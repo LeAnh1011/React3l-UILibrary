@@ -1,0 +1,354 @@
+$palettes: (
+  cerulean: (
+    900: #10277c,
+    800: #203991,
+    700: #28439d,
+    600: #324da9,
+    500: #3855b3,
+    400: #586ebe,
+    300: #7688c9,
+    200: #9daad9,
+    100: #c4cbe8,
+    50: #e8eaf6,
+  ),
+  grayscale: (
+    900: #181819,
+    800: #38383a,
+    700: #565758,
+    600: #696a6b,
+    500: #919294,
+    400: #b1b2b4,
+    300: #d6d6d8,
+    200: #e6e7e9,
+    100: #f0f1f2,
+    50: #f8f8fa,
+  ),
+  yellow: (
+    900: #90722f,
+    800: #b39638,
+    700: #c8ac3d,
+    600: #dcc243,
+    500: #ecd348,
+    400: #f0d961,
+    300: #f4e07b,
+    200: #f8e99f,
+    100: #fbf1c4,
+    50: #fefae7,
+  ),
+  green: (
+    900: #1b5e20,
+    800: #2e7d32,
+    700: #388e3c,
+    600: #43a047,
+    500: #4caf50,
+    400: #66bb6a,
+    300: #81c784,
+    200: #a5d6a7,
+    100: #c8e6c9,
+    50: #e8f5e9,
+  ),
+  red: (
+    900: #7d2a47,
+    800: #a3324f,
+    700: #b73853,
+    600: #cd3d57,
+    500: #dd425a,
+    400: #e35470,
+    300: #ea6d88,
+    200: #f095a9,
+    100: #f6becb,
+    50: #fbe5ea,
+  ),
+  teal: (
+    900: #006547,
+    800: #008364,
+    700: #009372,
+    600: #00a483,
+    500: #00b391,
+    400: #66bb6a,
+    300: #81c784,
+    200: #a5d6a7,
+    100: #c8e6c9,
+    50: #e8f5e9,
+  ),
+  cyan: (
+    900: #00605e,
+    800: #008488,
+    700: #00989f,
+    600: #00adb8,
+    500: #00bdcb,
+    400: #1cc7d0,
+    300: #4ad1d7,
+    200: #7fdfe2,
+    100: #b1eced,
+    50: #e0f7f8,
+  ),
+  blue: (
+    900: #005698,
+    800: #0076b9,
+    700: #0087cd,
+    600: #009ae1,
+    500: #00a8f0,
+    400: #29b5f2,
+    300: #4fc2f4,
+    200: #81d3f8,
+    100: #b3e5fb,
+    50: #e1f5fd,
+  ),
+  indigo: (
+    900: #250db0,
+    800: #342bc2,
+    700: #3c38ce,
+    600: #4544da,
+    500: #4a4de6,
+    400: #666ee8,
+    300: #828aed,
+    200: #a7acf2,
+    100: #caccf7,
+    50: #eaeafd,
+  ),
+  purple: (
+    900: #4e00c6,
+    800: #6500ce,
+    700: #7300d3,
+    600: #8110dc,
+    500: #8c18e2,
+    400: #9e4ae8,
+    300: #b16fed,
+    200: #c79bf2,
+    100: #ddc4f7,
+    50: #f2e7fc,
+  ),
+  pink: (
+    900: #852259,
+    800: #aa2964,
+    700: #c02c69,
+    600: #d72f70,
+    500: #e83274,
+    400: #ea4c89,
+    300: #ed6a9f,
+    200: #f194ba,
+    100: #f6bed6,
+    50: #fbe5ee,
+  ),
+  orange: (
+    900: #bf420c,
+    800: #d85015,
+    700: #e65719,
+    600: #f45e1e,
+    500: #ff6422,
+    400: #ff7b43,
+    300: #ff9365,
+    200: #ffb291,
+    100: #ffd0bc,
+    50: #fbede7,
+  ),
+  amber: (
+    900: #ed6700,
+    800: #ff8f00,
+    700: #ffa000,
+    600: #ffb300,
+    500: #ffc107,
+    400: #ffca28,
+    300: #ffd54f,
+    200: #ffe082,
+    100: #ffecb3,
+    50: #fff8e1,
+  ),
+  brown: (
+    900: #64473a,
+    800: #755646,
+    700: #84634f,
+    600: #95715a,
+    500: #a27c62,
+    400: #b3917b,
+    300: #c4a794,
+    200: #d8c1b2,
+    100: #ead9ce,
+    50: #faf0e7,
+  ),
+);
+
+:root {
+  /* color palettes */
+  @each $colorname, $palette in $palettes {
+    @each $key, $value in $palette {
+      $keyname: "--palette-" + $colorname + "-" + $key;
+      #{$keyname}: #{$value};
+    }
+  }
+
+  /* main colors */
+  /* used for the links, the button background color,... */
+  --color-primary: #4d84f4;
+  --color-primary-light: color-mod(var(--color-primary) tint(15%));
+  --color-primary-dark: color-mod(var(--color-primary) shade(15%));
+  --color-primary-bg: color-mod(var(--color-primary) alpha(20%));
+
+  --color-secondary: #00b391;
+  --color-secondary-light: color-mod(var(--color-primary) tint(15%));
+  --color-secondary-dark: color-mod(var(--color-primary) shade(15%));
+  --color-secondary-bg: color-mod(var(--color-primary) alpha(20%));
+  /* accent colors */
+  /* used to highlight something important on the page */
+  --color-accent: #f5414f;
+  --color-accent-light: color-mod(var(--color-accent) tint(15%));
+  --color-accent-dark: color-mod(var(--color-accent) shade(10%));
+  --color-accent-bg: color-mod(var(--color-accent) alpha(20%));
+
+  /* support color */
+  --color-link: #2c6ecb;
+
+  /* scale of neutral */
+  /* used for text elements, subtle elements, borders,... */
+  --black: #1d1d21;
+  --gray-10: #2e2e31;
+  --gray-6: #7b7a7d;
+  --gray-4: #a5a5a6;
+  --gray-3: #bbbbbc;
+  --gray-2: #d1d0d2;
+  --gray-1: #e8e7e8;
+  --white: white;
+
+  /* input colors */
+  --color-input-placeholder: #5f5d5a;
+  --color-input-presuffix: #9d9d9d;
+  --color-input-disabled: #8c9196;
+
+  /* border colors */
+  --color-border: #919294;
+  --color-border-disabled: #d2d5d8;
+
+  /* surface colors */
+  --color-surface-tag: #dfe1e6;
+  --color-surface-input: #f4f4f4;
+  --color-surface-input-hover: #e5e5e5;
+  --color-surface-input-disabled: #f1f1f1;
+
+  /* buttons */
+  --btn-primary-bg: var(--color-primary);
+  --btn-primary-hover: var(--color-primary-light);
+  --btn-primary-active: var(--color-primary-dark);
+  --btn-primary-label: var(--white);
+
+  --btn-secondary-bg: var(--color-secondary);
+  --btn-secondary-hover: var(--color-secondary-light);
+  --btn-secondary-active: var(--color-secondary-dark);
+  --btn-secondary-label: var(--white);
+
+  --btn-accent-bg: var(--color-accent);
+  --btn-accent-hover: var(--color-accent-light);
+  --btn-accent-active: var(--color-accent-dark);
+  --btn-accent-label: var(--white);
+
+  /* icons */
+  --color-icon-primary: var(--gray-4);
+  --color-icon-secondary: inherit;
+
+  /* feedback colors */
+  --color-success-high: var(--palette-teal-500);
+  --color-success-medium: color-mod(var(--color-success-high) alpha(35%));
+  --color-success-low: color-mod(var(--color-success-high) alpha(15%));
+
+  --color-error-high: var(--palette-red-500);
+  --color-error-medium: color-mod(var(--color-error-high) alpha(35%));
+  --color-success-low: color-mod(var(--color-error-high) alpha(15%));
+
+  --color-warning-high: var(--palette-amber-700);
+  --color-warning-medium: color-mod(var(--color-warning-high) alpha(35%));
+  --color-warning-medium: color-mod(var(--color-warning-high) alpha(15%));
+
+  --color-info-high: var(--palette-cyan-500);
+  --color-info-medium: color-mod(var(--color-info-high) alpha(35%));
+  --color-info-low: color-mod(var(--color-info-high) alpha(15%));
+
+  --color-tentative-high: var(--palette-indigo-500);
+  --color-tentative-medium: color-mod(var(--color-tentative-high) alpha(35%));
+  --color-tentative-low: color-mod(var(--color-tentative-high) alpha(15%));
+
+  --color-worked-high: var(--palette-blue-500);
+  --color-worked-medium: color-mod(var(--color-worked-high) alpha(35%));
+  --color-worked-low: color-mod(var(--color-worked-high) alpha(15%));
+}
+
+/* class bg and color for color $palletes with syntax .palette-$colorname-$number-$type */
+
+@each $colorname, $palette in $palettes {
+  @each $key, $value in $palette {
+    $keyname: "--palette-" + $colorname + "-" + $key;
+    .bg-palette-#{$colorname}-#{$key} {
+      background-color: var(#{$keyname});
+    }
+    .color-palette-#{$colorname}-#{$key} {
+      color: var(#{$keyname});
+    }
+  }
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.color-primary {
+  color: var(--color-primary);
+}
+
+.bg-success {
+  background-color: var(--color-success-high);
+}
+
+.color-success {
+  color: var(--color-success-high);
+}
+
+.bg-warning {
+  background-color: var(--color-warning-high);
+}
+
+.color-warning {
+  color: var(--color-warning-high);
+}
+
+.bg-error {
+  background-color: var(--color-error-high);
+}
+
+.color-error {
+  color: var(--color-error-high);
+}
+
+.bg-info {
+  background-color: var(--color-info-high);
+}
+
+.color-info {
+  color: var(--color-info-high);
+}
+
+.bg-tentative {
+  background-color: var(--color-tentative-high);
+}
+
+.color-tentative {
+  color: var(--color-tentative-high);
+}
+
+.bg-worked {
+  background-color: var(--color-worked-high);
+}
+
+.color-worked {
+  color: var(--color-worked-high);
+}
+
+.bg-white {
+  background-color: var(--white);
+}
+
+.color-white {
+  color: var(--white);
+}
+
+.color-link {
+  color: var(--color-link);
+}

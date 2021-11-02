@@ -1,0 +1,154 @@
+:root {
+  --font-primary: "Inter";
+  --font-secondary: sans-serif;
+  --base-ratio: 16px;
+  --base-body-ratio: 10px;
+
+  /* set base values */
+  --text-base-size: var(--base-ratio);
+  --text-base-line-height: var(--base-ratio);
+
+  /* color text */
+  --color-text: #181819;
+  --color-link: #3855b3;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+form legend {
+  color: var(--color-text);
+}
+
+/* text style heading */
+.text--xxxl {
+  font-size: calc(2.25 * var(--text-base-size));
+  line-height: calc(2.75 * var(--text-base-line-height));
+}
+
+h1,
+.heading-text--xxl {
+  font-size: calc(2 * var(--text-base-size));
+  line-height: calc(2.5 * var(--text-base-line-height));
+}
+
+h2,
+.heading-text--xl {
+  font-size: calc(1.75 * var(--text-base-size));
+  line-height: calc(2.25 * var(--text-base-line-height));
+}
+
+h3,
+.heading-text--lg {
+  font-size: calc(1.5 * var(--text-base-size));
+  line-height: calc(2 * var(--text-base-line-height));
+}
+
+h4,
+.heading-text--md {
+  font-size: calc(1.25 * var(--text-base-size));
+  line-height: calc(1.5 * var(--text-base-line-height));
+}
+
+h5,
+.heading-text--sm {
+  font-size: calc(1.125 * var(--text-base-size));
+  line-height: calc(1.5 * var(--text-base-line-height));
+}
+
+h6,
+.heading-text--xs {
+  font-size: var(--text-base-size);
+  line-height: calc(1.5 * var(--text-base-line-height));
+}
+
+/* text style body */
+
+.body-text--xs {
+  line-height: var(--text-base-line-height);
+  font-size: var(--base-body-ratio);
+}
+
+.body-text--sm {
+  line-height: var(--text-base-line-height);
+  font-size: calc(1.2 * var(--base-body-ratio));
+}
+
+.body-text--md {
+  line-height: var(--text-base-line-height);
+  font-size: calc(1.4 * var(--base-body-ratio));
+}
+
+.body-text--lg {
+  line-height: calc(1.5 * var(--text-base-line-height));
+  font-size: calc(1.6 * var(--base-body-ratio));
+}
+
+/* text style caps */
+
+.caps-text--sm {
+  line-height: var(--text-base-line-height);
+  font-size: var(--base-body-ratio);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.caps-text--md {
+  line-height: var(--text-base-line-height);
+  font-size: calc(1.2 * var(--base-body-ratio));
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.caps-text--lg {
+  line-height: var(--text-base-line-height);
+  font-size: calc(1.4 * var(--base-body-ratio));
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* other text style */
+
+p {
+  line-height: var(--text-base-line-height);
+}
+
+a,
+.text-link {
+  color: var(--color-link);
+
+  &:visited {
+    color: var(--color-link-visited);
+  }
+}
+
+b,
+strong,
+.bold-text {
+  font-weight: bold;
+}
+
+.italic-text {
+  font-style: italic;
+}
+
+.under-line-text {
+  text-decoration: underline;
+}
+
+.upper-case-text {
+  text-transform: uppercase;
+}
+
+/* utility classes */
+
+.truncate {
+  // truncate text if it exceeds parent
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,86 @@
+$spacings: (
+  xxxs: calc(0.25 * var(--space-unit)),
+  // default with 4px;
+  xxs: calc(0.5 * var(--space-unit)),
+  // default with 8px;
+  xs: calc(0.75 * var(--space-unit)),
+  // default with 12px;
+  sm: calc(1 * var(--space-unit)),
+  // default with 16px;
+  md: calc(1.25 * var(--space-unit)),
+  // default with 20px;
+  lg: calc(1.5 * var(--space-unit)),
+  // default with 24px;
+  xl: calc(1.75 * var(--space-unit)),
+  // default with 28px;
+  xxl: calc(2 * var(--space-unit)),
+  // default with 32px;
+  xxxl: calc(2.25 * var(--space-unit)),
+  // default with 36px;
+  max: calc(2.25 * var(--space-unit)),
+  // default with 40px;
+  base: var(--space-unit),
+  wire: calc(3.25 * var(--space-unit)),
+  super-wire: calc(5.25 * var(--space-unit)),
+  space-ultra-wire: calc(8.5 * var(--space-unit)),
+);
+
+:root {
+  /* spacing values */
+  --space-unit: 1em;
+
+  @each $spacingname, $unit in $spacings {
+    $keyname: "--space-" + $spacingname;
+    #{$keyname}: #{$unit};
+  }
+}
+
+@each $spacingname, $unit in $spacings {
+  $keyname: "--space-" + $spacingname;
+  .p-t--#{$spacingname} {
+    padding-top: var(#{$keyname});
+  }
+  .p-b--#{$spacingname} {
+    padding-bottom: var(#{$keyname});
+  }
+  .p-r--#{$spacingname} {
+    padding-right: var(#{$keyname});
+  }
+  .p-l--#{$spacingname} {
+    padding-left: var(#{$keyname});
+  }
+  .p-x--#{$spacingname} {
+    padding-right: var(#{$keyname});
+    padding-left: var(#{$keyname});
+  }
+  .p-y--#{$spacingname} {
+    padding-top: var(#{$keyname});
+    padding-bottom: var(#{$keyname});
+  }
+  .p--#{$spacingname} {
+    padding: var(#{$keyname});
+  }
+  .m-t--#{$spacingname} {
+    margin-top: var(#{$keyname});
+  }
+  .m-b--#{$spacingname} {
+    margin-bottom: var(#{$keyname});
+  }
+  .m-r--#{$spacingname} {
+    margin-right: var(#{$keyname});
+  }
+  .m-l--#{$spacingname} {
+    margin-left: var(#{$keyname});
+  }
+  .m-x--#{$spacingname} {
+    margin-right: var(#{$keyname});
+    margin-left: var(#{$keyname});
+  }
+  .m-y--#{$spacingname} {
+    margin-top: var(#{$keyname});
+    margin-bottom: var(#{$keyname});
+  }
+  .m--#{$spacingname} {
+    margin: var(#{$keyname});
+  }
+}

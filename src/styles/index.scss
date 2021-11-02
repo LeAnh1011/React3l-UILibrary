@@ -1,0 +1,21 @@
+@import "color";
+@import "typography";
+@import "spacing";
+@import "button";
+@import "./vendors/tio.scss";
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-size: var(--text-base-size);
+  font-family: var(--font-primary);
+  color: var(--color-text);
+}

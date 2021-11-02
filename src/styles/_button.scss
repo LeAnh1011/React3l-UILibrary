@@ -1,0 +1,110 @@
+:root {
+  --btn-font-size: calc(1em * 0.875);
+  --btn-sm: calc(1em * 0.75);
+  --btn-radius: 4px;
+}
+
+.btn {
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+  text-decoration: none;
+  line-height: var(--text-base-line-height);
+
+  padding: var(--space-xxs) var(--space-xs);
+  border-radius: var(--btn-radius);
+  font-size: var(--btn-sm);
+  color: var(--color-link);
+
+  transition: 0.2s;
+
+  &:active {
+    transition: none;
+  }
+
+  .icon {
+    /* icon inherits color of button label */
+    color: inherit;
+    flex-shrink: 0;
+  }
+}
+
+/* themes */
+.btn--primary {
+  // main button
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-label);
+
+  &:visited {
+    color: var(--btn-primary-label);
+  }
+
+  &:hover {
+    background-color: var(--btn-primary-hover);
+  }
+
+  &:active {
+    background-color: var(--btn-primary-active);
+  }
+}
+
+.btn--secondary {
+  // subtle version, used for secondary actions or in combo with primary/accent button
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-label);
+
+  &:visited {
+    color: var(--btn-secondary-label);
+  }
+
+  &:active {
+    background-color: var(--btn-secondary-active);
+  }
+}
+
+.btn--accent {
+  // used to draw special attention to the button (e.g. destructive actions)
+  background-color: var(--btn-accent-bg);
+  color: var(--btn-accent-label);
+
+  &:visited {
+    color: var(--btn-accent-label);
+  }
+
+  &:hover {
+    background-color: var(--btn-accent-hover);
+  }
+
+  &:active {
+    background-color: var(--btn-accent-active);
+  }
+}
+
+/* feedback */
+.btn[disabled] {
+  cursor: not-allowed;
+  background-color: var(--palette-grayscale-200);
+  color: var(--palette-grayscale-400);
+  box-shadow: none;
+  opacity: 0.6;
+
+  &:visited {
+    color: var(--btn-disabled-label);
+  }
+}
+
+/* button size */
+.btn--sm {
+  padding: var(--space-xxxs) var(--space-xxs);
+}
+
+.btn--lg {
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--btn-font-size);
+}
+
+.btn--full-width {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}

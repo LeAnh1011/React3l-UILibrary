@@ -15,9 +15,14 @@ export function InputTextStories() {
   const [inputValue, setInputVal] = React.useState();
 
   const [isMaterial, setIsMaterial] = React.useState<boolean>(false);
+  const [isFloatLabel, setIsFloatLabel] = React.useState<boolean>(false);
 
   const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
     setIsMaterial(event.target.value)
+  }, []);
+
+  const handleChangeLabelStyle = React.useCallback((event: RadioChangeEvent) => {
+    setIsFloatLabel(event.target.value)
   }, []);
 
   const handleChangeValue = React.useCallback((value) => {
@@ -33,7 +38,7 @@ export function InputTextStories() {
           <InputText
             isMaterial={isMaterial}
             label="First Name"
-            floatLabel={true}
+            floatLabel={isFloatLabel}
             prefix="Mr."
             showCount={true}
             maxLength={20}
@@ -64,6 +69,7 @@ export function InputTextStories() {
         >
           <InputText
             isMaterial={isMaterial}
+            floatLabel={isFloatLabel}
             label="Sample"
             showCount={true}
             maxLength={20}
@@ -74,6 +80,12 @@ export function InputTextStories() {
         </FormItem>
       </div>
 
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeLabelStyle} value={isFloatLabel}>
+          <Radio value={true}>Float label</Radio>
+          <Radio value={false}>Default label</Radio>
+        </Radio.Group>
+      </div>
       <div style={{ margin: "10px", width: "300px" }}>
         <Radio.Group onChange={handleChangeStyle} value={isMaterial}>
           <Radio value={true}>Material</Radio>

@@ -15,6 +15,7 @@ export function InputNumberStories() {
   const [numberType, setNumberType] = React.useState<string>(LONG);
 
   const [isMaterial, setIsMaterial] = React.useState<boolean>(false);
+  const [isFloatLabel, setIsFloatLabel] = React.useState<boolean>(false);
 
   const [isReverse, setIsReverse] = React.useState(false);
 
@@ -30,6 +31,10 @@ export function InputNumberStories() {
 
   const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
     setIsMaterial(event.target.value)
+  }, []);
+
+  const handleChangeLabelStyle = React.useCallback((event: RadioChangeEvent) => {
+    setIsFloatLabel(event.target.value)
   }, []);
 
   const handleChangeValue = React.useCallback((value) => {
@@ -71,7 +76,7 @@ export function InputNumberStories() {
           <InputNumber
             isMaterial={isMaterial}
             label="Label"
-            floatLabel={true}
+            floatLabel={isFloatLabel}
             prefix="Age"
             placeHolder={"Enter number..."}
             className={iconName}
@@ -115,6 +120,12 @@ export function InputNumberStories() {
         </FormItem>
       </div>
 
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeLabelStyle} value={isFloatLabel}>
+          <Radio value={true}>Float label</Radio>
+          <Radio value={false}>Default label</Radio>
+        </Radio.Group>
+      </div>
       <div style={{ margin: "10px", width: "300px" }}>
         <Radio.Group onChange={handleChangeStyle} value={isMaterial}>
           <Radio value={true}>Material</Radio>

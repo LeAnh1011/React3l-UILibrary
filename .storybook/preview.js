@@ -7,4 +7,3 @@ export const parameters = {
     },
   },
 }
-import './../src/styles/index.scss'

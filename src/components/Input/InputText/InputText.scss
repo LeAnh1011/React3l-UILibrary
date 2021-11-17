@@ -33,7 +33,7 @@ label {
 
   &:focus-within {
     outline-color: #114b5f;
-    box-shadow: 0px 0px 4px #25343a;
+    @include box-shadow--focus;;
   }
 
   &.input-text--disabled {

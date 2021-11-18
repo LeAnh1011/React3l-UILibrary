@@ -7,10 +7,17 @@ interface InputTextAction {
   action?: any;
 }
 
+export enum INPUT_TEXT_TYPE {
+  MATERIAL,
+  BORDERED,
+  FLOAT_LABEL,
+}
+
 interface InputTextProps {
   label?: string;
-  floatLabel?: boolean;
+  type?: INPUT_TEXT_TYPE;
   isRequired?: boolean;
+  floatLabel?: boolean;
   isMaterial?: boolean;
   prefix?: string | ReactNode;
   value?: string;
@@ -19,19 +26,19 @@ interface InputTextProps {
   className?: string;
   showCount?: boolean;
   maxLength?: number;
+  isSmall?: boolean;
+  action?: InputTextAction;
   onChange?: (T: string | null) => void;
   onEnter?: (T: string | null) => void;
   onBlur?: (T: string | null) => void;
-  action?: InputTextAction;
 }
 
 function InputText(props: InputTextProps) {
   const {
     action,
     label,
-    floatLabel,
-    isMaterial,
     isRequired,
+    type,
     prefix,
     showCount,
     maxLength,
@@ -39,6 +46,7 @@ function InputText(props: InputTextProps) {
     disabled,
     placeHolder,
     className,
+    isSmall,
     onChange,
     onEnter,
     onBlur,
@@ -107,30 +115,48 @@ function InputText(props: InputTextProps) {
   return (
     <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
       <div className="input-text__label m-b--xxxs">
-        {!floatLabel && label &&
-          <label className='component__title'>
+        {type !== INPUT_TEXT_TYPE.FLOAT_LABEL && label && (
+          <label className="component__title">
             {label}
             {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
-        }
+        )}
         <span style={{ width: "100%" }}></span>
         {showCount && maxLength > 0 && (
-          <span className="input-text__count p-l--xs body-text--xs">{internalValue.length}/{maxLength}</span>
+          <span className="input-text__count p-l--xs body-text--xs">
+            {internalValue.length}/{maxLength}
+          </span>
         )}
-        {action &&
-          <span className="m-l--xxxs body-text--md color-link" onClick={action.action}>{action.name}</span>
-        }
+        {action && (
+          <span
+            className="m-l--xxxs body-text--md color-link"
+            onClick={action.action}
+          >
+            {action.name}
+          </span>
+        )}
       </div>
-      <div className={classNames("component__input input-text__container p--xs bg-white", {
-        "input-text--material": isMaterial,
-        "input-text--disabled ": disabled,
-        "input-text--float": floatLabel,
-      })}>
+      <div
+        className={classNames(
+          "component__input input-text__container p--xs bg-white",
+          {
+            "input-text__container--sm": isSmall,
+            "py--xxs": isSmall,
+            "px--xs": isSmall,
+            "p--xs": !isSmall,
+            "input-text--material": type === INPUT_TEXT_TYPE.MATERIAL,
+            "input-text--disabled ": disabled,
+            "input-text--float": type === INPUT_TEXT_TYPE.FLOAT_LABEL,
+          }
+        )}
+      >
         {prefix && (
           <>
             {typeof prefix === "string" ? (
               <span className="p-r--xxs">{prefix}</span>
-            ) : (<>{prefix}</>)}
+            ) : (
+              <>{prefix}</>
+            )}
           </>
         )}
         <input
@@ -139,19 +165,27 @@ function InputText(props: InputTextProps) {
           onChange={handleChange}
           onKeyDown={handleKeyPress}
           onBlur={handleBlur}
-          placeholder={floatLabel && label ? label : placeHolder}
+          placeholder={
+            type === INPUT_TEXT_TYPE.FLOAT_LABEL && label ? "" : placeHolder
+          }
           ref={inputRef}
           disabled={disabled}
           className={classNames("component__input", {
             "disabled-field": disabled,
           })}
         />
-        {floatLabel && label &&
-          <label className='component__title component__title--float'>
+        {type === INPUT_TEXT_TYPE.FLOAT_LABEL && label && (
+          <label
+            className={classNames("component__title", {
+              "component__title--normal": !prefix,
+              "component__title--prefix": prefix,
+              "component__title--sm": isSmall,
+            })}
+          >
             {label}
             {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
-        }
+        )}
         {internalValue && !disabled ? (
           <i
             className="input-icon tio-clear p-l--xxs"
@@ -175,9 +209,9 @@ function InputText(props: InputTextProps) {
 
 InputText.defaultProps = {
   label: "",
-  floatLabel: false,
+  isSmall: false,
+  type: INPUT_TEXT_TYPE.BORDERED,
   isRequired: false,
-  isMaterial: false,
   prefix: "",
   disabled: false,
   className: "",

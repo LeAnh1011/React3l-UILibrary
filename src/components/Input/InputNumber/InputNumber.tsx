@@ -4,6 +4,11 @@ import "./InputNumber.scss";
 
 export const DECIMAL: string = "DECIMAL";
 export const LONG: string = "LONG";
+export enum INPUT_NUMBER_TYPE {
+  MATERIAL,
+  BORDERED,
+  FLOAT_LABEL,
+}
 
 interface InputNumberAction {
   name?: string;
@@ -12,8 +17,9 @@ interface InputNumberAction {
 
 export interface InputNumberProps {
   label?: string;
-  floatLabel?: boolean;
   isRequired?: boolean;
+  type?: INPUT_NUMBER_TYPE;
+  floatLabel?: boolean;
   isMaterial?: boolean;
   value?: number;
   prefix?: string;
@@ -25,21 +31,21 @@ export interface InputNumberProps {
   placeHolder?: string;
   disabled?: boolean;
   className?: string;
-  onChange?: (T: number) => void;
-  onEnter?: (T: number) => void;
-  onBlur?: (T: number) => void;
   min?: number;
   max?: number;
   action?: InputNumberAction;
+  isSmall?: boolean;
+  onChange?: (T: number) => void;
+  onEnter?: (T: number) => void;
+  onBlur?: (T: number) => void;
 }
 
 function InputNumber(props: InputNumberProps) {
   const {
     action,
     label,
-    floatLabel,
     isRequired,
-    isMaterial,
+    type,
     prefix,
     value,
     allowPositive,
@@ -49,11 +55,12 @@ function InputNumber(props: InputNumberProps) {
     placeHolder,
     className,
     disabled,
+    min,
+    max,
+    isSmall,
     onChange,
     onEnter,
     onBlur,
-    min,
-    max
   } = props;
 
   const [internalValue, setInternalValue] = React.useState<string>("");
@@ -241,27 +248,43 @@ function InputNumber(props: InputNumberProps) {
   return (
     <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
       <div className="input-number__label m-b--xxxs">
-        {!floatLabel && label &&
-          <label className='component__title'>
+        {type !== INPUT_NUMBER_TYPE.FLOAT_LABEL && label && (
+          <label className="component__title">
             {label}
             {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
-        }
+        )}
         <span style={{ width: "100%" }}></span>
-        {action &&
-          <span className="m-l--xxxs body-text--md color-link" onClick={action.action}>{action.name}</span>
-        }
+        {action && (
+          <span
+            className="m-l--xxxs body-text--md color-link"
+            onClick={action.action}
+          >
+            {action.name}
+          </span>
+        )}
       </div>
-      <div className={classNames("component__input input-number__container p--xs", {
-        "input-number--material": isMaterial,
-        "input-number--disabled ": disabled,
-        "input-number--float": floatLabel,
-      })}>
+      <div
+        className={classNames(
+          "component__input input-number__container p--xs",
+          {
+            "input-number__container--sm": isSmall,
+            "py--xxs": isSmall,
+            "px--xs": isSmall,
+            "p--xs": !isSmall,
+            "input-number--material": type === INPUT_NUMBER_TYPE.MATERIAL,
+            "input-number--disabled ": disabled,
+            "input-number--float": type === INPUT_NUMBER_TYPE.FLOAT_LABEL,
+          }
+        )}
+      >
         {prefix && (
           <>
             {typeof prefix === "string" ? (
               <span className="p-r--xxs">{prefix}</span>
-            ) : (<>{prefix}</>)}
+            ) : (
+              <>{prefix}</>
+            )}
           </>
         )}
         <input
@@ -270,7 +293,11 @@ function InputNumber(props: InputNumberProps) {
           onChange={handleChange}
           onKeyDown={handleKeyPress}
           onBlur={handleBlur}
-          placeholder={floatLabel && label ? label : placeHolder}
+          placeholder={
+            type === INPUT_NUMBER_TYPE.FLOAT_LABEL && label
+              ? ""
+              : placeHolder
+          }
           ref={inputRef}
           disabled={disabled}
           className={classNames("component__input", {
@@ -279,12 +306,18 @@ function InputNumber(props: InputNumberProps) {
           min={min}
           max={max}
         />
-        {floatLabel && label &&
-          <label className='component__title component__title--float'>
+        {type === INPUT_NUMBER_TYPE.FLOAT_LABEL && label && (
+          <label
+            className={classNames("component__title", {
+              "component__title--normal": !prefix,
+              "component__title--prefix": prefix,
+              "component__title--sm": isSmall,
+            })}
+          >
             {label}
             {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
-        }
+        )}
         {internalValue && !disabled ? (
           <i
             className="input-icon tio-clear p-l--xxs"
@@ -308,9 +341,9 @@ function InputNumber(props: InputNumberProps) {
 
 InputNumber.defaultProps = {
   label: "",
-  floatLabel: false,
+  type: INPUT_NUMBER_TYPE.BORDERED,
+  isSmall: false,
   isRequired: false,
-  isMaterial: false,
   allowPositive: false,
   isReverseSymb: false,
   numberType: LONG,

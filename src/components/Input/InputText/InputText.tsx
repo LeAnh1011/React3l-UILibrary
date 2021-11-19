@@ -19,7 +19,8 @@ interface InputTextProps {
   isRequired?: boolean;
   floatLabel?: boolean;
   isMaterial?: boolean;
-  prefix?: string | ReactNode;
+  prefix?: string | JSX.Element;
+  suffix?: string | JSX.Element;
   value?: string;
   disabled?: boolean;
   placeHolder?: string;
@@ -40,6 +41,7 @@ function InputText(props: InputTextProps) {
     isRequired,
     type,
     prefix,
+    suffix,
     showCount,
     maxLength,
     value,
@@ -54,9 +56,19 @@ function InputText(props: InputTextProps) {
 
   const [internalValue, setInternalValue] = React.useState<string>("");
 
+  const [focusIcon, setFocusIcon] = React.useState<boolean>(false);
+
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
     null
   );
+
+  const handleFocusIcon = React.useCallback(() => {
+    setFocusIcon(true);
+  }, []);
+
+  const handleBlurIcon = React.useCallback(() => {
+    setFocusIcon(false);
+  }, []);
 
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,7 +125,7 @@ function InputText(props: InputTextProps) {
   }, [value]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+    <div className={classNames("input-text__wrapper", className)}>
       <div className="input-text__label m-b--xxxs">
         {type !== INPUT_TEXT_TYPE.FLOAT_LABEL && label && (
           <label className="component__title">
@@ -130,6 +142,7 @@ function InputText(props: InputTextProps) {
         {action && (
           <span
             className="m-l--xxxs body-text--md color-link"
+            style={{ cursor: "pointer" }}
             onClick={action.action}
           >
             {action.name}
@@ -149,6 +162,9 @@ function InputText(props: InputTextProps) {
             "input-text--float": type === INPUT_TEXT_TYPE.FLOAT_LABEL,
           }
         )}
+        onClick={() => {
+          inputRef.current.focus();
+        }}
       >
         {prefix && (
           <>
@@ -186,21 +202,25 @@ function InputText(props: InputTextProps) {
             {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
-        {internalValue && !disabled ? (
+        {internalValue && !disabled && (
           <i
-            className="input-icon tio-clear p-l--xxs"
+            className={classNames("input-icon__clear", "m-l--xs", {
+              "tio-clear_circle_outlined": !focusIcon,
+              "tio-clear_circle": focusIcon,
+            })}
             onClick={handleClearInput}
+            onMouseOver={handleFocusIcon}
+            onMouseOut={handleBlurIcon}
           ></i>
-        ) : (
-          className && (
-            <i
-              className={classNames(
-                "input-icon",
-                "input-text__icon",
-                className
-              )}
-            ></i>
-          )
+        )}
+        {suffix && (
+          <>
+            {typeof suffix === "string" ? (
+              <span className="body-text--md m-l--xs">{suffix}</span>
+            ) : (
+              <div className="m-l--xs">{suffix}</div>
+            )}
+          </>
         )}
       </div>
     </div>

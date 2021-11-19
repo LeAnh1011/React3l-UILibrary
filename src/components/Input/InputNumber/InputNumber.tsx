@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React, { RefObject } from "react";
 import "./InputNumber.scss";
+import { ReactNode } from "react";
 
 export const DECIMAL: string = "DECIMAL";
 export const LONG: string = "LONG";
@@ -22,7 +23,8 @@ export interface InputNumberProps {
   floatLabel?: boolean;
   isMaterial?: boolean;
   value?: number;
-  prefix?: string;
+  prefix?: string | ReactNode;
+  suffix?: string | ReactNode;
   allowPositive?: boolean;
   error?: string;
   numberType?: string;
@@ -47,6 +49,7 @@ function InputNumber(props: InputNumberProps) {
     isRequired,
     type,
     prefix,
+    suffix,
     value,
     allowPositive,
     numberType,
@@ -64,6 +67,16 @@ function InputNumber(props: InputNumberProps) {
   } = props;
 
   const [internalValue, setInternalValue] = React.useState<string>("");
+
+  const [focusIcon, setFocusIcon] = React.useState<boolean>(false);
+
+  const handleFocusIcon = React.useCallback(() => {
+    setFocusIcon(true);
+  }, []);
+
+  const handleBlurIcon = React.useCallback(() => {
+    setFocusIcon(false);
+  }, []);
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
     null
@@ -246,7 +259,7 @@ function InputNumber(props: InputNumberProps) {
   }, [value, formatString, isReverseSymb]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+    <div className={classNames("input-number__wrapper", className)}>
       <div className="input-number__label m-b--xxxs">
         {type !== INPUT_NUMBER_TYPE.FLOAT_LABEL && label && (
           <label className="component__title">
@@ -258,6 +271,7 @@ function InputNumber(props: InputNumberProps) {
         {action && (
           <span
             className="m-l--xxxs body-text--md color-link"
+            style={{ cursor: "pointer" }}
             onClick={action.action}
           >
             {action.name}
@@ -277,6 +291,9 @@ function InputNumber(props: InputNumberProps) {
             "input-number--float": type === INPUT_NUMBER_TYPE.FLOAT_LABEL,
           }
         )}
+        onClick={() => {
+          inputRef.current.focus();
+        }}
       >
         {prefix && (
           <>
@@ -294,9 +311,7 @@ function InputNumber(props: InputNumberProps) {
           onKeyDown={handleKeyPress}
           onBlur={handleBlur}
           placeholder={
-            type === INPUT_NUMBER_TYPE.FLOAT_LABEL && label
-              ? ""
-              : placeHolder
+            type === INPUT_NUMBER_TYPE.FLOAT_LABEL && label ? "" : placeHolder
           }
           ref={inputRef}
           disabled={disabled}
@@ -318,21 +333,25 @@ function InputNumber(props: InputNumberProps) {
             {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
-        {internalValue && !disabled ? (
+        {internalValue && !disabled && (
           <i
-            className="input-icon tio-clear p-l--xxs"
+            className={classNames("input-icon__clear", "m-l--xs", {
+              "tio-clear_circle_outlined": !focusIcon,
+              "tio-clear_circle": focusIcon,
+            })}
             onClick={handleClearInput}
+            onMouseOver={handleFocusIcon}
+            onMouseOut={handleBlurIcon}
           ></i>
-        ) : (
-          className && (
-            <i
-              className={classNames(
-                "input-icon",
-                "input-number__icon",
-                className
-              )}
-            ></i>
-          )
+        )}
+        {suffix && (
+          <>
+            {typeof suffix === "string" ? (
+              <span className="body-text--md m-l--xs">{suffix}</span>
+            ) : (
+              <div className="m-l--xs">{suffix}</div>
+            )}
+          </>
         )}
       </div>
     </div>

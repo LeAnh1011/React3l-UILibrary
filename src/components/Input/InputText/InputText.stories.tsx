@@ -38,10 +38,12 @@ export function InputTextStories() {
         <FormItem message={"Helper text"}>
           <InputText
             type={type}
+            isSmall={isSmall}
             label="First Name"
             prefix="Mr."
+            suffix="Kg"
             showCount={true}
-            maxLength={20}
+            maxLength={100}
             value={inputValue}
             onChange={handleChangeValue}
             placeHolder={"Enter text..."}
@@ -57,6 +59,7 @@ export function InputTextStories() {
         <FormItem>
           <InputText
             type={type}
+            suffix={<i className="tio-search"></i>}
             value={""}
             onChange={handleChangeValue}
             placeHolder={"Enter text..."}

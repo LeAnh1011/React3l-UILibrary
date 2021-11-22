@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { ReactNode, RefObject } from "react";
+import React, { RefObject } from "react";
 import "./InputText.scss";
 
 interface InputTextAction {
@@ -56,19 +56,9 @@ function InputText(props: InputTextProps) {
 
   const [internalValue, setInternalValue] = React.useState<string>("");
 
-  const [focusIcon, setFocusIcon] = React.useState<boolean>(false);
-
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
     null
   );
-
-  const handleFocusIcon = React.useCallback(() => {
-    setFocusIcon(true);
-  }, []);
-
-  const handleBlurIcon = React.useCallback(() => {
-    setFocusIcon(false);
-  }, []);
 
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -182,7 +172,7 @@ function InputText(props: InputTextProps) {
           onKeyDown={handleKeyPress}
           onBlur={handleBlur}
           placeholder={
-            type === INPUT_TEXT_TYPE.FLOAT_LABEL && label ? "" : placeHolder
+            type === INPUT_TEXT_TYPE.FLOAT_LABEL && label ? " " : placeHolder
           }
           ref={inputRef}
           disabled={disabled}
@@ -204,13 +194,12 @@ function InputText(props: InputTextProps) {
         )}
         {internalValue && !disabled && (
           <i
-            className={classNames("input-icon__clear", "m-l--xs", {
-              "tio-clear_circle_outlined": !focusIcon,
-              "tio-clear_circle": focusIcon,
-            })}
+            className={classNames(
+              "input-icon__clear",
+              "m-l--xs",
+              "tio-clear_circle"
+            )}
             onClick={handleClearInput}
-            onMouseOver={handleFocusIcon}
-            onMouseOut={handleBlurIcon}
           ></i>
         )}
         {suffix && (

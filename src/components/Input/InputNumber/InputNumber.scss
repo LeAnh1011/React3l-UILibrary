@@ -58,6 +58,12 @@
 
       &:hover {
         background-color: var(--color-surface-input-hover);
+        .component__input {
+          background-color: var(--color-surface-input-hover);
+        }
+        .component__input.disabled-field {
+          background-color: var(--color-surface-input-disabled);
+        }
       }
 
       &:focus-within {
@@ -130,6 +136,13 @@
         color: var(--color-input-disabled);
       }
 
+      &:not(:placeholder-shown) + .component__title {
+        top: 0;
+        left: 8px;
+        background-color: white;
+        transform: translateY(-50%) scale(0.9);
+      }
+
       &:focus + .component__title {
         top: 0;
         left: 8px;
@@ -144,9 +157,11 @@
 
     .input-icon__clear {
       opacity: 0.8;
+      color: #959aa3;
       &:hover {
         opacity: 1;
         cursor: pointer;
+        color: #25343a;
       }
     }
   }

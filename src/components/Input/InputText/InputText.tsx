@@ -172,7 +172,7 @@ function InputText(props: InputTextProps) {
           onKeyDown={handleKeyPress}
           onBlur={handleBlur}
           placeholder={
-            type === INPUT_TEXT_TYPE.FLOAT_LABEL && label ? "" : placeHolder
+            type === INPUT_TEXT_TYPE.FLOAT_LABEL && label ? " " : placeHolder
           }
           ref={inputRef}
           disabled={disabled}
@@ -186,7 +186,6 @@ function InputText(props: InputTextProps) {
               "component__title--normal": !prefix,
               "component__title--prefix": prefix,
               "component__title--sm": isSmall,
-              "component__title--top": internalValue,
             })}
           >
             {label}

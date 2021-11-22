@@ -108,12 +108,6 @@
       &.component__title--prefix {
         left: 41px;
       }
-      &.component__title--top {
-        top: 0;
-        left: 8px;
-        background-color: white;
-        transform: translateY(-50%) scale(0.9);
-      }
     }
 
     .input-text__icon {
@@ -147,6 +141,13 @@
 
       &:disabled::placeholder {
         color: var(--color-input-disabled);
+      }
+
+      &:not(:placeholder-shown) + .component__title {
+        top: 0;
+        left: 8px;
+        background-color: white;
+        transform: translateY(-50%) scale(0.9);
       }
 
       &:focus + .component__title {

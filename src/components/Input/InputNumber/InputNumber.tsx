@@ -301,7 +301,7 @@ function InputNumber(props: InputNumberProps) {
           onKeyDown={handleKeyPress}
           onBlur={handleBlur}
           placeholder={
-            type === INPUT_NUMBER_TYPE.FLOAT_LABEL && label ? "" : placeHolder
+            type === INPUT_NUMBER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
           }
           ref={inputRef}
           disabled={disabled}
@@ -317,7 +317,6 @@ function InputNumber(props: InputNumberProps) {
               "component__title--normal": !prefix,
               "component__title--prefix": prefix,
               "component__title--sm": isSmall,
-              "component__title--top": internalValue,
             })}
           >
             {label}

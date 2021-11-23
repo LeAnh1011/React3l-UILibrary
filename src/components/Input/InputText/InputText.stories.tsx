@@ -20,6 +20,18 @@ export function InputTextStories() {
 
   const [isSmall, setIsSmall] = React.useState(false);
 
+  const [isDisabled, setIsDisabled] = React.useState(false);
+
+  const [isValidated, setValidated] = React.useState(false);
+
+  const handleChangeValidated = React.useCallback((event: RadioChangeEvent) => {
+    setValidated(event.target.value);
+  }, []);
+
+  const handleChangeDisabled = React.useCallback((event: RadioChangeEvent) => {
+    setIsDisabled(event.target.value);
+  }, []);
+
   const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
     setType(event.target.value);
   }, []);
@@ -35,7 +47,10 @@ export function InputTextStories() {
   return (
     <div style={{ width: "300px", padding: "10px" }}>
       <div style={{ margin: "15px 0" }}>
-        <FormItem message={"Helper text"}>
+        <FormItem
+          message={"Helper text"}
+          validateStatus={isValidated ? ValidateStatus.error : null}
+        >
           <InputText
             type={type}
             isSmall={isSmall}
@@ -47,40 +62,11 @@ export function InputTextStories() {
             value={inputValue}
             onChange={handleChangeValue}
             placeHolder={"Enter text..."}
+            disabled={isDisabled}
             action={{
               name: "Help",
               action: () => console.log("Help incoming..."),
             }}
-          />
-        </FormItem>
-      </div>
-
-      <div style={{ margin: "15px 0" }}>
-        <FormItem>
-          <InputText
-            type={type}
-            suffix={<i className="tio-search"></i>}
-            value={""}
-            onChange={handleChangeValue}
-            placeHolder={"Enter text..."}
-            disabled
-          />
-        </FormItem>
-      </div>
-
-      <div style={{ marginTop: "10px" }}>
-        <FormItem
-          validateStatus={ValidateStatus.error}
-          message={"Field required!"}
-        >
-          <InputText
-            type={type}
-            label="Sample"
-            showCount={true}
-            maxLength={20}
-            value={inputValue}
-            onChange={handleChangeValue}
-            placeHolder={"Enter text..."}
           />
         </FormItem>
       </div>
@@ -96,6 +82,18 @@ export function InputTextStories() {
         <Radio.Group onChange={handleChangeSize} value={isSmall}>
           <Radio value={true}>Small</Radio>
           <Radio value={false}>Default</Radio>
+        </Radio.Group>
+      </div>
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeDisabled} value={isDisabled}>
+          <Radio value={true}>Disabled</Radio>
+          <Radio value={false}>Not Disabled</Radio>
+        </Radio.Group>
+      </div>
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeValidated} value={isValidated}>
+          <Radio value={true}>Validated</Radio>
+          <Radio value={false}>Not Validated</Radio>
         </Radio.Group>
       </div>
     </div>

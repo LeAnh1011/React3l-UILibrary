@@ -30,11 +30,23 @@ export function InputNumberStories() {
 
   const [iconName] = React.useState("");
 
+  const [isDisabled, setIsDisabled] = React.useState(false);
+
+  const [isValidated, setValidated] = React.useState(false);
+
   const [filter] = React.useReducer<
     Reducer<DemoFilter, AdvanceFilterAction<DemoFilter, Filter>>
   >(advanceFilterReducer, new DemoFilter());
 
   const [value, setValue] = React.useState();
+
+  const handleChangeValidated = React.useCallback((event: RadioChangeEvent) => {
+    setValidated(event.target.value);
+  }, []);
+
+  const handleChangeDisabled = React.useCallback((event: RadioChangeEvent) => {
+    setIsDisabled(event.target.value);
+  }, []);
 
   const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
     setType(event.target.value);
@@ -77,7 +89,10 @@ export function InputNumberStories() {
   return (
     <div style={{ width: "300px", margin: "10px" }}>
       <div style={{ margin: "15px 0" }}>
-        <FormItem message="Helper">
+        <FormItem
+          message="Helper"
+          validateStatus={isValidated ? ValidateStatus.error : null}
+        >
           <InputNumber
             type={type}
             label="Label"
@@ -90,6 +105,7 @@ export function InputNumberStories() {
             isReverseSymb={isReverse}
             allowPositive={isPositive}
             isSmall={isSmall}
+            disabled={isDisabled}
             action={{
               name: "Help",
               action: () => console.log("Help incoming..."),
@@ -97,37 +113,6 @@ export function InputNumberStories() {
           />
         </FormItem>
       </div>
-
-      <div style={{ margin: "15px 0" }}>
-        <InputNumber
-          type={type}
-          value={0}
-          onChange={() => {}}
-          placeHolder={"Enter number..."}
-          className={iconName}
-          disabled
-        />
-      </div>
-
-      <div style={{ margin: "15px 0" }}>
-        <FormItem
-          validateStatus={ValidateStatus.error}
-          message={"Field required!"}
-        >
-          <InputNumber
-            type={type}
-            label={"Title Form: "}
-            placeHolder={"Enter number..."}
-            className={iconName}
-            value={value}
-            onChange={handleChangeValue}
-            numberType={numberType}
-            isReverseSymb={isReverse}
-            allowPositive={isPositive}
-          />
-        </FormItem>
-      </div>
-
       <div style={{ margin: "10px", width: "300px" }}>
         <Radio.Group onChange={handleChangeStyle} value={type}>
           <Radio value={INPUT_NUMBER_TYPE.MATERIAL}>Material</Radio>
@@ -157,6 +142,18 @@ export function InputNumberStories() {
         <Radio.Group onChange={handleChangeSize} value={isSmall}>
           <Radio value={true}>Small</Radio>
           <Radio value={false}>Default</Radio>
+        </Radio.Group>
+      </div>
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeDisabled} value={isDisabled}>
+          <Radio value={true}>Disabled</Radio>
+          <Radio value={false}>Not Disabled</Radio>
+        </Radio.Group>
+      </div>
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeValidated} value={isValidated}>
+          <Radio value={true}>Validated</Radio>
+          <Radio value={false}>Not Validated</Radio>
         </Radio.Group>
       </div>
     </div>

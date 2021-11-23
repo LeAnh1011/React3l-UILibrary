@@ -68,16 +68,6 @@ function InputNumber(props: InputNumberProps) {
 
   const [internalValue, setInternalValue] = React.useState<string>("");
 
-  const [focusIcon, setFocusIcon] = React.useState<boolean>(false);
-
-  const handleFocusIcon = React.useCallback(() => {
-    setFocusIcon(true);
-  }, []);
-
-  const handleBlurIcon = React.useCallback(() => {
-    setFocusIcon(false);
-  }, []);
-
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
     null
   );
@@ -311,7 +301,7 @@ function InputNumber(props: InputNumberProps) {
           onKeyDown={handleKeyPress}
           onBlur={handleBlur}
           placeholder={
-            type === INPUT_NUMBER_TYPE.FLOAT_LABEL && label ? "" : placeHolder
+            type === INPUT_NUMBER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
           }
           ref={inputRef}
           disabled={disabled}
@@ -335,13 +325,12 @@ function InputNumber(props: InputNumberProps) {
         )}
         {internalValue && !disabled && (
           <i
-            className={classNames("input-icon__clear", "m-l--xs", {
-              "tio-clear_circle_outlined": !focusIcon,
-              "tio-clear_circle": focusIcon,
-            })}
+            className={classNames(
+              "input-icon__clear",
+              "m-l--xs",
+              "tio-clear_circle"
+            )}
             onClick={handleClearInput}
-            onMouseOver={handleFocusIcon}
-            onMouseOut={handleBlurIcon}
           ></i>
         )}
         {suffix && (

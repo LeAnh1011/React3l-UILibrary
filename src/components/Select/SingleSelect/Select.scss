@@ -1,0 +1,92 @@
+@import "../../../styles/index.scss";
+/* Style for Select.tsx */
+.select__container {
+  width: 100%;
+
+  position: relative;
+
+  .select__input {
+    width: 100%;
+  }
+
+  .select__list-container {
+    width: 100%;
+    height: auto;
+    background: #ffffff;
+    @include box-shadow--popover();
+    border-radius: 4px;
+    margin-top: 5px;
+    position: absolute;
+    z-index: 999;
+    .select__list {
+      width: 100%;
+      overflow-y: auto;
+      max-height: 180px;
+      position: relative;
+      border-radius: 4px;
+    }
+    .select__bottom-button {
+      position: absolute;
+      bottom: 0;
+      height: 40px;
+      width: 100%;
+      border-radius: 4px;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      @include box-shadow--popover();
+      span {
+        font-size: 14px;
+      }
+    }
+    .select__add-button {
+      span {
+        color: #114b5f;
+        font-weight: bold;
+        font-size: 12px;
+        margin-left: 7px;
+      }
+      i {
+        margin-left: 11px;
+      }
+    }
+    .select__loading {
+      width: 100%;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .select__item {
+      position: relative;
+      display: block;
+      background-color: #fff;
+      padding-right: 15px;
+      font-size: 13px;
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      .select__text {
+        white-space: nowrap;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+      }
+      &:hover,
+      &:focus {
+        background-color: rgba(17, 75, 95, 0.12);
+        .select__text {
+          color: #25343a;
+        }
+      }
+      &.select__item--selected {
+        background-color: rgba(17, 75, 95, 0.12);
+        display: flex;
+        justify-content: space-between;
+        .select__text {
+          color: #25343a;
+        }
+      }
+    }
+  }
+}

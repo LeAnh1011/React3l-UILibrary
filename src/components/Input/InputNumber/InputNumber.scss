@@ -46,6 +46,9 @@
     &.input-number--float:focus-within {
       box-shadow: none;
       outline-width: 2px;
+      .component__title {
+        color: #114b5f;
+      }
     }
 
     &.input-number--material {

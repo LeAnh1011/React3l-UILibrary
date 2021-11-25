@@ -162,32 +162,18 @@ function InputSelect(props: InputSelectProps<Model>) {
                       onClick={handleClearItem}
                     ></i>
                   )}
-
-                  {
-                    <i
-                      className={classNames(
-                        "input-icon",
-                        "input-select__icon",
-                        "tio-chevron_down",
-                        {
-                          "input-select__icon--disabled": disabled,
-                        }
-                      )}
-                    ></i>
-                  }
                 </div>
-              ) : (
-                <i
-                  className={classNames(
-                    "input-icon",
-                    "input-select__icon",
-                    "tio-chevron_down",
-                    {
-                      "input-select__icon--disabled": disabled,
-                    }
-                  )}
-                ></i>
-              )}
+              ) : null}
+              <i
+                className={classNames(
+                  "input-icon",
+                  "input-select__icon",
+                  "tio-chevron_down",
+                  {
+                    "input-select__icon--disabled": disabled,
+                  }
+                )}
+              ></i>
             </>
           ) : (
             <>
@@ -195,7 +181,11 @@ function InputSelect(props: InputSelectProps<Model>) {
                 type="text"
                 value={render(model) || ""}
                 readOnly
-                placeholder={placeHolder}
+                placeholder={
+                  type === INPUT_SELECT_TYPE.FLOAT_LABEL && label
+                    ? " "
+                    : placeHolder
+                }
                 onKeyDown={handleEnter}
                 className={classNames("component__input", {
                   "component__input--material":
@@ -208,7 +198,14 @@ function InputSelect(props: InputSelectProps<Model>) {
                 ref={inputRef}
               />
               {type === INPUT_SELECT_TYPE.FLOAT_LABEL && label && (
-                <label className={classNames("component__title")}>
+                <label
+                  className={classNames(
+                    "component__title component__title--normal",
+                    {
+                      "component__title--sm": isSmall,
+                    }
+                  )}
+                >
                   {label}
                   {isRequired && <span className="text-danger">&nbsp;*</span>}
                 </label>
@@ -221,32 +218,18 @@ function InputSelect(props: InputSelectProps<Model>) {
                       onClick={handleClearItem}
                     ></i>
                   )}
-
-                  {
-                    <i
-                      className={classNames(
-                        "input-icon",
-                        "input-select__icon",
-                        "tio-chevron_down",
-                        {
-                          "input-select__icon--disabled": disabled,
-                        }
-                      )}
-                    ></i>
-                  }
                 </div>
-              ) : (
-                <i
-                  className={classNames(
-                    "input-icon",
-                    "input-select__icon",
-                    "tio-chevron_down",
-                    {
-                      "input-select__icon--disabled": disabled,
-                    }
-                  )}
-                ></i>
-              )}
+              ) : null}
+              <i
+                className={classNames(
+                  "input-icon",
+                  "input-select__icon",
+                  "tio-chevron_down",
+                  {
+                    "input-select__icon--disabled": disabled,
+                  }
+                )}
+              ></i>
             </>
           )}
         </div>

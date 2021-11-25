@@ -1,10 +1,8 @@
 import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
-import { storiesOf } from "@storybook/react";
 import Radio, { RadioChangeEvent } from "antd/lib/radio";
 import React from "react";
 import { Observable } from "rxjs";
-import nameof from "ts-nameof.macro";
 import MultipleSelect from "./MultipleSelect";
 
 const demoList = [
@@ -51,7 +49,7 @@ class DemoFilter extends ModelFilter {
   public provinceId: IdFilter = new IdFilter();
 }
 
-function Default() {
+export function MultipleSelectStories() {
   const [models, dispatch] = React.useReducer(testReducer, []);
 
   const [selectModelFilter] = React.useState<ModelFilter>(new ModelFilter());
@@ -91,5 +89,3 @@ function Default() {
     </>
   );
 }
-
-storiesOf("MultipleSelect", module).add(nameof(Default), Default);

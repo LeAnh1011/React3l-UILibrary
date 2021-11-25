@@ -210,7 +210,7 @@ function InputSelect(props: InputSelectProps<Model>) {
                   {isRequired && <span className="text-danger">&nbsp;*</span>}
                 </label>
               )}
-              {model ? (
+              {model && (
                 <div>
                   {!disabled && (
                     <i
@@ -219,7 +219,7 @@ function InputSelect(props: InputSelectProps<Model>) {
                     ></i>
                   )}
                 </div>
-              ) : null}
+              )}
               <i
                 className={classNames(
                   "input-icon",

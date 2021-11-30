@@ -9,7 +9,7 @@ export enum ValidateStatus {
   validating = 'validating'
 }
 
-interface FormItemProps {
+export interface FormItemProps {
   validateStatus?: ValidateStatus;
   message?: string;
   children: ReactNode;

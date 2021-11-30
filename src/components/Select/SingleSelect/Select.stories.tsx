@@ -8,7 +8,7 @@ import { of } from "rxjs";
 import nameof from "ts-nameof.macro";
 import FormItem, { ValidateStatus } from "../../FormItem/FormItem";
 import Select from "./Select";
-import { INPUT_SELECT_TYPE } from "components/Input/InputSelect/InputSelect";
+import { INPUT_SELECT_TYPE } from "../../Input/InputSelect/InputSelect";
 
 export class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();

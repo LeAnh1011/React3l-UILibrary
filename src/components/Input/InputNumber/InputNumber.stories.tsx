@@ -1,19 +1,9 @@
-import React, { Reducer } from "react";
+import React from "react";
 import InputNumber, { DECIMAL, INPUT_NUMBER_TYPE, LONG } from "./InputNumber";
 import { Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
-import { ModelFilter } from "react3l-common";
-import { NumberFilter } from "react3l-advanced-filters";
-import FormItem, { ValidateStatus } from "components/FormItem/FormItem";
-import {
-  AdvanceFilterAction,
-  advanceFilterReducer,
-  Filter,
-} from "services/advance-filter-service";
-
-class DemoFilter extends ModelFilter {
-  number: NumberFilter = new NumberFilter();
-}
+import FormItem from "../../FormItem/FormItem";
+import { ValidateStatus } from "../../FormItem/FormItem";
 
 export function InputNumberStories() {
   const [numberType, setNumberType] = React.useState<string>(LONG);
@@ -33,10 +23,6 @@ export function InputNumberStories() {
   const [isDisabled, setIsDisabled] = React.useState(false);
 
   const [isValidated, setValidated] = React.useState(false);
-
-  const [filter] = React.useReducer<
-    Reducer<DemoFilter, AdvanceFilterAction<DemoFilter, Filter>>
-  >(advanceFilterReducer, new DemoFilter());
 
   const [value, setValue] = React.useState();
 
@@ -83,8 +69,6 @@ export function InputNumberStories() {
   const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
     setIsSmall(event.target.value);
   }, []);
-
-  React.useEffect(() => {}, [filter]);
 
   return (
     <div style={{ width: "300px", margin: "10px" }}>

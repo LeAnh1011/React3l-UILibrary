@@ -14,6 +14,7 @@ export const CommonService = {
     );
     return [subscription];
   },
+
   useClickOutside(ref: RefObject<any>, callback: () => void) {
     const handleClickOutside = React.useCallback(
       (event) => {
@@ -56,6 +57,7 @@ export const CommonService = {
 
   useStateCallback(initialState: any) {
     const [state, setState] = React.useState(initialState);
+
     const cbRef = React.useRef(null);
 
     const setStateCallback = React.useCallback((state, cb) => {

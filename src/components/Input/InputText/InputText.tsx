@@ -13,7 +13,7 @@ export enum INPUT_TEXT_TYPE {
   FLOAT_LABEL,
 }
 
-interface InputTextProps {
+export interface InputTextProps {
   label?: string;
   type?: INPUT_TEXT_TYPE;
   isRequired?: boolean;
@@ -141,11 +141,11 @@ function InputText(props: InputTextProps) {
       </div>
       <div
         className={classNames(
-          "component__input input-text__container p--xs bg-white",
+          "component__input input-text__container bg-white",
           {
             "input-text__container--sm": isSmall,
-            "py--xxs": isSmall,
-            "px--xs": isSmall,
+            "p-y--xxs": isSmall,
+            "p-x--xs": isSmall,
             "p--xs": !isSmall,
             "input-text--material": type === INPUT_TEXT_TYPE.MATERIAL,
             "input-text--disabled ": disabled,

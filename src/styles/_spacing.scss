@@ -27,7 +27,7 @@ $spacings: (
 
 :root {
   /* spacing values */
-  --space-unit: 1em;
+  --space-unit: 1rem;
 
   @each $spacingname, $unit in $spacings {
     $keyname: "--space-" + $spacingname;

@@ -1,4 +1,3 @@
-import { StringFilter } from "react3l-advanced-filters";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import { Model, ModelFilter } from "react3l-common";
 import { useDebounceFn } from "ahooks";
@@ -8,7 +7,7 @@ import classNames from "classnames";
 import React, { RefObject } from "react";
 import { ErrorObserver, Observable } from "rxjs";
 import { CommonService } from "services/common-service";
-import nameof from "ts-nameof.macro";
+// import nameof from "ts-nameof.macro";
 import InputSelect, {
   INPUT_SELECT_TYPE,
 } from "components/Input/InputSelect/InputSelect";
@@ -346,8 +345,10 @@ function Select(props: SelectProps<Model, ModelFilter>) {
 }
 
 Select.defaultProps = {
-  searchProperty: nameof(Model.prototype.name),
-  searchType: nameof(StringFilter.prototype.contain),
+  // searchProperty: nameof(Model.prototype.name),
+  searchProperty: "name",
+  // searchType: nameof(StringFilter.prototype.contain),
+  searchType: "contain",
   isEnumerable: false,
   appendToBody: false,
   render: defaultRenderObject,

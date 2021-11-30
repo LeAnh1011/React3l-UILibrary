@@ -28,6 +28,10 @@
     background-color: white;
     height: 40px;
 
+    .tio-chevron_down {
+      transition: all 0.3s ease;
+    }
+
     &.input-select__container--sm {
       height: 32px !important;
     }
@@ -45,6 +49,9 @@
     &:focus-within {
       outline-color: #114b5f;
       @include box-shadow--focus;
+      .tio-chevron_down {
+        transform: rotate(180deg);
+      }
     }
 
     &.input-select--disabled {
@@ -112,6 +119,12 @@
       &.component__title--prefix {
         left: 41px;
       }
+      &.component__title--expanded {
+        top: 0;
+        left: 8px;
+        background-color: white;
+        transform: translateY(-50%) scale(0.9);
+      }
     }
 
     input {
@@ -157,7 +170,6 @@
 
     .input-icon__clear {
       color: #959aa3;
-      margin-right: 12px;
       &:hover {
         cursor: pointer;
         color: #25343a;

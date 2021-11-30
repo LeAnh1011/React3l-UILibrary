@@ -196,7 +196,7 @@ function InputText(props: InputTextProps) {
           <i
             className={classNames(
               "input-icon__clear",
-              "m-l--xs",
+              "m-l--xxs",
               "tio-clear_circle"
             )}
             onClick={handleClearInput}
@@ -205,9 +205,9 @@ function InputText(props: InputTextProps) {
         {suffix && (
           <>
             {typeof suffix === "string" ? (
-              <span className="body-text--md m-l--xs">{suffix}</span>
+              <span className="body-text--md m-l--xxs">{suffix}</span>
             ) : (
-              <div className="m-l--xs">{suffix}</div>
+              <div className="m-l--xxs">{suffix}</div>
             )}
           </>
         )}

@@ -1,31 +1,42 @@
 import commonjs from "@rollup/plugin-commonjs";
-import resolve from "@rollup/plugin-node-resolve";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import typescript from "rollup-plugin-typescript2";
-import postcss from "rollup-plugin-postcss";
-
-import packageJson from "./package.json";
+import sass from "rollup-plugin-sass";
+// import postcss from "rollup-plugin-postcss";
+import { terser } from "rollup-plugin-terser";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  input: "./src/index.ts",
+  input: [
+    "src/index.ts",
+    "src/components/FormItem/index.ts",
+    "src/components/Input/InputText/index.ts",
+    "src/components/Input/InputNumber/index.ts",
+    "src/components/Input/InputSelect/index.ts",
+    "src/components/Select/SingleSelect/index.ts"
+  ],
   output: [
     {
-      file: packageJson.main,
+      dir: "build",
       format: "cjs",
       sourcemap: true,
-    },
-    {
-      file: packageJson.module,
-      format: "esm",
-      sourcemap: true,
+      exports: "named",
+      preserveModulesRoot: "src",
     },
   ],
+  preserveModules: true,
   plugins: [
     peerDepsExternal(),
-    resolve(),
     commonjs(),
     typescript({ useTsconfigDeclarationDir: true }),
-    postcss(),
+    // postcss({
+    //   modules: true,
+    //   use: ["sass"],
+    // }),
+    sass({
+      insert: true,
+    }),
+    terser(),
   ],
+  external: ["react", "react-dom"],
 };

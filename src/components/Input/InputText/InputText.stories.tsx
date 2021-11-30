@@ -2,9 +2,9 @@ import { StringFilter } from "react3l-advanced-filters";
 import { ModelFilter } from "react3l-common";
 import React from "react";
 import InputText, { INPUT_TEXT_TYPE } from "./InputText";
-import FormItem, { ValidateStatus } from "components/FormItem/FormItem";
 import { Radio, RadioChangeEvent } from "antd";
-import { INPUT_NUMBER_TYPE } from "index";
+import FormItem from "../../FormItem/FormItem";
+import { ValidateStatus } from "../../FormItem/FormItem";
 
 export class DemoFilter extends ModelFilter {
   name: StringFilter = new StringFilter();
@@ -73,9 +73,9 @@ export function InputTextStories() {
 
       <div style={{ margin: "10px", width: "300px" }}>
         <Radio.Group onChange={handleChangeStyle} value={type}>
-          <Radio value={INPUT_NUMBER_TYPE.MATERIAL}>Material</Radio>
-          <Radio value={INPUT_NUMBER_TYPE.FLOAT_LABEL}>Float Label</Radio>
-          <Radio value={INPUT_NUMBER_TYPE.BORDERED}>Bordered</Radio>
+          <Radio value={INPUT_TEXT_TYPE.MATERIAL}>Material</Radio>
+          <Radio value={INPUT_TEXT_TYPE.FLOAT_LABEL}>Float Label</Radio>
+          <Radio value={INPUT_TEXT_TYPE.BORDERED}>Bordered</Radio>
         </Radio.Group>
       </div>
       <div style={{ margin: "10px", width: "300px" }}>

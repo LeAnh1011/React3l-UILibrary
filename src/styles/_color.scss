@@ -276,10 +276,10 @@ $palettes: (
 @each $colorname, $palette in $palettes {
   @each $key, $value in $palette {
     $keyname: "--palette-" + $colorname + "-" + $key;
-    .bg-palette-#{$colorname}-#{$key} {
+    .bg-palette-#{"" + $colorname}-#{$key} {
       background-color: var(#{$keyname});
     }
-    .color-palette-#{$colorname}-#{$key} {
+    .color-palette-#{"" + $colorname}-#{$key} {
       color: var(#{$keyname});
     }
   }

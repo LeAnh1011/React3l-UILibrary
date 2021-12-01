@@ -2,7 +2,7 @@ import React, { RefObject } from "react";
 import "./TextArea.scss";
 import classNames from "classnames";
 
-interface TextAreaAction {
+export interface TextAreaAction {
   name?: string;
   action?: any;
 }
@@ -14,7 +14,7 @@ export enum TEXT_AREA_TYPE {
 }
 
 
-interface TextAreaProps {
+export interface TextAreaProps {
   label?: string;
   type?: TEXT_AREA_TYPE;
   isRequired?: boolean;

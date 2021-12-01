@@ -84,16 +84,6 @@ function TextArea(props: TextAreaProps) {
     }
   }, [onBlur]);
 
-  const handleClearInput = React.useCallback(
-    (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-      setInternalValue("");
-      if (typeof onChange === "function") {
-        onChange(null);
-      }
-      inputRef.current.focus();
-    },
-    [onChange],
-  );
 
   React.useEffect(() => {
     if (value) {
@@ -131,7 +121,7 @@ function TextArea(props: TextAreaProps) {
         </div>
         <div
           className={classNames(
-            "component__input text-area__container p-x--xs p-x--xxs p-y--xxs p-y--xs bg-white",
+            "component__input text-area__container p-l--xs p-r--xxs p-b--xxs p-t--xs bg-white",
             {
               "text-area--material": type === TEXT_AREA_TYPE.MATERIAL,
               "text-area--disabled ": disabled,
@@ -163,16 +153,6 @@ function TextArea(props: TextAreaProps) {
               {label}
               {isRequired && <span className="text-danger">&nbsp;*</span>}
             </label>
-          )}
-          {internalValue && !disabled && (
-            <i
-              className={classNames(
-                "input-icon__clear",
-                "m-l--xs",
-                "tio-clear_circle"
-              )}
-              onClick={handleClearInput}
-            ></i>
           )}
         </div>
       </div>

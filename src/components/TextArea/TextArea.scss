@@ -30,10 +30,7 @@
     border-radius: 4px;
     background-color: white;
     height: inherit;
-
-    &.text-area__container--sm {
-      height: 32px !important;
-    }
+    padding: 12px 6px 6px 12px;
 
     &:hover {
       outline-color: #114b5f;
@@ -127,7 +124,7 @@
       outline: none;
       border: none;
       width: inherit !important;
-      min-height: 100px !important;
+      min-height: 82px !important;
       font-size: 14px;
       line-height: 1rem;
       background-color: transparent;

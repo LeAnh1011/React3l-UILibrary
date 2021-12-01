@@ -131,7 +131,7 @@ function TextArea(props: TextAreaProps) {
         </div>
         <div
           className={classNames(
-            "component__input text-area__container p--xs bg-white",
+            "component__input text-area__container p-x--xs p-x--xxs p-y--xxs p-y--xs bg-white",
             {
               "text-area--material": type === TEXT_AREA_TYPE.MATERIAL,
               "text-area--disabled ": disabled,

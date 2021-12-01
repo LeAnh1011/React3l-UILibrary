@@ -43,7 +43,7 @@ function Default() {
 
 
 
-    return <div style={{ width: '500px', padding: '10px' }}>
+    return <div style={{ width: '244px', padding: '10px' }}>
 
         <div style={{ margin: "15px 0" }}>
             <FormItem

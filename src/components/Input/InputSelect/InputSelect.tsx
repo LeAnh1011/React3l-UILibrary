@@ -131,7 +131,13 @@ function InputSelect(props: InputSelectProps<Model>) {
                 type="text"
                 value={internalModel}
                 onChange={handleChange}
-                placeholder={model ? render(model) : placeHolder}
+                placeholder={
+                  model
+                    ? render(model)
+                    : type === INPUT_SELECT_TYPE.FLOAT_LABEL && label
+                    ? " "
+                    : placeHolder
+                }
                 ref={inputRef}
                 disabled={disabled}
                 onKeyDown={handleKeyDown}
@@ -141,9 +147,12 @@ function InputSelect(props: InputSelectProps<Model>) {
               />
               {type === INPUT_SELECT_TYPE.FLOAT_LABEL && label && (
                 <label
-                  className={classNames("component__title", {
-                    "component__title--sm": isSmall,
-                  })}
+                  className={classNames(
+                    "component__title component__title--normal component__title--expanded",
+                    {
+                      "component__title--sm": isSmall,
+                    }
+                  )}
                 >
                   {label}
                   {isRequired && <span className="text-danger">&nbsp;*</span>}
@@ -151,14 +160,14 @@ function InputSelect(props: InputSelectProps<Model>) {
               )}
               {internalModel && !disabled ? (
                 <i
-                  className="input-icon tio-clear_circle input-icon__clear"
+                  className="input-icon tio-clear_circle input-icon__clear m-r--xxs"
                   onClick={handleClearInput}
                 ></i>
               ) : model ? (
                 <div>
                   {!disabled && (
                     <i
-                      className="input-icon tio-clear_circle input-icon__clear"
+                      className="input-icon tio-clear_circle input-icon__clear m-r--xxs"
                       onClick={handleClearItem}
                     ></i>
                   )}
@@ -214,7 +223,7 @@ function InputSelect(props: InputSelectProps<Model>) {
                 <div>
                   {!disabled && (
                     <i
-                      className="input-icon tio-clear_circle input-icon__clear"
+                      className="input-icon tio-clear_circle input-icon__clear m-r--xxs"
                       onClick={handleClearItem}
                     ></i>
                   )}

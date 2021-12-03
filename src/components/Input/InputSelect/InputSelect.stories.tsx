@@ -2,7 +2,7 @@ import React from "react";
 import InputSelect, { INPUT_SELECT_TYPE } from "./InputSelect";
 import { Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
-import FormItem, { ValidateStatus } from "components/FormItem/FormItem";
+import FormItem, { ValidateStatus } from "../../FormItem/FormItem";
 
 export function InputSelectStories() {
   const [expanded, setExpanded] = React.useState<boolean>(false);

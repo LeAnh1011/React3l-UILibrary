@@ -316,10 +316,10 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                 {selectWithAdd ? (
                   <div
                     className={classNames(
-                      "select__bottom-button select__add-button"
+                      "select__bottom-button select__add-button p-y--xs"
                     )}
                   >
-                    <i className="tio-add" />
+                    <i className="tio-add m-l--xxs" />
                     <span>Add new</span>
                   </div>
                 ) : selectWithPreferOption ? (

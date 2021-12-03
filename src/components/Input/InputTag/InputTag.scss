@@ -1,14 +1,17 @@
 @import "../../../styles/index.scss";
-/* Style for InputSelect.tsx */
-.input-select__wrapper {
+
+$tag-container-color: #0d1821;
+$primary-color: #0f62fe;
+
+/* Style for InputTag.tsx */
+.input-tag__wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
 
-  .input-select__label {
+  .input-tag__label {
     width: 100%;
     display: flex;
-    justify-content: center;
 
     label {
       font-size: 0.75em;
@@ -16,58 +19,54 @@
     }
   }
 
-  .input-select__container {
-    position: relative;
+  .input-tag__container {
+    background: #ffffff;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
     width: 100%;
+    max-width: 100%;
+    line-height: 22px;
+    cursor: text;
     outline: 1px solid var(--color-border);
-    border-radius: 4px;
-    background-color: white;
-    height: 40px;
+    align-items: center;
 
     .tio-chevron_down {
       transition: all 0.3s ease;
     }
 
-    &.input-select__container--sm {
-      height: 32px !important;
-    }
-
     &:hover {
-      outline-color: #114b5f;
-      .input-select__icon {
-        color: #114b5f;
+      outline-color: $primary-color;
+
+      .input-tag__icon {
+        color: $primary-color;
       }
-      .input-select__icon--disabled {
+      .input-tag__icon--disabled {
         color: var(--color-input-disabled);
       }
     }
 
     &:focus-within {
-      outline-color: #114b5f;
+      outline-color: $primary-color;
       @include box-shadow--focus;
       .tio-chevron_down {
         transform: rotate(180deg);
+        color: $primary-color;
       }
     }
 
-    &.input-select--disabled {
+    &.input-tag--disabled {
       outline-color: #d2d5d8;
       background-color: var(--color-surface-input-disabled);
     }
 
-    &.input-select--float:focus-within {
-      outline-color: #114b5f;
+    &.input-tag--float:focus-within {
+      outline-color: $primary-color;
       @include box-shadow--focus;
       .component__title {
-        color: #114b5f;
+        color: $primary-color;
       }
     }
 
-    &.input-select--material {
+    &.input-tag__container--material {
       background-color: var(--color-surface-input);
       outline: none;
       border-bottom-left-radius: 0;
@@ -86,16 +85,16 @@
       }
 
       &:focus-within {
-        border-color: #114b5f;
+        border-color: $primary-color;
         box-shadow: none;
       }
 
-      &.input-select--disabled {
+      &.input-tag--disabled {
         border-color: var(--color-border-disabled);
         background-color: var(--color-surface-input-disabled);
       }
 
-      &.input-select--float:focus-within {
+      &.input-tag--float:focus-within {
         box-shadow: none;
         outline-width: 2px;
       }
@@ -119,7 +118,8 @@
       &.component__title--prefix {
         left: 41px;
       }
-      &.component__title--expanded {
+
+      &.component__title--top {
         top: 0;
         left: 8px;
         background-color: white;
@@ -127,7 +127,32 @@
       }
     }
 
+    .input-tag__container-list-item {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      .input-tag-item__label {
+        display: inline;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-right: 6px;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        background: $tag-container-color;
+        border-radius: 7px;
+        font-size: 14px;
+        color: white;
+
+        .input-tag-item__icon {
+          margin-left: 5px;
+          cursor: pointer;
+        }
+      }
+    }
+
     input {
+      display: inline;
       font-family: inherit;
       padding: 0;
       outline: none;
@@ -164,12 +189,13 @@
       }
     }
 
-    .input-select__icon--disabled {
+    .input-tag__icon--disabled {
       color: var(--color-input-disabled);
     }
 
     .input-icon__clear {
       color: #959aa3;
+      align-self: flex-start;
       &:hover {
         cursor: pointer;
         color: #25343a;

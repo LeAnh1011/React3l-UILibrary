@@ -1,11 +1,11 @@
 import React from "react";
-import InputTag from "./InputTag";
+import InputTag, { INPUT_TAG_TYPE } from "./InputTag";
 import { Model } from "react3l-common";
 import { useDebounceFn } from "ahooks";
-import { DEBOUNCE_TIME_300 } from "config/consts";
 import { Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
-import FormItem, { ValidateStatus } from "components/FormItem/FormItem";
+import FormItem, { ValidateStatus } from "../../FormItem/FormItem";
+import { DEBOUNCE_TIME_300 } from "../../../config/consts";
 const demoItemList = [
   { id: 1, name: "Tag 1", code: "1" },
   { id: 2, name: "Tag 2", code: "2" },
@@ -16,7 +16,15 @@ const demoItemList = [
 export function InputTagStories() {
   const [listItem, setListItem] = React.useState<Model[]>(demoItemList);
 
-  const [isMaterial, setIsMaterial] = React.useState(false);
+  const [type, setType] = React.useState<INPUT_TAG_TYPE>(
+    INPUT_TAG_TYPE.BORDERED
+  );
+
+  const [isSmall, setIsSmall] = React.useState(false);
+
+  const [isDisabled, setIsDisabled] = React.useState(false);
+
+  const [isValidated, setValidated] = React.useState(false);
 
   const { run } = useDebounceFn(
     (searchTerm: string) => {
@@ -37,6 +45,10 @@ export function InputTagStories() {
     [listItem]
   );
 
+  const handleClearMultiItem = React.useCallback(() => {
+    setListItem([]);
+  }, []);
+
   const handleSearchItem = React.useCallback(
     (searchTerm: string) => {
       run(searchTerm);
@@ -45,46 +57,75 @@ export function InputTagStories() {
   );
 
   const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
-    setIsMaterial(event.target.value);
+    setType(event.target.value);
+  }, []);
+
+  const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
+    setIsSmall(event.target.value);
+  }, []);
+
+  const handleChangeValidated = React.useCallback((event: RadioChangeEvent) => {
+    setValidated(event.target.value);
+  }, []);
+
+  const handleChangeDisabled = React.useCallback((event: RadioChangeEvent) => {
+    setIsDisabled(event.target.value);
   }, []);
 
   return (
     <div style={{ margin: "10px", width: "380px" }}>
-      <InputTag
-        listItem={listItem}
-        isMaterial={isMaterial}
-        placeHolder={"Select tree node..."}
-        onSearch={handleSearchItem}
-        onClear={handleClearItem}
-      />
-
       <div style={{ marginTop: "10px", width: "380px" }}>
         <FormItem
-          validateStatus={ValidateStatus.error}
-          message={"Field required!"}
+          validateStatus={isValidated ? ValidateStatus.error : null}
+          message={"Helper text"}
         >
           <InputTag
+            type={type}
             listItem={listItem}
-            isMaterial={isMaterial}
-            placeHolder={"Select tree node..."}
+            placeHolder={"Select an option"}
             onSearch={handleSearchItem}
             onClear={handleClearItem}
             error={"Field required!"}
+            isSmall={isSmall}
+            disabled={isDisabled}
+            label={"Label"}
+            onClearMulti={handleClearMultiItem}
           />
         </FormItem>
       </div>
 
       <button
-        className="btn btn-info"
-        style={{ marginTop: "10px" }}
+        className="btn btn--secondary"
+        style={{ marginTop: "10px", border: "none" }}
         onClick={() => setListItem(demoItemList)}
       >
         Reset
       </button>
       <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeStyle} value={isMaterial}>
-          <Radio value={true}>Material Style</Radio>
-          <Radio value={false}>Normal Style</Radio>
+        <Radio.Group onChange={handleChangeStyle} value={type}>
+          <Radio value={INPUT_TAG_TYPE.MATERIAL}>Material</Radio>
+          <Radio value={INPUT_TAG_TYPE.FLOAT_LABEL}>Float Label</Radio>
+          <Radio value={INPUT_TAG_TYPE.BORDERED}>Bordered</Radio>
+        </Radio.Group>
+      </div>
+
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeSize} value={isSmall}>
+          <Radio value={true}>Small</Radio>
+          <Radio value={false}>Default</Radio>
+        </Radio.Group>
+      </div>
+
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeDisabled} value={isDisabled}>
+          <Radio value={true}>Disabled</Radio>
+          <Radio value={false}>Not Disabled</Radio>
+        </Radio.Group>
+      </div>
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeValidated} value={isValidated}>
+          <Radio value={true}>Validated</Radio>
+          <Radio value={false}>Not Validated</Radio>
         </Radio.Group>
       </div>
     </div>

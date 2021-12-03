@@ -218,12 +218,17 @@ $palettes: (
   /* border colors */
   --color-border: #919294;
   --color-border-disabled: #d2d5d8;
+  --color-closed-button-surface: #959aa3;
 
   /* surface colors */
-  --color-surface-tag: #dfe1e6;
+  --color-surface-tag: #e4e5e7;
+  --color-surface-tag-hover: #c9ccd0;
+  --color-surface-material-input: #f4f4f4;
+  --color-surface-material-input-hover: #e5e5e5;
   --color-surface-input: #f4f4f4;
   --color-surface-input-hover: #e5e5e5;
   --color-surface-input-disabled: #f1f1f1;
+  --color-surface-input-outline-hover: #f6f6f7;
 
   /* buttons */
   --btn-primary-bg: var(--color-primary);
@@ -269,6 +274,18 @@ $palettes: (
   --color-worked-high: var(--palette-blue-500);
   --color-worked-medium: color-mod(var(--color-worked-high) alpha(35%));
   --color-worked-low: color-mod(var(--color-worked-high) alpha(15%));
+
+  --color-supportive-high: #004144;
+  --color-supportive-medium: #9ef0f0;
+
+  --color-danger-high: #bf2600;
+  --color-danger-medium: #cd3d57;
+  --color-danger-low: #ffd7d9;
+
+  /* critical color */
+  --color-critical-hover: #bc2200;
+  --color-critical: #d82c0d;
+  --color-critical-surface: #fff0f0;
 }
 
 /* class bg and color for color $palletes with syntax .palette-$colorname-$number-$type */
@@ -317,6 +334,14 @@ $palettes: (
   color: var(--color-error-high);
 }
 
+.bg-danger {
+  background-color: var(--color-danger-high);
+}
+
+.color-danger {
+  color: var(--color-danger-high);
+}
+
 .bg-info {
   background-color: var(--color-info-high);
 }
@@ -339,6 +364,14 @@ $palettes: (
 
 .color-worked {
   color: var(--color-worked-high);
+}
+
+.bg-supportive {
+  background-color: var(--color-supportive-high);
+}
+
+.color-supportive {
+  color: var(--color-supportive-high);
 }
 
 .bg-white {

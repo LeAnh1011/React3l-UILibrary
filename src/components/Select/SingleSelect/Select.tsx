@@ -7,7 +7,6 @@ import classNames from "classnames";
 import React, { RefObject } from "react";
 import { ErrorObserver, Observable } from "rxjs";
 import { CommonService } from "services/common-service";
-// import nameof from "ts-nameof.macro";
 import InputSelect, {
   INPUT_SELECT_TYPE,
 } from "components/Input/InputSelect/InputSelect";
@@ -345,9 +344,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
 }
 
 Select.defaultProps = {
-  // searchProperty: nameof(Model.prototype.name),
   searchProperty: "name",
-  // searchType: nameof(StringFilter.prototype.contain),
   searchType: "contain",
   isEnumerable: false,
   appendToBody: false,

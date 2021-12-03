@@ -37,9 +37,9 @@
     }
 
     &:hover {
-      outline-color: #114b5f;
+      outline-color: var(--color-primary);
       .input-select__icon {
-        color: #114b5f;
+        color: var(--color-primary);
       }
       .input-select__icon--disabled {
         color: var(--color-input-disabled);
@@ -47,7 +47,7 @@
     }
 
     &:focus-within {
-      outline-color: #114b5f;
+      outline-color: var(--color-primary);
       @include box-shadow--focus;
       .tio-chevron_down {
         transform: rotate(180deg);
@@ -60,10 +60,10 @@
     }
 
     &.input-select--float:focus-within {
-      outline-color: #114b5f;
+      outline-color: var(--color-primary);
       @include box-shadow--focus;
       .component__title {
-        color: #114b5f;
+        color: var(--color-primary);
       }
     }
 

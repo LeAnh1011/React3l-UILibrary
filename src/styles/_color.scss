@@ -180,7 +180,7 @@ $palettes: (
 
   /* main colors */
   /* used for the links, the button background color,... */
-  --color-primary: #4d84f4;
+  --color-primary: #0F62FE;
   --color-primary-light: color-mod(var(--color-primary) tint(15%));
   --color-primary-dark: color-mod(var(--color-primary) shade(15%));
   --color-primary-bg: color-mod(var(--color-primary) alpha(20%));
@@ -198,7 +198,7 @@ $palettes: (
 
   /* support color */
   --color-link: #2c6ecb;
-
+  --color-harmony: #0D1821;
   /* scale of neutral */
   /* used for text elements, subtle elements, borders,... */
   --black: #1d1d21;

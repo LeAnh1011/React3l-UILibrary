@@ -1,4 +1,3 @@
-import { StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
 import { useDebounceFn } from "ahooks";
 import { CommonService } from "services/common-service";
@@ -7,7 +6,6 @@ import InputTag from "components/Input/InputTag/InputTag";
 import { ASSETS_IMAGE, ASSETS_SVG, DEBOUNCE_TIME_300 } from "config/consts";
 import React, { RefObject } from "react";
 import { ErrorObserver, Observable } from "rxjs";
-import nameof from "ts-nameof.macro";
 
 export interface MultipleSelectProps<
   T extends Model,
@@ -264,8 +262,8 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
 }
 
 MultipleSelect.defaultProps = {
-  searchProperty: nameof(Model.prototype.name),
-  searchType: nameof(StringFilter.prototype.startWith),
+  searchProperty: "name",
+  searchType: "startWith",
   isEnumerable: false,
   render: defaultRenderObject,
   isMaterial: false,

@@ -38,11 +38,11 @@
     }
 
     &:hover {
-      outline-color: #114b5f;
+      outline-color: var(--color-primary);
     }
 
     &:focus-within {
-      outline-color: #114b5f;
+      outline-color: var(--color-primary);
       @include box-shadow--focus;
     }
 
@@ -53,9 +53,8 @@
 
     &.input-text--float:focus-within {
       box-shadow: none;
-      outline-width: 2px;
       .component__title {
-        color: #114b5f;
+        color: var(--color-primary);
       }
     }
 
@@ -78,7 +77,7 @@
       }
 
       &:focus-within {
-        border-color: #114b5f;
+        border-color: var(--color-primary);
         box-shadow: none;
       }
 

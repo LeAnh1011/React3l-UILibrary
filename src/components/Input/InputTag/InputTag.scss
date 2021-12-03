@@ -1,8 +1,5 @@
 @import "../../../styles/index.scss";
 
-$tag-container-color: #0d1821;
-$primary-color: #0f62fe;
-
 /* Style for InputTag.tsx */
 .input-tag__wrapper {
   display: flex;
@@ -34,10 +31,10 @@ $primary-color: #0f62fe;
     }
 
     &:hover {
-      outline-color: $primary-color;
+      outline-color: var(--color-primary);
 
       .input-tag__icon {
-        color: $primary-color;
+        color: var(--color-primary);
       }
       .input-tag__icon--disabled {
         color: var(--color-input-disabled);
@@ -45,11 +42,11 @@ $primary-color: #0f62fe;
     }
 
     &:focus-within {
-      outline-color: $primary-color;
+      outline-color: var(--color-primary);
       @include box-shadow--focus;
       .tio-chevron_down {
         transform: rotate(180deg);
-        color: $primary-color;
+        color: var(--color-primary);
       }
     }
 
@@ -59,10 +56,10 @@ $primary-color: #0f62fe;
     }
 
     &.input-tag--float:focus-within {
-      outline-color: $primary-color;
+      outline-color: var(--color-primary);
       @include box-shadow--focus;
       .component__title {
-        color: $primary-color;
+        color: var(--color-primary);
       }
     }
 
@@ -85,7 +82,7 @@ $primary-color: #0f62fe;
       }
 
       &:focus-within {
-        border-color: $primary-color;
+        border-color: var(--color-primary);
         box-shadow: none;
       }
 
@@ -139,7 +136,7 @@ $primary-color: #0f62fe;
         text-align: center;
         white-space: nowrap;
         vertical-align: baseline;
-        background: $tag-container-color;
+        background: #0d1821;
         border-radius: 7px;
         font-size: 14px;
         color: white;

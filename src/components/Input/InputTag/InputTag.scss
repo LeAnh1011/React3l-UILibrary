@@ -85,8 +85,8 @@ $primary-color: #0f62fe;
       }
 
       &:focus-within {
-        border-color: $primary-color;
-        box-shadow: none;
+        @include box-shadow--focus;
+        border: 1px solid $primary-color;
       }
 
       &.input-tag--disabled {

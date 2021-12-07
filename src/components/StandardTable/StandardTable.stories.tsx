@@ -139,6 +139,7 @@ function Default() {
     <div className="page">
       <StandardTable
         columns={columns}
+        isExpandAble={true}
         expandedRowRend={expandedRowRender}
         list={data}
         size="lg"

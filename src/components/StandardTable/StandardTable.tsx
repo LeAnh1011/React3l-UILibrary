@@ -18,11 +18,12 @@ export interface StandardTableCustomProps extends UseMaster {
   isDragable?: boolean;
   isShowTitle?: boolean;
   translate?: TFunction;
+  isExpandAble?: boolean;
   expandedRowRend?: ExpandedRowRender<Model>;
 }
 
 function StandardTable(props: StandardTableCustomProps) {
-  const { list, columns, expandedRowRend, size } = props;
+  const { list, columns, expandedRowRend, size, isExpandAble } = props;
 
   const rowSelection = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: Model[]) => {
@@ -44,21 +45,25 @@ function StandardTable(props: StandardTableCustomProps) {
         <Table
           className={classNames(`table-size-${size}`)}
           columns={columns}
-          expandable={{
-            expandedRowRender: expandedRowRend,
-            expandIcon: ({ expanded, onExpand, record }) =>
-              expanded ? (
-                <DownOutlined
-                  className="icon-table-expand"
-                  onClick={(e) => onExpand(record, e)}
-                />
-              ) : (
-                <RightOutlined
-                  className="icon-table-expand"
-                  onClick={(e) => onExpand(record, e)}
-                />
-              ),
-          }}
+          expandable={
+            isExpandAble
+              ? {
+                  expandedRowRender: expandedRowRend,
+                  expandIcon: ({ expanded, onExpand, record }) =>
+                    expanded ? (
+                      <DownOutlined
+                        className="icon-table-expand"
+                        onClick={(e) => onExpand(record, e)}
+                      />
+                    ) : (
+                      <RightOutlined
+                        className="icon-table-expand"
+                        onClick={(e) => onExpand(record, e)}
+                      />
+                    ),
+                }
+              : null
+          }
           dataSource={list}
           rowSelection={rowSelection}
         />
@@ -68,5 +73,6 @@ function StandardTable(props: StandardTableCustomProps) {
 }
 StandardTable.defaultProps = {
   size: "md",
+  isExpandAble: false,
 };
 export default StandardTable;

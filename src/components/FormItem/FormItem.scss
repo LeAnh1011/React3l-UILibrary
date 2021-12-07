@@ -33,26 +33,26 @@
 
   &.form-item__container--error {
     .component__title {
-      color: var(--color-error-high) !important;
+      color: var(--color-critical) !important;
     }
     .form-item__content {
       .form-item__icon,
       i.input-icon {
-        color: var(--color-error-high) !important;
+        color: var(--color-input-disabled) !important;
       }
 
       .component__input,
       textarea,
       .input-tag__container,
       .ant-picker {
-        background-color: #fff0f0;
-        outline-color: var(--color-error-high) !important;
-        border-color: var(--color-error-high) !important;
+        background-color: var(--color-critical-surface);
+        outline-color: var(--color-critical) !important;
+        border-color: var(--color-critical) !important;
       }
     }
 
     .form-item__message {
-      color: var(--color-error-high) !important;
+      color: var(--color-critical) !important;
     }
   }
 

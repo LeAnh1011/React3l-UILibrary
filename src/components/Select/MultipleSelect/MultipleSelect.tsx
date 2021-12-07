@@ -6,6 +6,8 @@ import InputTag from "components/Input/InputTag/InputTag";
 import { ASSETS_IMAGE, ASSETS_SVG, DEBOUNCE_TIME_300 } from "config/consts";
 import React, { RefObject } from "react";
 import { ErrorObserver, Observable } from "rxjs";
+import { INPUT_TAG_TYPE } from "components/Input/InputTag";
+import "./MultipleSelect.scss";
 
 export interface MultipleSelectProps<
   T extends Model,
@@ -32,6 +34,16 @@ export interface MultipleSelectProps<
   render?: (t: T) => string;
 
   classFilter: new () => TFilter;
+
+  label?: string;
+
+  type?: INPUT_TAG_TYPE;
+
+  isSmall?: boolean;
+
+  selectWithAdd?: boolean;
+
+  selectWithPreferOption?: boolean;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -51,6 +63,11 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     onChange,
     render,
     classFilter: ClassFilter,
+    label,
+    type,
+    isSmall,
+    selectWithAdd,
+    selectWithPreferOption,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -205,11 +222,33 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     [ClassFilter, getList, modelFilter, onChange]
   );
 
+  const handleClearAll = React.useCallback(() => {
+    const cloneModelFilter = new ClassFilter();
+
+    cloneModelFilter["id"]["notIn"] = [];
+    getList(cloneModelFilter).subscribe(
+      (res: Model[]) => {
+        if (res) {
+          setList(res);
+        }
+        setLoading(false);
+      },
+      (err: ErrorObserver<Error>) => {
+        setList([]);
+        setLoading(false);
+      }
+    );
+    onChange(null, "REMOVE_ALL");
+  }, [ClassFilter, getList, onChange]);
+
   CommonService.useClickOutside(wrapperRef, handleCloseSelect);
 
   return (
     <>
-      <div className="select__container" ref={wrapperRef}>
+      <div
+        className="select__container multiple-select__container"
+        ref={wrapperRef}
+      >
         <div className="select__input" onClick={handleToggle}>
           <InputTag
             listItem={models}
@@ -219,32 +258,76 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
             disabled={disabled}
             onSearch={handleSearchChange}
             onClear={handleClearItem}
+            label={label}
+            onClearMulti={handleClearAll}
+            type={type}
+            isSmall={isSmall}
+            isUsingSearch={true}
           />
         </div>
         {isExpand && (
           <div className="select__list-container">
             {!loading ? (
-              <div className="select__list">
-                {internalList.length > 0 ? (
-                  internalList.map((item, index) => (
-                    <div
-                      className={classNames("select__item", {
-                        "select__item--selected": item.isSelected,
-                      })}
-                      key={index}
-                      onClick={handleClickItem(item)}
-                    >
-                      <span className="select__text">{render(item)}</span>
+              <>
+                <div className="select__list multiple-select__list">
+                  {internalList.length > 0 ? (
+                    internalList.map((item, index) => (
+                      <div
+                        className={classNames(
+                          "select__item p-l--xs p-y--xs p-r--xxs",
+                          {
+                            "select__item--selected": item.isSelected,
+                          }
+                        )}
+                        key={index}
+                      >
+                        <div>
+                          <label className={classNames("checkbox__container")}>
+                            <input type="checkbox" checked={item.isSelected} />
+                            <span
+                              className="checkmark"
+                              onClick={handleClickItem(item)}
+                            ></span>
+                            <span className="select__text">{render(item)}</span>
+                          </label>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <img
+                      className="img-emty"
+                      src={ASSETS_IMAGE + "/no-data.png"}
+                      alt=""
+                    />
+                  )}
+                </div>
+                {selectWithAdd ? (
+                  <div
+                    className={classNames(
+                      "select__bottom-button select__add-button p-y--xs"
+                    )}
+                  >
+                    <i className="tio-add m-l--xxs" />
+                    <span>Add new</span>
+                  </div>
+                ) : selectWithPreferOption ? (
+                  <div
+                    className={classNames(
+                      "select__bottom-button select__prefer-option-button"
+                    )}
+                  >
+                    <div className={classNames("p-l--xs")}>
+                      <label className={classNames("checkbox__container")}>
+                        <input type="checkbox" checked={true} />
+                        <span className="checkmark"></span>
+                        <span className="multiple-select__text">
+                          Prefer Options
+                        </span>
+                      </label>
                     </div>
-                  ))
-                ) : (
-                  <img
-                    className="img-emty"
-                    src={ASSETS_IMAGE + "/no-data.png"}
-                    alt=""
-                  />
-                )}
-              </div>
+                  </div>
+                ) : null}
+              </>
             ) : (
               <div className="select__loading">
                 <img

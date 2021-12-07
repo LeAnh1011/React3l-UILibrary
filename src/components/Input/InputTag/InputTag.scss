@@ -17,17 +17,23 @@
   }
 
   .input-tag__container {
-    background: #ffffff;
+    position: relative;
     display: flex;
-    width: 100%;
-    max-width: 100%;
-    line-height: 22px;
-    cursor: text;
-    outline: 1px solid var(--color-border);
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
+    width: 100%;
+    outline: 1px solid var(--color-border);
+    background-color: white;
+    height: 40px;
 
     .tio-chevron_down {
       transition: all 0.3s ease;
+      color: var(--color-input-placeholder);
+    }
+
+    &.input-tag__container--sm {
+      height: 32px !important;
     }
 
     &:hover {
@@ -79,11 +85,14 @@
         .component__input.disabled-field {
           background-color: var(--color-surface-input-disabled);
         }
+        .tio-chevron_down {
+          color: var(--color-input-placeholder);
+        }
       }
 
       &:focus-within {
-        border-color: var(--color-primary);
-        box-shadow: none;
+        border: 1px solid var(--color-primary);
+        @include box-shadow--focus();
       }
 
       &.input-tag--disabled {
@@ -124,27 +133,24 @@
       }
     }
 
-    .input-tag__container-list-item {
-      display: flex;
-      flex-wrap: wrap;
-      width: 100%;
-      .input-tag-item__label {
-        display: inline;
-        padding-top: 2px;
-        padding-bottom: 2px;
-        padding-right: 6px;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: baseline;
-        background: #0d1821;
-        border-radius: 7px;
-        font-size: 14px;
-        color: white;
+    .input-tag-item__label {
+      display: inline;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      padding-right: 6px;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      background: #0d1821;
+      border-radius: 12px;
+      font-size: 14px;
+      color: white;
+      margin-top: -2px;
+      margin-bottom: -2px;
 
-        .input-tag-item__icon {
-          margin-left: 5px;
-          cursor: pointer;
-        }
+      .input-tag-item__icon {
+        margin-left: 5px;
+        cursor: pointer;
       }
     }
 
@@ -192,7 +198,6 @@
 
     .input-icon__clear {
       color: #959aa3;
-      align-self: flex-start;
       &:hover {
         cursor: pointer;
         color: #25343a;

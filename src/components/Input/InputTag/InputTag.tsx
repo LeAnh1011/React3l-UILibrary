@@ -24,20 +24,20 @@ export interface InputTagProps<T extends Model> {
   label?: string;
   type?: INPUT_TAG_TYPE;
   isSmall?: boolean;
+  isUsingSearch?: boolean;
 }
 function InputTag(props: InputTagProps<Model>) {
   const {
     listItem,
     placeHolder,
     disabled,
-    render,
-    onClear,
     onSearch,
     isRequired,
     label,
     type,
     isSmall,
     onClearMulti,
+    isUsingSearch,
   } = props;
 
   const internalListItem = React.useMemo<Model[]>(() => {
@@ -58,21 +58,23 @@ function InputTag(props: InputTagProps<Model>) {
     [onSearch]
   );
 
-  const handleClearItem = React.useCallback(
-    (item) => (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-      event.stopPropagation();
-      if (typeof onClear === "function") {
-        onClear(item);
-      }
-    },
-    [onClear]
-  );
-
   const handleClearMultiItem = React.useCallback(() => {
     if (typeof onClearMulti === "function") {
       onClearMulti();
     }
   }, [onClearMulti]);
+
+  const handleClearInput = React.useCallback(
+    (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      setSearchTerm("");
+      inputRef.current.focus();
+      if (typeof onSearch === "function") {
+        onSearch(null);
+        return;
+      }
+    },
+    [onSearch]
+  );
 
   return (
     <>
@@ -89,7 +91,7 @@ function InputTag(props: InputTagProps<Model>) {
           className={classNames(
             "component__input input-tag__container bg-white",
             {
-              "input-text__container--sm": isSmall,
+              "input-tag__container--sm": isSmall,
               "p-y--xxs": isSmall,
               "p-x--xs": isSmall,
               "p--xs": !isSmall,
@@ -103,30 +105,34 @@ function InputTag(props: InputTagProps<Model>) {
           )}
           onClick={() => inputRef.current.focus()}
         >
-          <div className={classNames("input-tag__container-list-item")}>
-            {internalListItem &&
-              internalListItem.map((item, index) => (
-                <span
-                  className="input-tag-item__label p-l--xxs m-r--xxxs m-b--xxxs"
-                  key={index}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <span className="input-tag-item__text">{render(item)}</span>
-                  <i
-                    className="input-tag-item__icon tio-clear"
-                    onClick={handleClearItem(item)}
-                  ></i>
-                </span>
-              ))}
+          {internalListItem && internalListItem.length > 0 && (
+            <span
+              className="input-tag-item__label p-l--xxs m-r--xxxs m-b--xxxs"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span className="input-tag-item__text">
+                {internalListItem?.length}
+              </span>
+              <i
+                className="input-tag-item__icon tio-clear"
+                onClick={handleClearMultiItem}
+              ></i>
+            </span>
+          )}
+          {
             <input
               type="text"
               value={searchTerm}
-              placeholder={internalListItem ? undefined : placeHolder}
+              placeholder={
+                type === INPUT_TAG_TYPE.FLOAT_LABEL && label ? " " : placeHolder
+              }
               ref={inputRef}
               disabled={disabled}
               onChange={handleChangeInput}
+              readOnly={!isUsingSearch}
             />
-          </div>
+          }
+
           {type === INPUT_TAG_TYPE.FLOAT_LABEL && label && (
             <label
               className={classNames(
@@ -142,10 +148,10 @@ function InputTag(props: InputTagProps<Model>) {
             </label>
           )}
 
-          {!disabled && listItem && listItem.length > 0 && (
+          {!disabled && searchTerm && (
             <i
-              className="input-icon tio-clear_circle input-icon__clear m-r--xxs"
-              onClick={handleClearMultiItem}
+              className="input-icon tio-clear_circle input-icon__clear m-x--xxs"
+              onClick={handleClearInput}
             ></i>
           )}
 

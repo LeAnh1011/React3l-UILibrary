@@ -12,9 +12,8 @@
   .select__list-container {
     width: 100%;
     height: auto;
-    background: #ffffff;
+    background-color: var(--color-surface-material-input);
     @include box-shadow--popover();
-    border-radius: 4px;
     margin-top: 5px;
     position: absolute;
     z-index: 999;
@@ -23,15 +22,14 @@
       overflow-y: auto;
       max-height: 180px;
       position: relative;
-      border-radius: 4px;
+      background-color: var(--color-surface-material-input);
     }
     .select__bottom-button {
       position: absolute;
       bottom: 0;
       height: 40px;
       width: 100%;
-      border-radius: 0px 0px 4px 4px;
-      background-color: #fff;
+      background-color: var(--color-surface-material-input);
       display: flex;
       align-items: center;
       @include box-shadow--popover();
@@ -41,10 +39,12 @@
     }
     .select__add-button {
       span {
-        color: #114b5f;
-        font-weight: bold;
+        color: var(--color-primary);
         font-size: 12px;
         margin-left: 7px;
+      }
+      .tio-add {
+        color: var(--color-primary);
       }
     }
     .select__loading {
@@ -57,8 +57,9 @@
     }
     .select__item {
       position: relative;
-      display: block;
-      background-color: #fff;
+      display: flex;
+      align-items: center;
+      background-color: var(--color-surface-material-input);
       padding-right: 15px;
       font-size: 13px;
       white-space: nowrap;
@@ -71,18 +72,12 @@
       }
       &:hover,
       &:focus {
-        background-color: rgba(17, 75, 95, 0.12);
-        .select__text {
-          color: #25343a;
-        }
+        background-color: var(--color-surface-material-input-hover);
       }
       &.select__item--selected {
-        background-color: rgba(17, 75, 95, 0.12);
+        background-color: var(--color-surface-material-input-hover);
         display: flex;
         justify-content: space-between;
-        .select__text {
-          color: #25343a;
-        }
       }
     }
   }

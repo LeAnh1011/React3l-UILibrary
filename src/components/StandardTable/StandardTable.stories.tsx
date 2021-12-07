@@ -68,15 +68,16 @@ function Default() {
         dataIndex: "name",
         key: "name",
         sorter: true,
-        align: "center",
         width: 400,
+        render(...[name]) {
+          return <div>{name + " hihi"}</div>;
+        },
       },
       {
         title: <div className="text-center">{"Platform"}</div>,
         dataIndex: "platform",
         key: "platform",
         sorter: true,
-        align: "center",
         width: 400,
       },
       {
@@ -84,7 +85,6 @@ function Default() {
         dataIndex: "version",
         key: "version",
         sorter: true,
-        align: "center",
         width: 400,
       },
       {
@@ -92,7 +92,6 @@ function Default() {
         dataIndex: "upgradeNum",
         key: "upgradeNum",
         sorter: true,
-        align: "center",
         width: 400,
       },
       {
@@ -100,7 +99,6 @@ function Default() {
         dataIndex: "creator",
         key: "creator",
         sorter: true,
-        align: "center",
         width: 400,
       },
       {
@@ -108,13 +106,11 @@ function Default() {
         dataIndex: "createdAt",
         key: "createdAt",
         sorter: true,
-        align: "center",
         width: 400,
       },
       {
         title: <div className="text-center">{"Action"}</div>,
         key: "operation",
-        align: "center",
         width: 400,
         render: () => <a>Publish</a>,
       },
@@ -143,6 +139,7 @@ function Default() {
         expandedRowRend={expandedRowRender}
         list={data}
         size="lg"
+        orderPadding="order-center"
       />
     </div>
   );

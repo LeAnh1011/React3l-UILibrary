@@ -8,6 +8,25 @@
     .ant-table-tbody > tr > td{
       padding: 0px 0px;
     }
+    
+    .table-padding-order-left{
+      .ant-table-cell{
+        padding-left: 16px;
+        padding-right: 8px;
+      }
+    }
+    .table-padding-order-center{
+      .ant-table-cell{
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+    }
+    .table-padding-order-right{
+      .ant-table-cell{
+        padding-right: 16px;
+        padding-left: 8px;
+      }
+    }
     .table-size-lg{
       .ant-table-cell{
         height: 56px !important;

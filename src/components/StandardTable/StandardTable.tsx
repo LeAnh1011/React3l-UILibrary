@@ -14,6 +14,7 @@ import classNames from "classnames";
 
 export interface StandardTableCustomProps extends UseMaster {
   size?: "lg" | "md" | "sm";
+  orderPadding?: "order-left" | "order-center" | "order-right";
   columns?: ColumnProps<Model>[];
   isDragable?: boolean;
   isShowTitle?: boolean;
@@ -23,7 +24,14 @@ export interface StandardTableCustomProps extends UseMaster {
 }
 
 function StandardTable(props: StandardTableCustomProps) {
-  const { list, columns, expandedRowRend, size, isExpandAble } = props;
+  const {
+    list,
+    columns,
+    expandedRowRend,
+    size,
+    isExpandAble,
+    orderPadding,
+  } = props;
 
   const rowSelection = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: Model[]) => {
@@ -43,7 +51,10 @@ function StandardTable(props: StandardTableCustomProps) {
     <>
       <div className="page__master-table">
         <Table
-          className={classNames(`table-size-${size}`)}
+          className={classNames(
+            `table-size-${size}`,
+            `table-padding-${orderPadding}`
+          )}
           columns={columns}
           expandable={
             isExpandAble
@@ -74,5 +85,6 @@ function StandardTable(props: StandardTableCustomProps) {
 StandardTable.defaultProps = {
   size: "md",
   isExpandAble: false,
+  orderPadding: "order-center",
 };
 export default StandardTable;

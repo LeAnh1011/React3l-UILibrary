@@ -3,3 +3,26 @@
 .icon-table-expand {
   opacity: 0.5;
 }
+.page {
+  .page__master-table {
+    .ant-table-tbody > tr > td{
+      padding: 0px 0px;
+    }
+    .table-size-lg{
+      .ant-table-cell{
+        height: 56px !important;
+      }
+    }
+    .table-size-md{
+      .ant-table-cell{
+        height: 40px !important;
+      }
+    }
+    .table-size-sm{
+      .ant-table-cell{
+        height: 32px !important;
+      }
+    }
+
+  }
+}

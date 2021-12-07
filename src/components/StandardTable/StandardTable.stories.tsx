@@ -2,9 +2,11 @@ import { Table, Badge, Menu, Dropdown, Space } from "antd";
 import { storiesOf } from "@storybook/react";
 import { DownOutlined } from "@ant-design/icons";
 import nameof from "ts-nameof.macro";
+import { useMemo } from "react";
 import "./StandardTable.scss";
 import StandardTable from "./StandardTable";
-import { Model } from "react3l-common";
+// import { Model } from "react3l-common";
+import { ColumnProps } from "antd/lib/table";
 
 const menu = (
   <Menu>
@@ -59,15 +61,66 @@ function Default() {
     return <Table columns={columns} dataSource={data} pagination={false} />;
   };
 
-  const columns = [
-    { title: "Name", dataIndex: "name", key: "name" },
-    { title: "Platform", dataIndex: "platform", key: "platform" },
-    { title: "Version", dataIndex: "version", key: "version" },
-    { title: "Upgraded", dataIndex: "upgradeNum", key: "upgradeNum" },
-    { title: "Creator", dataIndex: "creator", key: "creator" },
-    { title: "Date", dataIndex: "createdAt", key: "createdAt" },
-    { title: "Action", key: "operation", render: () => <a>Publish</a> },
-  ];
+  const columns: ColumnProps<any>[] = useMemo(
+    () => [
+      {
+        title: <div className="text-center">{"title"}</div>,
+        dataIndex: "name",
+        key: "name",
+        sorter: true,
+        align: "center",
+        width: 400,
+      },
+      {
+        title: <div className="text-center">{"Platform"}</div>,
+        dataIndex: "platform",
+        key: "platform",
+        sorter: true,
+        align: "center",
+        width: 400,
+      },
+      {
+        title: <div className="text-center">{"Version"}</div>,
+        dataIndex: "version",
+        key: "version",
+        sorter: true,
+        align: "center",
+        width: 400,
+      },
+      {
+        title: <div className="text-center">{"Upgraded"}</div>,
+        dataIndex: "upgradeNum",
+        key: "upgradeNum",
+        sorter: true,
+        align: "center",
+        width: 400,
+      },
+      {
+        title: <div className="text-center">{"Creator"}</div>,
+        dataIndex: "creator",
+        key: "creator",
+        sorter: true,
+        align: "center",
+        width: 400,
+      },
+      {
+        title: <div className="text-center">{"Date"}</div>,
+        dataIndex: "createdAt",
+        key: "createdAt",
+        sorter: true,
+        align: "center",
+        width: 400,
+      },
+      {
+        title: <div className="text-center">{"Action"}</div>,
+        key: "operation",
+        align: "center",
+        width: 400,
+        render: () => <a>Publish</a>,
+      },
+    ],
+    []
+  );
 
   const data = [];
   for (let i = 0; i < 5; ++i) {
@@ -83,11 +136,12 @@ function Default() {
   }
 
   return (
-    <div>
+    <div className="page">
       <StandardTable
         columns={columns}
         expandedRowRend={expandedRowRender}
         list={data}
+        size="lg"
       />
     </div>
   );

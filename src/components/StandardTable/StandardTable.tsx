@@ -10,6 +10,7 @@ import { DownOutlined, RightOutlined } from "@ant-design/icons";
 import { ColumnProps } from "antd/lib/table";
 import { UseMaster } from "./interfaceTable";
 import { ExpandedRowRender } from "rc-table/lib/interface";
+import classNames from "classnames";
 
 export interface StandardTableCustomProps extends UseMaster {
   size?: "lg" | "md" | "sm";
@@ -21,12 +22,7 @@ export interface StandardTableCustomProps extends UseMaster {
 }
 
 function StandardTable(props: StandardTableCustomProps) {
-  const {
-    list,
-    columns,
-    expandedRowRend,
-    // size,
-  } = props;
+  const { list, columns, expandedRowRend, size } = props;
 
   const rowSelection = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: Model[]) => {
@@ -43,27 +39,34 @@ function StandardTable(props: StandardTableCustomProps) {
   };
 
   return (
-    <Table
-      className="components-table-demo-nested"
-      columns={columns}
-      expandable={{
-        expandedRowRender: expandedRowRend,
-        expandIcon: ({ expanded, onExpand, record }) =>
-          expanded ? (
-            <DownOutlined
-              className="icon-table-expand"
-              onClick={(e) => onExpand(record, e)}
-            />
-          ) : (
-            <RightOutlined
-              className="icon-table-expand"
-              onClick={(e) => onExpand(record, e)}
-            />
-          ),
-      }}
-      dataSource={list}
-      rowSelection={rowSelection}
-    />
+    <>
+      <div className="page__master-table">
+        <Table
+          className={classNames(`table-size-${size}`)}
+          columns={columns}
+          expandable={{
+            expandedRowRender: expandedRowRend,
+            expandIcon: ({ expanded, onExpand, record }) =>
+              expanded ? (
+                <DownOutlined
+                  className="icon-table-expand"
+                  onClick={(e) => onExpand(record, e)}
+                />
+              ) : (
+                <RightOutlined
+                  className="icon-table-expand"
+                  onClick={(e) => onExpand(record, e)}
+                />
+              ),
+          }}
+          dataSource={list}
+          rowSelection={rowSelection}
+        />
+      </div>
+    </>
   );
 }
+StandardTable.defaultProps = {
+  size: "md",
+};
 export default StandardTable;

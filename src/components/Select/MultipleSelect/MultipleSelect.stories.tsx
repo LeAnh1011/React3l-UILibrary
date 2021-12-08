@@ -74,6 +74,8 @@ export function MultipleSelectStories() {
 
   const [isSelectWithAdd, setIsSelectWithAdd] = React.useState<boolean>(false);
 
+  const [withSearch, setWithSearch] = React.useState(true);
+
   const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
     setType(event.target.value);
   }, []);
@@ -111,6 +113,13 @@ export function MultipleSelectStories() {
     []
   );
 
+  const handleChangeWithSearch = React.useCallback(
+    (event: RadioChangeEvent) => {
+      setWithSearch(event.target.value);
+    },
+    []
+  );
+
   return (
     <>
       <div style={{ margin: "10px", width: "300px" }}>
@@ -131,6 +140,7 @@ export function MultipleSelectStories() {
             disabled={isDisabled}
             selectWithAdd={isSelectWithAdd}
             selectWithPreferOption={isSelectWithPreferOption}
+            isUsingSearch={withSearch}
           ></MultipleSelect>
         </FormItem>
       </div>
@@ -180,6 +190,13 @@ export function MultipleSelectStories() {
         >
           <Radio value={true}>Select with prefer option</Radio>
           <Radio value={false}>Not select with prefer option</Radio>
+        </Radio.Group>
+      </div>
+
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeWithSearch} value={withSearch}>
+          <Radio value={true}>Using Search</Radio>
+          <Radio value={false}>Not Using Search</Radio>
         </Radio.Group>
       </div>
     </>

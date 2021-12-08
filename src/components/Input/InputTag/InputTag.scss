@@ -205,3 +205,9 @@
     }
   }
 }
+
+.form-item__container--error {
+  .input-tag__container--material {
+    border: 1px solid;
+  }
+}

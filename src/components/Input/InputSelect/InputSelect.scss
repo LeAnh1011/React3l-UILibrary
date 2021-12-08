@@ -176,3 +176,9 @@
     }
   }
 }
+
+.form-item__container--error {
+  .input-select--material {
+    border: 1px solid;
+  }
+}

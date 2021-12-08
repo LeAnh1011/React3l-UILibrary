@@ -44,6 +44,8 @@ export interface MultipleSelectProps<
   selectWithAdd?: boolean;
 
   selectWithPreferOption?: boolean;
+
+  isUsingSearch?: boolean;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -68,6 +70,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     isSmall,
     selectWithAdd,
     selectWithPreferOption,
+    isUsingSearch,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -338,7 +341,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
             onClearMulti={handleClearAll}
             type={type}
             isSmall={isSmall}
-            isUsingSearch={true}
+            isUsingSearch={isUsingSearch}
             onKeyDown={handleKeyPress}
             onKeyEnter={handleKeyEnter}
           />

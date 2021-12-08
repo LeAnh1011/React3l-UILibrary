@@ -161,44 +161,52 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      if (event && event.target === event.currentTarget) {
-        let filteredItem = models?.filter(
-          (current) => current.id === item.id
-        )[0];
-        const cloneModelFilter = modelFilter
-          ? { ...modelFilter }
-          : new ClassFilter();
+      let filteredItem = models?.filter((current) => current.id === item.id)[0];
+      const cloneModelFilter = modelFilter
+        ? { ...modelFilter }
+        : new ClassFilter();
 
-        if (!cloneModelFilter["id"]["notIn"]) {
-          cloneModelFilter["id"]["notIn"] = [item?.id];
-        } else {
-          cloneModelFilter["id"]["notIn"].push(item?.id);
-        }
+      if (!cloneModelFilter["id"]["notIn"]) {
+        cloneModelFilter["id"]["notIn"] = [item?.id];
+      } else {
+        cloneModelFilter["id"]["notIn"].push(item?.id);
+      }
 
-        getList(cloneModelFilter).subscribe(
-          (res: Model[]) => {
-            if (res) {
-              setList(res);
-            }
-            setLoading(false);
-          },
-          (err: ErrorObserver<Error>) => {
-            setList([]);
-            setLoading(false);
+      getList(cloneModelFilter).subscribe(
+        (res: Model[]) => {
+          if (res) {
+            setList(res);
           }
-        );
-        if (filteredItem) {
-          onChange(item, "REMOVE");
-          if (event) {
-            const currentItem = event.target as HTMLSpanElement;
-            currentItem.parentElement.parentElement.parentElement.blur();
-          }
-        } else {
-          onChange(item, "UPDATE");
+          setLoading(false);
+        },
+        (err: ErrorObserver<Error>) => {
+          setList([]);
+          setLoading(false);
         }
+      );
+      if (filteredItem) {
+        onChange(item, "REMOVE");
+        if (event) {
+          const currentItem = event.target as HTMLSpanElement;
+          currentItem.parentElement.parentElement.parentElement.blur();
+        }
+      } else {
+        onChange(item, "UPDATE");
       }
     },
     [models, modelFilter, ClassFilter, getList, onChange]
+  );
+
+  const handleClickParentItem = React.useCallback(
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      if (event && event.target === event.currentTarget) {
+        const currentItem = event.target as HTMLDivElement;
+        currentItem.firstElementChild.firstElementChild
+          .querySelector("span")
+          .click();
+      }
+    },
+    []
   );
 
   const handleSearchChange = React.useCallback(
@@ -355,6 +363,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                         key={index}
                         onKeyDown={handleMove(item)}
                         tabIndex={-1}
+                        onClick={handleClickParentItem}
                       >
                         <div>
                           <label className={classNames("checkbox__container")}>

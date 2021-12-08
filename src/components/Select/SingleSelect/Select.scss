@@ -71,9 +71,10 @@
         text-overflow: ellipsis;
       }
       &:hover,
-      &:focus,
-      &:focus-visible {
+      &:focus {
         background-color: var(--color-surface-material-input-hover);
+      }
+      &:focus-visible {
         outline: none;
       }
       &.select__item--selected {

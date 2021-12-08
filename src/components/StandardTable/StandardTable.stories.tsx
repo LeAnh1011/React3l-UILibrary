@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import "./StandardTable.scss";
 import StandardTable from "./StandardTable";
 // import { Model } from "react3l-common";
+import FormDataCell from "./FormDataCell/FormDataCell";
 import { ColumnProps } from "antd/lib/table";
 
 const menu = (
@@ -99,7 +100,7 @@ function Default() {
         sorter: true,
         width: 400,
         render(...[name]) {
-          return <div>{name + " hihi"}</div>;
+          return <FormDataCell orderPaddingType="left">{name}</FormDataCell>;
         },
       },
       {
@@ -108,6 +109,11 @@ function Default() {
         key: "platform",
         sorter: true,
         width: 400,
+        render(...[platform]) {
+          return (
+            <FormDataCell orderPaddingType="center">{platform}</FormDataCell>
+          );
+        },
       },
       {
         title: <div className="text-center">{"Version"}</div>,
@@ -115,6 +121,11 @@ function Default() {
         key: "version",
         sorter: true,
         width: 400,
+        render(...[version]) {
+          return (
+            <FormDataCell orderPaddingType="right">{version}</FormDataCell>
+          );
+        },
       },
       {
         title: <div className="text-center">{"Upgraded"}</div>,
@@ -122,6 +133,11 @@ function Default() {
         key: "upgradeNum",
         sorter: true,
         width: 400,
+        render(...[upgradeNum]) {
+          return (
+            <FormDataCell orderPaddingType="right">{upgradeNum}</FormDataCell>
+          );
+        },
       },
       {
         title: <div className="text-center">{"Creator"}</div>,
@@ -129,6 +145,11 @@ function Default() {
         key: "creator",
         sorter: true,
         width: 400,
+        render(...[creator]) {
+          return (
+            <FormDataCell orderPaddingType="right">{creator}</FormDataCell>
+          );
+        },
       },
       {
         title: <div className="text-center">{"Date"}</div>,
@@ -136,12 +157,23 @@ function Default() {
         key: "createdAt",
         sorter: true,
         width: 400,
+        render(...[createdAt]) {
+          return (
+            <FormDataCell orderPaddingType="right">{createdAt}</FormDataCell>
+          );
+        },
       },
       {
         title: <div className="text-center">{"Action"}</div>,
         key: "operation",
         width: 400,
-        render: () => <a>Publish</a>,
+        render(...[_operation]) {
+          return (
+            <FormDataCell orderPaddingType="right">
+              <a href="/#">publish</a>
+            </FormDataCell>
+          );
+        },
       },
     ],
     []

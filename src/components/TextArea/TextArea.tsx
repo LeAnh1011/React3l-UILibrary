@@ -13,7 +13,6 @@ export enum TEXT_AREA_TYPE {
   FLOAT_LABEL,
 }
 
-
 export interface TextAreaProps {
   label?: string;
   type?: TEXT_AREA_TYPE;
@@ -51,9 +50,9 @@ function TextArea(props: TextAreaProps) {
 
   const [internalValue, setInternalValue] = React.useState<string>("");
 
-  const inputRef: RefObject<HTMLTextAreaElement> = React.useRef<
-    HTMLTextAreaElement
-  >(null);
+  const inputRef: RefObject<HTMLTextAreaElement> = React.useRef<HTMLTextAreaElement>(
+    null
+  );
 
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -64,7 +63,7 @@ function TextArea(props: TextAreaProps) {
         }
       }
     },
-    [onChange, maxLength],
+    [onChange, maxLength]
   );
 
   const handleKeyPress = React.useCallback(
@@ -77,13 +76,15 @@ function TextArea(props: TextAreaProps) {
     },
     [onEnter]
   );
-  const handleBlur = React.useCallback((event: React.FocusEvent<HTMLTextAreaElement>) => {
-    const value = event.target.value;
-    if (typeof onBlur === "function") {
-      onBlur(value);
-    }
-  }, [onBlur]);
-
+  const handleBlur = React.useCallback(
+    (event: React.FocusEvent<HTMLTextAreaElement>) => {
+      const value = event.target.value;
+      if (typeof onBlur === "function") {
+        onBlur(value);
+      }
+    },
+    [onBlur]
+  );
 
   React.useEffect(() => {
     if (value) {
@@ -147,9 +148,7 @@ function TextArea(props: TextAreaProps) {
             })}
           ></textarea>
           {type === TEXT_AREA_TYPE.FLOAT_LABEL && label && (
-            <label
-              className="component__title"
-            >
+            <label className="component__title">
               {label}
               {isRequired && <span className="text-danger">&nbsp;*</span>}
             </label>

@@ -4,6 +4,8 @@ import Radio, { RadioChangeEvent } from "antd/lib/radio";
 import React from "react";
 import { Observable } from "rxjs";
 import MultipleSelect from "./MultipleSelect";
+import { INPUT_TAG_TYPE } from "../../Input/InputTag/InputTag";
+import FormItem, { ValidateStatus } from "../../FormItem/FormItem";
 
 const demoList = [
   { id: 1, name: "Ban hành chính", code: "FAD" },
@@ -39,6 +41,8 @@ function testReducer(currentState: Model[], action: changeAction): Model[] {
         (item) => item.id !== action.data.id
       );
       return [...filteredArray];
+    case "REMOVE_ALL":
+      return [];
   }
   return;
 }
@@ -52,12 +56,26 @@ class DemoFilter extends ModelFilter {
 export function MultipleSelectStories() {
   const [models, dispatch] = React.useReducer(testReducer, []);
 
-  const [selectModelFilter] = React.useState<ModelFilter>(new ModelFilter());
+  const [selectModelFilter] = React.useState<DemoFilter>(new DemoFilter());
 
-  const [isMaterial, setIsMaterial] = React.useState(false);
+  const [type, setType] = React.useState<INPUT_TAG_TYPE>(
+    INPUT_TAG_TYPE.BORDERED
+  );
+  const [isSmall, setIsSmall] = React.useState<boolean>(false);
+
+  const [isValidated, setValidated] = React.useState(false);
+
+  const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
+
+  const [
+    isSelectWithPreferOption,
+    setIsSelectWithPreferOption,
+  ] = React.useState<boolean>(false);
+
+  const [isSelectWithAdd, setIsSelectWithAdd] = React.useState<boolean>(false);
 
   const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
-    setIsMaterial(event.target.value);
+    setType(event.target.value);
   }, []);
 
   const handleChangeModels = React.useCallback((item, type) => {
@@ -67,23 +85,101 @@ export function MultipleSelectStories() {
     });
   }, []);
 
+  const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
+    setIsSmall(event.target.value);
+  }, []);
+
+  const handleChangeValidated = React.useCallback((event: RadioChangeEvent) => {
+    setValidated(event.target.value);
+  }, []);
+
+  const handleChangeDisabled = React.useCallback((event: RadioChangeEvent) => {
+    setIsDisabled(event.target.value);
+  }, []);
+
+  const handleChangeSelectWithAdd = React.useCallback(
+    (event: RadioChangeEvent) => {
+      setIsSelectWithAdd(event.target.value);
+    },
+    []
+  );
+
+  const handleChangeSelectWithPreferOption = React.useCallback(
+    (event: RadioChangeEvent) => {
+      setIsSelectWithPreferOption(event.target.value);
+    },
+    []
+  );
+
   return (
     <>
       <div style={{ margin: "10px", width: "300px" }}>
-        <MultipleSelect
-          models={models}
-          placeHolder={"Select Organization"}
-          onChange={handleChangeModels}
-          getList={demoSearchFunc}
-          isMaterial={isMaterial}
-          modelFilter={selectModelFilter}
-          classFilter={DemoFilter}
-        ></MultipleSelect>
+        <FormItem
+          validateStatus={isValidated ? ValidateStatus.error : null}
+          message={isValidated ? "Error label" : ""}
+        >
+          <MultipleSelect
+            models={models}
+            placeHolder={"Search content"}
+            onChange={handleChangeModels}
+            getList={demoSearchFunc}
+            modelFilter={selectModelFilter}
+            classFilter={DemoFilter}
+            label={"Label"}
+            type={type}
+            isSmall={isSmall}
+            disabled={isDisabled}
+            selectWithAdd={isSelectWithAdd}
+            selectWithPreferOption={isSelectWithPreferOption}
+          ></MultipleSelect>
+        </FormItem>
       </div>
       <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeStyle} value={isMaterial}>
-          <Radio value={true}>Material Style</Radio>
-          <Radio value={false}>Normal Style</Radio>
+        <Radio.Group onChange={handleChangeStyle} value={type}>
+          <Radio value={INPUT_TAG_TYPE.MATERIAL}>Material</Radio>
+          <Radio value={INPUT_TAG_TYPE.FLOAT_LABEL}>Float Label</Radio>
+          <Radio value={INPUT_TAG_TYPE.BORDERED}>Bordered</Radio>
+        </Radio.Group>
+      </div>
+
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeSize} value={isSmall}>
+          <Radio value={true}>Small</Radio>
+          <Radio value={false}>Default</Radio>
+        </Radio.Group>
+      </div>
+
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeValidated} value={isValidated}>
+          <Radio value={true}>Validated</Radio>
+          <Radio value={false}>Not Validated</Radio>
+        </Radio.Group>
+      </div>
+
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeDisabled} value={isDisabled}>
+          <Radio value={true}>Disabled</Radio>
+          <Radio value={false}>Not Disabled</Radio>
+        </Radio.Group>
+      </div>
+
+      <div style={{ margin: "10px", width: "400px" }}>
+        <Radio.Group
+          onChange={handleChangeSelectWithAdd}
+          value={isSelectWithAdd}
+        >
+          <Radio value={true}>Select with add</Radio>
+          <Radio value={false}>Not select with add</Radio>
+        </Radio.Group>
+      </div>
+
+      <div style={{ margin: "10px", width: "800px" }}>
+        <Radio.Group
+          onChange={handleChangeSelectWithPreferOption}
+          value={isSelectWithPreferOption}
+        >
+          <Radio value={true}>Select with prefer option</Radio>
+          <Radio value={false}>Not select with prefer option</Radio>
         </Radio.Group>
       </div>
     </>

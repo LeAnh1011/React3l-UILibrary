@@ -18,10 +18,24 @@ const menu = (
 function Default() {
   const expandedRowRender = () => {
     const columns = [
-      { title: "Date", dataIndex: "date", key: "date" },
-      { title: "Name", dataIndex: "name", key: "name" },
       {
-        title: "Status",
+        title: <div className="text-center">{"Date"}</div>,
+        dataIndex: "date",
+        key: "date",
+        render(...[date]) {
+          return <div>{date + " hihi"}</div>;
+        },
+      },
+      {
+        title: <div className="text-center">{"Name"}</div>,
+        dataIndex: "name",
+        key: "name",
+        render(...[name]) {
+          return <div>{name + " hihi"}</div>;
+        },
+      },
+      {
+        title: <div className="text-center">{"Status"}</div>,
         key: "state",
         render: () => (
           <span>
@@ -30,17 +44,32 @@ function Default() {
           </span>
         ),
       },
-      { title: "Upgrade Status", dataIndex: "upgradeNum", key: "upgradeNum" },
+      {
+        title: <div className="text-center">{"Upgrade Status"}</div>,
+        dataIndex: "upgradeNum",
+        key: "upgradeNum",
+        render(...[upgradeNum]) {
+          return <div>{upgradeNum}</div>;
+        },
+      },
+      {
+        title: <div className="text-center">{"Action"}</div>,
+        dataIndex: "operation",
+        key: "operation",
+        render(...[upgradeNum]) {
+          return <div>{upgradeNum}</div>;
+        },
+      },
       {
         title: "Action",
         dataIndex: "operation",
         key: "operation",
         render: () => (
           <Space size="middle">
-            <a>Pause</a>
-            <a>Stop</a>
+            <a href="/#">Pause</a>
+            <a href="/#">Stop</a>
             <Dropdown overlay={menu}>
-              <a>
+              <a href="/#">
                 More <DownOutlined />
               </a>
             </Dropdown>
@@ -50,7 +79,7 @@ function Default() {
     ];
 
     const data = [];
-    for (let i = 0; i < 3; ++i) {
+    for (let i = 0; i < 5; ++i) {
       data.push({
         key: i,
         date: "2014-12-24 23:12:00",
@@ -138,8 +167,6 @@ function Default() {
         isExpandAble={true}
         expandedRowRend={expandedRowRender}
         list={data}
-        size="lg"
-        orderPadding="order-center"
       />
     </div>
   );

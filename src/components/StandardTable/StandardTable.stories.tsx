@@ -6,7 +6,9 @@ import { useMemo } from "react";
 import "./StandardTable.scss";
 import StandardTable from "./StandardTable";
 // import { Model } from "react3l-common";
+import yomatoImg from "../../assets/image/yo.jpg";
 import LayoutCell from "./LayoutCell/LayoutCell";
+import OneLineText from "./DataCellComponent/OneLineText/OneLineText";
 import StatusLine from "./DataCellComponent/StatusLine/StatusLine";
 import { ColumnProps } from "antd/lib/table";
 
@@ -101,7 +103,11 @@ function Default() {
         sorter: true,
         width: 400,
         render(...[name]) {
-          return <LayoutCell orderType="left">{name}</LayoutCell>;
+          return (
+            <LayoutCell orderType="left">
+              <OneLineText avatar={yomatoImg} name={name} />
+            </LayoutCell>
+          );
         },
       },
       {
@@ -111,7 +117,11 @@ function Default() {
         sorter: true,
         width: 400,
         render(...[platform]) {
-          return <LayoutCell orderType="center">{platform}</LayoutCell>;
+          return (
+            <LayoutCell orderType="left">
+              <OneLineText icon="tio-calendar_month" name={platform} />
+            </LayoutCell>
+          );
         },
       },
       {

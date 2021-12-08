@@ -2,12 +2,19 @@
 
 .icon-table-expand {
   opacity: 0.5;
+  font-size: 12px !important; 
 }
 .page {
   .page__master-table {
     .ant-table-thead > tr > th{
       font-size: 12px;
       font-weight: 700;
+    }
+    .ant-table-tbody > tr.ant-table-row:hover > .ant-table-cell{
+      background-color: rgba(15, 98, 254, 0.04);
+    }
+    .ant-table-tbody > tr.ant-table-row-selected > .ant-table-cell{
+      background-color: rgba(13, 24, 33, 0.04);
     }
   }
 }

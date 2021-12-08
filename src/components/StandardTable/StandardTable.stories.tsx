@@ -6,7 +6,7 @@ import { useMemo } from "react";
 import "./StandardTable.scss";
 import StandardTable from "./StandardTable";
 // import { Model } from "react3l-common";
-import FormDataCell from "./FormDataCell/FormDataCell";
+import LayoutCell from "./LayoutCell/LayoutCell";
 import { ColumnProps } from "antd/lib/table";
 
 const menu = (
@@ -100,7 +100,7 @@ function Default() {
         sorter: true,
         width: 400,
         render(...[name]) {
-          return <FormDataCell orderPaddingType="left">{name}</FormDataCell>;
+          return <LayoutCell orderType="left">{name}</LayoutCell>;
         },
       },
       {
@@ -110,9 +110,7 @@ function Default() {
         sorter: true,
         width: 400,
         render(...[platform]) {
-          return (
-            <FormDataCell orderPaddingType="center">{platform}</FormDataCell>
-          );
+          return <LayoutCell orderType="center">{platform}</LayoutCell>;
         },
       },
       {
@@ -122,9 +120,7 @@ function Default() {
         sorter: true,
         width: 400,
         render(...[version]) {
-          return (
-            <FormDataCell orderPaddingType="right">{version}</FormDataCell>
-          );
+          return <LayoutCell orderType="right">{version}</LayoutCell>;
         },
       },
       {
@@ -134,9 +130,7 @@ function Default() {
         sorter: true,
         width: 400,
         render(...[upgradeNum]) {
-          return (
-            <FormDataCell orderPaddingType="right">{upgradeNum}</FormDataCell>
-          );
+          return <LayoutCell orderType="right">{upgradeNum}</LayoutCell>;
         },
       },
       {
@@ -146,9 +140,7 @@ function Default() {
         sorter: true,
         width: 400,
         render(...[creator]) {
-          return (
-            <FormDataCell orderPaddingType="right">{creator}</FormDataCell>
-          );
+          return <LayoutCell orderType="right">{creator}</LayoutCell>;
         },
       },
       {
@@ -158,9 +150,7 @@ function Default() {
         sorter: true,
         width: 400,
         render(...[createdAt]) {
-          return (
-            <FormDataCell orderPaddingType="right">{createdAt}</FormDataCell>
-          );
+          return <LayoutCell orderType="right">{createdAt}</LayoutCell>;
         },
       },
       {
@@ -169,9 +159,9 @@ function Default() {
         width: 400,
         render(...[_operation]) {
           return (
-            <FormDataCell orderPaddingType="right">
+            <LayoutCell orderType="right">
               <a href="/#">publish</a>
-            </FormDataCell>
+            </LayoutCell>
           );
         },
       },

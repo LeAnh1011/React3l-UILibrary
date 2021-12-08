@@ -25,6 +25,8 @@ export interface InputTagProps<T extends Model> {
   type?: INPUT_TAG_TYPE;
   isSmall?: boolean;
   isUsingSearch?: boolean;
+  onKeyDown?: (event: any) => void;
+  onKeyEnter?: (event: any) => void;
 }
 function InputTag(props: InputTagProps<Model>) {
   const {
@@ -38,6 +40,7 @@ function InputTag(props: InputTagProps<Model>) {
     isSmall,
     onClearMulti,
     isUsingSearch,
+    onKeyDown,
   } = props;
 
   const internalListItem = React.useMemo<Model[]>(() => {
@@ -47,6 +50,8 @@ function InputTag(props: InputTagProps<Model>) {
   const [searchTerm, setSearchTerm] = React.useState<string>("");
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef();
+
+  const inputContainerRef: RefObject<HTMLDivElement> = React.useRef();
 
   const handleChangeInput = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,6 +81,13 @@ function InputTag(props: InputTagProps<Model>) {
     [onSearch]
   );
 
+  const handleKeyDown = React.useCallback(
+    (event) => {
+      onKeyDown(event);
+    },
+    [onKeyDown]
+  );
+
   return (
     <>
       <div className="input-tag__wrapper">
@@ -103,7 +115,12 @@ function InputTag(props: InputTagProps<Model>) {
               "input-tag--float": type === INPUT_TAG_TYPE.FLOAT_LABEL,
             }
           )}
-          onClick={() => inputRef.current.focus()}
+          onClick={() =>
+            isUsingSearch
+              ? inputRef.current.focus()
+              : inputContainerRef.current.focus()
+          }
+          ref={inputContainerRef}
         >
           {internalListItem && internalListItem.length > 0 && (
             <span
@@ -119,7 +136,7 @@ function InputTag(props: InputTagProps<Model>) {
               ></i>
             </span>
           )}
-          {
+          {isUsingSearch ? (
             <input
               type="text"
               value={searchTerm}
@@ -130,8 +147,19 @@ function InputTag(props: InputTagProps<Model>) {
               disabled={disabled}
               onChange={handleChangeInput}
               readOnly={!isUsingSearch}
+              onKeyDown={handleKeyDown}
             />
-          }
+          ) : (
+            <input
+              ref={inputRef}
+              readOnly={true}
+              placeholder={
+                type === INPUT_TAG_TYPE.FLOAT_LABEL && label ? " " : ""
+              }
+              disabled={disabled}
+              onKeyDown={handleKeyDown}
+            />
+          )}
 
           {type === INPUT_TAG_TYPE.FLOAT_LABEL && label && (
             <label

@@ -80,6 +80,10 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     null
   );
 
+  const selectListRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
+    null
+  );
+
   const [subscription] = CommonService.useSubscription();
 
   const { run } = useDebounceFn(
@@ -143,10 +147,12 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
 
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      setExpand(true);
-      await handleLoadList();
+      if (!disabled) {
+        setExpand(true);
+        await handleLoadList();
+      }
     },
-    [handleLoadList]
+    [disabled, handleLoadList]
   );
 
   const handleCloseSelect = React.useCallback(() => {
@@ -241,6 +247,59 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     onChange(null, "REMOVE_ALL");
   }, [ClassFilter, getList, onChange]);
 
+  const handleKeyPress = React.useCallback(
+    (event: any) => {
+      switch (event.keyCode) {
+        case 40:
+          const firstItem = selectListRef.current
+            .firstElementChild as HTMLElement;
+          firstItem.focus();
+          console.log();
+          break;
+        case 9:
+          handleCloseSelect();
+          break;
+        default:
+          return;
+      }
+    },
+    [handleCloseSelect]
+  );
+
+  const handleMove = React.useCallback(
+    (item) => (event: any) => {
+      switch (event.keyCode) {
+        case 13:
+          handleClickItem(item)(null);
+          break;
+        case 40:
+          if (event.target.nextElementSibling !== null) {
+            event.target.nextElementSibling.focus();
+          }
+          event.preventDefault();
+          break;
+        case 38:
+          if (event.target.previousElementSibling !== null) {
+            event.target.previousElementSibling.focus();
+          }
+          event.preventDefault();
+          break;
+      }
+      return;
+    },
+    [handleClickItem]
+  );
+
+  const handleKeyEnter = React.useCallback(
+    (event: any) => {
+      if (event.key === "Enter") {
+        handleToggle(null);
+      }
+      return;
+    },
+    [handleToggle]
+  );
+
   CommonService.useClickOutside(wrapperRef, handleCloseSelect);
 
   return (
@@ -263,13 +322,18 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
             type={type}
             isSmall={isSmall}
             isUsingSearch={true}
+            onKeyDown={handleKeyPress}
+            onKeyEnter={handleKeyEnter}
           />
         </div>
         {isExpand && (
           <div className="select__list-container">
             {!loading ? (
               <>
-                <div className="select__list multiple-select__list">
+                <div
+                  className="select__list multiple-select__list"
+                  ref={selectListRef}
+                >
                   {internalList.length > 0 ? (
                     internalList.map((item, index) => (
                       <div
@@ -280,6 +344,8 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                           }
                         )}
                         key={index}
+                        onKeyDown={handleMove(item)}
+                        tabIndex={-1}
                       >
                         <div>
                           <label className={classNames("checkbox__container")}>
@@ -288,7 +354,12 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                               className="checkmark"
                               onClick={handleClickItem(item)}
                             ></span>
-                            <span className="select__text">{render(item)}</span>
+                            <span
+                              className="select__text"
+                              onClick={handleClickItem(item)}
+                            >
+                              {render(item)}
+                            </span>
                           </label>
                         </div>
                       </div>

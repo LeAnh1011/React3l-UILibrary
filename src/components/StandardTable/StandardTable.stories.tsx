@@ -8,6 +8,7 @@ import StandardTable from "./StandardTable";
 // import { Model } from "react3l-common";
 import yomatoImg from "../../assets/image/yo.jpg";
 import LayoutCell from "./LayoutCell/LayoutCell";
+import BadgeText from "./DataCellComponent/BadgeText/BadgeText";
 import TwoLineText from "./DataCellComponent/TwoLineText/TwoLineText";
 import OneLineText from "./DataCellComponent/OneLineText/OneLineText";
 import StatusLine from "./DataCellComponent/StatusLine/StatusLine";
@@ -165,8 +166,17 @@ function Default() {
         key: "creator",
         sorter: true,
         width: 400,
+        align: "center",
         render(...[creator]) {
-          return <LayoutCell orderType="right">{creator}</LayoutCell>;
+          return (
+            <LayoutCell orderType="right">
+              <BadgeText
+                name={creator}
+                backgroundColor="#FFECB3"
+                color="#ED6700"
+              />
+            </LayoutCell>
+          );
         },
       },
       {
@@ -204,7 +214,7 @@ function Default() {
       platform: "iOS",
       version: "10.3.4.5654",
       upgradeNum: 500,
-      creator: "Jack",
+      creator: "Jack Gealish",
       status: "hoạt động",
       createdAt: "2014-12-24 23:12:00",
     });

@@ -8,6 +8,7 @@ import StandardTable from "./StandardTable";
 // import { Model } from "react3l-common";
 import yomatoImg from "../../assets/image/yo.jpg";
 import LayoutCell from "./LayoutCell/LayoutCell";
+import TwoLineText from "./DataCellComponent/TwoLineText/TwoLineText";
 import OneLineText from "./DataCellComponent/OneLineText/OneLineText";
 import StatusLine from "./DataCellComponent/StatusLine/StatusLine";
 import { ColumnProps } from "antd/lib/table";
@@ -131,7 +132,15 @@ function Default() {
         sorter: true,
         width: 400,
         render(...[version]) {
-          return <LayoutCell orderType="right">{version}</LayoutCell>;
+          return (
+            <LayoutCell orderType="left">
+              <TwoLineText
+                avatar={yomatoImg}
+                nameLine1={version}
+                nameLine2={"hihii"}
+              />
+            </LayoutCell>
+          );
         },
       },
       {
@@ -141,7 +150,13 @@ function Default() {
         sorter: true,
         width: 400,
         render(...[upgradeNum]) {
-          return <LayoutCell orderType="right">{upgradeNum}</LayoutCell>;
+          return (
+            <TwoLineText
+              icon="tio-calendar_month"
+              nameLine1={upgradeNum + " alod dlkjwer"}
+              nameLine2={"hihii"}
+            />
+          );
         },
       },
       {

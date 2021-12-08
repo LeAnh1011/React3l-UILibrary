@@ -17,7 +17,7 @@ function OneLineText(props: OneLineTextProps) {
         {avatar && (
           <img src={avatar} className="avatar-one-line-text" alt="avatar" />
         )}
-        {icon && <i className={classNames(icon, `icon-one-line-text`)}></i>}{" "}
+        {icon && <i className={classNames(icon, `icon-one-line-text`)}></i>}
         {name}
       </div>
     </>

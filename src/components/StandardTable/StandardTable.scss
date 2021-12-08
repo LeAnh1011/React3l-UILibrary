@@ -8,7 +8,10 @@
     .ant-table-tbody > tr > td{
       padding: 0px 0px;
     }
-    
+    .ant-table-thead > tr > th{
+      font-size: 12px;
+      font-weight: 700;
+    }
     .table-padding-order-left{
       .ant-table-cell{
         padding-left: 16px;

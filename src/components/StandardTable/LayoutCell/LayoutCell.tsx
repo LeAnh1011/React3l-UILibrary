@@ -5,7 +5,7 @@ import "./LayoutCell.scss";
 export interface LayoutCellProps {
   className?: string;
   orderType?: "left" | "right" | "center";
-  children?: ReactNode;
+  children: ReactNode;
 }
 
 function LayoutCell(props: LayoutCellProps) {

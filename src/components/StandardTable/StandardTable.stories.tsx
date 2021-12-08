@@ -7,6 +7,7 @@ import "./StandardTable.scss";
 import StandardTable from "./StandardTable";
 // import { Model } from "react3l-common";
 import LayoutCell from "./LayoutCell/LayoutCell";
+import StatusLine from "./DataCellComponent/StatusLine/StatusLine";
 import { ColumnProps } from "antd/lib/table";
 
 const menu = (
@@ -155,12 +156,13 @@ function Default() {
       },
       {
         title: <div className="text-center">{"Action"}</div>,
-        key: "operation",
+        key: "status",
         width: 400,
-        render(...[_operation]) {
+        dataIndex: "status",
+        render(...[status]) {
           return (
             <LayoutCell orderType="right">
-              <a href="/#">publish</a>
+              <StatusLine name={status} active={true} />
             </LayoutCell>
           );
         },
@@ -178,6 +180,7 @@ function Default() {
       version: "10.3.4.5654",
       upgradeNum: 500,
       creator: "Jack",
+      status: "hoạt động",
       createdAt: "2014-12-24 23:12:00",
     });
   }

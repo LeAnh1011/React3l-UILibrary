@@ -26,6 +26,8 @@ export function InputTagStories() {
 
   const [isValidated, setValidated] = React.useState(false);
 
+  const [withSearch, setWithSearch] = React.useState(true);
+
   const { run } = useDebounceFn(
     (searchTerm: string) => {
       // write call api here
@@ -72,6 +74,13 @@ export function InputTagStories() {
     setIsDisabled(event.target.value);
   }, []);
 
+  const handleChangeWithSearch = React.useCallback(
+    (event: RadioChangeEvent) => {
+      setWithSearch(event.target.value);
+    },
+    []
+  );
+
   return (
     <div style={{ margin: "10px", width: "380px" }}>
       <div style={{ marginTop: "10px", width: "380px" }}>
@@ -82,7 +91,7 @@ export function InputTagStories() {
           <InputTag
             type={type}
             listItem={listItem}
-            placeHolder={"Select an option"}
+            placeHolder={"Search content"}
             onSearch={handleSearchItem}
             onClear={handleClearItem}
             error={"Field required!"}
@@ -90,6 +99,7 @@ export function InputTagStories() {
             disabled={isDisabled}
             label={"Label"}
             onClearMulti={handleClearMultiItem}
+            isUsingSearch={withSearch}
           />
         </FormItem>
       </div>
@@ -126,6 +136,12 @@ export function InputTagStories() {
         <Radio.Group onChange={handleChangeValidated} value={isValidated}>
           <Radio value={true}>Validated</Radio>
           <Radio value={false}>Not Validated</Radio>
+        </Radio.Group>
+      </div>
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeWithSearch} value={withSearch}>
+          <Radio value={true}>Using Search</Radio>
+          <Radio value={false}>Not Using Search</Radio>
         </Radio.Group>
       </div>
     </div>

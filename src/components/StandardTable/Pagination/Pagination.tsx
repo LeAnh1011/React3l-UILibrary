@@ -1,24 +1,11 @@
-import classNames from "classnames";
 import { Menu, Dropdown } from "antd";
 import React from "react";
 import { PaginationProps as AntdPaginationProps } from "antd/lib/pagination/Pagination";
 import "./Pagination.scss";
-
-function PreviousIcon() {
-  return (
-    <div className="pagination__previous-icon">
-      <i className="tio-arrow_large_backward"></i>
-    </div>
-  );
-}
-
-function NextIcon() {
-  return (
-    <div className="pagination__next-icon">
-      <i className="tio-arrow_large_forward"></i>
-    </div>
-  );
-}
+import nextAble from "../../../assets/image/next-able.png";
+import nextUnAble from "../../../assets/image/next-disabled.png";
+import prevAble from "../../../assets/image/prev-able.png";
+import prevUnAble from "../../../assets/image/prev-disabled.png";
 
 export interface PaginationProps extends AntdPaginationProps {
   skip?: number;
@@ -57,6 +44,7 @@ function Pagination(props: PaginationProps) {
     },
     [onChange, take]
   );
+
   const menuPageSize = React.useMemo(() => {
     return (
       <Menu onClick={handleMenuTakeClick} selectedKeys={["" + take]}>
@@ -69,13 +57,49 @@ function Pagination(props: PaginationProps) {
 
   const menuPageChange = React.useMemo(() => {
     return (
-      <Menu onClick={handleMenuPageClick} selectedKeys={["" + currentPage]}>
+      <Menu
+        onClick={handleMenuPageClick}
+        selectedKeys={["" + currentPage]}
+        className="menu-page-change"
+      >
         {pageArray.map((page) => {
           return <Menu.Item key={page}>{page}</Menu.Item>;
         })}
       </Menu>
     );
   }, [handleMenuPageClick, currentPage, pageArray]);
+
+  const handleChangeCurrentPage = React.useCallback(
+    (nextPage) => {
+      const takeValue = take;
+      const skipValue = (nextPage - 1) * take;
+      onChange(skipValue, takeValue);
+    },
+    [onChange, take]
+  );
+
+  const nextIcon = React.useMemo(() => {
+    return currentPage < pageArray.length ? (
+      <img
+        onClick={() => handleChangeCurrentPage(currentPage + 1)}
+        src={nextAble}
+        alt="next"
+      />
+    ) : (
+      <img src={nextUnAble} alt="next" />
+    );
+  }, [currentPage, handleChangeCurrentPage, pageArray.length]);
+  const prevIcon = React.useMemo(() => {
+    return currentPage > 1 ? (
+      <img
+        onClick={() => handleChangeCurrentPage(currentPage - 1)}
+        src={prevAble}
+        alt="prev"
+      />
+    ) : (
+      <img src={prevUnAble} alt="prev" />
+    );
+  }, [currentPage, handleChangeCurrentPage]);
 
   React.useEffect(() => {
     console.log("table skip take:", skip, " ", take);
@@ -115,14 +139,10 @@ function Pagination(props: PaginationProps) {
             </div>
           </Dropdown>
         </div>
-        <div>of {pageArray.length + 1} pages</div>
+        <div>of {pageArray.length} pages</div>
         <div className="box-change-page-button">
-          <div className="pagination__previous-icon m-r--xxs">
-            <i className="tio-arrow_large_backward"></i>
-          </div>
-          <div className="pagination__next-icon">
-            <i className="tio-arrow_large_forward"></i>
-          </div>
+          {prevIcon}
+          {nextIcon}
         </div>
       </div>
     </div>

@@ -2,7 +2,8 @@ import { Table, Badge, Menu, Dropdown, Space } from "antd";
 import { storiesOf } from "@storybook/react";
 import { DownOutlined } from "@ant-design/icons";
 import nameof from "ts-nameof.macro";
-import { useMemo } from "react";
+import React, { useMemo } from "react";
+import Radio, { RadioChangeEvent } from "antd/lib/radio";
 import "./StandardTable.scss";
 import StandardTable from "./StandardTable";
 // import { Model } from "react3l-common";
@@ -21,6 +22,16 @@ const menu = (
     <Menu.Item>Action 2</Menu.Item>
   </Menu>
 );
+export enum SIZE_TYPE {
+  LARGE = "large",
+  MEDIUM = "medium",
+  SMALL = "small",
+}
+export enum ORDER_TYPE {
+  LEFT = "left",
+  CENTER = "center",
+  RIGHT = "right",
+}
 
 function Default() {
   const expandedRowRender = () => {
@@ -97,8 +108,21 @@ function Default() {
     return <Table columns={columns} dataSource={data} pagination={false} />;
   };
 
-  const size = "small";
-  const orderType = "left";
+  // const size = "small";
+  // const orderType = "left";
+  const [size, setSize] = React.useState<SIZE_TYPE>(SIZE_TYPE.LARGE);
+  const [orderType, setOrderType] = React.useState<ORDER_TYPE>(ORDER_TYPE.LEFT);
+  const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
+    setOrderType(event.target.value);
+  }, []);
+  const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
+    setSize(event.target.value);
+  }, []);
+
+  React.useEffect(() => {
+    console.log("table size: ", size);
+    console.log("table order: ", orderType);
+  }, [orderType, size]);
 
   const columns: ColumnProps<any>[] = useMemo(
     () => [
@@ -224,7 +248,7 @@ function Default() {
         },
       },
     ],
-    []
+    [orderType, size]
   );
 
   const data = [];
@@ -250,6 +274,22 @@ function Default() {
         list={data}
         sizeTable={size}
       />
+      <div>
+        <div style={{ margin: "10px", width: "500px" }}>
+          <Radio.Group onChange={handleChangeSize} value={size}>
+            <Radio value={SIZE_TYPE.LARGE}>Large</Radio>
+            <Radio value={SIZE_TYPE.MEDIUM}>medium</Radio>
+            <Radio value={SIZE_TYPE.SMALL}>small</Radio>
+          </Radio.Group>
+        </div>
+        <div style={{ margin: "10px", width: "500px" }}>
+          <Radio.Group onChange={handleChangeStyle} value={orderType}>
+            <Radio value={ORDER_TYPE.LEFT}>order-left</Radio>
+            <Radio value={ORDER_TYPE.CENTER}>order-center</Radio>
+            <Radio value={ORDER_TYPE.RIGHT}>order-right</Radio>
+          </Radio.Group>
+        </div>
+      </div>
     </div>
   );
 }

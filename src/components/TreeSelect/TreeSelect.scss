@@ -1,0 +1,18 @@
+@import "../../styles/index.scss";
+/* Style for TreeSelect.tsx */
+.tree-select__container {
+  width: 100%;
+
+  position: relative;
+
+  .tree-select__input {
+    width: 100%;
+  }
+
+  .tree-select__list {
+    width: 100%;
+    margin-top: 5px;
+    position: absolute;
+    z-index: 999;
+  }
+}

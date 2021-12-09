@@ -7,17 +7,20 @@ export interface BadgeTextProps {
   name?: string;
   backgroundColor?: string;
   color?: string;
+  tableSize?: "large" | "medium" | "small";
 }
 
 function BadgeText(props: BadgeTextProps) {
-  const { className, color, name, backgroundColor } = props;
+  const { className, color, name, backgroundColor, tableSize } = props;
   return (
-    <span
-      className={classNames(className, "badge-text")}
-      style={{ backgroundColor: backgroundColor, color: color }}
-    >
-      {name}
-    </span>
+    <div className={classNames(`badge-text-table-size-${tableSize}`)}>
+      <span
+        className={classNames(className, "badge-text")}
+        style={{ backgroundColor: backgroundColor, color: color }}
+      >
+        {name}
+      </span>
+    </div>
   );
 }
 BadgeText.defaultProps = {

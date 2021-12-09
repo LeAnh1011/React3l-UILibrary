@@ -6,13 +6,16 @@ export interface StatusLineProps {
   className?: string;
   active?: boolean;
   name?: string;
+  tableSize?: "large" | "medium" | "small";
 }
 
 function StatusLine(props: StatusLineProps) {
-  const { className, active, name } = props;
+  const { className, active, name, tableSize } = props;
   return (
     <>
-      <div className={className}>
+      <div
+        className={classNames(className, `status-line-table-size-${tableSize}`)}
+      >
         <i
           className={classNames(
             "tio-record",
@@ -26,5 +29,6 @@ function StatusLine(props: StatusLineProps) {
 }
 StatusLine.defaultProps = {
   active: false,
+  tableSize: "large",
 };
 export default StatusLine;

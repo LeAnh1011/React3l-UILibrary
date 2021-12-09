@@ -5,7 +5,7 @@ import { Table } from "antd";
 import { Model } from "react3l-common/src/Model";
 import { TFunction } from "i18next";
 import { DownOutlined, RightOutlined } from "@ant-design/icons";
-// import classNames from "classnames";
+import classNames from "classnames";
 // import nameof from "ts-nameof.macro";
 import { ColumnProps } from "antd/lib/table";
 import { UseMaster } from "./interfaceTable";
@@ -19,10 +19,18 @@ export interface StandardTableCustomProps extends UseMaster {
   isExpandAble?: boolean;
   expandedRowRend?: ExpandedRowRender<Model>;
   className?: string;
+  sizeTable?: "large" | "medium" | "small";
 }
 
 function StandardTable(props: StandardTableCustomProps) {
-  const { list, columns, expandedRowRend, isExpandAble, className } = props;
+  const {
+    list,
+    columns,
+    expandedRowRend,
+    isExpandAble,
+    className,
+    sizeTable,
+  } = props;
 
   const rowSelection = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: Model[]) => {
@@ -42,7 +50,7 @@ function StandardTable(props: StandardTableCustomProps) {
     <>
       <div className="page__master-table">
         <Table
-          className={className}
+          className={classNames(className, `table-size-${sizeTable}`)}
           columns={columns}
           expandable={
             isExpandAble
@@ -72,5 +80,6 @@ function StandardTable(props: StandardTableCustomProps) {
 }
 StandardTable.defaultProps = {
   isExpandAble: false,
+  sizeTable: "large",
 };
 export default StandardTable;

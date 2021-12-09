@@ -18,7 +18,8 @@ function OneLineText(props: OneLineTextProps) {
         <div
           className={classNames(
             className,
-            `one-line-image-text-table-size-${tableSize}`
+            `one-line-image-text-table-size-${tableSize}`,
+            "text-in-table-cell"
           )}
         >
           {avatar && tableSize !== "small" && (
@@ -38,7 +39,8 @@ function OneLineText(props: OneLineTextProps) {
         <div
           className={classNames(
             className,
-            `one-line-text-table-size-${tableSize}`
+            `one-line-text-table-size-${tableSize}`,
+            "text-in-table-cell"
           )}
         >
           {icon && <i className={classNames(icon, `icon-one-line-text`)}></i>}

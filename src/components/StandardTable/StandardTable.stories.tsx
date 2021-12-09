@@ -96,6 +96,8 @@ function Default() {
     return <Table columns={columns} dataSource={data} pagination={false} />;
   };
 
+  const size = "small";
+
   const columns: ColumnProps<any>[] = useMemo(
     () => [
       {
@@ -107,7 +109,7 @@ function Default() {
         render(...[name]) {
           return (
             <LayoutCell orderType="left">
-              <OneLineText avatar={yomatoImg} name={name} />
+              <OneLineText avatar={yomatoImg} name={name} tableSize={size} />
             </LayoutCell>
           );
         },
@@ -121,7 +123,11 @@ function Default() {
         render(...[platform]) {
           return (
             <LayoutCell orderType="left">
-              <OneLineText icon="tio-calendar_month" name={platform} />
+              <OneLineText
+                icon="tio-calendar_month"
+                name={platform}
+                tableSize={size}
+              />
             </LayoutCell>
           );
         },
@@ -139,6 +145,7 @@ function Default() {
                 avatar={yomatoImg}
                 nameLine1={version}
                 nameLine2={"hihii"}
+                tableSize={size}
               />
             </LayoutCell>
           );
@@ -156,6 +163,7 @@ function Default() {
               icon="tio-calendar_month"
               nameLine1={upgradeNum + " alod dlkjwer"}
               nameLine2={"hihii"}
+              tableSize={size}
             />
           );
         },
@@ -174,6 +182,7 @@ function Default() {
                 name={creator}
                 backgroundColor="#FFECB3"
                 color="#ED6700"
+                tableSize={size}
               />
             </LayoutCell>
           );
@@ -186,7 +195,15 @@ function Default() {
         sorter: true,
         width: 400,
         render(...[createdAt]) {
-          return <LayoutCell orderType="right">{createdAt}</LayoutCell>;
+          return (
+            <LayoutCell orderType="right">
+              <OneLineText
+                avatar={yomatoImg}
+                name={createdAt}
+                tableSize={size}
+              />
+            </LayoutCell>
+          );
         },
       },
       {
@@ -197,7 +214,7 @@ function Default() {
         render(...[status]) {
           return (
             <LayoutCell orderType="right">
-              <StatusLine name={status} active={true} />
+              <StatusLine name={status} active={true} tableSize={size} />
             </LayoutCell>
           );
         },
@@ -227,6 +244,7 @@ function Default() {
         isExpandAble={true}
         expandedRowRend={expandedRowRender}
         list={data}
+        sizeTable={size}
       />
     </div>
   );

@@ -13,7 +13,12 @@ export interface BadgeTextProps {
 function BadgeText(props: BadgeTextProps) {
   const { className, color, name, backgroundColor, tableSize } = props;
   return (
-    <div className={classNames(`badge-text-table-size-${tableSize}`)}>
+    <div
+      className={classNames(
+        `badge-text-table-size-${tableSize}`,
+        "text-in-table-cell"
+      )}
+    >
       <span
         className={classNames(className, "badge-text")}
         style={{ backgroundColor: backgroundColor, color: color }}

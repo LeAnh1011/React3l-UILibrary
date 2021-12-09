@@ -14,14 +14,18 @@ function StatusLine(props: StatusLineProps) {
   return (
     <>
       <div
-        className={classNames(className, `status-line-table-size-${tableSize}`)}
+        className={classNames(
+          className,
+          `status-line-table-size-${tableSize}`,
+          "text-in-table-cell"
+        )}
       >
         <i
           className={classNames(
             "tio-record",
             active ? "status-active" : "status-inactive"
           )}
-        ></i>{" "}
+        ></i>
         {name}
       </div>
     </>

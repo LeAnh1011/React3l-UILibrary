@@ -9,7 +9,10 @@ import classNames from "classnames";
 // import nameof from "ts-nameof.macro";
 import { ColumnProps } from "antd/lib/table";
 import { UseMaster } from "./interfaceTable";
+import Pagination from "./Pagination/Pagination";
 import { ExpandedRowRender } from "rc-table/lib/interface";
+import { ModelFilter } from "react3l-common";
+import { StringFilter } from "react3l-advanced-filters";
 
 export interface StandardTableCustomProps extends UseMaster {
   columns?: ColumnProps<Model>[];
@@ -22,6 +25,11 @@ export interface StandardTableCustomProps extends UseMaster {
   sizeTable?: "large" | "medium" | "small";
 }
 
+export class DemoFilter extends ModelFilter {
+  name: StringFilter = new StringFilter();
+  code: StringFilter = new StringFilter();
+}
+
 function StandardTable(props: StandardTableCustomProps) {
   const {
     list,
@@ -31,6 +39,19 @@ function StandardTable(props: StandardTableCustomProps) {
     className,
     sizeTable,
   } = props;
+
+  const [filter, setFilter] = React.useState<DemoFilter>(new DemoFilter());
+
+  const handlePagination = React.useCallback(
+    (skip: number, take: number) => {
+      setFilter({ ...filter, skip, take });
+      // if (typeof handleSearch === "function") {
+      //   handleSearch();
+      // }
+      console.log(filter);
+    },
+    [filter, setFilter]
+  );
 
   const rowSelection = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: Model[]) => {
@@ -52,6 +73,7 @@ function StandardTable(props: StandardTableCustomProps) {
         <Table
           className={classNames(className, `table-size-${sizeTable}`)}
           columns={columns}
+          pagination={false}
           expandable={
             isExpandAble
               ? {
@@ -74,6 +96,15 @@ function StandardTable(props: StandardTableCustomProps) {
           dataSource={list}
           rowSelection={rowSelection}
         />
+        <div className="flex-shrink-1 d-flex align-items-center">
+          <Pagination
+            skip={filter.skip}
+            take={filter.take}
+            total={100}
+            onChange={handlePagination}
+            style={{ margin: "10px" }}
+          />
+        </div>
       </div>
     </>
   );

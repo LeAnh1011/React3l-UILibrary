@@ -25,7 +25,7 @@ function Default() {
   const expandedRowRender = () => {
     const columns = [
       {
-        title: <div className="text-center">{"Date"}</div>,
+        title: <div className="text-left">{"Date"}</div>,
         dataIndex: "date",
         key: "date",
         render(...[date]) {
@@ -33,7 +33,7 @@ function Default() {
         },
       },
       {
-        title: <div className="text-center">{"Name"}</div>,
+        title: <div className="text-left">{"Name"}</div>,
         dataIndex: "name",
         key: "name",
         render(...[name]) {
@@ -41,7 +41,7 @@ function Default() {
         },
       },
       {
-        title: <div className="text-center">{"Status"}</div>,
+        title: <div className="text-left">{"Status"}</div>,
         key: "state",
         render: () => (
           <span>
@@ -51,7 +51,7 @@ function Default() {
         ),
       },
       {
-        title: <div className="text-center">{"Upgrade Status"}</div>,
+        title: <div className="text-left">{"Upgrade Status"}</div>,
         dataIndex: "upgradeNum",
         key: "upgradeNum",
         render(...[upgradeNum]) {
@@ -59,7 +59,7 @@ function Default() {
         },
       },
       {
-        title: <div className="text-center">{"Action"}</div>,
+        title: <div className="text-left">{"Action"}</div>,
         dataIndex: "operation",
         key: "operation",
         render(...[upgradeNum]) {
@@ -99,7 +99,7 @@ function Default() {
   const columns: ColumnProps<any>[] = useMemo(
     () => [
       {
-        title: <div className="text-center">{"title"}</div>,
+        title: <div className="text-left">{"Title"}</div>,
         dataIndex: "name",
         key: "name",
         sorter: true,
@@ -113,7 +113,7 @@ function Default() {
         },
       },
       {
-        title: <div className="text-center">{"Platform"}</div>,
+        title: <div className="text-left">{"Platform"}</div>,
         dataIndex: "platform",
         key: "platform",
         sorter: true,
@@ -127,7 +127,7 @@ function Default() {
         },
       },
       {
-        title: <div className="text-center">{"Version"}</div>,
+        title: <div className="text-left">{"Version"}</div>,
         dataIndex: "version",
         key: "version",
         sorter: true,
@@ -145,7 +145,7 @@ function Default() {
         },
       },
       {
-        title: <div className="text-center">{"Upgraded"}</div>,
+        title: <div className="text-left">{"Upgraded"}</div>,
         dataIndex: "upgradeNum",
         key: "upgradeNum",
         sorter: true,
@@ -161,7 +161,7 @@ function Default() {
         },
       },
       {
-        title: <div className="text-center">{"Creator"}</div>,
+        title: <div className="text-left">{"Creator"}</div>,
         dataIndex: "creator",
         key: "creator",
         sorter: true,
@@ -180,7 +180,7 @@ function Default() {
         },
       },
       {
-        title: <div className="text-center">{"Date"}</div>,
+        title: <div className="text-left">{"Date"}</div>,
         dataIndex: "createdAt",
         key: "createdAt",
         sorter: true,
@@ -190,7 +190,7 @@ function Default() {
         },
       },
       {
-        title: <div className="text-center">{"Action"}</div>,
+        title: <div className="text-left">{"Action"}</div>,
         key: "status",
         width: 400,
         dataIndex: "status",

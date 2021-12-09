@@ -9,12 +9,21 @@
     .ant-table-thead > tr > th{
       font-size: 12px;
       font-weight: 700;
+      background-color: #ffffff;
     }
     .ant-table-tbody > tr.ant-table-row:hover > .ant-table-cell{
       background-color: rgba(15, 98, 254, 0.04);
     }
     .ant-table-tbody > tr.ant-table-row-selected > .ant-table-cell{
       background-color: rgba(13, 24, 33, 0.04);
+    }
+    .ant-table-tbody > tr > td{
+      padding: 0px 0px;
+    }
+    .ant-table-tbody > tr > td > .ant-table-wrapper:only-child .ant-table, .ant-table-tbody > tr > td > .ant-table-expanded-row-fixed > .ant-table-wrapper:only-child .ant-table {
+      margin-top: 0px;
+      margin-bottom: 0px;
+      margin-right: 0px;
     }
   }
 }

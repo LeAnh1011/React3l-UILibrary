@@ -17,6 +17,9 @@
     .ant-table-tbody > tr.ant-table-row-selected > .ant-table-cell{
       background-color: rgba(13, 24, 33, 0.04);
     }
+    .ant-table-thead > tr > th{
+      padding: 0px 0px;
+    }
     .ant-table-tbody > tr > td{
       padding: 0px 0px;
     }

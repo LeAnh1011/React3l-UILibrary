@@ -17,6 +17,6 @@ function LayoutCell(props: LayoutCellProps) {
   );
 }
 LayoutCell.defaultProps = {
-  orderType: "center",
+  orderType: "left",
 };
 export default LayoutCell;

@@ -7,6 +7,7 @@ import "./StandardTable.scss";
 import StandardTable from "./StandardTable";
 // import { Model } from "react3l-common";
 import yomatoImg from "../../assets/image/yo.jpg";
+import LayoutHeader from "./LayoutHeader/LayoutHeader";
 import LayoutCell from "./LayoutCell/LayoutCell";
 import BadgeText from "./DataCellComponent/BadgeText/BadgeText";
 import TwoLineText from "./DataCellComponent/TwoLineText/TwoLineText";
@@ -97,32 +98,33 @@ function Default() {
   };
 
   const size = "small";
+  const orderType = "left";
 
   const columns: ColumnProps<any>[] = useMemo(
     () => [
       {
-        title: <div className="text-left">{"Title"}</div>,
+        title: <LayoutHeader orderType={orderType} name="Title" />,
         dataIndex: "name",
         key: "name",
         sorter: true,
         width: 400,
         render(...[name]) {
           return (
-            <LayoutCell orderType="left">
+            <LayoutCell orderType={orderType}>
               <OneLineText avatar={yomatoImg} name={name} tableSize={size} />
             </LayoutCell>
           );
         },
       },
       {
-        title: <div className="text-left">{"Platform"}</div>,
+        title: <LayoutHeader orderType={orderType} name="Platform" />,
         dataIndex: "platform",
         key: "platform",
         sorter: true,
         width: 400,
         render(...[platform]) {
           return (
-            <LayoutCell orderType="left">
+            <LayoutCell orderType={orderType}>
               <OneLineText
                 icon="tio-calendar_month"
                 name={platform}
@@ -133,14 +135,14 @@ function Default() {
         },
       },
       {
-        title: <div className="text-left">{"Version"}</div>,
+        title: <LayoutHeader orderType={orderType} name="Version" />,
         dataIndex: "version",
         key: "version",
         sorter: true,
         width: 400,
         render(...[version]) {
           return (
-            <LayoutCell orderType="left">
+            <LayoutCell orderType={orderType}>
               <TwoLineText
                 avatar={yomatoImg}
                 nameLine1={version}
@@ -152,24 +154,26 @@ function Default() {
         },
       },
       {
-        title: <div className="text-left">{"Upgraded"}</div>,
+        title: <LayoutHeader orderType={orderType} name="Upgrade" />,
         dataIndex: "upgradeNum",
         key: "upgradeNum",
         sorter: true,
         width: 400,
         render(...[upgradeNum]) {
           return (
-            <TwoLineText
-              icon="tio-calendar_month"
-              nameLine1={upgradeNum + " alod dlkjwer"}
-              nameLine2={"hihii"}
-              tableSize={size}
-            />
+            <LayoutCell orderType={orderType}>
+              <TwoLineText
+                icon="tio-calendar_month"
+                nameLine1={upgradeNum + " alod dlkjwer"}
+                nameLine2={"hihii"}
+                tableSize={size}
+              />
+            </LayoutCell>
           );
         },
       },
       {
-        title: <div className="text-left">{"Creator"}</div>,
+        title: <LayoutHeader orderType={orderType} name="Creator" />,
         dataIndex: "creator",
         key: "creator",
         sorter: true,
@@ -177,7 +181,7 @@ function Default() {
         align: "center",
         render(...[creator]) {
           return (
-            <LayoutCell orderType="right">
+            <LayoutCell orderType={orderType}>
               <BadgeText
                 name={creator}
                 backgroundColor="#FFECB3"
@@ -189,14 +193,14 @@ function Default() {
         },
       },
       {
-        title: <div className="text-left">{"Date"}</div>,
+        title: <LayoutHeader orderType={orderType} name="Date" />,
         dataIndex: "createdAt",
         key: "createdAt",
         sorter: true,
         width: 400,
         render(...[createdAt]) {
           return (
-            <LayoutCell orderType="right">
+            <LayoutCell orderType={orderType}>
               <OneLineText
                 avatar={yomatoImg}
                 name={createdAt}
@@ -207,13 +211,13 @@ function Default() {
         },
       },
       {
-        title: <div className="text-left">{"Action"}</div>,
+        title: <LayoutHeader orderType={orderType} name="Action" />,
         key: "status",
         width: 400,
         dataIndex: "status",
         render(...[status]) {
           return (
-            <LayoutCell orderType="right">
+            <LayoutCell orderType={orderType}>
               <StatusLine name={status} active={true} tableSize={size} />
             </LayoutCell>
           );

@@ -3,15 +3,8 @@ import nameof from "ts-nameof.macro";
 import { Observable } from "rxjs";
 import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
-
-import {
-  advanceFilterService,
-  advanceFilterReducer,
-  AdvanceFilterAction,
-} from "services/advance-filter-service";
-
+import { advanceFilterService, advanceFilterReducer, AdvanceFilterAction } from '../../../services/advance-filter-service';
 import AdvanceIdFilterMaster from './AdvanceIdFilterMaster'
-
 
 
 const demoObservable = new Observable<Model[]>((observer) => {
@@ -29,6 +22,11 @@ const demoObservable = new Observable<Model[]>((observer) => {
   }, 1000);
 });
 
+const list = [
+  { id: 9, name: "Phòng Muti Media", code: "MEDIA" },
+  { id: 10, name: "Phòng truyền thông", code: "PTT" },
+]
+
 export class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
   name: StringFilter = new StringFilter();
@@ -36,16 +34,13 @@ export class DemoFilter extends ModelFilter {
 }
 
 const filterValue = new DemoFilter();
-filterValue.id.equal = 1;
+filterValue.id.equal = 10;
 
 const demoSearchFunc = (TModelFilter: ModelFilter) => {
   return demoObservable;
 };
 
 export function AdvanceIdFilterMasterStories() {
-  const [AdvanceIdFilterModelFilter] = React.useState<ModelFilter>(
-    new ModelFilter(),
-  );
 
   const [filter, dispatch] = React.useReducer<
     Reducer<DemoFilter, AdvanceFilterAction<DemoFilter>>
@@ -58,28 +53,19 @@ export function AdvanceIdFilterMasterStories() {
     "equal",
   );
 
-  const handleRenderModel = React.useCallback((item: Model) => {
-    if (item) {
-      return item.name;
-    } else {
-      return "";
-    }
-  }, []);
-
-  React.useEffect(() => { }, [filter]);
 
   return (
     <div style={{ margin: "10px", width: "250px" }}>
       <AdvanceIdFilterMaster
-        placeHolder={"AdvanceIdFilter Organization"}
         value={id}
+        placeHolder={"Tìm kiếm..."}
         classFilter={DemoFilter}
-        modelFilter={AdvanceIdFilterModelFilter}
+        modelFilter={filter}
         searchProperty={nameof(DemoFilter.name)}
-        render={handleRenderModel}
         onChange={setValue}
         getList={demoSearchFunc}
-        title={'Organization'}
+        title={'Đơn vị'}
+        preferOptions={list}
       />
     </div>
   );

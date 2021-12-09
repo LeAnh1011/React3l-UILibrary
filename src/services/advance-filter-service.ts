@@ -24,7 +24,11 @@ export interface AdvanceFilterAction<
   T2 = CoreFilter // default
 > {
   type: ActionFilterEnum;
-  classFilter?: new (partial?: any) => T2;
+  classFilter?: new (params: any) =>
+    | StringFilter
+    | NumberFilter
+    | DateFilter
+    | IdFilter;
   data?: T1;
   fieldName?: keyof T1 | string;
   fieldType?: keyof T2 | string;
@@ -93,51 +97,52 @@ export const advanceFilterService = {
   } {
     const handleChangeFilter = React.useCallback(
       (
-        fieldName: keyof TFilter,
-        fieldType:
-          | keyof (StringFilter | NumberFilter | DateFilter | IdFilter)
-          | (keyof StringFilter | NumberFilter | DateFilter | IdFilter)[],
-        ClassSubFilter: new (params: any) =>
-          | StringFilter
-          | NumberFilter
-          | DateFilter
-          | IdFilter,
-        handleSearch?: () => void
-      ) => (value: any) => {
-        if (fieldType instanceof Array) {
-          dispatch({
-            type: ActionFilterEnum.ChangeAllField,
-            data: {
-              ...modelFilter,
-              [fieldName]: new ClassSubFilter({
-                [nameof("greater")]: value[0],
-                [nameof("less")]: value[1],
-              }),
-            },
-          });
-        } else {
-          if (value instanceof Array) {
+          fieldName: keyof TFilter,
+          fieldType:
+            | keyof (StringFilter | NumberFilter | DateFilter | IdFilter)
+            | (keyof StringFilter | NumberFilter | DateFilter | IdFilter)[],
+          ClassSubFilter: new (params: any) =>
+            | StringFilter
+            | NumberFilter
+            | DateFilter
+            | IdFilter,
+          handleSearch?: () => void
+        ) =>
+        (value: any) => {
+          if (fieldType instanceof Array) {
             dispatch({
-              type: ActionFilterEnum.ChangeOneField,
-              fieldName: fieldName,
-              fieldType: fieldType,
-              fieldValue: value[0] ? value[0].id : null,
-              classFilter: ClassSubFilter,
+              type: ActionFilterEnum.ChangeAllField,
+              data: {
+                ...modelFilter,
+                [fieldName]: new ClassSubFilter({
+                  [nameof("greater")]: value[0],
+                  [nameof("less")]: value[1],
+                }),
+              },
             });
           } else {
-            dispatch({
-              type: ActionFilterEnum.ChangeOneField,
-              fieldName: fieldName,
-              fieldType: fieldType,
-              fieldValue: value,
-              classFilter: ClassSubFilter,
-            });
+            if (value instanceof Array) {
+              dispatch({
+                type: ActionFilterEnum.ChangeOneField,
+                fieldName: fieldName,
+                fieldType: fieldType,
+                fieldValue: value[0] ? value[0].id : null,
+                classFilter: ClassSubFilter,
+              });
+            } else {
+              dispatch({
+                type: ActionFilterEnum.ChangeOneField,
+                fieldName: fieldName,
+                fieldType: fieldType,
+                fieldValue: value,
+                classFilter: ClassSubFilter,
+              });
+            }
           }
-        }
-        if (typeof handleSearch === "function") {
-          handleSearch();
-        }
-      },
+          if (typeof handleSearch === "function") {
+            handleSearch();
+          }
+        },
       [dispatch, modelFilter]
     );
 
@@ -215,81 +220,82 @@ export const advanceFilterService = {
 
     const handleChangeFilter = React.useCallback(
       (
-        fieldName: keyof TFilter,
-        fieldType:
-          | keyof (StringFilter | NumberFilter | DateFilter | IdFilter)
-          | (keyof StringFilter | NumberFilter | DateFilter | IdFilter)[],
-        ClassSubFilter: new (params: any) =>
-          | StringFilter
-          | NumberFilter
-          | DateFilter
-          | IdFilter
-      ) => (value: any) => {
-        if (fieldType instanceof Array) {
-          dispatch({
-            type: ActionFilterEnum.ChangeAllField,
-            data: {
-              ...modelFilter,
-              skip: 0,
-              [fieldName]: new ClassSubFilter({
-                [nameof("greaterEqual")]: value[0],
-                [nameof("lessEqual")]: value[1],
-              }),
-            },
-          });
-        } else {
-          if (value instanceof Array) {
-            if (moment.isMoment(value[0])) {
-              dispatch({
-                type: ActionFilterEnum.ChangeAllField,
-                data: {
-                  ...modelFilter,
-                  skip: 0,
-                  [fieldName]: new ClassSubFilter({
-                    [nameof("greater")]: value[0],
-                    [nameof("less")]: value[1],
-                  }),
-                },
-              });
-            } else {
-              const ids = value.map((item) => item?.id);
-              if (ids && typeof ids[0] !== "undefined") {
+          fieldName: keyof TFilter,
+          fieldType:
+            | keyof (StringFilter | NumberFilter | DateFilter | IdFilter)
+            | (keyof StringFilter | NumberFilter | DateFilter | IdFilter)[],
+          ClassSubFilter: new (params: any) =>
+            | StringFilter
+            | NumberFilter
+            | DateFilter
+            | IdFilter
+        ) =>
+        (value: any) => {
+          if (fieldType instanceof Array) {
+            dispatch({
+              type: ActionFilterEnum.ChangeAllField,
+              data: {
+                ...modelFilter,
+                skip: 0,
+                [fieldName]: new ClassSubFilter({
+                  [nameof("greaterEqual")]: value[0],
+                  [nameof("lessEqual")]: value[1],
+                }),
+              },
+            });
+          } else {
+            if (value instanceof Array) {
+              if (moment.isMoment(value[0])) {
                 dispatch({
                   type: ActionFilterEnum.ChangeAllField,
                   data: {
                     ...modelFilter,
                     skip: 0,
                     [fieldName]: new ClassSubFilter({
-                      [nameof("in")]: ids,
+                      [nameof("greater")]: value[0],
+                      [nameof("less")]: value[1],
                     }),
                   },
                 });
               } else {
-                dispatch({
-                  type: ActionFilterEnum.ChangeAllField,
-                  data: {
-                    ...modelFilter,
-                    skip: 0,
-                    [fieldName]: {
-                      [nameof(NumberFilter.prototype.greaterEqual)]: value[0],
-                      [nameof(NumberFilter.prototype.lessEqual)]: value[1],
+                const ids = value.map((item) => item?.id);
+                if (ids && typeof ids[0] !== "undefined") {
+                  dispatch({
+                    type: ActionFilterEnum.ChangeAllField,
+                    data: {
+                      ...modelFilter,
+                      skip: 0,
+                      [fieldName]: new ClassSubFilter({
+                        [nameof("in")]: ids,
+                      }),
                     },
-                  },
-                });
+                  });
+                } else {
+                  dispatch({
+                    type: ActionFilterEnum.ChangeAllField,
+                    data: {
+                      ...modelFilter,
+                      skip: 0,
+                      [fieldName]: {
+                        [nameof(NumberFilter.prototype.greaterEqual)]: value[0],
+                        [nameof(NumberFilter.prototype.lessEqual)]: value[1],
+                      },
+                    },
+                  });
+                }
               }
+            } else {
+              dispatch({
+                type: ActionFilterEnum.ChangeOneField,
+                fieldName: fieldName,
+                fieldType: fieldType as string,
+                fieldValue: value,
+                classFilter: ClassSubFilter,
+              });
             }
-          } else {
-            dispatch({
-              type: ActionFilterEnum.ChangeOneField,
-              fieldName: fieldName,
-              fieldType: fieldType as string,
-              fieldValue: value,
-              classFilter: ClassSubFilter,
-            });
           }
-        }
-        handleSearch();
-      },
+          handleSearch();
+        },
       [dispatch, modelFilter, handleSearch]
     );
 
@@ -410,6 +416,7 @@ export const advanceFilterService = {
           fieldName: fieldName,
           fieldType: fieldType,
           fieldValue: id || null,
+          classFilter: IdFilter,
         });
       },
       [dispatch, fieldName, fieldType]

@@ -1,22 +1,25 @@
+import { useDebounceFn } from "ahooks";
 import { Empty, Spin } from "antd";
 import classNames from "classnames";
+import InputText from "components/Input/InputText";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import React, { RefObject } from "react";
 import { StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
-import { debounce, ErrorObserver, Observable, Subscription } from "rxjs";
+import { ErrorObserver, Observable, Subscription } from "rxjs";
+
 import { CommonService } from "services/common-service";
 import nameof from "ts-nameof.macro";
-import InputSelect from "./../../Input/InputSelect/InputSelect";
+import search from "assets/images/svg/search-normal.svg";
 import "./AdvanceIdFilterMaster.scss";
 
 export interface AdvanceIdFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
   > {
-  value?: number;
+  value?: number | string;
 
-  title?: string;
+  title: string;
 
   modelFilter?: TModelFilter;
 
@@ -45,10 +48,12 @@ export interface AdvanceIdFilterMasterProps<
   classFilter: new () => TModelFilter;
 
   className?: string;
+
+  preferOptions?: T[];
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
-  return t?.ten;
+  return t?.name;
 }
 
 function AdvanceIdFilterMaster(
@@ -71,6 +76,7 @@ function AdvanceIdFilterMaster(
     render,
     classFilter: ClassFilter,
     className,
+    preferOptions,
   } = props;
 
   const [internalModel, setInternalModel] = React.useState<Model>();
@@ -88,6 +94,34 @@ function AdvanceIdFilterMaster(
     React.useRef<HTMLDivElement>(null);
 
   const [subscription] = CommonService.useSubscription();
+
+  const { run } = useDebounceFn(
+    (searchTerm: string) => {
+      const cloneModelFilter = modelFilter
+        ? { ...modelFilter }
+        : new ClassFilter();
+      if (!isEnumList) {
+        if (searchType) {
+          cloneModelFilter[searchProperty][searchType] = searchTerm;
+        } else cloneModelFilter[searchProperty] = searchTerm;
+      }
+      setLoading(true);
+      subscription.add(getList);
+      getList(cloneModelFilter).subscribe(
+        (res: Model[]) => {
+          setList(res);
+          setLoading(false);
+        },
+        (err: ErrorObserver<Error>) => {
+          setList([]);
+          setLoading(false);
+        }
+      );
+    },
+    {
+      wait: DEBOUNCE_TIME_300,
+    }
+  );
 
   const handleLoadList = React.useCallback(() => {
     try {
@@ -114,7 +148,7 @@ function AdvanceIdFilterMaster(
         await handleLoadList();
       }
     },
-    [handleLoadList, disabled]
+    [handleLoadList, disabled, internalModel, value]
   );
 
   const handleCloseAdvanceIdFilterMaster = React.useCallback(() => {
@@ -123,7 +157,8 @@ function AdvanceIdFilterMaster(
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      // setInternalModel(item);
+
+      setInternalModel(item);
       onChange(item.id, item);
       handleCloseAdvanceIdFilterMaster();
     },
@@ -131,55 +166,12 @@ function AdvanceIdFilterMaster(
   );
 
   const handleSearchChange = React.useCallback(
-    debounce((searchTerm: string) => {
-      const cloneModelFilter = modelFilter
-        ? { ...modelFilter }
-        : new ClassFilter();
-      if (!isEnumList) {
-        if (searchType === null) {
-          cloneModelFilter[searchProperty] = searchTerm;
-        } else cloneModelFilter[searchProperty][searchType] = searchTerm;
-      }
-      setLoading(true);
-      subscription.add(getList);
-      getList(cloneModelFilter).subscribe(
-        (res: Model[]) => {
-          setList(res);
-          setLoading(false);
-        },
-        (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        }
-      );
-    }, DEBOUNCE_TIME_300),
+    (searchTerm: string) => {
+      run(searchTerm)
+    },
     [modelFilter, searchProperty, searchType, isEnumList, getList]
   );
 
-  const handleClearItem = React.useCallback(() => {
-    onChange(null);
-    if (!value) {
-      setInternalModel(null);
-    }
-  }, [onChange, value]);
-
-  const handleKeyPress = React.useCallback(
-    (event: any) => {
-      switch (event.keyCode) {
-        case 40:
-          const firstItem = selectListRef.current
-            .firstElementChild as HTMLElement;
-          firstItem.focus();
-          break;
-        case 9:
-          handleCloseAdvanceIdFilterMaster();
-          break;
-        default:
-          return;
-      }
-    },
-    [handleCloseAdvanceIdFilterMaster]
-  );
 
   const handleMove = React.useCallback(
     (item) => (event: any) => {
@@ -205,42 +197,40 @@ function AdvanceIdFilterMaster(
     [handleClickItem]
   );
 
-  const handleKeyEnter = React.useCallback(
-    (event: any) => {
-      if (event.key === "Enter") {
-        handleToggle(null);
+
+  React.useEffect(() => {
+    const subscription = new Subscription();
+    if (value !== null && value !== undefined) {
+      const filterValue = new ClassFilter();
+      if (isIdValue) {
+        const listFilterPreferOptions = preferOptions.filter((current) => current.id === Number(value));
+        if (listFilterPreferOptions && listFilterPreferOptions?.length > 0) {
+          setInternalModel(listFilterPreferOptions[0]);
+        }
+        filterValue["id"]["equal"] = Number(value);
+        subscription.add(getList);
+        getList(filterValue).subscribe((res: Model[]) => {
+          if (res) {
+            const filterList = res.filter((current) => current.id === Number(value));
+            if (filterList && filterList?.length > 0) {
+              setInternalModel(filterList[0]);
+            }
+          }
+        });
+
+      } else {
+        setInternalModel({
+          [typeRender]: value,
+        });
       }
-      return;
-    },
-    [handleToggle]
-  );
+    } else {
+      setInternalModel(null);
+    }
+    return function cleanup() {
+      subscription.unsubscribe();
+    };
+  }, [value, getList, ClassFilter, isIdValue, typeRender, preferOptions]);
 
-  // React.useEffect(() => {
-  //   const subscription = new Subscription();
-  //   if (value !== null && value !== undefined) {
-  //     const filterValue = new ClassFilter();
-  //     if (isIdValue) {
-  //       filterValue["id"]["equal"] = Number(value);
-  //       subscription.add(getList);
-  //       getList(filterValue).subscribe((res: Model[]) => {
-  //         if (res) {
-  //           res = res.filter((current) => current.id === Number(value));
-  //           setInternalModel(res[0]);
-  //         }
-  //       });
-  //     } else {
-  //       setInternalModel({
-  //         [typeRender]: value,
-  //       });
-  //     }
-  //   } else {
-  //     setInternalModel(null);
-  //   }
-
-  //   return function cleanup() {
-  //     subscription.unsubscribe();
-  //   };
-  // }, [value, getList, ClassFilter, isIdValue, typeRender]);
 
   CommonService.useClickOutside(wrapperRef, handleCloseAdvanceIdFilterMaster);
 
@@ -257,30 +247,22 @@ function AdvanceIdFilterMaster(
         {isExpand && (
           <div className="advance-id-filter-master__list-container m-t--xxxs">
             <div className="advance-id-filter__input p--xs" >
-              <input
-                type="text"
-                value={render(internalModel)}
-                onChange={() => handleSearchChange}
-                placeholder={
-                  placeHolder
-                }
-                // ref={inputRef}
-                disabled={disabled}
-                onKeyDown={handleKeyPress}
-                className={classNames("component__input", {
-                  "disabled-field": disabled,
-                })} />
+              <InputText
+                isSmall={false}
+                maxLength={100}
+                onChange={handleSearchChange}
+                placeHolder={placeHolder}
+                suffix={<img className='tio tio-search' src={search} />}
+                isMaterial={isMaterial}
+              />
             </div>
             {!loading ? (
-              <div className="advance-id-master__list" ref={selectListRef}>
+              <div className="advance-id-master__list" >
 
                 {list.length > 0 ? (
                   list.map((item, index) => (
                     <div
-                      className={classNames("advance-id-filter__item p--xs", {
-                        "advance-id-filter__item--advance-id-filtered":
-                          item.id === internalModel?.id,
-                      })}
+                      className={classNames("advance-id-filter__item p--xs")}
                       tabIndex={-1}
                       key={index}
                       onKeyDown={handleMove(item)}
@@ -289,6 +271,10 @@ function AdvanceIdFilterMaster(
                       <span className="advance-id-filter__text">
                         {render(item)}
                       </span>
+                      {
+                        item.id === internalModel?.id && <i className="tio tio-done" />
+                      }
+
                     </div>
                   ))
                 ) : (
@@ -300,6 +286,30 @@ function AdvanceIdFilterMaster(
                 <Spin tip="Loading..."></Spin>
               </div>
             )}
+            {
+              !loading && list.length > 0 &&
+              <div className="advance-id-master__list-prefer">
+                {
+                  preferOptions && preferOptions?.length > 0 &&
+                  preferOptions.map((item, index) => (
+                    <div
+                      className={classNames("advance-id-filter__prefer-option advance-id-filter__item p--xs")}
+                      key={index}
+                      onKeyDown={handleMove(item)}
+                      onClick={handleClickItem(item)}
+                    >
+                      <span className="advance-id-filter__text">
+                        {render(item)}
+                      </span>
+                      {
+                        item.id === internalModel?.id && <i className="tio tio-done" />
+                      }
+
+                    </div>
+                  ))
+                }
+              </div>
+            }
           </div>
         )}
       </div>

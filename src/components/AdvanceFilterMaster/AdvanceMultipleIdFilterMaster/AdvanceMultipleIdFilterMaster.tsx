@@ -18,7 +18,7 @@ export interface AdvanceMultipleIdFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
   > {
-  value?: number | string;
+  value?: number[] | string[];
 
   title: string;
 
@@ -257,7 +257,91 @@ function AdvanceMultipleIdFilterMaster(
                 isMaterial={isMaterial}
               />
             </div>
-
+            {/* {isExpand && (
+              <div className="select__list-container">
+                {!loading ? (
+                  <>
+                    <div
+                      className="select__list multiple-select__list"
+                      ref={selectListRef}
+                    >
+                      {internalList.length > 0 ? (
+                        internalList.map((item, index) => (
+                          <div
+                            className={classNames(
+                              "select__item p-l--xs p-y--xs p-r--xxs",
+                              {
+                                "select__item--selected": item.isSelected,
+                              }
+                            )}
+                            key={index}
+                            onKeyDown={handleMove(item)}
+                            tabIndex={-1}
+                            onClick={handleClickParentItem}
+                          >
+                            <div>
+                              <label className={classNames("checkbox__container")}>
+                                <input type="checkbox" checked={item.isSelected} />
+                                <span
+                                  className="checkmark"
+                                  onClick={handleClickItem(item)}
+                                ></span>
+                                <span
+                                  className="select__text"
+                                  onClick={handleClickItem(item)}
+                                >
+                                  {render(item)}
+                                </span>
+                              </label>
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <img
+                          className="img-emty"
+                          src={ASSETS_IMAGE + "/no-data.png"}
+                          alt=""
+                        />
+                      )}
+                    </div>
+                    {selectWithAdd ? (
+                      <div
+                        className={classNames(
+                          "select__bottom-button select__add-button p-y--xs"
+                        )}
+                      >
+                        <i className="tio-add m-l--xxs" />
+                        <span>Add new</span>
+                      </div>
+                    ) : selectWithPreferOption ? (
+                      <div
+                        className={classNames(
+                          "select__bottom-button select__prefer-option-button"
+                        )}
+                      >
+                        <div className={classNames("p-l--xs")}>
+                          <label className={classNames("checkbox__container")}>
+                            <input type="checkbox" checked={true} />
+                            <span className="checkmark"></span>
+                            <span className="multiple-select__text">
+                              Prefer Options
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+                    ) : null}
+                  </>
+                ) : (
+                  <div className="select__loading">
+                    <img
+                      className="img-loading"
+                      src={ASSETS_SVG + "/spinner.svg"}
+                      alt=""
+                    />
+                  </div>
+                )}
+              </div>
+            )} */}
             {
               !loading && list.length > 0 &&
               <div className="advance-id-master__list-prefer">

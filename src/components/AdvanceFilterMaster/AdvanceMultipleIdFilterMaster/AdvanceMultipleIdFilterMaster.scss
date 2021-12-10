@@ -1,0 +1,86 @@
+@import "../../../styles/index.scss";
+
+$backgound-color: #f4f4f4;
+
+/* Style for advance-id-filter.tsx */
+.advance-id-filter-master__wrapper {
+  position: relative;
+  .advance-id-filter-master__container {
+    width: fit-content;
+    cursor: pointer;
+    &.filter-bg {
+      background-color: var(--white);
+      border: 1px solid var(--color-primary);
+      box-sizing: border-box;
+      box-shadow: 0px 0px 8px var(--color-primary);
+      &:hover {
+        background-color: var(--white);
+      }
+    }
+    &:hover {
+      background: #e5e5e5;
+    }
+    .filter__icon {
+      font-size: 16px;
+    }
+    .advance-id-filter-master__title {
+      font-size: 14px;
+    }
+  }
+
+  .advance-id-filter__input {
+    .input-text__container {
+      border-radius: 0px;
+      background-color: $backgound-color;
+      outline: 1px var(--color-border);
+    }
+  }
+
+  .advance-id-filter-master__list-container {
+    width: 100%;
+    height: auto;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2), 0px 2px 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 999;
+    .advance-id-master__list {
+      background-color: $backgound-color;
+      width: 100%;
+      overflow-y: auto;
+      max-height: 160px;
+    }
+    .advance-id-filter__loading {
+      width: 100%;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .advance-id-filter__item {
+      &:hover {
+        background-color: #e5e5e5;
+      }
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      line-height: 16px;
+      cursor: pointer;
+    }
+    .advance-id-master__list-prefer {
+      box-shadow: inset 0px 1px 0px #e1e3e5;
+      background: $backgound-color;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(63, 86, 175, 0.15);
+}

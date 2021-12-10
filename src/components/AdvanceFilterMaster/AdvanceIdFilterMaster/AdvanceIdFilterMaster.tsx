@@ -88,6 +88,10 @@ function AdvanceIdFilterMaster(
   const wrapperRef: RefObject<HTMLDivElement> =
     React.useRef<HTMLDivElement>(null);
 
+  const inputRef: any = React.useRef<any>(
+    null
+  );
+
   const [subscription] = CommonService.useSubscription();
 
   const { run } = useDebounceFn(
@@ -140,10 +144,11 @@ function AdvanceIdFilterMaster(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (!disabled) {
         setExpand(true);
+        console.log(inputRef)
         await handleLoadList();
       }
     },
-    [handleLoadList, disabled]
+    [handleLoadList, disabled, inputRef]
   );
 
   const handleCloseAdvanceIdFilterMaster = React.useCallback(() => {
@@ -227,6 +232,10 @@ function AdvanceIdFilterMaster(
   }, [value, getList, ClassFilter, isIdValue, typeRender, preferOptions]);
 
 
+  React.useEffect(() => {
+    console.log(inputRef)
+  }, [inputRef])
+
   CommonService.useClickOutside(wrapperRef, handleCloseAdvanceIdFilterMaster);
 
   return (
@@ -241,7 +250,7 @@ function AdvanceIdFilterMaster(
         </div>
         {isExpand && (
           <div className="advance-id-filter-master__list-container m-t--xxxs">
-            <div className="advance-id-filter__input p--xs" >
+            <div className="advance-id-filter__input p--xs"  >
               <InputText
                 isSmall={false}
                 maxLength={100}
@@ -249,6 +258,7 @@ function AdvanceIdFilterMaster(
                 placeHolder={placeHolder}
                 suffix={<img className='tio tio-search' src={search} alt="noImage" />}
                 isMaterial={isMaterial}
+              // ref={inputRef}
               />
             </div>
             {!loading ? (

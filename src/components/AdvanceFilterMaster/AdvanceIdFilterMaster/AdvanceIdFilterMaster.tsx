@@ -10,11 +10,10 @@ import { ErrorObserver, Observable, Subscription } from "rxjs";
 import { CommonService } from "services/common-service";
 import "./AdvanceIdFilterMaster.scss";
 
-
 export interface AdvanceIdFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
-  > {
+> {
   value?: number | string;
 
   title: string;
@@ -85,8 +84,9 @@ function AdvanceIdFilterMaster(
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
-  const wrapperRef: RefObject<HTMLDivElement> =
-    React.useRef<HTMLDivElement>(null);
+  const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
+    null
+  );
 
   const [subscription] = CommonService.useSubscription();
 
@@ -133,7 +133,7 @@ function AdvanceIdFilterMaster(
           setLoading(false);
         }
       );
-    } catch (error) { }
+    } catch (error) {}
   }, [getList, modelFilter, subscription, ClassFilter]);
 
   const handleToggle = React.useCallback(
@@ -152,7 +152,6 @@ function AdvanceIdFilterMaster(
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-
       setInternalModel(item);
       onChange(item.id, item);
       handleCloseAdvanceIdFilterMaster();
@@ -162,11 +161,10 @@ function AdvanceIdFilterMaster(
 
   const handleSearchChange = React.useCallback(
     (searchTerm: string) => {
-      run(searchTerm)
+      run(searchTerm);
     },
     [run]
   );
-
 
   const handleMove = React.useCallback(
     (item) => (event: any) => {
@@ -192,13 +190,14 @@ function AdvanceIdFilterMaster(
     [handleClickItem]
   );
 
-
   React.useEffect(() => {
     const subscription = new Subscription();
     if (value !== null && value !== undefined) {
       const filterValue = new ClassFilter();
       if (isIdValue) {
-        const listFilterPreferOptions = preferOptions.filter((current) => current.id === Number(value));
+        const listFilterPreferOptions = preferOptions.filter(
+          (current) => current.id === Number(value)
+        );
         if (listFilterPreferOptions && listFilterPreferOptions?.length > 0) {
           setInternalModel(listFilterPreferOptions[0]);
         } else {
@@ -206,7 +205,9 @@ function AdvanceIdFilterMaster(
           subscription.add(getList);
           getList(filterValue).subscribe((res: Model[]) => {
             if (res) {
-              const filterList = res.filter((current) => current.id === Number(value));
+              const filterList = res.filter(
+                (current) => current.id === Number(value)
+              );
               if (filterList && filterList?.length > 0) {
                 setInternalModel(filterList[0]);
               }
@@ -226,14 +227,26 @@ function AdvanceIdFilterMaster(
     };
   }, [value, getList, ClassFilter, isIdValue, typeRender, preferOptions]);
 
+  const inputRef: any = React.useRef<any>(null);
+
+  const focus = React.useCallback(() => {
+    console.log(inputRef)
+  }, []);
 
   CommonService.useClickOutside(wrapperRef, handleCloseAdvanceIdFilterMaster);
 
   return (
     <>
-      <div className={classNames("advance-id-filter-master__wrapper", className)} ref={wrapperRef}>
-        <div className={classNames("advance-id-filter-master__container p--xs",
-          { "filter-bg": isExpand })} onClick={handleToggle}>
+      <div
+        className={classNames("advance-id-filter-master__wrapper", className)}
+        ref={wrapperRef}
+      >
+        <div
+          className={classNames("advance-id-filter-master__container p--xs", {
+            "filter-bg": isExpand,
+          })}
+          onClick={handleToggle}
+        >
           <div className="advance-id-filter-master__title">
             {title}
             <i className="filter__icon tio-chevron_down"></i>
@@ -241,19 +254,22 @@ function AdvanceIdFilterMaster(
         </div>
         {isExpand && (
           <div className="advance-id-filter-master__list-container m-t--xxxs">
-            <div className="advance-id-filter__input p--xs" >
+            <button onClick={focus}>Test focus</button>
+            <div className="advance-id-filter__input p--xs">
               <InputText
                 isSmall={false}
                 maxLength={100}
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
-                suffix={<img className='tio tio-search' src={search} alt="noImage" />}
+                suffix={
+                  <img className="tio tio-search" src={search} alt="noImage" />
+                }
                 isMaterial={isMaterial}
+                ref={inputRef}
               />
             </div>
             {!loading ? (
-              <div className="advance-id-master__list" >
-
+              <div className="advance-id-master__list">
                 {list.length > 0 ? (
                   list.map((item, index) => (
                     <div
@@ -266,10 +282,9 @@ function AdvanceIdFilterMaster(
                       <span className="advance-id-filter__text">
                         {render(item)}
                       </span>
-                      {
-                        item.id === internalModel?.id && <i className="tio tio-done" />
-                      }
-
+                      {item.id === internalModel?.id && (
+                        <i className="tio tio-done" />
+                      )}
                     </div>
                   ))
                 ) : (
@@ -281,14 +296,15 @@ function AdvanceIdFilterMaster(
                 <Spin tip="Loading..."></Spin>
               </div>
             )}
-            {
-              !loading && list.length > 0 &&
+            {!loading && list.length > 0 && (
               <div className="advance-id-master__list-prefer">
-                {
-                  preferOptions && preferOptions?.length > 0 &&
+                {preferOptions &&
+                  preferOptions?.length > 0 &&
                   preferOptions.map((item, index) => (
                     <div
-                      className={classNames("advance-id-filter__prefer-option advance-id-filter__item p--xs")}
+                      className={classNames(
+                        "advance-id-filter__prefer-option advance-id-filter__item p--xs"
+                      )}
                       key={index}
                       onKeyDown={handleMove(item)}
                       onClick={handleClickItem(item)}
@@ -296,15 +312,13 @@ function AdvanceIdFilterMaster(
                       <span className="advance-id-filter__text">
                         {render(item)}
                       </span>
-                      {
-                        item.id === internalModel?.id && <i className="tio tio-done" />
-                      }
-
+                      {item.id === internalModel?.id && (
+                        <i className="tio tio-done" />
+                      )}
                     </div>
-                  ))
-                }
+                  ))}
               </div>
-            }
+            )}
           </div>
         )}
       </div>

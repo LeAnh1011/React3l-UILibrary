@@ -34,7 +34,7 @@ export interface InputTextProps {
   onBlur?: (T: string | null) => void;
 }
 
-function InputText(props: InputTextProps) {
+const InputText = React.forwardRef((props: InputTextProps, ref: React.Ref<any>) => {
   const {
     action,
     label,
@@ -152,6 +152,7 @@ function InputText(props: InputTextProps) {
             "input-text--float": type === INPUT_TEXT_TYPE.FLOAT_LABEL,
           }
         )}
+        ref={ref}
         onClick={() => {
           inputRef.current.focus();
         }}
@@ -214,7 +215,7 @@ function InputText(props: InputTextProps) {
       </div>
     </div>
   );
-}
+});
 
 InputText.defaultProps = {
   label: "",
@@ -224,7 +225,6 @@ InputText.defaultProps = {
   prefix: "",
   disabled: false,
   className: "",
-  countWord: false,
   maxLength: 0,
 };
 

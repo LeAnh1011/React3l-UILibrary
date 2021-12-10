@@ -92,6 +92,9 @@ function AdvanceIdFilterMaster(
     null
   );
 
+  const selectListRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
+    null
+  );
   const [subscription] = CommonService.useSubscription();
 
   const { run } = useDebounceFn(
@@ -144,7 +147,9 @@ function AdvanceIdFilterMaster(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (!disabled) {
         setExpand(true);
-        console.log(inputRef)
+        setTimeout(() => {
+          inputRef.current.children[0].focus();
+        }, 400);
         await handleLoadList();
       }
     },
@@ -232,11 +237,21 @@ function AdvanceIdFilterMaster(
     };
   }, [value, getList, ClassFilter, isIdValue, typeRender, preferOptions]);
 
-  // const inputRef: any = React.useRef<any>(null);
 
-  const focus = React.useCallback(() => {
-    console.log(inputRef)
-  }, []);
+  const handleKeyDown = React.useCallback((event) => {
+    switch (event.keyCode) {
+      case 40:
+        const firstItem = selectListRef.current
+          .firstElementChild as HTMLElement;
+        firstItem.focus();
+        break;
+      case 9:
+        handleCloseAdvanceIdFilterMaster();
+        break;
+      default:
+        return;
+    }
+  }, [handleCloseAdvanceIdFilterMaster]);
 
   React.useEffect(() => {
     console.log(inputRef)
@@ -263,7 +278,6 @@ function AdvanceIdFilterMaster(
         </div>
         {isExpand && (
           <div className="advance-id-filter-master__list-container m-t--xxxs">
-            <button onClick={focus}>Test focus</button>
             <div className="advance-id-filter__input p--xs">
               <InputText
                 isSmall={false}
@@ -275,10 +289,11 @@ function AdvanceIdFilterMaster(
                 }
                 isMaterial={isMaterial}
                 ref={inputRef}
+                onKeyDown={handleKeyDown}
               />
             </div>
             {!loading ? (
-              <div className="advance-id-master__list">
+              <div className="advance-id-master__list" ref={selectListRef}>
                 {list.length > 0 ? (
                   list.map((item, index) => (
                     <div

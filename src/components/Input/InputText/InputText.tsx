@@ -32,6 +32,7 @@ export interface InputTextProps {
   onChange?: (T: string | null) => void;
   onEnter?: (T: string | null) => void;
   onBlur?: (T: string | null) => void;
+  onKeyDown?: (event: any) => void;
 }
 
 const InputText = React.forwardRef((props: InputTextProps, ref: React.Ref<any>) => {
@@ -52,6 +53,7 @@ const InputText = React.forwardRef((props: InputTextProps, ref: React.Ref<any>) 
     onChange,
     onEnter,
     onBlur,
+    onKeyDown
   } = props;
 
   const [internalValue, setInternalValue] = React.useState<string>("");
@@ -96,6 +98,14 @@ const InputText = React.forwardRef((props: InputTextProps, ref: React.Ref<any>) 
     },
     [onEnter]
   );
+
+  const handleKeyDown = React.useCallback(
+    (event) => {
+      onKeyDown(event);
+    },
+    [onKeyDown]
+  );
+
 
   const handleBlur = React.useCallback(
     (event: React.FocusEvent<HTMLInputElement>) => {
@@ -170,7 +180,8 @@ const InputText = React.forwardRef((props: InputTextProps, ref: React.Ref<any>) 
           type="text"
           value={internalValue}
           onChange={handleChange}
-          onKeyDown={handleKeyPress}
+          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyDown}
           onBlur={handleBlur}
           placeholder={
             type === INPUT_TEXT_TYPE.FLOAT_LABEL && label ? " " : placeHolder

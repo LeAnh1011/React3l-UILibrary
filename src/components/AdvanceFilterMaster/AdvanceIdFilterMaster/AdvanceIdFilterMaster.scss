@@ -57,8 +57,17 @@ $backgound-color: #f4f4f4;
       align-items: center;
     }
     .advance-id-filter__item {
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: #e5e5e5;
+      }
+      &:focus-visible {
+        outline: none;
+      }
+      &.select__item--selected {
+        background-color: var(--color-surface-material-input-hover);
+        display: flex;
+        justify-content: space-between;
       }
       position: relative;
       display: flex;
@@ -71,6 +80,11 @@ $backgound-color: #f4f4f4;
     .advance-id-master__list-prefer {
       box-shadow: inset 0px 1px 0px #e1e3e5;
       background: $backgound-color;
+    }
+    .advance-id-filter__text {
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
     }
   }
 }

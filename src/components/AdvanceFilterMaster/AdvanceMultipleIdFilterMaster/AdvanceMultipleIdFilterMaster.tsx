@@ -1,17 +1,20 @@
 import { useDebounceFn } from "ahooks";
 import { Empty, Spin } from "antd";
-import search from "assets/images/svg/search-normal.svg";
 import classNames from "classnames";
 import InputText from "components/Input/InputText";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import React, { RefObject } from "react";
+import { StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
 import { ErrorObserver, Observable, Subscription } from "rxjs";
+
 import { CommonService } from "services/common-service";
-import "./AdvanceIdFilterMaster.scss";
+import nameof from "ts-nameof.macro";
+import search from "assets/images/svg/search-normal.svg";
+import "./AdvanceMultipleIdFilterMaster.scss";
+import MultipleSelect from "components/Select/MultipleSelect";
 
-
-export interface AdvanceIdFilterMasterProps<
+export interface AdvanceMultipleIdFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
   > {
@@ -54,8 +57,8 @@ function defaultRenderObject<T extends Model>(t: T) {
   return t?.name;
 }
 
-function AdvanceIdFilterMaster(
-  props: AdvanceIdFilterMasterProps<Model, ModelFilter>
+function AdvanceMultipleIdFilterMaster(
+  props: AdvanceMultipleIdFilterMasterProps<Model, ModelFilter>
 ) {
   const {
     modelFilter,
@@ -87,8 +90,10 @@ function AdvanceIdFilterMaster(
 
   const wrapperRef: RefObject<HTMLDivElement> =
     React.useRef<HTMLDivElement>(null);
+  ;
 
   const [subscription] = CommonService.useSubscription();
+
 
   const { run } = useDebounceFn(
     (searchTerm: string) => {
@@ -146,7 +151,7 @@ function AdvanceIdFilterMaster(
     [handleLoadList, disabled]
   );
 
-  const handleCloseAdvanceIdFilterMaster = React.useCallback(() => {
+  const handleCloseAdvanceMultipleIdFilterMaster = React.useCallback(() => {
     setExpand(false);
   }, []);
 
@@ -155,9 +160,9 @@ function AdvanceIdFilterMaster(
 
       setInternalModel(item);
       onChange(item.id, item);
-      handleCloseAdvanceIdFilterMaster();
+      handleCloseAdvanceMultipleIdFilterMaster();
     },
-    [handleCloseAdvanceIdFilterMaster, setInternalModel, onChange]
+    [handleCloseAdvanceMultipleIdFilterMaster, setInternalModel, onChange]
   );
 
   const handleSearchChange = React.useCallback(
@@ -201,18 +206,18 @@ function AdvanceIdFilterMaster(
         const listFilterPreferOptions = preferOptions.filter((current) => current.id === Number(value));
         if (listFilterPreferOptions && listFilterPreferOptions?.length > 0) {
           setInternalModel(listFilterPreferOptions[0]);
-        } else {
-          filterValue["id"]["equal"] = Number(value);
-          subscription.add(getList);
-          getList(filterValue).subscribe((res: Model[]) => {
-            if (res) {
-              const filterList = res.filter((current) => current.id === Number(value));
-              if (filterList && filterList?.length > 0) {
-                setInternalModel(filterList[0]);
-              }
-            }
-          });
         }
+        filterValue["id"]["equal"] = Number(value);
+        subscription.add(getList);
+        getList(filterValue).subscribe((res: Model[]) => {
+          if (res) {
+            const filterList = res.filter((current) => current.id === Number(value));
+            if (filterList && filterList?.length > 0) {
+              setInternalModel(filterList[0]);
+            }
+          }
+        });
+
       } else {
         setInternalModel({
           [typeRender]: value,
@@ -227,7 +232,7 @@ function AdvanceIdFilterMaster(
   }, [value, getList, ClassFilter, isIdValue, typeRender, preferOptions]);
 
 
-  CommonService.useClickOutside(wrapperRef, handleCloseAdvanceIdFilterMaster);
+  CommonService.useClickOutside(wrapperRef, handleCloseAdvanceMultipleIdFilterMaster);
 
   return (
     <>
@@ -239,6 +244,7 @@ function AdvanceIdFilterMaster(
             <i className="filter__icon tio-chevron_down"></i>
           </div>
         </div>
+        <MultipleSelect {...props} onChange={() => handleSearchChange} />
         {isExpand && (
           <div className="advance-id-filter-master__list-container m-t--xxxs">
             <div className="advance-id-filter__input p--xs" >
@@ -251,36 +257,7 @@ function AdvanceIdFilterMaster(
                 isMaterial={isMaterial}
               />
             </div>
-            {!loading ? (
-              <div className="advance-id-master__list" >
 
-                {list.length > 0 ? (
-                  list.map((item, index) => (
-                    <div
-                      className={classNames("advance-id-filter__item p--xs")}
-                      tabIndex={-1}
-                      key={index}
-                      onKeyDown={handleMove(item)}
-                      onClick={handleClickItem(item)}
-                    >
-                      <span className="advance-id-filter__text">
-                        {render(item)}
-                      </span>
-                      {
-                        item.id === internalModel?.id && <i className="tio tio-done" />
-                      }
-
-                    </div>
-                  ))
-                ) : (
-                  <Empty />
-                )}
-              </div>
-            ) : (
-              <div className="advance-id-filter__loading">
-                <Spin tip="Loading..."></Spin>
-              </div>
-            )}
             {
               !loading && list.length > 0 &&
               <div className="advance-id-master__list-prefer">
@@ -312,15 +289,15 @@ function AdvanceIdFilterMaster(
   );
 }
 
-AdvanceIdFilterMaster.defaultProps = {
-  searchProperty: "name",
-  searchType: "contain",
+AdvanceMultipleIdFilterMaster.defaultProps = {
+  searchProperty: nameof(Model.prototype.name),
+  searchType: nameof(StringFilter.prototype.contain),
   isEnumList: false,
   render: defaultRenderObject,
   isMaterial: false,
   disabled: false,
-  typeRender: "name",
+  typeRender: nameof(Model.prototype.name),
   isIdValue: true,
 };
 
-export default AdvanceIdFilterMaster;
+export default AdvanceMultipleIdFilterMaster;

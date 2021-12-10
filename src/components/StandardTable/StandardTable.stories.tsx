@@ -1,4 +1,4 @@
-import { Table, Badge, Menu, Dropdown, Space } from "antd";
+import { Table, Badge, Menu, Dropdown, Space, Row } from "antd";
 import { storiesOf } from "@storybook/react";
 import { DownOutlined } from "@ant-design/icons";
 import nameof from "ts-nameof.macro";
@@ -131,7 +131,9 @@ function Default() {
         dataIndex: "name",
         key: "name",
         sorter: true,
-        width: 400,
+        fixed: "left",
+        width: 250,
+        ellipsis: true,
         render(...[name]) {
           return (
             <LayoutCell orderType={orderType}>
@@ -145,7 +147,8 @@ function Default() {
         dataIndex: "platform",
         key: "platform",
         sorter: true,
-        width: 400,
+        width: 250,
+        ellipsis: true,
         render(...[platform]) {
           return (
             <LayoutCell orderType={orderType}>
@@ -163,7 +166,8 @@ function Default() {
         dataIndex: "version",
         key: "version",
         sorter: true,
-        width: 400,
+        width: 250,
+        ellipsis: true,
         render(...[version]) {
           return (
             <LayoutCell orderType={orderType}>
@@ -182,7 +186,8 @@ function Default() {
         dataIndex: "upgradeNum",
         key: "upgradeNum",
         sorter: true,
-        width: 400,
+        width: 250,
+        ellipsis: true,
         render(...[upgradeNum]) {
           return (
             <LayoutCell orderType={orderType}>
@@ -201,7 +206,8 @@ function Default() {
         dataIndex: "creator",
         key: "creator",
         sorter: true,
-        width: 400,
+        width: 250,
+        ellipsis: true,
         align: "center",
         render(...[creator]) {
           return (
@@ -221,7 +227,8 @@ function Default() {
         dataIndex: "createdAt",
         key: "createdAt",
         sorter: true,
-        width: 400,
+        width: 250,
+        ellipsis: true,
         render(...[createdAt]) {
           return (
             <LayoutCell orderType={orderType}>
@@ -237,7 +244,9 @@ function Default() {
       {
         title: <LayoutHeader orderType={orderType} name="Action" />,
         key: "status",
-        width: 400,
+        width: 250,
+        fixed: "right",
+        ellipsis: true,
         dataIndex: "status",
         render(...[status]) {
           return (
@@ -252,7 +261,7 @@ function Default() {
   );
 
   const data = [];
-  for (let i = 0; i < 5; ++i) {
+  for (let i = 0; i < 9; ++i) {
     data.push({
       key: i,
       name: "Screem",
@@ -272,6 +281,7 @@ function Default() {
         isExpandAble={true}
         expandedRowRend={expandedRowRender}
         list={data}
+        isDragable={true}
         sizeTable={size}
       />
       <div>

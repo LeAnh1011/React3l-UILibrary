@@ -13,7 +13,8 @@ import Pagination from "./Pagination/Pagination";
 import { ExpandedRowRender } from "rc-table/lib/interface";
 import { ModelFilter } from "react3l-common";
 import { StringFilter } from "react3l-advanced-filters";
-
+import arrowUp from "../../assets/image/arrow-up.png";
+import arrowDown from "../../assets/image/arrow-down.png";
 export interface StandardTableCustomProps extends UseMaster {
   columns?: ColumnProps<Model>[];
   isDragable?: boolean;
@@ -38,7 +39,59 @@ function StandardTable(props: StandardTableCustomProps) {
     isExpandAble,
     className,
     sizeTable,
+    isDragable,
   } = props;
+
+  React.useEffect(() => {
+    const antTable = document.getElementsByClassName(
+      "ant-table-body"
+    )[0] as HTMLElement;
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    if (isDragable) {
+      const handleMouseDown = (e: any) => {
+        isDown = true;
+        antTable.classList.add("active-draggable");
+        startX = e.pageX - antTable.offsetLeft;
+        scrollLeft = antTable.scrollLeft;
+      };
+
+      const handleMouseLeave = () => {
+        isDown = false;
+        antTable.classList.remove("active-draggable");
+      };
+
+      const handleMouseUp = () => {
+        isDown = false;
+        antTable.classList.remove("active-draggable");
+      };
+
+      const handleMouseMove = (e: any) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - antTable.offsetLeft;
+        const walk = (x - startX) * 3;
+        antTable.scrollLeft = scrollLeft - walk;
+      };
+
+      antTable.addEventListener("mousedown", handleMouseDown);
+
+      antTable.addEventListener("mouseleave", handleMouseLeave);
+
+      antTable.addEventListener("mouseup", handleMouseUp);
+
+      antTable.addEventListener("mousemove", handleMouseMove);
+
+      return () => {
+        antTable.removeEventListener("mousedown", handleMouseDown);
+        antTable.removeEventListener("mouseleave", handleMouseLeave);
+        antTable.removeEventListener("mouseup", handleMouseUp);
+        antTable.removeEventListener("mousemove", handleMouseMove);
+      };
+    }
+  }, [isDragable]);
 
   const [filter, setFilter] = React.useState<DemoFilter>(new DemoFilter());
 
@@ -71,21 +124,30 @@ function StandardTable(props: StandardTableCustomProps) {
     <>
       <div className="page__master-table">
         <Table
-          className={classNames(className, `table-size-${sizeTable}`)}
+          className={classNames(
+            className,
+            `table-size-${sizeTable}`,
+            "custom-scrollbar"
+          )}
           columns={columns}
           pagination={false}
+          scroll={{ y: 500 }}
           expandable={
             isExpandAble
               ? {
                   expandedRowRender: expandedRowRend,
                   expandIcon: ({ expanded, onExpand, record }) =>
                     expanded ? (
-                      <DownOutlined
+                      <img
+                        src={arrowUp}
+                        alt="up"
                         className="icon-table-expand"
                         onClick={(e) => onExpand(record, e)}
                       />
                     ) : (
-                      <RightOutlined
+                      <img
+                        src={arrowDown}
+                        alt="down"
                         className="icon-table-expand"
                         onClick={(e) => onExpand(record, e)}
                       />
@@ -96,15 +158,15 @@ function StandardTable(props: StandardTableCustomProps) {
           dataSource={list}
           rowSelection={rowSelection}
         />
-        <div className="flex-shrink-1 d-flex align-items-center">
-          <Pagination
-            skip={filter.skip}
-            take={filter.take}
-            total={100}
-            onChange={handlePagination}
-            style={{ margin: "10px" }}
-          />
-        </div>
+      </div>
+      <div className="flex-shrink-1 d-flex align-items-center">
+        <Pagination
+          skip={filter.skip}
+          take={filter.take}
+          total={100}
+          onChange={handlePagination}
+          style={{ margin: "10px" }}
+        />
       </div>
     </>
   );

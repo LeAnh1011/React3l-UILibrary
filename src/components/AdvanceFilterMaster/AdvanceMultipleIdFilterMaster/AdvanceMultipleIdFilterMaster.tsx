@@ -2,7 +2,7 @@ import { useDebounceFn } from "ahooks";
 import { Empty, Spin } from "antd";
 import classNames from "classnames";
 import InputText from "components/Input/InputText";
-import { DEBOUNCE_TIME_300 } from "config/consts";
+import { ASSETS_IMAGE, ASSETS_SVG, DEBOUNCE_TIME_300 } from "config/consts";
 import React, { RefObject } from "react";
 import { StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
@@ -18,7 +18,7 @@ export interface AdvanceMultipleIdFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
   > {
-  value?: number[] | string[];
+  values?: number[] | string[];
 
   title: string;
 
@@ -63,7 +63,7 @@ function AdvanceMultipleIdFilterMaster(
   const {
     modelFilter,
     title,
-    value,
+    values,
     searchProperty,
     searchType,
     placeHolder,
@@ -92,7 +92,27 @@ function AdvanceMultipleIdFilterMaster(
     React.useRef<HTMLDivElement>(null);
   ;
 
+  const selectListRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
+    null
+  );
+
   const [subscription] = CommonService.useSubscription();
+
+
+  const internalList = React.useMemo(() => {
+    if (list && list.length > 0) {
+      list.forEach((current) => {
+        // let filteredItem = values && values?.length > 0 && values.filter(());
+        // if (filteredItem) {
+        //   current.isSelected = true;
+        // } else {
+        current.isSelected = false;
+        // }
+      });
+      return [...list];
+    }
+    return [];
+  }, [list]);
 
 
   const { run } = useDebounceFn(
@@ -198,38 +218,38 @@ function AdvanceMultipleIdFilterMaster(
   );
 
 
-  React.useEffect(() => {
-    const subscription = new Subscription();
-    if (value !== null && value !== undefined) {
-      const filterValue = new ClassFilter();
-      if (isIdValue) {
-        const listFilterPreferOptions = preferOptions.filter((current) => current.id === Number(value));
-        if (listFilterPreferOptions && listFilterPreferOptions?.length > 0) {
-          setInternalModel(listFilterPreferOptions[0]);
-        }
-        filterValue["id"]["equal"] = Number(value);
-        subscription.add(getList);
-        getList(filterValue).subscribe((res: Model[]) => {
-          if (res) {
-            const filterList = res.filter((current) => current.id === Number(value));
-            if (filterList && filterList?.length > 0) {
-              setInternalModel(filterList[0]);
-            }
-          }
-        });
+  // React.useEffect(() => {
+  //   const subscription = new Subscription();
+  //   if (values !== null && values !== undefined) {
+  //     const filterValue = new ClassFilter();
+  //     if (isIdValue) {
+  //       const listFilterPreferOptions = preferOptions.filter((current) => current.id === Number(value));
+  //       if (listFilterPreferOptions && listFilterPreferOptions?.length > 0) {
+  //         setInternalModel(listFilterPreferOptions[0]);
+  //       }
+  //       filterValue["id"]["equal"] = Number(value);
+  //       subscription.add(getList);
+  //       getList(filterValue).subscribe((res: Model[]) => {
+  //         if (res) {
+  //           const filterList = res.filter((current) => current.id === Number(value));
+  //           if (filterList && filterList?.length > 0) {
+  //             setInternalModel(filterList[0]);
+  //           }
+  //         }
+  //       });
 
-      } else {
-        setInternalModel({
-          [typeRender]: value,
-        });
-      }
-    } else {
-      setInternalModel(null);
-    }
-    return function cleanup() {
-      subscription.unsubscribe();
-    };
-  }, [value, getList, ClassFilter, isIdValue, typeRender, preferOptions]);
+  //     } else {
+  //       setInternalModel({
+  //         [typeRender]: value,
+  //       });
+  //     }
+  //   } else {
+  //     setInternalModel(null);
+  //   }
+  //   return function cleanup() {
+  //     subscription.unsubscribe();
+  //   };
+  // }, [value, getList, ClassFilter, isIdValue, typeRender, preferOptions]);
 
 
   CommonService.useClickOutside(wrapperRef, handleCloseAdvanceMultipleIdFilterMaster);
@@ -244,7 +264,7 @@ function AdvanceMultipleIdFilterMaster(
             <i className="filter__icon tio-chevron_down"></i>
           </div>
         </div>
-        <MultipleSelect {...props} onChange={() => handleSearchChange} />
+        {/* <MultipleSelect {...props} onChange={() => handleSearchChange} /> */}
         {isExpand && (
           <div className="advance-id-filter-master__list-container m-t--xxxs">
             <div className="advance-id-filter__input p--xs" >
@@ -257,7 +277,7 @@ function AdvanceMultipleIdFilterMaster(
                 isMaterial={isMaterial}
               />
             </div>
-            {/* {isExpand && (
+            {isExpand && (
               <div className="select__list-container">
                 {!loading ? (
                   <>
@@ -277,7 +297,7 @@ function AdvanceMultipleIdFilterMaster(
                             key={index}
                             onKeyDown={handleMove(item)}
                             tabIndex={-1}
-                            onClick={handleClickParentItem}
+                          // onClick={handleClickParentItem}
                           >
                             <div>
                               <label className={classNames("checkbox__container")}>
@@ -304,32 +324,6 @@ function AdvanceMultipleIdFilterMaster(
                         />
                       )}
                     </div>
-                    {selectWithAdd ? (
-                      <div
-                        className={classNames(
-                          "select__bottom-button select__add-button p-y--xs"
-                        )}
-                      >
-                        <i className="tio-add m-l--xxs" />
-                        <span>Add new</span>
-                      </div>
-                    ) : selectWithPreferOption ? (
-                      <div
-                        className={classNames(
-                          "select__bottom-button select__prefer-option-button"
-                        )}
-                      >
-                        <div className={classNames("p-l--xs")}>
-                          <label className={classNames("checkbox__container")}>
-                            <input type="checkbox" checked={true} />
-                            <span className="checkmark"></span>
-                            <span className="multiple-select__text">
-                              Prefer Options
-                            </span>
-                          </label>
-                        </div>
-                      </div>
-                    ) : null}
                   </>
                 ) : (
                   <div className="select__loading">
@@ -341,7 +335,7 @@ function AdvanceMultipleIdFilterMaster(
                   </div>
                 )}
               </div>
-            )} */}
+            )}
             {
               !loading && list.length > 0 &&
               <div className="advance-id-master__list-prefer">

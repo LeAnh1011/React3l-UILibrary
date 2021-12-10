@@ -133,7 +133,7 @@ function InputSelect(props: InputSelectProps<Model>) {
                 onChange={handleChange}
                 placeholder={
                   model
-                    ? render(model)
+                    ? (render(model) as string)
                     : type === INPUT_SELECT_TYPE.FLOAT_LABEL && label
                     ? " "
                     : placeHolder
@@ -188,7 +188,7 @@ function InputSelect(props: InputSelectProps<Model>) {
             <>
               <input
                 type="text"
-                value={render(model) || ""}
+                value={(render(model) as string) || ""}
                 readOnly
                 placeholder={
                   type === INPUT_SELECT_TYPE.FLOAT_LABEL && label

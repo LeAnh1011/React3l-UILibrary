@@ -9,6 +9,8 @@ import { StringFilter } from "react3l-advanced-filters";
 import { Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
 import FormItem, { ValidateStatus } from "../FormItem/FormItem";
+import { INPUT_SELECT_TYPE } from "../Input/InputSelect/InputSelect";
+import { INPUT_TAG_TYPE } from "../Input/InputTag/InputTag";
 
 export class DistrictFilter extends ModelFilter {
   public id: IdFilter = new IdFilter();
@@ -64,11 +66,41 @@ function Default() {
 
   const [isMultiple, setMultiple] = React.useState(false);
 
-  const [isMaterial, setIsMaterial] = React.useState(false);
+  const [multipleType, setMultipleType] = React.useState<INPUT_TAG_TYPE>(
+    INPUT_TAG_TYPE.BORDERED
+  );
 
-  const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
-    setIsMaterial(event.target.value);
-  }, []);
+  const [singleType, setSingleType] = React.useState<INPUT_SELECT_TYPE>(
+    INPUT_SELECT_TYPE.BORDERED
+  );
+  const [isSmall, setIsSmall] = React.useState<boolean>(false);
+
+  const [isValidated, setValidated] = React.useState(false);
+
+  const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
+
+  const [
+    isSelectWithPreferOption,
+    setIsSelectWithPreferOption,
+  ] = React.useState<boolean>(false);
+
+  const [isSelectWithAdd, setIsSelectWithAdd] = React.useState<boolean>(false);
+
+  const [withSearch, setWithSearch] = React.useState(true);
+
+  const handleChangeMultipleStyle = React.useCallback(
+    (event: RadioChangeEvent) => {
+      setMultipleType(event.target.value);
+    },
+    []
+  );
+
+  const handleChangeSingleStyle = React.useCallback(
+    (event: RadioChangeEvent) => {
+      setSingleType(event.target.value);
+    },
+    []
+  );
 
   const handleChangeRadio = React.useCallback((event: RadioChangeEvent) => {
     if (event.target.value) setItem(undefined);
@@ -84,29 +116,48 @@ function Default() {
     }
   }, []);
 
+  const handleChangeValidated = React.useCallback((event: RadioChangeEvent) => {
+    setValidated(event.target.value);
+  }, []);
+
+  const handleChangeSelectWithAdd = React.useCallback(
+    (event: RadioChangeEvent) => {
+      setIsSelectWithAdd(event.target.value);
+    },
+    []
+  );
+
+  const handleChangeSelectWithPreferOption = React.useCallback(
+    (event: RadioChangeEvent) => {
+      setIsSelectWithPreferOption(event.target.value);
+    },
+    []
+  );
+
+  const handleChangeDisabled = React.useCallback((event: RadioChangeEvent) => {
+    setIsDisabled(event.target.value);
+  }, []);
+
+  const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
+    setIsSmall(event.target.value);
+  }, []);
+
+  const handleChangeWithSearch = React.useCallback(
+    (event: RadioChangeEvent) => {
+      setWithSearch(event.target.value);
+    },
+    []
+  );
+
   return (
     <div style={{ margin: "10px", width: "300px" }}>
-      <TreeSelect
-        checkable={isMultiple}
-        isMaterial={isMaterial}
-        placeHolder={"Select Organization"}
-        selectable={!isMultiple}
-        classFilter={DistrictFilter}
-        onChange={handleChangeItem}
-        checkStrictly={true}
-        item={item}
-        listItem={listItem}
-        getTreeData={demoSearchFunc}
-      />
-
       <div style={{ margin: "10px", width: "300px" }}>
         <FormItem
-          validateStatus={ValidateStatus.error}
-          message={"Field required!"}
+          validateStatus={isValidated ? ValidateStatus.error : null}
+          message={isValidated ? "Error label" : ""}
         >
           <TreeSelect
             checkable={isMultiple}
-            isMaterial={isMaterial}
             placeHolder={"Select Organization"}
             selectable={!isMultiple}
             classFilter={DistrictFilter}
@@ -115,6 +166,12 @@ function Default() {
             item={item}
             listItem={listItem}
             getTreeData={demoSearchFunc}
+            multipleType={multipleType}
+            singleType={singleType}
+            isUsingSearch={withSearch}
+            label={"Label"}
+            disabled={isDisabled}
+            isSmall={isSmall}
           />
         </FormItem>
       </div>
@@ -125,12 +182,75 @@ function Default() {
           <Radio value={true}>Multiple</Radio>
         </Radio.Group>
       </div>
+      {isMultiple ? (
+        <div style={{ margin: "10px", width: "400px" }}>
+          <Radio.Group
+            onChange={handleChangeMultipleStyle}
+            value={multipleType}
+          >
+            <Radio value={INPUT_TAG_TYPE.MATERIAL}>Material</Radio>
+            <Radio value={INPUT_TAG_TYPE.FLOAT_LABEL}>Float Label</Radio>
+            <Radio value={INPUT_TAG_TYPE.BORDERED}>Bordered</Radio>
+          </Radio.Group>
+        </div>
+      ) : (
+        <div style={{ margin: "10px", width: "400px" }}>
+          <Radio.Group onChange={handleChangeSingleStyle} value={singleType}>
+            <Radio value={INPUT_SELECT_TYPE.MATERIAL}>Material</Radio>
+            <Radio value={INPUT_SELECT_TYPE.FLOAT_LABEL}>Float Label</Radio>
+            <Radio value={INPUT_SELECT_TYPE.BORDERED}>Bordered</Radio>
+          </Radio.Group>
+        </div>
+      )}
+
       <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeStyle} value={isMaterial}>
-          <Radio value={true}>Material Style</Radio>
-          <Radio value={false}>Normal Style</Radio>
+        <Radio.Group onChange={handleChangeValidated} value={isValidated}>
+          <Radio value={true}>Validated</Radio>
+          <Radio value={false}>Not Validated</Radio>
         </Radio.Group>
       </div>
+
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeDisabled} value={isDisabled}>
+          <Radio value={true}>Disabled</Radio>
+          <Radio value={false}>Not Disabled</Radio>
+        </Radio.Group>
+      </div>
+
+      <div style={{ margin: "10px", width: "400px" }}>
+        <Radio.Group
+          onChange={handleChangeSelectWithAdd}
+          value={isSelectWithAdd}
+        >
+          <Radio value={true}>Select with add</Radio>
+          <Radio value={false}>Not select with add</Radio>
+        </Radio.Group>
+      </div>
+
+      <div style={{ margin: "10px", width: "800px" }}>
+        <Radio.Group
+          onChange={handleChangeSelectWithPreferOption}
+          value={isSelectWithPreferOption}
+        >
+          <Radio value={true}>Select with prefer option</Radio>
+          <Radio value={false}>Not select with prefer option</Radio>
+        </Radio.Group>
+      </div>
+
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeSize} value={isSmall}>
+          <Radio value={true}>Small</Radio>
+          <Radio value={false}>Default</Radio>
+        </Radio.Group>
+      </div>
+      {isMultiple && (
+        <div style={{ margin: "10px", width: "300px" }}>
+          <Radio.Group onChange={handleChangeWithSearch} value={withSearch}>
+            <Radio value={true}>Using Search</Radio>
+            <Radio value={false}>Not Using Search</Radio>
+          </Radio.Group>
+        </div>
+      )}
     </div>
   );
 }

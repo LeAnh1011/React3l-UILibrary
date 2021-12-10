@@ -8,8 +8,10 @@ import { Observable } from "rxjs";
 import nameof from "ts-nameof.macro";
 import { CommonService } from "services/common-service";
 import { StringFilter } from "react3l-advanced-filters";
-import InputTag from "../Input/InputTag/InputTag";
-import InputSelect from "../Input/InputSelect/InputSelect";
+import InputTag, { INPUT_TAG_TYPE } from "../Input/InputTag/InputTag";
+import InputSelect, {
+  INPUT_SELECT_TYPE,
+} from "../Input/InputSelect/InputSelect";
 
 export interface TreeSelectProps<
   T extends Model,
@@ -34,16 +36,18 @@ export interface TreeSelectProps<
   getTreeData?: (TModelFilter?: TModelFilter) => Observable<T[]>;
   onChange?: (T: Model[], TT: boolean) => void;
   classFilter?: new () => TModelFilter;
+  multipleType?: INPUT_TAG_TYPE;
+  singleType?: INPUT_SELECT_TYPE;
+  label?: string;
+  isSmall?: boolean;
+  isUsingSearch?: boolean;
 }
-export interface filterAction<T extends Model> {
+export interface filterAction {
   type: string;
   data?: ModelFilter;
 }
 
-function filterReducer(
-  state: ModelFilter,
-  action: filterAction<Model>
-): ModelFilter {
+function filterReducer(state: ModelFilter, action: filterAction): ModelFilter {
   switch (action.type) {
     case "UPDATE":
       return action.data;
@@ -70,6 +74,11 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     render,
     getTreeData,
     onChange,
+    multipleType,
+    singleType,
+    label,
+    isSmall,
+    isUsingSearch,
   } = props;
 
   const { run } = useDebounceFn(
@@ -96,7 +105,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
   );
 
   const [filter, dispatch] = React.useReducer<
-    Reducer<ModelFilter, filterAction<Model>>
+    Reducer<ModelFilter, filterAction>
   >(filterReducer, new ClassFilter());
 
   const handleClearItem = React.useCallback(
@@ -158,6 +167,10 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               disabled={disabled}
               onSearch={handleSearchItem}
               onClear={handleClearItem}
+              type={multipleType}
+              label={label}
+              isSmall={isSmall}
+              isUsingSearch={isUsingSearch}
             />
           ) : (
             <InputSelect
@@ -169,6 +182,9 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               disabled={disabled}
               onSearch={handleSearchItem}
               onClear={handleClearItem}
+              type={singleType}
+              label={label}
+              isSmall={isSmall}
             />
           )}
         </div>

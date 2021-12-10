@@ -4,6 +4,7 @@ import nameof from "ts-nameof.macro";
 import Tree from "./Tree";
 import { Observable } from "rxjs";
 import { Model, ModelFilter } from "react3l-common";
+import Radio, { RadioChangeEvent } from "antd/lib/radio";
 
 const demoObservable = new Observable<Model[]>((observer) => {
   setTimeout(() => {
@@ -24,17 +25,31 @@ const demoSearchFunc = (TModelFilter: ModelFilter) => {
 };
 
 function Default() {
+  const [isMultiple, setMultiple] = React.useState(false);
+
+  const handleChangeRadio = React.useCallback((event: RadioChangeEvent) => {
+    setMultiple(event.target.value);
+  }, []);
+
   return (
-    <Tree
-      getTreeData={demoSearchFunc}
-      height={300}
-      selectable={false}
-      checkable={true}
-      virtual
-      titleRender={(treeNode: any) =>
-        treeNode.item?.name + " - " + treeNode.item?.code
-      }
-    />
+    <div style={{ margin: "10px", width: "300px" }}>
+      <Tree
+        getTreeData={demoSearchFunc}
+        height={300}
+        selectable={!isMultiple}
+        checkable={isMultiple}
+        virtual
+        titleRender={(treeNode: any) => (
+          <div>{treeNode.item?.name + " - " + treeNode.item?.code}</div>
+        )}
+      />
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeRadio} value={isMultiple}>
+          <Radio value={false}>Single</Radio>
+          <Radio value={true}>Multiple</Radio>
+        </Radio.Group>
+      </div>
+    </div>
   );
 }
 

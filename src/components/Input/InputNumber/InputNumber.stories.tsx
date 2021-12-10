@@ -97,7 +97,7 @@ export function InputNumberStories() {
           />
         </FormItem>
       </div>
-      <div style={{ margin: "10px", width: "300px" }}>
+      <div style={{ margin: "10px", width: "400px" }}>
         <Radio.Group onChange={handleChangeStyle} value={type}>
           <Radio value={INPUT_NUMBER_TYPE.MATERIAL}>Material</Radio>
           <Radio value={INPUT_NUMBER_TYPE.FLOAT_LABEL}>Float Label</Radio>

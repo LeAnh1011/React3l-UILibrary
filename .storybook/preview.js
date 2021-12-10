@@ -1,4 +1,5 @@
-import './../src/styles/vendors/tio.scss';
+import "./../src/styles/vendors/tio.scss";
+import "antd/dist/antd.css";
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -7,4 +8,4 @@ export const parameters = {
       date: /Date$/,
     },
   },
-}
+};

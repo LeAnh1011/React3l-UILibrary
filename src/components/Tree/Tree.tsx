@@ -6,11 +6,11 @@ import {
   TreeProps as AntdTreeProps,
 } from "antd/lib/tree";
 import { ASSETS_IMAGE, ASSETS_SVG } from "config/consts";
-import React from "react";
+import React, { ReactNode } from "react";
 import { ErrorObserver, Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import "./Tree.scss";
-import { TreeNode } from "./TreeNode";
+import { TreeNode as CustomTreeNode } from "./TreeNode";
 import { Key } from "antd/lib/table/interface";
 
 function SwitcherIcon() {
@@ -21,7 +21,7 @@ function SwitcherIcon() {
   );
 }
 export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
-  treeData?: TreeNode<T>[];
+  treeData?: CustomTreeNode<T>[];
   modelFilter?: TModelFilter;
   expandedKeys?: number[];
   checkedKeys?: number[];
@@ -29,8 +29,9 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   selectedKey?: number;
   onlySelectLeaf?: boolean;
   getTreeData?: (TModelFilter?: TModelFilter) => Observable<T[]>;
-  onChange?: (treeNode: TreeNode<T>[]) => void;
-  titleRender?: (treeNode: TreeNode<T>) => string;
+  onChange?: (treeNode: CustomTreeNode<T>[]) => void;
+  titleRender?: (treeNode: CustomTreeNode<T>) => string | ReactNode;
+  isMultiple?: boolean;
 }
 function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const {
@@ -46,7 +47,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   } = props;
 
   const [internalTreeData, setInternalTreeData] = React.useState<
-    TreeNode<Model>[]
+    CustomTreeNode<Model>[]
   >(treeData);
 
   const [autoExpandParent, setAutoExpandParent] = React.useState<boolean>(true);
@@ -68,7 +69,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const [subscription] = CommonService.useSubscription();
 
   const searchTreeNode: any = React.useCallback(
-    (element: TreeNode<Model>, key: number) => {
+    (element: CustomTreeNode<Model>, key: number) => {
       if (element.key === key) {
         return element;
       } else if (element.children != null) {
@@ -85,7 +86,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   );
 
   const searchTree = React.useCallback(
-    (treeNodes: TreeNode<Model>[], listKeys: Key[]) => {
+    (treeNodes: CustomTreeNode<Model>[], listKeys: Key[]) => {
       const nodes: any[] = [];
 
       treeNodes.forEach((currentTree) => {
@@ -200,7 +201,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                 expandedKeys={internalExpandedKeys}
                 checkedKeys={internalCheckedKeys}
                 selectedKeys={internalSelectedKeys}
-                showLine={{ showLeafIcon: false }}
+                showLine={false && { showLeafIcon: false }}
                 switcherIcon={<SwitcherIcon />}
                 treeData={internalTreeData} // pass internalTreeData here
                 onExpand={handleExpandKey}

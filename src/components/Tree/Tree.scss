@@ -4,7 +4,6 @@
   width: 100%;
   height: auto;
   max-width: 300px;
-  padding: 10px;
   background-color: var(--color-surface-material-input);
   @include box-shadow--popover();
   &.tree-container--lg {
@@ -26,6 +25,38 @@
   }
   .ant-tree-list {
     background-color: var(--color-surface-material-input);
+
+    .ant-tree-treenode {
+      height: 40px;
+      align-items: center;
+      width: 100%;
+      padding-left: 14px;
+      transition: all 0.3s, border 0s, line-height 0s, box-shadow 0s;
+
+      &:hover {
+        background-color: var(--color-surface-material-input-hover);
+      }
+      .ant-tree-switcher {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .ant-tree-treenode-selected {
+      background-color: var(--color-surface-material-input-hover);
+    }
+
+    .ant-tree-node-content-wrapper:hover {
+      background-color: var(--color-surface-material-input-hover);
+    }
+
+    .ant-tree-node-content-wrapper {
+      width: 100%;
+      padding-right: 15px;
+      &.ant-tree-node-selected {
+        background-color: var(--color-surface-material-input-hover);
+      }
+    }
   }
   .ant-tree .ant-tree-switcher_close .tree__icon {
     -webkit-transform: rotate(-90deg);

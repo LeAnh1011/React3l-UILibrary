@@ -44,6 +44,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     onlySelectLeaf,
     getTreeData,
     onChange,
+    titleRender,
   } = props;
 
   const [internalTreeData, setInternalTreeData] = React.useState<
@@ -207,6 +208,22 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                 onExpand={handleExpandKey}
                 onCheck={handleCheck}
                 onSelect={handleSelect}
+                titleRender={(node: DataNode) => (
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <div>{titleRender(node)}</div>
+                    {internalCheckedKeys.includes(node.key) && (
+                      <div>
+                        <i className="tio-done" />
+                      </div>
+                    )}
+                  </div>
+                )}
               ></TreeAntd>
             ) : (
               <img

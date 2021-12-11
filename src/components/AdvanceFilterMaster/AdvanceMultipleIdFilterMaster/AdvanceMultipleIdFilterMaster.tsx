@@ -13,12 +13,13 @@ import nameof from "ts-nameof.macro";
 import search from "assets/images/svg/search-normal.svg";
 import "./AdvanceMultipleIdFilterMaster.scss";
 import MultipleSelect from "components/Select/MultipleSelect";
+import Item from "antd/lib/list/Item";
 
 export interface AdvanceMultipleIdFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
   > {
-  values?: number[] | string[];
+  values?: any[];
 
   title: string;
 
@@ -88,32 +89,50 @@ function AdvanceMultipleIdFilterMaster(
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
-  const wrapperRef: RefObject<HTMLDivElement> =
-    React.useRef<HTMLDivElement>(null);
-  ;
-
+  const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
+    null
+  );
   const selectListRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
     null
   );
 
   const [subscription] = CommonService.useSubscription();
 
-
   const internalList = React.useMemo(() => {
     if (list && list.length > 0) {
       list.forEach((current) => {
-        // let filteredItem = values && values?.length > 0 && values.filter(());
-        // if (filteredItem) {
-        //   current.isSelected = true;
-        // } else {
-        current.isSelected = false;
-        // }
+        let filteredItem =
+          values &&
+          values?.length > 0 &&
+          values.filter((item) => item === current.id)[0];
+        if (filteredItem) {
+          current.isSelected = true;
+        } else {
+          current.isSelected = false;
+        }
       });
       return [...list];
     }
     return [];
-  }, [list]);
+  }, [list, values]);
 
+  const internalPreferOptions = React.useMemo(() => {
+    if (preferOptions && preferOptions.length > 0) {
+      preferOptions.forEach((current) => {
+        let filteredItem =
+          values &&
+          values?.length > 0 &&
+          values.filter((item) => item === current.id)[0];
+        if (filteredItem) {
+          current.isSelected = true;
+        } else {
+          current.isSelected = false;
+        }
+      });
+      return [...preferOptions];
+    }
+    return [];
+  }, [preferOptions, values]);
 
   const { run } = useDebounceFn(
     (searchTerm: string) => {
@@ -177,21 +196,35 @@ function AdvanceMultipleIdFilterMaster(
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      let filteredItem = values?.filter((current) => current.id === item.id)[0];
+      if (filteredItem) {
+        item.isSelected = true;
+      } else {
+        item.isSelected = false;
+      }
+      const cloneModelFilter = modelFilter
+        ? { ...modelFilter }
+        : new ClassFilter();
+
+      if (!cloneModelFilter["id"]["notIn"]) {
+        cloneModelFilter["id"]["notIn"] = [item?.id];
+      } else {
+        cloneModelFilter["id"]["notIn"].push(item?.id);
+      }
 
       setInternalModel(item);
       onChange(item.id, item);
-      handleCloseAdvanceMultipleIdFilterMaster();
+      // handleCloseAdvanceMultipleIdFilterMaster();
     },
-    [handleCloseAdvanceMultipleIdFilterMaster, setInternalModel, onChange]
+    [values, modelFilter, ClassFilter, onChange]
   );
 
   const handleSearchChange = React.useCallback(
     (searchTerm: string) => {
-      run(searchTerm)
+      run(searchTerm);
     },
     [run]
   );
-
 
   const handleMove = React.useCallback(
     (item) => (event: any) => {
@@ -216,7 +249,6 @@ function AdvanceMultipleIdFilterMaster(
     },
     [handleClickItem]
   );
-
 
   // React.useEffect(() => {
   //   const subscription = new Subscription();
@@ -251,115 +283,121 @@ function AdvanceMultipleIdFilterMaster(
   //   };
   // }, [value, getList, ClassFilter, isIdValue, typeRender, preferOptions]);
 
-
-  CommonService.useClickOutside(wrapperRef, handleCloseAdvanceMultipleIdFilterMaster);
+  CommonService.useClickOutside(
+    wrapperRef,
+    handleCloseAdvanceMultipleIdFilterMaster
+  );
 
   return (
     <>
-      <div className={classNames("advance-id-filter-master__wrapper", className)} ref={wrapperRef}>
-        <div className={classNames("advance-id-filter-master__container p--xs",
-          { "filter-bg": isExpand })} onClick={handleToggle}>
+      <div
+        className={classNames(
+          "advance-multi-id-filter-master__wrapper",
+          className
+        )}
+        ref={wrapperRef}
+      >
+        <div
+          className={classNames(
+            "advance-id-filter-master__container p--xs d-flex",
+            { "filter-bg": isExpand }
+          )}
+          onClick={handleToggle}
+        >
+          <span className="input-tag-item__text p-r--xxxs">
+            {internalList?.length > 0 && <>({internalList?.length})</>}
+          </span>
           <div className="advance-id-filter-master__title">
             {title}
             <i className="filter__icon tio-chevron_down"></i>
           </div>
         </div>
-        {/* <MultipleSelect {...props} onChange={() => handleSearchChange} /> */}
         {isExpand && (
           <div className="advance-id-filter-master__list-container m-t--xxxs">
-            <div className="advance-id-filter__input p--xs" >
+            <div className="advance-id-filter__input p--xs">
               <InputText
                 isSmall={false}
                 maxLength={100}
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
-                suffix={<img className='tio tio-search' src={search} alt="noImage" />}
+                suffix={
+                  <img className="tio tio-search" src={search} alt="noImage" />
+                }
                 isMaterial={isMaterial}
               />
             </div>
-            {isExpand && (
-              <div className="select__list-container">
-                {!loading ? (
-                  <>
+            {!loading ? (
+              <div className="advance-id-master__list" ref={selectListRef}>
+                {internalList.length > 0 ? (
+                  internalList.map((item, index) => (
                     <div
-                      className="select__list multiple-select__list"
-                      ref={selectListRef}
-                    >
-                      {internalList.length > 0 ? (
-                        internalList.map((item, index) => (
-                          <div
-                            className={classNames(
-                              "select__item p-l--xs p-y--xs p-r--xxs",
-                              {
-                                "select__item--selected": item.isSelected,
-                              }
-                            )}
-                            key={index}
-                            onKeyDown={handleMove(item)}
-                            tabIndex={-1}
-                          // onClick={handleClickParentItem}
-                          >
-                            <div>
-                              <label className={classNames("checkbox__container")}>
-                                <input type="checkbox" checked={item.isSelected} />
-                                <span
-                                  className="checkmark"
-                                  onClick={handleClickItem(item)}
-                                ></span>
-                                <span
-                                  className="select__text"
-                                  onClick={handleClickItem(item)}
-                                >
-                                  {render(item)}
-                                </span>
-                              </label>
-                            </div>
-                          </div>
-                        ))
-                      ) : (
-                        <img
-                          className="img-emty"
-                          src={ASSETS_IMAGE + "/no-data.png"}
-                          alt=""
-                        />
+                      className={classNames(
+                        "advance-id-filter__item p-l--xs p-y--xs p-r--xxs",
+                        {
+                          "advance-id-filter__item--selected": item.isSelected,
+                        }
                       )}
+                      key={index}
+                      onKeyDown={handleMove(item)}
+                      tabIndex={-1}
+                    // onClick={handleClickParentItem}
+                    >
+                      <label className={classNames("checkbox__container")}>
+                        <input
+                          type="checkbox"
+                          defaultChecked={item.isSelected}
+                        />
+                        <span className="checkmark"></span>
+                        <span className="advance-id-filter__text m-l--lg">
+                          {render(item)}
+                        </span>
+                      </label>
                     </div>
-                  </>
+                  ))
                 ) : (
-                  <div className="select__loading">
-                    <img
-                      className="img-loading"
-                      src={ASSETS_SVG + "/spinner.svg"}
-                      alt=""
-                    />
-                  </div>
+                  <img
+                    className="img-emty"
+                    src={ASSETS_IMAGE + "/no-data.png"}
+                    alt=""
+                  />
                 )}
               </div>
+            ) : (
+              <div className="select__loading">
+                <img
+                  className="img-loading"
+                  src={ASSETS_SVG + "/spinner.svg"}
+                  alt=""
+                />
+              </div>
             )}
-            {
-              !loading && list.length > 0 &&
+            {!loading && list.length > 0 && (
               <div className="advance-id-master__list-prefer">
-                {
-                  preferOptions && preferOptions?.length > 0 &&
-                  preferOptions.map((item, index) => (
+                {internalPreferOptions &&
+                  internalPreferOptions?.length > 0 &&
+                  internalPreferOptions.map((item, index) => (
                     <div
-                      className={classNames("advance-id-filter__prefer-option advance-id-filter__item p--xs")}
+                      className={classNames(
+                        "advance-id-filter__prefer-option advance-id-filter__item p-l--xs p-y--xs p-r--xxs"
+                      )}
                       key={index}
                       onKeyDown={handleMove(item)}
                       onClick={handleClickItem(item)}
                     >
-                      <span className="advance-id-filter__text">
-                        {render(item)}
-                      </span>
-                      {
-                        item.id === internalModel?.id && <i className="tio tio-done" />
-                      }
-
+                      <label className={classNames("checkbox__container")}>
+                        <input
+                          type="checkbox"
+                          defaultChecked={item.isSelected}
+                        />
+                        <span className="checkmark" />
+                        <span className="advance-id-filter__text m-l--lg">
+                          {render(item)}
+                        </span>
+                      </label>
                     </div>
-                  ))
-                }
+                  ))}
               </div>
-            }
+            )}
           </div>
         )}
       </div>

@@ -3,10 +3,12 @@
 $backgound-color: #f4f4f4;
 
 /* Style for advance-id-filter.tsx */
-.advance-id-filter-master__wrapper {
+.advance-multi-id-filter-master__wrapper {
   position: relative;
   .advance-id-filter-master__container {
     width: fit-content;
+    display: flex;
+    align-items: center;
     cursor: pointer;
     &.filter-bg {
       background-color: var(--white);
@@ -67,10 +69,79 @@ $backgound-color: #f4f4f4;
       font-size: 14px;
       line-height: 16px;
       cursor: pointer;
+
+      /* The container */
+      .checkbox__container {
+        display: block;
+        position: relative;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      /* Hide the browser's default checkbox */
+      .checkbox__container input {
+        visibility: hidden;
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+        border-radius: 2px;
+      }
+
+      /* Create a custom checkbox */
+      .checkmark {
+        position: absolute;
+        top: 0px;
+        left: 0;
+        height: 16px;
+        width: 16px;
+        background-color: #fff;
+        border-radius: 2px;
+        border: 1px solid #d2d5d8;
+      }
+
+      .checkbox__container input:checked ~ .checkmark {
+        background-color: var(--color-text);
+        border: 1px solid var(--color-text);
+      }
+
+      /* Create the checkmark/indicator (hidden when not checked) */
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+
+      /* Show the checkmark when checked */
+      .checkbox__container input:checked ~ .checkmark:after {
+        display: block;
+      }
+
+      /* Style the checkmark/indicator */
+      .checkbox__container .checkmark:after {
+        left: 5px;
+        top: 2px;
+        width: 4px;
+        height: 8px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
     }
     .advance-id-master__list-prefer {
       box-shadow: inset 0px 1px 0px #e1e3e5;
       background: $backgound-color;
+    }
+    .advance-id-filter__text {
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
     }
   }
 }

@@ -275,10 +275,10 @@ function Default() {
   }
 
   return (
-    <div className="page">
+    <div>
       <StandardTable
         columns={columns}
-        isExpandAble={true}
+        isExpandable={true}
         expandedRowRend={expandedRowRender}
         list={data}
         isDragable={true}

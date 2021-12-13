@@ -4,12 +4,10 @@ import "antd/dist/antd.css";
 import { Table } from "antd";
 import { Model } from "react3l-common/src/Model";
 import { TFunction } from "i18next";
-import { DownOutlined, RightOutlined } from "@ant-design/icons";
 import classNames from "classnames";
 // import nameof from "ts-nameof.macro";
 import { ColumnProps } from "antd/lib/table";
-import { UseMaster } from "./interfaceTable";
-import Pagination from "./Pagination/Pagination";
+import { UseMaster } from "./InterfaceStandardTable";
 import { ExpandedRowRender } from "rc-table/lib/interface";
 import { ModelFilter } from "react3l-common";
 import { StringFilter } from "react3l-advanced-filters";
@@ -20,7 +18,7 @@ export interface StandardTableCustomProps extends UseMaster {
   isDragable?: boolean;
   isShowTitle?: boolean;
   translate?: TFunction;
-  isExpandAble?: boolean;
+  isExpandable?: boolean;
   expandedRowRend?: ExpandedRowRender<Model>;
   className?: string;
   sizeTable?: "large" | "medium" | "small";
@@ -36,7 +34,7 @@ function StandardTable(props: StandardTableCustomProps) {
     list,
     columns,
     expandedRowRend,
-    isExpandAble,
+    isExpandable,
     className,
     sizeTable,
     isDragable,
@@ -93,19 +91,6 @@ function StandardTable(props: StandardTableCustomProps) {
     }
   }, [isDragable]);
 
-  const [filter, setFilter] = React.useState<DemoFilter>(new DemoFilter());
-
-  const handlePagination = React.useCallback(
-    (skip: number, take: number) => {
-      setFilter({ ...filter, skip, take });
-      // if (typeof handleSearch === "function") {
-      //   handleSearch();
-      // }
-      console.log(filter);
-    },
-    [filter, setFilter]
-  );
-
   const rowSelection = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: Model[]) => {
       console.log(
@@ -122,7 +107,7 @@ function StandardTable(props: StandardTableCustomProps) {
 
   return (
     <>
-      <div className="page__master-table">
+      <div className="page-table">
         <Table
           className={classNames(
             className,
@@ -133,7 +118,7 @@ function StandardTable(props: StandardTableCustomProps) {
           pagination={false}
           scroll={{ y: 500 }}
           expandable={
-            isExpandAble
+            isExpandable
               ? {
                   expandedRowRender: expandedRowRend,
                   expandIcon: ({ expanded, onExpand, record }) =>
@@ -159,20 +144,11 @@ function StandardTable(props: StandardTableCustomProps) {
           rowSelection={rowSelection}
         />
       </div>
-      <div className="flex-shrink-1 d-flex align-items-center">
-        <Pagination
-          skip={filter.skip}
-          take={filter.take}
-          total={100}
-          onChange={handlePagination}
-          style={{ margin: "10px" }}
-        />
-      </div>
     </>
   );
 }
 StandardTable.defaultProps = {
-  isExpandAble: false,
+  isExpandable: false,
   sizeTable: "large",
 };
 export default StandardTable;

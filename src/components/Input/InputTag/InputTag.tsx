@@ -83,7 +83,9 @@ function InputTag(props: InputTagProps<Model>) {
 
   const handleKeyDown = React.useCallback(
     (event) => {
-      onKeyDown(event);
+      if (typeof onKeyDown === "function") {
+        onKeyDown(event);
+      }
     },
     [onKeyDown]
   );

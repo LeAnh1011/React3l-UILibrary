@@ -164,7 +164,7 @@ function Default() {
             onChange={handleChangeItem}
             checkStrictly={true}
             item={item}
-            listItem={listItem}
+            listItem={isMultiple ? listItem : []}
             getTreeData={demoSearchFunc}
             multipleType={multipleType}
             singleType={singleType}

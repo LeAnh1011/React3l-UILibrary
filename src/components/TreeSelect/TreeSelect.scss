@@ -5,6 +5,20 @@
 
   position: relative;
 
+  .ant-checkbox-checked {
+    .ant-checkbox-inner {
+      background-color: var(--color-text);
+      border-color: var(--color-text);
+    }
+  }
+
+  .ant-checkbox:hover,
+  .ant-checkbox-checked:hover {
+    .ant-checkbox-inner {
+      border-color: var(--color-text);
+    }
+  }
+
   .tree-select__input {
     width: 100%;
   }

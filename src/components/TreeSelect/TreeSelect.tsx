@@ -101,6 +101,8 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
   const [expanded, setExpanded] = React.useState<boolean>(false);
 
   const listIds = React.useMemo(() => {
+    console.log("item", item);
+    console.log("list item", listItem);
     if (item) return [item.id];
     if (listItem) return listItem.map((currentItem) => currentItem?.id);
     return [];
@@ -127,6 +129,12 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     },
     [listItem, onChange, checkable]
   );
+
+  const handleClearMultiItem = React.useCallback(() => {
+    if (typeof onChange === "function") {
+      onChange([], checkable);
+    }
+  }, [checkable, onChange]);
 
   const handleSearchItem = React.useCallback(
     (searchTerm: string) => {
@@ -177,6 +185,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               label={label}
               isSmall={isSmall}
               isUsingSearch={isUsingSearch}
+              onClearMulti={handleClearMultiItem}
             />
           ) : (
             <InputSelect

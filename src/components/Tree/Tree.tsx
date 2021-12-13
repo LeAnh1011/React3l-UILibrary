@@ -13,6 +13,7 @@ import "./Tree.scss";
 import { TreeNode as CustomTreeNode } from "./TreeNode";
 import { Key } from "antd/lib/table/interface";
 import classNames from "classnames";
+import Checkbox from "antd/lib/checkbox/Checkbox";
 
 function SwitcherIcon() {
   return (
@@ -152,6 +153,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     if (checkable) {
       setInternalCheckedKeys(checkedKeys);
     } else {
+      console.log(checkedKeys);
       setInternalSelectedKeys(checkedKeys);
     }
   }, [checkable, checkedKeys]);
@@ -246,7 +248,18 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                       "select__bottom-button select__prefer-option-button"
                     )}
                   >
-                    <span className={classNames("p--xs")}>Prefer Options</span>
+                    {checkable ? (
+                      <div className="p--xs">
+                        <Checkbox />
+                        <span className={classNames("p--xs")}>
+                          Prefer Options
+                        </span>
+                      </div>
+                    ) : (
+                      <span className={classNames("p--xs")}>
+                        Prefer Options
+                      </span>
+                    )}
                   </div>
                 ) : null}
               </>

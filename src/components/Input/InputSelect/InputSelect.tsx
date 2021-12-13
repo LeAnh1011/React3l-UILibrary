@@ -72,7 +72,9 @@ function InputSelect(props: InputSelectProps<Model>) {
 
   const handleClearItem = React.useCallback(
     (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-      onClear(null);
+      if (typeof onClear === "function") {
+        onClear(null);
+      }
       event.stopPropagation();
     },
     [onClear]
@@ -80,14 +82,18 @@ function InputSelect(props: InputSelectProps<Model>) {
 
   const handleKeyDown = React.useCallback(
     (event) => {
-      onKeyDown(event);
+      if (typeof onKeyDown === "function") {
+        onKeyDown(event);
+      }
     },
     [onKeyDown]
   );
 
   const handleEnter = React.useCallback(
     (event) => {
-      onKeyEnter(event);
+      if (typeof onKeyEnter === "function") {
+        onKeyEnter(event);
+      }
     },
     [onKeyEnter]
   );

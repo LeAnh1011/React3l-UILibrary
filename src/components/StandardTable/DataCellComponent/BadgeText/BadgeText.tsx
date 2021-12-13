@@ -4,14 +4,14 @@ import "./BadgeText.scss";
 
 export interface BadgeTextProps {
   className?: string;
-  name?: string;
+  value?: string;
   backgroundColor?: string;
   color?: string;
   tableSize?: "large" | "medium" | "small";
 }
 
 function BadgeText(props: BadgeTextProps) {
-  const { className, color, name, backgroundColor, tableSize } = props;
+  const { className, color, value, backgroundColor, tableSize } = props;
   return (
     <div
       className={classNames(
@@ -23,7 +23,7 @@ function BadgeText(props: BadgeTextProps) {
         className={classNames(className, "badge-text")}
         style={{ backgroundColor: backgroundColor, color: color }}
       >
-        {name}
+        {value}
       </span>
     </div>
   );

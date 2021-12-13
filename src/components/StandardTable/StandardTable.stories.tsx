@@ -119,15 +119,10 @@ function Default() {
     setSize(event.target.value);
   }, []);
 
-  React.useEffect(() => {
-    console.log("table size: ", size);
-    console.log("table order: ", orderType);
-  }, [orderType, size]);
-
   const columns: ColumnProps<any>[] = useMemo(
     () => [
       {
-        title: <LayoutHeader orderType={orderType} name="Title" />,
+        title: <LayoutHeader orderType={orderType} title="Title" />,
         dataIndex: "name",
         key: "name",
         sorter: true,
@@ -137,13 +132,13 @@ function Default() {
         render(...[name]) {
           return (
             <LayoutCell orderType={orderType}>
-              <OneLineText avatar={yomatoImg} name={name} tableSize={size} />
+              <OneLineText avatar={yomatoImg} value={name} tableSize={size} />
             </LayoutCell>
           );
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} name="Platform" />,
+        title: <LayoutHeader orderType={orderType} title="Platform" />,
         dataIndex: "platform",
         key: "platform",
         sorter: true,
@@ -154,7 +149,7 @@ function Default() {
             <LayoutCell orderType={orderType}>
               <OneLineText
                 icon="tio-calendar_month"
-                name={platform}
+                value={platform}
                 tableSize={size}
               />
             </LayoutCell>
@@ -162,7 +157,7 @@ function Default() {
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} name="Version" />,
+        title: <LayoutHeader orderType={orderType} title="Version" />,
         dataIndex: "version",
         key: "version",
         sorter: true,
@@ -173,8 +168,8 @@ function Default() {
             <LayoutCell orderType={orderType}>
               <TwoLineText
                 avatar={yomatoImg}
-                nameLine1={version}
-                nameLine2={"hihii"}
+                valueLine1={version}
+                valueLine2={"hihii"}
                 tableSize={size}
               />
             </LayoutCell>
@@ -182,7 +177,7 @@ function Default() {
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} name="Upgrade" />,
+        title: <LayoutHeader orderType={orderType} title="Upgrade" />,
         dataIndex: "upgradeNum",
         key: "upgradeNum",
         sorter: true,
@@ -193,8 +188,8 @@ function Default() {
             <LayoutCell orderType={orderType}>
               <TwoLineText
                 icon="tio-calendar_month"
-                nameLine1={upgradeNum + " alod dlkjwer"}
-                nameLine2={"hihii"}
+                valueLine1={upgradeNum + " alod dlkjwer"}
+                valueLine2={"hihii"}
                 tableSize={size}
               />
             </LayoutCell>
@@ -202,7 +197,7 @@ function Default() {
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} name="Creator" />,
+        title: <LayoutHeader orderType={orderType} title="Creator" />,
         dataIndex: "creator",
         key: "creator",
         sorter: true,
@@ -213,7 +208,7 @@ function Default() {
           return (
             <LayoutCell orderType={orderType}>
               <BadgeText
-                name={creator}
+                value={creator}
                 backgroundColor="#FFECB3"
                 color="#ED6700"
                 tableSize={size}
@@ -223,7 +218,7 @@ function Default() {
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} name="Date" />,
+        title: <LayoutHeader orderType={orderType} title="Date" />,
         dataIndex: "createdAt",
         key: "createdAt",
         sorter: true,
@@ -234,7 +229,7 @@ function Default() {
             <LayoutCell orderType={orderType}>
               <OneLineText
                 avatar={yomatoImg}
-                name={createdAt}
+                value={createdAt}
                 tableSize={size}
               />
             </LayoutCell>
@@ -242,7 +237,7 @@ function Default() {
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} name="Action" />,
+        title: <LayoutHeader orderType={orderType} title="Action" />,
         key: "status",
         width: 250,
         fixed: "right",
@@ -251,7 +246,7 @@ function Default() {
         render(...[status]) {
           return (
             <LayoutCell orderType={orderType}>
-              <StatusLine name={status} active={true} tableSize={size} />
+              <StatusLine value={status} active={true} tableSize={size} />
             </LayoutCell>
           );
         },

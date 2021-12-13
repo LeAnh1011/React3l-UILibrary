@@ -6,8 +6,8 @@ export interface TwoLineTextProps {
   className?: string;
   avatar?: string;
   icon?: string;
-  nameLine1?: string;
-  nameLine2?: string;
+  valueLine1?: string;
+  valueLine2?: string;
   classNameFirstLine?: string;
   classNameSecondLine?: string;
   tableSize?: "large" | "medium" | "small";
@@ -17,9 +17,9 @@ function TwoLineText(props: TwoLineTextProps) {
   const {
     className,
     avatar,
-    nameLine1,
+    valueLine1,
     icon,
-    nameLine2,
+    valueLine2,
     classNameFirstLine,
     classNameSecondLine,
     tableSize,
@@ -48,7 +48,7 @@ function TwoLineText(props: TwoLineTextProps) {
                   className={classNames(icon, `icon-two-line-text m-r--xxs`)}
                 ></i>
               )}
-              {nameLine1}
+              {valueLine1}
             </div>
             <div
               className={classNames(
@@ -57,7 +57,7 @@ function TwoLineText(props: TwoLineTextProps) {
                 icon ? "m-l--lg" : ""
               )}
             >
-              {nameLine2}
+              {valueLine2}
             </div>
           </div>
         </div>

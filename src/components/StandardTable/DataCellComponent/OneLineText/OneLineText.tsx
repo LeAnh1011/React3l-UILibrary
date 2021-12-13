@@ -1,17 +1,17 @@
 import classNames from "classnames";
-import React from "react";
+import React, { ReactNode } from "react";
 import "./OneLineText.scss";
 
 export interface OneLineTextProps {
-  className?: string;
+  className?: string | number | ReactNode;
   avatar?: string;
   icon?: string;
-  name?: string;
+  value?: string;
   tableSize?: "large" | "medium" | "small";
 }
 
 function OneLineText(props: OneLineTextProps) {
-  const { className, avatar, name, icon, tableSize } = props;
+  const { className, avatar, value, icon, tableSize } = props;
   return (
     <>
       {avatar && (
@@ -32,7 +32,7 @@ function OneLineText(props: OneLineTextProps) {
             />
           )}
           {icon && <i className={classNames(icon, `icon-one-line-text`)}></i>}
-          {name}
+          {value}
         </div>
       )}
       {!avatar && (
@@ -44,7 +44,7 @@ function OneLineText(props: OneLineTextProps) {
           )}
         >
           {icon && <i className={classNames(icon, `icon-one-line-text`)}></i>}
-          {name}
+          {value}
         </div>
       )}
     </>

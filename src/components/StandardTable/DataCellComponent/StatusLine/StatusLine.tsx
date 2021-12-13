@@ -5,12 +5,12 @@ import "./StatusLine.scss";
 export interface StatusLineProps {
   className?: string;
   active?: boolean;
-  name?: string;
+  value?: string;
   tableSize?: "large" | "medium" | "small";
 }
 
 function StatusLine(props: StatusLineProps) {
-  const { className, active, name, tableSize } = props;
+  const { className, active, value, tableSize } = props;
   return (
     <>
       <div
@@ -26,7 +26,7 @@ function StatusLine(props: StatusLineProps) {
             active ? "status-active" : "status-inactive"
           )}
         ></i>
-        {name}
+        {value}
       </div>
     </>
   );

@@ -239,7 +239,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                       "select__bottom-button select__add-button p-y--xs"
                     )}
                   >
-                    <i className="tio-add m-l--xxs" />
+                    <i className="tio-add m-l--xs" />
                     <span>Add new</span>
                   </div>
                 ) : selectWithPreferOption ? (
@@ -251,7 +251,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                     {checkable ? (
                       <div className="p--xs">
                         <Checkbox />
-                        <span className={classNames("p--xs")}>
+                        <span className={classNames("p--xxs")}>
                           Prefer Options
                         </span>
                       </div>

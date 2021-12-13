@@ -1,9 +1,8 @@
-import React, { Reducer } from "react";
+import React from "react";
 import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
 import { Observable, Subscription } from "rxjs";
 import nameof from "ts-nameof.macro";
-import { AdvanceFilterAction, advanceFilterReducer, advanceFilterService } from '../../../services/advance-filter-service';
 import AdvanceMultipleIdFilterMaster from './AdvanceMultipleIdFilterMaster';
 
 

@@ -1,20 +1,17 @@
 import { useDebounceFn } from "ahooks";
-import { Checkbox, Empty, Spin } from "antd";
+import { Checkbox } from "antd";
+import search from "assets/images/svg/search-normal.svg";
 import classNames from "classnames";
 import InputText from "components/Input/InputText";
 import { ASSETS_IMAGE, ASSETS_SVG, DEBOUNCE_TIME_300 } from "config/consts";
 import React, { RefObject } from "react";
 import { StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
-import { ErrorObserver, Observable, Subscription } from "rxjs";
-
+import { ErrorObserver, Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import nameof from "ts-nameof.macro";
-import search from "assets/images/svg/search-normal.svg";
 import "./AdvanceMultipleIdFilterMaster.scss";
-import MultipleSelect from "components/Select/MultipleSelect";
-import Item from "antd/lib/list/Item";
-import { CheckboxChangeEvent } from "antd/lib/checkbox";
+
 
 export interface AdvanceMultipleIdFilterMasterProps<
   T extends Model,
@@ -102,7 +99,6 @@ function AdvanceMultipleIdFilterMaster(
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const [firstLoad, setFirstLoad] = React.useState<boolean>(true);
-  const [firstLoadList, setFirstLoadList] = React.useState<boolean>(true);
 
   const [list, setList] = React.useState<Model[]>([]);
 
@@ -180,7 +176,7 @@ function AdvanceMultipleIdFilterMaster(
 
     }
 
-  }, [firstLoad, firstLoadList, internalList, internalPreferOptions]);
+  }, [firstLoad, internalList, internalPreferOptions]);
   const { run } = useDebounceFn(
     (searchTerm: string) => {
       const cloneModelFilter = modelFilter

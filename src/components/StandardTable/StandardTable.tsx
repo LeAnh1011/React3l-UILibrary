@@ -9,8 +9,6 @@ import classNames from "classnames";
 import { ColumnProps } from "antd/lib/table";
 import { UseMaster } from "./InterfaceStandardTable";
 import { ExpandedRowRender } from "rc-table/lib/interface";
-import { ModelFilter } from "react3l-common";
-import { StringFilter } from "react3l-advanced-filters";
 import arrowUp from "../../assets/image/arrow-up.png";
 import arrowDown from "../../assets/image/arrow-down.png";
 export interface StandardTableCustomProps extends UseMaster {
@@ -23,12 +21,6 @@ export interface StandardTableCustomProps extends UseMaster {
   className?: string;
   sizeTable?: "large" | "medium" | "small";
 }
-
-export class DemoFilter extends ModelFilter {
-  name: StringFilter = new StringFilter();
-  code: StringFilter = new StringFilter();
-}
-
 function StandardTable(props: StandardTableCustomProps) {
   const {
     list,

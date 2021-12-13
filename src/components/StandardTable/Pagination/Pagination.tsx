@@ -101,9 +101,6 @@ function Pagination(props: PaginationProps) {
     );
   }, [currentPage, handleChangeCurrentPage]);
 
-  React.useEffect(() => {
-    console.log("table skip take:", skip, " ", take);
-  }, [skip, take]);
   return (
     <div className="pagination-container">
       <div className="number-per-page-box">

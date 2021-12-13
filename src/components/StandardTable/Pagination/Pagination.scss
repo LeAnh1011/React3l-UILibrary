@@ -58,9 +58,11 @@
     width: 45px;
 }
 .menu-page-change {
-    height: 200px;
     overflow-y: scroll;
     width: 45px;
+    &.options-select-page-height{
+        height: 200px;
+    }
 }
  .menu-page-change::-webkit-scrollbar {
      width: 0px;

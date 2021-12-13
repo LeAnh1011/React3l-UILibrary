@@ -6,6 +6,7 @@ import nextAble from "../../../assets/image/next-able.png";
 import nextUnAble from "../../../assets/image/next-disabled.png";
 import prevAble from "../../../assets/image/prev-able.png";
 import prevUnAble from "../../../assets/image/prev-disabled.png";
+import classNames from "classnames";
 
 export interface PaginationProps extends AntdPaginationProps {
   skip?: number;
@@ -60,7 +61,10 @@ function Pagination(props: PaginationProps) {
       <Menu
         onClick={handleMenuPageClick}
         selectedKeys={["" + currentPage]}
-        className="menu-page-change"
+        className={classNames(
+          "menu-page-change",
+          pageArray?.length > 6 ? "options-select-page-height" : ""
+        )}
       >
         {pageArray.map((page) => {
           return <Menu.Item key={page}>{page}</Menu.Item>;

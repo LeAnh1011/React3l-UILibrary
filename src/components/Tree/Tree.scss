@@ -54,6 +54,7 @@
       align-items: center;
       width: 100%;
       padding-left: 14px;
+      padding-top: 0px;
       transition: all 0.3s, border 0s, line-height 0s, box-shadow 0s;
 
       &:hover {
@@ -62,6 +63,9 @@
       .ant-tree-switcher {
         display: flex;
         align-items: center;
+      }
+      .ant-tree-checkbox {
+        margin: 0px;
       }
     }
 

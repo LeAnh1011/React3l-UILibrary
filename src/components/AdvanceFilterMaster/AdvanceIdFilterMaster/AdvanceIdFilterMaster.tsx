@@ -88,9 +88,7 @@ function AdvanceIdFilterMaster(
     null
   );
 
-  const inputRef: any = React.useRef<any>(
-    null
-  );
+  const inputRef: any = React.useRef<any>(null);
 
   const selectListRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
     null
@@ -237,25 +235,23 @@ function AdvanceIdFilterMaster(
     };
   }, [value, getList, ClassFilter, isIdValue, typeRender, preferOptions]);
 
-
-  const handleKeyDown = React.useCallback((event) => {
-    switch (event.keyCode) {
-      case 40:
-        const firstItem = selectListRef.current
-          .firstElementChild as HTMLElement;
-        firstItem.focus();
-        break;
-      case 9:
-        handleCloseAdvanceIdFilterMaster();
-        break;
-      default:
-        return;
-    }
-  }, [handleCloseAdvanceIdFilterMaster]);
-
-  React.useEffect(() => {
-    console.log(inputRef)
-  }, [inputRef])
+  const handleKeyDown = React.useCallback(
+    (event) => {
+      switch (event.keyCode) {
+        case 40:
+          const firstItem = selectListRef.current
+            .firstElementChild as HTMLElement;
+          firstItem.focus();
+          break;
+        case 9:
+          handleCloseAdvanceIdFilterMaster();
+          break;
+        default:
+          return;
+      }
+    },
+    [handleCloseAdvanceIdFilterMaster]
+  );
 
   CommonService.useClickOutside(wrapperRef, handleCloseAdvanceIdFilterMaster);
 

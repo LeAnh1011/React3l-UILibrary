@@ -1,9 +1,9 @@
 import React, { Reducer } from "react";
 import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import nameof from "ts-nameof.macro";
-import { AdvanceFilterAction, advanceFilterReducer } from '../../../services/advance-filter-service';
+import { AdvanceFilterAction, advanceFilterReducer, advanceFilterService } from '../../../services/advance-filter-service';
 import AdvanceMultipleIdFilterMaster from './AdvanceMultipleIdFilterMaster';
 
 
@@ -25,7 +25,7 @@ const demoObservable = new Observable<Model[]>((observer) => {
 const list = [
   { id: 9, name: "Phòng Muti Media", code: "MEDIA" },
   { id: 10, name: "Phòng truyền thông", code: "PTT" },
-]
+];
 
 export class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
@@ -42,14 +42,24 @@ const demoSearchFunc = (TModelFilter: ModelFilter) => {
 
 export function AdvanceMultipleIdFilterMasterStories() {
 
-  const [filter, dispatch] = React.useReducer<
-    Reducer<DemoFilter, AdvanceFilterAction<DemoFilter>>
-  >(advanceFilterReducer, filterValue);
+  const [filter, setFilter] = React.useState(new DemoFilter());
 
-  const handleChangeFilter = React.useCallback((value) => {
-    console.log('handleChangeFilter', value)
-  }, []);
+  React.useEffect(() => {
+    const subscription = new Subscription();
+    if (!filter.id.in) {
+      setFilter({
+        ...filter,
+        id: { in: [10, 9, 4, 6] }
+      })
+    }
+    return function cleanup() {
+      subscription.unsubscribe();
+    };
+  }, [filter]);
 
+  const handleChangeFilter = React.useCallback((listItem) => {
+    setFilter({ ...filter, id: { in: listItem.map((currentItem) => currentItem.id) } })
+  }, [filter]);
 
 
   return (
@@ -58,7 +68,6 @@ export function AdvanceMultipleIdFilterMasterStories() {
         values={filter.id.in}
         placeHolder={"Tìm kiếm..."}
         classFilter={DemoFilter}
-        modelFilter={filter}
         searchProperty={nameof(DemoFilter.name)}
         onChange={handleChangeFilter}
         getList={demoSearchFunc}

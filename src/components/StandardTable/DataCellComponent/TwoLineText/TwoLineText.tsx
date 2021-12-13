@@ -1,13 +1,13 @@
 import classNames from "classnames";
-import React from "react";
+import React, { ReactNode } from "react";
 import "./TwoLineText.scss";
 
 export interface TwoLineTextProps {
   className?: string;
   avatar?: string;
   icon?: string;
-  valueLine1?: string;
-  valueLine2?: string;
+  valueLine1?: string | number | ReactNode;
+  valueLine2?: string | number | ReactNode;
   classNameFirstLine?: string;
   classNameSecondLine?: string;
   tableSize?: "large" | "medium" | "small";

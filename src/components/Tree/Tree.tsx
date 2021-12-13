@@ -12,6 +12,7 @@ import { CommonService } from "services/common-service";
 import "./Tree.scss";
 import { TreeNode as CustomTreeNode } from "./TreeNode";
 import { Key } from "antd/lib/table/interface";
+import classNames from "classnames";
 
 function SwitcherIcon() {
   return (
@@ -32,6 +33,8 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   onChange?: (treeNode: CustomTreeNode<T>[]) => void;
   titleRender?: (treeNode: CustomTreeNode<T>) => string | ReactNode;
   isMultiple?: boolean;
+  selectWithAdd?: boolean;
+  selectWithPreferOption?: boolean;
 }
 function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const {
@@ -45,6 +48,8 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     getTreeData,
     onChange,
     titleRender,
+    selectWithAdd,
+    selectWithPreferOption,
   } = props;
 
   const [internalTreeData, setInternalTreeData] = React.useState<
@@ -195,36 +200,56 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
         ) : (
           <>
             {internalTreeData.length > 0 ? (
-              <TreeAntd
-                {...props}
-                virtual
-                autoExpandParent={autoExpandParent}
-                expandedKeys={internalExpandedKeys}
-                checkedKeys={internalCheckedKeys}
-                selectedKeys={internalSelectedKeys}
-                showLine={false && { showLeafIcon: false }}
-                switcherIcon={<SwitcherIcon />}
-                treeData={internalTreeData} // pass internalTreeData here
-                onExpand={handleExpandKey}
-                onCheck={handleCheck}
-                onSelect={handleSelect}
-                titleRender={(node: DataNode) => (
+              <>
+                <TreeAntd
+                  {...props}
+                  virtual
+                  autoExpandParent={autoExpandParent}
+                  expandedKeys={internalExpandedKeys}
+                  checkedKeys={internalCheckedKeys}
+                  selectedKeys={internalSelectedKeys}
+                  showLine={false && { showLeafIcon: false }}
+                  switcherIcon={<SwitcherIcon />}
+                  treeData={internalTreeData} // pass internalTreeData here
+                  onExpand={handleExpandKey}
+                  onCheck={handleCheck}
+                  onSelect={handleSelect}
+                  titleRender={(node: DataNode) => (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <div>{titleRender(node)}</div>
+                      {!checkable && internalSelectedKeys.includes(node.key) && (
+                        <div>
+                          <i className="tio-done" />
+                        </div>
+                      )}
+                    </div>
+                  )}
+                ></TreeAntd>
+                {selectWithAdd ? (
                   <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <div>{titleRender(node)}</div>
-                    {internalCheckedKeys.includes(node.key) && (
-                      <div>
-                        <i className="tio-done" />
-                      </div>
+                    className={classNames(
+                      "select__bottom-button select__add-button p-y--xs"
                     )}
+                  >
+                    <i className="tio-add m-l--xxs" />
+                    <span>Add new</span>
                   </div>
-                )}
-              ></TreeAntd>
+                ) : selectWithPreferOption ? (
+                  <div
+                    className={classNames(
+                      "select__bottom-button select__prefer-option-button"
+                    )}
+                  >
+                    <span className={classNames("p--xs")}>Prefer Options</span>
+                  </div>
+                ) : null}
+              </>
             ) : (
               <img
                 className="img-emty"

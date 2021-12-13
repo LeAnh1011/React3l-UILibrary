@@ -42,6 +42,8 @@ export interface TreeSelectProps<
   isSmall?: boolean;
   isUsingSearch?: boolean;
   treeTitleRender?: (T: T) => string;
+  selectWithAdd?: boolean;
+  selectWithPreferOption?: boolean;
 }
 export interface filterAction {
   type: string;
@@ -81,6 +83,8 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     isSmall,
     isUsingSearch,
     treeTitleRender,
+    selectWithAdd,
+    selectWithPreferOption,
   } = props;
 
   const { run } = useDebounceFn(
@@ -204,6 +208,8 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               selectable={selectable}
               checkable={checkable}
               titleRender={treeTitleRender}
+              selectWithAdd={selectWithAdd}
+              selectWithPreferOption={selectWithPreferOption}
             />
           </div>
         )}

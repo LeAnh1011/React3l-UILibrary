@@ -172,6 +172,8 @@ function Default() {
             label={"Label"}
             disabled={isDisabled}
             isSmall={isSmall}
+            selectWithAdd={isSelectWithAdd}
+            selectWithPreferOption={isSelectWithPreferOption}
           />
         </FormItem>
       </div>

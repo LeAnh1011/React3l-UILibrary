@@ -3,10 +3,10 @@ import React, { ReactNode } from "react";
 import "./OneLineText.scss";
 
 export interface OneLineTextProps {
-  className?: string | number | ReactNode;
+  className?: string;
   avatar?: string;
   icon?: string;
-  value?: string;
+  value?: string | number | ReactNode;
   tableSize?: "large" | "medium" | "small";
 }
 

@@ -5,7 +5,12 @@
     .avatar-two-line-text{
         width: 32px;
         height: 32px;
-        border-radius: 16px;
+        &.avatar-type-circle{
+            border-radius: 16px;
+        }
+        &.avatar-type-square{
+            border-radius: 0px;
+        }
     }
     .icon-two-line-text{
         font-size: 16px;

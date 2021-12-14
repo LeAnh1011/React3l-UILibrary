@@ -22,6 +22,10 @@ const menu = (
     <Menu.Item>Action 2</Menu.Item>
   </Menu>
 );
+export enum AVATAR_TYPE {
+  CIRCLE = "circle",
+  SQUARE = "square",
+}
 export enum SIZE_TYPE {
   LARGE = "large",
   MEDIUM = "medium",
@@ -110,6 +114,9 @@ function Default() {
 
   // const size = "small";
   // const orderType = "left";
+  const [avatarType, setAvatarType] = React.useState<AVATAR_TYPE>(
+    AVATAR_TYPE.CIRCLE
+  );
   const [size, setSize] = React.useState<SIZE_TYPE>(SIZE_TYPE.LARGE);
   const [orderType, setOrderType] = React.useState<ORDER_TYPE>(ORDER_TYPE.LEFT);
   const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
@@ -118,21 +125,87 @@ function Default() {
   const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
     setSize(event.target.value);
   }, []);
+  const handleChangeAvatarType = React.useCallback(
+    (event: RadioChangeEvent) => {
+      setAvatarType(event.target.value);
+    },
+    []
+  );
 
   const columns: ColumnProps<any>[] = useMemo(
     () => [
       {
         title: <LayoutHeader orderType={orderType} title="Title" />,
+        dataIndex: "type",
+        key: "type",
+        sorter: true,
+        fixed: "left",
+        width: 135,
+        ellipsis: true,
+        render(...[type]) {
+          return (
+            <LayoutCell orderType={orderType}>
+              <OneLineText value={type} tableSize={size} />
+            </LayoutCell>
+          );
+        },
+      },
+      {
+        title: <LayoutHeader orderType={orderType} title="Type" />,
         dataIndex: "name",
         key: "name",
         sorter: true,
-        fixed: "left",
-        width: 250,
+        width: 135,
         ellipsis: true,
         render(...[name]) {
           return (
             <LayoutCell orderType={orderType}>
-              <OneLineText avatar={yomatoImg} value={name} tableSize={size} />
+              <OneLineText
+                avatar={yomatoImg}
+                avatarType={avatarType}
+                value={name}
+                link="https://www.youtube.com/"
+                tableSize={size}
+              />
+            </LayoutCell>
+          );
+        },
+      },
+      {
+        title: <LayoutHeader orderType={orderType} title="Type" />,
+        dataIndex: "name",
+        key: "name2",
+        sorter: true,
+        width: 135,
+        ellipsis: true,
+        render(...[name]) {
+          return (
+            <LayoutCell orderType={orderType}>
+              <OneLineText
+                avatar={yomatoImg}
+                avatarType={avatarType}
+                value={name}
+                tableSize={size}
+              />
+            </LayoutCell>
+          );
+        },
+      },
+      {
+        title: <LayoutHeader orderType={orderType} title="Location" />,
+        dataIndex: "location",
+        key: "location",
+        sorter: true,
+        width: 100,
+        ellipsis: true,
+        render(...[location]) {
+          return (
+            <LayoutCell orderType={orderType}>
+              <OneLineText
+                value={location}
+                link="https://www.youtube.com/"
+                tableSize={size}
+              />
             </LayoutCell>
           );
         },
@@ -142,7 +215,7 @@ function Default() {
         dataIndex: "platform",
         key: "platform",
         sorter: true,
-        width: 250,
+        width: 135,
         ellipsis: true,
         render(...[platform]) {
           return (
@@ -161,15 +234,78 @@ function Default() {
         dataIndex: "version",
         key: "version",
         sorter: true,
-        width: 250,
+        width: 150,
+        ellipsis: true,
+        render(...[version]) {
+          return (
+            <LayoutCell orderType={orderType}>
+              <TwoLineText
+                valueLine1={version}
+                valueLine2={"facebook"}
+                tableSize={size}
+              />
+            </LayoutCell>
+          );
+        },
+      },
+      {
+        title: <LayoutHeader orderType={orderType} title="Version" />,
+        dataIndex: "version",
+        key: "version",
+        sorter: true,
+        width: 150,
         ellipsis: true,
         render(...[version]) {
           return (
             <LayoutCell orderType={orderType}>
               <TwoLineText
                 avatar={yomatoImg}
+                avatarType={avatarType}
                 valueLine1={version}
-                valueLine2={"hihii"}
+                valueLine2={"facebook"}
+                tableSize={size}
+              />
+            </LayoutCell>
+          );
+        },
+      },
+      {
+        title: <LayoutHeader orderType={orderType} title="Version" />,
+        dataIndex: "version",
+        key: "version",
+        sorter: true,
+        width: 150,
+        ellipsis: true,
+        render(...[version]) {
+          return (
+            <LayoutCell orderType={orderType}>
+              <TwoLineText
+                avatar={yomatoImg}
+                avatarType={avatarType}
+                valueLine1={version}
+                valueLine2={"facebook"}
+                link="/ksdjflsf"
+                tableSize={size}
+              />
+            </LayoutCell>
+          );
+        },
+      },
+      {
+        title: <LayoutHeader orderType={orderType} title="Version" />,
+        dataIndex: "version",
+        key: "version",
+        sorter: true,
+        width: 150,
+        ellipsis: true,
+        render(...[version]) {
+          return (
+            <LayoutCell orderType={orderType}>
+              <TwoLineText
+                avatar={yomatoImg}
+                avatarType={avatarType}
+                valueLine1={version}
+                valueLine2={"facebook"}
                 tableSize={size}
               />
             </LayoutCell>
@@ -181,7 +317,7 @@ function Default() {
         dataIndex: "upgradeNum",
         key: "upgradeNum",
         sorter: true,
-        width: 250,
+        width: 150,
         ellipsis: true,
         render(...[upgradeNum]) {
           return (
@@ -197,11 +333,32 @@ function Default() {
         },
       },
       {
+        title: <LayoutHeader orderType={orderType} title="Upgrade" />,
+        dataIndex: "upgradeNum",
+        key: "upgradeNum",
+        sorter: true,
+        width: 150,
+        ellipsis: true,
+        render(...[upgradeNum]) {
+          return (
+            <LayoutCell orderType={orderType}>
+              <TwoLineText
+                icon="tio-calendar_month"
+                valueLine1={upgradeNum + " alod dlkjwer"}
+                valueLine2={"hihii"}
+                link="/hsfdsdhio"
+                tableSize={size}
+              />
+            </LayoutCell>
+          );
+        },
+      },
+      {
         title: <LayoutHeader orderType={orderType} title="Creator" />,
         dataIndex: "creator",
         key: "creator",
         sorter: true,
-        width: 250,
+        width: 135,
         ellipsis: true,
         align: "center",
         render(...[creator]) {
@@ -218,28 +375,9 @@ function Default() {
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} title="Date" />,
-        dataIndex: "createdAt",
-        key: "createdAt",
-        sorter: true,
-        width: 250,
-        ellipsis: true,
-        render(...[createdAt]) {
-          return (
-            <LayoutCell orderType={orderType}>
-              <OneLineText
-                avatar={yomatoImg}
-                value={createdAt}
-                tableSize={size}
-              />
-            </LayoutCell>
-          );
-        },
-      },
-      {
         title: <LayoutHeader orderType={orderType} title="Action" />,
         key: "status",
-        width: 250,
+        width: 150,
         fixed: "right",
         ellipsis: true,
         dataIndex: "status",
@@ -252,7 +390,7 @@ function Default() {
         },
       },
     ],
-    [orderType, size]
+    [avatarType, orderType, size]
   );
 
   const data = [];
@@ -260,6 +398,9 @@ function Default() {
     data.push({
       key: i,
       name: "Screem",
+      type: "Diamond",
+      location: "Hill",
+      weight: "50kg",
       platform: "iOS",
       version: "10.3.4.5654",
       upgradeNum: 500,
@@ -280,6 +421,12 @@ function Default() {
         sizeTable={size}
       />
       <div>
+        <div style={{ margin: "10px", width: "500px" }}>
+          <Radio.Group onChange={handleChangeAvatarType} value={avatarType}>
+            <Radio value={AVATAR_TYPE.CIRCLE}>circle</Radio>
+            <Radio value={AVATAR_TYPE.SQUARE}>squale</Radio>
+          </Radio.Group>
+        </div>
         <div style={{ margin: "10px", width: "500px" }}>
           <Radio.Group onChange={handleChangeSize} value={size}>
             <Radio value={SIZE_TYPE.LARGE}>Large</Radio>

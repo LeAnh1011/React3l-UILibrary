@@ -32,9 +32,10 @@ export interface InputTextProps {
   onChange?: (T: string | null) => void;
   onEnter?: (T: string | null) => void;
   onBlur?: (T: string | null) => void;
+  onKeyDown?: (event: any) => void;
 }
 
-function InputText(props: InputTextProps) {
+const InputText = React.forwardRef((props: InputTextProps, ref: React.Ref<any>) => {
   const {
     action,
     label,
@@ -52,6 +53,7 @@ function InputText(props: InputTextProps) {
     onChange,
     onEnter,
     onBlur,
+    onKeyDown
   } = props;
 
   const [internalValue, setInternalValue] = React.useState<string>("");
@@ -96,6 +98,14 @@ function InputText(props: InputTextProps) {
     },
     [onEnter]
   );
+
+  const handleKeyDown = React.useCallback(
+    (event) => {
+      onKeyDown(event);
+    },
+    [onKeyDown]
+  );
+
 
   const handleBlur = React.useCallback(
     (event: React.FocusEvent<HTMLInputElement>) => {
@@ -152,6 +162,7 @@ function InputText(props: InputTextProps) {
             "input-text--float": type === INPUT_TEXT_TYPE.FLOAT_LABEL,
           }
         )}
+        ref={ref}
         onClick={() => {
           inputRef.current.focus();
         }}
@@ -169,7 +180,8 @@ function InputText(props: InputTextProps) {
           type="text"
           value={internalValue}
           onChange={handleChange}
-          onKeyDown={handleKeyPress}
+          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyDown}
           onBlur={handleBlur}
           placeholder={
             type === INPUT_TEXT_TYPE.FLOAT_LABEL && label ? " " : placeHolder
@@ -214,7 +226,7 @@ function InputText(props: InputTextProps) {
       </div>
     </div>
   );
-}
+});
 
 InputText.defaultProps = {
   label: "",
@@ -224,7 +236,6 @@ InputText.defaultProps = {
   prefix: "",
   disabled: false,
   className: "",
-  countWord: false,
   maxLength: 0,
 };
 

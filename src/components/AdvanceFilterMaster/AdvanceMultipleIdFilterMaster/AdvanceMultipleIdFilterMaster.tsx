@@ -1,5 +1,5 @@
 import { useDebounceFn } from "ahooks";
-import { Checkbox } from "antd";
+import { Checkbox, Empty, Spin } from "antd";
 import search from "assets/images/svg/search-normal.svg";
 import classNames from "classnames";
 import InputText from "components/Input/InputText";
@@ -426,20 +426,12 @@ function AdvanceMultipleIdFilterMaster(
                     </div>
                   ))
                 ) : (
-                  <img
-                    className="img-emty"
-                    src={ASSETS_IMAGE + "/no-data.png"}
-                    alt=""
-                  />
+                  <Empty />
                 )}
               </div>
             ) : (
-              <div className="select__loading">
-                <img
-                  className="img-loading"
-                  src={ASSETS_SVG + "/spinner.svg"}
-                  alt=""
-                />
+              <div className="advance-id-filter__loading">
+                <Spin tip="Loading..."></Spin>
               </div>
             )}
             {!loading && list.length > 0 && (

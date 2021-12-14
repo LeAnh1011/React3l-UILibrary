@@ -31,3 +31,10 @@ body {
 .text-in-table-cell{
   line-height: 16px;
 }
+.link-text{
+  text-decoration: underline;
+  &:hover{
+    color: blue;
+    text-decoration: underline;
+  }
+}

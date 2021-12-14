@@ -225,11 +225,13 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                       }}
                     >
                       <div>{titleRender(node)}</div>
-                      {!checkable && internalSelectedKeys.includes(node.key) && (
-                        <div>
-                          <i className="tio-done" />
-                        </div>
-                      )}
+                      {!checkable &&
+                        internalSelectedKeys &&
+                        internalSelectedKeys.includes(node.key) && (
+                          <div>
+                            <i className="tio-done" />
+                          </div>
+                        )}
                     </div>
                   )}
                 ></TreeAntd>

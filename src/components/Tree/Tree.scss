@@ -40,7 +40,7 @@
     span {
       color: var(--color-primary);
       font-size: 12px;
-      margin-left: 7px;
+      margin-left: 8px;
     }
     .tio-add {
       color: var(--color-primary);
@@ -68,6 +68,7 @@
       }
       .ant-tree-checkbox {
         margin: 0px;
+        margin-right: 4px;
       }
     }
 
@@ -83,6 +84,7 @@
     .ant-tree-node-content-wrapper {
       width: 100%;
       padding-right: 15px;
+      padding-left: 0px;
       &.ant-tree-node-selected {
         background-color: var(--color-surface-material-input-hover);
       }

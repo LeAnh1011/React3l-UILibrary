@@ -46,6 +46,8 @@ export interface AdvanceMultipleIdFilterMasterProps<
   className?: string;
 
   preferOptions?: T[];
+
+  maxLength?: number;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -94,6 +96,7 @@ function AdvanceMultipleIdFilterMaster(
     classFilter: ClassFilter,
     className,
     preferOptions,
+    maxLength,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -380,8 +383,9 @@ function AdvanceMultipleIdFilterMaster(
           <div className="advance-id-filter-master__list-container m-t--xxxs">
             <div className="advance-id-filter__input p--xs">
               <InputText
+
                 isSmall={false}
-                maxLength={100}
+                maxLength={maxLength}
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
                 suffix={
@@ -481,6 +485,7 @@ AdvanceMultipleIdFilterMaster.defaultProps = {
   disabled: false,
   typeRender: nameof(Model.prototype.name),
   isIdValue: true,
+  maxLength: 200,
 };
 
 export default AdvanceMultipleIdFilterMaster;

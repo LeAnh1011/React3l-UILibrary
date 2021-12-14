@@ -47,6 +47,8 @@ export interface AdvanceIdFilterMasterProps<
   className?: string;
 
   preferOptions?: T[];
+
+  maxLength?: number;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -74,6 +76,7 @@ function AdvanceIdFilterMaster(
     classFilter: ClassFilter,
     className,
     preferOptions,
+    maxLength
   } = props;
 
   const [internalModel, setInternalModel] = React.useState<Model>();
@@ -277,7 +280,7 @@ function AdvanceIdFilterMaster(
             <div className="advance-id-filter__input p--xs">
               <InputText
                 isSmall={false}
-                maxLength={100}
+                maxLength={maxLength}
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
                 suffix={
@@ -355,6 +358,7 @@ AdvanceIdFilterMaster.defaultProps = {
   disabled: false,
   typeRender: "name",
   isIdValue: true,
+  maxLength: 200,
 };
 
 export default AdvanceIdFilterMaster;

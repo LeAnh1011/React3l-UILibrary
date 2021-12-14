@@ -13,10 +13,18 @@ export interface PaginationProps extends AntdPaginationProps {
   take?: number;
   pageSizeOptions: string[];
   onChange?: (skip: number, take: number) => void;
+  canChangePageSize?: boolean;
 }
 
 function Pagination(props: PaginationProps) {
-  const { skip, take, total, onChange, pageSizeOptions } = props;
+  const {
+    skip,
+    take,
+    total,
+    onChange,
+    pageSizeOptions,
+    canChangePageSize,
+  } = props;
   const pageArray = React.useMemo(() => {
     const ind = (total - (total % take)) / take;
     const arrTmp = [];
@@ -108,21 +116,24 @@ function Pagination(props: PaginationProps) {
   return (
     <div className="pagination-container">
       <div className="number-per-page-box">
-        <div className="number-per-page-box-1">
-          <div className="m-r--xxxs">Items per pages : </div>
-          <div>
-            <Dropdown
-              className="dropdown-pagination-per-page"
-              overlay={menuPageSize}
-              trigger={["click"]}
-            >
-              <div className="pagination__size-options">
-                <span className="size-options_page">{take}</span>
-                <i className="size-options__icon tio-chevron_down"></i>
-              </div>
-            </Dropdown>
+        {canChangePageSize === true && (
+          <div className="number-per-page-box-1">
+            <div className="m-r--xxxs">Items per pages : </div>
+            <div>
+              <Dropdown
+                className="dropdown-pagination-per-page"
+                overlay={menuPageSize}
+                trigger={["click"]}
+              >
+                <div className="pagination__size-options">
+                  <span className="size-options_page">{take}</span>
+                  <i className="size-options__icon tio-chevron_down"></i>
+                </div>
+              </Dropdown>
+            </div>
           </div>
-        </div>
+        )}
+
         <div className="number-per-page-box-2">
           {skip + 1}-{skip + take} of {total} items
         </div>
@@ -154,5 +165,6 @@ Pagination.defaultProps = {
   skip: 0,
   take: 10,
   total: 100,
+  canChangePageSize: true,
 };
 export default Pagination;

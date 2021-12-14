@@ -29,7 +29,13 @@ function Default() {
         take={filter.take}
         total={100}
         onChange={handlePagination}
-        style={{ margin: "10px" }}
+      />
+      <Pagination
+        skip={filter.skip}
+        take={filter.take}
+        total={100}
+        onChange={handlePagination}
+        canChangePageSize={false}
       />
     </div>
   );

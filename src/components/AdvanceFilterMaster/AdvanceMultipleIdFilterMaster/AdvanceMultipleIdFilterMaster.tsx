@@ -3,13 +3,11 @@ import { Checkbox, Empty, Spin } from "antd";
 import search from "assets/images/svg/search-normal.svg";
 import classNames from "classnames";
 import InputText from "components/Input/InputText";
-import { ASSETS_IMAGE, ASSETS_SVG, DEBOUNCE_TIME_300 } from "config/consts";
+import { DEBOUNCE_TIME_300 } from "config/consts";
 import React, { RefObject } from "react";
-import { StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
 import { ErrorObserver, Observable } from "rxjs";
 import { CommonService } from "services/common-service";
-import nameof from "ts-nameof.macro";
 import "./AdvanceMultipleIdFilterMaster.scss";
 
 
@@ -469,13 +467,13 @@ function AdvanceMultipleIdFilterMaster(
 }
 
 AdvanceMultipleIdFilterMaster.defaultProps = {
-  searchProperty: nameof(Model.prototype.name),
-  searchType: nameof(StringFilter.prototype.contain),
+  searchProperty: "name",
+  searchType: "contain",
   isEnumList: false,
   render: defaultRenderObject,
   isMaterial: false,
   disabled: false,
-  typeRender: nameof(Model.prototype.name),
+  typeRender: "name",
   isIdValue: true,
   maxLength: 200,
 };

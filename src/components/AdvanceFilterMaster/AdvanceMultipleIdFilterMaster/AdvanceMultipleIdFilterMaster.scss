@@ -1,0 +1,186 @@
+@import "../../../styles/index.scss";
+
+$backgound-color: #f4f4f4;
+
+/* Style for advance-id-filter.tsx */
+.advance-multi-id-filter-master__wrapper {
+  position: relative;
+  .advance-id-filter-master__container {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    &.filter-bg {
+      background-color: var(--white);
+      border: 1px solid var(--color-primary);
+      box-sizing: border-box;
+      box-shadow: 0px 0px 8px var(--color-primary);
+      &:hover {
+        background-color: var(--white);
+      }
+    }
+    &:hover {
+      background: #e5e5e5;
+    }
+    .filter__icon {
+      font-size: 16px;
+    }
+    .advance-id-filter-master__title {
+      font-size: 14px;
+    }
+  }
+
+  .advance-id-filter__input {
+    .input-text__container {
+      border-radius: 0px;
+      background-color: $backgound-color;
+      outline: 1px var(--color-border);
+    }
+  }
+
+  .advance-id-filter-master__list-container {
+    width: 100%;
+    height: auto;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2), 0px 2px 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 999;
+    .advance-id-master__list {
+      background-color: $backgound-color;
+      width: 100%;
+      overflow-y: auto;
+      max-height: 160px;
+    }
+    .advance-id-filter__loading {
+      width: 100%;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .advance-id-filter__item {
+      &:hover,
+      &:focus {
+        background-color: #e5e5e5;
+      }
+      &:focus-visible {
+        outline: none;
+      }
+      &.select__item--selected {
+        background-color: var(--color-surface-material-input-hover);
+        display: flex;
+        justify-content: space-between;
+      }
+      position: relative;
+      display: flex;
+      font-size: 14px;
+      line-height: 16px;
+      cursor: pointer;
+
+      .ant-checkbox:hover .ant-checkbox-inner {
+        border-color: black !important;
+      }
+      .ant-checkbox-checked .ant-checkbox-inner {
+        background-color: black;
+        border-color: black;
+      }
+      .ant-checkbox-input:focus + .ant-checkbox-inner {
+        border-color: black;
+      }
+      .ant-checkbox-indeterminate .ant-checkbox-inner::after {
+        background-color: black;
+      }
+      .ant-checkbox-checked::after {
+        border: 1px solid black;
+      }
+      .ant-checkbox-wrapper:hover .ant-checkbox-inner,
+      .ant-checkbox:hover .ant-checkbox-inner,
+      .ant-checkbox-input:focus + .ant-checkbox-inner {
+        border-color: black;
+      }
+
+      /* The container */
+      .checkbox__container {
+        display: block;
+        position: relative;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      /* Hide the browser's default checkbox */
+      .checkbox__container input {
+        visibility: hidden;
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+        border-radius: 2px;
+      }
+
+      /* Create a custom checkbox */
+      .checkmark {
+        position: absolute;
+        top: 0px;
+        left: 0;
+        height: 16px;
+        width: 16px;
+        background-color: #fff;
+        border-radius: 2px;
+        border: 1px solid #d2d5d8;
+      }
+
+      .checkbox__container input:checked ~ .checkmark {
+        background-color: var(--color-text);
+        border: 1px solid var(--color-text);
+      }
+
+      /* Create the checkmark/indicator (hidden when not checked) */
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+
+      /* Show the checkmark when checked */
+      .checkbox__container input:checked ~ .checkmark:after {
+        display: block;
+      }
+
+      /* Style the checkmark/indicator */
+      .checkbox__container .checkmark:after {
+        left: 5px;
+        top: 2px;
+        width: 4px;
+        height: 8px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+    }
+    .advance-id-master__list-prefer {
+      box-shadow: inset 0px 1px 0px #e1e3e5;
+      background: $backgound-color;
+    }
+    .advance-id-filter__text {
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(63, 86, 175, 0.15);
+}

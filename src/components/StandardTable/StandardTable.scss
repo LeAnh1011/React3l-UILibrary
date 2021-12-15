@@ -65,17 +65,7 @@
 .ant-table-body.active-draggable {
   cursor: grabbing;
 }
-.ant-table-body {
-  &::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px #ecf3fa;
-  }
-
-  &::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(68, 102, 242, 0.15);
-  }
+.height-500px{
+  height: 500px;
+  overflow: scroll;
 }

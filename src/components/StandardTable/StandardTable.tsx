@@ -20,6 +20,7 @@ export interface StandardTableCustomProps extends UseMaster {
   expandedRowRend?: ExpandedRowRender<Model>;
   className?: string;
   sizeTable?: "large" | "medium" | "small";
+  isLevel2?: boolean; //unset height for table level2
 }
 function StandardTable(props: StandardTableCustomProps) {
   const {
@@ -31,11 +32,12 @@ function StandardTable(props: StandardTableCustomProps) {
     sizeTable,
     isDragable,
     rowSelection,
+    isLevel2,
   } = props;
 
   React.useEffect(() => {
     const antTable = document.getElementsByClassName(
-      "ant-table-body"
+      "page-table"
     )[0] as HTMLElement;
     let isDown = false;
     let startX = 0;
@@ -86,7 +88,7 @@ function StandardTable(props: StandardTableCustomProps) {
 
   return (
     <>
-      <div className="page-table">
+      <div className={classNames("page-table", isLevel2 ? "" : "height-500px")}>
         <Table
           className={classNames(
             className,
@@ -95,7 +97,6 @@ function StandardTable(props: StandardTableCustomProps) {
           )}
           columns={columns}
           pagination={false}
-          scroll={{ y: 500 }}
           expandable={
             isExpandable
               ? {
@@ -129,5 +130,6 @@ function StandardTable(props: StandardTableCustomProps) {
 StandardTable.defaultProps = {
   isExpandable: false,
   sizeTable: "large",
+  isLevel2: false,
 };
 export default StandardTable;

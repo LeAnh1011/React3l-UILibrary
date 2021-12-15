@@ -145,6 +145,7 @@ function Default() {
         list={data}
         isDragable={true}
         sizeTable={size}
+        isLevel2={true}
       />
     );
   };
@@ -422,7 +423,7 @@ function Default() {
   );
 
   const data = [];
-  for (let i = 0; i < 9; ++i) {
+  for (let i = 0; i < 15; ++i) {
     data.push({
       key: i,
       name: "Screem",

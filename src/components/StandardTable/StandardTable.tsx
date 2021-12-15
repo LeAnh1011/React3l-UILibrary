@@ -30,6 +30,7 @@ function StandardTable(props: StandardTableCustomProps) {
     className,
     sizeTable,
     isDragable,
+    rowSelection,
   } = props;
 
   React.useEffect(() => {
@@ -82,20 +83,6 @@ function StandardTable(props: StandardTableCustomProps) {
       };
     }
   }, [isDragable]);
-
-  const rowSelection = {
-    onChange: (selectedRowKeys: React.Key[], selectedRows: Model[]) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
-    },
-    getCheckboxProps: (record: Model) => ({
-      disabled: record.name === "Disabled User", // Column configuration not to be checked
-      name: record.name,
-    }),
-  };
 
   return (
     <>

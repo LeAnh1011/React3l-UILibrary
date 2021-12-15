@@ -1,12 +1,11 @@
-import { Table, Badge, Menu, Dropdown, Space, Row } from "antd";
 import { storiesOf } from "@storybook/react";
-import { DownOutlined } from "@ant-design/icons";
 import nameof from "ts-nameof.macro";
 import React, { useMemo } from "react";
 import Radio, { RadioChangeEvent } from "antd/lib/radio";
 import "./StandardTable.scss";
 import StandardTable from "./StandardTable";
 // import { Model } from "react3l-common";
+import { RowSelectionType } from "antd/lib/table/interface";
 import yomatoImg from "../../assets/image/yo.jpg";
 import LayoutHeader from "./LayoutHeader/LayoutHeader";
 import LayoutCell from "./LayoutCell/LayoutCell";
@@ -16,12 +15,6 @@ import OneLineText from "./DataCellComponent/OneLineText/OneLineText";
 import StatusLine from "./DataCellComponent/StatusLine/StatusLine";
 import { ColumnProps } from "antd/lib/table";
 
-const menu = (
-  <Menu>
-    <Menu.Item>Action 1</Menu.Item>
-    <Menu.Item>Action 2</Menu.Item>
-  </Menu>
-);
 export enum AVATAR_TYPE {
   CIRCLE = "circle",
   SQUARE = "square",
@@ -38,82 +31,6 @@ export enum ORDER_TYPE {
 }
 
 function Default() {
-  const expandedRowRender = () => {
-    const columns = [
-      {
-        title: <div className="text-left">{"Date"}</div>,
-        dataIndex: "date",
-        key: "date",
-        render(...[date]) {
-          return <div>{date + " hihi"}</div>;
-        },
-      },
-      {
-        title: <div className="text-left">{"Name"}</div>,
-        dataIndex: "name",
-        key: "name",
-        render(...[name]) {
-          return <div>{name + " hihi"}</div>;
-        },
-      },
-      {
-        title: <div className="text-left">{"Status"}</div>,
-        key: "state",
-        render: () => (
-          <span>
-            <Badge status="success" />
-            Finished
-          </span>
-        ),
-      },
-      {
-        title: <div className="text-left">{"Upgrade Status"}</div>,
-        dataIndex: "upgradeNum",
-        key: "upgradeNum",
-        render(...[upgradeNum]) {
-          return <div>{upgradeNum}</div>;
-        },
-      },
-      {
-        title: <div className="text-left">{"Action"}</div>,
-        dataIndex: "operation",
-        key: "operation",
-        render(...[upgradeNum]) {
-          return <div>{upgradeNum}</div>;
-        },
-      },
-      {
-        title: "Action",
-        dataIndex: "operation",
-        key: "operation",
-        render: () => (
-          <Space size="middle">
-            <a href="/#">Pause</a>
-            <a href="/#">Stop</a>
-            <Dropdown overlay={menu}>
-              <a href="/#">
-                More <DownOutlined />
-              </a>
-            </Dropdown>
-          </Space>
-        ),
-      },
-    ];
-
-    const data = [];
-    for (let i = 0; i < 5; ++i) {
-      data.push({
-        key: i,
-        date: "2014-12-24 23:12:00",
-        name: "This is production name",
-        upgradeNum: "Upgraded: 56",
-      });
-    }
-    return <Table columns={columns} dataSource={data} pagination={false} />;
-  };
-
-  // const size = "small";
-  // const orderType = "left";
   const [avatarType, setAvatarType] = React.useState<AVATAR_TYPE>(
     AVATAR_TYPE.CIRCLE
   );
@@ -131,6 +48,117 @@ function Default() {
     },
     []
   );
+
+  const expandedRowRender = () => {
+    const columns: ColumnProps<any>[] = [
+      {
+        title: <LayoutHeader orderType={orderType} title="Title" />,
+        dataIndex: "type",
+        key: "type",
+        width: 135,
+        ellipsis: true,
+        render(...[type]) {
+          return (
+            <LayoutCell orderType={orderType}>
+              <OneLineText value={type} tableSize={size} />
+            </LayoutCell>
+          );
+        },
+      },
+
+      {
+        title: <LayoutHeader orderType={orderType} title="Version" />,
+        dataIndex: "version",
+        key: "version",
+        width: 150,
+        ellipsis: true,
+        render(...[version]) {
+          return (
+            <LayoutCell orderType={orderType}>
+              <TwoLineText
+                avatar={yomatoImg}
+                avatarType={avatarType}
+                valueLine1={version}
+                valueLine2={"facebook"}
+                link="/ksdjflsf"
+                tableSize={size}
+              />
+            </LayoutCell>
+          );
+        },
+      },
+      {
+        title: <LayoutHeader orderType={orderType} title="Creator" />,
+        dataIndex: "creator",
+        key: "creator",
+        width: 135,
+        ellipsis: true,
+        align: "center",
+        render(...[creator]) {
+          return (
+            <LayoutCell orderType={orderType}>
+              <BadgeText
+                value={creator}
+                backgroundColor="#FFECB3"
+                color="#ED6700"
+                tableSize={size}
+              />
+            </LayoutCell>
+          );
+        },
+      },
+      {
+        title: <LayoutHeader orderType={orderType} title="Action" />,
+        key: "status",
+        width: 150,
+        ellipsis: true,
+        dataIndex: "status",
+        render(...[status]) {
+          return (
+            <LayoutCell orderType={orderType}>
+              <StatusLine value={status} active={true} tableSize={size} />
+            </LayoutCell>
+          );
+        },
+      },
+    ];
+
+    const data = [];
+    for (let i = 0; i < 9; ++i) {
+      data.push({
+        key: i,
+        name: "Screem",
+        type: "Diamond",
+        location: "Hill",
+        weight: "50kg",
+        platform: "iOS",
+        version: "10.3.4.5654",
+        upgradeNum: 500,
+        creator: "Jack Gealish",
+        status: "hoạt động",
+        createdAt: "2014-12-24 23:12:00",
+      });
+    }
+    return (
+      <StandardTable
+        columns={columns}
+        list={data}
+        isDragable={true}
+        sizeTable={size}
+      />
+    );
+  };
+  const typeRowSelection: RowSelectionType = "checkbox";
+
+  const rowSelection = {
+    onChange(selectedRowKeys: KeyType[]) {
+      console.log(`selectedRowKeys: ${selectedRowKeys}`);
+    },
+    type: typeRowSelection,
+  };
+
+  // const size = "small";
+  // const orderType = "left";
 
   const columns: ColumnProps<any>[] = useMemo(
     () => [
@@ -419,6 +447,7 @@ function Default() {
         list={data}
         isDragable={true}
         sizeTable={size}
+        rowSelection={rowSelection}
       />
       <div>
         <div style={{ margin: "10px", width: "500px" }}>

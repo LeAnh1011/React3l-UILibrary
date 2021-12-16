@@ -26,17 +26,17 @@
     margin-right: 0px;
   }
   .table-size-large {
-    .ant-table-cell {
+    th.ant-table-cell {
       height: 56px !important;
     }
   }
   .table-size-medium {
-    .ant-table-cell {
+    th.ant-table-cell {
       height: 40px !important;
     }
   }
   .table-size-small {
-    .ant-table-cell {
+    th.ant-table-cell {
       height: 32px !important;
     }
   }

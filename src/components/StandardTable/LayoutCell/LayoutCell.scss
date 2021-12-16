@@ -1,12 +1,30 @@
-.form-data-cell-left{
+.form-data-cell-left {
+    width: 100%;
     padding-left: 16px;
     padding-right: 8px;
 }
-.form-data-cell-right{
+.form-data-cell-right {
+    width: 100%;
     padding-right: 16px;
     padding-left: 8px;
 }
-.form-data-cell-center{
+.form-data-cell-center {
+    width: 100%;
     padding-left: 8px;
     padding-right: 8px;
+}
+.layout-cell-size-large {
+    height: 56px !important;
+    display: flex;
+    align-items: center;
+}
+.layout-cell-size-medium {
+    height: 40px !important;
+    display: flex;
+    align-items: center;
+}
+.layout-cell-size-small {
+    height: 32px !important;
+    display: flex;
+    align-items: center;
 }

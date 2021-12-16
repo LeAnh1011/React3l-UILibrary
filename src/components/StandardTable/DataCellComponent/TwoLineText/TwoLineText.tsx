@@ -11,7 +11,6 @@ export interface TwoLineTextProps {
   valueLine2?: string | number | ReactNode;
   classNameFirstLine?: string;
   classNameSecondLine?: string;
-  tableSize?: "large" | "medium" | "small";
   link?: string;
 }
 
@@ -25,61 +24,58 @@ function TwoLineText(props: TwoLineTextProps) {
     valueLine2,
     classNameFirstLine,
     classNameSecondLine,
-    tableSize,
     link,
   } = props;
   return (
     <>
-      {tableSize === "large" && (
-        <div className="cell-two-line">
-          {avatar && (
-            <div className="m-r--xxs">
-              {avatar && (
-                <img
-                  src={avatar}
-                  className={classNames(
-                    `avatar-two-line-text`,
-                    `avatar-type-${avatarType}`
-                  )}
-                  alt="avatar"
-                />
-              )}
-            </div>
-          )}
-          <div className={className}>
-            <div
-              className={classNames(classNameFirstLine, "line-text first-line")}
-            >
-              {icon && (
-                <i
-                  className={classNames(icon, `icon-two-line-text m-r--xxs`)}
-                ></i>
-              )}
-              {valueLine1}
-            </div>
-            <div
-              className={classNames(
-                classNameSecondLine,
-                "line-text second-line",
-                icon ? "m-l--lg" : ""
-              )}
-            >
-              {link ? (
-                <a
-                  href={link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link-text"
-                >
-                  {valueLine2}
-                </a>
-              ) : (
-                valueLine2
-              )}
-            </div>
+      <div className="cell-two-line">
+        {avatar && (
+          <div className="m-r--xxs">
+            {avatar && (
+              <img
+                src={avatar}
+                className={classNames(
+                  `avatar-two-line-text`,
+                  `avatar-type-${avatarType}`
+                )}
+                alt="avatar"
+              />
+            )}
+          </div>
+        )}
+        <div className={className}>
+          <div
+            className={classNames(classNameFirstLine, "line-text first-line")}
+          >
+            {icon && (
+              <i
+                className={classNames(icon, `icon-two-line-text m-r--xxs`)}
+              ></i>
+            )}
+            {valueLine1}
+          </div>
+          <div
+            className={classNames(
+              classNameSecondLine,
+              "line-text second-line",
+              icon ? "m-l--lg" : ""
+            )}
+          >
+            {link ? (
+              <a
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-text"
+              >
+                {valueLine2}
+              </a>
+            ) : (
+              valueLine2
+            )}
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 }

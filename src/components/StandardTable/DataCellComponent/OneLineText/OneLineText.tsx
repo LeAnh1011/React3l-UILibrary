@@ -8,27 +8,29 @@ export interface OneLineTextProps {
   avatarType?: "circle" | "square";
   icon?: string;
   value?: string | number | ReactNode;
-  tableSize?: "large" | "medium" | "small";
+  avatarSize?: "large" | "medium" | "small";
   link?: string;
 }
 
 function OneLineText(props: OneLineTextProps) {
-  const { className, avatar, value, icon, tableSize, link, avatarType } = props;
+  const {
+    className,
+    avatar,
+    value,
+    icon,
+    avatarSize,
+    link,
+    avatarType,
+  } = props;
   return (
     <>
       {avatar && (
-        <div
-          className={classNames(
-            className,
-            `one-line-image-text-table-size-${tableSize}`,
-            "text-in-table-cell"
-          )}
-        >
-          {avatar && tableSize !== "small" && (
+        <div className={classNames(className, "text-in-table-cell")}>
+          {avatar && avatarSize !== "small" && (
             <img
               src={avatar}
               className={classNames(
-                `avatar-one-line-text-table-size-${tableSize}`,
+                `avatar-one-line-text-table-size-${avatarSize}`,
                 `avatar-type-${avatarType}`
               )}
               alt="avatar"
@@ -49,13 +51,7 @@ function OneLineText(props: OneLineTextProps) {
         </div>
       )}
       {!avatar && (
-        <div
-          className={classNames(
-            className,
-            `one-line-text-table-size-${tableSize}`,
-            "text-in-table-cell"
-          )}
-        >
+        <div className={classNames(className, "text-in-table-cell")}>
           {icon && <i className={classNames(icon, `icon-one-line-text`)}></i>}
           {link ? (
             <a

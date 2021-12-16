@@ -16,6 +16,9 @@ import OneLineText from "./DataCellComponent/OneLineText/OneLineText";
 import StatusLine from "./DataCellComponent/StatusLine/StatusLine";
 import { ColumnProps } from "antd/lib/table";
 import { Button } from "antd";
+import { Tabs } from "antd";
+
+const { TabPane } = Tabs;
 
 export enum AVATAR_TYPE {
   CIRCLE = "circle",
@@ -36,7 +39,6 @@ function Default() {
   const [avatarType, setAvatarType] = React.useState<AVATAR_TYPE>(
     AVATAR_TYPE.CIRCLE
   );
-  const [selected, setSelected] = React.useState<number>(0);
   const [size, setSize] = React.useState<SIZE_TYPE>(SIZE_TYPE.LARGE);
   const [orderType, setOrderType] = React.useState<ORDER_TYPE>(ORDER_TYPE.LEFT);
   const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
@@ -44,9 +46,6 @@ function Default() {
   }, []);
   const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
     setSize(event.target.value);
-  }, []);
-  const handleChangeSelected = React.useCallback((event: RadioChangeEvent) => {
-    setSelected(event.target.value);
   }, []);
   const handleChangeAvatarType = React.useCallback(
     (event: RadioChangeEvent) => {
@@ -65,8 +64,8 @@ function Default() {
         ellipsis: true,
         render(...[type]) {
           return (
-            <LayoutCell orderType={orderType}>
-              <OneLineText value={type} tableSize={size} />
+            <LayoutCell orderType={orderType} tableSize={size}>
+              <OneLineText value={type} />
             </LayoutCell>
           );
         },
@@ -76,19 +75,12 @@ function Default() {
         title: <LayoutHeader orderType={orderType} title="Version" />,
         dataIndex: "version",
         key: "version",
-        width: 150,
+        width: 135,
         ellipsis: true,
         render(...[version]) {
           return (
-            <LayoutCell orderType={orderType}>
-              <TwoLineText
-                avatar={yomatoImg}
-                avatarType={avatarType}
-                valueLine1={version}
-                valueLine2={"facebook"}
-                link="/ksdjflsf"
-                tableSize={size}
-              />
+            <LayoutCell orderType={orderType} tableSize={size}>
+              <OneLineText value={`version`} />
             </LayoutCell>
           );
         },
@@ -102,12 +94,11 @@ function Default() {
         align: "center",
         render(...[creator]) {
           return (
-            <LayoutCell orderType={orderType}>
+            <LayoutCell orderType={orderType} tableSize={size}>
               <BadgeText
                 value={creator}
                 backgroundColor="#FFECB3"
                 color="#ED6700"
-                tableSize={size}
               />
             </LayoutCell>
           );
@@ -121,8 +112,8 @@ function Default() {
         dataIndex: "status",
         render(...[status]) {
           return (
-            <LayoutCell orderType={orderType}>
-              <StatusLine value={status} active={true} tableSize={size} />
+            <LayoutCell orderType={orderType} tableSize={size}>
+              <StatusLine value={status} active={true} />
             </LayoutCell>
           );
         },
@@ -150,7 +141,7 @@ function Default() {
         columns={columns}
         list={data}
         isDragable={true}
-        sizeTable={size}
+        tableSize={size}
         isLevel2={true}
       />
     );
@@ -173,13 +164,142 @@ function Default() {
         dataIndex: "type",
         key: "type",
         sorter: true,
+        width: 135,
+        fixed: "left",
+        ellipsis: true,
+        render(...[type]) {
+          return (
+            <LayoutCell orderType={orderType} tableSize={size}>
+              <OneLineText value={type} />
+            </LayoutCell>
+          );
+        },
+      },
+      {
+        title: <LayoutHeader orderType={orderType} title="Type" />,
+        dataIndex: "name",
+        key: "name",
+        sorter: true,
+        width: 135,
+        ellipsis: true,
+        render(...[name]) {
+          return (
+            <LayoutCell orderType={orderType} tableSize={size}>
+              <OneLineText
+                avatar={yomatoImg}
+                avatarType={avatarType}
+                value={name}
+                link="https://www.youtube.com/"
+                avatarSize={size}
+              />
+            </LayoutCell>
+          );
+        },
+      },
+
+      {
+        title: <LayoutHeader orderType={orderType} title="Type" />,
+        dataIndex: "name",
+        key: "name2",
+        sorter: true,
+        width: 135,
+        ellipsis: true,
+        render(...[name]) {
+          return (
+            <LayoutCell orderType={orderType} tableSize={size}>
+              <OneLineText
+                avatar={yomatoImg}
+                avatarType={avatarType}
+                value={name}
+                avatarSize={size}
+              />
+            </LayoutCell>
+          );
+        },
+      },
+      {
+        title: <LayoutHeader orderType={orderType} title="Location" />,
+        dataIndex: "location",
+        key: "location",
+        sorter: true,
+        width: 100,
+        ellipsis: true,
+        render(...[location]) {
+          return (
+            <LayoutCell orderType={orderType} tableSize={size}>
+              <OneLineText value={location} link="/ksjhdfkshj" />
+            </LayoutCell>
+          );
+        },
+      },
+      {
+        title: <LayoutHeader orderType={orderType} title="Platform" />,
+        dataIndex: "platform",
+        key: "platform",
+        sorter: true,
+        width: 135,
+        ellipsis: true,
+        render(...[platform]) {
+          return (
+            <LayoutCell orderType={orderType} tableSize={size}>
+              <OneLineText icon="tio-calendar_month" value={platform} />
+            </LayoutCell>
+          );
+        },
+      },
+      {
+        title: <LayoutHeader orderType={orderType} title="Creator" />,
+        dataIndex: "creator",
+        key: "creator",
+        sorter: true,
+        width: 135,
+        ellipsis: true,
+        align: "center",
+        render(...[creator]) {
+          return (
+            <LayoutCell orderType={orderType} tableSize={size}>
+              <BadgeText
+                value={creator}
+                backgroundColor="#FFECB3"
+                color="#ED6700"
+              />
+            </LayoutCell>
+          );
+        },
+      },
+      {
+        title: <LayoutHeader orderType={orderType} title="Action" />,
+        key: "status",
+        width: 150,
+        fixed: "right",
+        ellipsis: true,
+        dataIndex: "status",
+        render(...[status]) {
+          return (
+            <LayoutCell orderType={orderType} tableSize={size}>
+              <StatusLine value={status} active={true} />
+            </LayoutCell>
+          );
+        },
+      },
+    ],
+    [avatarType, orderType, size]
+  );
+
+  const columns2: ColumnProps<any>[] = useMemo(
+    () => [
+      {
+        title: <LayoutHeader orderType={orderType} title="Title" />,
+        dataIndex: "type",
+        key: "type",
+        sorter: true,
         fixed: "left",
         width: 135,
         ellipsis: true,
         render(...[type]) {
           return (
             <LayoutCell orderType={orderType}>
-              <OneLineText value={type} tableSize={size} />
+              <OneLineText value={type} />
             </LayoutCell>
           );
         },
@@ -199,7 +319,7 @@ function Default() {
                 avatarType={avatarType}
                 value={name}
                 link="https://www.youtube.com/"
-                tableSize={size}
+                avatarSize={"large"}
               />
             </LayoutCell>
           );
@@ -219,7 +339,7 @@ function Default() {
                 avatar={yomatoImg}
                 avatarType={avatarType}
                 value={name}
-                tableSize={size}
+                avatarSize={"large"}
               />
             </LayoutCell>
           );
@@ -235,11 +355,7 @@ function Default() {
         render(...[location]) {
           return (
             <LayoutCell orderType={orderType}>
-              <OneLineText
-                value={location}
-                link="https://www.youtube.com/"
-                tableSize={size}
-              />
+              <OneLineText value={location} link="https://www.youtube.com/" />
             </LayoutCell>
           );
         },
@@ -254,11 +370,7 @@ function Default() {
         render(...[platform]) {
           return (
             <LayoutCell orderType={orderType}>
-              <OneLineText
-                icon="tio-calendar_month"
-                value={platform}
-                tableSize={size}
-              />
+              <OneLineText icon="tio-calendar_month" value={platform} />
             </LayoutCell>
           );
         },
@@ -273,11 +385,7 @@ function Default() {
         render(...[version]) {
           return (
             <LayoutCell orderType={orderType}>
-              <TwoLineText
-                valueLine1={version}
-                valueLine2={"facebook"}
-                tableSize={size}
-              />
+              <TwoLineText valueLine1={version} valueLine2={"facebook"} />
             </LayoutCell>
           );
         },
@@ -297,7 +405,6 @@ function Default() {
                 avatarType={avatarType}
                 valueLine1={version}
                 valueLine2={"facebook"}
-                tableSize={size}
               />
             </LayoutCell>
           );
@@ -319,7 +426,6 @@ function Default() {
                 valueLine1={version}
                 valueLine2={"facebook"}
                 link="/ksdjflsf"
-                tableSize={size}
               />
             </LayoutCell>
           );
@@ -340,7 +446,6 @@ function Default() {
                 avatarType={avatarType}
                 valueLine1={version}
                 valueLine2={"facebook"}
-                tableSize={size}
               />
             </LayoutCell>
           );
@@ -360,7 +465,6 @@ function Default() {
                 icon="tio-calendar_month"
                 valueLine1={upgradeNum + " alod dlkjwer"}
                 valueLine2={"hihii"}
-                tableSize={size}
               />
             </LayoutCell>
           );
@@ -381,7 +485,6 @@ function Default() {
                 valueLine1={upgradeNum + " alod dlkjwer"}
                 valueLine2={"hihii"}
                 link="/hsfdsdhio"
-                tableSize={size}
               />
             </LayoutCell>
           );
@@ -402,7 +505,6 @@ function Default() {
                 value={creator}
                 backgroundColor="#FFECB3"
                 color="#ED6700"
-                tableSize={size}
               />
             </LayoutCell>
           );
@@ -418,17 +520,16 @@ function Default() {
         render(...[status]) {
           return (
             <LayoutCell orderType={orderType}>
-              <StatusLine value={status} active={true} tableSize={size} />
+              <StatusLine value={status} active={true} />
             </LayoutCell>
           );
         },
       },
     ],
-    [avatarType, orderType, size]
+    [avatarType, orderType]
   );
-
   const data = [];
-  for (let i = 0; i < 15; ++i) {
+  for (let i = 0; i < 8; ++i) {
     data.push({
       key: i,
       name: "Screem",
@@ -446,28 +547,42 @@ function Default() {
 
   return (
     <div>
-      <ActionBarComponent
-        selectedRowKeys={selectedRowKeys}
-        setSelectedRowKeys={setSelectedRowKeys}
-      >
-        <Button>Button demo</Button>
-      </ActionBarComponent>
-      <StandardTable
-        columns={columns}
-        isExpandable={true}
-        expandedRowRend={expandedRowRender}
-        list={data}
-        isDragable={true}
-        sizeTable={size}
-        rowSelection={rowSelection}
-      />
+      <Tabs defaultActiveKey="1">
+        <TabPane tab="Table not have TwoLineText" key="1">
+          <ActionBarComponent
+            selectedRowKeys={selectedRowKeys}
+            setSelectedRowKeys={setSelectedRowKeys}
+          >
+            <Button>Button demo</Button>
+          </ActionBarComponent>
+          <StandardTable
+            columns={columns}
+            isExpandable={true}
+            expandedRowRend={expandedRowRender}
+            list={data}
+            isDragable={true}
+            tableSize={size}
+            rowSelection={rowSelection}
+          />
+        </TabPane>
+        <TabPane tab="Table only size large" key="2">
+          <ActionBarComponent
+            selectedRowKeys={selectedRowKeys}
+            setSelectedRowKeys={setSelectedRowKeys}
+          >
+            <Button>Button demo</Button>
+          </ActionBarComponent>
+          <StandardTable
+            columns={columns2}
+            list={data}
+            isDragable={true}
+            tableSize={"large"}
+            rowSelection={rowSelection}
+          />
+        </TabPane>
+      </Tabs>
+
       <div>
-        <div style={{ margin: "10px", width: "500px" }}>
-          <Radio.Group onChange={handleChangeSelected} value={selected}>
-            <Radio value={1}>show action bar</Radio>
-            <Radio value={0}>hide action bar</Radio>
-          </Radio.Group>
-        </div>
         <div style={{ margin: "10px", width: "500px" }}>
           <Radio.Group onChange={handleChangeAvatarType} value={avatarType}>
             <Radio value={AVATAR_TYPE.CIRCLE}>circle</Radio>

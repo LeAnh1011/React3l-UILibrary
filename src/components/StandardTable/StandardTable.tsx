@@ -19,7 +19,7 @@ export interface StandardTableCustomProps extends UseMaster {
   isExpandable?: boolean;
   expandedRowRend?: ExpandedRowRender<Model>;
   className?: string;
-  sizeTable?: "large" | "medium" | "small";
+  tableSize?: "large" | "medium" | "small";
   isLevel2?: boolean; //unset height for table level2
 }
 function StandardTable(props: StandardTableCustomProps) {
@@ -29,7 +29,7 @@ function StandardTable(props: StandardTableCustomProps) {
     expandedRowRend,
     isExpandable,
     className,
-    sizeTable,
+    tableSize,
     isDragable,
     rowSelection,
     isLevel2,
@@ -92,7 +92,7 @@ function StandardTable(props: StandardTableCustomProps) {
         <Table
           className={classNames(
             className,
-            `table-size-${sizeTable}`,
+            `table-size-${tableSize}`,
             "custom-scrollbar"
           )}
           columns={columns}
@@ -129,7 +129,7 @@ function StandardTable(props: StandardTableCustomProps) {
 }
 StandardTable.defaultProps = {
   isExpandable: false,
-  sizeTable: "large",
+  tableSize: "large",
   isLevel2: false,
 };
 export default StandardTable;

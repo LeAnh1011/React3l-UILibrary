@@ -1,0 +1,209 @@
+@import "../../../styles/index.scss";
+/* Style for DatePicker.tsx */
+.date-picker__wrapper {
+  width: 100%;
+  position: relative;
+
+  .date-picker__wrapper--sm {
+    height: 32px !important;
+  }
+
+  .date-picker__label {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    label {
+      font-size: 0.75em;
+      white-space: nowrap;
+    }
+  }
+
+  .date-picker__icon-wrapper {
+    position: absolute;
+    display: flex;
+    height: 1.5rem;
+    width: 2rem;
+    top: 49%;
+    right: 0.5rem;
+    box-sizing: border-box;
+    background-color: white;
+    justify-content: flex-end;
+    align-items: center;
+
+    .date-picker__icon-clear {
+      font-size: 17px;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    &.date-picker__icon-wrapper--material {
+      background-color: var(--color-surface-input);
+
+      .date-picker__icon-clear {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .date-picker__icon {
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+    &.error-background {
+      background: var(--color-error-high) !important;
+    }
+
+    i {
+      font-size: 12px;
+    }
+  }
+
+  .date-picker__container {
+    position: relative;
+    .ant-picker {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      outline: 1px solid var(--color-border);
+      border: none;
+      background-color: white;
+      height: 40px;
+      border-radius: 0px;
+
+      &:hover,
+      &:focus {
+        & + .date-picker__icon-wrapper--material {
+          background-color: var(--color-surface-input-hover);
+        }
+      }
+      &:hover {
+        outline-color: var(--color-primary);
+      }
+
+      &.ant-picker--bordered {
+        background-color: white;
+      }
+
+      &.ant-picker-focused {
+        border-bottom: none !important;
+        outline-color: var(--color-primary);
+        @include box-shadow--focus;
+      }
+      &.date-picker--material {
+        background-color: var(--color-surface-input);
+        outline: none;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: 1px solid var(--color-border);
+        margin-bottom: -1px;
+        .date-picker__icon-wrapper {
+          background-color: var(--color-surface-input);
+        }
+        &:hover,
+        &:focus {
+          background-color: var(--color-surface-input-hover);
+        }
+      }
+      &.date-picker--float:focus-within {
+        .component__title {
+          color: var(--color-primary);
+        }
+      }
+    }
+    .date-picker--float {
+      & + .ant-picker-focused {
+        input:focus:not(:placeholder-shown) + .component__title {
+          top: 0;
+          left: 8px;
+          background-color: white;
+          transform: translateY(-50%) scale(0.9);
+        }
+        .component__title {
+          top: 0;
+          left: 8px;
+          background-color: white;
+          transform: translateY(-50%) scale(0.9);
+        }
+        .ant-picker-input > input:not(:placeholder-shown) + .component__title {
+          top: 0;
+          left: 8px;
+          background-color: white;
+          transform: translateY(-50%) scale(0.9);
+        }
+      }
+    }
+    input {
+      font-family: inherit;
+      padding: 0;
+      outline: none;
+      border: none;
+      width: 100%;
+      font-size: 14px;
+      line-height: 1rem;
+      background-color: transparent;
+
+      &::placeholder {
+        color: var(--color-input-placeholder);
+      }
+
+      &:disabled::placeholder {
+        color: var(--color-input-disabled);
+      }
+
+      &:not(:placeholder-shown) + .component__title {
+        top: 0;
+        left: 8px;
+        background-color: white;
+        transform: translateY(-50%) scale(0.9);
+      }
+
+      &:focus + .component__title {
+        top: 0;
+        left: 8px;
+        background-color: white;
+        transform: translateY(-50%) scale(0.9);
+      }
+
+      &:focus::placeholder {
+        color: transparent;
+      }
+    }
+
+    .ant-picker-input > input:focus + .component__title {
+      top: 0;
+      left: 8px;
+      background-color: white;
+      transform: translateY(-50%) scale(0.9);
+    }
+
+    .component__title {
+      position: absolute;
+      color: gray;
+      transition: all 0.1s ease-out;
+      padding: 0 4px;
+      z-index: 200;
+      top: 9px;
+      font-size: 14px;
+
+      &.component__title--normal {
+        left: 8px;
+      }
+      &.component__title--sm {
+        top: 6px;
+      }
+    }
+  }
+}

@@ -1,0 +1,112 @@
+@import "../../../styles/index.scss";
+/* Style for DatePicker.tsx */
+.date-range__container {
+    width: 100%;
+    position: relative;
+
+    .date-range__icon-wrapper {
+        position: absolute;
+        display: flex;
+        height: 1.5rem;
+        width: 1.5rem;
+        top: 0.5rem;
+        right: 1rem;
+        background-color: #ffffff;
+        box-sizing: border-box;
+        box-shadow: 0px 7px 64px rgba(0, 0, 0, 0.07);
+        justify-content: center;
+        align-items: center;
+
+        .date-range__icon-clear {
+            font-size: 18px;
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+
+        &.date-range__icon-wrapper--material {
+            top: 0.45rem !important;
+            right: 1rem !important;
+            background-color: #f2f2f2 !important;
+            .date-range__icon-clear {
+                &:hover {
+                    cursor: pointer;
+                    opacity: 0.7;
+                }
+            }
+        }
+    }
+
+    .date-range__icon {
+        height: 1.5rem;
+        width: 1.5rem;
+        border-radius: 50%;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+
+        &.error-background {
+            background: var(--color-error-high) !important;
+        }
+
+        i {
+            font-size: 12px;
+        }
+    }
+
+    .ant-picker {
+        height: 40px;
+        padding: 1rem;
+        font-size: 13px;
+        border: 0;
+        box-shadow: none !important;
+        outline: 1px solid var(--color-border);
+        background-color: white;
+
+        &:hover {
+            outline-color: var(--color-primary);
+        }
+
+        &:focus-within {
+            outline-color: var(--color-primary);
+            @include box-shadow--focus;
+        }
+
+        &.ant-picker--bordered {
+            border: 1px solid var(--color-border);
+        }
+
+        &.ant-picker-focused {
+            outline-color: var(--color-primary);
+            @include box-shadow--focus;
+        }
+        &.ant-picker--material {
+            background-color: var(--color-surface-input);
+            outline: none;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: -1px;
+            &:hover,
+            &:focus {
+                border-bottom: 2px solid !important;
+            }
+            &:hover {
+                background-color: var(--color-surface-input-hover);
+                .component__input {
+                    background-color: var(--color-surface-input-hover);
+                }
+                .component__input.disabled-field {
+                    background-color: var(--color-surface-input-disabled);
+                }
+            }
+
+            &:focus-within {
+                border: 1px solid var(--color-primary);
+                @include box-shadow--focus();
+            }
+        }
+    }
+}

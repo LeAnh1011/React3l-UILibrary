@@ -155,6 +155,7 @@ function Default() {
     },
     selectedRowKeys,
     type: typeRowSelection,
+    columnWidth: "45px",
   };
 
   const columns: ColumnProps<any>[] = useMemo(
@@ -557,10 +558,10 @@ function Default() {
           </ActionBarComponent>
           <StandardTable
             columns={columns}
-            isExpandable={true}
-            expandedRowRend={expandedRowRender}
             list={data}
             isDragable={true}
+            isExpandable={true}
+            expandedRowRend={expandedRowRender}
             tableSize={size}
             rowSelection={rowSelection}
           />
@@ -576,6 +577,8 @@ function Default() {
             columns={columns2}
             list={data}
             isDragable={true}
+            isExpandable={true}
+            expandedRowRend={expandedRowRender}
             tableSize={"large"}
             rowSelection={rowSelection}
           />

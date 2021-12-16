@@ -117,6 +117,7 @@ function StandardTable(props: StandardTableCustomProps) {
                         onClick={(e) => onExpand(record, e)}
                       />
                     ),
+                  columnWidth: "45px",
                 }
               : null
           }

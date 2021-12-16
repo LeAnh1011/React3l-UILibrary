@@ -9,11 +9,13 @@ import { RowSelectionType } from "antd/lib/table/interface";
 import yomatoImg from "../../assets/image/yo.jpg";
 import LayoutHeader from "./LayoutHeader/LayoutHeader";
 import LayoutCell from "./LayoutCell/LayoutCell";
+import ActionBarComponent from "./ActionBarComponent/ActionBarComponent";
 import BadgeText from "./DataCellComponent/BadgeText/BadgeText";
 import TwoLineText from "./DataCellComponent/TwoLineText/TwoLineText";
 import OneLineText from "./DataCellComponent/OneLineText/OneLineText";
 import StatusLine from "./DataCellComponent/StatusLine/StatusLine";
 import { ColumnProps } from "antd/lib/table";
+import { Button } from "antd";
 
 export enum AVATAR_TYPE {
   CIRCLE = "circle",
@@ -34,6 +36,7 @@ function Default() {
   const [avatarType, setAvatarType] = React.useState<AVATAR_TYPE>(
     AVATAR_TYPE.CIRCLE
   );
+  const [selected, setSelected] = React.useState<number>(0);
   const [size, setSize] = React.useState<SIZE_TYPE>(SIZE_TYPE.LARGE);
   const [orderType, setOrderType] = React.useState<ORDER_TYPE>(ORDER_TYPE.LEFT);
   const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
@@ -41,6 +44,9 @@ function Default() {
   }, []);
   const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
     setSize(event.target.value);
+  }, []);
+  const handleChangeSelected = React.useCallback((event: RadioChangeEvent) => {
+    setSelected(event.target.value);
   }, []);
   const handleChangeAvatarType = React.useCallback(
     (event: RadioChangeEvent) => {
@@ -150,16 +156,15 @@ function Default() {
     );
   };
   const typeRowSelection: RowSelectionType = "checkbox";
+  const [selectedRowKeys, setSelectedRowKeys] = React.useState<KeyType[]>([]);
 
   const rowSelection = {
-    onChange(selectedRowKeys: KeyType[]) {
-      console.log(`selectedRowKeys: ${selectedRowKeys}`);
+    onChange(selectedKeys: KeyType[]) {
+      setSelectedRowKeys(selectedKeys);
     },
+    selectedRowKeys,
     type: typeRowSelection,
   };
-
-  // const size = "small";
-  // const orderType = "left";
 
   const columns: ColumnProps<any>[] = useMemo(
     () => [
@@ -441,6 +446,12 @@ function Default() {
 
   return (
     <div>
+      <ActionBarComponent
+        selectedRowKeys={selectedRowKeys}
+        setSelectedRowKeys={setSelectedRowKeys}
+      >
+        <Button>Button demo</Button>
+      </ActionBarComponent>
       <StandardTable
         columns={columns}
         isExpandable={true}
@@ -451,6 +462,12 @@ function Default() {
         rowSelection={rowSelection}
       />
       <div>
+        <div style={{ margin: "10px", width: "500px" }}>
+          <Radio.Group onChange={handleChangeSelected} value={selected}>
+            <Radio value={1}>show action bar</Radio>
+            <Radio value={0}>hide action bar</Radio>
+          </Radio.Group>
+        </div>
         <div style={{ margin: "10px", width: "500px" }}>
           <Radio.Group onChange={handleChangeAvatarType} value={avatarType}>
             <Radio value={AVATAR_TYPE.CIRCLE}>circle</Radio>

@@ -2,16 +2,15 @@ import { Radio } from 'antd';
 import { RadioChangeEvent } from 'antd/lib/radio';
 import { Moment } from 'moment';
 import React from 'react';
-import InputText from "./../../Input/InputText/InputText";
-import DatePicker, { DATE_PICKER_TYPE } from './DatePicker';
 import FormItem, { ValidateStatus } from "../../FormItem/FormItem";
+import DatePicker, { DATE_PICKER_TYPE } from './DatePicker';
 
 export function DatePickerStories() {
 
   const [value, setValue] = React.useState<Moment>();
 
   const [type, setType] = React.useState<DATE_PICKER_TYPE>(
-    DATE_PICKER_TYPE.BORDERED
+    DATE_PICKER_TYPE.FLOAT_LABEL
   );
 
   const [isDisabled, setIsDisabled] = React.useState(false);
@@ -21,6 +20,8 @@ export function DatePickerStories() {
   const [isValidated, setValidated] = React.useState(false);
 
   const handleChange = React.useCallback((dateMoment, dateString) => {
+
+    console.log(dateMoment)
     setValue(dateMoment);
   }, []);
 
@@ -59,7 +60,8 @@ export function DatePickerStories() {
             name: "Help",
             action: () => console.log("Help incoming..."),
           }}
-          value={value} />
+          value={value}
+        />
       </FormItem>
     </div>
     <div style={{ margin: "10px", width: "300px" }}>

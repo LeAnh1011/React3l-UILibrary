@@ -54,7 +54,6 @@ export function DatePickerStories() {
           label="Ngày nhập hàng"
           placeHolder={"Enter text..."}
           onChange={handleChange}
-          error={'Field required!'}
           disabled={isDisabled}
           action={{
             name: "Help",

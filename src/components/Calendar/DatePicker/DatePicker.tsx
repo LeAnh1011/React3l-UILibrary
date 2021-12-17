@@ -38,7 +38,6 @@ interface DatePickerProps {
 function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
   const {
     value,
-    isMaterial,
     dateFormat,
     onChange,
     className,
@@ -61,7 +60,6 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
       : value;
   }, [value]);
 
-  console.log('internalValue', internalValue)
 
   const handleClearDate = React.useCallback(
     (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -81,27 +79,18 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
             element.classList.remove('component__title-down');
           }
         }
-      }
-    },
-    [type]
-  );
-
-  const handleClickOutside = React.useCallback(() => {
-    if (type === DATE_PICKER_TYPE.FLOAT_LABEL) {
-      console.log(internalValue)
-      if (!internalValue) {
-        const element = document.getElementById("component__title-id");
-        if (element) {
-          element.classList.add('component__title-down');
-          element.classList.remove('component__title-up');
+      } else {
+        if (!internalValue) {
+          const element = document.getElementById("component__title-id");
+          if (element) {
+            element.classList.add('component__title-down');
+            element.classList.remove('component__title-up');
+          }
         }
       }
-    }
-  }, [internalValue, type])
-
-
-  CommonService.useClickOutside(wrapperRef, handleClickOutside);
-
+    },
+    [internalValue, type]
+  );
 
   React.useEffect(() => {
     const subscription = new Subscription();
@@ -116,6 +105,9 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
       subscription.unsubscribe();
     };
   }, [internalValue]);
+
+
+
 
   return (
     <div className={classNames("date-picker__wrapper", className)} ref={wrapperRef}>
@@ -163,7 +155,7 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
       {type === DATE_PICKER_TYPE.FLOAT_LABEL && label && (
         <label
           id="component__title-id"
-          className={classNames("component__title component__title--normal heading-text--sm", {
+          className={classNames("component__title component__title--normal", {
             "component__title--sm": isSmall,
             "component__title-up": internalValue,
           })}
@@ -182,7 +174,11 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
           })}
         >
           <i
-            className="date-picker__icon-clear tio-clear"
+            className={classNames(
+              "input-icon__clear",
+              "m-l--xxs",
+              "tio-clear_circle"
+            )}
             onClick={handleClearDate}
           ></i>
         </span>

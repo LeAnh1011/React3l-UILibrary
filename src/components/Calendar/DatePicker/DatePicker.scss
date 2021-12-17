@@ -1,5 +1,6 @@
 @import "../../../styles/index.scss";
 /* Style for DatePicker.tsx */
+
 .date-picker__wrapper {
   width: 100%;
   position: relative;
@@ -47,24 +48,12 @@
         }
       }
     }
-  }
-
-  .date-picker__icon {
-    height: 1.5rem;
-    width: 1.5rem;
-    border-radius: 50%;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-
-    &.error-background {
-      background: var(--color-error-high) !important;
-    }
-
-    i {
-      font-size: 12px;
+    .input-icon__clear {
+      color: #959aa3;
+      &:hover {
+        cursor: pointer;
+        color: #25343a;
+      }
     }
   }
 
@@ -138,7 +127,7 @@
     transition: all 0.1s ease-out;
     padding: 0 4px;
     z-index: 200;
-    top: 28px;
+    top: 31px;
     font-style: normal;
     font-weight: normal;
     font-size: 14px !important;
@@ -146,7 +135,7 @@
     letter-spacing: 0.16px;
     left: 8px;
     &.component__title--sm {
-      top: 23px;
+      top: 27px;
     }
     &.component__title-up {
       top: 19px;
@@ -155,9 +144,23 @@
       transform: translateY(-50%) scale(0.9);
     }
     &.component__title-down {
-      top: 38px;
+      top: 35px;
       left: 8px;
       transform: translateY(-50%) scale(0.9);
     }
+  }
+}
+.form-item__container--error {
+  .date-picker__icon-wrapper {
+    background-color: var(--color-critical-surface);
+  }
+  .date-picker--material + .date-picker__icon-wrapper {
+    background-color: var(--color-critical-surface) !important;
+    &:hover {
+      background-color: var(--color-surface-input-hover) !important;
+    }
+  }
+  .date-picker--material:hover + .date-picker__icon-wrapper {
+    background-color: var(--color-surface-input-hover) !important;
   }
 }

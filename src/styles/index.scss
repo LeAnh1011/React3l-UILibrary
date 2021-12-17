@@ -20,3 +20,23 @@ body {
   font-family: var(--font-primary);
   color: var(--color-text);
 }
+.text-center{
+  text-align: center !important;
+}
+.text-right{
+  text-align: right !important;
+}
+.text-left{
+  text-align: left !important;
+}
+.text-in-table-cell{
+  line-height: 16px;
+}
+.link-text{
+  color: #000000D9;
+  text-decoration: underline;
+  &:hover{
+    color: #0F62FE;
+    text-decoration: underline;
+  }
+}

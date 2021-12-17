@@ -30,6 +30,7 @@ function Default() {
         total={100}
         onChange={handlePagination}
       />
+      <br />
       <Pagination
         skip={filter.skip}
         take={filter.take}

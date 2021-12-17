@@ -21,18 +21,21 @@
     flex-direction: row;
     width: 100%;
     height: 40px;
-    align-items: center;
     justify-content: space-between;
     .number-per-page-box{
         display: flex;
         flex-direction: row;
         .number-per-page-box-1{
+            height: 40px;
             padding: 0px 16px;
             display: flex;
             flex-direction: row;
+            align-items: center;
             border-right: 0.5px solid #e0e0dc;
         }
         .number-per-page-box-2{
+            display: flex;
+            align-items: center;
             padding: 0px 16px;
         }
     }
@@ -43,6 +46,9 @@
         .change-page-box-1{
             padding-left: 16px;
             border-left: 0.5px solid #e0e0dc;
+            height: 40px;
+            display: flex;
+            align-items: center;
         }
         .box-change-page-button{
             margin-left: 16px;

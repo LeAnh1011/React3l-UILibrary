@@ -2,12 +2,7 @@ import React, { RefObject } from "react";
 import "./InputTag.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
-
-export enum INPUT_TAG_TYPE {
-  MATERIAL,
-  BORDERED,
-  FLOAT_LABEL,
-}
+import { BORDER_TYPE } from "config/enum";
 
 export interface InputTagProps<T extends Model> {
   listItem?: T[];
@@ -22,7 +17,7 @@ export interface InputTagProps<T extends Model> {
   onSearch?: (T: string) => void;
   isRequired?: boolean;
   label?: string;
-  type?: INPUT_TAG_TYPE;
+  type?: BORDER_TYPE;
   isSmall?: boolean;
   isUsingSearch?: boolean;
   onKeyDown?: (event: any) => void;
@@ -94,7 +89,7 @@ function InputTag(props: InputTagProps<Model>) {
     <>
       <div className="input-tag__wrapper">
         <div className="input-tag__label m-b--xxxs">
-          {type !== INPUT_TAG_TYPE.FLOAT_LABEL && label && (
+          {type !== BORDER_TYPE.FLOAT_LABEL && label && (
             <label className="component__title">
               {label}
               {isRequired && <span className="text-danger">&nbsp;*</span>}
@@ -110,11 +105,11 @@ function InputTag(props: InputTagProps<Model>) {
               "p-x--xs": isSmall,
               "p--xs": !isSmall,
               "input-tag__container--material":
-                type === INPUT_TAG_TYPE.MATERIAL,
+                type === BORDER_TYPE.MATERIAL,
               "input-tag__container--bordered":
-                type === INPUT_TAG_TYPE.BORDERED,
+                type === BORDER_TYPE.BORDERED,
               "input-tag--disabled ": disabled,
-              "input-tag--float": type === INPUT_TAG_TYPE.FLOAT_LABEL,
+              "input-tag--float": type === BORDER_TYPE.FLOAT_LABEL,
             }
           )}
           onClick={() =>
@@ -143,7 +138,7 @@ function InputTag(props: InputTagProps<Model>) {
               type="text"
               value={searchTerm}
               placeholder={
-                type === INPUT_TAG_TYPE.FLOAT_LABEL && label ? " " : placeHolder
+                type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
               }
               ref={inputRef}
               disabled={disabled}
@@ -156,14 +151,14 @@ function InputTag(props: InputTagProps<Model>) {
               ref={inputRef}
               readOnly={true}
               placeholder={
-                type === INPUT_TAG_TYPE.FLOAT_LABEL && label ? " " : ""
+                type === BORDER_TYPE.FLOAT_LABEL && label ? " " : ""
               }
               disabled={disabled}
               onKeyDown={handleKeyDown}
             />
           )}
 
-          {type === INPUT_TAG_TYPE.FLOAT_LABEL && label && (
+          {type === BORDER_TYPE.FLOAT_LABEL && label && (
             <label
               className={classNames(
                 "component__title component__title--normal",
@@ -206,6 +201,7 @@ function defaultRenderObject<T extends Model>(t: T) {
 }
 
 InputTag.defaultProps = {
+  type: BORDER_TYPE.BORDERED,
   title: null,
   render: defaultRenderObject,
   isMaterial: false,

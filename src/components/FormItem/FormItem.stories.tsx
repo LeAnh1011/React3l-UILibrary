@@ -1,6 +1,7 @@
 import { storiesOf } from "@storybook/react";
-import FormItem, { ValidateStatus } from "./FormItem";
+import FormItem from "./FormItem";
 import InputText from "../Input/InputText/InputText";
+import { ValidateStatus } from "./../../config/enum";
 
 function Default() {
   return (

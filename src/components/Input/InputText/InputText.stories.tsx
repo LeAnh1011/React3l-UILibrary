@@ -1,10 +1,11 @@
 import { StringFilter } from "react3l-advanced-filters";
 import { ModelFilter } from "react3l-common";
 import React from "react";
-import InputText, { INPUT_TEXT_TYPE } from "./InputText";
+import InputText from "./InputText";
 import { Radio, RadioChangeEvent } from "antd";
 import FormItem from "../../FormItem/FormItem";
-import { ValidateStatus } from "../../FormItem/FormItem";
+import { ValidateStatus } from "./../../../config/enum";
+import { BORDER_TYPE } from "./../../../config/enum";
 
 export class DemoFilter extends ModelFilter {
   name: StringFilter = new StringFilter();
@@ -14,9 +15,7 @@ export class DemoFilter extends ModelFilter {
 export function InputTextStories() {
   const [inputValue, setInputVal] = React.useState();
 
-  const [type, setType] = React.useState<INPUT_TEXT_TYPE>(
-    INPUT_TEXT_TYPE.BORDERED
-  );
+  const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
 
   const [isSmall, setIsSmall] = React.useState(false);
 
@@ -73,9 +72,9 @@ export function InputTextStories() {
 
       <div style={{ margin: "10px", width: "400px" }}>
         <Radio.Group onChange={handleChangeStyle} value={type}>
-          <Radio value={INPUT_TEXT_TYPE.MATERIAL}>Material</Radio>
-          <Radio value={INPUT_TEXT_TYPE.FLOAT_LABEL}>Float Label</Radio>
-          <Radio value={INPUT_TEXT_TYPE.BORDERED}>Bordered</Radio>
+          <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
+          <Radio value={BORDER_TYPE.FLOAT_LABEL}>Float Label</Radio>
+          <Radio value={BORDER_TYPE.BORDERED}>Bordered</Radio>
         </Radio.Group>
       </div>
       <div style={{ margin: "10px", width: "300px" }}>

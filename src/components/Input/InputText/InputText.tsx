@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { BORDER_TYPE } from "config/enum";
 import React, { RefObject } from "react";
 import "./InputText.scss";
 
@@ -7,15 +8,9 @@ interface InputTextAction {
   action?: any;
 }
 
-export enum INPUT_TEXT_TYPE {
-  MATERIAL,
-  BORDERED,
-  FLOAT_LABEL,
-}
-
 export interface InputTextProps {
   label?: string;
-  type?: INPUT_TEXT_TYPE;
+  type?: BORDER_TYPE;
   isRequired?: boolean;
   floatLabel?: boolean;
   isMaterial?: boolean;
@@ -127,7 +122,7 @@ const InputText = React.forwardRef((props: InputTextProps, ref: React.Ref<any>) 
   return (
     <div className={classNames("input-text__wrapper", className)}>
       <div className="input-text__label m-b--xxxs">
-        {type !== INPUT_TEXT_TYPE.FLOAT_LABEL && label && (
+        {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label className="component__title">
             {label}
             {isRequired && <span className="text-danger">&nbsp;*</span>}
@@ -157,9 +152,9 @@ const InputText = React.forwardRef((props: InputTextProps, ref: React.Ref<any>) 
             "p-y--xxs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
-            "input-text--material": type === INPUT_TEXT_TYPE.MATERIAL,
+            "input-text--material": type === BORDER_TYPE.MATERIAL,
             "input-text--disabled ": disabled,
-            "input-text--float": type === INPUT_TEXT_TYPE.FLOAT_LABEL,
+            "input-text--float": type === BORDER_TYPE.FLOAT_LABEL,
           }
         )}
         ref={ref}
@@ -184,7 +179,7 @@ const InputText = React.forwardRef((props: InputTextProps, ref: React.Ref<any>) 
           onKeyDown={handleKeyDown}
           onBlur={handleBlur}
           placeholder={
-            type === INPUT_TEXT_TYPE.FLOAT_LABEL && label ? " " : placeHolder
+            type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
           }
           ref={inputRef}
           disabled={disabled}
@@ -192,7 +187,7 @@ const InputText = React.forwardRef((props: InputTextProps, ref: React.Ref<any>) 
             "disabled-field": disabled,
           })}
         />
-        {type === INPUT_TEXT_TYPE.FLOAT_LABEL && label && (
+        {type === BORDER_TYPE.FLOAT_LABEL && label && (
           <label
             className={classNames("component__title", {
               "component__title--normal": !prefix,
@@ -231,7 +226,7 @@ const InputText = React.forwardRef((props: InputTextProps, ref: React.Ref<any>) 
 InputText.defaultProps = {
   label: "",
   isSmall: false,
-  type: INPUT_TEXT_TYPE.BORDERED,
+  type: BORDER_TYPE.BORDERED,
   isRequired: false,
   prefix: "",
   disabled: false,

@@ -1,0 +1,83 @@
+.pagination__previous-icon, .pagination__next-icon {
+    background: #FFFFFF;
+    font-size: 14px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover{
+        cursor: pointer;
+        box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.09);
+        border-radius: 7px;
+    }
+
+    i {
+        color: rgb(97, 97, 97);
+    } 
+}
+.pagination-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 40px;
+    justify-content: space-between;
+    .number-per-page-box{
+        display: flex;
+        flex-direction: row;
+        .number-per-page-box-1{
+            height: 40px;
+            padding: 0px 16px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border-right: 0.5px solid #e0e0dc;
+        }
+        .number-per-page-box-2{
+            display: flex;
+            align-items: center;
+            padding: 0px 16px;
+        }
+    }
+    .change-page-box{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .change-page-box-1{
+            padding-left: 16px;
+            border-left: 0.5px solid #e0e0dc;
+            height: 40px;
+            display: flex;
+            align-items: center;
+        }
+        .box-change-page-button{
+            margin-left: 16px;
+            display: flex;
+            flex-direction: row;
+        }
+    }
+}
+.dropdown-pagination-per-page{
+    width: 40px;
+}
+.dropdown-pagination-page{
+    width: 45px;
+}
+.menu-page-change {
+    overflow-y: scroll;
+    width: 45px;
+    &.options-select-page-height{
+        height: 200px;
+    }
+}
+ .menu-page-change::-webkit-scrollbar {
+     width: 0px;
+ }
+ 
+ .menu-page-change::-webkit-scrollbar-track {
+     display: none;
+ }
+ 
+ .menu-page-change::-webkit-scrollbar-thumb {
+     display: none; 
+ }

@@ -9,9 +9,9 @@ export interface ActionBarComponentProps {
   selectedRowKeys?: Key[];
   setSelectedRowKeys?: Dispatch<SetStateAction<Key[]>>;
   rowSelections?: any;
-  textSelect?: string;
-  textLine?: string;
-  textTitleCancelButton?: string;
+  translateSelected?: string;
+  translateLine?: string;
+  translateTitleCancelButton?: string;
 }
 
 function ActionBarComponent(props: ActionBarComponentProps) {
@@ -19,9 +19,9 @@ function ActionBarComponent(props: ActionBarComponentProps) {
     children,
     selectedRowKeys,
     setSelectedRowKeys,
-    textSelect,
-    textLine,
-    textTitleCancelButton,
+    translateSelected,
+    translateLine,
+    translateTitleCancelButton,
   } = props;
 
   const handleCancel = React.useCallback(() => {
@@ -38,13 +38,13 @@ function ActionBarComponent(props: ActionBarComponentProps) {
       )}
     >
       <div className="item-selected-counter">
-        {textSelect} {selectedRowKeys?.length} {textLine}
+        {translateSelected} {selectedRowKeys?.length} {translateLine}
       </div>
       {selectedRowKeys?.length > 0 && (
         <div className="action-button">
           {children}
           <div className="button-cancel" onClick={handleCancel}>
-            {textTitleCancelButton}
+            {translateTitleCancelButton}
           </div>
         </div>
       )}
@@ -54,9 +54,9 @@ function ActionBarComponent(props: ActionBarComponentProps) {
 
 ActionBarComponent.defaultProps = {
   selectedRowKeys: [],
-  textSelect: "Đã chọn",
-  textLine: "dòng",
-  textTitleCancelButton: "Cancel",
+  translateSelected: "Đã chọn",
+  translateLine: "dòng",
+  translateTitleCancelButton: "Cancel",
 };
 
 export default ActionBarComponent;

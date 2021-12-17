@@ -23,15 +23,21 @@
     justify-content: center;
     align-items: center;
   }
+  .select__list-prefer {
+    .ant-tree-list {
+      box-shadow: inset 0px 1px 0px #e1e3e5;
+    }
+  }
   .select__bottom-button {
-    position: absolute;
-    bottom: 0;
     height: 40px;
     width: 100%;
     background-color: var(--color-surface-material-input);
     display: flex;
     align-items: center;
-    @include box-shadow--popover();
+    box-shadow: inset 0px 1px 0px #e1e3e5;
+    &:hover {
+      cursor: pointer;
+    }
     span {
       font-size: 14px;
     }
@@ -63,8 +69,6 @@
       .ant-tree-switcher {
         display: flex;
         align-items: center;
-        width: unset;
-        margin-right: 8px;
       }
       .ant-tree-checkbox {
         margin: 0px;
@@ -97,5 +101,23 @@
   .ant-tree-rtl.ant-tree .ant-tree-switcher_close .tree__icon {
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
+  }
+
+  .ant-tree-checkbox:hover,
+  .ant-tree-checkbox-checked:hover {
+    .ant-tree-checkbox-inner {
+      border-color: var(--color-text);
+    }
+  }
+
+  .ant-tree-checkbox-checked {
+    .ant-tree-checkbox-inner {
+      background-color: var(--color-text);
+      border-color: var(--color-text);
+    }
+  }
+
+  .ant-tree-checkbox-inner {
+    border: 1px solid var(--color-input-disabled);
   }
 }

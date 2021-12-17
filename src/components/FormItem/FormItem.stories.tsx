@@ -1,7 +1,6 @@
 import { storiesOf } from "@storybook/react";
-import nameof from "ts-nameof.macro";
 import FormItem, { ValidateStatus } from "./FormItem";
-import InputText from '../Input/InputText/InputText';
+import InputText from "../Input/InputText/InputText";
 
 function Default() {
   return (
@@ -42,4 +41,4 @@ function Default() {
   );
 }
 
-storiesOf("FormItem", module).add(nameof(Default), Default);
+storiesOf("FormItem", module).add("Default", Default);

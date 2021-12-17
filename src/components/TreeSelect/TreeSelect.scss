@@ -28,23 +28,5 @@
     margin-top: 5px;
     position: absolute;
     z-index: 999;
-
-    .ant-tree-checkbox:hover,
-    .ant-tree-checkbox-checked:hover {
-      .ant-tree-checkbox-inner {
-        border-color: var(--color-text);
-      }
-    }
-
-    .ant-tree-checkbox-checked {
-      .ant-tree-checkbox-inner {
-        background-color: var(--color-text);
-        border-color: var(--color-text);
-      }
-    }
-
-    .ant-tree-checkbox-inner {
-      border: 1px solid var(--color-input-disabled);
-    }
   }
 }

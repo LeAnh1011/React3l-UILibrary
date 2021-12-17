@@ -25,16 +25,17 @@
       background-color: var(--color-surface-material-input);
     }
     .select__bottom-button {
-      position: absolute;
-      bottom: 0;
       height: 40px;
       width: 100%;
       background-color: var(--color-surface-material-input);
       display: flex;
       align-items: center;
-      @include box-shadow--popover();
+      box-shadow: inset 0px 1px 0px #e1e3e5;
       span {
         font-size: 14px;
+      }
+      &:hover {
+        cursor: pointer;
       }
     }
     .select__add-button {
@@ -59,7 +60,6 @@
       position: relative;
       display: flex;
       align-items: center;
-      background-color: var(--color-surface-material-input);
       padding-right: 15px;
       font-size: 13px;
       white-space: nowrap;
@@ -69,6 +69,9 @@
         white-space: nowrap;
         overflow-x: hidden;
         text-overflow: ellipsis;
+      }
+      &:hover {
+        cursor: pointer;
       }
       &:hover,
       &:focus {
@@ -82,6 +85,10 @@
         display: flex;
         justify-content: space-between;
       }
+    }
+
+    .select__list-prefer {
+      box-shadow: inset 0px 1px 0px #e1e3e5;
     }
   }
 }

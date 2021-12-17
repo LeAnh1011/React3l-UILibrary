@@ -5,9 +5,7 @@ import Tree from "../Tree/Tree";
 import { useDebounceFn } from "ahooks";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import { Observable } from "rxjs";
-import nameof from "ts-nameof.macro";
 import { CommonService } from "services/common-service";
-import { StringFilter } from "react3l-advanced-filters";
 import InputTag, { INPUT_TAG_TYPE } from "../Input/InputTag/InputTag";
 import InputSelect, {
   INPUT_SELECT_TYPE,
@@ -44,6 +42,7 @@ export interface TreeSelectProps<
   treeTitleRender?: (T: T) => string;
   selectWithAdd?: boolean;
   selectWithPreferOption?: boolean;
+  preferOptions?: T[];
 }
 export interface filterAction {
   type: string;
@@ -85,6 +84,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     treeTitleRender,
     selectWithAdd,
     selectWithPreferOption,
+    preferOptions,
   } = props;
 
   const { run } = useDebounceFn(
@@ -101,8 +101,6 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
   const [expanded, setExpanded] = React.useState<boolean>(false);
 
   const listIds = React.useMemo(() => {
-    console.log("item", item);
-    console.log("list item", listItem);
     if (item) return [item.id];
     if (listItem) return listItem.map((currentItem) => currentItem?.id);
     return [];
@@ -149,13 +147,17 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
 
   const handleExpand = React.useCallback(
     (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      if (!expanded) {
-        const filterData = modelFilter ? { ...modelFilter } : new ClassFilter();
-        dispatch({ type: "UPDATE", data: filterData });
+      if (!disabled) {
+        if (!expanded) {
+          const filterData = modelFilter
+            ? { ...modelFilter }
+            : new ClassFilter();
+          dispatch({ type: "UPDATE", data: filterData });
+        }
+        setExpanded(true);
       }
-      setExpanded(true);
     },
-    [ClassFilter, expanded, modelFilter]
+    [ClassFilter, disabled, expanded, modelFilter]
   );
 
   const handleOnchange = React.useCallback(
@@ -219,6 +221,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               titleRender={treeTitleRender}
               selectWithAdd={selectWithAdd}
               selectWithPreferOption={selectWithPreferOption}
+              preferOptions={preferOptions}
             />
           </div>
         )}
@@ -228,9 +231,9 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
 }
 
 TreeSelect.defaultProps = {
-  placeHolder: `Select ${nameof(TreeSelect)}...`,
-  searchProperty: nameof(Model.prototype.name),
-  searchType: nameof(StringFilter.prototype.contain),
+  placeHolder: `Select TreeSelect...`,
+  searchProperty: "name",
+  searchType: "contain",
   classFilter: ModelFilter,
   onlySelectLeaf: false,
   isMaterial: false,

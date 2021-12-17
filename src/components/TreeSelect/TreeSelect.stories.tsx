@@ -1,6 +1,5 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import nameof from "ts-nameof.macro";
 import TreeSelect from "./TreeSelect";
 import { Model, ModelFilter } from "react3l-common";
 import { Observable } from "rxjs";
@@ -40,6 +39,11 @@ const demoList = [
   { id: 5, name: "Ban công nghệ", code: "FTI", parentId: 4 },
   { id: 6, name: "Ban giám đốc", code: "BOD", parentId: 3 },
   { id: 7, name: "Ban quản trị", code: "BOM", parentId: 4 },
+];
+
+const list = [
+  { id: 9, name: "Phòng Muti Media", code: "MEDIA", parentId: null },
+  { id: 10, name: "Phòng truyền thông", code: "PTT", parentId: 9 },
 ];
 
 const demoItem = {
@@ -174,6 +178,7 @@ function Default() {
             isSmall={isSmall}
             selectWithAdd={isSelectWithAdd}
             selectWithPreferOption={isSelectWithPreferOption}
+            preferOptions={isSelectWithPreferOption ? list : undefined}
           />
         </FormItem>
       </div>
@@ -257,4 +262,4 @@ function Default() {
   );
 }
 
-storiesOf("TreeSelect", module).add(nameof(Default), Default);
+storiesOf("TreeSelect", module).add("Default", Default);

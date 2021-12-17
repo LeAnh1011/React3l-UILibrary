@@ -1,11 +1,10 @@
 import { Model, ModelFilter } from "react3l-common";
-import { Tree as TreeAntd } from "antd";
+import { Empty, Spin, Tree as TreeAntd } from "antd";
 import {
   DataNode,
   EventDataNode,
   TreeProps as AntdTreeProps,
 } from "antd/lib/tree";
-import { ASSETS_IMAGE, ASSETS_SVG } from "config/consts";
 import React, { ReactNode } from "react";
 import { ErrorObserver, Observable } from "rxjs";
 import { CommonService } from "services/common-service";
@@ -13,7 +12,6 @@ import "./Tree.scss";
 import { TreeNode as CustomTreeNode } from "./TreeNode";
 import { Key } from "antd/lib/table/interface";
 import classNames from "classnames";
-import Checkbox from "antd/lib/checkbox/Checkbox";
 
 function SwitcherIcon() {
   return (
@@ -36,6 +34,7 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   isMultiple?: boolean;
   selectWithAdd?: boolean;
   selectWithPreferOption?: boolean;
+  preferOptions?: T[];
 }
 function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const {
@@ -50,7 +49,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     onChange,
     titleRender,
     selectWithAdd,
-    selectWithPreferOption,
+    preferOptions,
   } = props;
 
   const [internalTreeData, setInternalTreeData] = React.useState<
@@ -74,6 +73,21 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const [subscription] = CommonService.useSubscription();
+
+  // prefer options tree list
+  const internalPreferOptionsTreeData = React.useMemo(() => {
+    if (preferOptions && preferOptions.length > 0) {
+      const [treeData] = CommonService.buildTree(preferOptions);
+      if (selectedKey) {
+        CommonService.setDisabledNode(selectedKey, treeData);
+      }
+      if (onlySelectLeaf) {
+        CommonService.setOnlySelectLeaf(treeData);
+      }
+      return treeData;
+    }
+    return [];
+  }, [onlySelectLeaf, preferOptions, selectedKey]);
 
   const searchTreeNode: any = React.useCallback(
     (element: CustomTreeNode<Model>, key: number) => {
@@ -116,14 +130,17 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     (checkedKeys: { checked: Key[]; halfChecked: Key[] }) => {
       setInternalCheckedKeys(checkedKeys.checked);
       if (typeof onChange === "function") {
-        const checkedNodes = searchTree(internalTreeData, checkedKeys.checked);
+        const checkedNodes = searchTree(
+          [...internalTreeData, ...internalPreferOptionsTreeData],
+          checkedKeys.checked
+        );
         const checkedItems = checkedNodes.map(
           (currentNode) => currentNode.item
         );
         onChange([...checkedItems]);
       }
     },
-    [internalTreeData, onChange, searchTree]
+    [internalPreferOptionsTreeData, internalTreeData, onChange, searchTree]
   );
 
   const handleSelect: AntdTreeProps["onSelect"] = React.useCallback(
@@ -139,21 +156,23 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     ) => {
       setInternalSelectedKeys(selectedKeys);
       if (typeof onChange === "function") {
-        const checkedNodes = searchTree(internalTreeData, selectedKeys);
+        const checkedNodes = searchTree(
+          [...internalTreeData, ...internalPreferOptionsTreeData],
+          selectedKeys
+        );
         const checkedItems = checkedNodes.map(
           (currentNode) => currentNode.item
         );
         onChange([...checkedItems]);
       }
     },
-    [internalTreeData, onChange, searchTree]
+    [internalPreferOptionsTreeData, internalTreeData, onChange, searchTree]
   );
 
   React.useEffect(() => {
     if (checkable) {
       setInternalCheckedKeys(checkedKeys);
     } else {
-      console.log(checkedKeys);
       setInternalSelectedKeys(checkedKeys);
     }
   }, [checkable, checkedKeys]);
@@ -193,11 +212,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       <div className="tree-container">
         {loading ? (
           <div className="tree__loading">
-            <img
-              className="img-loading"
-              src={ASSETS_SVG + "/spinner.svg"}
-              alt=""
-            />
+            <Spin tip="Loading..."></Spin>
           </div>
         ) : (
           <>
@@ -235,7 +250,44 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                     </div>
                   )}
                 ></TreeAntd>
-                {selectWithAdd ? (
+
+                {!loading && internalTreeData.length > 0 && (
+                  <div className="select__list-prefer">
+                    {internalPreferOptionsTreeData &&
+                      internalPreferOptionsTreeData.length > 0 && (
+                        <TreeAntd
+                          {...props}
+                          virtual
+                          showLine={false && { showLeafIcon: false }}
+                          treeData={internalPreferOptionsTreeData} // pass internalTreeData here  showLine={false && { showLeafIcon: false }}
+                          switcherIcon={<SwitcherIcon />}
+                          onCheck={handleCheck}
+                          onSelect={handleSelect}
+                          checkedKeys={internalCheckedKeys}
+                          selectedKeys={internalSelectedKeys}
+                          titleRender={(node: DataNode) => (
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <div>{titleRender(node)}</div>
+                              {!checkable &&
+                                internalSelectedKeys &&
+                                internalSelectedKeys.includes(node.key) && (
+                                  <div>
+                                    <i className="tio-done" />
+                                  </div>
+                                )}
+                            </div>
+                          )}
+                        />
+                      )}
+                  </div>
+                )}
+                {selectWithAdd && (
                   <div
                     className={classNames(
                       "select__bottom-button select__add-button p-y--xs"
@@ -244,33 +296,10 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                     <i className="tio-add m-l--xs" />
                     <span>Add new</span>
                   </div>
-                ) : selectWithPreferOption ? (
-                  <div
-                    className={classNames(
-                      "select__bottom-button select__prefer-option-button"
-                    )}
-                  >
-                    {checkable ? (
-                      <div className="p--xs">
-                        <Checkbox />
-                        <span className={classNames("p--xxs")}>
-                          Prefer Options
-                        </span>
-                      </div>
-                    ) : (
-                      <span className={classNames("p--xs")}>
-                        Prefer Options
-                      </span>
-                    )}
-                  </div>
-                ) : null}
+                )}
               </>
             ) : (
-              <img
-                className="img-emty"
-                src={ASSETS_IMAGE + "/no-data.png"}
-                alt=""
-              />
+              <Empty />
             )}
           </>
         )}

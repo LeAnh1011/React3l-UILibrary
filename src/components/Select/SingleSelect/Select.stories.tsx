@@ -5,7 +5,6 @@ import { Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
 import React from "react";
 import { of } from "rxjs";
-import nameof from "ts-nameof.macro";
 import FormItem, { ValidateStatus } from "../../FormItem/FormItem";
 import Select from "./Select";
 import { INPUT_SELECT_TYPE } from "../../Input/InputSelect/InputSelect";
@@ -30,6 +29,11 @@ const demoListEnum = (TModelFilter: ModelFilter) => {
     { id: 5, name: "Enum 5", code: "E5" },
   ]);
 };
+
+const list = [
+  { id: 9, name: "Phòng Muti Media", code: "MEDIA" },
+  { id: 10, name: "Phòng truyền thông", code: "PTT" },
+];
 
 export function SingleSelectStories() {
   const [selectModel, setSelectModel] = React.useState<Model>({
@@ -110,7 +114,7 @@ export function SingleSelectStories() {
             placeHolder={"Select Organization"}
             model={selectModel}
             modelFilter={selectModelFilter}
-            searchProperty={nameof(selectModel.name)}
+            searchProperty={"name"}
             render={handleRenderModel}
             onChange={handleSetModel}
             getList={demoListEnum}
@@ -121,6 +125,7 @@ export function SingleSelectStories() {
             selectWithPreferOption={isSelectWithPreferOption}
             disabled={isDisabled}
             isSmall={isSmall}
+            preferOptions={isSelectWithPreferOption ? list : undefined}
           />
         </FormItem>
       </div>

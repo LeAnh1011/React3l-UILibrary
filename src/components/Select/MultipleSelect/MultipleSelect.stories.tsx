@@ -17,6 +17,11 @@ const demoList = [
   { id: 7, name: "Ban quản trị", code: "BOM" },
 ];
 
+const list = [
+  { id: 9, name: "Phòng Muti Media", code: "MEDIA" },
+  { id: 10, name: "Phòng truyền thông", code: "PTT" },
+];
+
 const demoObservable = new Observable<Model[]>((observer) => {
   setTimeout(() => {
     observer.next(demoList);
@@ -139,8 +144,8 @@ export function MultipleSelectStories() {
             isSmall={isSmall}
             disabled={isDisabled}
             selectWithAdd={isSelectWithAdd}
-            selectWithPreferOption={isSelectWithPreferOption}
             isUsingSearch={withSearch}
+            preferOptions={isSelectWithPreferOption ? list : undefined}
           ></MultipleSelect>
         </FormItem>
       </div>

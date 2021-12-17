@@ -1,6 +1,5 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import nameof from "ts-nameof.macro";
 import Tree from "./Tree";
 import { Observable } from "rxjs";
 import { Model, ModelFilter } from "react3l-common";
@@ -25,10 +24,15 @@ const demoSearchFunc = (TModelFilter: ModelFilter) => {
 };
 
 function Default() {
+  const [checkedKeys, setCheckedKeys] = React.useState<any[]>([]);
   const [isMultiple, setMultiple] = React.useState(false);
 
   const handleChangeRadio = React.useCallback((event: RadioChangeEvent) => {
     setMultiple(event.target.value);
+  }, []);
+
+  const onChange = React.useCallback((items: Model[]) => {
+    setCheckedKeys(items.map((currentItem) => currentItem?.id));
   }, []);
 
   return (
@@ -42,6 +46,9 @@ function Default() {
         titleRender={(treeNode: any) => (
           <div>{treeNode.item?.name + " - " + treeNode.item?.code}</div>
         )}
+        onChange={onChange}
+        checkedKeys={checkedKeys}
+        checkStrictly={true}
       />
       <div style={{ margin: "10px", width: "300px" }}>
         <Radio.Group onChange={handleChangeRadio} value={isMultiple}>
@@ -53,4 +60,4 @@ function Default() {
   );
 }
 
-storiesOf("Tree", module).add(nameof(Default), Default);
+storiesOf("Tree", module).add("Default", Default);

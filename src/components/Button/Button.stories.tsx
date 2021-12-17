@@ -1,15 +1,15 @@
-import React from 'react';
-import {storiesOf} from '@storybook/react';
-import nameof from 'ts-nameof.macro';
-
+import React from "react";
+import { storiesOf } from "@storybook/react";
+import nameof from "ts-nameof.macro";
+import Button from "./Button";
 function Default() {
-  return <></>;
+  return <Button type="secondary">{"hihi"}</Button>;
 }
 
 function Primary() {
-  return <></>;
+  return <Button type="secondary" />;
 }
 
-storiesOf('Button', module)
+storiesOf("Button", module)
   .add(nameof(Default), Default)
   .add(nameof(Primary), Primary);

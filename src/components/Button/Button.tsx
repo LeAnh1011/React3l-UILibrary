@@ -3,59 +3,51 @@ import React, {
   ButtonHTMLAttributes,
   PropsWithChildren,
   ReactNode,
-  RefObject,
 } from "react";
 import "./Button.scss";
-import { LoadingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
+
+export type ButtonType =
+  | "default"
+  | "primary"
+  | "secondary"
+  | "danger"
+  | "warning"
+  | "link";
 
 export interface ButtonProps {
-  loading?: boolean;
-
-  children: ReactNode;
+  type?: ButtonType;
 
   htmlType?: ButtonHTMLAttributes<any>["type"];
+
+  outlined?: boolean;
 
   className?: string;
 
   onClick?: ButtonHTMLAttributes<any>["onClick"];
+
+  children?: ReactNode;
 }
 
-const antIcon = (
-  <LoadingOutlined style={{ fontSize: 16, color: "#fff" }} spin />
+const Button = React.forwardRef(
+  (props: PropsWithChildren<ButtonProps>, ref: React.Ref<any>) => {
+    const { htmlType, children, type, onClick, className } = props;
+
+    return (
+      <button
+        type={htmlType}
+        onClick={onClick}
+        ref={ref}
+        className={classNames("btn", `btn-${type}`, className)}
+      >
+        {children}
+      </button>
+    );
+  }
 );
 
-const Button = React.forwardRef(function ButtonComponent(
-  props: PropsWithChildren<ButtonProps>,
-  ref: RefObject<HTMLButtonElement>
-) {
-  const { htmlType, children, onClick, className, loading } = props;
-  const [isFocused, setIsFocused] = React.useState<boolean>(false);
-  const handleFocus = React.useCallback(() => {
-    setIsFocused(true);
-  }, []);
-  const handleBlur = React.useCallback(() => {
-    setIsFocused(false);
-  }, []);
-
-  return (
-    <button
-      type={htmlType}
-      onClick={onClick}
-      ref={ref}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      className={classNames("btn", className, {
-        loading__button: loading && isFocused,
-      })}
-      disabled={loading}
-    >
-      {loading && isFocused && <Spin indicator={antIcon} />} {children}
-    </button>
-  );
-});
-
 Button.defaultProps = {
+  type: "default",
+  outlined: false,
   htmlType: "button",
 };
 

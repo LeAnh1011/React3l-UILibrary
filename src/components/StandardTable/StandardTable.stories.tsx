@@ -5,7 +5,7 @@ import Radio, { RadioChangeEvent } from "antd/lib/radio";
 import "./StandardTable.scss";
 import StandardTable from "./StandardTable";
 // import { Model } from "react3l-common";
-import { RowSelectionType } from "antd/lib/table/interface";
+import { Key, RowSelectionType } from "antd/lib/table/interface";
 import yomatoImg from "../../assets/image/yo.jpg";
 import LayoutHeader from "./LayoutHeader/LayoutHeader";
 import LayoutCell from "./LayoutCell/LayoutCell";
@@ -167,10 +167,10 @@ function Default() {
     );
   };
   const typeRowSelection: RowSelectionType = "checkbox";
-  const [selectedRowKeys, setSelectedRowKeys] = React.useState<KeyType[]>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = React.useState<Key[]>([]);
 
   const rowSelection = {
-    onChange(selectedKeys: KeyType[]) {
+    onChange(selectedKeys: Key[]) {
       setSelectedRowKeys(selectedKeys);
     },
     selectedRowKeys,

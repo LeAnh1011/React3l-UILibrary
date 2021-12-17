@@ -1,12 +1,13 @@
 import React, { ReactNode, Dispatch, SetStateAction } from "react";
 import "./ActionBarComponent.scss";
 import classNames from "classnames";
+import { Key } from "antd/lib/table/interface";
 
 export interface ActionBarComponentProps {
   name?: string;
   children?: ReactNode;
-  selectedRowKeys?: KeyType[];
-  setSelectedRowKeys?: Dispatch<SetStateAction<KeyType[]>>;
+  selectedRowKeys?: Key[];
+  setSelectedRowKeys?: Dispatch<SetStateAction<Key[]>>;
   rowSelections?: any;
 }
 

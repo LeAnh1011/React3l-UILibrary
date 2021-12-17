@@ -2,38 +2,16 @@ import React from "react";
 import "./StandardTable.scss";
 import "antd/dist/antd.css";
 import { Table } from "antd";
-import { Model } from "react3l-common/src/Model";
-import { TFunction } from "i18next";
 import classNames from "classnames";
-// import nameof from "ts-nameof.macro";
-import { ColumnProps } from "antd/lib/table";
-import { UseMaster } from "./InterfaceStandardTable";
-import { ExpandedRowRender } from "rc-table/lib/interface";
-import arrowUp from "../../assets/image/arrow-up.png";
-import arrowDown from "../../assets/image/arrow-down.png";
-export interface StandardTableCustomProps extends UseMaster {
-  columns?: ColumnProps<Model>[];
+import { TableProps } from "antd/lib/table";
+export interface StandardTableCustomProps extends TableProps<any> {
   isDragable?: boolean;
-  isShowTitle?: boolean;
-  translate?: TFunction;
-  isExpandable?: boolean;
-  expandedRowRend?: ExpandedRowRender<Model>;
   className?: string;
   tableSize?: "large" | "medium" | "small";
   isLevel2?: boolean; //unset height for table level2
 }
 function StandardTable(props: StandardTableCustomProps) {
-  const {
-    list,
-    columns,
-    expandedRowRend,
-    isExpandable,
-    className,
-    tableSize,
-    isDragable,
-    rowSelection,
-    isLevel2,
-  } = props;
+  const { className, tableSize, isDragable, isLevel2 } = props;
 
   React.useEffect(() => {
     const antTable = document.getElementsByClassName(
@@ -95,34 +73,7 @@ function StandardTable(props: StandardTableCustomProps) {
             `table-size-${tableSize}`,
             "custom-scrollbar"
           )}
-          columns={columns}
-          pagination={false}
-          expandable={
-            isExpandable
-              ? {
-                  expandedRowRender: expandedRowRend,
-                  expandIcon: ({ expanded, onExpand, record }) =>
-                    expanded ? (
-                      <img
-                        src={arrowUp}
-                        alt="up"
-                        className="icon-table-expand"
-                        onClick={(e) => onExpand(record, e)}
-                      />
-                    ) : (
-                      <img
-                        src={arrowDown}
-                        alt="down"
-                        className="icon-table-expand"
-                        onClick={(e) => onExpand(record, e)}
-                      />
-                    ),
-                  columnWidth: "45px",
-                }
-              : null
-          }
-          dataSource={list}
-          rowSelection={rowSelection}
+          {...props}
         />
       </div>
     </>
@@ -132,5 +83,6 @@ StandardTable.defaultProps = {
   isExpandable: false,
   tableSize: "large",
   isLevel2: false,
+  pagination: false,
 };
 export default StandardTable;

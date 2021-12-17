@@ -9,6 +9,7 @@ import { RowSelectionType } from "antd/lib/table/interface";
 import yomatoImg from "../../assets/image/yo.jpg";
 import LayoutHeader from "./LayoutHeader/LayoutHeader";
 import LayoutCell from "./LayoutCell/LayoutCell";
+import { ModelFilter } from "react3l-common";
 import ActionBarComponent from "./ActionBarComponent/ActionBarComponent";
 import BadgeText from "./DataCellComponent/BadgeText/BadgeText";
 import TwoLineText from "./DataCellComponent/TwoLineText/TwoLineText";
@@ -17,9 +18,16 @@ import StatusLine from "./DataCellComponent/StatusLine/StatusLine";
 import { ColumnProps } from "antd/lib/table";
 import { Button } from "antd";
 import { Tabs } from "antd";
+import Pagination from "./Pagination/Pagination";
+import arrowUp from "../../assets/image/arrow-up.png";
+import arrowDown from "../../assets/image/arrow-down.png";
+import { StringFilter } from "react3l-advanced-filters";
 
 const { TabPane } = Tabs;
-
+export class DemoFilter extends ModelFilter {
+  name: StringFilter = new StringFilter();
+  code: StringFilter = new StringFilter();
+}
 export enum AVATAR_TYPE {
   CIRCLE = "circle",
   SQUARE = "square",
@@ -36,6 +44,18 @@ export enum ORDER_TYPE {
 }
 
 function Default() {
+  const [filter, setFilter] = React.useState<DemoFilter>(new DemoFilter());
+
+  const handlePagination = React.useCallback(
+    (skip: number, take: number) => {
+      setFilter({ ...filter, skip, take });
+      // if (typeof handleSearch === "function") {
+      //   handleSearch();
+      // }
+      console.log(filter);
+    },
+    [filter, setFilter]
+  );
   const [avatarType, setAvatarType] = React.useState<AVATAR_TYPE>(
     AVATAR_TYPE.CIRCLE
   );
@@ -139,7 +159,7 @@ function Default() {
     return (
       <StandardTable
         columns={columns}
-        list={data}
+        dataSource={data}
         isDragable={true}
         tableSize={size}
         isLevel2={true}
@@ -299,7 +319,7 @@ function Default() {
         ellipsis: true,
         render(...[type]) {
           return (
-            <LayoutCell orderType={orderType}>
+            <LayoutCell orderType={orderType} tableSize="large">
               <OneLineText value={type} />
             </LayoutCell>
           );
@@ -314,7 +334,7 @@ function Default() {
         ellipsis: true,
         render(...[name]) {
           return (
-            <LayoutCell orderType={orderType}>
+            <LayoutCell orderType={orderType} tableSize="large">
               <OneLineText
                 avatar={yomatoImg}
                 avatarType={avatarType}
@@ -335,7 +355,7 @@ function Default() {
         ellipsis: true,
         render(...[name]) {
           return (
-            <LayoutCell orderType={orderType}>
+            <LayoutCell orderType={orderType} tableSize="large">
               <OneLineText
                 avatar={yomatoImg}
                 avatarType={avatarType}
@@ -355,7 +375,7 @@ function Default() {
         ellipsis: true,
         render(...[location]) {
           return (
-            <LayoutCell orderType={orderType}>
+            <LayoutCell orderType={orderType} tableSize="large">
               <OneLineText value={location} link="https://www.youtube.com/" />
             </LayoutCell>
           );
@@ -370,7 +390,7 @@ function Default() {
         ellipsis: true,
         render(...[platform]) {
           return (
-            <LayoutCell orderType={orderType}>
+            <LayoutCell orderType={orderType} tableSize="large">
               <OneLineText icon="tio-calendar_month" value={platform} />
             </LayoutCell>
           );
@@ -385,7 +405,7 @@ function Default() {
         ellipsis: true,
         render(...[version]) {
           return (
-            <LayoutCell orderType={orderType}>
+            <LayoutCell orderType={orderType} tableSize="large">
               <TwoLineText valueLine1={version} valueLine2={"facebook"} />
             </LayoutCell>
           );
@@ -400,7 +420,7 @@ function Default() {
         ellipsis: true,
         render(...[version]) {
           return (
-            <LayoutCell orderType={orderType}>
+            <LayoutCell orderType={orderType} tableSize="large">
               <TwoLineText
                 avatar={yomatoImg}
                 avatarType={avatarType}
@@ -420,7 +440,7 @@ function Default() {
         ellipsis: true,
         render(...[version]) {
           return (
-            <LayoutCell orderType={orderType}>
+            <LayoutCell orderType={orderType} tableSize="large">
               <TwoLineText
                 avatar={yomatoImg}
                 avatarType={avatarType}
@@ -441,7 +461,7 @@ function Default() {
         ellipsis: true,
         render(...[version]) {
           return (
-            <LayoutCell orderType={orderType}>
+            <LayoutCell orderType={orderType} tableSize="large">
               <TwoLineText
                 avatar={yomatoImg}
                 avatarType={avatarType}
@@ -461,7 +481,7 @@ function Default() {
         ellipsis: true,
         render(...[upgradeNum]) {
           return (
-            <LayoutCell orderType={orderType}>
+            <LayoutCell orderType={orderType} tableSize="large">
               <TwoLineText
                 icon="tio-calendar_month"
                 valueLine1={upgradeNum + " alod dlkjwer"}
@@ -480,7 +500,7 @@ function Default() {
         ellipsis: true,
         render(...[upgradeNum]) {
           return (
-            <LayoutCell orderType={orderType}>
+            <LayoutCell orderType={orderType} tableSize="large">
               <TwoLineText
                 icon="tio-calendar_month"
                 valueLine1={upgradeNum + " alod dlkjwer"}
@@ -501,7 +521,7 @@ function Default() {
         align: "center",
         render(...[creator]) {
           return (
-            <LayoutCell orderType={orderType}>
+            <LayoutCell orderType={orderType} tableSize="large">
               <BadgeText
                 value={creator}
                 backgroundColor="#FFECB3"
@@ -520,7 +540,7 @@ function Default() {
         dataIndex: "status",
         render(...[status]) {
           return (
-            <LayoutCell orderType={orderType}>
+            <LayoutCell orderType={orderType} tableSize="large">
               <StatusLine value={status} active={true} />
             </LayoutCell>
           );
@@ -546,6 +566,27 @@ function Default() {
     });
   }
 
+  const expandable = {
+    expandedRowRender: expandedRowRender,
+    expandIcon: ({ expanded, onExpand, record }) =>
+      expanded ? (
+        <img
+          src={arrowUp}
+          alt="up"
+          className="icon-table-expand"
+          onClick={(e) => onExpand(record, e)}
+        />
+      ) : (
+        <img
+          src={arrowDown}
+          alt="down"
+          className="icon-table-expand"
+          onClick={(e) => onExpand(record, e)}
+        />
+      ),
+    columnWidth: "45px",
+  };
+
   return (
     <div>
       <Tabs defaultActiveKey="1">
@@ -558,13 +599,21 @@ function Default() {
           </ActionBarComponent>
           <StandardTable
             columns={columns}
-            list={data}
+            dataSource={data}
             isDragable={true}
             isExpandable={true}
-            expandedRowRend={expandedRowRender}
             tableSize={size}
             rowSelection={rowSelection}
+            expandable={expandable}
           />
+          <div>
+            <Pagination
+              skip={filter.skip}
+              take={filter.take}
+              total={100}
+              onChange={handlePagination}
+            />
+          </div>
         </TabPane>
         <TabPane tab="Table only size large" key="2">
           <ActionBarComponent
@@ -575,13 +624,21 @@ function Default() {
           </ActionBarComponent>
           <StandardTable
             columns={columns2}
-            list={data}
+            dataSource={data}
             isDragable={true}
             isExpandable={true}
-            expandedRowRend={expandedRowRender}
             tableSize={"large"}
             rowSelection={rowSelection}
           />
+          <div>
+            <Pagination
+              skip={filter.skip}
+              take={filter.take}
+              total={100}
+              onChange={handlePagination}
+              canChangePageSize={false}
+            />
+          </div>
         </TabPane>
       </Tabs>
 

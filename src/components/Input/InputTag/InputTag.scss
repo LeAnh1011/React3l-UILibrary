@@ -112,14 +112,14 @@
       transition: all 0.1s ease-out;
       padding: 0 4px;
       z-index: 200;
-      top: 11px;
+      top: 9px;
       font-size: 14px;
 
       &.component__title--normal {
         left: 8px;
       }
       &.component__title--sm {
-        top: 7px;
+        top: 5px;
       }
       &.component__title--prefix {
         left: 41px;

@@ -2,14 +2,10 @@ import classNames from "classnames";
 import React, { RefObject } from "react";
 import "./InputNumber.scss";
 import { ReactNode } from "react";
+import { BORDER_TYPE } from "config/enum";
 
 export const DECIMAL: string = "DECIMAL";
 export const LONG: string = "LONG";
-export enum INPUT_NUMBER_TYPE {
-  MATERIAL,
-  BORDERED,
-  FLOAT_LABEL,
-}
 
 interface InputNumberAction {
   name?: string;
@@ -19,7 +15,7 @@ interface InputNumberAction {
 export interface InputNumberProps {
   label?: string;
   isRequired?: boolean;
-  type?: INPUT_NUMBER_TYPE;
+  type?: BORDER_TYPE;
   floatLabel?: boolean;
   isMaterial?: boolean;
   value?: number;
@@ -251,7 +247,7 @@ function InputNumber(props: InputNumberProps) {
   return (
     <div className={classNames("input-number__wrapper", className)}>
       <div className="input-number__label m-b--xxxs">
-        {type !== INPUT_NUMBER_TYPE.FLOAT_LABEL && label && (
+        {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label className="component__title">
             {label}
             {isRequired && <span className="text-danger">&nbsp;*</span>}
@@ -276,9 +272,9 @@ function InputNumber(props: InputNumberProps) {
             "py--xxs": isSmall,
             "px--xs": isSmall,
             "p--xs": !isSmall,
-            "input-number--material": type === INPUT_NUMBER_TYPE.MATERIAL,
+            "input-number--material": type === BORDER_TYPE.MATERIAL,
             "input-number--disabled ": disabled,
-            "input-number--float": type === INPUT_NUMBER_TYPE.FLOAT_LABEL,
+            "input-number--float": type === BORDER_TYPE.FLOAT_LABEL,
           }
         )}
         onClick={() => {
@@ -301,7 +297,7 @@ function InputNumber(props: InputNumberProps) {
           onKeyDown={handleKeyPress}
           onBlur={handleBlur}
           placeholder={
-            type === INPUT_NUMBER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
+            type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
           }
           ref={inputRef}
           disabled={disabled}
@@ -311,7 +307,7 @@ function InputNumber(props: InputNumberProps) {
           min={min}
           max={max}
         />
-        {type === INPUT_NUMBER_TYPE.FLOAT_LABEL && label && (
+        {type === BORDER_TYPE.FLOAT_LABEL && label && (
           <label
             className={classNames("component__title", {
               "component__title--normal": !prefix,
@@ -349,7 +345,7 @@ function InputNumber(props: InputNumberProps) {
 
 InputNumber.defaultProps = {
   label: "",
-  type: INPUT_NUMBER_TYPE.BORDERED,
+  type: BORDER_TYPE.BORDERED,
   isSmall: false,
   isRequired: false,
   allowPositive: false,

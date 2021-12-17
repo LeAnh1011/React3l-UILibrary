@@ -3,11 +3,12 @@ import { useDebounceFn } from "ahooks";
 import { CommonService } from "services/common-service";
 import classNames from "classnames";
 import InputTag from "components/Input/InputTag/InputTag";
-import { ASSETS_IMAGE, ASSETS_SVG, DEBOUNCE_TIME_300 } from "config/consts";
+import { DEBOUNCE_TIME_300 } from "config/consts";
 import React, { RefObject } from "react";
 import { ErrorObserver, Observable } from "rxjs";
 import { INPUT_TAG_TYPE } from "components/Input/InputTag";
 import "./MultipleSelect.scss";
+import { Checkbox, Empty, Spin } from "antd";
 
 export interface MultipleSelectProps<
   T extends Model,
@@ -46,10 +47,35 @@ export interface MultipleSelectProps<
   selectWithPreferOption?: boolean;
 
   isUsingSearch?: boolean;
+
+  preferOptions?: T[];
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
   return t?.name;
+}
+
+interface changeAction {
+  type: string;
+  data: Model;
+}
+
+function multipleSelectReducer(
+  currentState: Model[],
+  action: changeAction
+): Model[] {
+  switch (action.type) {
+    case "UPDATE":
+      return [...currentState, action.data];
+    case "REMOVE":
+      const filteredArray = currentState.filter(
+        (item) => item.id !== action.data.id
+      );
+      return [...filteredArray];
+    case "REMOVE_ALL":
+      return [];
+  }
+  return;
 }
 
 export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
@@ -69,13 +95,17 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     type,
     isSmall,
     selectWithAdd,
-    selectWithPreferOption,
     isUsingSearch,
+    preferOptions,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
 
+  const [firstLoad, setFirstLoad] = React.useState<boolean>(true);
+
   const [list, setList] = React.useState<Model[]>([]);
+
+  const [selectedList, dispatch] = React.useReducer(multipleSelectReducer, []);
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
@@ -116,7 +146,10 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
   const internalList = React.useMemo(() => {
     if (list && list.length > 0) {
       list.forEach((current) => {
-        let filteredItem = models?.filter((item) => item.id === current.id)[0];
+        let filteredItem =
+          models &&
+          models.length > 0 &&
+          models?.filter((item) => item.id === current.id)[0];
         if (filteredItem) {
           current.isSelected = true;
         } else {
@@ -127,6 +160,43 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     }
     return [];
   }, [list, models]);
+
+  const internalPreferOptions = React.useMemo(() => {
+    if (preferOptions && preferOptions.length > 0) {
+      preferOptions.forEach((current) => {
+        let filteredItem =
+          models &&
+          models?.length > 0 &&
+          models.filter((item) => item.id === current.id)[0];
+        if (filteredItem) {
+          current.isSelected = true;
+        } else {
+          current.isSelected = false;
+        }
+      });
+      return [...preferOptions];
+    }
+    return [];
+  }, [preferOptions, models]);
+
+  React.useEffect(() => {
+    if (firstLoad) {
+      if (internalList && internalList?.length > 0) {
+        const tempList = [...internalList, ...internalPreferOptions];
+        if (tempList && tempList?.length > 0) {
+          tempList.forEach((item) => {
+            if (item?.isSelected === true) {
+              dispatch({
+                type: "UPDATE",
+                data: item,
+              });
+            }
+          });
+          setFirstLoad(false);
+        }
+      }
+    }
+  }, [firstLoad, internalList, internalPreferOptions]);
 
   const handleLoadList = React.useCallback(() => {
     try {
@@ -163,8 +233,10 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
   }, []);
 
   const handleClickItem = React.useCallback(
-    (item: Model) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      let filteredItem = models?.filter((current) => current.id === item.id)[0];
+    (item: Model) => (event: any) => {
+      let filteredItem = selectedList?.filter(
+        (current) => current.id === item.id
+      )[0];
       const cloneModelFilter = modelFilter
         ? { ...modelFilter }
         : new ClassFilter();
@@ -187,17 +259,25 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
           setLoading(false);
         }
       );
+
       if (filteredItem) {
+        const tmp = [...selectedList];
+        const index = tmp.indexOf(filteredItem);
+        tmp.splice(index, 1);
+        dispatch({
+          type: "REMOVE",
+          data: item,
+        });
         onChange(item, "REMOVE");
-        if (event) {
-          const currentItem = event.target as HTMLSpanElement;
-          currentItem.parentElement.parentElement.parentElement.blur();
-        }
       } else {
         onChange(item, "UPDATE");
+        dispatch({
+          type: "UPDATE",
+          data: item,
+        });
       }
     },
-    [models, modelFilter, ClassFilter, getList, onChange]
+    [modelFilter, ClassFilter, getList, selectedList, onChange]
   );
 
   const handleClickParentItem = React.useCallback(
@@ -368,65 +448,55 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                         tabIndex={-1}
                         onClick={handleClickParentItem}
                       >
-                        <div>
-                          <label className={classNames("checkbox__container")}>
-                            <input type="checkbox" checked={item.isSelected} />
-                            <span
-                              className="checkmark"
-                              onClick={handleClickItem(item)}
-                            ></span>
-                            <span
-                              className="select__text"
-                              onClick={handleClickItem(item)}
-                            >
-                              {render(item)}
-                            </span>
-                          </label>
-                        </div>
+                        <Checkbox
+                          checked={item.isSelected}
+                          onChange={handleClickItem(item)}
+                        >
+                          <span className="select__text">{render(item)}</span>
+                        </Checkbox>
                       </div>
                     ))
                   ) : (
-                    <img
-                      className="img-emty"
-                      src={ASSETS_IMAGE + "/no-data.png"}
-                      alt=""
-                    />
+                    <Empty />
                   )}
                 </div>
-                {selectWithAdd ? (
-                  <div
-                    className={classNames(
-                      "select__bottom-button select__add-button p-y--xs"
-                    )}
-                  >
-                    <i className="tio-add m-l--xxs" />
-                    <span>Add new</span>
-                  </div>
-                ) : selectWithPreferOption ? (
-                  <div
-                    className={classNames(
-                      "select__bottom-button select__prefer-option-button"
-                    )}
-                  >
-                    <div className={classNames("p-l--xs")}>
-                      <label className={classNames("checkbox__container")}>
-                        <input type="checkbox" checked={true} />
-                        <span className="checkmark"></span>
-                        <span className="multiple-select__text">
-                          Prefer Options
-                        </span>
-                      </label>
-                    </div>
-                  </div>
-                ) : null}
               </>
             ) : (
               <div className="select__loading">
-                <img
-                  className="img-loading"
-                  src={ASSETS_SVG + "/spinner.svg"}
-                  alt=""
-                />
+                <Spin tip="Loading..."></Spin>
+              </div>
+            )}
+            {!loading && list.length > 0 && (
+              <div className="select__list-prefer">
+                {internalPreferOptions &&
+                  internalPreferOptions?.length > 0 &&
+                  internalPreferOptions.map((item, index) => (
+                    <div
+                      className={classNames(
+                        "select__prefer-option select__item p-l--xs p-y--xs p-r--xxs"
+                      )}
+                      key={index}
+                      onKeyDown={handleMove(item)}
+                      onClick={handleClickParentItem}
+                    >
+                      <Checkbox
+                        onChange={handleClickItem(item)}
+                        checked={item.isSelected}
+                      >
+                        <span className="select__text ">{render(item)}</span>
+                      </Checkbox>
+                    </div>
+                  ))}
+              </div>
+            )}
+            {selectWithAdd && (
+              <div
+                className={classNames(
+                  "select__bottom-button select__add-button p-y--xs"
+                )}
+              >
+                <i className="tio-add m-l--xs" />
+                <span className="m-l--xs">Add new</span>
               </div>
             )}
           </div>

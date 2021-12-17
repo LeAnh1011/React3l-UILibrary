@@ -6,7 +6,7 @@ import InputTag from "components/Input/InputTag/InputTag";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import React, { RefObject } from "react";
 import { ErrorObserver, Observable } from "rxjs";
-import { INPUT_TAG_TYPE } from "components/Input/InputTag";
+import { BORDER_TYPE } from "config/enum";
 import "./MultipleSelect.scss";
 import { Checkbox, Empty, Spin } from "antd";
 
@@ -38,7 +38,7 @@ export interface MultipleSelectProps<
 
   label?: string;
 
-  type?: INPUT_TAG_TYPE;
+  type?: BORDER_TYPE;
 
   isSmall?: boolean;
 

@@ -1,3 +1,3 @@
-import InputNumber, { DECIMAL, LONG, INPUT_NUMBER_TYPE } from "./InputNumber";
-export { DECIMAL, LONG, INPUT_NUMBER_TYPE };
+import InputNumber, { DECIMAL, LONG } from "./InputNumber";
+export { DECIMAL, LONG };
 export default InputNumber;

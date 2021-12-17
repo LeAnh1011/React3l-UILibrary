@@ -1,3 +1,2 @@
-import InputTag, { INPUT_TAG_TYPE } from "./InputTag";
-export { INPUT_TAG_TYPE };
+import InputTag from "./InputTag";
 export default InputTag;

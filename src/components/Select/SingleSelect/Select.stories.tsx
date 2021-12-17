@@ -5,10 +5,10 @@ import { Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
 import React from "react";
 import { of } from "rxjs";
-import nameof from "ts-nameof.macro";
-import FormItem, { ValidateStatus } from "../../FormItem/FormItem";
+import FormItem from "../../FormItem/FormItem";
 import Select from "./Select";
-import { INPUT_SELECT_TYPE } from "../../Input/InputSelect/InputSelect";
+import { ValidateStatus } from "./../../../config/enum";
+import { BORDER_TYPE } from "./../../../config/enum";
 
 export class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
@@ -31,6 +31,11 @@ const demoListEnum = (TModelFilter: ModelFilter) => {
   ]);
 };
 
+const list = [
+  { id: 9, name: "Phòng Muti Media", code: "MEDIA" },
+  { id: 10, name: "Phòng truyền thông", code: "PTT" },
+];
+
 export function SingleSelectStories() {
   const [selectModel, setSelectModel] = React.useState<Model>({
     id: 0,
@@ -40,9 +45,7 @@ export function SingleSelectStories() {
 
   const [selectModelFilter] = React.useState<DemoFilter>(new DemoFilter());
 
-  const [type, setType] = React.useState<INPUT_SELECT_TYPE>(
-    INPUT_SELECT_TYPE.BORDERED
-  );
+  const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
 
   const [isValidated, setValidated] = React.useState(false);
 
@@ -110,7 +113,7 @@ export function SingleSelectStories() {
             placeHolder={"Select Organization"}
             model={selectModel}
             modelFilter={selectModelFilter}
-            searchProperty={nameof(selectModel.name)}
+            searchProperty={"name"}
             render={handleRenderModel}
             onChange={handleSetModel}
             getList={demoListEnum}
@@ -121,15 +124,16 @@ export function SingleSelectStories() {
             selectWithPreferOption={isSelectWithPreferOption}
             disabled={isDisabled}
             isSmall={isSmall}
+            preferOptions={isSelectWithPreferOption ? list : undefined}
           />
         </FormItem>
       </div>
 
-      <div style={{ margin: "10px", width: "300px" }}>
+      <div style={{ margin: "10px", width: "400px" }}>
         <Radio.Group onChange={handleChangeStyle} value={type}>
-          <Radio value={INPUT_SELECT_TYPE.MATERIAL}>Material</Radio>
-          <Radio value={INPUT_SELECT_TYPE.FLOAT_LABEL}>Float Label</Radio>
-          <Radio value={INPUT_SELECT_TYPE.BORDERED}>Bordered</Radio>
+          <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
+          <Radio value={BORDER_TYPE.FLOAT_LABEL}>Float Label</Radio>
+          <Radio value={BORDER_TYPE.BORDERED}>Bordered</Radio>
         </Radio.Group>
       </div>
 

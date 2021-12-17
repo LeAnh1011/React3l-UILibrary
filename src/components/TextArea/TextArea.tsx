@@ -1,21 +1,16 @@
 import React, { RefObject } from "react";
 import "./TextArea.scss";
 import classNames from "classnames";
+import { BORDER_TYPE } from "config/enum";
 
 export interface TextAreaAction {
   name?: string;
   action?: any;
 }
 
-export enum TEXT_AREA_TYPE {
-  MATERIAL,
-  BORDERED,
-  FLOAT_LABEL,
-}
-
 export interface TextAreaProps {
   label?: string;
-  type?: TEXT_AREA_TYPE;
+  type?: BORDER_TYPE;
   isRequired?: boolean;
   floatLabel?: boolean;
   isMaterial?: boolean;
@@ -98,7 +93,7 @@ function TextArea(props: TextAreaProps) {
     <>
       <div className={classNames("text-area__wrapper", className)}>
         <div className="text-area__label m-b--xxxs">
-          {type !== TEXT_AREA_TYPE.FLOAT_LABEL && label && (
+          {type !== BORDER_TYPE.FLOAT_LABEL && label && (
             <label className="component__title">
               {label}
               {isRequired && <span className="text-danger">&nbsp;*</span>}
@@ -124,9 +119,9 @@ function TextArea(props: TextAreaProps) {
           className={classNames(
             "component__input text-area__container p-l--xs p-r--xxs p-b--xxs p-t--xs bg-white",
             {
-              "text-area--material": type === TEXT_AREA_TYPE.MATERIAL,
+              "text-area--material": type === BORDER_TYPE.MATERIAL,
               "text-area--disabled ": disabled,
-              "text-area--float": type === TEXT_AREA_TYPE.FLOAT_LABEL,
+              "text-area--float": type === BORDER_TYPE.FLOAT_LABEL,
             }
           )}
           onClick={() => {
@@ -139,7 +134,7 @@ function TextArea(props: TextAreaProps) {
             onKeyDown={() => handleKeyPress}
             onBlur={handleBlur}
             placeholder={
-              type === TEXT_AREA_TYPE.FLOAT_LABEL && label ? " " : placeHolder
+              type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
             }
             ref={inputRef}
             disabled={disabled}
@@ -147,7 +142,7 @@ function TextArea(props: TextAreaProps) {
               "disabled-field": disabled,
             })}
           ></textarea>
-          {type === TEXT_AREA_TYPE.FLOAT_LABEL && label && (
+          {type === BORDER_TYPE.FLOAT_LABEL && label && (
             <label className="component__title">
               {label}
               {isRequired && <span className="text-danger">&nbsp;*</span>}
@@ -161,7 +156,7 @@ function TextArea(props: TextAreaProps) {
 
 TextArea.defaultProps = {
   label: "",
-  type: TEXT_AREA_TYPE.BORDERED,
+  type: BORDER_TYPE.BORDERED,
   isRequired: false,
   prefix: "",
   disabled: false,

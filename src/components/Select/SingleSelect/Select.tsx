@@ -51,6 +51,8 @@ export interface SelectProps<
   selectWithPreferOption?: boolean;
 
   isSmall?: boolean;
+
+  preferOptions?: T[];
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -74,8 +76,8 @@ function Select(props: SelectProps<Model, ModelFilter>) {
     type,
     label,
     selectWithAdd,
-    selectWithPreferOption,
     isSmall,
+    preferOptions,
   } = props;
 
   const internalModel = React.useMemo((): Model => {
@@ -312,28 +314,45 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                     <Empty />
                   )}
                 </div>
-                {selectWithAdd ? (
-                  <div
-                    className={classNames(
-                      "select__bottom-button select__add-button p-y--xs"
-                    )}
-                  >
-                    <i className="tio-add m-l--xxs" />
-                    <span>Add new</span>
-                  </div>
-                ) : selectWithPreferOption ? (
-                  <div
-                    className={classNames(
-                      "select__bottom-button select__prefer-option-button"
-                    )}
-                  >
-                    <span className={classNames("p--xs")}>Prefer Options</span>
-                  </div>
-                ) : null}
               </>
             ) : (
               <div className="select__loading">
                 <Spin tip="Loading..."></Spin>
+              </div>
+            )}
+            {!loading && list.length > 0 && (
+              <div className="select__list-prefer">
+                {preferOptions &&
+                  preferOptions?.length > 0 &&
+                  preferOptions.map((item, index) => (
+                    <div
+                      className={classNames(
+                        "select__prefer-option select__item p--xs",
+                        {
+                          "select__item--selected":
+                            item.id === internalModel?.id,
+                        }
+                      )}
+                      key={index}
+                      onKeyDown={handleMove(item)}
+                      onClick={handleClickItem(item)}
+                    >
+                      <span className="select__text">{render(item)}</span>
+                      {item.id === internalModel?.id && (
+                        <i className="tio tio-done" />
+                      )}
+                    </div>
+                  ))}
+              </div>
+            )}
+            {selectWithAdd && (
+              <div
+                className={classNames(
+                  "select__bottom-button select__add-button p-y--xs"
+                )}
+              >
+                <i className="tio-add m-l--xxs" />
+                <span>Add new</span>
               </div>
             )}
           </div>

@@ -1,33 +1,45 @@
 @import "../../../styles/index.scss";
 /* Style for DatePicker.tsx */
-.date-range__container {
+.date-range__wrapper {
     width: 100%;
     position: relative;
+
+    .date-picker__wrapper--sm {
+        height: 32px !important;
+    }
+
+    .date-picker__label {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        label {
+            font-size: 0.75em;
+            white-space: nowrap;
+        }
+    }
 
     .date-range__icon-wrapper {
         position: absolute;
         display: flex;
         height: 1.5rem;
-        width: 1.5rem;
-        top: 0.5rem;
-        right: 1rem;
-        background-color: #ffffff;
+        width: 2rem;
+        top: 49%;
+        right: 0.5rem;
         box-sizing: border-box;
-        box-shadow: 0px 7px 64px rgba(0, 0, 0, 0.07);
-        justify-content: center;
+        background-color: white;
+        justify-content: flex-end;
         align-items: center;
 
         .date-range__icon-clear {
-            font-size: 18px;
+            font-size: 17px;
             &:hover {
                 opacity: 0.7;
             }
         }
 
         &.date-range__icon-wrapper--material {
-            top: 0.45rem !important;
-            right: 1rem !important;
-            background-color: #f2f2f2 !important;
+            background-color: var(--color-surface-input);
             .date-range__icon-clear {
                 &:hover {
                     cursor: pointer;
@@ -35,78 +47,119 @@
                 }
             }
         }
-    }
-
-    .date-range__icon {
-        height: 1.5rem;
-        width: 1.5rem;
-        border-radius: 50%;
-        color: #ffffff;
-        display: flex;
-        align-items: center;
-        align-content: center;
-        justify-content: center;
-
-        &.error-background {
-            background: var(--color-error-high) !important;
-        }
-
-        i {
-            font-size: 12px;
+        .input-icon__clear {
+            color: #959aa3;
+            &:hover {
+                cursor: pointer;
+                color: #25343a;
+            }
         }
     }
 
     .ant-picker {
-        height: 40px;
-        padding: 1rem;
-        font-size: 13px;
-        border: 0;
-        box-shadow: none !important;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
         outline: 1px solid var(--color-border);
-        background-color: white;
+        border: none;
+        background: white;
+        height: 40px;
+        border-radius: 0px;
+        font-size: 14px;
+
+        &.date-picker--disabled {
+            background-color: var(--color-surface-input-disabled);
+            & + .component__title {
+                pointer-events: none;
+            }
+        }
+        &:hover,
+        &:focus {
+            & + .date-range__icon-wrapper--material {
+                background-color: var(--color-surface-input-hover);
+            }
+        }
 
         &:hover {
             outline-color: var(--color-primary);
         }
 
-        &:focus-within {
-            outline-color: var(--color-primary);
-            @include box-shadow--focus;
-        }
-
         &.ant-picker--bordered {
-            border: 1px solid var(--color-border);
+            background-color: #ffffff;
         }
 
         &.ant-picker-focused {
+            border-bottom: none !important;
             outline-color: var(--color-primary);
             @include box-shadow--focus;
         }
-        &.ant-picker--material {
+        &.date-picker--material {
             background-color: var(--color-surface-input);
             outline: none;
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
             border-bottom: 1px solid var(--color-border);
             margin-bottom: -1px;
+            .date-range-wrapper {
+                background-color: var(--color-surface-input);
+            }
             &:hover,
             &:focus {
-                border-bottom: 2px solid !important;
-            }
-            &:hover {
                 background-color: var(--color-surface-input-hover);
-                .component__input {
-                    background-color: var(--color-surface-input-hover);
-                }
-                .component__input.disabled-field {
-                    background-color: var(--color-surface-input-disabled);
-                }
-            }
-
-            &:focus-within {
-                border: 1px solid var(--color-primary);
-                @include box-shadow--focus();
             }
         }
+    }
+    .date-picker--float {
+        &.ant-picker-focused {
+            & + .component__title {
+                color: var(--color-primary);
+            }
+        }
+    }
+    .component__title--normal {
+        position: absolute;
+        color: gray;
+        transition: all 0.1s ease-out;
+        padding: 0 4px;
+        z-index: 200;
+        top: 31px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px !important;
+        line-height: 16px;
+        letter-spacing: 0.16px;
+        left: 8px;
+        &.component__title--sm {
+            top: 27px;
+        }
+        &.component__title-up {
+            top: 19px;
+            left: 8px;
+            background-color: white;
+            transform: translateY(-50%) scale(0.9);
+        }
+        &.component__title-down {
+            top: 35px;
+            left: 8px;
+            transform: translateY(-50%) scale(0.9);
+        }
+    }
+}
+
+.form-item__container--error {
+    .date-range__icon-wrapper {
+        background-color: var(--color-critical-surface);
+    }
+    .date-picker--material + .date-range__icon-wrapper {
+        background-color: var(--color-critical-surface) !important;
+        &:hover {
+            background-color: var(--color-surface-input-hover) !important;
+        }
+    }
+    .date-picker--material:hover + .date-range__icon-wrapper {
+        background-color: var(--color-surface-input-hover) !important;
     }
 }

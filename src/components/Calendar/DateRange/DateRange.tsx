@@ -1,30 +1,65 @@
-import React from "react";
+import React, { RefObject } from "react";
 import "./DateRange.scss";
 import { Moment } from "moment";
 import { DatePicker } from "antd";
 import classNames from "classnames";
 import { RangePickerProps } from "antd/lib/date-picker";
 import { CommonService } from "services/common-service";
+import { Subscription } from "rxjs";
 
 const { RangePicker } = DatePicker;
 
 function SuffixDateIcon() {
   return (
     <span className={classNames("date-range__icon")}>
-      <i className='tio-calendar'></i>
+      <i className="tio-calendar"></i>
     </span>
   );
 }
 
+interface DateRangeAction {
+  name?: string;
+  action?: any;
+}
+export enum DATE_RANGE_TYPE {
+  MATERIAL,
+  BORDERED,
+  FLOAT_LABEL,
+}
+
 interface DateRangeProps {
+  label?: string;
   value: [Moment, Moment];
   isMaterial?: boolean;
   dateFormat?: string[];
   onChange?: (value: [Moment, Moment], dateString?: [string, string]) => void;
+  type?: DATE_RANGE_TYPE;
+  isSmall?: boolean;
+  disabled?: boolean;
+  isRequired?: boolean;
+  className?: string;
+  action?: DateRangeAction;
+  placeHolder?: string;
 }
 
 function DateRange(props: DateRangeProps & RangePickerProps) {
-  const { value, isMaterial, dateFormat, onChange } = props;
+  const {
+    value,
+    dateFormat,
+    onChange,
+    type,
+    label,
+    isRequired,
+    action,
+    isSmall,
+    disabled,
+    placeHolder,
+    className
+  } = props;
+
+  const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
+    null
+  );
 
   const internalValue: [Moment, Moment] = React.useMemo(() => {
     return [
@@ -42,35 +77,118 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
       event.stopPropagation();
       onChange([null, null]);
     },
-    [onChange],
+    [onChange]
   );
 
+  const handleOpenChange = React.useCallback(
+    (event) => {
+      if (event) {
+        if (type === DATE_RANGE_TYPE.FLOAT_LABEL) {
+          const element = document.getElementById("component__title-id");
+          if (element) {
+            element.classList.add("component__title-up");
+            element.classList.remove("component__title-down");
+          }
+        }
+      } else {
+        console.log('internalValue', internalValue)
+        if (!internalValue || internalValue[0] === null) {
+          const element = document.getElementById("component__title-id");
+          if (element) {
+            element.classList.add("component__title-down");
+            element.classList.remove("component__title-up");
+          }
+        }
+      }
+    },
+    [internalValue, type]
+  );
+
+  React.useEffect(() => {
+    const subscription = new Subscription();
+    if (internalValue) {
+      const element = document.getElementById("component__title-id");
+      if (element) {
+        element.classList.add('component__title-up');
+        element.classList.remove('component__title-down');
+      }
+    }
+    return function cleanup() {
+      subscription.unsubscribe();
+    };
+  }, [internalValue]);
+
+
   return (
-    <div className='date-range__container'>
+    <div className={classNames("date-range__wrapper", className)} ref={wrapperRef} >
+      <div className="date-picker__label m-b--xxxs">
+        {type !== DATE_RANGE_TYPE.FLOAT_LABEL && label && (
+          <label className="component__title">
+            {label}
+            {isRequired && <span className="text-danger">&nbsp;*</span>}
+          </label>
+        )}
+        <span style={{ width: "100%" }}></span>
+        {action && (
+          <span
+            className="m-l--xxxs body-text--md color-link"
+            style={{ cursor: "pointer" }}
+            onClick={action.action}
+          >
+            {action.name}
+          </span>
+        )}
+      </div>
       <RangePicker
         {...props}
         value={internalValue}
         style={{ width: "100%" }}
         allowClear={false}
         format={dateFormat}
-        className={classNames({
-          "ant-picker--material": isMaterial,
-          "ant-picker--bordered": !isMaterial,
-        })}
-        placeholder={["Pick date1...", "Pick date2..."]}
+        placeholder={[type === DATE_RANGE_TYPE.FLOAT_LABEL && label ? " " : placeHolder, type === DATE_RANGE_TYPE.FLOAT_LABEL && label ? " " : placeHolder]}
+        onOpenChange={handleOpenChange}
         suffixIcon={<SuffixDateIcon />}
+        className={classNames("bg-white", {
+          "date-picker__wrapper--sm": isSmall,
+          "p-y--xxs": isSmall,
+          "p-x--xs": isSmall,
+          "p--xs": !isSmall,
+          "date-picker--material": type === DATE_RANGE_TYPE.MATERIAL,
+          "date-picker--disabled ": disabled,
+          "date-picker--float": type === DATE_RANGE_TYPE.FLOAT_LABEL,
+        })}
       />
-      {internalValue[0] && (
-        <span
-          className={classNames("date-range__icon-wrapper", {
-            "date-range__icon-wrapper--material": isMaterial,
+      {type === DATE_RANGE_TYPE.FLOAT_LABEL && label && (
+        <label
+          id="component__title-id"
+          className={classNames("component__title component__title--normal", {
+            "component__title--sm": isSmall,
+            "component__title-up": internalValue,
           })}
+          onClick={handleOpenChange}
+
         >
-          <i
-            className='date-range__icon-clear tio-clear'
-            onClick={handleClearDate}
-          ></i>
-        </span>
+          {label}
+          {isRequired && <span className="text-danger">&nbsp;*</span>}
+        </label>
+      )}
+      {internalValue[0] && (
+        <>
+          <span
+            className={classNames("date-range__icon-wrapper", {
+              "date-range__icon-wrapper--material": type === DATE_RANGE_TYPE.MATERIAL,
+            })}
+          >
+            <i
+              className={classNames(
+                "input-icon__clear",
+                "m-l--xxs",
+                "tio-clear_circle"
+              )}
+              onClick={handleClearDate}
+            ></i>
+          </span>
+        </>
       )}
     </div>
   );
@@ -78,6 +196,12 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
 DateRange.defaultProps = {
   isMaterial: false,
   dateFormat: ["DD/MM/YYYY", "YYYY/MM/DD"],
+  label: "",
+  isSmall: false,
+  type: DATE_RANGE_TYPE.BORDERED,
+  isRequired: false,
+  disabled: false,
+  className: "",
 };
 
 export default DateRange;

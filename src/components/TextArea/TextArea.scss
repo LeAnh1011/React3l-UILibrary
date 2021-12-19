@@ -27,16 +27,15 @@
     align-items: center;
     width: inherit;
     outline: 1px solid var(--color-border);
-    border-radius: 4px;
     background-color: white;
     height: inherit;
 
     &:hover {
-      outline-color: #114b5f;
+      outline-color: var(--color-primary);
     }
 
     &:focus-within {
-      outline-color: #114b5f;
+      outline-color: var(--color-primary);
       @include box-shadow--focus;
     }
 
@@ -49,7 +48,7 @@
       box-shadow: none;
       outline-width: 2px;
       .component__title {
-        color: #114b5f;
+        color: var(--color-primary);
       }
     }
 
@@ -72,8 +71,8 @@
       }
 
       &:focus-within {
-        border-color: #114b5f;
-        box-shadow: none;
+        border: 1px solid var(--color-primary);
+        @include box-shadow--focus();
       }
 
       &.text-area--disabled {

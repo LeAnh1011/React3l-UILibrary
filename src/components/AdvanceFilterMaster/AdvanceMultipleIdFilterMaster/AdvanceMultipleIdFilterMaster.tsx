@@ -369,7 +369,7 @@ function AdvanceMultipleIdFilterMaster(
           )}
           onClick={handleToggle}
         >
-          <span className="input-tag-item__text p-r--xxxs">
+          <span className="advance-count-item__text p-r--xxxs">
             {values?.length > 0 && <>({values?.length})</>}
           </span>
           <div className="advance-id-filter-master__title">

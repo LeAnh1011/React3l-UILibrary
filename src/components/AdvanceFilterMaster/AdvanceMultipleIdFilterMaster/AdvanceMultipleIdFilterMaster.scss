@@ -10,6 +10,7 @@ $backgound-color: #f4f4f4;
     display: flex;
     align-items: center;
     cursor: pointer;
+
     &.filter-bg {
       background-color: var(--white);
       border: 1px solid var(--color-primary);
@@ -25,8 +26,15 @@ $backgound-color: #f4f4f4;
     .filter__icon {
       font-size: 16px;
     }
-    .advance-id-filter-master__title {
+    .advance-id-filter-master__title,
+    .advance-count-item__text {
+      font-style: normal;
+      font-weight: normal;
       font-size: 14px;
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.16px;
     }
   }
 

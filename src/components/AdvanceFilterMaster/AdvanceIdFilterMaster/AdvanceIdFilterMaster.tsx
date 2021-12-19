@@ -265,12 +265,12 @@ function AdvanceIdFilterMaster(
         ref={wrapperRef}
       >
         <div
-          className={classNames("advance-id-filter-master__container p--xs", {
+          className={classNames("advance-id-filter-master__container ", {
             "filter-bg": isExpand,
           })}
           onClick={handleToggle}
         >
-          <div className="advance-id-filter-master__title">
+          <div className="advance-id-filter-master__title p--xs">
             {title}
             <i className="filter__icon tio-chevron_down"></i>
           </div>

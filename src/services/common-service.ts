@@ -1,6 +1,8 @@
 import React, { RefObject } from "react";
 import { Subscription } from "rxjs";
 import moment, { Moment } from "moment";
+import { Model } from "react3l-common";
+import { TreeNode } from "components/Tree/TreeNode";
 export const CommonService = {
   useSubscription() {
     var subscription = React.useRef(new Subscription()).current;
@@ -90,5 +92,70 @@ export const CommonService = {
     var element = arr[fromIndex];
     arr.splice(fromIndex, 1);
     arr.splice(toIndex, 0, element);
+  },
+
+  buildTree<T extends Model>(
+    listItem: T[],
+    parent?: TreeNode<T>,
+    keyNodes?: number[],
+    tree?: TreeNode<T>[]
+  ): [TreeNode<T>[], number[]] {
+    tree = typeof tree !== "undefined" ? tree : [];
+    parent = typeof parent !== "undefined" ? parent : new TreeNode();
+    keyNodes = typeof keyNodes !== "undefined" ? keyNodes : [];
+
+    var children = listItem
+      .filter((child) => {
+        return child.parentId === parent.key;
+      })
+      .map((currentItem) => new TreeNode(currentItem));
+
+    if (children && children.length) {
+      if (parent.key === null) {
+        tree = children;
+      } else {
+        parent.children = children;
+        keyNodes.push(parent.key);
+      }
+      children.forEach((child) => {
+        this.buildTree(listItem, child, keyNodes);
+      });
+    }
+
+    return [tree, keyNodes];
+  },
+
+  setDisabledNode<T extends Model>(nodeId: number, tree: TreeNode<T>[]) {
+    var filteredNode = tree.filter(
+      (currentNode) => currentNode.key === nodeId
+    )[0];
+    if (filteredNode) {
+      let index = tree.indexOf(filteredNode);
+      tree[index].disabled = true;
+      if (filteredNode.children && filteredNode.children.length > 0) {
+        filteredNode.children.forEach((currentChildren) => {
+          this.setDisabledNode(currentChildren.key, filteredNode.children);
+        });
+      }
+    } else {
+      tree.forEach((currentTree) => {
+        if (currentTree.children && currentTree.children.length > 0) {
+          this.setDisabledNode(nodeId, currentTree.children);
+        }
+      });
+    }
+  },
+
+  setOnlySelectLeaf<T extends Model>(tree: TreeNode<T>[]) {
+    if (tree && tree.length) {
+      tree.forEach((currentNode) => {
+        if (currentNode.item.hasChildren) {
+          currentNode.disabled = true;
+          this.setOnlySelectLeaf(currentNode.children);
+        } else {
+          currentNode.disabled = false;
+        }
+      });
+    }
   },
 };

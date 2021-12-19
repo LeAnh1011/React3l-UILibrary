@@ -10,7 +10,12 @@ $backgound-color: #f4f4f4;
     display: flex;
     align-items: center;
     cursor: pointer;
-
+    label {
+      display: flex;
+    }
+    &.p-b---active {
+      padding-bottom: 11px !important;
+    }
     &.filter-bg {
       background-color: var(--white);
       border: 1px solid var(--color-primary);
@@ -19,6 +24,10 @@ $backgound-color: #f4f4f4;
       &:hover {
         background-color: var(--white);
       }
+    }
+    .filter-active {
+      color: #0f62fe;
+      border-bottom: 1px solid #0f62fe;
     }
     &:hover {
       background: #e5e5e5;

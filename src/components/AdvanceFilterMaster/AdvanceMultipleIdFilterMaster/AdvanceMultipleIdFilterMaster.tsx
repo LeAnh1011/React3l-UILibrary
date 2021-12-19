@@ -10,7 +10,6 @@ import { ErrorObserver, Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import "./AdvanceMultipleIdFilterMaster.scss";
 
-
 export interface AdvanceMultipleIdFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
@@ -136,8 +135,6 @@ function AdvanceMultipleIdFilterMaster(
     return [];
   }, [list, values]);
 
-
-
   const internalPreferOptions = React.useMemo(() => {
     if (preferOptions && preferOptions.length > 0) {
       preferOptions.forEach((current) => {
@@ -147,7 +144,6 @@ function AdvanceMultipleIdFilterMaster(
           values.filter((item) => item === current.id)[0];
         if (filteredItem) {
           current.isSelected = true;
-
         } else {
           current.isSelected = false;
         }
@@ -156,7 +152,6 @@ function AdvanceMultipleIdFilterMaster(
     }
     return [];
   }, [preferOptions, values]);
-
 
   React.useEffect(() => {
     if (firstLoad) {
@@ -171,12 +166,10 @@ function AdvanceMultipleIdFilterMaster(
               });
             }
           });
-          setFirstLoad(false)
+          setFirstLoad(false);
         }
       }
-
     }
-
   }, [firstLoad, internalList, internalPreferOptions]);
   const { run } = useDebounceFn(
     (searchTerm: string) => {
@@ -269,7 +262,7 @@ function AdvanceMultipleIdFilterMaster(
       );
 
       if (filteredItem) {
-        const tmp = [...selectedList]
+        const tmp = [...selectedList];
         const index = tmp.indexOf(filteredItem);
         tmp.splice(index, 1);
         dispatch({
@@ -364,24 +357,29 @@ function AdvanceMultipleIdFilterMaster(
       >
         <div
           className={classNames(
-            "advance-id-filter-master__container p--xs d-flex",
-            { "filter-bg": isExpand }
+            "advance-id-filter-master__container p-l--sm p-t--xs p-r--xs p-b--xs d-flex",
+            {
+              "filter-bg": isExpand,
+              "p-b---active": values?.length > 0,
+            }
           )}
           onClick={handleToggle}
         >
-          <span className="advance-count-item__text p-r--xxxs">
-            {values?.length > 0 && <>({values?.length})</>}
-          </span>
-          <div className="advance-id-filter-master__title">
-            {title}
-            <i className="filter__icon tio-chevron_down"></i>
-          </div>
+          <label className={classNames("d-flex", { "filter-active": values?.length > 0, })}>
+            <span className="advance-count-item__text p-r--xxxs">
+              {values?.length > 0 && <>({values?.length})</>}
+            </span>
+            <div className="advance-id-filter-master__title">
+              {title}
+              <i className="filter__icon tio-chevron_down"></i>
+            </div>
+          </label>
+
         </div>
         {isExpand && (
           <div className="advance-id-filter-master__list-container m-t--xxxs">
             <div className="advance-id-filter__input p--xs">
               <InputText
-
                 isSmall={false}
                 maxLength={maxLength}
                 onChange={handleSearchChange}
@@ -399,12 +397,9 @@ function AdvanceMultipleIdFilterMaster(
                 {internalList.length > 0 ? (
                   internalList.map((item, index) => (
                     <div
-                      className={classNames(
-                        "advance-id-filter__item",
-                        {
-                          "advance-id-filter__item--selected": item.isSelected,
-                        }
-                      )}
+                      className={classNames("advance-id-filter__item", {
+                        "advance-id-filter__item--selected": item.isSelected,
+                      })}
                       key={index}
                       onKeyDown={handleMove(item)}
                       tabIndex={-1}
@@ -415,9 +410,7 @@ function AdvanceMultipleIdFilterMaster(
                         className=" m-l--xs m-y--xs m-r--xxs"
                         onChange={handleClickItem(item)}
                       >
-                        <span
-                          className="advance-id-filter__text"
-                        >
+                        <span className="advance-id-filter__text">
                           {render(item)}
                         </span>
                       </Checkbox>
@@ -449,9 +442,7 @@ function AdvanceMultipleIdFilterMaster(
                         onChange={handleClickItem(item)}
                         checked={item.isSelected}
                       >
-                        <span
-                          className="advance-id-filter__text "
-                        >
+                        <span className="advance-id-filter__text ">
                           {render(item)}
                         </span>
                       </Checkbox>

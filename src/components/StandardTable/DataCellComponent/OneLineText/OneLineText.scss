@@ -1,0 +1,28 @@
+.avatar-one-line-text-table-size-large{
+    width: 32px;
+    height: 32px;
+    &.avatar-type-circle{
+        border-radius: 16px;
+    }
+    &.avatar-type-square{
+        border-radius: 0px;
+    }
+    margin-right: 8px;
+}
+.avatar-one-line-text-table-size-medium{
+    width: 24px;
+    height: 24px;
+    &.avatar-type-circle{
+        border-radius: 12px;
+    }
+    &.avatar-type-square{
+        border-radius: 0px;
+    }
+    border-radius: 12px;
+    margin-right: 8px;
+}
+
+.icon-one-line-text{
+    font-size: 16px;
+    margin-right: 8px;
+}

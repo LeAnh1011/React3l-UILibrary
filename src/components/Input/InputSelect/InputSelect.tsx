@@ -2,12 +2,7 @@ import React, { RefObject } from "react";
 import "./InputSelect.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
-
-export enum INPUT_SELECT_TYPE {
-  MATERIAL,
-  BORDERED,
-  FLOAT_LABEL,
-}
+import { BORDER_TYPE } from "config/enum";
 
 export interface InputSelectProps<T extends Model> {
   model?: T;
@@ -21,7 +16,7 @@ export interface InputSelectProps<T extends Model> {
   onKeyDown?: (event: any) => void;
   onKeyEnter?: (event: any) => void;
   className?: string;
-  type?: INPUT_SELECT_TYPE;
+  type?: BORDER_TYPE;
   label?: string;
   isRequired?: boolean;
   isSmall?: boolean;
@@ -109,7 +104,7 @@ function InputSelect(props: InputSelectProps<Model>) {
     <>
       <div className={classNames("input-select__wrapper", className)}>
         <div className="input-select__label m-b--xxxs">
-          {type !== INPUT_SELECT_TYPE.FLOAT_LABEL && label && (
+          {type !== BORDER_TYPE.FLOAT_LABEL && label && (
             <label className="component__title">
               {label}
               {isRequired && <span className="text-danger">&nbsp;*</span>}
@@ -125,9 +120,9 @@ function InputSelect(props: InputSelectProps<Model>) {
               "py--xxs": isSmall,
               "px--xs": isSmall,
               "p--xs": !isSmall,
-              "input-select--material": type === INPUT_SELECT_TYPE.MATERIAL,
+              "input-select--material": type === BORDER_TYPE.MATERIAL,
               "input-select--disabled ": disabled,
-              "input-select--float": type === INPUT_SELECT_TYPE.FLOAT_LABEL,
+              "input-select--float": type === BORDER_TYPE.FLOAT_LABEL,
             }
           )}
         >
@@ -140,7 +135,7 @@ function InputSelect(props: InputSelectProps<Model>) {
                 placeholder={
                   model
                     ? (render(model) as string)
-                    : type === INPUT_SELECT_TYPE.FLOAT_LABEL && label
+                    : type === BORDER_TYPE.FLOAT_LABEL && label
                     ? " "
                     : placeHolder
                 }
@@ -151,7 +146,7 @@ function InputSelect(props: InputSelectProps<Model>) {
                   "disabled-field": disabled,
                 })}
               />
-              {type === INPUT_SELECT_TYPE.FLOAT_LABEL && label && (
+              {type === BORDER_TYPE.FLOAT_LABEL && label && (
                 <label
                   className={classNames(
                     "component__title component__title--normal component__title--expanded",
@@ -197,22 +192,18 @@ function InputSelect(props: InputSelectProps<Model>) {
                 value={(render(model) as string) || ""}
                 readOnly
                 placeholder={
-                  type === INPUT_SELECT_TYPE.FLOAT_LABEL && label
-                    ? " "
-                    : placeHolder
+                  type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
                 }
                 onKeyDown={handleEnter}
                 className={classNames("component__input", {
-                  "component__input--material":
-                    type === INPUT_SELECT_TYPE.MATERIAL,
-                  "component__input--bordered":
-                    type === INPUT_SELECT_TYPE.BORDERED,
+                  "component__input--material": type === BORDER_TYPE.MATERIAL,
+                  "component__input--bordered": type === BORDER_TYPE.BORDERED,
                   "disabled-field": disabled,
                 })}
                 disabled={disabled}
                 ref={inputRef}
               />
-              {type === INPUT_SELECT_TYPE.FLOAT_LABEL && label && (
+              {type === BORDER_TYPE.FLOAT_LABEL && label && (
                 <label
                   className={classNames(
                     "component__title component__title--normal",

@@ -1,3 +1,2 @@
-import FormItem, { ValidateStatus } from "./FormItem";
-export { ValidateStatus };
+import FormItem from "./FormItem";
 export default FormItem;

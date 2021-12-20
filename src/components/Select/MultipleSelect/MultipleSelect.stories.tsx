@@ -4,8 +4,9 @@ import Radio, { RadioChangeEvent } from "antd/lib/radio";
 import React from "react";
 import { Observable } from "rxjs";
 import MultipleSelect from "./MultipleSelect";
-import { INPUT_TAG_TYPE } from "../../Input/InputTag/InputTag";
-import FormItem, { ValidateStatus } from "../../FormItem/FormItem";
+import FormItem from "../../FormItem/FormItem";
+import { ValidateStatus } from "./../../../config/enum";
+import { BORDER_TYPE } from "./../../../config/enum";
 
 const demoList = [
   { id: 1, name: "Ban hành chính", code: "FAD" },
@@ -63,9 +64,7 @@ export function MultipleSelectStories() {
 
   const [selectModelFilter] = React.useState<DemoFilter>(new DemoFilter());
 
-  const [type, setType] = React.useState<INPUT_TAG_TYPE>(
-    INPUT_TAG_TYPE.BORDERED
-  );
+  const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
   const [isSmall, setIsSmall] = React.useState<boolean>(false);
 
   const [isValidated, setValidated] = React.useState(false);
@@ -151,9 +150,9 @@ export function MultipleSelectStories() {
       </div>
       <div style={{ margin: "10px", width: "400px" }}>
         <Radio.Group onChange={handleChangeStyle} value={type}>
-          <Radio value={INPUT_TAG_TYPE.MATERIAL}>Material</Radio>
-          <Radio value={INPUT_TAG_TYPE.FLOAT_LABEL}>Float Label</Radio>
-          <Radio value={INPUT_TAG_TYPE.BORDERED}>Bordered</Radio>
+          <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
+          <Radio value={BORDER_TYPE.FLOAT_LABEL}>Float Label</Radio>
+          <Radio value={BORDER_TYPE.BORDERED}>Bordered</Radio>
         </Radio.Group>
       </div>
 

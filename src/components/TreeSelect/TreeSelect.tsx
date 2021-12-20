@@ -6,10 +6,9 @@ import { useDebounceFn } from "ahooks";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import { Observable } from "rxjs";
 import { CommonService } from "services/common-service";
-import InputTag, { INPUT_TAG_TYPE } from "../Input/InputTag/InputTag";
-import InputSelect, {
-  INPUT_SELECT_TYPE,
-} from "../Input/InputSelect/InputSelect";
+import InputTag from "../Input/InputTag/InputTag";
+import InputSelect from "../Input/InputSelect/InputSelect";
+import { BORDER_TYPE } from "config/enum";
 
 export interface TreeSelectProps<
   T extends Model,
@@ -34,8 +33,7 @@ export interface TreeSelectProps<
   getTreeData?: (TModelFilter?: TModelFilter) => Observable<T[]>;
   onChange?: (T: Model[], TT: boolean) => void;
   classFilter?: new () => TModelFilter;
-  multipleType?: INPUT_TAG_TYPE;
-  singleType?: INPUT_SELECT_TYPE;
+  type?: BORDER_TYPE;
   label?: string;
   isSmall?: boolean;
   isUsingSearch?: boolean;
@@ -76,8 +74,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     render,
     getTreeData,
     onChange,
-    multipleType,
-    singleType,
+    type,
     label,
     isSmall,
     isUsingSearch,
@@ -183,7 +180,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               disabled={disabled}
               onSearch={handleSearchItem}
               onClear={handleClearItem}
-              type={multipleType}
+              type={type}
               label={label}
               isSmall={isSmall}
               isUsingSearch={isUsingSearch}
@@ -199,7 +196,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               disabled={disabled}
               onSearch={handleSearchItem}
               onClear={handleClearItem}
-              type={singleType}
+              type={type}
               label={label}
               isSmall={isSmall}
             />

@@ -1,11 +1,14 @@
 import React from "react";
-import InputTag, { INPUT_TAG_TYPE } from "./InputTag";
+import InputTag from "./InputTag";
 import { Model } from "react3l-common";
 import { useDebounceFn } from "ahooks";
 import { Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
-import FormItem, { ValidateStatus } from "../../FormItem/FormItem";
+import FormItem from "../../FormItem/FormItem";
+import { ValidateStatus } from "./../../../config/enum";
 import { DEBOUNCE_TIME_300 } from "../../../config/consts";
+import { BORDER_TYPE } from "./../../../config/enum";
+
 const demoItemList = [
   { id: 1, name: "Tag 1", code: "1" },
   { id: 2, name: "Tag 2", code: "2" },
@@ -16,9 +19,7 @@ const demoItemList = [
 export function InputTagStories() {
   const [listItem, setListItem] = React.useState<Model[]>(demoItemList);
 
-  const [type, setType] = React.useState<INPUT_TAG_TYPE>(
-    INPUT_TAG_TYPE.BORDERED
-  );
+  const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
 
   const [isSmall, setIsSmall] = React.useState(false);
 
@@ -113,9 +114,9 @@ export function InputTagStories() {
       </button>
       <div style={{ margin: "10px", width: "400px" }}>
         <Radio.Group onChange={handleChangeStyle} value={type}>
-          <Radio value={INPUT_TAG_TYPE.MATERIAL}>Material</Radio>
-          <Radio value={INPUT_TAG_TYPE.FLOAT_LABEL}>Float Label</Radio>
-          <Radio value={INPUT_TAG_TYPE.BORDERED}>Bordered</Radio>
+          <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
+          <Radio value={BORDER_TYPE.FLOAT_LABEL}>Float Label</Radio>
+          <Radio value={BORDER_TYPE.BORDERED}>Bordered</Radio>
         </Radio.Group>
       </div>
 

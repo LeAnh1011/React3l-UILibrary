@@ -7,9 +7,9 @@ import { IdFilter } from "react3l-advanced-filters";
 import { StringFilter } from "react3l-advanced-filters";
 import { Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
-import FormItem, { ValidateStatus } from "../FormItem/FormItem";
-import { INPUT_SELECT_TYPE } from "../Input/InputSelect/InputSelect";
-import { INPUT_TAG_TYPE } from "../Input/InputTag/InputTag";
+import FormItem from "../FormItem/FormItem";
+import { BORDER_TYPE } from "./../../config/enum";
+import { ValidateStatus } from "./../../config/enum";
 
 export class DistrictFilter extends ModelFilter {
   public id: IdFilter = new IdFilter();
@@ -70,13 +70,8 @@ function Default() {
 
   const [isMultiple, setMultiple] = React.useState(false);
 
-  const [multipleType, setMultipleType] = React.useState<INPUT_TAG_TYPE>(
-    INPUT_TAG_TYPE.BORDERED
-  );
+  const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
 
-  const [singleType, setSingleType] = React.useState<INPUT_SELECT_TYPE>(
-    INPUT_SELECT_TYPE.BORDERED
-  );
   const [isSmall, setIsSmall] = React.useState<boolean>(false);
 
   const [isValidated, setValidated] = React.useState(false);
@@ -92,19 +87,9 @@ function Default() {
 
   const [withSearch, setWithSearch] = React.useState(true);
 
-  const handleChangeMultipleStyle = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setMultipleType(event.target.value);
-    },
-    []
-  );
-
-  const handleChangeSingleStyle = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setSingleType(event.target.value);
-    },
-    []
-  );
+  const handleChangeType = React.useCallback((event: RadioChangeEvent) => {
+    setType(event.target.value);
+  }, []);
 
   const handleChangeRadio = React.useCallback((event: RadioChangeEvent) => {
     if (event.target.value) setItem(undefined);
@@ -170,8 +155,7 @@ function Default() {
             item={item}
             listItem={isMultiple ? listItem : []}
             getTreeData={demoSearchFunc}
-            multipleType={multipleType}
-            singleType={singleType}
+            type={type}
             isUsingSearch={withSearch}
             label={"Label"}
             disabled={isDisabled}
@@ -189,26 +173,14 @@ function Default() {
           <Radio value={true}>Multiple</Radio>
         </Radio.Group>
       </div>
-      {isMultiple ? (
-        <div style={{ margin: "10px", width: "400px" }}>
-          <Radio.Group
-            onChange={handleChangeMultipleStyle}
-            value={multipleType}
-          >
-            <Radio value={INPUT_TAG_TYPE.MATERIAL}>Material</Radio>
-            <Radio value={INPUT_TAG_TYPE.FLOAT_LABEL}>Float Label</Radio>
-            <Radio value={INPUT_TAG_TYPE.BORDERED}>Bordered</Radio>
-          </Radio.Group>
-        </div>
-      ) : (
-        <div style={{ margin: "10px", width: "400px" }}>
-          <Radio.Group onChange={handleChangeSingleStyle} value={singleType}>
-            <Radio value={INPUT_SELECT_TYPE.MATERIAL}>Material</Radio>
-            <Radio value={INPUT_SELECT_TYPE.FLOAT_LABEL}>Float Label</Radio>
-            <Radio value={INPUT_SELECT_TYPE.BORDERED}>Bordered</Radio>
-          </Radio.Group>
-        </div>
-      )}
+
+      <div style={{ margin: "10px", width: "400px" }}>
+        <Radio.Group onChange={handleChangeType} value={type}>
+          <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
+          <Radio value={BORDER_TYPE.FLOAT_LABEL}>Float Label</Radio>
+          <Radio value={BORDER_TYPE.BORDERED}>Bordered</Radio>
+        </Radio.Group>
+      </div>
 
       <div style={{ margin: "10px", width: "300px" }}>
         <Radio.Group onChange={handleChangeValidated} value={isValidated}>

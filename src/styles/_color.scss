@@ -181,20 +181,11 @@ $palettes: (
   /* main colors */
   /* used for the links, the button background color,... */
   --color-primary: #0F62FE;
-  --color-primary-light: color-mod(var(--color-primary) tint(15%));
-  --color-primary-dark: color-mod(var(--color-primary) shade(15%));
-  --color-primary-bg: color-mod(var(--color-primary) alpha(20%));
 
   --color-secondary: #00b391;
-  --color-secondary-light: color-mod(var(--color-primary) tint(15%));
-  --color-secondary-dark: color-mod(var(--color-primary) shade(15%));
-  --color-secondary-bg: color-mod(var(--color-primary) alpha(20%));
   /* accent colors */
   /* used to highlight something important on the page */
   --color-accent: #f5414f;
-  --color-accent-light: color-mod(var(--color-accent) tint(15%));
-  --color-accent-dark: color-mod(var(--color-accent) shade(10%));
-  --color-accent-bg: color-mod(var(--color-accent) alpha(20%));
 
   /* support color */
   --color-link: #2c6ecb;
@@ -252,28 +243,16 @@ $palettes: (
 
   /* feedback colors */
   --color-success-high: var(--palette-teal-500);
-  --color-success-medium: color-mod(var(--color-success-high) alpha(35%));
-  --color-success-low: color-mod(var(--color-success-high) alpha(15%));
 
   --color-error-high: var(--palette-red-500);
-  --color-error-medium: color-mod(var(--color-error-high) alpha(35%));
-  --color-success-low: color-mod(var(--color-error-high) alpha(15%));
 
   --color-warning-high: var(--palette-amber-700);
-  --color-warning-medium: color-mod(var(--color-warning-high) alpha(35%));
-  --color-warning-medium: color-mod(var(--color-warning-high) alpha(15%));
 
   --color-info-high: var(--palette-cyan-500);
-  --color-info-medium: color-mod(var(--color-info-high) alpha(35%));
-  --color-info-low: color-mod(var(--color-info-high) alpha(15%));
 
   --color-tentative-high: var(--palette-indigo-500);
-  --color-tentative-medium: color-mod(var(--color-tentative-high) alpha(35%));
-  --color-tentative-low: color-mod(var(--color-tentative-high) alpha(15%));
 
   --color-worked-high: var(--palette-blue-500);
-  --color-worked-medium: color-mod(var(--color-worked-high) alpha(35%));
-  --color-worked-low: color-mod(var(--color-worked-high) alpha(15%));
 
   --color-supportive-high: #004144;
   --color-supportive-medium: #9ef0f0;

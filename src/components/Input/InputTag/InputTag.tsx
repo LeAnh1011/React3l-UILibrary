@@ -107,7 +107,7 @@ function InputTag(props: InputTagProps<Model>) {
               "input-tag__container--material": type === BORDER_TYPE.MATERIAL,
               "input-tag__container--bordered": type === BORDER_TYPE.BORDERED,
               "input-tag--disabled ": disabled,
-              "input-tag--float": type === BORDER_TYPE.FLOAT_LABEL,
+              "input-tag__container--float": type === BORDER_TYPE.FLOAT_LABEL,
             }
           )}
           onClick={() =>
@@ -119,7 +119,15 @@ function InputTag(props: InputTagProps<Model>) {
         >
           {internalListItem && internalListItem.length > 0 && (
             <span
-              className="input-tag-item__label p-l--xxs m-r--xxxs m-b--xxxs"
+              className={classNames(
+                "input-tag-item__label m-r--xxxs m-b--xxxs",
+                {
+                  "input-tag-item__label--small":
+                    type === BORDER_TYPE.FLOAT_LABEL && isSmall,
+                  "p-l--xxxs": BORDER_TYPE.FLOAT_LABEL && isSmall,
+                  "p-l--xxs": !(BORDER_TYPE.FLOAT_LABEL && isSmall),
+                }
+              )}
               onClick={(e) => e.stopPropagation()}
             >
               <span className="input-tag-item__text">

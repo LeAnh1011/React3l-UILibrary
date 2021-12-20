@@ -134,7 +134,7 @@ export function MultipleSelectStories() {
         >
           <MultipleSelect
             models={models}
-            placeHolder={"Search content"}
+            placeHolder={"Select an option"}
             onChange={handleChangeModels}
             getList={demoSearchFunc}
             modelFilter={selectModelFilter}

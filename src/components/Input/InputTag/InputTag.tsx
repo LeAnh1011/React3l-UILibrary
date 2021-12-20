@@ -156,7 +156,7 @@ function InputTag(props: InputTagProps<Model>) {
               ref={inputRef}
               readOnly={true}
               placeholder={
-                type === INPUT_TAG_TYPE.FLOAT_LABEL && label ? " " : ""
+                type === INPUT_TAG_TYPE.FLOAT_LABEL && label ? " " : placeHolder
               }
               disabled={disabled}
               onKeyDown={handleKeyDown}

@@ -124,8 +124,8 @@ function InputTag(props: InputTagProps<Model>) {
                 {
                   "input-tag-item__label--small":
                     type === BORDER_TYPE.FLOAT_LABEL && isSmall,
-                  "p-l--xxxs": BORDER_TYPE.FLOAT_LABEL && isSmall,
-                  "p-l--xxs": !(BORDER_TYPE.FLOAT_LABEL && isSmall),
+                  "p-l--xxxs": type === BORDER_TYPE.FLOAT_LABEL && isSmall,
+                  "p-l--xxs": !(type === BORDER_TYPE.FLOAT_LABEL && isSmall),
                 }
               )}
               onClick={(e) => e.stopPropagation()}

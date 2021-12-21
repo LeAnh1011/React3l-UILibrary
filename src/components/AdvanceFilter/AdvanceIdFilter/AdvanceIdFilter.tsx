@@ -300,7 +300,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                         className={classNames(
                           "advance-id-filter__item p-l--xs p-y--xs",
                           {
-                            "select__item--selected":
+                            "advance-id-filter__item--selected":
                               item.id === internalModel?.id,
                           }
                         )}
@@ -336,7 +336,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                       className={classNames(
                         "advance-id-filter__prefer-option advance-id-filter__item p--xs",
                         {
-                          "select__item--selected":
+                          "advance-id-filter__item--selected":
                             item.id === internalModel?.id,
                         }
                       )}

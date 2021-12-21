@@ -2,11 +2,19 @@ import { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import DateRange from "components/Calendar/DateRange";
 import { DATE_RANGE_TYPE } from "components/Calendar/DateRange/DateRange";
+import { BORDER_TYPE } from "config/enum";
+import { InputSelect } from "index";
 import moment, { Moment } from "moment";
 import React, { RefObject } from "react";
 import { Model } from "react3l-common";
 import { CommonService } from "services/common-service";
 import "./AdvanceDateRangFilterMaster.scss";
+
+
+export enum ADVANCE_DATE_RANGE_TYPE {
+  SHORT,
+  INPUT,
+}
 
 interface AdvanceDateRangeFilterProps {
   value?: [Moment, Moment];
@@ -27,7 +35,7 @@ interface AdvanceDateRangeFilterProps {
 
   render?: (t: Model) => string;
 
-  type?: DATE_RANGE_TYPE;
+  typeCustomDate?: DATE_RANGE_TYPE;
 
   isSmall?: boolean;
 
@@ -36,6 +44,13 @@ interface AdvanceDateRangeFilterProps {
   placeHolder?: string;
 
   activeItem?: any;
+
+  type?: ADVANCE_DATE_RANGE_TYPE;
+
+  inputType?: BORDER_TYPE;
+
+  placeHolderSelect?: string;
+
 }
 
 const list = [
@@ -63,10 +78,13 @@ function AdvanceDateRangeFilter(
     className,
     disabled,
     render,
-    type,
+    typeCustomDate,
     isSmall,
     activeItem,
     placeHolder,
+    type,
+    inputType,
+    placeHolderSelect,
   } = props;
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
@@ -185,6 +203,11 @@ function AdvanceDateRangeFilter(
 
   CommonService.useClickOutside(wrapperRef, handleCloseAdvanceFilterMaster);
 
+
+  const handleClearItem = React.useCallback(() => {
+    onChange(null, [null, null]);
+  }, [onChange]);
+
   return (
     <div
       className={classNames(
@@ -193,17 +216,34 @@ function AdvanceDateRangeFilter(
       )}
       ref={wrapperRef}
     >
-      <div
-        className={classNames("advance-date-range-filter-master__container ", {
-          "filter-bg": isExpand,
-        })}
-        onClick={handleToggle}
-      >
-        <div className="advance-date-range-filter-master__title p--xs">
-          {title}
-          <i className="filter__icon tio-chevron_down"></i>
-        </div>
-      </div>
+      {
+        type === ADVANCE_DATE_RANGE_TYPE.SHORT ?
+          <div
+            className={classNames("advance-date-range-filter-master__container ", {
+              "filter-bg": isExpand,
+            })}
+            onClick={handleToggle}
+          >
+            <div className="advance-date-range-filter-master__title p--xs">
+              {title}
+              <i className="filter__icon tio-chevron_down"></i>
+            </div>
+          </div>
+          : <div className="select__input" onClick={handleToggle}>
+            <InputSelect
+              model={activeItem} // value of input, event should change these on update
+              render={render}
+              placeHolder={placeHolderSelect}
+              expanded={isExpand}
+              disabled={disabled}
+              onClear={handleClearItem}
+              type={inputType}
+              label={title}
+              isSmall={isSmall}
+            />
+          </div>
+      }
+
       {isExpand && (
         <div
           id="list-container"
@@ -240,7 +280,7 @@ function AdvanceDateRangeFilter(
             <>
               <DateRange
                 {...props}
-                type={type}
+                type={typeCustomDate}
                 isSmall={isSmall}
                 onChange={handleChange}
                 value={internalValue}
@@ -262,6 +302,8 @@ AdvanceDateRangeFilter.defaultProps = {
   dateFormat: ["DD/MM/YYYY", "YYYY/MM/DD"],
   placeHolder: "Chọn ngày",
   render: defaultRenderObject,
+  type: ADVANCE_DATE_RANGE_TYPE.SHORT,
+  placeHolderSelect: ""
 };
 
 export default AdvanceDateRangeFilter;

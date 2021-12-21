@@ -1,12 +1,12 @@
-import React from 'react';
-import DateRange, { DATE_RANGE_TYPE } from './DateRange';
 import { Radio } from 'antd';
 import { RadioChangeEvent } from 'antd/lib/radio';
 import { Moment } from 'moment';
-import FormItem, { ValidateStatus } from '../../FormItem/FormItem';
+import React from 'react';
+import { ValidateStatus } from '../../../config/enum';
+import FormItem from '../../FormItem/FormItem';
+import DateRange, { DATE_RANGE_TYPE } from './DateRange';
 
 export function DateRangeStories() {
-  const [isMaterial, setIsMaterial] = React.useState(false);
 
   const [value, setValue] = React.useState<[Moment, Moment]>([null, null]);
 

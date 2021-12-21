@@ -1,11 +1,11 @@
-import React, { RefObject } from "react";
-import "./DateRange.scss";
-import { Moment } from "moment";
 import { DatePicker } from "antd";
-import classNames from "classnames";
 import { RangePickerProps } from "antd/lib/date-picker";
-import { CommonService } from "services/common-service";
+import classNames from "classnames";
+import { Moment } from "moment";
+import React, { RefObject } from "react";
 import { Subscription } from "rxjs";
+import { CommonService } from "services/common-service";
+import "./DateRange.scss";
 
 const { RangePicker } = DatePicker;
 
@@ -30,7 +30,7 @@ export enum DATE_RANGE_TYPE {
 interface DateRangeProps {
   label?: string;
   value: [Moment, Moment];
-  isMaterial?: boolean;
+  open?: boolean;
   dateFormat?: string[];
   onChange?: (value: [Moment, Moment], dateString?: [string, string]) => void;
   type?: DATE_RANGE_TYPE;
@@ -54,7 +54,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
     isSmall,
     disabled,
     placeHolder,
-    className
+    className,
   } = props;
 
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
@@ -91,7 +91,6 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
           }
         }
       } else {
-        console.log('internalValue', internalValue)
         if (!internalValue || internalValue[0] === null) {
           const element = document.getElementById("component__title-id");
           if (element) {
@@ -194,7 +193,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
   );
 }
 DateRange.defaultProps = {
-  isMaterial: false,
+  // open: false,
   dateFormat: ["DD/MM/YYYY", "YYYY/MM/DD"],
   label: "",
   isSmall: false,

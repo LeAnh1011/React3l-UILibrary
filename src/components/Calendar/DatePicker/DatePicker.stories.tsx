@@ -2,7 +2,8 @@ import { Radio } from 'antd';
 import { RadioChangeEvent } from 'antd/lib/radio';
 import { Moment } from 'moment';
 import React from 'react';
-import FormItem, { ValidateStatus } from "../../FormItem/FormItem";
+import { ValidateStatus } from '../../../config/enum';
+import FormItem from "../../FormItem/FormItem";
 import DatePicker, { DATE_PICKER_TYPE } from './DatePicker';
 
 export function DatePickerStories() {

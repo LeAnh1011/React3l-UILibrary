@@ -147,10 +147,6 @@ function AdvanceDateRangeFilter(
     ];
   }, [value]);
 
-  React.useEffect(() => {
-    console.log(internalValue);
-    console.log('activeItem: ', activeItem)
-  }, [activeItem, internalValue])
 
   const handleChange = React.useCallback(
     (values: [Moment, Moment], formatString: [string, string]) => {

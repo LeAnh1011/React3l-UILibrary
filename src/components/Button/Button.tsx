@@ -45,15 +45,71 @@ const Button = React.forwardRef(
       disabled,
       icon,
     } = props;
+    let numb = 0;
+    switch (type) {
+      // ba bộ đầu có bộ padding khá giống nhau
+      // khác nhau mỗi padding khi có icon hoặc không có icon
+      // nên đặt là btn-normal-have/no-icon cho 2 bộ này
+      // và sẽ chia thành case 1 và 2 cho numb
+      case "primary":
+        if (!icon) {
+          numb = 1;
+          break;
+        } else {
+          numb = 2;
+          break;
+        }
+      case "outline-primary":
+        if (!icon) {
+          numb = 1;
+          break;
+        } else {
+          numb = 2;
+          break;
+        }
+      case "secondary":
+        if (!icon) {
+          numb = 1;
+          break;
+        } else {
+          numb = 2;
+          break;
+        }
+      case "ghost":
+        if (!icon) {
+          numb = 3;
+          break;
+        } else {
+          numb = 4;
+          break;
+        }
+      default:
+        numb = 1;
+    }
 
-    return icon ? (
+    return numb === 1 ? (
       <button
         type={htmlType}
         onClick={onClick}
         ref={ref}
         disabled={disabled}
         className={classNames(
-          "btn btn-have-icon",
+          "btn btn-normal-no-icon",
+          `btn--${type}`,
+          disabled ? "disabled" : "",
+          className
+        )}
+      >
+        {children}
+      </button>
+    ) : numb === 2 ? (
+      <button
+        type={htmlType}
+        onClick={onClick}
+        ref={ref}
+        disabled={disabled}
+        className={classNames(
+          "btn btn-normal-have-icon",
           `btn--${type}`,
           disabled ? "disabled" : "",
           className
@@ -66,6 +122,21 @@ const Button = React.forwardRef(
           </div>
         </div>
       </button>
+    ) : numb === 3 ? (
+      <button
+        type={htmlType}
+        onClick={onClick}
+        ref={ref}
+        disabled={disabled}
+        className={classNames(
+          "btn btn-ghost-no-icon",
+          `btn--${type}`,
+          disabled ? "disabled" : "",
+          className
+        )}
+      >
+        {children}
+      </button>
     ) : (
       <button
         type={htmlType}
@@ -73,13 +144,18 @@ const Button = React.forwardRef(
         ref={ref}
         disabled={disabled}
         className={classNames(
-          "btn btn-no-icon",
+          "btn btn-ghost-have-icon",
           `btn--${type}`,
           disabled ? "disabled" : "",
           className
         )}
       >
-        {children}
+        <div className="button-content-have-icon">
+          <div className="children-content">{children}</div>
+          <div className="box-icon">
+            <i className={classNames(icon, "icon-button")}></i>
+          </div>
+        </div>
       </button>
     );
   }

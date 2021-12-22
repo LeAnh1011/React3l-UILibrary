@@ -170,7 +170,7 @@
     color: var(--btn-disabled-label);
   }
 }
-.btn-have-icon{
+.btn-normal-have-icon{
 
   .button-content-have-icon{
     width: 100%;
@@ -220,7 +220,7 @@
 } 
 
 /* button size */
-.btn-no-icon{
+.btn-normal-no-icon{
   &.btn--sm {
     height: 32px;
     padding-left: 12px;

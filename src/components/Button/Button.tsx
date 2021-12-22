@@ -77,7 +77,7 @@ const Button = React.forwardRef(
           numb = 2;
           break;
         }
-      case "ghost":
+      case "ghost": //các bộ ghost có ui padding khác nên chia thành 3-4
         if (!icon) {
           numb = 3;
           break;
@@ -99,6 +99,14 @@ const Button = React.forwardRef(
           break;
         } else {
           numb = 4;
+          break;
+        }
+      case "danger": // bộ danger có ui padding khá giống 3 bộ đầu nên chia 1 và 2
+        if (!icon) {
+          numb = 1;
+          break;
+        } else {
+          numb = 2;
           break;
         }
       default:

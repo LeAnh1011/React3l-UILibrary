@@ -64,44 +64,6 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
     [onChange]
   );
 
-  const handleOpenChange = React.useCallback(
-    (event) => {
-      if (event) {
-        if (type === BORDER_TYPE.FLOAT_LABEL) {
-          const element = document.getElementById("component__title-id");
-          if (element) {
-            element.classList.add('component__title-up');
-            element.classList.remove('component__title-down');
-          }
-        }
-      } else {
-        if (!internalValue) {
-          const element = document.getElementById("component__title-id");
-          if (element) {
-            element.classList.add('component__title-down');
-            element.classList.remove('component__title-up');
-          }
-        }
-      }
-    },
-    [internalValue, type]
-  );
-
-  React.useEffect(() => {
-    const subscription = new Subscription();
-    if (internalValue) {
-      const element = document.getElementById("component__title-id");
-      if (element) {
-        element.classList.add('component__title-up');
-        element.classList.remove('component__title-down');
-      }
-    }
-    return function cleanup() {
-      subscription.unsubscribe();
-    };
-  }, [internalValue]);
-
-
 
 
   return (
@@ -132,7 +94,6 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
         ref={dateRef}
         allowClear={false}
         format={dateFormat}
-        onOpenChange={handleOpenChange}
         className={classNames("bg-white", {
           "date-picker__wrapper--sm": isSmall,
           "p-y--xxs": isSmall,
@@ -143,7 +104,7 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
           "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,
         })}
         placeholder={
-          type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
+          placeHolder
         }
 
       />
@@ -154,7 +115,6 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
             "component__title--sm": isSmall,
             "component__title-up": internalValue,
           })}
-          onClick={handleOpenChange}
 
         >
           {label}

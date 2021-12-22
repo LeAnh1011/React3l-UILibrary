@@ -145,142 +145,189 @@ const Button = React.forwardRef(
         numb = 1;
     }
 
-    return numb === 1 ? (
-      <button
-        type={htmlType}
-        onClick={onClick}
-        ref={ref}
-        disabled={disabled}
-        className={classNames(
-          "btn btn-normal-no-icon",
-          `btn--${type}`,
-          disabled ? "disabled" : "",
-          className
-        )}
-      >
-        {children}
-      </button>
-    ) : numb === 2 ? (
-      <button
-        type={htmlType}
-        onClick={onClick}
-        ref={ref}
-        disabled={disabled}
-        className={classNames(
-          "btn btn-normal-have-icon",
-          `btn--${type}`,
-          disabled ? "disabled" : "",
-          className
-        )}
-      >
-        <div className="button-content-have-icon">
-          <div className="children-content">{children}</div>
-          <div className="box-icon">
-            <i className={classNames(icon, "icon-button")}></i>
+    const Button1 = React.useMemo(() => {
+      return (
+        <button
+          type={htmlType}
+          onClick={onClick}
+          ref={ref}
+          disabled={disabled}
+          className={classNames(
+            "btn btn-normal-no-icon",
+            `btn--${type}`,
+            disabled ? "disabled" : "",
+            className
+          )}
+        >
+          {children}
+        </button>
+      );
+    }, [children, className, disabled, htmlType, onClick, ref, type]);
+
+    const Button2 = React.useMemo(() => {
+      return (
+        <button
+          type={htmlType}
+          onClick={onClick}
+          ref={ref}
+          disabled={disabled}
+          className={classNames(
+            "btn btn-normal-have-icon",
+            `btn--${type}`,
+            disabled ? "disabled" : "",
+            className
+          )}
+        >
+          <div className="button-content-have-icon">
+            <div className="children-content">{children}</div>
+            <div className="box-icon">
+              <i className={classNames(icon, "icon-button")}></i>
+            </div>
           </div>
-        </div>
-      </button>
-    ) : numb === 3 ? (
-      <button
-        type={htmlType}
-        onClick={onClick}
-        ref={ref}
-        disabled={disabled}
-        className={classNames(
-          "btn btn-ghost-no-icon",
-          `btn--${type}`,
-          disabled ? "disabled" : "",
-          className
-        )}
-      >
-        {children}
-      </button>
-    ) : numb === 4 ? (
-      <button
-        type={htmlType}
-        onClick={onClick}
-        ref={ref}
-        disabled={disabled}
-        className={classNames(
-          "btn btn-ghost-have-icon",
-          `btn--${type}`,
-          disabled ? "disabled" : "",
-          className
-        )}
-      >
-        <div className="button-content-have-icon">
-          <div className="children-content">{children}</div>
-          <div className="box-icon">
-            <i className={classNames(icon, "icon-button")}></i>
+        </button>
+      );
+    }, [children, className, disabled, htmlType, icon, onClick, ref, type]);
+
+    const Button3 = React.useMemo(() => {
+      return (
+        <button
+          type={htmlType}
+          onClick={onClick}
+          ref={ref}
+          disabled={disabled}
+          className={classNames(
+            "btn btn-ghost-no-icon",
+            `btn--${type}`,
+            disabled ? "disabled" : "",
+            className
+          )}
+        >
+          {children}
+        </button>
+      );
+    }, [children, className, disabled, htmlType, onClick, ref, type]);
+
+    const Button4 = React.useMemo(() => {
+      return (
+        <button
+          type={htmlType}
+          onClick={onClick}
+          ref={ref}
+          disabled={disabled}
+          className={classNames(
+            "btn btn-ghost-have-icon",
+            `btn--${type}`,
+            disabled ? "disabled" : "",
+            className
+          )}
+        >
+          <div className="button-content-have-icon">
+            <div className="children-content">{children}</div>
+            <div className="box-icon">
+              <i className={classNames(icon, "icon-button")}></i>
+            </div>
           </div>
-        </div>
-      </button>
-    ) : numb === 5 ? (
-      <button
-        type={htmlType}
-        onClick={onClick}
-        ref={ref}
-        disabled={disabled}
-        className={classNames(
-          "btn btn-bleed-no-icon",
-          `btn--${type}`,
-          disabled ? "disabled" : "",
-          className
-        )}
-      >
-        {children}
-      </button>
-    ) : numb === 6 ? (
-      <button
-        type={htmlType}
-        onClick={onClick}
-        ref={ref}
-        disabled={disabled}
-        className={classNames(
-          "btn btn-bleed-have-icon",
-          `btn--${type}`,
-          disabled ? "disabled" : "",
-          className
-        )}
-      >
-        <div className="button-content-have-icon">
-          <div className="children-content">{children}</div>
-          <div className="box-icon">
-            <i className={classNames(icon, "icon-button")}></i>
+        </button>
+      );
+    }, [children, className, disabled, htmlType, icon, onClick, ref, type]);
+
+    const Button5 = React.useMemo(() => {
+      return (
+        <button
+          type={htmlType}
+          onClick={onClick}
+          ref={ref}
+          disabled={disabled}
+          className={classNames(
+            "btn btn-bleed-no-icon",
+            `btn--${type}`,
+            disabled ? "disabled" : "",
+            className
+          )}
+        >
+          {children}
+        </button>
+      );
+    }, [children, className, disabled, htmlType, onClick, ref, type]);
+
+    const Button6 = React.useMemo(() => {
+      return (
+        <button
+          type={htmlType}
+          onClick={onClick}
+          ref={ref}
+          disabled={disabled}
+          className={classNames(
+            "btn btn-bleed-have-icon",
+            `btn--${type}`,
+            disabled ? "disabled" : "",
+            className
+          )}
+        >
+          <div className="button-content-have-icon">
+            <div className="children-content">{children}</div>
+            <div className="box-icon">
+              <i className={classNames(icon, "icon-button")}></i>
+            </div>
           </div>
-        </div>
-      </button>
-    ) : numb === 7 ? (
-      <button
-        type={htmlType}
-        onClick={onClick}
-        ref={ref}
-        disabled={disabled}
-        className={classNames(
-          "btn btn-link-plain",
-          `btn--${type}`,
-          disabled ? "disabled" : "",
-          className
-        )}
-      >
-        {children}
-      </button>
-    ) : (
-      <button
-        type={htmlType}
-        onClick={onClick}
-        ref={ref}
-        disabled={disabled}
-        className={classNames(
-          "btn btn-link",
-          `btn--${type}`,
-          disabled ? "disabled" : "",
-          className
-        )}
-      >
-        {children}
-      </button>
-    );
+        </button>
+      );
+    }, [children, className, disabled, htmlType, icon, onClick, ref, type]);
+
+    const Button7 = React.useMemo(() => {
+      return (
+        <button
+          type={htmlType}
+          onClick={onClick}
+          ref={ref}
+          disabled={disabled}
+          className={classNames(
+            "btn btn-link-plain",
+            `btn--${type}`,
+            disabled ? "disabled" : "",
+            className
+          )}
+        >
+          {children}
+        </button>
+      );
+    }, [children, className, disabled, htmlType, onClick, ref, type]);
+
+    const Button8 = React.useMemo(() => {
+      return (
+        <button
+          type={htmlType}
+          onClick={onClick}
+          ref={ref}
+          disabled={disabled}
+          className={classNames(
+            "btn btn-link-plain",
+            `btn--${type}`,
+            disabled ? "disabled" : "",
+            className
+          )}
+        >
+          {children}
+        </button>
+      );
+    }, [children, className, disabled, htmlType, onClick, ref, type]);
+
+    // render button here
+    return numb === 1
+      ? Button1
+      : numb === 2
+      ? Button2
+      : numb === 3
+      ? Button3
+      : numb === 4
+      ? Button4
+      : numb === 5
+      ? Button5
+      : numb === 6
+      ? Button6
+      : numb === 7
+      ? Button7
+      : Button8;
   }
 );
 

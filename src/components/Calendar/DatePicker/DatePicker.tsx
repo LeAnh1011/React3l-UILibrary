@@ -8,17 +8,12 @@ import { DatePickerProps as AntdDatePickerProps } from "antd/lib/date-picker";
 import { DEFAULT_DATETIME_VALUE } from "config/consts";
 import { CommonService } from "services/common-service";
 import { Subscription } from "rxjs";
+import { BORDER_TYPE } from "config/enum";
 
 interface DatePickerAction {
   name?: string;
   action?: any;
 }
-export enum DATE_PICKER_TYPE {
-  MATERIAL,
-  BORDERED,
-  FLOAT_LABEL,
-}
-
 interface DatePickerProps {
   value?: Moment;
   label?: string;
@@ -26,7 +21,7 @@ interface DatePickerProps {
   dateFormat?: string[];
   error?: string;
   onChange?: (value: Moment | null, dateString?: string) => void;
-  type?: DATE_PICKER_TYPE;
+  type?: BORDER_TYPE;
   isSmall?: boolean;
   disabled?: boolean;
   isRequired?: boolean;
@@ -72,7 +67,7 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
   const handleOpenChange = React.useCallback(
     (event) => {
       if (event) {
-        if (type === DATE_PICKER_TYPE.FLOAT_LABEL) {
+        if (type === BORDER_TYPE.FLOAT_LABEL) {
           const element = document.getElementById("component__title-id");
           if (element) {
             element.classList.add('component__title-up');
@@ -112,7 +107,7 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
   return (
     <div className={classNames("date-picker__wrapper", className)} ref={wrapperRef}>
       <div className="date-picker__label m-b--xxxs">
-        {type !== DATE_PICKER_TYPE.FLOAT_LABEL && label && (
+        {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label className="component__title">
             {label}
             {isRequired && <span className="text-danger">&nbsp;*</span>}
@@ -143,16 +138,16 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
           "p-y--xxs": isSmall,
           "p-x--xs": isSmall,
           "p--xs": !isSmall,
-          "date-picker--material": type === DATE_PICKER_TYPE.MATERIAL,
+          "date-picker--material": type === BORDER_TYPE.MATERIAL,
           "date-picker--disabled ": disabled,
-          "date-picker--float": type === DATE_PICKER_TYPE.FLOAT_LABEL,
+          "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,
         })}
         placeholder={
-          type === DATE_PICKER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
+          type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
         }
 
       />
-      {type === DATE_PICKER_TYPE.FLOAT_LABEL && label && (
+      {type === BORDER_TYPE.FLOAT_LABEL && label && (
         <label
           id="component__title-id"
           className={classNames("component__title component__title--normal", {
@@ -170,7 +165,7 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
         <span
           className={classNames("date-picker__icon-wrapper", {
             "date-picker__icon-wrapper--material":
-              type === DATE_PICKER_TYPE.MATERIAL,
+              type === BORDER_TYPE.MATERIAL,
           })}
         >
           <i
@@ -191,7 +186,7 @@ DatePicker.defaultProps = {
   dateFormat: ["DD/MM/YYYY", "YYYY/MM/DD"],
   label: "",
   isSmall: false,
-  type: DATE_PICKER_TYPE.BORDERED,
+  type: BORDER_TYPE.BORDERED,
   isRequired: false,
   disabled: false,
   className: "",

@@ -1,6 +1,7 @@
 import { DatePicker } from "antd";
 import { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
+import { BORDER_TYPE } from "config/enum";
 import { Moment } from "moment";
 import React, { RefObject } from "react";
 import { Subscription } from "rxjs";
@@ -21,11 +22,6 @@ interface DateRangeAction {
   name?: string;
   action?: any;
 }
-export enum DATE_RANGE_TYPE {
-  MATERIAL,
-  BORDERED,
-  FLOAT_LABEL,
-}
 
 interface DateRangeProps {
   label?: string;
@@ -33,7 +29,7 @@ interface DateRangeProps {
   open?: boolean;
   dateFormat?: string[];
   onChange?: (value: [Moment, Moment], dateString?: [string, string]) => void;
-  type?: DATE_RANGE_TYPE;
+  type?: BORDER_TYPE;
   isSmall?: boolean;
   disabled?: boolean;
   isRequired?: boolean;
@@ -83,7 +79,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
   const handleOpenChange = React.useCallback(
     (event) => {
       if (event) {
-        if (type === DATE_RANGE_TYPE.FLOAT_LABEL) {
+        if (type === BORDER_TYPE.FLOAT_LABEL) {
           const element = document.getElementById("component__title-id");
           if (element) {
             element.classList.add("component__title-up");
@@ -121,7 +117,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
   return (
     <div className={classNames("date-range__wrapper", className)} ref={wrapperRef} >
       <div className="date-picker__label m-b--xxxs">
-        {type !== DATE_RANGE_TYPE.FLOAT_LABEL && label && (
+        {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label className="component__title">
             {label}
             {isRequired && <span className="text-danger">&nbsp;*</span>}
@@ -144,7 +140,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
         style={{ width: "100%" }}
         allowClear={false}
         format={dateFormat}
-        placeholder={[type === DATE_RANGE_TYPE.FLOAT_LABEL && label ? " " : placeHolder, type === DATE_RANGE_TYPE.FLOAT_LABEL && label ? " " : placeHolder]}
+        placeholder={[type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder, type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder]}
         onOpenChange={handleOpenChange}
         suffixIcon={<SuffixDateIcon />}
         className={classNames("bg-white", {
@@ -152,12 +148,12 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
           "p-y--xxs": isSmall,
           "p-x--xs": isSmall,
           "p--xs": !isSmall,
-          "date-picker--material": type === DATE_RANGE_TYPE.MATERIAL,
+          "date-picker--material": type === BORDER_TYPE.MATERIAL,
           "date-picker--disabled ": disabled,
-          "date-picker--float": type === DATE_RANGE_TYPE.FLOAT_LABEL,
+          "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,
         })}
       />
-      {type === DATE_RANGE_TYPE.FLOAT_LABEL && label && (
+      {type === BORDER_TYPE.FLOAT_LABEL && label && (
         <label
           id="component__title-id"
           className={classNames("component__title component__title--normal", {
@@ -175,7 +171,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
         <>
           <span
             className={classNames("date-range__icon-wrapper", {
-              "date-range__icon-wrapper--material": type === DATE_RANGE_TYPE.MATERIAL,
+              "date-range__icon-wrapper--material": type === BORDER_TYPE.MATERIAL,
             })}
           >
             <i
@@ -197,7 +193,7 @@ DateRange.defaultProps = {
   dateFormat: ["DD/MM/YYYY", "YYYY/MM/DD"],
   label: "",
   isSmall: false,
-  type: DATE_RANGE_TYPE.BORDERED,
+  type: BORDER_TYPE.BORDERED,
   isRequired: false,
   disabled: false,
   className: "",

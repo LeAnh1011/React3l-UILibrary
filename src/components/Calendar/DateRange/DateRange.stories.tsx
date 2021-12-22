@@ -2,9 +2,9 @@ import { Radio } from 'antd';
 import { RadioChangeEvent } from 'antd/lib/radio';
 import { Moment } from 'moment';
 import React from 'react';
-import { ValidateStatus } from '../../../config/enum';
+import { BORDER_TYPE, ValidateStatus } from '../../../config/enum';
 import FormItem from '../../FormItem/FormItem';
-import DateRange, { DATE_RANGE_TYPE } from './DateRange';
+import DateRange from './DateRange';
 
 export function DateRangeStories() {
 
@@ -12,8 +12,8 @@ export function DateRangeStories() {
 
   const [isValidated, setValidated] = React.useState(false);
 
-  const [type, setType] = React.useState<DATE_RANGE_TYPE>(
-    DATE_RANGE_TYPE.FLOAT_LABEL
+  const [type, setType] = React.useState<BORDER_TYPE>(
+    BORDER_TYPE.FLOAT_LABEL
   );
 
   const [isDisabled, setIsDisabled] = React.useState(false);
@@ -65,9 +65,9 @@ export function DateRangeStories() {
 
     <div style={{ margin: "10px", width: "300px" }}>
       <Radio.Group onChange={handleChangeStyle} value={type}>
-        <Radio value={DATE_RANGE_TYPE.MATERIAL}>Material</Radio>
-        <Radio value={DATE_RANGE_TYPE.FLOAT_LABEL}>Float Label</Radio>
-        <Radio value={DATE_RANGE_TYPE.BORDERED}>Bordered</Radio>
+        <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
+        <Radio value={BORDER_TYPE.FLOAT_LABEL}>Float Label</Radio>
+        <Radio value={BORDER_TYPE.BORDERED}>Bordered</Radio>
       </Radio.Group>
     </div>
 

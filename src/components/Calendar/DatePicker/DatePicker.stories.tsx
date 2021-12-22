@@ -2,16 +2,16 @@ import { Radio } from 'antd';
 import { RadioChangeEvent } from 'antd/lib/radio';
 import { Moment } from 'moment';
 import React from 'react';
-import { ValidateStatus } from '../../../config/enum';
+import { BORDER_TYPE, ValidateStatus } from '../../../config/enum';
 import FormItem from "../../FormItem/FormItem";
-import DatePicker, { DATE_PICKER_TYPE } from './DatePicker';
+import DatePicker from './DatePicker';
 
 export function DatePickerStories() {
 
   const [value, setValue] = React.useState<Moment>();
 
-  const [type, setType] = React.useState<DATE_PICKER_TYPE>(
-    DATE_PICKER_TYPE.FLOAT_LABEL
+  const [type, setType] = React.useState<BORDER_TYPE>(
+    BORDER_TYPE.FLOAT_LABEL
   );
 
   const [isDisabled, setIsDisabled] = React.useState(false);
@@ -66,9 +66,9 @@ export function DatePickerStories() {
     </div>
     <div style={{ margin: "10px", width: "300px" }}>
       <Radio.Group onChange={handleChangeStyle} value={type}>
-        <Radio value={DATE_PICKER_TYPE.MATERIAL}>Material</Radio>
-        <Radio value={DATE_PICKER_TYPE.FLOAT_LABEL}>Float Label</Radio>
-        <Radio value={DATE_PICKER_TYPE.BORDERED}>Bordered</Radio>
+        <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
+        <Radio value={BORDER_TYPE.FLOAT_LABEL}>Float Label</Radio>
+        <Radio value={BORDER_TYPE.BORDERED}>Bordered</Radio>
       </Radio.Group>
     </div>
 

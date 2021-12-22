@@ -339,6 +339,29 @@
     background-color: unset;
   }
 }
+.btn--link {
+  // main button
+  background-color: var(--color--link);
+  color: var(--color--primary);
+  text-decoration: none;
+
+  &:visited {
+    color: var(--color--primary);
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus {
+    box-shadow: 0px 0px 8px #0F62FE;
+    text-decoration: underline;
+  }
+  &.disabled {
+    color: var(--color--link);
+    background-color: unset;
+  }
+}
 
 
 
@@ -530,6 +553,9 @@
     height: 40px;
     padding: 12px 12px;
   }
+}
+.btn-link{
+  padding: 0px 4px;
 }
 
 .btn--full-width {

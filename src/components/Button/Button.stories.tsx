@@ -1553,9 +1553,15 @@ function BleedPS() {
     </div>
   );
 }
-function LinkPlain() {
+function LinkPlainAndLink() {
   return (
-    <div>
+    <div
+      style={{
+        padding: "30px 30px",
+        backgroundColor: "#E6EAEE",
+      }}
+    >
+      <h2>Button Link Plain</h2>
       <div
         style={{
           display: "flex",
@@ -1566,16 +1572,16 @@ function LinkPlain() {
         }}
       >
         <Button type="link-plain" className="btn--sm">
-          {"hihi"}
+          {"Button"}
         </Button>
         <Button type="link-plain" className="btn--md">
-          {"hihi"}
+          {"Button"}
         </Button>
         <Button type="link-plain" className="btn--lg">
-          {"hihi"}
+          {"Button"}
         </Button>
         <Button type="link-plain" className="btn--xl">
-          {"hihi"}
+          {"Button"}
         </Button>
       </div>
       <div
@@ -1600,6 +1606,18 @@ function LinkPlain() {
           {"hihi"}
         </Button>
       </div>
+      <h2>Button Link</h2>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          width: 700,
+          marginBottom: 30,
+        }}
+      >
+        <Button type="link">{"button"}</Button>
+      </div>
     </div>
   );
 }
@@ -1612,4 +1630,4 @@ storiesOf("Button", module)
   .add(nameof(GhostSecondary), GhostSecondary)
   .add(nameof(Danger), Danger)
   .add(nameof(BleedPS), BleedPS)
-  .add(nameof(LinkPlain), LinkPlain);
+  .add(nameof(LinkPlainAndLink), LinkPlainAndLink);

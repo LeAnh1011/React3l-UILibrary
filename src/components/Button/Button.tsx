@@ -7,7 +7,6 @@ import React, {
 import "./Button.scss";
 
 export type ButtonType =
-  | "default"
   | "primary"
   | "outline-primary"
   | "secondary"
@@ -18,7 +17,7 @@ export type ButtonType =
   | "outline-danger"
   | "bleed-primary"
   | "bleed-secondary"
-  | "warning"
+  | "link-plain"
   | "link";
 
 export interface ButtonProps {
@@ -136,6 +135,12 @@ const Button = React.forwardRef(
           numb = 6;
           break;
         }
+      case "link-plain": // bộ link-plain & link có ui padding cố định, khác bộ khác chia thành 7-8
+        numb = 7;
+        break;
+      case "link":
+        numb = 8;
+        break;
       default:
         numb = 1;
     }
@@ -225,7 +230,7 @@ const Button = React.forwardRef(
       >
         {children}
       </button>
-    ) : (
+    ) : numb === 6 ? (
       <button
         type={htmlType}
         onClick={onClick}
@@ -245,12 +250,42 @@ const Button = React.forwardRef(
           </div>
         </div>
       </button>
+    ) : numb === 7 ? (
+      <button
+        type={htmlType}
+        onClick={onClick}
+        ref={ref}
+        disabled={disabled}
+        className={classNames(
+          "btn btn-link-plain",
+          `btn--${type}`,
+          disabled ? "disabled" : "",
+          className
+        )}
+      >
+        {children}
+      </button>
+    ) : (
+      <button
+        type={htmlType}
+        onClick={onClick}
+        ref={ref}
+        disabled={disabled}
+        className={classNames(
+          "btn btn-link",
+          `btn--${type}`,
+          disabled ? "disabled" : "",
+          className
+        )}
+      >
+        {children}
+      </button>
     );
   }
 );
 
 Button.defaultProps = {
-  type: "default",
+  type: "primary",
   outlined: false,
   htmlType: "button",
   disabled: false,

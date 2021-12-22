@@ -1553,6 +1553,56 @@ function BleedPS() {
     </div>
   );
 }
+function LinkPlain() {
+  return (
+    <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          width: 700,
+          marginBottom: 30,
+        }}
+      >
+        <Button type="link-plain" className="btn--sm">
+          {"hihi"}
+        </Button>
+        <Button type="link-plain" className="btn--md">
+          {"hihi"}
+        </Button>
+        <Button type="link-plain" className="btn--lg">
+          {"hihi"}
+        </Button>
+        <Button type="link-plain" className="btn--xl">
+          {"hihi"}
+        </Button>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          width: 700,
+          marginBottom: 30,
+        }}
+      >
+        <Button type="link-plain" className="btn--sm" disabled={true}>
+          {"hihi"}
+        </Button>
+        <Button type="link-plain" className="btn--md" disabled={true}>
+          {"hihi"}
+        </Button>
+        <Button type="link-plain" className="btn--lg" disabled={true}>
+          {"hihi"}
+        </Button>
+        <Button type="link-plain" className="btn--xl" disabled={true}>
+          {"hihi"}
+        </Button>
+      </div>
+    </div>
+  );
+}
 
 storiesOf("Button", module)
   .add(nameof(Primary), Primary)
@@ -1561,4 +1611,5 @@ storiesOf("Button", module)
   .add(nameof(GhostPrimary), GhostPrimary)
   .add(nameof(GhostSecondary), GhostSecondary)
   .add(nameof(Danger), Danger)
-  .add(nameof(BleedPS), BleedPS);
+  .add(nameof(BleedPS), BleedPS)
+  .add(nameof(LinkPlain), LinkPlain);

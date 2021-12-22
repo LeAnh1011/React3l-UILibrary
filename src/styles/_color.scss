@@ -303,11 +303,14 @@ $palettes: (
   --btn-outline-danger-disabled-border: #D2D5D8;
   --btn-outline-danger-disabled-label: #A8A8A8 ;
 
-  --btn-accent-bg: var(--color-accent);
-  --btn-accent-hover: var(--color-accent-light);
-  --btn-accent-active: var(--color-accent-dark);
-  --btn-accent-label: var(--white);
-
+  /* buttons link-plain */
+  --color--link-plain: #E5E5E5;
+  --btn-link-plain-hover: var(--color--link-plain);
+  --btn-link-plain-active: var(--color--link-plain);
+  --btn-link-plain-focus: var(--white);
+  --btn-link-plain-label: #000000;
+  --btn-link-plain-disabled-label: #A8A8A8;
+  --btn-link-plain-border-forcus: #0F62FE;
   /* icons */
   --color-icon-primary: var(--gray-4);
   --color-icon-secondary: inherit;

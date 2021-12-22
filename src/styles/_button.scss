@@ -133,6 +133,7 @@
 
   &:focus {
     box-shadow: 0px 0px 8px #0F62FE;
+    border: 1px solid #0F62FE;
     background-color: var(--btn-ghost-focus);
   }
   &.disabled {
@@ -252,6 +253,61 @@
     padding-right: 64px;
     padding-top: 20px;
     padding-bottom: 20px;
+  }
+}
+.btn-ghost-have-icon{
+
+  .button-content-have-icon{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .children-content{
+      margin-right: 8px;
+    }
+    .icon-button{
+      font-size: 16px;
+    }
+  }
+  &.btn--sm {
+    height: 32px;
+    padding: 8px 12px;
+  }
+  
+  &.btn--md {
+    height: 36px;
+    padding: 10px 16px;
+  }
+  
+  &.btn--lg {
+    height: 40px;
+    padding: 12px 16px;
+  }
+  
+  &.btn--xl {
+    height: 56px;
+    padding: 20px 16px;
+  }
+} 
+.btn-ghost-no-icon{
+  &.btn--sm {
+    height: 32px;
+    padding: 8px 12px;
+  }
+  
+  &.btn--md {
+    height: 36px;
+    padding: 10px 16px;
+  }
+  
+  &.btn--lg {
+    height: 40px;
+    padding: 12px 16px;
+  }
+  
+  &.btn--xl {
+    height: 56px;
+    padding: 20px 16px;
   }
 }
 

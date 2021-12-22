@@ -1,0 +1,94 @@
+@import "../../../styles/index.scss";
+/* Style for Select.tsx */
+.advance-id-filter__container {
+  width: 100%;
+
+  position: relative;
+
+  .advance-id-filter__input {
+    width: 100%;
+  }
+
+  .advance-id-filter__list-container {
+    width: 100%;
+    height: auto;
+    background-color: var(--color-surface-material-input);
+    @include box-shadow--popover();
+    margin-top: 5px;
+    position: absolute;
+    z-index: 999;
+    .advance-id-filter__list {
+      width: 100%;
+      overflow-y: auto;
+      max-height: 180px;
+      position: relative;
+      background-color: var(--color-surface-material-input);
+    }
+    .advance-id-filter__bottom-button {
+      height: 40px;
+      width: 100%;
+      background-color: var(--color-surface-material-input);
+      display: flex;
+      align-items: center;
+      box-shadow: inset 0px 1px 0px #e1e3e5;
+      span {
+        font-size: 14px;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .advance-id-filter__add-button {
+      span {
+        color: var(--color-primary);
+        font-size: 12px;
+        margin-left: 7px;
+      }
+      .tio-add {
+        color: var(--color-primary);
+      }
+    }
+    .advance-id-filter__loading {
+      width: 100%;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .advance-id-filter__item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding-right: 15px;
+      font-size: 13px;
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      .advance-id-filter__text {
+        white-space: nowrap;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+      &:hover,
+      &:focus {
+        background-color: var(--color-surface-material-input-hover);
+      }
+      &:focus-visible {
+        outline: none;
+      }
+      &.advance-id-filter__item--selected {
+        background-color: var(--color-surface-material-input-hover);
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    .advance-id-filter__list-prefer {
+      box-shadow: inset 0px 1px 0px #e1e3e5;
+    }
+  }
+}

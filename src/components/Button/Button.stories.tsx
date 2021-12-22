@@ -550,6 +550,182 @@ function Default() {
             </Button>
           </div>
         </TabPane>
+        <TabPane tab="ghost and ghost with icon" key="3">
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: 700,
+              marginBottom: 30,
+            }}
+          >
+            <Button type="ghost" className="btn--sm">
+              {"hihi"}
+            </Button>
+            <Button type="ghost" className="btn--md">
+              {"hihi"}
+            </Button>
+            <Button type="ghost" className="btn--lg">
+              {"hihi"}
+            </Button>
+            <Button type="ghost" className="btn--xl">
+              {"hihi"}
+            </Button>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: 700,
+              marginBottom: 30,
+            }}
+          >
+            <Button type="ghost" className="btn--sm" disabled={true}>
+              {"hihi"}
+            </Button>
+            <Button type="ghost" className="btn--md" disabled={true}>
+              {"hihi"}
+            </Button>
+            <Button type="ghost" className="btn--lg" disabled={true}>
+              {"hihi"}
+            </Button>
+            <Button type="ghost" className="btn--xl" disabled={true}>
+              {"hihi"}
+            </Button>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: 700,
+              marginBottom: 30,
+            }}
+          >
+            <Button type="ghost" className="btn--sm" icon="tio-add">
+              {"Button"}
+            </Button>
+            <Button type="ghost" className="btn--md" icon="tio-add">
+              {"Button"}
+            </Button>
+            <Button type="ghost" className="btn--lg" icon="tio-add">
+              {"Button"}
+            </Button>
+            <Button type="ghost" className="btn--xl" icon="tio-add">
+              {"Button"}
+            </Button>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: 700,
+              marginBottom: 30,
+            }}
+          >
+            <Button
+              type="ghost"
+              className="btn--sm"
+              disabled={true}
+              icon="tio-add"
+            >
+              {"Button"}
+            </Button>
+            <Button
+              type="ghost"
+              className="btn--md"
+              disabled={true}
+              icon="tio-add"
+            >
+              {"Button"}
+            </Button>
+            <Button
+              type="ghost"
+              className="btn--lg"
+              disabled={true}
+              icon="tio-add"
+            >
+              {"Button"}
+            </Button>
+            <Button
+              type="ghost"
+              className="btn--xl"
+              disabled={true}
+              icon="tio-add"
+            >
+              {"Button"}
+            </Button>
+          </div>
+          <br />
+          <br />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: 700,
+              marginBottom: 30,
+            }}
+          >
+            <Button type="ghost" className="btn--sm" icon="tio-down_ui">
+              {"Button"}
+            </Button>
+            <Button type="ghost" className="btn--md" icon="tio-down_ui">
+              {"Button"}
+            </Button>
+            <Button type="ghost" className="btn--lg" icon="tio-down_ui">
+              {"Button"}
+            </Button>
+            <Button type="ghost" className="btn--xl" icon="tio-down_ui">
+              {"Button"}
+            </Button>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: 700,
+              marginBottom: 30,
+            }}
+          >
+            <Button
+              type="ghost"
+              className="btn--sm"
+              disabled={true}
+              icon="tio-down_ui"
+            >
+              {"Button"}
+            </Button>
+            <Button
+              type="ghost"
+              className="btn--md"
+              disabled={true}
+              icon="tio-down_ui"
+            >
+              {"Button"}
+            </Button>
+            <Button
+              type="ghost"
+              className="btn--lg"
+              disabled={true}
+              icon="tio-down_ui"
+            >
+              {"Button"}
+            </Button>
+            <Button
+              type="ghost"
+              className="btn--xl"
+              disabled={true}
+              icon="tio-down_ui"
+            >
+              {"Button"}
+            </Button>
+          </div>
+        </TabPane>
       </Tabs>
     </div>
   );

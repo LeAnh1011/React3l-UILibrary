@@ -113,6 +113,33 @@
   }
 }
 
+.btn--ghost {
+  // main button
+  background-color: unset;
+  color: var(--btn-ghost-label);
+
+  &:visited {
+    color: var(--btn-ghost-label);
+  }
+
+  &:hover {
+    background-color: var(--btn-ghost-hover);
+  }
+
+  &:active {
+    box-shadow: inset 0px 2px 0px rgba(0, 0, 0, 0.05);
+    background-color: var(--btn-ghost-active);
+  }
+
+  &:focus {
+    box-shadow: 0px 0px 8px #0F62FE;
+    background-color: var(--btn-ghost-focus);
+  }
+  &.disabled {
+    color: var(btn-ghost-disabled-label);
+  }
+}
+
 .btn--accent {
   // used to draw special attention to the button (e.g. destructive actions)
   background-color: var(--btn-accent-bg);
@@ -190,7 +217,7 @@
     padding-top: 20px;
     padding-bottom: 20px;
   }
-}
+} 
 
 /* button size */
 .btn-no-icon{

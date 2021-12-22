@@ -257,6 +257,16 @@ $palettes: (
   --btn-secondary-label: var(--white);
   --btn-secondary-disabled: #F1F1F1;
   --btn-secondary-disabled-label: #A8A8A8;
+
+  /* buttons ghost */
+  --color--ghost: #E5E5E5;
+  --btn-ghost-hover: var(--color--ghost);
+  --btn-ghost-active: var(--color--ghost);
+  --btn-ghost-focus: var(--color--ghost);
+  --btn-ghost-label: #0D1821;
+  --btn-ghost-disabled-label: #A8A8A8;
+  --btn-ghost-border-forcus: #0F62FE;
+  
   
 
   --btn-accent-bg: var(--color-accent);

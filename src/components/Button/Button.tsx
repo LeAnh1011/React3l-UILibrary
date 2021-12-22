@@ -11,6 +11,7 @@ export type ButtonType =
   | "primary"
   | "outline-primary"
   | "secondary"
+  | "ghost"
   | "danger"
   | "warning"
   | "link";

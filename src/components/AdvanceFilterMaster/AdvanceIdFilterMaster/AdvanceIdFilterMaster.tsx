@@ -264,14 +264,17 @@ function AdvanceIdFilterMaster(
         ref={wrapperRef}
       >
         <div
-          className={classNames("advance-id-filter-master__container ", {
+          className={classNames("advance-id-filter-master__container p-l--sm p-t--xs p-r--xs p-b--xs", {
             "filter-bg": isExpand,
+            "p-b---active": value,
           })}
           onClick={handleToggle}
         >
-          <div className="advance-id-filter-master__title p--xs">
-            {title}
-            <i className="filter__icon tio-chevron_down"></i>
+          <div className={classNames({ "filter-active": value })}>
+            <div className="advance-id-filter-master__title">
+              {title}
+              <i className="filter__icon tio-chevron_down"></i>
+            </div>
           </div>
         </div>
         {isExpand && (

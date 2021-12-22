@@ -26,8 +26,8 @@ $backgound-color: #f4f4f4;
       }
     }
     .filter-active {
-      color: #0f62fe;
-      border-bottom: 1px solid #0f62fe;
+      color: var(--color-primary);
+      border-bottom: 1px solid var(--color-primary);
     }
     &:hover {
       background: #e5e5e5;

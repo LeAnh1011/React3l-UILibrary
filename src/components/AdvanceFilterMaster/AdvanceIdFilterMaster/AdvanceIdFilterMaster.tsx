@@ -1,6 +1,5 @@
 import { useDebounceFn } from "ahooks";
 import { Empty, Spin } from "antd";
-import search from "assets/images/svg/search-normal.svg";
 import classNames from "classnames";
 import InputText from "components/Input/InputText";
 import { DEBOUNCE_TIME_300 } from "config/consts";
@@ -284,7 +283,7 @@ function AdvanceIdFilterMaster(
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
                 suffix={
-                  <img className="tio tio-search" src={search} alt="noImage" />
+                  <i className="tio tio-search" />
                 }
                 isMaterial={isMaterial}
                 ref={inputRef}

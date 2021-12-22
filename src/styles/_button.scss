@@ -143,6 +143,59 @@
   }
 }
 
+.btn--ghost-primary {
+  // main button
+  background-color: unset;
+  color: var(--btn-ghost-primary-label);
+
+  &:visited {
+    color: var(--btn-ghost-primary-label);
+  }
+
+  &:hover {
+    background-color: var(--btn-ghost-primary-hover);
+  }
+
+  &:active {
+    background-color: var(--btn-ghost-primary-hover);
+  }
+
+  &:focus {
+    box-shadow: 0px 0px 8px #0F62FE;
+    border: 1px solid #0F62FE;
+    background-color: var(--btn-ghost-primary-focus);
+  }
+  &.disabled {
+    color: var(btn-ghost-primary-disabled-label);
+  }
+}
+.btn--ghost-secondary {
+  // main button
+  background-color: unset;
+  color: var(--btn-ghost-secondary-label);
+
+  &:visited {
+    color: var(--btn-ghost-secondary-label);
+  }
+
+  &:hover {
+    background-color: var(--btn-ghost-secondary-hover);
+  }
+
+  &:active {
+    background-color: var(--btn-ghost-secondary-hover);
+  }
+
+  &:focus {
+    box-shadow: 0px 0px 8px #0F62FE;
+    border: 1px solid #0F62FE;
+    background-color: var(--btn-ghost-secondary-focus);
+  }
+  &.disabled {
+    color: var(btn-ghost-secondary-disabled-label);
+  }
+}
+
 .btn--accent {
   // used to draw special attention to the button (e.g. destructive actions)
   background-color: var(--btn-accent-bg);

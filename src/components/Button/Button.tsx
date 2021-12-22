@@ -12,6 +12,8 @@ export type ButtonType =
   | "outline-primary"
   | "secondary"
   | "ghost"
+  | "ghost-primary"
+  | "ghost-secondary"
   | "danger"
   | "warning"
   | "link";
@@ -76,6 +78,22 @@ const Button = React.forwardRef(
           break;
         }
       case "ghost":
+        if (!icon) {
+          numb = 3;
+          break;
+        } else {
+          numb = 4;
+          break;
+        }
+      case "ghost-primary":
+        if (!icon) {
+          numb = 3;
+          break;
+        } else {
+          numb = 4;
+          break;
+        }
+      case "ghost-secondary":
         if (!icon) {
           numb = 3;
           break;

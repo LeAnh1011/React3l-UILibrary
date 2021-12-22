@@ -56,6 +56,8 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
     null
   );
+  const dateRef = React.useRef<any>();
+
 
   const internalValue: [Moment, Moment] = React.useMemo(() => {
     return [
@@ -95,13 +97,16 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
           }
         }
       }
+
     },
     [internalValue, type]
   );
 
   React.useEffect(() => {
     const subscription = new Subscription();
-    if (internalValue) {
+    console.log(internalValue)
+    if (internalValue && internalValue?.length > 0 && internalValue[0]) {
+
       const element = document.getElementById("component__title-id");
       if (element) {
         element.classList.add('component__title-up');
@@ -112,6 +117,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
       subscription.unsubscribe();
     };
   }, [internalValue]);
+
 
 
   return (
@@ -152,13 +158,14 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
           "date-picker--disabled ": disabled,
           "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,
         })}
+        ref={dateRef}
       />
       {type === BORDER_TYPE.FLOAT_LABEL && label && (
         <label
           id="component__title-id"
           className={classNames("component__title component__title--normal", {
             "component__title--sm": isSmall,
-            "component__title-up": internalValue,
+            "component__title-up": internalValue && internalValue?.length > 0 && internalValue[0],
           })}
           onClick={handleOpenChange}
 
@@ -189,7 +196,6 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
   );
 }
 DateRange.defaultProps = {
-  // open: false,
   dateFormat: ["DD/MM/YYYY", "YYYY/MM/DD"],
   label: "",
   isSmall: false,

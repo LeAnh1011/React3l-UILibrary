@@ -134,6 +134,11 @@
         left: 8px;
         &.component__title--sm {
             top: 27px;
+            &.component__title-down {
+                top: 35px;
+                left: 8px;
+                transform: translateY(-50%);
+            }
         }
         &.component__title-up {
             top: 19px;
@@ -144,7 +149,7 @@
         &.component__title-down {
             top: 35px;
             left: 8px;
-            transform: translateY(-50%) scale(0.9);
+            transform: translateY(-30%);
         }
     }
 }

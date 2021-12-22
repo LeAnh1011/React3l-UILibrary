@@ -1,73 +1,55 @@
-import { IdFilter, StringFilter } from "react3l-advanced-filters";
+import { IdFilter } from "react3l-advanced-filters";
+import { StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
-import Radio, { RadioChangeEvent } from "antd/lib/radio";
+import { Radio } from "antd";
+import { RadioChangeEvent } from "antd/lib/radio";
 import React from "react";
-import { Observable } from "rxjs";
-import MultipleSelect from "./MultipleSelect";
+import { of } from "rxjs";
 import FormItem from "../../FormItem/FormItem";
+import AdvanceIdFilter from "./AdvanceIdFilter";
 import { ValidateStatus } from "./../../../config/enum";
 import { BORDER_TYPE } from "./../../../config/enum";
 
-const demoList = [
-  { id: 1, name: "Ban hành chính", code: "FAD" },
-  { id: 2, name: "Ban công nghệ thông tin", code: "FIM" },
-  { id: 3, name: "Ban nhân sự", code: "FHR" },
-  { id: 4, name: "Ban truyền thông", code: "FCC" },
-  { id: 5, name: "Ban công nghệ", code: "FTI" },
-  { id: 6, name: "Ban giám đốc", code: "BOD" },
-  { id: 7, name: "Ban quản trị", code: "BOM" },
-];
+export class DemoFilter extends ModelFilter {
+  id: IdFilter = new IdFilter();
+  name: StringFilter = new StringFilter();
+  code: StringFilter = new StringFilter();
+}
+
+const demoListEnum = (TModelFilter: ModelFilter) => {
+  return of([
+    {
+      id: 1,
+      name:
+        "Option 2 very long one very long one Option 2 very long one very long one",
+      code: "E1",
+    },
+    { id: 2, name: "Enum 2", code: "E2" },
+    { id: 3, name: "Enum 3", code: "E3" },
+    { id: 4, name: "Enum 4", code: "E4" },
+    { id: 5, name: "Enum 5", code: "E5" },
+  ]);
+};
 
 const list = [
   { id: 9, name: "Phòng Muti Media", code: "MEDIA" },
   { id: 10, name: "Phòng truyền thông", code: "PTT" },
 ];
 
-const demoObservable = new Observable<Model[]>((observer) => {
-  setTimeout(() => {
-    observer.next(demoList);
-  }, 1000);
-});
-
-const demoSearchFunc = (TModelFilter: ModelFilter) => {
-  return demoObservable;
-};
-
-interface changeAction {
-  type: string;
-  data: Model;
-}
-
-function testReducer(currentState: Model[], action: changeAction): Model[] {
-  switch (action.type) {
-    case "UPDATE":
-      return [...currentState, action.data];
-    case "REMOVE":
-      const filteredArray = currentState.filter(
-        (item) => item.id !== action.data.id
-      );
-      return [...filteredArray];
-    case "REMOVE_ALL":
-      return [];
-  }
-  return;
-}
-
-class DemoFilter extends ModelFilter {
-  public id: IdFilter = new IdFilter();
-  public name: StringFilter = new StringFilter();
-  public provinceId: IdFilter = new IdFilter();
-}
-
-export function MultipleSelectStories() {
-  const [models, dispatch] = React.useReducer(testReducer, []);
+export function AdvanceIdFilterStories() {
+  const [selectModel, setSelectModel] = React.useState<Model>({
+    id: 0,
+    name: "Option 2",
+    code: "FAD",
+  });
 
   const [selectModelFilter] = React.useState<DemoFilter>(new DemoFilter());
 
   const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
-  const [isSmall, setIsSmall] = React.useState<boolean>(false);
 
   const [isValidated, setValidated] = React.useState(false);
+
+  const [isSelectWithAdd, setIsSelectWithAdd] = React.useState<boolean>(false);
 
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
 
@@ -76,31 +58,26 @@ export function MultipleSelectStories() {
     setIsSelectWithPreferOption,
   ] = React.useState<boolean>(false);
 
-  const [isSelectWithAdd, setIsSelectWithAdd] = React.useState<boolean>(false);
-
-  const [withSearch, setWithSearch] = React.useState(true);
+  const [isSmall, setIsSmall] = React.useState<boolean>(false);
 
   const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
     setType(event.target.value);
   }, []);
 
-  const handleChangeModels = React.useCallback((item, type) => {
-    dispatch({
-      type: type,
-      data: item,
-    });
+  const handleSetModel = React.useCallback((...[, item]) => {
+    setSelectModel(item);
   }, []);
 
-  const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
-    setIsSmall(event.target.value);
+  const handleRenderModel = React.useCallback((item: Model) => {
+    if (item) {
+      return item.name;
+    } else {
+      return "";
+    }
   }, []);
 
   const handleChangeValidated = React.useCallback((event: RadioChangeEvent) => {
     setValidated(event.target.value);
-  }, []);
-
-  const handleChangeDisabled = React.useCallback((event: RadioChangeEvent) => {
-    setIsDisabled(event.target.value);
   }, []);
 
   const handleChangeSelectWithAdd = React.useCallback(
@@ -117,49 +94,46 @@ export function MultipleSelectStories() {
     []
   );
 
-  const handleChangeWithSearch = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setWithSearch(event.target.value);
-    },
-    []
-  );
+  const handleChangeDisabled = React.useCallback((event: RadioChangeEvent) => {
+    setIsDisabled(event.target.value);
+  }, []);
+
+  const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
+    setIsSmall(event.target.value);
+  }, []);
 
   return (
-    <>
+    <div style={{ margin: "10px", width: "300px" }}>
       <div style={{ margin: "10px", width: "300px" }}>
         <FormItem
           validateStatus={isValidated ? ValidateStatus.error : null}
           message={isValidated ? "Error label" : ""}
         >
-          <MultipleSelect
-            models={models}
-            placeHolder={"Select an option"}
-            onChange={handleChangeModels}
-            getList={demoSearchFunc}
+          <AdvanceIdFilter
+            placeHolder={"Select Organization"}
+            model={selectModel}
             modelFilter={selectModelFilter}
+            searchProperty={"name"}
+            render={handleRenderModel}
+            onChange={handleSetModel}
+            getList={demoListEnum}
             classFilter={DemoFilter}
-            label={"Label"}
             type={type}
-            isSmall={isSmall}
-            disabled={isDisabled}
+            label={"Label"}
             selectWithAdd={isSelectWithAdd}
-            isUsingSearch={withSearch}
+            selectWithPreferOption={isSelectWithPreferOption}
+            disabled={isDisabled}
+            isSmall={isSmall}
             preferOptions={isSelectWithPreferOption ? list : undefined}
-          ></MultipleSelect>
+          />
         </FormItem>
       </div>
+
       <div style={{ margin: "10px", width: "400px" }}>
         <Radio.Group onChange={handleChangeStyle} value={type}>
           <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
           <Radio value={BORDER_TYPE.FLOAT_LABEL}>Float Label</Radio>
           <Radio value={BORDER_TYPE.BORDERED}>Bordered</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeSize} value={isSmall}>
-          <Radio value={true}>Small</Radio>
-          <Radio value={false}>Default</Radio>
         </Radio.Group>
       </div>
 
@@ -198,11 +172,11 @@ export function MultipleSelectStories() {
       </div>
 
       <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeWithSearch} value={withSearch}>
-          <Radio value={true}>Using Search</Radio>
-          <Radio value={false}>Not Using Search</Radio>
+        <Radio.Group onChange={handleChangeSize} value={isSmall}>
+          <Radio value={true}>Small</Radio>
+          <Radio value={false}>Default</Radio>
         </Radio.Group>
       </div>
-    </>
+    </div>
   );
 }

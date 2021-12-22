@@ -4,7 +4,6 @@ import classNames from "classnames";
 import { BORDER_TYPE } from "config/enum";
 import { Moment } from "moment";
 import React, { RefObject } from "react";
-import { Subscription } from "rxjs";
 import { CommonService } from "services/common-service";
 import "./DateRange.scss";
 

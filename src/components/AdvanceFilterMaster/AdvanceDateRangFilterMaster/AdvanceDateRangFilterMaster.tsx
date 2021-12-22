@@ -1,7 +1,6 @@
 import { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import DateRange from "components/Calendar/DateRange";
-import { DATE_RANGE_TYPE } from "components/Calendar/DateRange/DateRange";
 import { BORDER_TYPE } from "config/enum";
 import { InputSelect } from "index";
 import moment, { Moment } from "moment";
@@ -9,7 +8,6 @@ import React, { RefObject } from "react";
 import { Model } from "react3l-common";
 import { CommonService } from "services/common-service";
 import "./AdvanceDateRangFilterMaster.scss";
-
 
 export enum ADVANCE_DATE_RANGE_TYPE {
   SHORT,
@@ -25,8 +23,6 @@ interface AdvanceDateRangeFilterProps {
 
   onChange?: (item: any, value: [Moment, Moment]) => void;
 
-  placeholder?: string[];
-
   title?: string;
 
   className?: string;
@@ -35,13 +31,13 @@ interface AdvanceDateRangeFilterProps {
 
   render?: (t: Model) => string;
 
-  typeCustomDate?: DATE_RANGE_TYPE;
+  typeCustomDate?: BORDER_TYPE;
 
   isSmall?: boolean;
 
   label?: string;
 
-  placeHolder?: string;
+  placeholder?: string;
 
   activeItem?: any;
 
@@ -50,7 +46,6 @@ interface AdvanceDateRangeFilterProps {
   inputType?: BORDER_TYPE;
 
   placeHolderSelect?: string;
-
 }
 
 const list = [
@@ -81,7 +76,7 @@ function AdvanceDateRangeFilter(
     typeCustomDate,
     isSmall,
     activeItem,
-    placeHolder,
+    placeholder,
     type,
     inputType,
     placeHolderSelect,
@@ -165,7 +160,6 @@ function AdvanceDateRangeFilter(
     ];
   }, [value]);
 
-
   const handleChange = React.useCallback(
     (values: [Moment, Moment], formatString: [string, string]) => {
       onChange(undefined, [values[0]?.startOf("day"), values[1]?.endOf("day")]);
@@ -203,7 +197,6 @@ function AdvanceDateRangeFilter(
 
   CommonService.useClickOutside(wrapperRef, handleCloseAdvanceFilterMaster);
 
-
   const handleClearItem = React.useCallback(() => {
     onChange(null, [null, null]);
   }, [onChange]);
@@ -216,33 +209,43 @@ function AdvanceDateRangeFilter(
       )}
       ref={wrapperRef}
     >
-      {
-        type === ADVANCE_DATE_RANGE_TYPE.SHORT ?
-          <div
-            className={classNames("advance-date-range-filter-master__container ", {
+      {type === ADVANCE_DATE_RANGE_TYPE.SHORT ? (
+        <div
+          className={classNames(
+            "advance-date-range-filter-master__container p-l--sm p-t--xs p-r--xs p-b--xs",
+            {
               "filter-bg": isExpand,
+              "p-b---active": value && value?.length > 0 && value[0],
+            }
+          )}
+          onClick={handleToggle}
+        >
+          <div
+            className={classNames({
+              "filter-active": value && value?.length > 0 && value[0],
             })}
-            onClick={handleToggle}
           >
-            <div className="advance-date-range-filter-master__title p--xs">
+            <div className="advance-date-range-filter-master__title">
               {title}
               <i className="filter__icon tio-chevron_down"></i>
             </div>
           </div>
-          : <div className="select__input" onClick={handleToggle}>
-            <InputSelect
-              model={activeItem} // value of input, event should change these on update
-              render={render}
-              placeHolder={placeHolderSelect}
-              expanded={isExpand}
-              disabled={disabled}
-              onClear={handleClearItem}
-              type={inputType}
-              label={title}
-              isSmall={isSmall}
-            />
-          </div>
-      }
+        </div>
+      ) : (
+        <div className="select__input" onClick={handleToggle}>
+          <InputSelect
+            model={activeItem} // value of input, event should change these on update
+            render={render}
+            placeHolder={placeHolderSelect}
+            expanded={isExpand}
+            disabled={disabled}
+            onClear={handleClearItem}
+            type={inputType}
+            label={title}
+            isSmall={isSmall}
+          />
+        </div>
+      )}
 
       {isExpand && (
         <div
@@ -287,7 +290,7 @@ function AdvanceDateRangeFilter(
                 getPopupContainer={() =>
                   document.getElementById("list-container")
                 }
-                placeHolder={placeHolder}
+                placeHolder={placeholder}
               />
             </>
           )}
@@ -303,7 +306,7 @@ AdvanceDateRangeFilter.defaultProps = {
   placeHolder: "Chọn ngày",
   render: defaultRenderObject,
   type: ADVANCE_DATE_RANGE_TYPE.SHORT,
-  placeHolderSelect: ""
+  placeHolderSelect: "",
 };
 
 export default AdvanceDateRangeFilter;

@@ -1082,38 +1082,16 @@ function Danger() {
           marginBottom: 30,
         }}
       >
-        <Button type="primary" className="btn--sm">
+        <Button type="danger" className="btn--sm">
           {"hihi"}
         </Button>
-        <Button type="primary" className="btn--md">
+        <Button type="danger" className="btn--md">
           {"hihi"}
         </Button>
-        <Button type="primary" className="btn--lg">
+        <Button type="danger" className="btn--lg">
           {"hihi"}
         </Button>
-        <Button type="primary" className="btn--xl">
-          {"hihi"}
-        </Button>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          width: 700,
-          marginBottom: 30,
-        }}
-      >
-        <Button type="primary" className="btn--sm" disabled={true}>
-          {"hihi"}
-        </Button>
-        <Button type="primary" className="btn--md" disabled={true}>
-          {"hihi"}
-        </Button>
-        <Button type="primary" className="btn--lg" disabled={true}>
-          {"hihi"}
-        </Button>
-        <Button type="primary" className="btn--xl" disabled={true}>
+        <Button type="danger" className="btn--xl">
           {"hihi"}
         </Button>
       </div>
@@ -1126,16 +1104,16 @@ function Danger() {
           marginBottom: 30,
         }}
       >
-        <Button type="outline-primary" className="btn--sm">
+        <Button type="danger" className="btn--sm" disabled={true}>
           {"hihi"}
         </Button>
-        <Button type="outline-primary" className="btn--md">
+        <Button type="danger" className="btn--md" disabled={true}>
           {"hihi"}
         </Button>
-        <Button type="outline-primary" className="btn--lg">
+        <Button type="danger" className="btn--lg" disabled={true}>
           {"hihi"}
         </Button>
-        <Button type="outline-primary" className="btn--xl">
+        <Button type="danger" className="btn--xl" disabled={true}>
           {"hihi"}
         </Button>
       </div>
@@ -1148,16 +1126,38 @@ function Danger() {
           marginBottom: 30,
         }}
       >
-        <Button type="outline-primary" className="btn--sm" disabled={true}>
+        <Button type="outline-danger" className="btn--sm">
           {"hihi"}
         </Button>
-        <Button type="outline-primary" className="btn--md" disabled={true}>
+        <Button type="outline-danger" className="btn--md">
           {"hihi"}
         </Button>
-        <Button type="outline-primary" className="btn--lg" disabled={true}>
+        <Button type="outline-danger" className="btn--lg">
           {"hihi"}
         </Button>
-        <Button type="outline-primary" className="btn--xl" disabled={true}>
+        <Button type="outline-danger" className="btn--xl">
+          {"hihi"}
+        </Button>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          width: 700,
+          marginBottom: 30,
+        }}
+      >
+        <Button type="outline-danger" className="btn--sm" disabled={true}>
+          {"hihi"}
+        </Button>
+        <Button type="outline-danger" className="btn--md" disabled={true}>
+          {"hihi"}
+        </Button>
+        <Button type="outline-danger" className="btn--lg" disabled={true}>
+          {"hihi"}
+        </Button>
+        <Button type="outline-danger" className="btn--xl" disabled={true}>
           {"hihi"}
         </Button>
       </div>
@@ -1171,16 +1171,16 @@ function Danger() {
           marginBottom: 30,
         }}
       >
-        <Button type="primary" className="btn--sm" icon="tio-add">
+        <Button type="danger" className="btn--sm" icon="tio-clear">
           {"Button"}
         </Button>
-        <Button type="primary" className="btn--md" icon="tio-add">
+        <Button type="danger" className="btn--md" icon="tio-clear">
           {"Button"}
         </Button>
-        <Button type="primary" className="btn--lg" icon="tio-add">
+        <Button type="danger" className="btn--lg" icon="tio-clear">
           {"Button"}
         </Button>
-        <Button type="primary" className="btn--xl" icon="tio-add">
+        <Button type="danger" className="btn--xl" icon="tio-clear">
           {"Button"}
         </Button>
       </div>
@@ -1194,34 +1194,34 @@ function Danger() {
         }}
       >
         <Button
-          type="primary"
+          type="danger"
           className="btn--sm"
           disabled={true}
-          icon="tio-add"
+          icon="tio-clear"
         >
           {"Button"}
         </Button>
         <Button
-          type="primary"
+          type="danger"
           className="btn--md"
           disabled={true}
-          icon="tio-add"
+          icon="tio-clear"
         >
           {"Button"}
         </Button>
         <Button
-          type="primary"
+          type="danger"
           className="btn--lg"
           disabled={true}
-          icon="tio-add"
+          icon="tio-clear"
         >
           {"Button"}
         </Button>
         <Button
-          type="primary"
+          type="danger"
           className="btn--xl"
           disabled={true}
-          icon="tio-add"
+          icon="tio-clear"
         >
           {"Button"}
         </Button>
@@ -1235,16 +1235,16 @@ function Danger() {
           marginBottom: 30,
         }}
       >
-        <Button type="outline-primary" className="btn--sm" icon="tio-add">
+        <Button type="outline-danger" className="btn--sm" icon="tio-clear">
           {"Button"}
         </Button>
-        <Button type="outline-primary" className="btn--md" icon="tio-add">
+        <Button type="outline-danger" className="btn--md" icon="tio-clear">
           {"Button"}
         </Button>
-        <Button type="outline-primary" className="btn--lg" icon="tio-add">
+        <Button type="outline-danger" className="btn--lg" icon="tio-clear">
           {"Button"}
         </Button>
-        <Button type="outline-primary" className="btn--xl" icon="tio-add">
+        <Button type="outline-danger" className="btn--xl" icon="tio-clear">
           {"Button"}
         </Button>
       </div>
@@ -1258,34 +1258,34 @@ function Danger() {
         }}
       >
         <Button
-          type="outline-primary"
+          type="outline-danger"
           className="btn--sm"
           disabled={true}
-          icon="tio-add"
+          icon="tio-clear"
         >
           {"Button"}
         </Button>
         <Button
-          type="outline-primary"
+          type="outline-danger"
           className="btn--md"
           disabled={true}
-          icon="tio-add"
+          icon="tio-clear"
         >
           {"Button"}
         </Button>
         <Button
-          type="outline-primary"
+          type="outline-danger"
           className="btn--lg"
           disabled={true}
-          icon="tio-add"
+          icon="tio-clear"
         >
           {"Button"}
         </Button>
         <Button
-          type="outline-primary"
+          type="outline-danger"
           className="btn--xl"
           disabled={true}
-          icon="tio-add"
+          icon="tio-clear"
         >
           {"Button"}
         </Button>
@@ -1301,16 +1301,32 @@ function Danger() {
           marginBottom: 30,
         }}
       >
-        <Button type="primary" className="btn--sm" icon="tio-down_ui">
+        <Button
+          type="danger"
+          className="btn--sm"
+          icon="tio-clear_circle_outlined"
+        >
           {"Button"}
         </Button>
-        <Button type="primary" className="btn--md" icon="tio-down_ui">
+        <Button
+          type="danger"
+          className="btn--md"
+          icon="tio-clear_circle_outlined"
+        >
           {"Button"}
         </Button>
-        <Button type="primary" className="btn--lg" icon="tio-down_ui">
+        <Button
+          type="danger"
+          className="btn--lg"
+          icon="tio-clear_circle_outlined"
+        >
           {"Button"}
         </Button>
-        <Button type="primary" className="btn--xl" icon="tio-down_ui">
+        <Button
+          type="danger"
+          className="btn--xl"
+          icon="tio-clear_circle_outlined"
+        >
           {"Button"}
         </Button>
       </div>
@@ -1324,34 +1340,34 @@ function Danger() {
         }}
       >
         <Button
-          type="primary"
+          type="danger"
           className="btn--sm"
           disabled={true}
-          icon="tio-down_ui"
+          icon="tio-clear_circle_outlined"
         >
           {"Button"}
         </Button>
         <Button
-          type="primary"
+          type="danger"
           className="btn--md"
           disabled={true}
-          icon="tio-down_ui"
+          icon="tio-clear_circle_outlined"
         >
           {"Button"}
         </Button>
         <Button
-          type="primary"
+          type="danger"
           className="btn--lg"
           disabled={true}
-          icon="tio-down_ui"
+          icon="tio-clear_circle_outlined"
         >
           {"Button"}
         </Button>
         <Button
-          type="primary"
+          type="danger"
           className="btn--xl"
           disabled={true}
-          icon="tio-down_ui"
+          icon="tio-clear_circle_outlined"
         >
           {"Button"}
         </Button>
@@ -1365,16 +1381,32 @@ function Danger() {
           marginBottom: 30,
         }}
       >
-        <Button type="outline-primary" className="btn--sm" icon="tio-down_ui">
+        <Button
+          type="outline-danger"
+          className="btn--sm"
+          icon="tio-clear_circle_outlined"
+        >
           {"Button"}
         </Button>
-        <Button type="outline-primary" className="btn--md" icon="tio-down_ui">
+        <Button
+          type="outline-danger"
+          className="btn--md"
+          icon="tio-clear_circle_outlined"
+        >
           {"Button"}
         </Button>
-        <Button type="outline-primary" className="btn--lg" icon="tio-down_ui">
+        <Button
+          type="outline-danger"
+          className="btn--lg"
+          icon="tio-clear_circle_outlined"
+        >
           {"Button"}
         </Button>
-        <Button type="outline-primary" className="btn--xl" icon="tio-down_ui">
+        <Button
+          type="outline-danger"
+          className="btn--xl"
+          icon="tio-clear_circle_outlined"
+        >
           {"Button"}
         </Button>
       </div>
@@ -1388,34 +1420,34 @@ function Danger() {
         }}
       >
         <Button
-          type="outline-primary"
+          type="outline-danger"
           className="btn--sm"
           disabled={true}
-          icon="tio-down_ui"
+          icon="tio-clear_circle_outlined"
         >
           {"Button"}
         </Button>
         <Button
-          type="outline-primary"
+          type="outline-danger"
           className="btn--md"
           disabled={true}
-          icon="tio-down_ui"
+          icon="tio-clear_circle_outlined"
         >
           {"Button"}
         </Button>
         <Button
-          type="outline-primary"
+          type="outline-danger"
           className="btn--lg"
           disabled={true}
-          icon="tio-down_ui"
+          icon="tio-clear_circle_outlined"
         >
           {"Button"}
         </Button>
         <Button
-          type="outline-primary"
+          type="outline-danger"
           className="btn--xl"
           disabled={true}
-          icon="tio-down_ui"
+          icon="tio-clear_circle_outlined"
         >
           {"Button"}
         </Button>
@@ -1429,4 +1461,5 @@ storiesOf("Button", module)
   .add(nameof(Secondary), Secondary)
   .add(nameof(Ghost), Ghost)
   .add(nameof(GhostPrimary), GhostPrimary)
-  .add(nameof(GhostSecondary), GhostSecondary);
+  .add(nameof(GhostSecondary), GhostSecondary)
+  .add(nameof(Danger), Danger);

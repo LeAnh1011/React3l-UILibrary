@@ -15,6 +15,7 @@ export type ButtonType =
   | "ghost-primary"
   | "ghost-secondary"
   | "danger"
+  | "outline-danger"
   | "warning"
   | "link";
 
@@ -102,6 +103,14 @@ const Button = React.forwardRef(
           break;
         }
       case "danger": // bộ danger có ui padding khá giống 3 bộ đầu nên chia 1 và 2
+        if (!icon) {
+          numb = 1;
+          break;
+        } else {
+          numb = 2;
+          break;
+        }
+      case "outline-danger":
         if (!icon) {
           numb = 1;
           break;

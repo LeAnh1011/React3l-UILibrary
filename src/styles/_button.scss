@@ -1,7 +1,9 @@
 :root {
   --btn-font-size: calc(1em * 0.875);
   --btn-sm: calc(1em * 0.75);
-  --btn-radius: 4px;
+  --btn-radius: 0px;
+  --font-size: 14px;
+  --line-height: 16px;
 }
 
 .btn {
@@ -9,11 +11,11 @@
   position: relative;
   white-space: nowrap;
   text-decoration: none;
-  line-height: var(--text-base-line-height);
-
+  line-height: var(--line-height);
+  border: none;
   padding: var(--space-xxs) var(--space-xs);
-  border-radius: var(--btn-radius);
-  font-size: var(--btn-sm);
+  border-radius:  var(--btn-radius);
+  font-size: var(--font-size);
   color: var(--color-link);
 
   transition: 0.2s;
@@ -45,6 +47,43 @@
 
   &:active {
     background-color: var(--btn-primary-active);
+  }
+
+  &:focus {
+    background-color: var(--btn-primary-focus);
+  }
+  &.disabled {
+    color: var(btn-primary-disabled-label);
+    background-color: var(btn-primary-disabled);
+  }
+}
+.btn--outline-primary {
+  // main button
+  background-color: var(--white);
+  border: 1px solid var(--btn-outline-primary-border);
+  color: var(--btn-outline-primary-border);
+
+  &:hover {
+    background-color: var(--btn-outline-primary-hover);
+    color: var(--white);
+  }
+
+  &:active {
+    color: var(--white);
+    background-color: var(--btn-outline-primary-active);
+  }
+
+  &:focus {
+    background-color: var(--white);
+    color: var(--btn-outline-primary-border);
+    border: 1px solid var(--btn-outline-primary-border);
+    box-sizing: border-box;
+    box-shadow: 0px 0px 8px var(--btn-outline-primary-border);
+  }
+  &.disabled {
+    color: var(--btn-outline-primary-disabled-label);
+    background-color: var(--white) !important;
+    border-color: var(--btn-outline-primary-disabled-border);
   }
 }
 
@@ -92,15 +131,89 @@
     color: var(--btn-disabled-label);
   }
 }
+.btn-have-icon{
 
-/* button size */
-.btn--sm {
-  padding: var(--space-xxxs) var(--space-xxs);
+  .button-content-have-icon{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .children-content{
+      margin-right: 32px;
+    }
+    .icon-button{
+      font-size: 16px;
+    }
+  }
+  //tio-down_ui
+  &.btn--sm {
+    height: 32px;
+    padding-left: 12px;
+    padding-right: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 12px !important;
+  }
+  
+  &.btn--md {
+    height: 36px;
+    padding-left: 16px;
+    padding-right: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+  &.btn--lg {
+    height: 40px;
+    padding-left: 16px;
+    padding-right: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  
+  &.btn--xl {
+    height: 56px;
+    padding-left: 16px;
+    padding-right: 12px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 }
 
-.btn--lg {
-  padding: var(--space-xs) var(--space-sm);
-  font-size: var(--btn-font-size);
+/* button size */
+.btn-no-icon{
+  &.btn--sm {
+    height: 32px;
+    padding-left: 12px;
+    padding-right: 64px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 12px !important;
+  }
+  
+  &.btn--md {
+    height: 36px;
+    padding-left: 16px;
+    padding-right: 64px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+  &.btn--lg {
+    height: 40px;
+    padding-left: 16px;
+    padding-right: 64px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  
+  &.btn--xl {
+    height: 56px;
+    padding-left: 16px;
+    padding-right: 64px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 }
 
 .btn--full-width {

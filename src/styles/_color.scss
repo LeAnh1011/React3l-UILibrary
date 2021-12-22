@@ -230,11 +230,24 @@ $palettes: (
   --color-surface-input-disabled: #f1f1f1;
   --color-surface-input-outline-hover: #f6f6f7;
 
-  /* buttons */
-  --btn-primary-bg: var(--color-primary);
-  --btn-primary-hover: var(--color-primary-light);
-  --btn-primary-active: var(--color-primary-dark);
+  /* buttons primary */
+  --color--primary: #0F62FE;
+  --btn-primary-bg: var(--color--primary);
+  --btn-primary-hover: #174ED2;
+  --btn-primary-active: var(--color--primary);
+  --btn-primary-focus: var(--color--primary);
   --btn-primary-label: var(--white);
+  --btn-primary-disabled: #F1F1F1;
+  --btn-primary-disabled-label: #8C9196;
+
+  /* buttons primary outline */
+  --btn-outline-primary-border: var(--color--primary);
+  --btn-outline-primary-hover: var(--color--primary);
+  --btn-outline-primary-active: var(--color--primary);
+  --btn-outline-primary-label: var(--color--primary);
+  --btn-outline-primary-disabled-border: #D2D5D8;
+  --btn-outline-primary-disabled-label: #8C9196;
+  
 
   --btn-secondary-bg: var(--color-secondary);
   --btn-secondary-hover: var(--color-secondary-light);

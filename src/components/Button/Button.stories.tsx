@@ -9,7 +9,7 @@ function Default() {
   return (
     <div>
       <Tabs defaultActiveKey="1">
-        <TabPane tab="Primary and outLine primary" key="1">
+        <TabPane tab="Primary and outLine primary + icon" key="1">
           <div
             style={{
               display: "flex",
@@ -374,7 +374,7 @@ function Default() {
             </Button>
           </div>
         </TabPane>
-        <TabPane tab="primary with icon" key="2">
+        <TabPane tab="secondary and secondary with icon" key="2">
           <div
             style={{
               display: "flex",
@@ -384,16 +384,60 @@ function Default() {
               marginBottom: 30,
             }}
           >
-            <Button type="primary" className="btn--sm" icon="tio-add">
+            <Button type="secondary" className="btn--sm">
+              {"hihi"}
+            </Button>
+            <Button type="secondary" className="btn--md">
+              {"hihi"}
+            </Button>
+            <Button type="secondary" className="btn--lg">
+              {"hihi"}
+            </Button>
+            <Button type="secondary" className="btn--xl">
+              {"hihi"}
+            </Button>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: 700,
+              marginBottom: 30,
+            }}
+          >
+            <Button type="secondary" className="btn--sm" disabled={true}>
+              {"hihi"}
+            </Button>
+            <Button type="secondary" className="btn--md" disabled={true}>
+              {"hihi"}
+            </Button>
+            <Button type="secondary" className="btn--lg" disabled={true}>
+              {"hihi"}
+            </Button>
+            <Button type="secondary" className="btn--xl" disabled={true}>
+              {"hihi"}
+            </Button>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: 700,
+              marginBottom: 30,
+            }}
+          >
+            <Button type="secondary" className="btn--sm" icon="tio-add">
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--md" icon="tio-add">
+            <Button type="secondary" className="btn--md" icon="tio-add">
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--lg" icon="tio-add">
+            <Button type="secondary" className="btn--lg" icon="tio-add">
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--xl" icon="tio-add">
+            <Button type="secondary" className="btn--xl" icon="tio-add">
               {"Button"}
             </Button>
           </div>
@@ -407,7 +451,7 @@ function Default() {
             }}
           >
             <Button
-              type="primary"
+              type="secondary"
               className="btn--sm"
               disabled={true}
               icon="tio-add"
@@ -415,7 +459,7 @@ function Default() {
               {"Button"}
             </Button>
             <Button
-              type="primary"
+              type="secondary"
               className="btn--md"
               disabled={true}
               icon="tio-add"
@@ -423,7 +467,7 @@ function Default() {
               {"Button"}
             </Button>
             <Button
-              type="primary"
+              type="secondary"
               className="btn--lg"
               disabled={true}
               icon="tio-add"
@@ -431,71 +475,7 @@ function Default() {
               {"Button"}
             </Button>
             <Button
-              type="primary"
-              className="btn--xl"
-              disabled={true}
-              icon="tio-add"
-            >
-              {"Button"}
-            </Button>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: 700,
-              marginBottom: 30,
-            }}
-          >
-            <Button type="outline-primary" className="btn--sm" icon="tio-add">
-              {"Button"}
-            </Button>
-            <Button type="outline-primary" className="btn--md" icon="tio-add">
-              {"Button"}
-            </Button>
-            <Button type="outline-primary" className="btn--lg" icon="tio-add">
-              {"Button"}
-            </Button>
-            <Button type="outline-primary" className="btn--xl" icon="tio-add">
-              {"Button"}
-            </Button>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: 700,
-              marginBottom: 30,
-            }}
-          >
-            <Button
-              type="outline-primary"
-              className="btn--sm"
-              disabled={true}
-              icon="tio-add"
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="outline-primary"
-              className="btn--md"
-              disabled={true}
-              icon="tio-add"
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="outline-primary"
-              className="btn--lg"
-              disabled={true}
-              icon="tio-add"
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="outline-primary"
+              type="secondary"
               className="btn--xl"
               disabled={true}
               icon="tio-add"
@@ -514,58 +494,16 @@ function Default() {
               marginBottom: 30,
             }}
           >
-            <Button type="primary" className="btn--sm" icon="tio-down_ui">
+            <Button type="secondary" className="btn--sm" icon="tio-down_ui">
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--md" icon="tio-down_ui">
+            <Button type="secondary" className="btn--md" icon="tio-down_ui">
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--lg" icon="tio-down_ui">
+            <Button type="secondary" className="btn--lg" icon="tio-down_ui">
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--xl" icon="tio-down_ui">
-              {"Button"}
-            </Button>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: 700,
-              marginBottom: 30,
-            }}
-          >
-            <Button
-              type="primary"
-              className="btn--sm"
-              disabled={true}
-              icon="tio-down_ui"
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="primary"
-              className="btn--md"
-              disabled={true}
-              icon="tio-down_ui"
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="primary"
-              className="btn--lg"
-              disabled={true}
-              icon="tio-down_ui"
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="primary"
-              className="btn--xl"
-              disabled={true}
-              icon="tio-down_ui"
-            >
+            <Button type="secondary" className="btn--xl" icon="tio-down_ui">
               {"Button"}
             </Button>
           </div>
@@ -579,45 +517,7 @@ function Default() {
             }}
           >
             <Button
-              type="outline-primary"
-              className="btn--sm"
-              icon="tio-down_ui"
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="outline-primary"
-              className="btn--md"
-              icon="tio-down_ui"
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="outline-primary"
-              className="btn--lg"
-              icon="tio-down_ui"
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="outline-primary"
-              className="btn--xl"
-              icon="tio-down_ui"
-            >
-              {"Button"}
-            </Button>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: 700,
-              marginBottom: 30,
-            }}
-          >
-            <Button
-              type="outline-primary"
+              type="secondary"
               className="btn--sm"
               disabled={true}
               icon="tio-down_ui"
@@ -625,7 +525,7 @@ function Default() {
               {"Button"}
             </Button>
             <Button
-              type="outline-primary"
+              type="secondary"
               className="btn--md"
               disabled={true}
               icon="tio-down_ui"
@@ -633,7 +533,7 @@ function Default() {
               {"Button"}
             </Button>
             <Button
-              type="outline-primary"
+              type="secondary"
               className="btn--lg"
               disabled={true}
               icon="tio-down_ui"
@@ -641,7 +541,7 @@ function Default() {
               {"Button"}
             </Button>
             <Button
-              type="outline-primary"
+              type="secondary"
               className="btn--xl"
               disabled={true}
               icon="tio-down_ui"

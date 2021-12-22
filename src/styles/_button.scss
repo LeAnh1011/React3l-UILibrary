@@ -88,7 +88,7 @@
 }
 
 .btn--secondary {
-  // subtle version, used for secondary actions or in combo with primary/accent button
+  // main button
   background-color: var(--btn-secondary-bg);
   color: var(--btn-secondary-label);
 
@@ -96,8 +96,20 @@
     color: var(--btn-secondary-label);
   }
 
+  &:hover {
+    background-color: var(--btn-secondary-hover);
+  }
+
   &:active {
     background-color: var(--btn-secondary-active);
+  }
+
+  &:focus {
+    background-color: var(--btn-secondary-focus);
+  }
+  &.disabled {
+    color: var(btn-secondary-disabled-label);
+    background-color: var(btn-secondary-disabled);
   }
 }
 

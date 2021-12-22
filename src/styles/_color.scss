@@ -247,12 +247,17 @@ $palettes: (
   --btn-outline-primary-label: var(--color--primary);
   --btn-outline-primary-disabled-border: #D2D5D8;
   --btn-outline-primary-disabled-label: #8C9196;
-  
 
-  --btn-secondary-bg: var(--color-secondary);
-  --btn-secondary-hover: var(--color-secondary-light);
-  --btn-secondary-active: var(--color-secondary-dark);
+  /* buttons secondary */
+  --color--secondary: #393939;
+  --btn-secondary-bg: var(--color--secondary);
+  --btn-secondary-hover: #4C4C4C;
+  --btn-secondary-active: var(--color--secondary);
+  --btn-secondary-focus: var(--color--secondary);
   --btn-secondary-label: var(--white);
+  --btn-secondary-disabled: #F1F1F1;
+  --btn-secondary-disabled-label: #A8A8A8;
+  
 
   --btn-accent-bg: var(--color-accent);
   --btn-accent-hover: var(--color-accent-light);

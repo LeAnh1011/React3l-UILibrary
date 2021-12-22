@@ -51,7 +51,7 @@ export function DateRangeStories() {
         <DateRange type={type}
           isSmall={isSmall}
           label="Ngày nhập hàng"
-          placeHolder={'Chọn ngày'}
+          placeHolder={["Chọn ngày ...", "Chọn ngày ..."]}
           onChange={handleChange}
           value={value}
           disabled={isDisabled}

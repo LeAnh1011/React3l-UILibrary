@@ -127,14 +127,15 @@
     transition: all 0.1s ease-out;
     padding: 0 4px;
     z-index: 200;
-    top: 11px;
+    top: 18px;
     font-style: normal;
     font-weight: normal;
-    font-size: 14px !important;
+    font-size: 14px;
     line-height: 16px;
     letter-spacing: 0.16px;
     left: 8px;
     background-color: white;
+    transform: translateY(-50%) scale(0.9);
   }
 }
 .form-item__container--error {

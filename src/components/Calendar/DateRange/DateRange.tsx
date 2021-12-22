@@ -35,7 +35,7 @@ interface DateRangeProps {
   isRequired?: boolean;
   className?: string;
   action?: DateRangeAction;
-  placeHolder?: string;
+  placeHolder?: [string, string];
 }
 
 function DateRange(props: DateRangeProps & RangePickerProps) {
@@ -78,48 +78,6 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
     [onChange]
   );
 
-  const handleOpenChange = React.useCallback(
-    (event) => {
-      if (event) {
-        if (type === BORDER_TYPE.FLOAT_LABEL) {
-          const element = document.getElementById("component__title-id");
-          if (element) {
-            element.classList.add("component__title-up");
-            element.classList.remove("component__title-down");
-          }
-        }
-      } else {
-        if (!internalValue || internalValue[0] === null) {
-          const element = document.getElementById("component__title-id");
-          if (element) {
-            element.classList.add("component__title-down");
-            element.classList.remove("component__title-up");
-          }
-        }
-      }
-
-    },
-    [internalValue, type]
-  );
-
-  React.useEffect(() => {
-    const subscription = new Subscription();
-    console.log(internalValue)
-    if (internalValue && internalValue?.length > 0 && internalValue[0]) {
-
-      const element = document.getElementById("component__title-id");
-      if (element) {
-        element.classList.add('component__title-up');
-        element.classList.remove('component__title-down');
-      }
-    }
-    return function cleanup() {
-      subscription.unsubscribe();
-    };
-  }, [internalValue]);
-
-
-
   return (
     <div className={classNames("date-range__wrapper", className)} ref={wrapperRef} >
       <div className="date-picker__label m-b--xxxs">
@@ -146,8 +104,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
         style={{ width: "100%" }}
         allowClear={false}
         format={dateFormat}
-        placeholder={[type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder, type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder]}
-        onOpenChange={handleOpenChange}
+        placeholder={placeHolder}
         suffixIcon={<SuffixDateIcon />}
         className={classNames("bg-white", {
           "date-picker__wrapper--sm": isSmall,
@@ -167,8 +124,6 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
             "component__title--sm": isSmall,
             "component__title-up": internalValue && internalValue?.length > 0 && internalValue[0],
           })}
-          onClick={handleOpenChange}
-
         >
           {label}
           {isRequired && <span className="text-danger">&nbsp;*</span>}

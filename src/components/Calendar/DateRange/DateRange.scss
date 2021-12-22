@@ -125,32 +125,15 @@
         transition: all 0.1s ease-out;
         padding: 0 4px;
         z-index: 200;
-        top: 31px;
+        top: 18px;
         font-style: normal;
         font-weight: normal;
-        font-size: 14px !important;
+        font-size: 14px;
         line-height: 16px;
         letter-spacing: 0.16px;
         left: 8px;
-        &.component__title--sm {
-            top: 27px;
-            &.component__title-down {
-                top: 35px;
-                left: 8px;
-                transform: translateY(-50%);
-            }
-        }
-        &.component__title-up {
-            top: 19px;
-            left: 8px;
-            background-color: white;
-            transform: translateY(-50%) scale(0.9);
-        }
-        &.component__title-down {
-            top: 35px;
-            left: 8px;
-            transform: translateY(-30%);
-        }
+        background-color: white;
+        transform: translateY(-50%) scale(0.9);
     }
 }
 

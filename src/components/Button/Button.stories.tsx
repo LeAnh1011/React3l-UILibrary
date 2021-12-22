@@ -1455,6 +1455,104 @@ function Danger() {
     </div>
   );
 }
+function BleedPS() {
+  return (
+    <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          width: 400,
+          marginBottom: 30,
+        }}
+      >
+        <Button type="bleed-primary">{"hihi"}</Button>
+        <Button type="bleed-primary" disabled={true}>
+          {"hihi"}
+        </Button>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          width: 400,
+          marginBottom: 30,
+        }}
+      >
+        <Button type="bleed-primary" icon="tio-add">
+          {"hihi"}
+        </Button>
+        <Button type="bleed-primary" icon="tio-add" disabled={true}>
+          {"hihi"}
+        </Button>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          width: 400,
+          marginBottom: 30,
+        }}
+      >
+        <Button type="bleed-primary" icon="tio-down_ui">
+          {"hihi"}
+        </Button>
+        <Button type="bleed-primary" icon="tio-down_ui" disabled={true}>
+          {"hihi"}
+        </Button>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          width: 400,
+          marginBottom: 30,
+        }}
+      >
+        <Button type="bleed-secondary">{"hihi"}</Button>
+        <Button type="bleed-secondary" disabled={true}>
+          {"hihi"}
+        </Button>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          width: 400,
+          marginBottom: 30,
+        }}
+      >
+        <Button type="bleed-secondary" icon="tio-add">
+          {"hihi"}
+        </Button>
+        <Button type="bleed-secondary" icon="tio-add" disabled={true}>
+          {"hihi"}
+        </Button>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          width: 400,
+          marginBottom: 30,
+        }}
+      >
+        <Button type="bleed-secondary" icon="tio-down_ui">
+          {"hihi"}
+        </Button>
+        <Button type="bleed-secondary" icon="tio-down_ui" disabled={true}>
+          {"hihi"}
+        </Button>
+      </div>
+    </div>
+  );
+}
 
 storiesOf("Button", module)
   .add(nameof(Primary), Primary)
@@ -1462,4 +1560,5 @@ storiesOf("Button", module)
   .add(nameof(Ghost), Ghost)
   .add(nameof(GhostPrimary), GhostPrimary)
   .add(nameof(GhostSecondary), GhostSecondary)
-  .add(nameof(Danger), Danger);
+  .add(nameof(Danger), Danger)
+  .add(nameof(BleedPS), BleedPS);

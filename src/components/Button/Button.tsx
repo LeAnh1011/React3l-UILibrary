@@ -16,6 +16,8 @@ export type ButtonType =
   | "ghost-secondary"
   | "danger"
   | "outline-danger"
+  | "bleed-primary"
+  | "bleed-secondary"
   | "warning"
   | "link";
 
@@ -118,6 +120,22 @@ const Button = React.forwardRef(
           numb = 2;
           break;
         }
+      case "bleed-primary": // bộ bleed có ui padding cố định, khác bộ khác chia thành 5-6
+        if (!icon) {
+          numb = 5;
+          break;
+        } else {
+          numb = 6;
+          break;
+        }
+      case "bleed-secondary":
+        if (!icon) {
+          numb = 5;
+          break;
+        } else {
+          numb = 6;
+          break;
+        }
       default:
         numb = 1;
     }
@@ -172,7 +190,7 @@ const Button = React.forwardRef(
       >
         {children}
       </button>
-    ) : (
+    ) : numb === 4 ? (
       <button
         type={htmlType}
         onClick={onClick}
@@ -180,6 +198,41 @@ const Button = React.forwardRef(
         disabled={disabled}
         className={classNames(
           "btn btn-ghost-have-icon",
+          `btn--${type}`,
+          disabled ? "disabled" : "",
+          className
+        )}
+      >
+        <div className="button-content-have-icon">
+          <div className="children-content">{children}</div>
+          <div className="box-icon">
+            <i className={classNames(icon, "icon-button")}></i>
+          </div>
+        </div>
+      </button>
+    ) : numb === 5 ? (
+      <button
+        type={htmlType}
+        onClick={onClick}
+        ref={ref}
+        disabled={disabled}
+        className={classNames(
+          "btn btn-bleed-no-icon",
+          `btn--${type}`,
+          disabled ? "disabled" : "",
+          className
+        )}
+      >
+        {children}
+      </button>
+    ) : (
+      <button
+        type={htmlType}
+        onClick={onClick}
+        ref={ref}
+        disabled={disabled}
+        className={classNames(
+          "btn btn-bleed-have-icon",
           `btn--${type}`,
           disabled ? "disabled" : "",
           className

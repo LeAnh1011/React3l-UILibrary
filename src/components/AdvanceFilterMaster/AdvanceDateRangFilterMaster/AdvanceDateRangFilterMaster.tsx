@@ -1,6 +1,7 @@
 import { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import DateRange from "components/Calendar/DateRange";
+import { STANDARD_DATE_FORMAT_INVERSE } from "config/consts";
 import { BORDER_TYPE } from "config/enum";
 import { InputSelect } from "index";
 import moment, { Moment } from "moment";
@@ -102,7 +103,7 @@ function AdvanceDateRangeFilter(
         case 2:
           return [
             moment().subtract(1, "days").startOf("day"),
-            moment().subtract(1, "days").startOf("day"),
+            moment().subtract(1, "days").endOf("day"),
           ];
 
         case 3:
@@ -115,12 +116,12 @@ function AdvanceDateRangeFilter(
           ]; //lastweek
 
         case 5:
-          return [moment().startOf("month"), moment().startOf("month")]; //thismonth
+          return [moment().startOf("month"), moment().endOf("month")]; //thismonth
 
         case 6:
           return [
             moment().subtract(1, "months").startOf("month"),
-            moment().subtract(1, "months").startOf("month"),
+            moment().subtract(1, "months").endOf("month"),
           ]; //lastmonth
 
         case 7:
@@ -200,6 +201,11 @@ function AdvanceDateRangeFilter(
   const handleClearItem = React.useCallback(() => {
     onChange(null, [null, null]);
   }, [onChange]);
+
+  React.useEffect(() => {
+    console.log('activeItem', activeItem);
+    console.log(value && value?.length && value[0]?.format(STANDARD_DATE_FORMAT_INVERSE))
+  }, [activeItem, value])
 
   return (
     <div

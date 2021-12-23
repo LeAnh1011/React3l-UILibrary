@@ -3,7 +3,7 @@ import { Model, ModelFilter } from "react3l-common";
 import Radio, { RadioChangeEvent } from "antd/lib/radio";
 import React from "react";
 import { Observable } from "rxjs";
-import MultipleSelect from "./MultipleSelect";
+import AdvanceIdMultipleFilter from "./AdvanceIdMultipleFilter";
 import FormItem from "../../FormItem/FormItem";
 import { ValidateStatus } from "./../../../config/enum";
 import { BORDER_TYPE } from "./../../../config/enum";
@@ -59,7 +59,7 @@ class DemoFilter extends ModelFilter {
   public provinceId: IdFilter = new IdFilter();
 }
 
-export function MultipleSelectStories() {
+export function AdvanceIdMultipleFilterStories() {
   const [models, dispatch] = React.useReducer(testReducer, []);
 
   const [selectModelFilter] = React.useState<DemoFilter>(new DemoFilter());
@@ -131,7 +131,7 @@ export function MultipleSelectStories() {
           validateStatus={isValidated ? ValidateStatus.error : null}
           message={isValidated ? "Error label" : ""}
         >
-          <MultipleSelect
+          <AdvanceIdMultipleFilter
             models={models}
             placeHolder={"Select an option"}
             onChange={handleChangeModels}
@@ -145,7 +145,7 @@ export function MultipleSelectStories() {
             selectWithAdd={isSelectWithAdd}
             isUsingSearch={withSearch}
             preferOptions={isSelectWithPreferOption ? list : undefined}
-          ></MultipleSelect>
+          ></AdvanceIdMultipleFilter>
         </FormItem>
       </div>
       <div style={{ margin: "10px", width: "400px" }}>

@@ -1,3 +1,2 @@
-import InputSelect, { INPUT_SELECT_TYPE } from "./InputSelect";
-export { INPUT_SELECT_TYPE };
+import InputSelect from "./InputSelect";
 export default InputSelect;

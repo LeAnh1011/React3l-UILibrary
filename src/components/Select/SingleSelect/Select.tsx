@@ -7,9 +7,8 @@ import classNames from "classnames";
 import React, { RefObject } from "react";
 import { ErrorObserver, Observable } from "rxjs";
 import { CommonService } from "services/common-service";
-import InputSelect, {
-  INPUT_SELECT_TYPE,
-} from "components/Input/InputSelect/InputSelect";
+import InputSelect from "components/Input/InputSelect/InputSelect";
+import { BORDER_TYPE } from "config/enum";
 import "./Select.scss";
 
 export interface SelectProps<
@@ -42,7 +41,7 @@ export interface SelectProps<
 
   classFilter: new () => TModelFilter;
 
-  type?: INPUT_SELECT_TYPE;
+  type?: BORDER_TYPE;
 
   label?: string;
 

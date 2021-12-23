@@ -1,3 +1,2 @@
-import InputText, { INPUT_TEXT_TYPE } from "./InputText";
-export {INPUT_TEXT_TYPE}
+import InputText from "./InputText";
 export default InputText;

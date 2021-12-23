@@ -45,7 +45,7 @@
       textarea,
       .input-tag__container,
       .ant-picker {
-        background-color: var(--color-critical-surface);
+        background-color: var(--color-critical-surface) !important;
         outline-color: var(--color-critical) !important;
         border-color: var(--color-critical) !important;
       }

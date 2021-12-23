@@ -10,6 +10,12 @@ $backgound-color: #f4f4f4;
     display: flex;
     align-items: center;
     cursor: pointer;
+    label {
+      display: flex;
+    }
+    &.p-b---active {
+      padding-bottom: 11px !important;
+    }
     &.filter-bg {
       background-color: var(--white);
       border: 1px solid var(--color-primary);
@@ -19,22 +25,25 @@ $backgound-color: #f4f4f4;
         background-color: var(--white);
       }
     }
+    .filter-active {
+      color: var(--color-primary);
+      border-bottom: 1px solid var(--color-primary);
+    }
     &:hover {
       background: #e5e5e5;
     }
     .filter__icon {
       font-size: 16px;
     }
-    .advance-id-filter-master__title {
+    .advance-id-filter-master__title,
+    .advance-count-item__text {
+      font-style: normal;
+      font-weight: normal;
       font-size: 14px;
-    }
-  }
-
-  .advance-id-filter__input {
-    .input-text__container {
-      border-radius: 0px;
-      background-color: $backgound-color;
-      outline: 1px var(--color-border);
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.16px;
     }
   }
 

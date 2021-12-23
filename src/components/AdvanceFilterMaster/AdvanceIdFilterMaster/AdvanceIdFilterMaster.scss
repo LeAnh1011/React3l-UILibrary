@@ -17,6 +17,13 @@ $backgound-color: #f4f4f4;
         background-color: var(--white);
       }
     }
+    &.p-b---active {
+      padding-bottom: 11px !important;
+    }
+    .filter-active {
+      color: var(--color-primary);
+      border-bottom: 1px solid var(--color-primary);
+    }
     &:hover {
       background: #e5e5e5;
     }
@@ -24,15 +31,13 @@ $backgound-color: #f4f4f4;
       font-size: 16px;
     }
     .advance-id-filter-master__title {
+      font-style: normal;
+      font-weight: normal;
       font-size: 14px;
-    }
-  }
-
-  .advance-id-filter__input {
-    .input-text__container {
-      border-radius: 0px;
-      background-color: $backgound-color;
-      outline: 1px var(--color-border);
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.16px;
     }
   }
 

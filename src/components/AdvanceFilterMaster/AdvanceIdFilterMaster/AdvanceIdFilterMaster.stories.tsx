@@ -34,7 +34,7 @@ export class DemoFilter extends ModelFilter {
 }
 
 const filterValue = new DemoFilter();
-filterValue.id.equal = 10;
+// filterValue.id.equal = 10;
 
 const demoSearchFunc = (TModelFilter: ModelFilter) => {
   return demoObservable;

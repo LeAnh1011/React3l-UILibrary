@@ -1,0 +1,159 @@
+.btn-only-icon {
+    .content-icon {
+        font-size: 16px;
+    }
+    &.btn--sm {
+        height: 24px;
+        padding: 4px;
+    }
+
+    &.btn--md {
+        height: 32px;
+        padding: 8px;
+    }
+
+    &.btn--lg {
+        height: 36px;
+        padding: 10px;
+    }
+
+    &.btn--xl {
+        height: 40px;
+        padding: 12px;
+    }
+}
+.btn--icon--primary {
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-label);
+
+    &:visited {
+        color: var(--btn-primary-label);
+    }
+
+    &:hover {
+        background-color: var(--btn-primary-hover);
+    }
+
+    &:active {
+        background-color: var(--btn-primary-active);
+    }
+
+    &:focus {
+        background-color: var(--btn-primary-focus);
+        border: 1px solid #0f62fe;
+        box-shadow: 0px 0px 8px #0f62fe;
+    }
+    &.disabled {
+        color: #a8a8a8;
+        background-color: var(--btn-primary-disabled);
+    }
+}
+.btn--icon--outline-primary {
+    background-color: var(--white);
+    border: 1px solid var(--btn-outline-primary-border) !important;
+    color: var(--btn-outline-primary-border);
+
+    &:hover {
+        background-color: var(--btn-outline-primary-hover);
+        color: var(--white);
+    }
+
+    &:active {
+        color: var(--white);
+        background-color: var(--btn-outline-primary-active);
+    }
+
+    &:focus {
+        background-color: var(--btn-outline-primary-active);
+        color: var(--white);
+        border: 1px solid var(--btn-outline-primary-border);
+        box-sizing: border-box;
+        box-shadow: 0px 0px 8px var(--btn-outline-primary-border);
+    }
+    &.disabled {
+        color: var(--btn-outline-primary-disabled-label);
+        background-color: var(--white) !important;
+        border-color: var(--btn-outline-primary-disabled-border) !important;
+    }
+}
+.btn--icon--danger {
+    background-color: var(--btn-danger-bg);
+    color: var(--btn-danger-label);
+
+    &:visited {
+        color: var(--btn-danger-label);
+    }
+
+    &:hover {
+        background-color: var(--btn-danger-hover);
+    }
+
+    &:active {
+        background-color: var(--btn-danger-active);
+    }
+
+    &:focus {
+        background-color: var(--btn-danger-focus);
+        border: 1px solid #0f62fe;
+        box-shadow: 0px 0px 8px #0f62fe;
+    }
+    &.disabled {
+        color: var(--btn-danger-disabled-label);
+        background-color: var(--btn-danger-disabled);
+    }
+}
+.btn--icon--outline-danger {
+    background-color: var(--white);
+    border: 1px solid var(--btn-danger-hover) !important;
+    color: var(--btn-danger-hover);
+
+    &:hover {
+        background-color: var(--btn-danger-hover);
+        color: var(--white);
+    }
+
+    &:active {
+        color: var(--white);
+        background-color: var(--btn-danger-active);
+    }
+
+    &:focus {
+        background-color: var(--btn-danger-focus);
+        color: var(--white);
+        border: 1px solid #0F62FE !important;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 8px #0F62FE;
+    }
+    &.disabled {
+        color: var(--btn-outline-primary-disabled-label);
+        background-color: var(--white) !important;
+        border-color: var(--btn-outline-primary-disabled-border) !important;
+    }
+}
+.btn--icon--ghost {
+    background-color: unset;
+    color: #000000;
+  
+    &:visited {
+      color: #000000;
+    }
+  
+    &:hover {
+      background-color: var(--btn-ghost-hover);
+    }
+  
+    &:active {
+      box-shadow: inset 0px 2px 0px rgba(0, 0, 0, 0.05);
+      background-color: var(--btn-ghost-active);
+    }
+  
+    &:focus {
+      box-shadow: 0px 0px 8px #0F62FE;
+      border: 1px solid #0F62FE;
+      background-color: var(--white);
+    }
+    &.disabled {
+      color: var(--btn-ghost-disabled-label);
+      background-color: unset;
+    }
+  }

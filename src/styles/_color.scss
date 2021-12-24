@@ -368,31 +368,31 @@ $palettes: (
   --btn-secondary-disabled-label: #A8A8A8;
 
   /* buttons ghost */
-  --color--ghost: #E5E5E5;
+  --color--ghost: #E8E8E8;
   --btn-ghost-hover: var(--color--ghost);
   --btn-ghost-active: var(--color--ghost);
   --btn-ghost-focus: var(--color--ghost);
-  --btn-ghost-label: #0D1821;
+  --btn-ghost-label: #161616;
   --btn-ghost-disabled-label: #A8A8A8;
-  --btn-ghost-border-forcus: #0F62FE;
+  --btn-ghost-border-forcus: var(--color--primary);
   
    /* buttons ghost primary */
-   --color--ghost--primary: #174ED2;
+   --color--ghost--primary: #0050E6;
    --btn-ghost-primary-hover: var(--color--ghost--primary);
    --btn-ghost-primary-active: var(--color--ghost--primary);
    --btn-ghost-primary-focus: var(--color--ghost--primary);
-   --btn-ghost-primary-label: #ffffff;
+   --btn-ghost-primary-label: var(--white);
    --btn-ghost-primary-disabled-label: #A8A8A8;
-   --btn-ghost-primary-border-forcus: #0F62FE;
+   --btn-ghost-primary-border-forcus: var(--color--ghost--primary);
   
    /* buttons ghost secondary */
    --color--ghost--secondary: #4C4C4C;
    --btn-ghost-secondary-hover: var(--color--ghost--secondary);
    --btn-ghost-secondary-active: var(--color--ghost--secondary);
    --btn-ghost-secondary-focus: var(--color--ghost--secondary);
-   --btn-ghost-secondary-label: #ffffff;
-   --btn-ghost-secondary-disabled-label: #A8A8A8;
-   --btn-ghost-secondary-border-forcus: #0F62FE; 
+   --btn-ghost-secondary-label: var(--white);
+   --btn-ghost-secondary-disabled-label: #A8A8A8; 
+   --btn-ghost-secondary-border-forcus: var(--color--primary);
 
    /* buttons destructive */
   --color--danger: #DA1E28;

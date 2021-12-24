@@ -176,10 +176,10 @@
     }
 
     .input-icon__clear {
-      color: #959aa3;
+      color: var(--palette-coolGray-50);
       &:hover {
         cursor: pointer;
-        color: #25343a;
+        color: var(--palette-coolGrayHover-50);
       }
     }
   }

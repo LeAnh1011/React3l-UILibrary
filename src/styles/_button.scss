@@ -30,59 +30,6 @@
   }
 }
 
-.btn--bleed-primary { 
-  // main button
-  background-color: var(--btn-primary-bg);
-  color: var(--btn-primary-label);
-
-  &:visited {
-    color: var(--btn-primary-label);
-  }
-
-  &:hover {
-    background-color: var(--btn-primary-hover);
-  }
-
-  &:active {
-    background-color: var(--btn-primary-active);
-  }
-
-  &:focus {
-    background-color: var(--btn-primary-focus);
-    border: 1px solid #0F62FE;
-    box-shadow: 0px 0px 8px #0F62FE;
-  }
-  &.disabled {
-    color: var(--btn-primary-disabled-label);
-    background-color: var(--btn-primary-disabled);
-  }
-}
-.btn--bleed-secondary { 
-  // main button
-  background-color: var(--btn-secondary-bg);
-  color: var(--btn-secondary-label);
-
-  &:visited {
-    color: var(--btn-secondary-label);
-  }
-
-  &:hover {
-    background-color: var(--btn-secondary-hover);
-  }
-
-  &:active {
-    background-color: var(--btn-secondary-active);
-  }
-
-  &:focus {
-    background-color: var(--btn-secondary-focus);
-    box-shadow: 0px 0px 8px #0F62FE;
-  }
-  &.disabled {
-    color: var(--btn-secondary-disabled-label);
-    background-color: var(--btn-secondary-disabled);
-  }
-}
 .btn--link-plain {
   // main button
   background-color: unset;
@@ -150,24 +97,6 @@
 }
 
 
-.btn-bleed-have-icon{
-  padding: 12px 16px 32px 16px;
-  .button-content-have-icon{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    .children-content{
-      margin-right: 32px;
-    }
-    .icon-button{
-      font-size: 16px;
-    }
-  }
-} 
-.btn-bleed-no-icon{
-  padding: 12px 64px 32px 16px;
-}
 
 .btn-link-plain{
   &.btn--sm {

@@ -4,6 +4,7 @@ import React, {
   PropsWithChildren,
   ReactNode,
 } from "react";
+import BleedButton from "./BleedButton";
 import "./Button.scss";
 import GhostButton from "./GhostButton";
 import NormalButton from "./NormalButton/NormalButton";
@@ -43,15 +44,7 @@ export interface ButtonProps {
 
 const Button = React.forwardRef(
   (props: PropsWithChildren<ButtonProps>, ref: React.Ref<any>) => {
-    const {
-      htmlType,
-      children,
-      type,
-      onClick,
-      className,
-      disabled,
-      icon,
-    } = props;
+    const { htmlType, children, type, onClick, className, disabled } = props;
     let numb = 0;
     switch (props.type) {
       // ba bộ đầu có bộ padding khá giống nhau
@@ -86,21 +79,11 @@ const Button = React.forwardRef(
         numb = 2;
         break;
       case "bleed-primary": // bộ bleed có ui padding cố định, khác bộ khác chia thành 5-6
-        if (!icon) {
-          numb = 5;
-          break;
-        } else {
-          numb = 6;
-          break;
-        }
+        numb = 4;
+        break;
       case "bleed-secondary":
-        if (!icon) {
-          numb = 5;
-          break;
-        } else {
-          numb = 6;
-          break;
-        }
+        numb = 4;
+        break;
       case "link-plain": // bộ link-plain & link có ui padding cố định, khác bộ khác chia thành 7-8
         numb = 7;
         break;
@@ -110,49 +93,6 @@ const Button = React.forwardRef(
       default:
         numb = 1;
     }
-
-    const Button5 = React.useMemo(() => {
-      return (
-        <button
-          type={htmlType}
-          onClick={onClick}
-          ref={ref}
-          disabled={disabled}
-          className={classNames(
-            "btn btn-bleed-no-icon",
-            `btn--${type}`,
-            disabled ? "disabled" : "",
-            className
-          )}
-        >
-          {children}
-        </button>
-      );
-    }, [children, className, disabled, htmlType, onClick, ref, type]);
-
-    const Button6 = React.useMemo(() => {
-      return (
-        <button
-          type={htmlType}
-          onClick={onClick}
-          ref={ref}
-          disabled={disabled}
-          className={classNames(
-            "btn btn-bleed-have-icon",
-            `btn--${type}`,
-            disabled ? "disabled" : "",
-            className
-          )}
-        >
-          <div className="button-content-have-icon">
-            <div className="children-content">{children}</div>
-            <div className="box-icon">
-              <i className={classNames(icon, "icon-button")}></i>
-            </div>
-          </div>
-        </button>
-      );
-    }, [children, className, disabled, htmlType, icon, onClick, ref, type]);
 
     const Button7 = React.useMemo(() => {
       return (
@@ -199,10 +139,8 @@ const Button = React.forwardRef(
       <OutlineButton {...props} />
     ) : numb === 3 ? (
       <GhostButton {...props} />
-    ) : numb === 5 ? (
-      Button5
-    ) : numb === 6 ? (
-      Button6
+    ) : numb === 4 ? (
+      <BleedButton {...props} />
     ) : numb === 7 ? (
       Button7
     ) : (

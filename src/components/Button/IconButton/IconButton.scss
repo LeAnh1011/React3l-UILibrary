@@ -40,8 +40,8 @@
 
     &:focus {
         background-color: var(--btn-primary-focus);
-        border: 1px solid #0f62fe;
-        box-shadow: 0px 0px 8px #0f62fe;
+        border: 1px solid var(--color--primary);
+        box-shadow: 0px 0px 8px var(--color--primary);
     }
     &.disabled {
         color: #a8a8a8;
@@ -94,8 +94,8 @@
 
     &:focus {
         background-color: var(--btn-danger-focus);
-        border: 1px solid #0f62fe;
-        box-shadow: 0px 0px 8px #0f62fe;
+        border: 1px solid var(--color--primary);
+        box-shadow: 0px 0px 8px var(--color--primary);
     }
     &.disabled {
         color: var(--btn-danger-disabled-label);
@@ -120,9 +120,9 @@
     &:focus {
         background-color: var(--btn-danger-focus);
         color: var(--white);
-        border: 1px solid #0F62FE !important;
+        border: 1px solid var(--color--primary) !important;
         box-sizing: border-box;
-        box-shadow: 0px 0px 8px #0F62FE;
+        box-shadow: 0px 0px 8px var(--color--primary);
     }
     &.disabled {
         color: var(--btn-outline-primary-disabled-label);
@@ -148,8 +148,8 @@
     }
   
     &:focus {
-      box-shadow: 0px 0px 8px #0F62FE;
-      border: 1px solid #0F62FE;
+      box-shadow: 0px 0px 8px var(--color--primary);
+      border: 1px solid var(--color--primary);
       background-color: var(--white);
     }
     &.disabled {

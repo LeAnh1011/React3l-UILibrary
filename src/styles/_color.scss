@@ -414,22 +414,22 @@ $palettes: (
   --btn-outline-danger-disabled-label: #A8A8A8 ;
 
   /* buttons link-plain */
-  --color--link-plain: #E5E5E5;
+  --color--link-plain: #E8E8E8;
   --btn-link-plain-hover: var(--color--link-plain);
   --btn-link-plain-active: var(--color--link-plain);
   --btn-link-plain-focus: var(--white);
-  --btn-link-plain-label: #000000;
+  --btn-link-plain-label: #161616;
   --btn-link-plain-disabled-label: #A8A8A8;
-  --btn-link-plain-border-forcus: #0F62FE;
+  --btn-link-plain-border-forcus: var(--color--primary);
   
-  /* buttons link-plain */
+  /* buttons link*/
   --color--link: var(--white);
   --btn-link-hover: var(--color--link);
   --btn-link-active: var(--color--link);
   --btn-link-focus: var(--white);
-  --btn-link-label: #000000;
+  --btn-link-label: #161616;
   --btn-link-disabled-label: #A8A8A8;
-  --btn-link-border-forcus: #0F62FE;
+  --btn-link-border-forcus: var(--color--primary);
 }
 
 /* class bg and color for color $palletes with syntax .palette-$colorname-$number-$type */

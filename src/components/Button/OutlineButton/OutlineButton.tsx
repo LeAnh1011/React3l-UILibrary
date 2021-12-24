@@ -24,7 +24,7 @@ const OutlineButton = React.forwardRef(
         ref={ref}
         disabled={disabled}
         className={classNames(
-          "btn btn-normal-have-icon",
+          "btn btn-outline-have-icon",
           `btn--${type}`,
           disabled ? "disabled" : "",
           className
@@ -44,7 +44,7 @@ const OutlineButton = React.forwardRef(
         ref={ref}
         disabled={disabled}
         className={classNames(
-          "btn btn-normal-no-icon",
+          "btn btn-outline-no-icon",
           `btn--${type}`,
           disabled ? "disabled" : "",
           className

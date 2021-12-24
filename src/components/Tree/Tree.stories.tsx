@@ -44,7 +44,6 @@ function Default() {
         checkable={isMultiple}
         virtual
         titleRender={(treeNode: any) => {
-          console.log(treeNode);
           return <div>{treeNode.item?.name + " - " + treeNode.item?.code}</div>;
         }}
         onChange={onChange}

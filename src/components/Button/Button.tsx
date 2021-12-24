@@ -5,6 +5,7 @@ import React, {
   ReactNode,
 } from "react";
 import "./Button.scss";
+import NormalButton from "./NormalButton/NormalButton";
 
 export type ButtonType =
   | "primary"
@@ -50,19 +51,14 @@ const Button = React.forwardRef(
       icon,
     } = props;
     let numb = 0;
-    switch (type) {
+    switch (props.type) {
       // ba bộ đầu có bộ padding khá giống nhau
       // khác nhau mỗi padding khi có icon hoặc không có icon
       // nên đặt là btn-normal-have/no-icon cho 2 bộ này
       // và sẽ chia thành case 1 và 2 cho numb
       case "primary":
-        if (!icon) {
-          numb = 1;
-          break;
-        } else {
-          numb = 2;
-          break;
-        }
+        numb = 1;
+        break;
       case "outline-primary":
         if (!icon) {
           numb = 1;
@@ -72,13 +68,8 @@ const Button = React.forwardRef(
           break;
         }
       case "secondary":
-        if (!icon) {
-          numb = 1;
-          break;
-        } else {
-          numb = 2;
-          break;
-        }
+        numb = 1;
+        break;
       case "ghost": //các bộ ghost có ui padding khác nên chia thành 3-4
         if (!icon) {
           numb = 3;
@@ -104,13 +95,8 @@ const Button = React.forwardRef(
           break;
         }
       case "danger": // bộ danger có ui padding khá giống 3 bộ đầu nên chia 1 và 2
-        if (!icon) {
-          numb = 1;
-          break;
-        } else {
-          numb = 2;
-          break;
-        }
+        numb = 1;
+        break;
       case "outline-danger":
         if (!icon) {
           numb = 1;
@@ -144,49 +130,6 @@ const Button = React.forwardRef(
       default:
         numb = 1;
     }
-
-    const Button1 = React.useMemo(() => {
-      return (
-        <button
-          type={htmlType}
-          onClick={onClick}
-          ref={ref}
-          disabled={disabled}
-          className={classNames(
-            "btn btn-normal-no-icon",
-            `btn--${type}`,
-            disabled ? "disabled" : "",
-            className
-          )}
-        >
-          {children}
-        </button>
-      );
-    }, [children, className, disabled, htmlType, onClick, ref, type]);
-
-    const Button2 = React.useMemo(() => {
-      return (
-        <button
-          type={htmlType}
-          onClick={onClick}
-          ref={ref}
-          disabled={disabled}
-          className={classNames(
-            "btn btn-normal-have-icon",
-            `btn--${type}`,
-            disabled ? "disabled" : "",
-            className
-          )}
-        >
-          <div className="button-content-have-icon">
-            <div className="children-content">{children}</div>
-            <div className="box-icon">
-              <i className={classNames(icon, "icon-button")}></i>
-            </div>
-          </div>
-        </button>
-      );
-    }, [children, className, disabled, htmlType, icon, onClick, ref, type]);
 
     const Button3 = React.useMemo(() => {
       return (
@@ -313,21 +256,21 @@ const Button = React.forwardRef(
     }, [children, className, disabled, htmlType, onClick, ref, type]);
 
     // render button here
-    return numb === 1
-      ? Button1
-      : numb === 2
-      ? Button2
-      : numb === 3
-      ? Button3
-      : numb === 4
-      ? Button4
-      : numb === 5
-      ? Button5
-      : numb === 6
-      ? Button6
-      : numb === 7
-      ? Button7
-      : Button8;
+    return numb === 1 ? (
+      <NormalButton {...props} />
+    ) : numb === 3 ? (
+      Button3
+    ) : numb === 4 ? (
+      Button4
+    ) : numb === 5 ? (
+      Button5
+    ) : numb === 6 ? (
+      Button6
+    ) : numb === 7 ? (
+      Button7
+    ) : (
+      Button8
+    );
   }
 );
 

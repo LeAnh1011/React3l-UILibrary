@@ -62,32 +62,20 @@ const Button = React.forwardRef(
     let numb = 0;
     switch (props.type) {
       case "primary":
-        numb = ButtonSet.NORMAL;
-        break;
       case "secondary":
-        numb = ButtonSet.NORMAL;
-        break;
       case "danger":
         numb = ButtonSet.NORMAL;
         break;
       case "outline-primary":
-        numb = ButtonSet.OUTLINE;
-        break;
       case "outline-danger":
         numb = ButtonSet.OUTLINE;
         break;
       case "ghost":
-        numb = ButtonSet.GHOST;
-        break;
       case "ghost-primary":
-        numb = ButtonSet.GHOST;
-        break;
       case "ghost-secondary":
         numb = ButtonSet.GHOST;
         break;
       case "bleed-primary":
-        numb = ButtonSet.BLEED;
-        break;
       case "bleed-secondary":
         numb = ButtonSet.BLEED;
         break;
@@ -98,17 +86,9 @@ const Button = React.forwardRef(
         numb = ButtonSet.LINK;
         break;
       case "icon-only-primary":
-        numb = ButtonSet.ICON_ONLY;
-        break;
       case "icon-only-outline-primary":
-        numb = ButtonSet.ICON_ONLY;
-        break;
       case "icon-only-danger":
-        numb = ButtonSet.ICON_ONLY;
-        break;
       case "icon-only-outline-danger":
-        numb = ButtonSet.ICON_ONLY;
-        break;
       case "icon-only-ghost":
         numb = ButtonSet.ICON_ONLY;
         break;

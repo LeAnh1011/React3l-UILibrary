@@ -1,10 +1,10 @@
 .btn--link {
     background-color: var(--color--link);
-    color: var(--color--primary);
+    color: var(--color-primary);
     text-decoration: none;
 
     &:visited {
-        color: var(--color--primary);
+        color: var(--color-primary);
     }
 
     &:hover {

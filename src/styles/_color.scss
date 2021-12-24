@@ -340,20 +340,19 @@ $palettes: (
 
   --white: #FFFFFF;
   /* buttons primary */
-  --color--primary: #0F62FE;
-  --btn-primary-bg: var(--color--primary);
-  --btn-primary-hover: #0050E6;
-  --btn-primary-active: var(--color--primary);
-  --btn-primary-focus: var(--color--primary);
+  --btn-primary-bg: var(--color-primary);
+  --btn-primary-hover: var(--color-primary-hover);
+  --btn-primary-active: var(--color-primary);
+  --btn-primary-focus: var(--color-primary);
   --btn-primary-label: var(--white);
   --btn-primary-disabled: #F4F4F4;
   --btn-primary-disabled-label: #A8A8A8;
 
   /* buttons primary outline */
-  --btn-outline-primary-border: var(--color--primary);
-  --btn-outline-primary-hover: var(--color--primary);
-  --btn-outline-primary-active: var(--color--primary);
-  --btn-outline-primary-label: var(--color--primary);
+  --btn-outline-primary-border: var(--color-primary);
+  --btn-outline-primary-hover: var(--color-primary);
+  --btn-outline-primary-active: var(--color-primary);
+  --btn-outline-primary-label: var(--color-primary);
   --btn-outline-primary-disabled-border: #C1C7CD;
   --btn-outline-primary-disabled-label: #A8A8A8;
 
@@ -374,10 +373,10 @@ $palettes: (
   --btn-ghost-focus: var(--color--ghost);
   --btn-ghost-label: #161616;
   --btn-ghost-disabled-label: #A8A8A8;
-  --btn-ghost-border-forcus: var(--color--primary);
+  --btn-ghost-border-forcus: var(--color-primary);
   
    /* buttons ghost primary */
-   --color--ghost--primary: #0050E6;
+   --color--ghost--primary: var(--color-primary-hover);
    --btn-ghost-primary-hover: var(--color--ghost--primary);
    --btn-ghost-primary-active: var(--color--ghost--primary);
    --btn-ghost-primary-focus: var(--color--ghost--primary);
@@ -392,7 +391,7 @@ $palettes: (
    --btn-ghost-secondary-focus: var(--color--ghost--secondary);
    --btn-ghost-secondary-label: var(--white);
    --btn-ghost-secondary-disabled-label: #A8A8A8; 
-   --btn-ghost-secondary-border-forcus: var(--color--primary);
+   --btn-ghost-secondary-border-forcus: var(--color-primary);
 
    /* buttons destructive */
   --color--danger: #DA1E28;
@@ -420,7 +419,7 @@ $palettes: (
   --btn-link-plain-focus: var(--white);
   --btn-link-plain-label: #161616;
   --btn-link-plain-disabled-label: #A8A8A8;
-  --btn-link-plain-border-forcus: var(--color--primary);
+  --btn-link-plain-border-forcus: var(--color-primary);
   
   /* buttons link*/
   --color--link: var(--white);
@@ -429,7 +428,7 @@ $palettes: (
   --btn-link-focus: var(--white);
   --btn-link-label: #161616;
   --btn-link-disabled-label: #A8A8A8;
-  --btn-link-border-forcus: var(--color--primary);
+  --btn-link-border-forcus: var(--color-primary);
 }
 
 /* class bg and color for color $palletes with syntax .palette-$colorname-$number-$type */

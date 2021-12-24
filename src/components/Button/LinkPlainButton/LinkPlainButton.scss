@@ -17,8 +17,8 @@
     }
 
     &:focus {
-        box-shadow: 0px 0px 8px var(--color--primary); 
-        border: 1px solid var(--color--primary);
+        box-shadow: 0px 0px 8px var(--color-primary); 
+        border: 1px solid var(--color-primary);
         background-color: var(--btn-link-plain-focus);
     }
     &.disabled {

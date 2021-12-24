@@ -56,11 +56,4 @@ const GhostButton = React.forwardRef(
   }
 );
 
-GhostButton.defaultProps = {
-  type: "primary",
-  outlined: false,
-  htmlType: "button",
-  disabled: false,
-};
-
 export default GhostButton;

@@ -56,11 +56,4 @@ const OutlineButton = React.forwardRef(
   }
 );
 
-OutlineButton.defaultProps = {
-  type: "primary",
-  outlined: false,
-  htmlType: "button",
-  disabled: false,
-};
-
 export default OutlineButton;

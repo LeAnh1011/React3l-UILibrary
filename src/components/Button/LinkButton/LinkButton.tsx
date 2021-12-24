@@ -28,11 +28,4 @@ const LinkButton = React.forwardRef(
   }
 );
 
-LinkButton.defaultProps = {
-  type: "primary",
-  outlined: false,
-  htmlType: "button",
-  disabled: false,
-};
-
 export default LinkButton;

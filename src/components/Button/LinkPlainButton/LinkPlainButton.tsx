@@ -28,11 +28,4 @@ const LinkPlainButton = React.forwardRef(
   }
 );
 
-LinkPlainButton.defaultProps = {
-  type: "primary",
-  outlined: false,
-  htmlType: "button",
-  disabled: false,
-};
-
 export default LinkPlainButton;

@@ -56,11 +56,4 @@ const BleedButton = React.forwardRef(
   }
 );
 
-BleedButton.defaultProps = {
-  type: "primary",
-  outlined: false,
-  htmlType: "button",
-  disabled: false,
-};
-
 export default BleedButton;

@@ -56,11 +56,4 @@ const NormalButton = React.forwardRef(
   }
 );
 
-NormalButton.defaultProps = {
-  type: "primary",
-  outlined: false,
-  htmlType: "button",
-  disabled: false,
-};
-
 export default NormalButton;

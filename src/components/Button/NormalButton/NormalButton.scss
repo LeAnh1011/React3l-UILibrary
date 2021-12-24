@@ -16,8 +16,8 @@
 
     &:focus {
         background-color: var(--btn-primary-focus);
-        border: 1px solid #0f62fe;
-        box-shadow: 0px 0px 8px #0f62fe;
+        border: 1px solid var(--color--primary);
+        box-shadow: 0px 0px 8px var(--color--primary); 
     }
     &.disabled {
         color: var(--btn-primary-disabled-label);
@@ -42,8 +42,8 @@
 
     &:focus {
         background-color: var(--btn-secondary-focus);
-        border: 1px solid #0f62fe;
-        box-shadow: 0px 0px 8px #0f62fe;
+        border: 1px solid var(--color--primary);
+        box-shadow: 0px 0px 8px var(--color--primary);
     }
     &.disabled {
         color: var(--btn-secondary-disabled-label);
@@ -68,8 +68,8 @@
 
     &:focus {
         background-color: var(--btn-danger-focus);
-        border: 1px solid #0f62fe;
-        box-shadow: 0px 0px 8px #0f62fe;
+        border: 1px solid var(--color--primary);
+        box-shadow: 0px 0px 8px var(--color--primary);
     }
     &.disabled {
         color: var(--btn-danger-disabled-label);

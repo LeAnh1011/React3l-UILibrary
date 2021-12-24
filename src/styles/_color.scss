@@ -342,20 +342,20 @@ $palettes: (
   /* buttons primary */
   --color--primary: #0F62FE;
   --btn-primary-bg: var(--color--primary);
-  --btn-primary-hover: #174ED2;
+  --btn-primary-hover: #0050E6;
   --btn-primary-active: var(--color--primary);
   --btn-primary-focus: var(--color--primary);
   --btn-primary-label: var(--white);
-  --btn-primary-disabled: #F1F1F1;
-  --btn-primary-disabled-label: #8C9196;
+  --btn-primary-disabled: #F4F4F4;
+  --btn-primary-disabled-label: #A8A8A8;
 
   /* buttons primary outline */
   --btn-outline-primary-border: var(--color--primary);
   --btn-outline-primary-hover: var(--color--primary);
   --btn-outline-primary-active: var(--color--primary);
   --btn-outline-primary-label: var(--color--primary);
-  --btn-outline-primary-disabled-border: #D2D5D8;
-  --btn-outline-primary-disabled-label: #8C9196;
+  --btn-outline-primary-disabled-border: #C1C7CD;
+  --btn-outline-primary-disabled-label: #A8A8A8;
 
   /* buttons secondary */
   --color--secondary: #393939;
@@ -364,7 +364,7 @@ $palettes: (
   --btn-secondary-active: var(--color--secondary);
   --btn-secondary-focus: var(--color--secondary);
   --btn-secondary-label: var(--white);
-  --btn-secondary-disabled: #F1F1F1;
+  --btn-secondary-disabled: #F4F4F4;
   --btn-secondary-disabled-label: #A8A8A8;
 
   /* buttons ghost */
@@ -395,21 +395,22 @@ $palettes: (
    --btn-ghost-secondary-border-forcus: #0F62FE; 
 
    /* buttons destructive */
-  --color--danger: #D82C0D;
+  --color--danger: #DA1E28;
   --btn-danger-bg: var(--color--danger);
-  --btn-danger-hover: #BC2200;
-  --btn-danger-active: #BC2200;
+  --btn-danger-hover: #B81922;
+  --btn-danger-active: #B81922;
   --btn-danger-focus: var(--color--danger);
   --btn-danger-label: var(--white);
-  --btn-danger-disabled: #F1F1F1;
-  --btn-danger-disabled-label: #8C9196;
+  --btn-danger-disabled: #F4F4F4;
+  --btn-danger-disabled-label: #A8A8A8;
 
   /* buttons destructive outline */
   --btn-outline-danger-border: var(--color--danger);
   --btn-outline-danger-hover: var(--color--danger); 
   --btn-outline-danger-active: var(--color--danger);
+  --btn-outline-danger-focus: var(--color--danger);
   --btn-outline-danger-label: var(--color--danger);
-  --btn-outline-danger-disabled-border: #D2D5D8;
+  --btn-outline-danger-disabled-border: #C1C7CD;
   --btn-outline-danger-disabled-label: #A8A8A8 ;
 
   /* buttons link-plain */

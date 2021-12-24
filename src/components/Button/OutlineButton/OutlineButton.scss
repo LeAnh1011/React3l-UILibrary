@@ -42,11 +42,11 @@
     }
 
     &:focus {
-        background-color: var(--btn-outline-danger-hover);
+        background-color: var(--btn-outline-danger-focus);
         color: var(--white);
-        border: 1px solid #0f62fe !important;
+        border: 1px solid var(--color--primary) !important;
         box-sizing: border-box;
-        box-shadow: 0px 0px 8px #0f62fe;
+        box-shadow: 0px 0px 8px var(--color--primary);
     }
     &.disabled {
         color: var(--btn-outline-primary-disabled-label);

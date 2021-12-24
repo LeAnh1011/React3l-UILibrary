@@ -1,0 +1,131 @@
+@import "../../../styles/index.scss";
+$backgound-color: #f4f4f4;
+
+/* Style for DatePicker.tsx */
+.advance-date-range-filter-master__wrapper {
+    width: 100%;
+    position: relative;
+    .advance-date-range-filter-master__container {
+        width: fit-content;
+        cursor: pointer;
+        &.filter-bg {
+            background-color: var(--white);
+            border: 1px solid var(--color-primary);
+            box-sizing: border-box;
+            box-shadow: 0px 0px 8px var(--color-primary);
+            &:hover {
+                background-color: var(--white);
+            }
+        }
+
+        &.p-b---active {
+            padding-bottom: 11px !important;
+        }
+        .filter-active {
+            color: var(--color-primary);
+            border-bottom: 1px solid var(--color-primary);
+        }
+        &:hover {
+            background: #e5e5e5;
+        }
+        .filter__icon {
+            font-size: 16px;
+        }
+        .advance-date-range-filter-master__title {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.16px;
+        }
+    }
+    .date-range__icon-wrapper {
+        top: 29% !important;
+    }
+
+    .date-range-filter-master__list-container {
+        width: 100%;
+        height: auto;
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2), 0px 2px 10px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        z-index: 999;
+        .advance-date-range-master__list {
+            background-color: $backgound-color;
+            width: 100%;
+            overflow-y: auto;
+            max-height: 160px;
+        }
+
+        .advance-date-range-filter__item {
+            &:hover,
+            &:focus {
+                background-color: #e5e5e5;
+            }
+            &:focus-visible {
+                outline: none;
+            }
+            &.filter__item--selected {
+                background-color: var(--color-surface-material-input-hover);
+                display: flex;
+                justify-content: space-between;
+            }
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            line-height: 16px;
+            cursor: pointer;
+        }
+        .date-range-master__prefer-option {
+            box-shadow: inset 0px 1px 0px #e1e3e5;
+            background: $backgound-color;
+            font-style: normal;
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            span {
+                font-size: 12px;
+                margin-left: 6px;
+            }
+            i {
+                font-size: 14px;
+            }
+
+            line-height: 16px;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.32px;
+            color: var(--color-primary);
+            cursor: pointer;
+            &:hover,
+            &:focus {
+                background-color: var(--color-primary);
+                color: white;
+            }
+            &.date-range-master__bg-primary {
+                background-color: var(--color-primary);
+                color: white;
+            }
+        }
+        .advance-date-range-filter__text {
+            white-space: nowrap;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .ant-picker--material {
+            padding: 1rem !important;
+            border-radius: 0 !important;
+            border-bottom: 1px solid var(--color-border);
+            background: none !important;
+            box-shadow: none !important;
+            &:hover,
+            &:focus {
+                border-bottom: 2px solid !important;
+            }
+        }
+    }
+}

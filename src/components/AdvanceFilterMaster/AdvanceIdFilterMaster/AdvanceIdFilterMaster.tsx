@@ -1,6 +1,5 @@
 import { useDebounceFn } from "ahooks";
 import { Empty, Spin } from "antd";
-import search from "assets/images/svg/search-normal.svg";
 import classNames from "classnames";
 import InputText from "components/Input/InputText";
 import { DEBOUNCE_TIME_300 } from "config/consts";
@@ -265,14 +264,17 @@ function AdvanceIdFilterMaster(
         ref={wrapperRef}
       >
         <div
-          className={classNames("advance-id-filter-master__container p--xs", {
+          className={classNames("advance-id-filter-master__container p-l--sm p-t--xs p-r--xs p-b--xs", {
             "filter-bg": isExpand,
+            "p-b---active": value,
           })}
           onClick={handleToggle}
         >
-          <div className="advance-id-filter-master__title">
-            {title}
-            <i className="filter__icon tio-chevron_down"></i>
+          <div className={classNames({ "filter-active": value })}>
+            <div className="advance-id-filter-master__title">
+              {title}
+              <i className="filter__icon tio-chevron_down"></i>
+            </div>
           </div>
         </div>
         {isExpand && (
@@ -284,7 +286,7 @@ function AdvanceIdFilterMaster(
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
                 suffix={
-                  <img className="tio tio-search" src={search} alt="noImage" />
+                  <i className="tio tio-search" />
                 }
                 isMaterial={isMaterial}
                 ref={inputRef}

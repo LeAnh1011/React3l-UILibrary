@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import "./Button.scss";
 import NormalButton from "./NormalButton/NormalButton";
+import OutlineButton from "./OutlineButton";
 
 export type ButtonType =
   | "primary"
@@ -60,13 +61,8 @@ const Button = React.forwardRef(
         numb = 1;
         break;
       case "outline-primary":
-        if (!icon) {
-          numb = 1;
-          break;
-        } else {
-          numb = 2;
-          break;
-        }
+        numb = 2;
+        break;
       case "secondary":
         numb = 1;
         break;
@@ -98,13 +94,8 @@ const Button = React.forwardRef(
         numb = 1;
         break;
       case "outline-danger":
-        if (!icon) {
-          numb = 1;
-          break;
-        } else {
-          numb = 2;
-          break;
-        }
+        numb = 2;
+        break;
       case "bleed-primary": // bộ bleed có ui padding cố định, khác bộ khác chia thành 5-6
         if (!icon) {
           numb = 5;
@@ -258,6 +249,8 @@ const Button = React.forwardRef(
     // render button here
     return numb === 1 ? (
       <NormalButton {...props} />
+    ) : numb === 2 ? (
+      <OutlineButton {...props} />
     ) : numb === 3 ? (
       Button3
     ) : numb === 4 ? (

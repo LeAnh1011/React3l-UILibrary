@@ -31,35 +31,7 @@
 }
 
 
-.btn--outline-primary {
-  // main button
-  background-color: var(--white);
-  border: 1px solid var(--btn-outline-primary-border);
-  color: var(--btn-outline-primary-border);
 
-  &:hover {
-    background-color: var(--btn-outline-primary-hover);
-    color: var(--white);
-  }
-
-  &:active {
-    color: var(--white);
-    background-color: var(--btn-outline-primary-active);
-  }
-
-  &:focus {
-    background-color: var(--white);
-    color: var(--btn-outline-primary-border);
-    border: 1px solid var(--btn-outline-primary-border);
-    box-sizing: border-box;
-    box-shadow: 0px 0px 8px var(--btn-outline-primary-border);
-  }
-  &.disabled {
-    color: var(--btn-outline-primary-disabled-label);
-    background-color: var(--white) !important;
-    border-color: var(--btn-outline-primary-disabled-border);
-  }
-}
 
 
 
@@ -149,35 +121,7 @@
 
 
 
-.btn--outline-danger {
-  // main button
-  background-color: var(--white);
-  border: 1px solid var(--btn-outline-danger-border);
-  color: var(--btn-outline-danger-border);
 
-  &:hover {
-    background-color: var(--btn-outline-danger-hover);
-    color: var(--white);
-  }
-
-  &:active {
-    color: var(--white);
-    background-color: var(--btn-outline-danger-active);
-  }
-
-  &:focus {
-    background-color: var(--btn-outline-danger-hover);
-    color: var(--white);
-    border: 1px solid #0F62FE;
-    box-sizing: border-box;
-    box-shadow: 0px 0px 8px #0F62FE;;
-  }
-  &.disabled {
-    color: var(--btn-outline-primary-disabled-label);
-    background-color: var(--white) !important;
-    border-color: var(--btn-outline-primary-disabled-border);
-  }
-}
 
 .btn--bleed-primary { 
   // main button

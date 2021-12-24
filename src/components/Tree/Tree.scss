@@ -63,6 +63,10 @@
       padding-bottom: 0px;
       transition: all 0.3s, border 0s, line-height 0s, box-shadow 0s;
 
+      &:focus-within {
+        background-color: var(--color-surface-material-input-hover);
+      }
+
       &:hover {
         background-color: var(--color-surface-material-input-hover);
       }

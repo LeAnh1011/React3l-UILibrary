@@ -43,9 +43,10 @@ function Default() {
         selectable={!isMultiple}
         checkable={isMultiple}
         virtual
-        titleRender={(treeNode: any) => (
-          <div>{treeNode.item?.name + " - " + treeNode.item?.code}</div>
-        )}
+        titleRender={(treeNode: any) => {
+          console.log(treeNode);
+          return <div>{treeNode.item?.name + " - " + treeNode.item?.code}</div>;
+        }}
         onChange={onChange}
         checkedKeys={checkedKeys}
         checkStrictly={true}

@@ -165,6 +165,28 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     [onChange, checkable]
   );
 
+  const handleKeyPress = React.useCallback(
+    (event: any) => {
+      switch (event.keyCode) {
+        case 40:
+          const treeHolder = document.querySelector(
+            ".ant-tree-list-holder-inner"
+          ) as HTMLDivElement;
+          const firstItem = treeHolder.firstElementChild.querySelector(
+            ".ant-tree-node-content-wrapper .ant-tree-title div"
+          ) as HTMLElement;
+          firstItem.focus();
+          break;
+        case 9:
+          handleCloseList();
+          break;
+        default:
+          return;
+      }
+    },
+    [handleCloseList]
+  );
+
   CommonService.useClickOutside(wrapperRef, handleCloseList);
 
   return (
@@ -185,6 +207,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               isSmall={isSmall}
               isUsingSearch={isUsingSearch}
               onClearMulti={handleClearMultiItem}
+              onKeyDown={handleKeyPress}
             />
           ) : (
             <InputSelect
@@ -199,6 +222,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               type={type}
               label={label}
               isSmall={isSmall}
+              onKeyDown={handleKeyPress}
             />
           )}
         </div>
@@ -219,6 +243,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               selectWithAdd={selectWithAdd}
               selectWithPreferOption={selectWithPreferOption}
               preferOptions={preferOptions}
+              isExpand={expanded}
             />
           </div>
         )}

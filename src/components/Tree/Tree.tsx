@@ -5,13 +5,14 @@ import {
   EventDataNode,
   TreeProps as AntdTreeProps,
 } from "antd/lib/tree";
-import React, { ReactNode } from "react";
+import React, { ReactNode, RefObject } from "react";
 import { ErrorObserver, Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import "./Tree.scss";
 import { TreeNode as CustomTreeNode } from "./TreeNode";
 import { Key } from "antd/lib/table/interface";
 import classNames from "classnames";
+const { TreeNode } = TreeAntd;
 
 function SwitcherIcon() {
   return (
@@ -35,6 +36,8 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   selectWithAdd?: boolean;
   selectWithPreferOption?: boolean;
   preferOptions?: T[];
+  selectListRef?: RefObject<any>;
+  isExpand?: boolean;
 }
 function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const {
@@ -63,7 +66,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   );
 
   const [internalCheckedKeys, setInternalCheckedKeys] = React.useState<Key[]>(
-    checkedKeys
+    checkedKeys.map((item) => item.toString())
   );
 
   const [internalSelectedKeys, setInternalSelectedKeys] = React.useState<Key[]>(
@@ -91,13 +94,13 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
 
   const searchTreeNode: any = React.useCallback(
     (element: CustomTreeNode<Model>, key: number) => {
-      if (element.key === key) {
+      if (element.key === +key) {
         return element;
       } else if (element.children != null) {
         var i;
         var result = null;
         for (i = 0; result == null && i < element.children.length; i++) {
-          result = searchTreeNode(element.children[i], key);
+          result = searchTreeNode(element.children[i], +key);
         }
         return result;
       }
@@ -146,7 +149,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const handleSelect: AntdTreeProps["onSelect"] = React.useCallback(
     (
       selectedKeys: Key[],
-      info: {
+      info?: {
         event: "select";
         selected: boolean;
         node: EventDataNode;
@@ -171,9 +174,9 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
 
   React.useEffect(() => {
     if (checkable) {
-      setInternalCheckedKeys(checkedKeys);
+      setInternalCheckedKeys(checkedKeys.map((item) => item.toString()));
     } else {
-      setInternalSelectedKeys(checkedKeys);
+      setInternalSelectedKeys(checkedKeys.map((item) => item.toString()));
     }
   }, [checkable, checkedKeys]);
 
@@ -195,7 +198,9 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
               CommonService.setOnlySelectLeaf(treeData);
             }
             setInternalTreeData(treeData);
-            setInternalExpandedKeys(internalExpandedKeys);
+            setInternalExpandedKeys(
+              internalExpandedKeys.map((item) => item.toString())
+            );
           } else setInternalTreeData([]);
           setLoading(false);
         },
@@ -206,6 +211,129 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     }
     return () => {};
   }, [getTreeData, selectedKey, modelFilter, subscription, onlySelectLeaf]);
+
+  const handleMove = React.useCallback(
+    (item) => (event: any) => {
+      const wrapperElement =
+        event.target.parentElement.parentElement.parentElement;
+      switch (event.keyCode) {
+        case 13:
+          if (!checkable) {
+            handleSelect([item.key], {
+              event: "select",
+              selected: true,
+              node: null,
+              selectedNodes: [item],
+              nativeEvent: null,
+            });
+          } else {
+            let checkedKeys: any[] = [];
+            if (
+              internalCheckedKeys &&
+              internalCheckedKeys.length > 0 &&
+              internalCheckedKeys.includes(item.key.toString())
+            ) {
+              checkedKeys = internalCheckedKeys.filter(
+                (checkedItem) => checkedItem !== item.key.toString()
+              );
+            } else {
+              checkedKeys = [...internalCheckedKeys, item.key.toString()];
+            }
+            handleCheck({ checked: checkedKeys, halfChecked: [] });
+          }
+
+          break;
+        case 40:
+          if (wrapperElement.nextElementSibling !== null) {
+            wrapperElement.nextElementSibling
+              .querySelector(
+                ".ant-tree-node-content-wrapper .ant-tree-title div"
+              )
+              .focus();
+          }
+          event.preventDefault();
+          break;
+        case 38:
+          if (wrapperElement.previousElementSibling !== null) {
+            wrapperElement.previousElementSibling
+              .querySelector(
+                ".ant-tree-node-content-wrapper .ant-tree-title div"
+              )
+              .focus();
+          }
+          event.preventDefault();
+          break;
+      }
+      return;
+    },
+    [checkable, handleCheck, handleSelect, internalCheckedKeys]
+  );
+
+  const loop = React.useCallback(
+    (data) =>
+      data.map((item: DataNode) => {
+        if (item.children && item.children.length) {
+          return (
+            <TreeNode
+              key={item.key}
+              checkable={checkable}
+              title={
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                  tabIndex={-1}
+                  onKeyDown={handleMove(item)}
+                  className={`tree-node-${item.key}`}
+                >
+                  <div>{titleRender(item)}</div>
+                  {!checkable &&
+                    internalSelectedKeys &&
+                    internalSelectedKeys.includes(item.key.toString()) && (
+                      <div>
+                        <i className="tio-done" />
+                      </div>
+                    )}
+                </div>
+              }
+            >
+              {loop(item.children)}
+            </TreeNode>
+          );
+        }
+
+        return (
+          <TreeNode
+            key={item.key}
+            checkable={checkable}
+            title={
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+                tabIndex={-1}
+                onKeyDown={handleMove(item)}
+                className={`tree-node-${item.key}`}
+              >
+                <div>{titleRender(item)}</div>
+                {!checkable &&
+                  internalSelectedKeys &&
+                  internalSelectedKeys.includes(item.key.toString()) && (
+                    <div>
+                      <i className="tio-done" />
+                    </div>
+                  )}
+              </div>
+            }
+          />
+        );
+      }),
+    [checkable, handleMove, internalSelectedKeys, titleRender]
+  );
 
   return (
     <>
@@ -227,29 +355,12 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                   selectedKeys={internalSelectedKeys}
                   showLine={false && { showLeafIcon: false }}
                   switcherIcon={<SwitcherIcon />}
-                  treeData={internalTreeData} // pass internalTreeData here
                   onExpand={handleExpandKey}
                   onCheck={handleCheck}
                   onSelect={handleSelect}
-                  titleRender={(node: DataNode) => (
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <div>{titleRender(node)}</div>
-                      {!checkable &&
-                        internalSelectedKeys &&
-                        internalSelectedKeys.includes(node.key) && (
-                          <div>
-                            <i className="tio-done" />
-                          </div>
-                        )}
-                    </div>
-                  )}
-                ></TreeAntd>
+                >
+                  {loop(internalTreeData)}
+                </TreeAntd>
 
                 {!loading && internalTreeData.length > 0 && (
                   <div className="select__list-prefer">

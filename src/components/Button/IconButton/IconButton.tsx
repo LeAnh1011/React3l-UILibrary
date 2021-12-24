@@ -1,29 +1,9 @@
 import classNames from "classnames";
-import React, { ButtonHTMLAttributes, PropsWithChildren } from "react";
+import { ButtonProps } from "../Button";
+import React, { PropsWithChildren } from "react";
 import "./IconButton.scss";
 
-export type IconButtonType =
-  | "primary"
-  | "outline-primary"
-  | "danger"
-  | "outline-danger"
-  | "ghost";
-
-export interface IconButtonProps {
-  type?: IconButtonType;
-
-  htmlType?: ButtonHTMLAttributes<any>["type"];
-
-  outlined?: boolean;
-
-  className?: string;
-
-  onClick?: ButtonHTMLAttributes<any>["onClick"];
-
-  icon: string;
-
-  disabled?: boolean;
-}
+export interface IconButtonProps extends ButtonProps {}
 
 const IconButton = React.forwardRef(
   (props: PropsWithChildren<IconButtonProps>, ref: React.Ref<any>) => {
@@ -37,7 +17,7 @@ const IconButton = React.forwardRef(
         disabled={disabled}
         className={classNames(
           "btn btn-only-icon",
-          `btn--icon--${type}`,
+          `btn--${type}`,
           disabled ? "disabled" : "",
           className
         )}

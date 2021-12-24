@@ -2,7 +2,6 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import nameof from "ts-nameof.macro";
 import Button from "./Button";
-import IconButton from "./IconButton/IconButton";
 
 function Primary() {
   return (
@@ -1637,10 +1636,10 @@ function ButtonIcon() {
           marginBottom: 30,
         }}
       >
-        <IconButton type="primary" icon="tio-add" className="btn--sm" />
-        <IconButton type="primary" icon="tio-add" className="btn--md" />
-        <IconButton type="primary" icon="tio-add" className="btn--lg" />
-        <IconButton type="primary" icon="tio-add" className="btn--xl" />
+        <Button type="icon-only-primary" icon="tio-add" className="btn--sm" />
+        <Button type="icon-only-primary" icon="tio-add" className="btn--md" />
+        <Button type="icon-only-primary" icon="tio-add" className="btn--lg" />
+        <Button type="icon-only-primary" icon="tio-add" className="btn--xl" />
       </div>
       <div
         style={{
@@ -1651,26 +1650,26 @@ function ButtonIcon() {
           marginBottom: 30,
         }}
       >
-        <IconButton
-          type="primary"
+        <Button
+          type="icon-only-primary"
           icon="tio-add"
           className="btn--sm"
           disabled={true}
         />
-        <IconButton
-          type="primary"
+        <Button
+          type="icon-only-primary"
           icon="tio-add"
           className="btn--md"
           disabled={true}
         />
-        <IconButton
-          type="primary"
+        <Button
+          type="icon-only-primary"
           icon="tio-add"
           className="btn--lg"
           disabled={true}
         />
-        <IconButton
-          type="primary"
+        <Button
+          type="icon-only-primary"
           icon="tio-add"
           className="btn--xl"
           disabled={true}
@@ -1685,10 +1684,26 @@ function ButtonIcon() {
           marginBottom: 30,
         }}
       >
-        <IconButton type="outline-primary" icon="tio-add" className="btn--sm" />
-        <IconButton type="outline-primary" icon="tio-add" className="btn--md" />
-        <IconButton type="outline-primary" icon="tio-add" className="btn--lg" />
-        <IconButton type="outline-primary" icon="tio-add" className="btn--xl" />
+        <Button
+          type="icon-only-outline-primary"
+          icon="tio-add"
+          className="btn--sm"
+        />
+        <Button
+          type="icon-only-outline-primary"
+          icon="tio-add"
+          className="btn--md"
+        />
+        <Button
+          type="icon-only-outline-primary"
+          icon="tio-add"
+          className="btn--lg"
+        />
+        <Button
+          type="icon-only-outline-primary"
+          icon="tio-add"
+          className="btn--xl"
+        />
       </div>
       <div
         style={{
@@ -1699,26 +1714,26 @@ function ButtonIcon() {
           marginBottom: 30,
         }}
       >
-        <IconButton
-          type="outline-primary"
+        <Button
+          type="icon-only-outline-primary"
           icon="tio-add"
           className="btn--sm"
           disabled={true}
         />
-        <IconButton
-          type="outline-primary"
+        <Button
+          type="icon-only-outline-primary"
           icon="tio-add"
           className="btn--md"
           disabled={true}
         />
-        <IconButton
-          type="outline-primary"
+        <Button
+          type="icon-only-outline-primary"
           icon="tio-add"
           className="btn--lg"
           disabled={true}
         />
-        <IconButton
-          type="outline-primary"
+        <Button
+          type="icon-only-outline-primary"
           icon="tio-add"
           className="btn--xl"
           disabled={true}
@@ -1733,10 +1748,10 @@ function ButtonIcon() {
           marginBottom: 30,
         }}
       >
-        <IconButton type="danger" icon="tio-add" className="btn--sm" />
-        <IconButton type="danger" icon="tio-add" className="btn--md" />
-        <IconButton type="danger" icon="tio-add" className="btn--lg" />
-        <IconButton type="danger" icon="tio-add" className="btn--xl" />
+        <Button type="icon-only-danger" icon="tio-add" className="btn--sm" />
+        <Button type="icon-only-danger" icon="tio-add" className="btn--md" />
+        <Button type="icon-only-danger" icon="tio-add" className="btn--lg" />
+        <Button type="icon-only-danger" icon="tio-add" className="btn--xl" />
       </div>
       <div
         style={{
@@ -1747,26 +1762,26 @@ function ButtonIcon() {
           marginBottom: 30,
         }}
       >
-        <IconButton
-          type="danger"
+        <Button
+          type="icon-only-danger"
           icon="tio-add"
           className="btn--sm"
           disabled={true}
         />
-        <IconButton
-          type="danger"
+        <Button
+          type="icon-only-danger"
           icon="tio-add"
           className="btn--md"
           disabled={true}
         />
-        <IconButton
-          type="danger"
+        <Button
+          type="icon-only-danger"
           icon="tio-add"
           className="btn--lg"
           disabled={true}
         />
-        <IconButton
-          type="danger"
+        <Button
+          type="icon-only-danger"
           icon="tio-add"
           className="btn--xl"
           disabled={true}
@@ -1781,10 +1796,26 @@ function ButtonIcon() {
           marginBottom: 30,
         }}
       >
-        <IconButton type="outline-danger" icon="tio-add" className="btn--sm" />
-        <IconButton type="outline-danger" icon="tio-add" className="btn--md" />
-        <IconButton type="outline-danger" icon="tio-add" className="btn--lg" />
-        <IconButton type="outline-danger" icon="tio-add" className="btn--xl" />
+        <Button
+          type="icon-only-outline-danger"
+          icon="tio-add"
+          className="btn--sm"
+        />
+        <Button
+          type="icon-only-outline-danger"
+          icon="tio-add"
+          className="btn--md"
+        />
+        <Button
+          type="icon-only-outline-danger"
+          icon="tio-add"
+          className="btn--lg"
+        />
+        <Button
+          type="icon-only-outline-danger"
+          icon="tio-add"
+          className="btn--xl"
+        />
       </div>
       <div
         style={{
@@ -1795,26 +1826,26 @@ function ButtonIcon() {
           marginBottom: 30,
         }}
       >
-        <IconButton
-          type="outline-danger"
+        <Button
+          type="icon-only-outline-danger"
           icon="tio-add"
           className="btn--sm"
           disabled={true}
         />
-        <IconButton
-          type="outline-danger"
+        <Button
+          type="icon-only-outline-danger"
           icon="tio-add"
           className="btn--md"
           disabled={true}
         />
-        <IconButton
-          type="outline-danger"
+        <Button
+          type="icon-only-outline-danger"
           icon="tio-add"
           className="btn--lg"
           disabled={true}
         />
-        <IconButton
-          type="outline-danger"
+        <Button
+          type="icon-only-outline-danger"
           icon="tio-add"
           className="btn--xl"
           disabled={true}
@@ -1829,10 +1860,10 @@ function ButtonIcon() {
           marginBottom: 30,
         }}
       >
-        <IconButton type="ghost" icon="tio-add" className="btn--sm" />
-        <IconButton type="ghost" icon="tio-add" className="btn--md" />
-        <IconButton type="ghost" icon="tio-add" className="btn--lg" />
-        <IconButton type="ghost" icon="tio-add" className="btn--xl" />
+        <Button type="icon-only-ghost" icon="tio-add" className="btn--sm" />
+        <Button type="icon-only-ghost" icon="tio-add" className="btn--md" />
+        <Button type="icon-only-ghost" icon="tio-add" className="btn--lg" />
+        <Button type="icon-only-ghost" icon="tio-add" className="btn--xl" />
       </div>
       <div
         style={{
@@ -1843,26 +1874,26 @@ function ButtonIcon() {
           marginBottom: 30,
         }}
       >
-        <IconButton
-          type="ghost"
+        <Button
+          type="icon-only-ghost"
           icon="tio-add"
           className="btn--sm"
           disabled={true}
         />
-        <IconButton
-          type="ghost"
+        <Button
+          type="icon-only-ghost"
           icon="tio-add"
           className="btn--md"
           disabled={true}
         />
-        <IconButton
-          type="ghost"
+        <Button
+          type="icon-only-ghost"
           icon="tio-add"
           className="btn--lg"
           disabled={true}
         />
-        <IconButton
-          type="ghost"
+        <Button
+          type="icon-only-ghost"
           icon="tio-add"
           className="btn--xl"
           disabled={true}

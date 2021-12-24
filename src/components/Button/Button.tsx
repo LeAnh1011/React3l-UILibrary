@@ -6,6 +6,7 @@ import React, {
 import BleedButton from "./BleedButton";
 import "./Button.scss";
 import GhostButton from "./GhostButton";
+import IconButton from "./IconButton";
 import LinkButton from "./LinkButton";
 import LinkPlainButton from "./LinkPlainButton";
 import NormalButton from "./NormalButton/NormalButton";
@@ -15,8 +16,9 @@ export enum ButtonSet {
   OUTLINE,
   GHOST,
   BLEED,
-  LINKPAIN,
+  LINK_PAIN,
   LINK,
+  ICON_ONLY,
 }
 export type ButtonType =
   | "primary"
@@ -30,7 +32,12 @@ export type ButtonType =
   | "bleed-primary"
   | "bleed-secondary"
   | "link-plain"
-  | "link";
+  | "link"
+  | "icon-only-primary"
+  | "icon-only-outline-primary"
+  | "icon-only-danger"
+  | "icon-only-outline-danger"
+  | "icon-only-ghost";
 
 export interface ButtonProps {
   type?: ButtonType;
@@ -85,10 +92,25 @@ const Button = React.forwardRef(
         numb = ButtonSet.BLEED;
         break;
       case "link-plain":
-        numb = ButtonSet.LINKPAIN;
+        numb = ButtonSet.LINK_PAIN;
         break;
       case "link":
         numb = ButtonSet.LINK;
+        break;
+      case "icon-only-primary":
+        numb = ButtonSet.ICON_ONLY;
+        break;
+      case "icon-only-outline-primary":
+        numb = ButtonSet.ICON_ONLY;
+        break;
+      case "icon-only-danger":
+        numb = ButtonSet.ICON_ONLY;
+        break;
+      case "icon-only-outline-danger":
+        numb = ButtonSet.ICON_ONLY;
+        break;
+      case "icon-only-ghost":
+        numb = ButtonSet.ICON_ONLY;
         break;
       default:
         numb = ButtonSet.NORMAL;
@@ -102,10 +124,12 @@ const Button = React.forwardRef(
       <GhostButton {...props} />
     ) : numb === ButtonSet.BLEED ? (
       <BleedButton {...props} />
-    ) : numb === ButtonSet.LINKPAIN ? (
+    ) : numb === ButtonSet.LINK_PAIN ? (
       <LinkPlainButton {...props} />
-    ) : (
+    ) : numb === ButtonSet.LINK ? (
       <LinkButton {...props} />
+    ) : (
+      <IconButton {...props} />
     );
   }
 );

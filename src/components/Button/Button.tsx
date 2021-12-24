@@ -5,6 +5,7 @@ import React, {
   ReactNode,
 } from "react";
 import "./Button.scss";
+import GhostButton from "./GhostButton";
 import NormalButton from "./NormalButton/NormalButton";
 import OutlineButton from "./OutlineButton";
 
@@ -67,29 +68,17 @@ const Button = React.forwardRef(
         numb = 1;
         break;
       case "ghost": //các bộ ghost có ui padding khác nên chia thành 3-4
-        if (!icon) {
-          numb = 3;
-          break;
-        } else {
-          numb = 4;
-          break;
-        }
+        numb = 3;
+        break;
+
       case "ghost-primary":
-        if (!icon) {
-          numb = 3;
-          break;
-        } else {
-          numb = 4;
-          break;
-        }
+        numb = 3;
+        break;
+
       case "ghost-secondary":
-        if (!icon) {
-          numb = 3;
-          break;
-        } else {
-          numb = 4;
-          break;
-        }
+        numb = 3;
+        break;
+
       case "danger": // bộ danger có ui padding khá giống 3 bộ đầu nên chia 1 và 2
         numb = 1;
         break;
@@ -121,49 +110,6 @@ const Button = React.forwardRef(
       default:
         numb = 1;
     }
-
-    const Button3 = React.useMemo(() => {
-      return (
-        <button
-          type={htmlType}
-          onClick={onClick}
-          ref={ref}
-          disabled={disabled}
-          className={classNames(
-            "btn btn-ghost-no-icon",
-            `btn--${type}`,
-            disabled ? "disabled" : "",
-            className
-          )}
-        >
-          {children}
-        </button>
-      );
-    }, [children, className, disabled, htmlType, onClick, ref, type]);
-
-    const Button4 = React.useMemo(() => {
-      return (
-        <button
-          type={htmlType}
-          onClick={onClick}
-          ref={ref}
-          disabled={disabled}
-          className={classNames(
-            "btn btn-ghost-have-icon",
-            `btn--${type}`,
-            disabled ? "disabled" : "",
-            className
-          )}
-        >
-          <div className="button-content-have-icon">
-            <div className="children-content">{children}</div>
-            <div className="box-icon">
-              <i className={classNames(icon, "icon-button")}></i>
-            </div>
-          </div>
-        </button>
-      );
-    }, [children, className, disabled, htmlType, icon, onClick, ref, type]);
 
     const Button5 = React.useMemo(() => {
       return (
@@ -252,9 +198,7 @@ const Button = React.forwardRef(
     ) : numb === 2 ? (
       <OutlineButton {...props} />
     ) : numb === 3 ? (
-      Button3
-    ) : numb === 4 ? (
-      Button4
+      <GhostButton {...props} />
     ) : numb === 5 ? (
       Button5
     ) : numb === 6 ? (

@@ -30,7 +30,6 @@ const IconButton = React.forwardRef(
 
 IconButton.defaultProps = {
   type: "primary",
-  outlined: false,
   htmlType: "button",
   disabled: false,
 };

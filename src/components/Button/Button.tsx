@@ -11,24 +11,16 @@ import LinkButton from "./LinkButton";
 import LinkPlainButton from "./LinkPlainButton";
 import NormalButton from "./NormalButton/NormalButton";
 import OutlineButton from "./OutlineButton";
-export enum ButtonSet {
-  NORMAL,
-  OUTLINE,
-  GHOST,
-  BLEED,
-  LINK_PAIN,
-  LINK,
-  ICON_ONLY,
-}
+
 export type ButtonType =
   | "primary"
-  | "outline-primary"
   | "secondary"
+  | "danger"
+  | "outline-primary"
+  | "outline-danger"
   | "ghost"
   | "ghost-primary"
   | "ghost-secondary"
-  | "danger"
-  | "outline-danger"
   | "bleed-primary"
   | "bleed-secondary"
   | "link-plain"
@@ -44,8 +36,6 @@ export interface ButtonProps {
 
   htmlType?: ButtonHTMLAttributes<any>["type"];
 
-  outlined?: boolean;
-
   className?: string;
 
   onClick?: ButtonHTMLAttributes<any>["onClick"];
@@ -59,64 +49,52 @@ export interface ButtonProps {
 
 const Button = React.forwardRef(
   (props: PropsWithChildren<ButtonProps>, ref: React.Ref<any>) => {
-    let numb = 0;
-    switch (props.type) {
-      case "primary":
-      case "secondary":
-      case "danger":
-        numb = ButtonSet.NORMAL;
-        break;
-      case "outline-primary":
-      case "outline-danger":
-        numb = ButtonSet.OUTLINE;
-        break;
-      case "ghost":
-      case "ghost-primary":
-      case "ghost-secondary":
-        numb = ButtonSet.GHOST;
-        break;
-      case "bleed-primary":
-      case "bleed-secondary":
-        numb = ButtonSet.BLEED;
-        break;
-      case "link-plain":
-        numb = ButtonSet.LINK_PAIN;
-        break;
-      case "link":
-        numb = ButtonSet.LINK;
-        break;
-      case "icon-only-primary":
-      case "icon-only-outline-primary":
-      case "icon-only-danger":
-      case "icon-only-outline-danger":
-      case "icon-only-ghost":
-        numb = ButtonSet.ICON_ONLY;
-        break;
-      default:
-        numb = ButtonSet.NORMAL;
+    if (
+      props.type === "primary" ||
+      props.type === "secondary" ||
+      props.type === "danger"
+    ) {
+      return <NormalButton {...props} />;
     }
-    // render button here
-    return numb === ButtonSet.NORMAL ? (
-      <NormalButton {...props} />
-    ) : numb === ButtonSet.OUTLINE ? (
-      <OutlineButton {...props} />
-    ) : numb === ButtonSet.GHOST ? (
-      <GhostButton {...props} />
-    ) : numb === ButtonSet.BLEED ? (
-      <BleedButton {...props} />
-    ) : numb === ButtonSet.LINK_PAIN ? (
-      <LinkPlainButton {...props} />
-    ) : numb === ButtonSet.LINK ? (
-      <LinkButton {...props} />
-    ) : (
-      <IconButton {...props} />
-    );
+
+    if (props.type === "outline-primary" || props.type === "outline-danger") {
+      return <OutlineButton {...props} />;
+    }
+
+    if (
+      props.type === "ghost" ||
+      props.type === "ghost-primary" ||
+      props.type === "ghost-secondary"
+    ) {
+      return <GhostButton {...props} />;
+    }
+
+    if (props.type === "bleed-primary" || props.type === "bleed-secondary") {
+      return <BleedButton {...props} />;
+    }
+
+    if (props.type === "link-plain") {
+      return <LinkPlainButton {...props} />;
+    }
+
+    if (props.type === "link") {
+      return <LinkButton {...props} />;
+    }
+
+    if (
+      props.type === "icon-only-primary" ||
+      props.type === "icon-only-outline-primary" ||
+      props.type === "icon-only-danger" ||
+      props.type === "icon-only-outline-danger" ||
+      props.type === "icon-only-ghost"
+    ) {
+      return <IconButton {...props} />;
+    }
   }
 );
 
 Button.defaultProps = {
   type: "primary",
-  outlined: false,
   htmlType: "button",
   disabled: false,
 };

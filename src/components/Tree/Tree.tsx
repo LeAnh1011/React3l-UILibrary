@@ -66,7 +66,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   );
 
   const [internalCheckedKeys, setInternalCheckedKeys] = React.useState<Key[]>(
-    checkedKeys.map((item) => item.toString())
+    checkedKeys
   );
 
   const [internalSelectedKeys, setInternalSelectedKeys] = React.useState<Key[]>(
@@ -174,9 +174,9 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
 
   React.useEffect(() => {
     if (checkable) {
-      setInternalCheckedKeys(checkedKeys.map((item) => item.toString()));
+      setInternalCheckedKeys(checkedKeys);
     } else {
-      setInternalSelectedKeys(checkedKeys.map((item) => item.toString()));
+      setInternalSelectedKeys(checkedKeys);
     }
   }, [checkable, checkedKeys]);
 
@@ -198,9 +198,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
               CommonService.setOnlySelectLeaf(treeData);
             }
             setInternalTreeData(treeData);
-            setInternalExpandedKeys(
-              internalExpandedKeys.map((item) => item.toString())
-            );
+            setInternalExpandedKeys(internalExpandedKeys);
           } else setInternalTreeData([]);
           setLoading(false);
         },
@@ -231,13 +229,13 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
             if (
               internalCheckedKeys &&
               internalCheckedKeys.length > 0 &&
-              internalCheckedKeys.includes(item.key.toString())
+              internalCheckedKeys.includes(item.key)
             ) {
               checkedKeys = internalCheckedKeys.filter(
-                (checkedItem) => checkedItem !== item.key.toString()
+                (checkedItem) => checkedItem !== item.key
               );
             } else {
-              checkedKeys = [...internalCheckedKeys, item.key.toString()];
+              checkedKeys = [...internalCheckedKeys, item.key];
             }
             handleCheck({ checked: checkedKeys, halfChecked: [] });
           }
@@ -269,6 +267,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     [checkable, handleCheck, handleSelect, internalCheckedKeys]
   );
 
+  // dont need to use this function
   const loop = React.useCallback(
     (data) =>
       data.map((item: DataNode) => {
@@ -358,9 +357,29 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                   onExpand={handleExpandKey}
                   onCheck={handleCheck}
                   onSelect={handleSelect}
-                >
-                  {loop(internalTreeData)}
-                </TreeAntd>
+                  treeData={internalTreeData}
+                  titleRender={(node: DataNode) => (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                      tabIndex={-1}
+                      onKeyDown={handleMove(node)}
+                      className={`tree-node-${node.key}`}
+                    >
+                      <div>{titleRender(node)}</div>
+                      {!checkable &&
+                        internalSelectedKeys &&
+                        internalSelectedKeys.includes(node.key) && (
+                          <div>
+                            <i className="tio-done" />
+                          </div>
+                        )}
+                    </div>
+                  )}
+                ></TreeAntd>
 
                 {!loading && internalTreeData.length > 0 && (
                   <div className="select__list-prefer">

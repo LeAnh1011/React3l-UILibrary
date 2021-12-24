@@ -30,58 +30,7 @@
   }
 }
 
-.btn--link-plain {
-  // main button
-  background-color: unset;
-  color: var(--btn-link-plain-label);
-  text-decoration: underline;
 
-  &:visited {
-    color: var(--btn-link-plain-label);
-  }
-
-  &:hover {
-    background-color: var(--btn-link-plain-hover);
-  }
-
-  &:active {
-    box-shadow: inset 0px 2px 0px rgba(0, 0, 0, 0.05);
-    background-color: var(--btn-link-plain-active);
-  }
-
-  &:focus {
-    box-shadow: 0px 0px 8px #0F62FE;
-    border: 1px solid #0F62FE;
-    background-color: var(--btn-link-plain-focus);
-  }
-  &.disabled {
-    color: var(--btn-link-plain-disabled-label);
-    background-color: unset;
-  }
-}
-.btn--link {
-  // main button
-  background-color: var(--color--link);
-  color: var(--color--primary);
-  text-decoration: none;
-
-  &:visited {
-    color: var(--color--primary);
-  }
-
-  &:hover {
-    text-decoration: underline;
-  }
-
-  &:focus {
-    box-shadow: 0px 0px 8px #0F62FE;
-    text-decoration: underline;
-  }
-  &.disabled {
-    color: var(--color--link);
-    background-color: unset;
-  }
-}
 
 
 
@@ -98,30 +47,8 @@
 
 
 
-.btn-link-plain{
-  &.btn--sm {
-    height: 32px;
-    padding: 8px 8px;
-  }
-  
-  &.btn--md {
-    height: 36px;
-    padding: 10px 10px;
-  }
-  
-  &.btn--lg {
-    height: 40px;
-    padding: 12px 12px;
-  }
-  
-  &.btn--xl {
-    height: 40px;
-    padding: 12px 12px;
-  }
-}
-.btn-link{
-  padding: 0px 4px;
-}
+
+
 
 .btn--full-width {
   display: flex;

@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import React, {
   ButtonHTMLAttributes,
   PropsWithChildren,
@@ -7,6 +6,8 @@ import React, {
 import BleedButton from "./BleedButton";
 import "./Button.scss";
 import GhostButton from "./GhostButton";
+import LinkButton from "./LinkButton";
+import LinkPlainButton from "./LinkPlainButton";
 import NormalButton from "./NormalButton/NormalButton";
 import OutlineButton from "./OutlineButton";
 
@@ -44,7 +45,6 @@ export interface ButtonProps {
 
 const Button = React.forwardRef(
   (props: PropsWithChildren<ButtonProps>, ref: React.Ref<any>) => {
-    const { htmlType, children, type, onClick, className, disabled } = props;
     let numb = 0;
     switch (props.type) {
       // ba bộ đầu có bộ padding khá giống nhau
@@ -85,53 +85,14 @@ const Button = React.forwardRef(
         numb = 4;
         break;
       case "link-plain": // bộ link-plain & link có ui padding cố định, khác bộ khác chia thành 7-8
-        numb = 7;
+        numb = 5;
         break;
       case "link":
-        numb = 8;
+        numb = 6;
         break;
       default:
         numb = 1;
     }
-
-    const Button7 = React.useMemo(() => {
-      return (
-        <button
-          type={htmlType}
-          onClick={onClick}
-          ref={ref}
-          disabled={disabled}
-          className={classNames(
-            "btn btn-link-plain",
-            `btn--${type}`,
-            disabled ? "disabled" : "",
-            className
-          )}
-        >
-          {children}
-        </button>
-      );
-    }, [children, className, disabled, htmlType, onClick, ref, type]);
-
-    const Button8 = React.useMemo(() => {
-      return (
-        <button
-          type={htmlType}
-          onClick={onClick}
-          ref={ref}
-          disabled={disabled}
-          className={classNames(
-            "btn btn-link",
-            `btn--${type}`,
-            disabled ? "disabled" : "",
-            className
-          )}
-        >
-          {children}
-        </button>
-      );
-    }, [children, className, disabled, htmlType, onClick, ref, type]);
-
     // render button here
     return numb === 1 ? (
       <NormalButton {...props} />
@@ -141,10 +102,10 @@ const Button = React.forwardRef(
       <GhostButton {...props} />
     ) : numb === 4 ? (
       <BleedButton {...props} />
-    ) : numb === 7 ? (
-      Button7
+    ) : numb === 5 ? (
+      <LinkPlainButton {...props} />
     ) : (
-      Button8
+      <LinkButton {...props} />
     );
   }
 );

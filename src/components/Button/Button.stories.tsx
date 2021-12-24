@@ -1613,11 +1613,14 @@ function LinkPlainAndLink() {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
-          width: 700,
+          width: 200,
           marginBottom: 30,
         }}
       >
         <Button type="link">{"button"}</Button>
+        <Button type="link" disabled={true}>
+          {"button"}
+        </Button>
       </div>
     </div>
   );

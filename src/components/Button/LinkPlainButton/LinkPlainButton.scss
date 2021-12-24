@@ -1,0 +1,50 @@
+.btn--link-plain {
+    background-color: unset;
+    color: var(--btn-link-plain-label);
+    text-decoration: underline;
+
+    &:visited {
+        color: var(--btn-link-plain-label);
+    }
+
+    &:hover {
+        background-color: var(--btn-link-plain-hover);
+    }
+
+    &:active {
+        box-shadow: inset 0px 2px 0px rgba(0, 0, 0, 0.05);
+        background-color: var(--btn-link-plain-active);
+    }
+
+    &:focus {
+        box-shadow: 0px 0px 8px #0f62fe;
+        border: 1px solid #0f62fe;
+        background-color: var(--btn-link-plain-focus);
+    }
+    &.disabled {
+        color: var(--btn-link-plain-disabled-label);
+        background-color: unset;
+    }
+}
+
+.btn-link-plain {
+    &.btn--sm {
+        height: 32px;
+        padding: 8px 8px;
+    }
+
+    &.btn--md {
+        height: 36px;
+        padding: 10px 10px;
+    }
+
+    &.btn--lg {
+        height: 40px;
+        padding: 12px 12px;
+    }
+
+    &.btn--xl {
+        height: 40px;
+        padding: 12px 12px;
+    }
+}

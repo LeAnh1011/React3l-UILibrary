@@ -3,7 +3,7 @@ import React, { PropsWithChildren } from "react";
 import { ButtonProps } from "../Button";
 import InlineLoading from "../InlineLoading";
 import "./NormalButton.scss";
-
+export type LoadingType = "default" | "submitting" | "submitted";
 export interface NormalButtonProps extends ButtonProps {}
 
 const NormalButton = React.forwardRef(
@@ -20,32 +20,33 @@ const NormalButton = React.forwardRef(
       isSubmitBtn,
     } = props;
 
-    const [loadingStatus, setLoadingStatus] = React.useState<boolean>(false);
-    const [isFocused, setIsFocused] = React.useState<boolean>(false);
+    const [loadingType, setLoadingType] = React.useState<LoadingType>(
+      "default"
+    );
+
     React.useEffect(() => {
       if (isSubmitBtn) {
         if (loading) {
-          setIsFocused(true);
+          setLoadingType("submitting");
         }
-        if (isFocused && !loading) {
-          setLoadingStatus(true);
+        if (loadingType === "submitting" && !loading) {
+          setLoadingType("submitted");
           setTimeout(() => {
-            setIsFocused(false);
-            setLoadingStatus(false);
-          }, 1000);
+            setLoadingType("default");
+          }, 15000);
         }
       }
-    }, [isFocused, isSubmitBtn, loading]);
+    }, [isSubmitBtn, loading, loadingType]);
 
     return icon ? (
       <>
-        {isSubmitBtn && isFocused && (
+        {isSubmitBtn && loadingType !== "default" && (
           <InlineLoading
-            status={loadingStatus ? "finished" : "active"}
+            status={loadingType}
             className={classNames("inline-loading-normal-have-icon", className)}
           />
         )}
-        {!isFocused && (
+        {loadingType === "default" && (
           <button
             type={htmlType}
             onClick={onClick}
@@ -69,13 +70,13 @@ const NormalButton = React.forwardRef(
       </>
     ) : (
       <>
-        {isSubmitBtn && isFocused && (
+        {isSubmitBtn && loadingType !== "default" && (
           <InlineLoading
-            status={loadingStatus ? "finished" : "active"}
+            status={loadingType}
             className={classNames("inline-loading-normal-no-icon", className)}
           />
         )}
-        {!isFocused && (
+        {loadingType === "default" && (
           <button
             type={htmlType}
             onClick={onClick}

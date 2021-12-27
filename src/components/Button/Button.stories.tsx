@@ -12,7 +12,7 @@ function NormalButtonView() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 2000);
   }, []);
   return (
     <div>
@@ -34,16 +34,16 @@ function NormalButtonView() {
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="primary" className="btn--md">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="primary" className="btn--lg">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="primary" className="btn--xl">
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
           <div
@@ -56,16 +56,16 @@ function NormalButtonView() {
             }}
           >
             <Button type="primary" className="btn--sm" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="primary" className="btn--md" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="primary" className="btn--lg" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="primary" className="btn--xl" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
           <div
@@ -222,16 +222,16 @@ function NormalButtonView() {
             }}
           >
             <Button type="secondary" className="btn--sm">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="secondary" className="btn--md">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="secondary" className="btn--lg">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="secondary" className="btn--xl">
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
           <div
@@ -244,16 +244,16 @@ function NormalButtonView() {
             }}
           >
             <Button type="secondary" className="btn--sm" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="secondary" className="btn--md" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="secondary" className="btn--lg" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="secondary" className="btn--xl" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
           <div
@@ -396,16 +396,16 @@ function NormalButtonView() {
             }}
           >
             <Button type="danger" className="btn--sm">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="danger" className="btn--md">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="danger" className="btn--lg">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="danger" className="btn--xl">
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
           <div
@@ -418,16 +418,16 @@ function NormalButtonView() {
             }}
           >
             <Button type="danger" className="btn--sm" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="danger" className="btn--md" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="danger" className="btn--lg" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="danger" className="btn--xl" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
           <div
@@ -594,16 +594,16 @@ function OutlineButtonView() {
             }}
           >
             <Button type="outline-primary" className="btn--sm">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="outline-primary" className="btn--md">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="outline-primary" className="btn--lg">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="outline-primary" className="btn--xl">
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
           <div
@@ -616,16 +616,16 @@ function OutlineButtonView() {
             }}
           >
             <Button type="outline-primary" className="btn--sm" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="outline-primary" className="btn--md" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="outline-primary" className="btn--lg" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="outline-primary" className="btn--xl" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
           <div
@@ -784,16 +784,16 @@ function OutlineButtonView() {
             }}
           >
             <Button type="outline-danger" className="btn--sm">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="outline-danger" className="btn--md">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="outline-danger" className="btn--lg">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="outline-danger" className="btn--xl">
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
           <div
@@ -806,16 +806,16 @@ function OutlineButtonView() {
             }}
           >
             <Button type="outline-danger" className="btn--sm" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="outline-danger" className="btn--md" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="outline-danger" className="btn--lg" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="outline-danger" className="btn--xl" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
           <div
@@ -983,16 +983,16 @@ function GhostButtonView() {
             }}
           >
             <Button type="ghost" className="btn--sm">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="ghost" className="btn--md">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="ghost" className="btn--lg">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="ghost" className="btn--xl">
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
           <div
@@ -1005,16 +1005,16 @@ function GhostButtonView() {
             }}
           >
             <Button type="ghost" className="btn--sm" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="ghost" className="btn--md" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="ghost" className="btn--lg" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="ghost" className="btn--xl" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
           <div
@@ -1163,16 +1163,16 @@ function GhostButtonView() {
               }}
             >
               <Button type="ghost-primary" className="btn--sm">
-                {"hihi"}
+                {"Button"}
               </Button>
               <Button type="ghost-primary" className="btn--md">
-                {"hihi"}
+                {"Button"}
               </Button>
               <Button type="ghost-primary" className="btn--lg">
-                {"hihi"}
+                {"Button"}
               </Button>
               <Button type="ghost-primary" className="btn--xl">
-                {"hihi"}
+                {"Button"}
               </Button>
             </div>
             <div
@@ -1185,16 +1185,16 @@ function GhostButtonView() {
               }}
             >
               <Button type="ghost-primary" className="btn--sm" disabled={true}>
-                {"hihi"}
+                {"Button"}
               </Button>
               <Button type="ghost-primary" className="btn--md" disabled={true}>
-                {"hihi"}
+                {"Button"}
               </Button>
               <Button type="ghost-primary" className="btn--lg" disabled={true}>
-                {"hihi"}
+                {"Button"}
               </Button>
               <Button type="ghost-primary" className="btn--xl" disabled={true}>
-                {"hihi"}
+                {"Button"}
               </Button>
             </div>
             <div
@@ -1362,16 +1362,16 @@ function GhostButtonView() {
               }}
             >
               <Button type="ghost-secondary" className="btn--sm">
-                {"hihi"}
+                {"Button"}
               </Button>
               <Button type="ghost-secondary" className="btn--md">
-                {"hihi"}
+                {"Button"}
               </Button>
               <Button type="ghost-secondary" className="btn--lg">
-                {"hihi"}
+                {"Button"}
               </Button>
               <Button type="ghost-secondary" className="btn--xl">
-                {"hihi"}
+                {"Button"}
               </Button>
             </div>
             <div
@@ -1388,28 +1388,28 @@ function GhostButtonView() {
                 className="btn--sm"
                 disabled={true}
               >
-                {"hihi"}
+                {"Button"}
               </Button>
               <Button
                 type="ghost-secondary"
                 className="btn--md"
                 disabled={true}
               >
-                {"hihi"}
+                {"Button"}
               </Button>
               <Button
                 type="ghost-secondary"
                 className="btn--lg"
                 disabled={true}
               >
-                {"hihi"}
+                {"Button"}
               </Button>
               <Button
                 type="ghost-secondary"
                 className="btn--xl"
                 disabled={true}
               >
-                {"hihi"}
+                {"Button"}
               </Button>
             </div>
             <div
@@ -1579,9 +1579,9 @@ function BleedButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="bleed-primary">{"hihi"}</Button>
+            <Button type="bleed-primary">{"Button"}</Button>
             <Button type="bleed-primary" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
           <div
@@ -1594,10 +1594,10 @@ function BleedButtonView() {
             }}
           >
             <Button type="bleed-primary" icon="tio-add">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="bleed-primary" icon="tio-add" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
           <div
@@ -1610,10 +1610,10 @@ function BleedButtonView() {
             }}
           >
             <Button type="bleed-primary" icon="tio-down_ui">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="bleed-primary" icon="tio-down_ui" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
         </TabPane>
@@ -1627,9 +1627,9 @@ function BleedButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="bleed-secondary">{"hihi"}</Button>
+            <Button type="bleed-secondary">{"Button"}</Button>
             <Button type="bleed-secondary" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
           <div
@@ -1642,10 +1642,10 @@ function BleedButtonView() {
             }}
           >
             <Button type="bleed-secondary" icon="tio-add">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="bleed-secondary" icon="tio-add" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
           <div
@@ -1658,10 +1658,10 @@ function BleedButtonView() {
             }}
           >
             <Button type="bleed-secondary" icon="tio-down_ui">
-              {"hihi"}
+              {"Button"}
             </Button>
             <Button type="bleed-secondary" icon="tio-down_ui" disabled={true}>
-              {"hihi"}
+              {"Button"}
             </Button>
           </div>
         </TabPane>
@@ -1711,16 +1711,16 @@ function LinkPlainAndLink() {
         }}
       >
         <Button type="link-plain" className="btn--sm" disabled={true}>
-          {"hihi"}
+          {"Button"}
         </Button>
         <Button type="link-plain" className="btn--md" disabled={true}>
-          {"hihi"}
+          {"Button"}
         </Button>
         <Button type="link-plain" className="btn--lg" disabled={true}>
-          {"hihi"}
+          {"Button"}
         </Button>
         <Button type="link-plain" className="btn--xl" disabled={true}>
-          {"hihi"}
+          {"Button"}
         </Button>
       </div>
       <h2>Button Link</h2>

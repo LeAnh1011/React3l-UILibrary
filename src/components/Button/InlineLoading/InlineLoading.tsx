@@ -7,7 +7,7 @@ import { CheckmarkFilled16 } from "@carbon/icons-react";
 
 export interface InlineLoadingProps {
   className?: string;
-  status?: "active" | "finished";
+  status?: "default" | "submitting" | "submitted";
 }
 
 const antIcon = (
@@ -23,17 +23,17 @@ const InlineLoading = React.forwardRef(
     const { className, status } = props;
 
     return (
-      <div className={classNames("btn", className)}>
-        {status === "active" && (
+      <div className={classNames("inline-loading", className)}>
+        {status === "submitting" && (
           <>
             <Spin indicator={antIcon} /> Submitting...
           </>
         )}
-        {status === "finished" && (
-          <>
+        {status === "submitted" && (
+          <div className="submitted-box">
             <CheckmarkFilled16 className="icon-done-inline-loading" />
             Submitted
-          </>
+          </div>
         )}
       </div>
     );
@@ -41,7 +41,7 @@ const InlineLoading = React.forwardRef(
 );
 
 InlineLoading.defaultProps = {
-  status: "active",
+  status: "submitting",
 };
 
 export default InlineLoading;

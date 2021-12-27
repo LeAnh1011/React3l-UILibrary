@@ -3,6 +3,7 @@ import React, { PropsWithChildren } from "react";
 import "./InlineLoading.scss";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
+import doneImg from "../../../assets/image/done.png";
 
 export interface InlineLoadingProps {
   className?: string;
@@ -29,7 +30,13 @@ const InlineLoading = React.forwardRef(
             <Spin indicator={antIcon} /> Loading...
           </>
         )}
-        {status === "finished" && <>loaded</>}
+        {status === "finished" && (
+          <>
+            {" "}
+            <img src={doneImg} alt="done" className="img-done-inline-loading" />
+            loaded
+          </>
+        )}
       </div>
     );
   }

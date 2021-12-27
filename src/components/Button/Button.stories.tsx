@@ -10,7 +10,6 @@ function NormalButtonView() {
 
   const handleOnClick = React.useCallback(() => {
     setLoading(true);
-    debugger;
     setTimeout(() => {
       setLoading(false);
     }, 1500);
@@ -92,16 +91,40 @@ function NormalButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="primary" className="btn--sm" icon="tio-add">
+            <Button
+              type="primary"
+              className="btn--sm"
+              icon="tio-add"
+              loading={loading}
+              onClick={handleOnClick}
+            >
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--md" icon="tio-add">
+            <Button
+              type="primary"
+              className="btn--md"
+              icon="tio-add"
+              loading={loading}
+              onClick={handleOnClick}
+            >
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--lg" icon="tio-add">
+            <Button
+              type="primary"
+              className="btn--lg"
+              icon="tio-add"
+              loading={loading}
+              onClick={handleOnClick}
+            >
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--xl" icon="tio-add">
+            <Button
+              type="primary"
+              className="btn--xl"
+              icon="tio-add"
+              loading={loading}
+              onClick={handleOnClick}
+            >
               {"Button"}
             </Button>
           </div>
@@ -156,16 +179,40 @@ function NormalButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="primary" className="btn--sm" icon="tio-down_ui">
+            <Button
+              type="primary"
+              className="btn--sm"
+              icon="tio-down_ui"
+              loading={loading}
+              onClick={handleOnClick}
+            >
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--md" icon="tio-down_ui">
+            <Button
+              type="primary"
+              className="btn--md"
+              icon="tio-down_ui"
+              loading={loading}
+              onClick={handleOnClick}
+            >
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--lg" icon="tio-down_ui">
+            <Button
+              type="primary"
+              className="btn--lg"
+              icon="tio-down_ui"
+              loading={loading}
+              onClick={handleOnClick}
+            >
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--xl" icon="tio-down_ui">
+            <Button
+              type="primary"
+              className="btn--xl"
+              icon="tio-down_ui"
+              loading={loading}
+              onClick={handleOnClick}
+            >
               {"Button"}
             </Button>
           </div>

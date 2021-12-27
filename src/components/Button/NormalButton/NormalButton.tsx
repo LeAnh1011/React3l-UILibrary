@@ -20,7 +20,7 @@ const NormalButton = React.forwardRef(
     } = props;
 
     const [loadingStatus, setLoadingStatus] = React.useState<boolean>(false);
-    const [isFocused, setIsFocused] = React.useState<boolean>(false);
+    const [isFocused, setIsFocused] = React.useState<boolean>(true);
     React.useEffect(() => {
       if (loading) {
         setIsFocused(true);
@@ -35,29 +35,42 @@ const NormalButton = React.forwardRef(
     }, [isFocused, loading]);
 
     return icon ? (
-      <button
-        type={htmlType}
-        onClick={onClick}
-        ref={ref}
-        disabled={disabled}
-        className={classNames(
-          "btn btn-normal-have-icon",
-          `btn--${type}`,
-          disabled ? "disabled" : "",
-          className
+      <>
+        {isFocused && (
+          <InlineLoading
+            status={loadingStatus ? "finished" : "active"}
+            className={classNames("inline-loading-normal-have-icon", className)}
+          />
         )}
-      >
-        <div className="button-content-have-icon">
-          <div className="children-content">{children}</div>
-          <div className="box-icon">
-            <i className={classNames(icon, "icon-button")}></i>
-          </div>
-        </div>
-      </button>
+        {!isFocused && (
+          <button
+            type={htmlType}
+            onClick={onClick}
+            ref={ref}
+            disabled={disabled}
+            className={classNames(
+              "btn btn-normal-have-icon",
+              `btn--${type}`,
+              disabled ? "disabled" : "",
+              className
+            )}
+          >
+            <div className="button-content-have-icon">
+              <div className="children-content">{children}</div>
+              <div className="box-icon">
+                <i className={classNames(icon, "icon-button")}></i>
+              </div>
+            </div>
+          </button>
+        )}
+      </>
     ) : (
       <>
         {isFocused && (
-          <InlineLoading status={loadingStatus ? "finished" : "active"} />
+          <InlineLoading
+            status={loadingStatus ? "finished" : "active"}
+            className={classNames("inline-loading-normal-no-icon", className)}
+          />
         )}
         {!isFocused && (
           <button

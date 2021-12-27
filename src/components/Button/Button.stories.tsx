@@ -36,31 +36,13 @@ function NormalButtonView() {
             >
               {"hihi"}
             </Button>
-            <Button
-              type="primary"
-              className="btn--md"
-              loading={loading}
-              onClick={handleOnClick}
-              isSubmitBtn={true}
-            >
+            <Button type="primary" className="btn--md">
               {"hihi"}
             </Button>
-            <Button
-              type="primary"
-              className="btn--lg"
-              loading={loading}
-              onClick={handleOnClick}
-              isSubmitBtn={true}
-            >
+            <Button type="primary" className="btn--lg">
               {"hihi"}
             </Button>
-            <Button
-              type="primary"
-              className="btn--xl"
-              loading={loading}
-              onClick={handleOnClick}
-              isSubmitBtn={true}
-            >
+            <Button type="primary" className="btn--xl">
               {"hihi"}
             </Button>
           </div>
@@ -105,34 +87,13 @@ function NormalButtonView() {
             >
               {"Button"}
             </Button>
-            <Button
-              type="primary"
-              className="btn--md"
-              icon="tio-add"
-              loading={loading}
-              onClick={handleOnClick}
-              isSubmitBtn={true}
-            >
+            <Button type="primary" className="btn--md" icon="tio-add">
               {"Button"}
             </Button>
-            <Button
-              type="primary"
-              className="btn--lg"
-              icon="tio-add"
-              loading={loading}
-              onClick={handleOnClick}
-              isSubmitBtn={true}
-            >
+            <Button type="primary" className="btn--lg" icon="tio-add">
               {"Button"}
             </Button>
-            <Button
-              type="primary"
-              className="btn--xl"
-              icon="tio-add"
-              loading={loading}
-              onClick={handleOnClick}
-              isSubmitBtn={true}
-            >
+            <Button type="primary" className="btn--xl" icon="tio-add">
               {"Button"}
             </Button>
           </div>
@@ -197,34 +158,13 @@ function NormalButtonView() {
             >
               {"Button"}
             </Button>
-            <Button
-              type="primary"
-              className="btn--md"
-              icon="tio-down_ui"
-              loading={loading}
-              onClick={handleOnClick}
-              isSubmitBtn={true}
-            >
+            <Button type="primary" className="btn--md" icon="tio-down_ui">
               {"Button"}
             </Button>
-            <Button
-              type="primary"
-              className="btn--lg"
-              icon="tio-down_ui"
-              loading={loading}
-              onClick={handleOnClick}
-              isSubmitBtn={true}
-            >
+            <Button type="primary" className="btn--lg" icon="tio-down_ui">
               {"Button"}
             </Button>
-            <Button
-              type="primary"
-              className="btn--xl"
-              icon="tio-down_ui"
-              loading={loading}
-              onClick={handleOnClick}
-              isSubmitBtn={true}
-            >
+            <Button type="primary" className="btn--xl" icon="tio-down_ui">
               {"Button"}
             </Button>
           </div>

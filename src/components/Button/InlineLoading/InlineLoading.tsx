@@ -8,7 +8,6 @@ import doneImg from "../../../assets/image/done.png";
 export interface InlineLoadingProps {
   className?: string;
   status?: "active" | "finished";
-  type?: string;
 }
 
 const antIcon = (
@@ -21,20 +20,20 @@ const antIcon = (
 
 const InlineLoading = React.forwardRef(
   (props: PropsWithChildren<InlineLoadingProps>, ref: React.Ref<any>) => {
-    const { className, status, type } = props;
+    const { className, status } = props;
 
     return (
-      <div className={classNames("btn", `btn--${type}`, className)}>
+      <div className={classNames("btn", className)}>
         {status === "active" && (
           <>
-            <Spin indicator={antIcon} /> Loading...
+            <Spin indicator={antIcon} /> Submitting...
           </>
         )}
         {status === "finished" && (
           <>
             {" "}
             <img src={doneImg} alt="done" className="img-done-inline-loading" />
-            loaded
+            Submitted
           </>
         )}
       </div>

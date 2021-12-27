@@ -3,7 +3,7 @@ import React, { PropsWithChildren } from "react";
 import "./InlineLoading.scss";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
-import doneImg from "../../../assets/image/done.png";
+import { CheckmarkFilled16 } from "@carbon/icons-react";
 
 export interface InlineLoadingProps {
   className?: string;
@@ -31,8 +31,7 @@ const InlineLoading = React.forwardRef(
         )}
         {status === "finished" && (
           <>
-            {" "}
-            <img src={doneImg} alt="done" className="img-done-inline-loading" />
+            <CheckmarkFilled16 className="icon-done-inline-loading" />
             Submitted
           </>
         )}

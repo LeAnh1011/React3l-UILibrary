@@ -36,6 +36,8 @@ export interface ButtonProps {
 
   loading?: boolean;
 
+  isSubmitBtn?: boolean;
+
   htmlType?: ButtonHTMLAttributes<any>["type"];
 
   className?: string;
@@ -99,6 +101,7 @@ Button.defaultProps = {
   type: "primary",
   htmlType: "button",
   disabled: false,
+  isSubmitBtn: false,
 };
 
 export default Button;

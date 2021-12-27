@@ -32,6 +32,7 @@ function NormalButtonView() {
               className="btn--sm"
               loading={loading}
               onClick={handleOnClick}
+              isSubmitBtn={true}
             >
               {"hihi"}
             </Button>
@@ -40,6 +41,7 @@ function NormalButtonView() {
               className="btn--md"
               loading={loading}
               onClick={handleOnClick}
+              isSubmitBtn={true}
             >
               {"hihi"}
             </Button>
@@ -48,6 +50,7 @@ function NormalButtonView() {
               className="btn--lg"
               loading={loading}
               onClick={handleOnClick}
+              isSubmitBtn={true}
             >
               {"hihi"}
             </Button>
@@ -56,6 +59,7 @@ function NormalButtonView() {
               className="btn--xl"
               loading={loading}
               onClick={handleOnClick}
+              isSubmitBtn={true}
             >
               {"hihi"}
             </Button>
@@ -97,6 +101,7 @@ function NormalButtonView() {
               icon="tio-add"
               loading={loading}
               onClick={handleOnClick}
+              isSubmitBtn={true}
             >
               {"Button"}
             </Button>
@@ -106,6 +111,7 @@ function NormalButtonView() {
               icon="tio-add"
               loading={loading}
               onClick={handleOnClick}
+              isSubmitBtn={true}
             >
               {"Button"}
             </Button>
@@ -115,6 +121,7 @@ function NormalButtonView() {
               icon="tio-add"
               loading={loading}
               onClick={handleOnClick}
+              isSubmitBtn={true}
             >
               {"Button"}
             </Button>
@@ -124,6 +131,7 @@ function NormalButtonView() {
               icon="tio-add"
               loading={loading}
               onClick={handleOnClick}
+              isSubmitBtn={true}
             >
               {"Button"}
             </Button>
@@ -185,6 +193,7 @@ function NormalButtonView() {
               icon="tio-down_ui"
               loading={loading}
               onClick={handleOnClick}
+              isSubmitBtn={true}
             >
               {"Button"}
             </Button>
@@ -194,6 +203,7 @@ function NormalButtonView() {
               icon="tio-down_ui"
               loading={loading}
               onClick={handleOnClick}
+              isSubmitBtn={true}
             >
               {"Button"}
             </Button>
@@ -203,6 +213,7 @@ function NormalButtonView() {
               icon="tio-down_ui"
               loading={loading}
               onClick={handleOnClick}
+              isSubmitBtn={true}
             >
               {"Button"}
             </Button>
@@ -212,6 +223,7 @@ function NormalButtonView() {
               icon="tio-down_ui"
               loading={loading}
               onClick={handleOnClick}
+              isSubmitBtn={true}
             >
               {"Button"}
             </Button>

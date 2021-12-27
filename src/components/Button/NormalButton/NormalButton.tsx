@@ -17,26 +17,29 @@ const NormalButton = React.forwardRef(
       disabled,
       children,
       loading,
+      isSubmitBtn,
     } = props;
 
     const [loadingStatus, setLoadingStatus] = React.useState<boolean>(false);
-    const [isFocused, setIsFocused] = React.useState<boolean>(true);
+    const [isFocused, setIsFocused] = React.useState<boolean>(false);
     React.useEffect(() => {
-      if (loading) {
-        setIsFocused(true);
+      if (isSubmitBtn) {
+        if (loading) {
+          setIsFocused(true);
+        }
+        if (isFocused && !loading) {
+          setLoadingStatus(true);
+          setTimeout(() => {
+            setIsFocused(false);
+            setLoadingStatus(false);
+          }, 1000);
+        }
       }
-      if (isFocused && !loading) {
-        setLoadingStatus(true);
-        setTimeout(() => {
-          setIsFocused(false);
-          setLoadingStatus(false);
-        }, 1000);
-      }
-    }, [isFocused, loading]);
+    }, [isFocused, isSubmitBtn, loading]);
 
     return icon ? (
       <>
-        {isFocused && (
+        {isSubmitBtn && isFocused && (
           <InlineLoading
             status={loadingStatus ? "finished" : "active"}
             className={classNames("inline-loading-normal-have-icon", className)}
@@ -66,7 +69,7 @@ const NormalButton = React.forwardRef(
       </>
     ) : (
       <>
-        {isFocused && (
+        {isSubmitBtn && isFocused && (
           <InlineLoading
             status={loadingStatus ? "finished" : "active"}
             className={classNames("inline-loading-normal-no-icon", className)}

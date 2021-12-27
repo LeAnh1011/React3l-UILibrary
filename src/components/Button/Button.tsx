@@ -34,6 +34,8 @@ export type ButtonType =
 export interface ButtonProps {
   type?: ButtonType;
 
+  loading?: boolean;
+
   htmlType?: ButtonHTMLAttributes<any>["type"];
 
   className?: string;

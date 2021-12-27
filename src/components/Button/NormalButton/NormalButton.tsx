@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React, { PropsWithChildren } from "react";
 import { ButtonProps } from "../Button";
+import InlineLoading from "../InlineLoading";
 import "./NormalButton.scss";
 
 export interface NormalButtonProps extends ButtonProps {}
@@ -15,7 +16,23 @@ const NormalButton = React.forwardRef(
       icon,
       disabled,
       children,
+      loading,
     } = props;
+
+    const [loadingStatus, setLoadingStatus] = React.useState<boolean>(false);
+    const [isFocused, setIsFocused] = React.useState<boolean>(false);
+    React.useEffect(() => {
+      if (loading) {
+        setIsFocused(true);
+      }
+      if (isFocused && !loading) {
+        setLoadingStatus(true);
+        setTimeout(() => {
+          setIsFocused(false);
+          setLoadingStatus(false);
+        }, 1000);
+      }
+    }, [isFocused, loading]);
 
     return icon ? (
       <button
@@ -38,20 +55,27 @@ const NormalButton = React.forwardRef(
         </div>
       </button>
     ) : (
-      <button
-        type={htmlType}
-        onClick={onClick}
-        ref={ref}
-        disabled={disabled}
-        className={classNames(
-          "btn btn-normal-no-icon",
-          `btn--${type}`,
-          disabled ? "disabled" : "",
-          className
+      <>
+        {isFocused && (
+          <InlineLoading status={loadingStatus ? "finished" : "active"} />
         )}
-      >
-        {children}
-      </button>
+        {!isFocused && (
+          <button
+            type={htmlType}
+            onClick={onClick}
+            ref={ref}
+            disabled={disabled}
+            className={classNames(
+              "btn btn-normal-no-icon",
+              `btn--${type}`,
+              disabled ? "disabled" : "",
+              className
+            )}
+          >
+            {children}
+          </button>
+        )}
+      </>
     );
   }
 );

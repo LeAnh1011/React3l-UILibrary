@@ -28,10 +28,4 @@ const IconButton = React.forwardRef(
   }
 );
 
-IconButton.defaultProps = {
-  type: "primary",
-  htmlType: "button",
-  disabled: false,
-};
-
 export default IconButton;

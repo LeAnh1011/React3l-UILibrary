@@ -6,6 +6,15 @@ import { Tabs } from "antd";
 
 const { TabPane } = Tabs;
 function NormalButtonView() {
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const handleOnClick = React.useCallback(() => {
+    setLoading(true);
+    debugger;
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  }, []);
   return (
     <div>
       <Tabs defaultActiveKey="1">
@@ -19,16 +28,36 @@ function NormalButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="primary" className="btn--sm">
+            <Button
+              type="primary"
+              className="btn--sm"
+              loading={loading}
+              onClick={handleOnClick}
+            >
               {"hihi"}
             </Button>
-            <Button type="primary" className="btn--md">
+            <Button
+              type="primary"
+              className="btn--md"
+              loading={loading}
+              onClick={handleOnClick}
+            >
               {"hihi"}
             </Button>
-            <Button type="primary" className="btn--lg">
+            <Button
+              type="primary"
+              className="btn--lg"
+              loading={loading}
+              onClick={handleOnClick}
+            >
               {"hihi"}
             </Button>
-            <Button type="primary" className="btn--xl">
+            <Button
+              type="primary"
+              className="btn--xl"
+              loading={loading}
+              onClick={handleOnClick}
+            >
               {"hihi"}
             </Button>
           </div>

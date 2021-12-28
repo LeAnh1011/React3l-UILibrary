@@ -48,7 +48,7 @@ export interface ButtonProps {
 
   disabled?: boolean;
 
-  icon?: string;
+  icon?: JSX.Element;
 }
 
 const Button = React.forwardRef(

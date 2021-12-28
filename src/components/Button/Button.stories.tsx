@@ -3,6 +3,7 @@ import { storiesOf } from "@storybook/react";
 import nameof from "ts-nameof.macro";
 import Button from "./Button";
 import { Tabs } from "antd";
+import { ChevronDown16, TrashCan16, Add16 } from "@carbon/icons-react";
 
 const { TabPane } = Tabs;
 function NormalButtonView() {
@@ -80,20 +81,20 @@ function NormalButtonView() {
             <Button
               type="primary"
               className="btn--sm"
-              icon="tio-add"
+              icon={<Add16 />}
               loading={loading}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--md" icon="tio-add">
+            <Button type="primary" className="btn--md" icon={<Add16 />}>
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--lg" icon="tio-add">
+            <Button type="primary" className="btn--lg" icon={<Add16 />}>
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--xl" icon="tio-add">
+            <Button type="primary" className="btn--xl" icon={<Add16 />}>
               {"Button"}
             </Button>
           </div>
@@ -110,7 +111,7 @@ function NormalButtonView() {
               type="primary"
               className="btn--sm"
               disabled={true}
-              icon="tio-add"
+              icon={<Add16 />}
             >
               {"Button"}
             </Button>
@@ -118,7 +119,7 @@ function NormalButtonView() {
               type="primary"
               className="btn--md"
               disabled={true}
-              icon="tio-add"
+              icon={<Add16 />}
             >
               {"Button"}
             </Button>
@@ -126,7 +127,7 @@ function NormalButtonView() {
               type="primary"
               className="btn--lg"
               disabled={true}
-              icon="tio-add"
+              icon={<Add16 />}
             >
               {"Button"}
             </Button>
@@ -134,7 +135,7 @@ function NormalButtonView() {
               type="primary"
               className="btn--xl"
               disabled={true}
-              icon="tio-add"
+              icon={<Add16 />}
             >
               {"Button"}
             </Button>
@@ -151,20 +152,20 @@ function NormalButtonView() {
             <Button
               type="primary"
               className="btn--sm"
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
               loading={loading}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--md" icon="tio-down_ui">
+            <Button type="primary" className="btn--md" icon={<ChevronDown16 />}>
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--lg" icon="tio-down_ui">
+            <Button type="primary" className="btn--lg" icon={<ChevronDown16 />}>
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--xl" icon="tio-down_ui">
+            <Button type="primary" className="btn--xl" icon={<ChevronDown16 />}>
               {"Button"}
             </Button>
           </div>
@@ -181,7 +182,7 @@ function NormalButtonView() {
               type="primary"
               className="btn--sm"
               disabled={true}
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
             >
               {"Button"}
             </Button>
@@ -189,7 +190,7 @@ function NormalButtonView() {
               type="primary"
               className="btn--md"
               disabled={true}
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
             >
               {"Button"}
             </Button>
@@ -197,7 +198,7 @@ function NormalButtonView() {
               type="primary"
               className="btn--lg"
               disabled={true}
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
             >
               {"Button"}
             </Button>
@@ -205,7 +206,7 @@ function NormalButtonView() {
               type="primary"
               className="btn--xl"
               disabled={true}
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
             >
               {"Button"}
             </Button>
@@ -274,20 +275,20 @@ function NormalButtonView() {
             <Button
               type="secondary"
               className="btn--sm"
-              icon="tio-add"
+              icon={<Add16 />}
               loading={loading}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
               {"Button"}
             </Button>
-            <Button type="secondary" className="btn--md" icon="tio-add">
+            <Button type="secondary" className="btn--md" icon={<Add16 />}>
               {"Button"}
             </Button>
-            <Button type="secondary" className="btn--lg" icon="tio-add">
+            <Button type="secondary" className="btn--lg" icon={<Add16 />}>
               {"Button"}
             </Button>
-            <Button type="secondary" className="btn--xl" icon="tio-add">
+            <Button type="secondary" className="btn--xl" icon={<Add16 />}>
               {"Button"}
             </Button>
           </div>
@@ -304,7 +305,7 @@ function NormalButtonView() {
               type="secondary"
               className="btn--sm"
               disabled={true}
-              icon="tio-add"
+              icon={<Add16 />}
             >
               {"Button"}
             </Button>
@@ -312,7 +313,7 @@ function NormalButtonView() {
               type="secondary"
               className="btn--md"
               disabled={true}
-              icon="tio-add"
+              icon={<Add16 />}
             >
               {"Button"}
             </Button>
@@ -320,7 +321,7 @@ function NormalButtonView() {
               type="secondary"
               className="btn--lg"
               disabled={true}
-              icon="tio-add"
+              icon={<Add16 />}
             >
               {"Button"}
             </Button>
@@ -328,7 +329,7 @@ function NormalButtonView() {
               type="secondary"
               className="btn--xl"
               disabled={true}
-              icon="tio-add"
+              icon={<Add16 />}
             >
               {"Button"}
             </Button>
@@ -345,20 +346,32 @@ function NormalButtonView() {
             <Button
               type="secondary"
               className="btn--sm"
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
               loading={loading}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
               {"Button"}
             </Button>
-            <Button type="secondary" className="btn--md" icon="tio-down_ui">
+            <Button
+              type="secondary"
+              className="btn--md"
+              icon={<ChevronDown16 />}
+            >
               {"Button"}
             </Button>
-            <Button type="secondary" className="btn--lg" icon="tio-down_ui">
+            <Button
+              type="secondary"
+              className="btn--lg"
+              icon={<ChevronDown16 />}
+            >
               {"Button"}
             </Button>
-            <Button type="secondary" className="btn--xl" icon="tio-down_ui">
+            <Button
+              type="secondary"
+              className="btn--xl"
+              icon={<ChevronDown16 />}
+            >
               {"Button"}
             </Button>
           </div>
@@ -375,7 +388,7 @@ function NormalButtonView() {
               type="secondary"
               className="btn--sm"
               disabled={true}
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
             >
               {"Button"}
             </Button>
@@ -383,7 +396,7 @@ function NormalButtonView() {
               type="secondary"
               className="btn--md"
               disabled={true}
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
             >
               {"Button"}
             </Button>
@@ -391,7 +404,7 @@ function NormalButtonView() {
               type="secondary"
               className="btn--lg"
               disabled={true}
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
             >
               {"Button"}
             </Button>
@@ -399,7 +412,7 @@ function NormalButtonView() {
               type="secondary"
               className="btn--xl"
               disabled={true}
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
             >
               {"Button"}
             </Button>
@@ -468,20 +481,20 @@ function NormalButtonView() {
             <Button
               type="danger"
               className="btn--sm"
-              icon="tio-clear"
+              icon={<TrashCan16 />}
               loading={loading}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
               {"Button"}
             </Button>
-            <Button type="danger" className="btn--md" icon="tio-clear">
+            <Button type="danger" className="btn--md" icon={<TrashCan16 />}>
               {"Button"}
             </Button>
-            <Button type="danger" className="btn--lg" icon="tio-clear">
+            <Button type="danger" className="btn--lg" icon={<TrashCan16 />}>
               {"Button"}
             </Button>
-            <Button type="danger" className="btn--xl" icon="tio-clear">
+            <Button type="danger" className="btn--xl" icon={<TrashCan16 />}>
               {"Button"}
             </Button>
           </div>
@@ -498,7 +511,7 @@ function NormalButtonView() {
               type="danger"
               className="btn--sm"
               disabled={true}
-              icon="tio-clear"
+              icon={<TrashCan16 />}
             >
               {"Button"}
             </Button>
@@ -506,7 +519,7 @@ function NormalButtonView() {
               type="danger"
               className="btn--md"
               disabled={true}
-              icon="tio-clear"
+              icon={<TrashCan16 />}
             >
               {"Button"}
             </Button>
@@ -514,7 +527,7 @@ function NormalButtonView() {
               type="danger"
               className="btn--lg"
               disabled={true}
-              icon="tio-clear"
+              icon={<TrashCan16 />}
             >
               {"Button"}
             </Button>
@@ -522,7 +535,7 @@ function NormalButtonView() {
               type="danger"
               className="btn--xl"
               disabled={true}
-              icon="tio-clear"
+              icon={<TrashCan16 />}
             >
               {"Button"}
             </Button>
@@ -539,32 +552,20 @@ function NormalButtonView() {
             <Button
               type="danger"
               className="btn--sm"
-              icon="tio-clear_circle_outlined"
+              icon={<TrashCan16 />}
               loading={loading}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
               {"Button"}
             </Button>
-            <Button
-              type="danger"
-              className="btn--md"
-              icon="tio-clear_circle_outlined"
-            >
+            <Button type="danger" className="btn--md" icon={<TrashCan16 />}>
               {"Button"}
             </Button>
-            <Button
-              type="danger"
-              className="btn--lg"
-              icon="tio-clear_circle_outlined"
-            >
+            <Button type="danger" className="btn--lg" icon={<TrashCan16 />}>
               {"Button"}
             </Button>
-            <Button
-              type="danger"
-              className="btn--xl"
-              icon="tio-clear_circle_outlined"
-            >
+            <Button type="danger" className="btn--xl" icon={<TrashCan16 />}>
               {"Button"}
             </Button>
           </div>
@@ -581,7 +582,7 @@ function NormalButtonView() {
               type="danger"
               className="btn--sm"
               disabled={true}
-              icon="tio-clear_circle_outlined"
+              icon={<TrashCan16 />}
             >
               {"Button"}
             </Button>
@@ -589,7 +590,7 @@ function NormalButtonView() {
               type="danger"
               className="btn--md"
               disabled={true}
-              icon="tio-clear_circle_outlined"
+              icon={<TrashCan16 />}
             >
               {"Button"}
             </Button>
@@ -597,7 +598,7 @@ function NormalButtonView() {
               type="danger"
               className="btn--lg"
               disabled={true}
-              icon="tio-clear_circle_outlined"
+              icon={<TrashCan16 />}
             >
               {"Button"}
             </Button>
@@ -605,7 +606,7 @@ function NormalButtonView() {
               type="danger"
               className="btn--xl"
               disabled={true}
-              icon="tio-clear_circle_outlined"
+              icon={<TrashCan16 />}
             >
               {"Button"}
             </Button>
@@ -691,20 +692,20 @@ function OutlineButtonView() {
             <Button
               type="outline-primary"
               className="btn--sm"
-              icon="tio-add"
+              icon={<Add16 />}
               loading={loading}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
               {"Button"}
             </Button>
-            <Button type="outline-primary" className="btn--md" icon="tio-add">
+            <Button type="outline-primary" className="btn--md" icon={<Add16 />}>
               {"Button"}
             </Button>
-            <Button type="outline-primary" className="btn--lg" icon="tio-add">
+            <Button type="outline-primary" className="btn--lg" icon={<Add16 />}>
               {"Button"}
             </Button>
-            <Button type="outline-primary" className="btn--xl" icon="tio-add">
+            <Button type="outline-primary" className="btn--xl" icon={<Add16 />}>
               {"Button"}
             </Button>
           </div>
@@ -721,7 +722,7 @@ function OutlineButtonView() {
               type="outline-primary"
               className="btn--sm"
               disabled={true}
-              icon="tio-add"
+              icon={<Add16 />}
             >
               {"Button"}
             </Button>
@@ -729,7 +730,7 @@ function OutlineButtonView() {
               type="outline-primary"
               className="btn--md"
               disabled={true}
-              icon="tio-add"
+              icon={<Add16 />}
             >
               {"Button"}
             </Button>
@@ -737,7 +738,7 @@ function OutlineButtonView() {
               type="outline-primary"
               className="btn--lg"
               disabled={true}
-              icon="tio-add"
+              icon={<Add16 />}
             >
               {"Button"}
             </Button>
@@ -745,7 +746,7 @@ function OutlineButtonView() {
               type="outline-primary"
               className="btn--xl"
               disabled={true}
-              icon="tio-add"
+              icon={<Add16 />}
             >
               {"Button"}
             </Button>
@@ -762,7 +763,7 @@ function OutlineButtonView() {
             <Button
               type="outline-primary"
               className="btn--sm"
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
               loading={loading}
               onClick={handleOnClick}
               isSubmitBtn={true}
@@ -772,21 +773,21 @@ function OutlineButtonView() {
             <Button
               type="outline-primary"
               className="btn--md"
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
             >
               {"Button"}
             </Button>
             <Button
               type="outline-primary"
               className="btn--lg"
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
             >
               {"Button"}
             </Button>
             <Button
               type="outline-primary"
               className="btn--xl"
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
             >
               {"Button"}
             </Button>
@@ -804,7 +805,7 @@ function OutlineButtonView() {
               type="outline-primary"
               className="btn--sm"
               disabled={true}
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
             >
               {"Button"}
             </Button>
@@ -812,7 +813,7 @@ function OutlineButtonView() {
               type="outline-primary"
               className="btn--md"
               disabled={true}
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
             >
               {"Button"}
             </Button>
@@ -820,7 +821,7 @@ function OutlineButtonView() {
               type="outline-primary"
               className="btn--lg"
               disabled={true}
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
             >
               {"Button"}
             </Button>
@@ -828,7 +829,7 @@ function OutlineButtonView() {
               type="outline-primary"
               className="btn--xl"
               disabled={true}
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
             >
               {"Button"}
             </Button>
@@ -897,78 +898,7 @@ function OutlineButtonView() {
             <Button
               type="outline-danger"
               className="btn--sm"
-              icon="tio-clear"
-              loading={loading}
-              onClick={handleOnClick}
-              isSubmitBtn={true}
-            >
-              {"Button"}
-            </Button>
-            <Button type="outline-danger" className="btn--md" icon="tio-clear">
-              {"Button"}
-            </Button>
-            <Button type="outline-danger" className="btn--lg" icon="tio-clear">
-              {"Button"}
-            </Button>
-            <Button type="outline-danger" className="btn--xl" icon="tio-clear">
-              {"Button"}
-            </Button>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: 700,
-              marginBottom: 30,
-            }}
-          >
-            <Button
-              type="outline-danger"
-              className="btn--sm"
-              disabled={true}
-              icon="tio-clear"
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="outline-danger"
-              className="btn--md"
-              disabled={true}
-              icon="tio-clear"
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="outline-danger"
-              className="btn--lg"
-              disabled={true}
-              icon="tio-clear"
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="outline-danger"
-              className="btn--xl"
-              disabled={true}
-              icon="tio-clear"
-            >
-              {"Button"}
-            </Button>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: 700,
-              marginBottom: 30,
-            }}
-          >
-            <Button
-              type="outline-danger"
-              className="btn--sm"
-              icon="tio-clear_circle_outlined"
+              icon={<TrashCan16 />}
               loading={loading}
               onClick={handleOnClick}
               isSubmitBtn={true}
@@ -978,21 +908,21 @@ function OutlineButtonView() {
             <Button
               type="outline-danger"
               className="btn--md"
-              icon="tio-clear_circle_outlined"
+              icon={<TrashCan16 />}
             >
               {"Button"}
             </Button>
             <Button
               type="outline-danger"
               className="btn--lg"
-              icon="tio-clear_circle_outlined"
+              icon={<TrashCan16 />}
             >
               {"Button"}
             </Button>
             <Button
               type="outline-danger"
               className="btn--xl"
-              icon="tio-clear_circle_outlined"
+              icon={<TrashCan16 />}
             >
               {"Button"}
             </Button>
@@ -1010,7 +940,7 @@ function OutlineButtonView() {
               type="outline-danger"
               className="btn--sm"
               disabled={true}
-              icon="tio-clear_circle_outlined"
+              icon={<TrashCan16 />}
             >
               {"Button"}
             </Button>
@@ -1018,7 +948,7 @@ function OutlineButtonView() {
               type="outline-danger"
               className="btn--md"
               disabled={true}
-              icon="tio-clear_circle_outlined"
+              icon={<TrashCan16 />}
             >
               {"Button"}
             </Button>
@@ -1026,7 +956,7 @@ function OutlineButtonView() {
               type="outline-danger"
               className="btn--lg"
               disabled={true}
-              icon="tio-clear_circle_outlined"
+              icon={<TrashCan16 />}
             >
               {"Button"}
             </Button>
@@ -1034,7 +964,90 @@ function OutlineButtonView() {
               type="outline-danger"
               className="btn--xl"
               disabled={true}
-              icon="tio-clear_circle_outlined"
+              icon={<TrashCan16 />}
+            >
+              {"Button"}
+            </Button>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: 700,
+              marginBottom: 30,
+            }}
+          >
+            <Button
+              type="outline-danger"
+              className="btn--sm"
+              icon={<TrashCan16 />}
+              loading={loading}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
+              {"Button"}
+            </Button>
+            <Button
+              type="outline-danger"
+              className="btn--md"
+              icon={<TrashCan16 />}
+            >
+              {"Button"}
+            </Button>
+            <Button
+              type="outline-danger"
+              className="btn--lg"
+              icon={<TrashCan16 />}
+            >
+              {"Button"}
+            </Button>
+            <Button
+              type="outline-danger"
+              className="btn--xl"
+              icon={<TrashCan16 />}
+            >
+              {"Button"}
+            </Button>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: 700,
+              marginBottom: 30,
+            }}
+          >
+            <Button
+              type="outline-danger"
+              className="btn--sm"
+              disabled={true}
+              icon={<TrashCan16 />}
+            >
+              {"Button"}
+            </Button>
+            <Button
+              type="outline-danger"
+              className="btn--md"
+              disabled={true}
+              icon={<TrashCan16 />}
+            >
+              {"Button"}
+            </Button>
+            <Button
+              type="outline-danger"
+              className="btn--lg"
+              disabled={true}
+              icon={<TrashCan16 />}
+            >
+              {"Button"}
+            </Button>
+            <Button
+              type="outline-danger"
+              className="btn--xl"
+              disabled={true}
+              icon={<TrashCan16 />}
             >
               {"Button"}
             </Button>
@@ -1103,80 +1116,16 @@ function GhostButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="ghost" className="btn--sm" icon="tio-add">
+            <Button type="ghost" className="btn--sm" icon={<Add16 />}>
               {"Button"}
             </Button>
-            <Button type="ghost" className="btn--md" icon="tio-add">
+            <Button type="ghost" className="btn--md" icon={<Add16 />}>
               {"Button"}
             </Button>
-            <Button type="ghost" className="btn--lg" icon="tio-add">
+            <Button type="ghost" className="btn--lg" icon={<Add16 />}>
               {"Button"}
             </Button>
-            <Button type="ghost" className="btn--xl" icon="tio-add">
-              {"Button"}
-            </Button>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: 700,
-              marginBottom: 30,
-            }}
-          >
-            <Button
-              type="ghost"
-              className="btn--sm"
-              disabled={true}
-              icon="tio-add"
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="ghost"
-              className="btn--md"
-              disabled={true}
-              icon="tio-add"
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="ghost"
-              className="btn--lg"
-              disabled={true}
-              icon="tio-add"
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="ghost"
-              className="btn--xl"
-              disabled={true}
-              icon="tio-add"
-            >
-              {"Button"}
-            </Button>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: 700,
-              marginBottom: 30,
-            }}
-          >
-            <Button type="ghost" className="btn--sm" icon="tio-down_ui">
-              {"Button"}
-            </Button>
-            <Button type="ghost" className="btn--md" icon="tio-down_ui">
-              {"Button"}
-            </Button>
-            <Button type="ghost" className="btn--lg" icon="tio-down_ui">
-              {"Button"}
-            </Button>
-            <Button type="ghost" className="btn--xl" icon="tio-down_ui">
+            <Button type="ghost" className="btn--xl" icon={<Add16 />}>
               {"Button"}
             </Button>
           </div>
@@ -1193,7 +1142,7 @@ function GhostButtonView() {
               type="ghost"
               className="btn--sm"
               disabled={true}
-              icon="tio-down_ui"
+              icon={<Add16 />}
             >
               {"Button"}
             </Button>
@@ -1201,7 +1150,7 @@ function GhostButtonView() {
               type="ghost"
               className="btn--md"
               disabled={true}
-              icon="tio-down_ui"
+              icon={<Add16 />}
             >
               {"Button"}
             </Button>
@@ -1209,7 +1158,7 @@ function GhostButtonView() {
               type="ghost"
               className="btn--lg"
               disabled={true}
-              icon="tio-down_ui"
+              icon={<Add16 />}
             >
               {"Button"}
             </Button>
@@ -1217,7 +1166,71 @@ function GhostButtonView() {
               type="ghost"
               className="btn--xl"
               disabled={true}
-              icon="tio-down_ui"
+              icon={<Add16 />}
+            >
+              {"Button"}
+            </Button>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: 700,
+              marginBottom: 30,
+            }}
+          >
+            <Button type="ghost" className="btn--sm" icon={<ChevronDown16 />}>
+              {"Button"}
+            </Button>
+            <Button type="ghost" className="btn--md" icon={<ChevronDown16 />}>
+              {"Button"}
+            </Button>
+            <Button type="ghost" className="btn--lg" icon={<ChevronDown16 />}>
+              {"Button"}
+            </Button>
+            <Button type="ghost" className="btn--xl" icon={<ChevronDown16 />}>
+              {"Button"}
+            </Button>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: 700,
+              marginBottom: 30,
+            }}
+          >
+            <Button
+              type="ghost"
+              className="btn--sm"
+              disabled={true}
+              icon={<ChevronDown16 />}
+            >
+              {"Button"}
+            </Button>
+            <Button
+              type="ghost"
+              className="btn--md"
+              disabled={true}
+              icon={<ChevronDown16 />}
+            >
+              {"Button"}
+            </Button>
+            <Button
+              type="ghost"
+              className="btn--lg"
+              disabled={true}
+              icon={<ChevronDown16 />}
+            >
+              {"Button"}
+            </Button>
+            <Button
+              type="ghost"
+              className="btn--xl"
+              disabled={true}
+              icon={<ChevronDown16 />}
             >
               {"Button"}
             </Button>
@@ -1283,16 +1296,16 @@ function GhostButtonView() {
                 marginBottom: 30,
               }}
             >
-              <Button type="ghost-primary" className="btn--sm" icon="tio-add">
+              <Button type="ghost-primary" className="btn--sm" icon={<Add16 />}>
                 {"Button"}
               </Button>
-              <Button type="ghost-primary" className="btn--md" icon="tio-add">
+              <Button type="ghost-primary" className="btn--md" icon={<Add16 />}>
                 {"Button"}
               </Button>
-              <Button type="ghost-primary" className="btn--lg" icon="tio-add">
+              <Button type="ghost-primary" className="btn--lg" icon={<Add16 />}>
                 {"Button"}
               </Button>
-              <Button type="ghost-primary" className="btn--xl" icon="tio-add">
+              <Button type="ghost-primary" className="btn--xl" icon={<Add16 />}>
                 {"Button"}
               </Button>
             </div>
@@ -1309,7 +1322,7 @@ function GhostButtonView() {
                 type="ghost-primary"
                 className="btn--sm"
                 disabled={true}
-                icon="tio-add"
+                icon={<Add16 />}
               >
                 {"Button"}
               </Button>
@@ -1317,7 +1330,7 @@ function GhostButtonView() {
                 type="ghost-primary"
                 className="btn--md"
                 disabled={true}
-                icon="tio-add"
+                icon={<Add16 />}
               >
                 {"Button"}
               </Button>
@@ -1325,7 +1338,7 @@ function GhostButtonView() {
                 type="ghost-primary"
                 className="btn--lg"
                 disabled={true}
-                icon="tio-add"
+                icon={<Add16 />}
               >
                 {"Button"}
               </Button>
@@ -1333,7 +1346,7 @@ function GhostButtonView() {
                 type="ghost-primary"
                 className="btn--xl"
                 disabled={true}
-                icon="tio-add"
+                icon={<Add16 />}
               >
                 {"Button"}
               </Button>
@@ -1352,28 +1365,28 @@ function GhostButtonView() {
               <Button
                 type="ghost-primary"
                 className="btn--sm"
-                icon="tio-down_ui"
+                icon={<ChevronDown16 />}
               >
                 {"Button"}
               </Button>
               <Button
                 type="ghost-primary"
                 className="btn--md"
-                icon="tio-down_ui"
+                icon={<ChevronDown16 />}
               >
                 {"Button"}
               </Button>
               <Button
                 type="ghost-primary"
                 className="btn--lg"
-                icon="tio-down_ui"
+                icon={<ChevronDown16 />}
               >
                 {"Button"}
               </Button>
               <Button
                 type="ghost-primary"
                 className="btn--xl"
-                icon="tio-down_ui"
+                icon={<ChevronDown16 />}
               >
                 {"Button"}
               </Button>
@@ -1391,7 +1404,7 @@ function GhostButtonView() {
                 type="ghost-primary"
                 className="btn--sm"
                 disabled={true}
-                icon="tio-down_ui"
+                icon={<ChevronDown16 />}
               >
                 {"Button"}
               </Button>
@@ -1399,7 +1412,7 @@ function GhostButtonView() {
                 type="ghost-primary"
                 className="btn--md"
                 disabled={true}
-                icon="tio-down_ui"
+                icon={<ChevronDown16 />}
               >
                 {"Button"}
               </Button>
@@ -1407,7 +1420,7 @@ function GhostButtonView() {
                 type="ghost-primary"
                 className="btn--lg"
                 disabled={true}
-                icon="tio-down_ui"
+                icon={<ChevronDown16 />}
               >
                 {"Button"}
               </Button>
@@ -1415,7 +1428,7 @@ function GhostButtonView() {
                 type="ghost-primary"
                 className="btn--xl"
                 disabled={true}
-                icon="tio-down_ui"
+                icon={<ChevronDown16 />}
               >
                 {"Button"}
               </Button>
@@ -1498,16 +1511,32 @@ function GhostButtonView() {
                 marginBottom: 30,
               }}
             >
-              <Button type="ghost-secondary" className="btn--sm" icon="tio-add">
+              <Button
+                type="ghost-secondary"
+                className="btn--sm"
+                icon={<Add16 />}
+              >
                 {"Button"}
               </Button>
-              <Button type="ghost-secondary" className="btn--md" icon="tio-add">
+              <Button
+                type="ghost-secondary"
+                className="btn--md"
+                icon={<Add16 />}
+              >
                 {"Button"}
               </Button>
-              <Button type="ghost-secondary" className="btn--lg" icon="tio-add">
+              <Button
+                type="ghost-secondary"
+                className="btn--lg"
+                icon={<Add16 />}
+              >
                 {"Button"}
               </Button>
-              <Button type="ghost-secondary" className="btn--xl" icon="tio-add">
+              <Button
+                type="ghost-secondary"
+                className="btn--xl"
+                icon={<Add16 />}
+              >
                 {"Button"}
               </Button>
             </div>
@@ -1524,7 +1553,7 @@ function GhostButtonView() {
                 type="ghost-secondary"
                 className="btn--sm"
                 disabled={true}
-                icon="tio-add"
+                icon={<Add16 />}
               >
                 {"Button"}
               </Button>
@@ -1532,7 +1561,7 @@ function GhostButtonView() {
                 type="ghost-secondary"
                 className="btn--md"
                 disabled={true}
-                icon="tio-add"
+                icon={<Add16 />}
               >
                 {"Button"}
               </Button>
@@ -1540,7 +1569,7 @@ function GhostButtonView() {
                 type="ghost-secondary"
                 className="btn--lg"
                 disabled={true}
-                icon="tio-add"
+                icon={<Add16 />}
               >
                 {"Button"}
               </Button>
@@ -1548,7 +1577,7 @@ function GhostButtonView() {
                 type="ghost-secondary"
                 className="btn--xl"
                 disabled={true}
-                icon="tio-add"
+                icon={<Add16 />}
               >
                 {"Button"}
               </Button>
@@ -1567,28 +1596,28 @@ function GhostButtonView() {
               <Button
                 type="ghost-secondary"
                 className="btn--sm"
-                icon="tio-down_ui"
+                icon={<ChevronDown16 />}
               >
                 {"Button"}
               </Button>
               <Button
                 type="ghost-secondary"
                 className="btn--md"
-                icon="tio-down_ui"
+                icon={<ChevronDown16 />}
               >
                 {"Button"}
               </Button>
               <Button
                 type="ghost-secondary"
                 className="btn--lg"
-                icon="tio-down_ui"
+                icon={<ChevronDown16 />}
               >
                 {"Button"}
               </Button>
               <Button
                 type="ghost-secondary"
                 className="btn--xl"
-                icon="tio-down_ui"
+                icon={<ChevronDown16 />}
               >
                 {"Button"}
               </Button>
@@ -1606,7 +1635,7 @@ function GhostButtonView() {
                 type="ghost-secondary"
                 className="btn--sm"
                 disabled={true}
-                icon="tio-down_ui"
+                icon={<ChevronDown16 />}
               >
                 {"Button"}
               </Button>
@@ -1614,7 +1643,7 @@ function GhostButtonView() {
                 type="ghost-secondary"
                 className="btn--md"
                 disabled={true}
-                icon="tio-down_ui"
+                icon={<ChevronDown16 />}
               >
                 {"Button"}
               </Button>
@@ -1622,7 +1651,7 @@ function GhostButtonView() {
                 type="ghost-secondary"
                 className="btn--lg"
                 disabled={true}
-                icon="tio-down_ui"
+                icon={<ChevronDown16 />}
               >
                 {"Button"}
               </Button>
@@ -1630,7 +1659,7 @@ function GhostButtonView() {
                 type="ghost-secondary"
                 className="btn--xl"
                 disabled={true}
-                icon="tio-down_ui"
+                icon={<ChevronDown16 />}
               >
                 {"Button"}
               </Button>
@@ -1688,14 +1717,14 @@ function BleedButtonView() {
           >
             <Button
               type="bleed-primary"
-              icon="tio-add"
+              icon={<Add16 />}
               loading={loading}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
               {"Button"}
             </Button>
-            <Button type="bleed-primary" icon="tio-add" disabled={true}>
+            <Button type="bleed-primary" icon={<Add16 />} disabled={true}>
               {"Button"}
             </Button>
           </div>
@@ -1710,14 +1739,18 @@ function BleedButtonView() {
           >
             <Button
               type="bleed-primary"
-              icon="tio-down_ui"
+              icon={<ChevronDown16 />}
               loading={loading}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
               {"Button"}
             </Button>
-            <Button type="bleed-primary" icon="tio-down_ui" disabled={true}>
+            <Button
+              type="bleed-primary"
+              icon={<ChevronDown16 />}
+              disabled={true}
+            >
               {"Button"}
             </Button>
           </div>
@@ -1746,10 +1779,10 @@ function BleedButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="bleed-secondary" icon="tio-add">
+            <Button type="bleed-secondary" icon={<Add16 />}>
               {"Button"}
             </Button>
-            <Button type="bleed-secondary" icon="tio-add" disabled={true}>
+            <Button type="bleed-secondary" icon={<Add16 />} disabled={true}>
               {"Button"}
             </Button>
           </div>
@@ -1762,10 +1795,14 @@ function BleedButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="bleed-secondary" icon="tio-down_ui">
+            <Button type="bleed-secondary" icon={<ChevronDown16 />}>
               {"Button"}
             </Button>
-            <Button type="bleed-secondary" icon="tio-down_ui" disabled={true}>
+            <Button
+              type="bleed-secondary"
+              icon={<ChevronDown16 />}
+              disabled={true}
+            >
               {"Button"}
             </Button>
           </div>
@@ -1858,10 +1895,10 @@ function IconOnlyButtonView() {
           marginBottom: 30,
         }}
       >
-        <Button type="icon-only-primary" icon="tio-add" className="btn--sm" />
-        <Button type="icon-only-primary" icon="tio-add" className="btn--md" />
-        <Button type="icon-only-primary" icon="tio-add" className="btn--lg" />
-        <Button type="icon-only-primary" icon="tio-add" className="btn--xl" />
+        <Button type="icon-only-primary" icon={<Add16 />} className="btn--sm" />
+        <Button type="icon-only-primary" icon={<Add16 />} className="btn--md" />
+        <Button type="icon-only-primary" icon={<Add16 />} className="btn--lg" />
+        <Button type="icon-only-primary" icon={<Add16 />} className="btn--xl" />
       </div>
       <div
         style={{
@@ -1874,25 +1911,25 @@ function IconOnlyButtonView() {
       >
         <Button
           type="icon-only-primary"
-          icon="tio-add"
+          icon={<Add16 />}
           className="btn--sm"
           disabled={true}
         />
         <Button
           type="icon-only-primary"
-          icon="tio-add"
+          icon={<Add16 />}
           className="btn--md"
           disabled={true}
         />
         <Button
           type="icon-only-primary"
-          icon="tio-add"
+          icon={<Add16 />}
           className="btn--lg"
           disabled={true}
         />
         <Button
           type="icon-only-primary"
-          icon="tio-add"
+          icon={<Add16 />}
           className="btn--xl"
           disabled={true}
         />
@@ -1908,22 +1945,22 @@ function IconOnlyButtonView() {
       >
         <Button
           type="icon-only-outline-primary"
-          icon="tio-add"
+          icon={<Add16 />}
           className="btn--sm"
         />
         <Button
           type="icon-only-outline-primary"
-          icon="tio-add"
+          icon={<Add16 />}
           className="btn--md"
         />
         <Button
           type="icon-only-outline-primary"
-          icon="tio-add"
+          icon={<Add16 />}
           className="btn--lg"
         />
         <Button
           type="icon-only-outline-primary"
-          icon="tio-add"
+          icon={<Add16 />}
           className="btn--xl"
         />
       </div>
@@ -1938,42 +1975,28 @@ function IconOnlyButtonView() {
       >
         <Button
           type="icon-only-outline-primary"
-          icon="tio-add"
+          icon={<Add16 />}
           className="btn--sm"
           disabled={true}
         />
         <Button
           type="icon-only-outline-primary"
-          icon="tio-add"
+          icon={<Add16 />}
           className="btn--md"
           disabled={true}
         />
         <Button
           type="icon-only-outline-primary"
-          icon="tio-add"
+          icon={<Add16 />}
           className="btn--lg"
           disabled={true}
         />
         <Button
           type="icon-only-outline-primary"
-          icon="tio-add"
+          icon={<Add16 />}
           className="btn--xl"
           disabled={true}
         />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          width: 700,
-          marginBottom: 30,
-        }}
-      >
-        <Button type="icon-only-danger" icon="tio-add" className="btn--sm" />
-        <Button type="icon-only-danger" icon="tio-add" className="btn--md" />
-        <Button type="icon-only-danger" icon="tio-add" className="btn--lg" />
-        <Button type="icon-only-danger" icon="tio-add" className="btn--xl" />
       </div>
       <div
         style={{
@@ -1986,25 +2009,55 @@ function IconOnlyButtonView() {
       >
         <Button
           type="icon-only-danger"
-          icon="tio-add"
+          icon={<TrashCan16 />}
+          className="btn--sm"
+        />
+        <Button
+          type="icon-only-danger"
+          icon={<TrashCan16 />}
+          className="btn--md"
+        />
+        <Button
+          type="icon-only-danger"
+          icon={<TrashCan16 />}
+          className="btn--lg"
+        />
+        <Button
+          type="icon-only-danger"
+          icon={<TrashCan16 />}
+          className="btn--xl"
+        />
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          width: 700,
+          marginBottom: 30,
+        }}
+      >
+        <Button
+          type="icon-only-danger"
+          icon={<TrashCan16 />}
           className="btn--sm"
           disabled={true}
         />
         <Button
           type="icon-only-danger"
-          icon="tio-add"
+          icon={<TrashCan16 />}
           className="btn--md"
           disabled={true}
         />
         <Button
           type="icon-only-danger"
-          icon="tio-add"
+          icon={<TrashCan16 />}
           className="btn--lg"
           disabled={true}
         />
         <Button
           type="icon-only-danger"
-          icon="tio-add"
+          icon={<TrashCan16 />}
           className="btn--xl"
           disabled={true}
         />
@@ -2020,22 +2073,22 @@ function IconOnlyButtonView() {
       >
         <Button
           type="icon-only-outline-danger"
-          icon="tio-add"
+          icon={<TrashCan16 />}
           className="btn--sm"
         />
         <Button
           type="icon-only-outline-danger"
-          icon="tio-add"
+          icon={<TrashCan16 />}
           className="btn--md"
         />
         <Button
           type="icon-only-outline-danger"
-          icon="tio-add"
+          icon={<TrashCan16 />}
           className="btn--lg"
         />
         <Button
           type="icon-only-outline-danger"
-          icon="tio-add"
+          icon={<TrashCan16 />}
           className="btn--xl"
         />
       </div>
@@ -2050,25 +2103,25 @@ function IconOnlyButtonView() {
       >
         <Button
           type="icon-only-outline-danger"
-          icon="tio-add"
+          icon={<TrashCan16 />}
           className="btn--sm"
           disabled={true}
         />
         <Button
           type="icon-only-outline-danger"
-          icon="tio-add"
+          icon={<TrashCan16 />}
           className="btn--md"
           disabled={true}
         />
         <Button
           type="icon-only-outline-danger"
-          icon="tio-add"
+          icon={<TrashCan16 />}
           className="btn--lg"
           disabled={true}
         />
         <Button
           type="icon-only-outline-danger"
-          icon="tio-add"
+          icon={<TrashCan16 />}
           className="btn--xl"
           disabled={true}
         />
@@ -2082,10 +2135,10 @@ function IconOnlyButtonView() {
           marginBottom: 30,
         }}
       >
-        <Button type="icon-only-ghost" icon="tio-add" className="btn--sm" />
-        <Button type="icon-only-ghost" icon="tio-add" className="btn--md" />
-        <Button type="icon-only-ghost" icon="tio-add" className="btn--lg" />
-        <Button type="icon-only-ghost" icon="tio-add" className="btn--xl" />
+        <Button type="icon-only-ghost" icon={<Add16 />} className="btn--sm" />
+        <Button type="icon-only-ghost" icon={<Add16 />} className="btn--md" />
+        <Button type="icon-only-ghost" icon={<Add16 />} className="btn--lg" />
+        <Button type="icon-only-ghost" icon={<Add16 />} className="btn--xl" />
       </div>
       <div
         style={{
@@ -2098,25 +2151,25 @@ function IconOnlyButtonView() {
       >
         <Button
           type="icon-only-ghost"
-          icon="tio-add"
+          icon={<Add16 />}
           className="btn--sm"
           disabled={true}
         />
         <Button
           type="icon-only-ghost"
-          icon="tio-add"
+          icon={<Add16 />}
           className="btn--md"
           disabled={true}
         />
         <Button
           type="icon-only-ghost"
-          icon="tio-add"
+          icon={<Add16 />}
           className="btn--lg"
           disabled={true}
         />
         <Button
           type="icon-only-ghost"
-          icon="tio-add"
+          icon={<Add16 />}
           className="btn--xl"
           disabled={true}
         />

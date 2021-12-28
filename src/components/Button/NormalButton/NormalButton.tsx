@@ -61,9 +61,7 @@ const NormalButton = React.forwardRef(
           >
             <div className="button-content-have-icon">
               <div className="children-content">{children}</div>
-              <div className="box-icon">
-                <i className={classNames(icon, "icon-button")}></i>
-              </div>
+              <div className="box-icon">{icon}</div>
             </div>
           </button>
         )}

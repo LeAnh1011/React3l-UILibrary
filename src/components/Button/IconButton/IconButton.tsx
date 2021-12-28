@@ -22,7 +22,7 @@ const IconButton = React.forwardRef(
           className
         )}
       >
-        <i className={classNames("content-icon", icon)}></i>
+        {icon}
       </button>
     );
   }

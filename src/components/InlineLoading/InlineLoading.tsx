@@ -3,11 +3,11 @@ import React, { PropsWithChildren } from "react";
 import "./InlineLoading.scss";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
-import { CheckmarkFilled16 } from "@carbon/icons-react";
+import { CheckmarkFilled16, ErrorFilled16 } from "@carbon/icons-react";
 
 export interface InlineLoadingProps {
   className?: string;
-  status?: "default" | "submitting" | "submitted";
+  status?: "default" | "submitting" | "submitted" | "error";
 }
 
 const antIcon = (
@@ -26,13 +26,20 @@ const InlineLoading = React.forwardRef(
       <div className={classNames("inline-loading", className)}>
         {status === "submitting" && (
           <>
-            <Spin indicator={antIcon} /> Submitting...
+            <Spin indicator={antIcon} />
+            Loading...
           </>
         )}
         {status === "submitted" && (
           <div className="submitted-box">
-            <CheckmarkFilled16 className="icon-done-inline-loading" />
+            <CheckmarkFilled16 className="icon-submitted-inline-loading" />
             Submitted
+          </div>
+        )}
+        {status === "error" && (
+          <div className="submitted-box">
+            <ErrorFilled16 className="icon-error-inline-loading" />
+            Error
           </div>
         )}
       </div>

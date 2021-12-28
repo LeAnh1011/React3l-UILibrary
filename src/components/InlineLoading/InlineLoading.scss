@@ -1,7 +1,15 @@
 .inline-loading{
-    .icon-done-inline-loading{
-        margin-right: 4px;
+    line-height: 16px !important;
+    font-size: 12px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    .icon-submitted-inline-loading{
+        margin-right: 8px;
         color: green;
+    }
+    .icon-error-inline-loading{
+        margin-right: 8px;
+        color: #DA1E28;
     }
     .submitted-box{
         display: flex;

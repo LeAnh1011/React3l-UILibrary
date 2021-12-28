@@ -221,7 +221,13 @@ function NormalButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="secondary" className="btn--sm">
+            <Button
+              type="secondary"
+              className="btn--sm"
+              loading={loading}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
             <Button type="secondary" className="btn--md">
@@ -265,7 +271,14 @@ function NormalButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="secondary" className="btn--sm" icon="tio-add">
+            <Button
+              type="secondary"
+              className="btn--sm"
+              icon="tio-add"
+              loading={loading}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
             <Button type="secondary" className="btn--md" icon="tio-add">
@@ -329,7 +342,14 @@ function NormalButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="secondary" className="btn--sm" icon="tio-down_ui">
+            <Button
+              type="secondary"
+              className="btn--sm"
+              icon="tio-down_ui"
+              loading={loading}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
             <Button type="secondary" className="btn--md" icon="tio-down_ui">
@@ -395,7 +415,13 @@ function NormalButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="danger" className="btn--sm">
+            <Button
+              type="danger"
+              className="btn--sm"
+              loading={loading}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
             <Button type="danger" className="btn--md">
@@ -439,7 +465,14 @@ function NormalButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="danger" className="btn--sm" icon="tio-clear">
+            <Button
+              type="danger"
+              className="btn--sm"
+              icon="tio-clear"
+              loading={loading}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
             <Button type="danger" className="btn--md" icon="tio-clear">
@@ -507,6 +540,9 @@ function NormalButtonView() {
               type="danger"
               className="btn--sm"
               icon="tio-clear_circle_outlined"
+              loading={loading}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
             >
               {"Button"}
             </Button>
@@ -808,7 +844,13 @@ function OutlineButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="outline-danger" className="btn--sm">
+            <Button
+              type="outline-danger"
+              className="btn--sm"
+              loading={loading}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
             <Button type="outline-danger" className="btn--md">
@@ -852,7 +894,14 @@ function OutlineButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="outline-danger" className="btn--sm" icon="tio-clear">
+            <Button
+              type="outline-danger"
+              className="btn--sm"
+              icon="tio-clear"
+              loading={loading}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
             <Button type="outline-danger" className="btn--md" icon="tio-clear">
@@ -920,6 +969,9 @@ function OutlineButtonView() {
               type="outline-danger"
               className="btn--sm"
               icon="tio-clear_circle_outlined"
+              loading={loading}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
             >
               {"Button"}
             </Button>

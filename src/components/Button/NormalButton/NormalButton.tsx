@@ -1,7 +1,7 @@
 import classNames from "classnames";
+import InlineLoading from "components/InlineLoading";
 import React, { PropsWithChildren } from "react";
 import { ButtonProps } from "../Button";
-import InlineLoading from "../InlineLoading";
 import "./NormalButton.scss";
 export type LoadingType = "default" | "submitting" | "submitted";
 export interface NormalButtonProps extends ButtonProps {}
@@ -33,7 +33,7 @@ const NormalButton = React.forwardRef(
           setLoadingType("submitted");
           setTimeout(() => {
             setLoadingType("default");
-          }, 15000);
+          }, 1000);
         }
       }
     }, [isSubmitBtn, loading, loadingType]);

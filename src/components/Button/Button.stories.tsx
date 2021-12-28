@@ -580,6 +580,15 @@ function NormalButtonView() {
   );
 }
 function OutlineButtonView() {
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const handleOnClick = React.useCallback(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 20000);
+  }, []);
+
   return (
     <div>
       <Tabs defaultActiveKey="1">
@@ -593,7 +602,13 @@ function OutlineButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="outline-primary" className="btn--sm">
+            <Button
+              type="outline-primary"
+              className="btn--sm"
+              loading={loading}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
             <Button type="outline-primary" className="btn--md">
@@ -637,7 +652,14 @@ function OutlineButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="outline-primary" className="btn--sm" icon="tio-add">
+            <Button
+              type="outline-primary"
+              className="btn--sm"
+              icon="tio-add"
+              loading={loading}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
             <Button type="outline-primary" className="btn--md" icon="tio-add">
@@ -705,6 +727,9 @@ function OutlineButtonView() {
               type="outline-primary"
               className="btn--sm"
               icon="tio-down_ui"
+              loading={loading}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
             >
               {"Button"}
             </Button>

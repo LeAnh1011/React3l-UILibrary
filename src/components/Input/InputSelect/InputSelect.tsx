@@ -1,4 +1,5 @@
-import React, { RefObject } from "react";
+import React, { ReactSVGElement, RefObject } from "react";
+import { CloseFilled16 } from "@carbon/icons-react";
 import "./InputSelect.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
@@ -57,7 +58,7 @@ function InputSelect(props: InputSelectProps<Model>) {
   );
 
   const handleClearInput = React.useCallback(
-    (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
       setInternalModel("");
       inputRef.current.focus();
       event.stopPropagation();
@@ -66,7 +67,7 @@ function InputSelect(props: InputSelectProps<Model>) {
   );
 
   const handleClearItem = React.useCallback(
-    (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
       if (typeof onClear === "function") {
         onClear(null);
       }
@@ -164,17 +165,25 @@ function InputSelect(props: InputSelectProps<Model>) {
                 </label>
               )}
               {internalModel && !disabled ? (
-                <i
-                  className="input-icon tio-clear_circle input-icon__clear m-r--xxs"
-                  onClick={handleClearInput}
-                ></i>
+                <div
+                  style={{ width: "16px", height: "20px" }}
+                  className="m-r--xxs"
+                >
+                  <CloseFilled16
+                    className="input-icon input-icon__clear m-r--xxs"
+                    onClick={handleClearInput}
+                  ></CloseFilled16>
+                </div>
               ) : model ? (
-                <div>
+                <div
+                  style={{ width: "16px", height: "20px" }}
+                  className="m-r--xxs"
+                >
                   {!disabled && (
-                    <i
-                      className="input-icon tio-clear_circle input-icon__clear m-r--xxs"
+                    <CloseFilled16
+                      className="input-icon input-icon__clear"
                       onClick={handleClearItem}
-                    ></i>
+                    ></CloseFilled16>
                   )}
                 </div>
               ) : null}
@@ -221,12 +230,15 @@ function InputSelect(props: InputSelectProps<Model>) {
                 </label>
               )}
               {model && (
-                <div>
+                <div
+                  style={{ width: "16px", height: "20px" }}
+                  className="m-r--xxs"
+                >
                   {!disabled && (
-                    <i
-                      className="input-icon tio-clear_circle input-icon__clear m-r--xxs"
+                    <CloseFilled16
+                      className="input-icon input-icon__clear"
                       onClick={handleClearItem}
-                    ></i>
+                    ></CloseFilled16>
                   )}
                 </div>
               )}

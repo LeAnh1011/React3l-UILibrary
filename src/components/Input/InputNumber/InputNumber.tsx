@@ -1,5 +1,6 @@
 import classNames from "classnames";
-import React, { RefObject } from "react";
+import React, { ReactSVGElement, RefObject } from "react";
+import { CloseFilled16 } from "@carbon/icons-react";
 import "./InputNumber.scss";
 import { ReactNode } from "react";
 import { BORDER_TYPE } from "config/enum";
@@ -193,7 +194,7 @@ function InputNumber(props: InputNumberProps) {
   );
 
   const handleClearInput = React.useCallback(
-    (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
       setInternalValue("");
       inputRef.current.focus();
       if (typeof onChange === "function") {
@@ -324,14 +325,12 @@ function InputNumber(props: InputNumberProps) {
           </label>
         )}
         {internalValue && !disabled && (
-          <i
-            className={classNames(
-              "input-icon__clear",
-              "m-l--xxs",
-              "tio-clear_circle"
-            )}
-            onClick={handleClearInput}
-          ></i>
+          <div style={{ width: "16px", height: "20px" }} className="m-l--xxs">
+            <CloseFilled16
+              className={classNames("input-icon__clear")}
+              onClick={handleClearInput}
+            ></CloseFilled16>
+          </div>
         )}
         {suffix && (
           <>

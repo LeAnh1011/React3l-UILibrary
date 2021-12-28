@@ -242,6 +242,8 @@
 
     .input-icon__clear {
       color: var(--palette-coolGray-50);
+      width: 16px;
+      height: 16px;
       &:hover {
         cursor: pointer;
         color: var(--palette-coolGrayHover-50);

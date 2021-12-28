@@ -1,4 +1,5 @@
-import React, { RefObject } from "react";
+import React, { ReactSVGElement, RefObject } from "react";
+import { CloseFilled16 } from "@carbon/icons-react";
 import "./InputTag.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
@@ -65,7 +66,7 @@ function InputTag(props: InputTagProps<Model>) {
   }, [onClearMulti]);
 
   const handleClearInput = React.useCallback(
-    (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
       setSearchTerm("");
       inputRef.current.focus();
       if (typeof onSearch === "function") {
@@ -184,10 +185,12 @@ function InputTag(props: InputTagProps<Model>) {
           )}
 
           {!disabled && searchTerm && (
-            <i
-              className="input-icon tio-clear_circle input-icon__clear m-x--xxs"
-              onClick={handleClearInput}
-            ></i>
+            <div style={{ width: "16px", height: "20px" }} className="m-x--xxs">
+              <CloseFilled16
+                className="input-icon input-icon__clear"
+                onClick={handleClearInput}
+              ></CloseFilled16>
+            </div>
           )}
 
           <i

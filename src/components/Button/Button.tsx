@@ -11,7 +11,7 @@ import LinkButton from "./LinkButton";
 import LinkPlainButton from "./LinkPlainButton";
 import NormalButton from "./NormalButton/NormalButton";
 import OutlineButton from "./OutlineButton";
-
+export type LoadingStatus = "default" | "submitting" | "submitted";
 export type ButtonType =
   | "primary"
   | "secondary"

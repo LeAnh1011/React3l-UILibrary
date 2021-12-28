@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import InlineLoading from "components/InlineLoading";
 import React, { PropsWithChildren } from "react";
-import { ButtonProps } from "../Button";
+import { ButtonProps, LoadingStatus } from "../Button";
 import "./NormalButton.scss";
-export type LoadingType = "default" | "submitting" | "submitted";
+
 export interface NormalButtonProps extends ButtonProps {}
 
 const NormalButton = React.forwardRef(
@@ -20,33 +20,33 @@ const NormalButton = React.forwardRef(
       isSubmitBtn,
     } = props;
 
-    const [loadingType, setLoadingType] = React.useState<LoadingType>(
+    const [loadingStatus, setLoadingStatus] = React.useState<LoadingStatus>(
       "default"
     );
 
     React.useEffect(() => {
       if (isSubmitBtn) {
         if (loading) {
-          setLoadingType("submitting");
+          setLoadingStatus("submitting");
         }
-        if (loadingType === "submitting" && !loading) {
-          setLoadingType("submitted");
+        if (loadingStatus === "submitting" && !loading) {
+          setLoadingStatus("submitted");
           setTimeout(() => {
-            setLoadingType("default");
+            setLoadingStatus("default");
           }, 1000);
         }
       }
-    }, [isSubmitBtn, loading, loadingType]);
+    }, [isSubmitBtn, loading, loadingStatus]);
 
     return icon ? (
       <>
-        {isSubmitBtn && loadingType !== "default" && (
+        {isSubmitBtn && loadingStatus !== "default" && (
           <InlineLoading
-            status={loadingType}
+            status={loadingStatus}
             className={classNames("inline-loading-normal-have-icon", className)}
           />
         )}
-        {loadingType === "default" && (
+        {loadingStatus === "default" && (
           <button
             type={htmlType}
             onClick={onClick}
@@ -70,13 +70,13 @@ const NormalButton = React.forwardRef(
       </>
     ) : (
       <>
-        {isSubmitBtn && loadingType !== "default" && (
+        {isSubmitBtn && loadingStatus !== "default" && (
           <InlineLoading
-            status={loadingType}
+            status={loadingStatus}
             className={classNames("inline-loading-normal-no-icon", className)}
           />
         )}
-        {loadingType === "default" && (
+        {loadingStatus === "default" && (
           <button
             type={htmlType}
             onClick={onClick}

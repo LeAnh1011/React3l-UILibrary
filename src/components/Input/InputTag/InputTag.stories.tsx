@@ -92,7 +92,7 @@ export function InputTagStories() {
           <InputTag
             type={type}
             listItem={listItem}
-            placeHolder={"Search content"}
+            placeHolder={"Select an option"}
             onSearch={handleSearchItem}
             onClear={handleClearItem}
             error={"Field required!"}
@@ -106,7 +106,7 @@ export function InputTagStories() {
       </div>
 
       <button
-        className="btn btn--secondary"
+        className="btn"
         style={{ marginTop: "10px", border: "none" }}
         onClick={() => setListItem(demoItemList)}
       >

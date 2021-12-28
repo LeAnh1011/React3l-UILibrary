@@ -90,7 +90,11 @@ function InputTag(props: InputTagProps<Model>) {
       <div className="input-tag__wrapper">
         <div className="input-tag__label m-b--xxxs">
           {type !== BORDER_TYPE.FLOAT_LABEL && label && (
-            <label className="component__title">
+            <label
+              className={classNames("component__title", {
+                "component__title--disabled": disabled,
+              })}
+            >
               {label}
               {isRequired && <span className="text-danger">&nbsp;*</span>}
             </label>

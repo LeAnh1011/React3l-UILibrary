@@ -19,8 +19,7 @@ import { ColumnProps } from "antd/lib/table";
 import { Button } from "antd";
 import { Tabs } from "antd";
 import Pagination from "./Pagination/Pagination";
-import arrowUp from "../../assets/image/arrow-up.png";
-import arrowDown from "../../assets/image/arrow-down.png";
+import { ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
 import { StringFilter } from "react3l-advanced-filters";
 
 const { TabPane } = Tabs;
@@ -570,19 +569,9 @@ function Default() {
     expandedRowRender: expandedRowRender,
     expandIcon: ({ expanded, onExpand, record }) =>
       expanded ? (
-        <img
-          src={arrowUp}
-          alt="up"
-          className="icon-table-expand"
-          onClick={(e) => onExpand(record, e)}
-        />
+        <ChevronUp16 onClick={(e) => onExpand(record, e)} />
       ) : (
-        <img
-          src={arrowDown}
-          alt="down"
-          className="icon-table-expand"
-          onClick={(e) => onExpand(record, e)}
-        />
+        <ChevronDown16 onClick={(e) => onExpand(record, e)} />
       ),
     columnWidth: "45px",
   };

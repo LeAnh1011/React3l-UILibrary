@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import InlineLoading from "components/InlineLoading";
 import React, { PropsWithChildren } from "react";
-import { ButtonProps, LoadingStatus } from "../Button";
+import { ButtonProps } from "../Button";
 import "./OutlineButton.scss";
 export interface OutlineButtonProps extends ButtonProps {}
 
@@ -15,26 +15,10 @@ const OutlineButton = React.forwardRef(
       icon,
       disabled,
       children,
-      loading,
+      loadingStatus,
       isSubmitBtn,
     } = props;
 
-    const [loadingStatus, setLoadingStatus] = React.useState<LoadingStatus>(
-      "default"
-    );
-    React.useEffect(() => {
-      if (isSubmitBtn) {
-        if (loading) {
-          setLoadingStatus("submitting");
-        }
-        if (loadingStatus === "submitting" && !loading) {
-          setLoadingStatus("submitted");
-          setTimeout(() => {
-            setLoadingStatus("default");
-          }, 1000);
-        }
-      }
-    }, [isSubmitBtn, loading, loadingStatus]);
     return icon ? (
       <>
         {isSubmitBtn && loadingStatus !== "default" && (

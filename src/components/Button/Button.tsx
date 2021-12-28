@@ -34,8 +34,6 @@ export type ButtonType =
 export interface ButtonProps {
   type?: ButtonType;
 
-  loading?: boolean;
-
   loadingStatus?: LoadingStatus;
 
   isSubmitBtn?: boolean;

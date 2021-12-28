@@ -1,4 +1,5 @@
 import React, { RefObject, Reducer } from "react";
+import { v4 as uuidv4 } from "uuid";
 import "./TreeSelect.scss";
 import { Model, ModelFilter } from "react3l-common";
 import Tree from "../Tree/Tree";
@@ -41,7 +42,6 @@ export interface TreeSelectProps<
   selectWithAdd?: boolean;
   selectWithPreferOption?: boolean;
   preferOptions?: T[];
-  componentId?: string;
 }
 export interface filterAction {
   type: string;
@@ -83,8 +83,9 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     selectWithAdd,
     selectWithPreferOption,
     preferOptions,
-    componentId,
   } = props;
+
+  const componentId = React.useMemo(() => uuidv4(), []);
 
   const { run } = useDebounceFn(
     (searchTerm: string) => {
@@ -172,7 +173,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
       switch (event.keyCode) {
         case 40:
           const treeHolder = document
-            .getElementById(`tree-select__wrapper-list-${componentId}`)
+            .getElementById(componentId)
             .querySelector(".ant-tree-list-holder-inner") as HTMLDivElement;
           const firstItem = treeHolder.firstElementChild.querySelector(
             ".ant-tree-node-content-wrapper .ant-tree-title div"
@@ -229,10 +230,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
           )}
         </div>
         {expanded && (
-          <div
-            className="tree-select__list"
-            id={`tree-select__wrapper-list-${componentId}`}
-          >
+          <div className="tree-select__list" id={componentId}>
             <Tree
               getTreeData={getTreeData}
               selectedKey={selectedKey}

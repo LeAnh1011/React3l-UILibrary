@@ -1,5 +1,4 @@
 import React from "react";
-import { v4 as uuidv4 } from "uuid";
 import { storiesOf } from "@storybook/react";
 import TreeSelect from "./TreeSelect";
 import { Model, ModelFilter } from "react3l-common";
@@ -164,7 +163,6 @@ function Default() {
             selectWithAdd={isSelectWithAdd}
             selectWithPreferOption={isSelectWithPreferOption}
             preferOptions={isSelectWithPreferOption ? list : undefined}
-            componentId={uuidv4()}
           />
         </FormItem>
       </div>
@@ -192,7 +190,6 @@ function Default() {
             selectWithAdd={isSelectWithAdd}
             selectWithPreferOption={isSelectWithPreferOption}
             preferOptions={isSelectWithPreferOption ? list : undefined}
-            componentId={uuidv4()}
           />
         </FormItem>
       </div>

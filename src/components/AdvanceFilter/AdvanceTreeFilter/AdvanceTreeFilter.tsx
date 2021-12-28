@@ -41,6 +41,7 @@ export interface AdvanceTreeFilterProps<
   selectWithAdd?: boolean;
   selectWithPreferOption?: boolean;
   preferOptions?: T[];
+  componentId?: string;
 }
 export interface filterAction {
   type: string;
@@ -82,6 +83,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
     selectWithAdd,
     selectWithPreferOption,
     preferOptions,
+    componentId,
   } = props;
 
   const { run } = useDebounceFn(
@@ -169,9 +171,9 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
     (event: any) => {
       switch (event.keyCode) {
         case 40:
-          const treeHolder = document.querySelector(
-            ".ant-tree-list-holder-inner"
-          ) as HTMLDivElement;
+          const treeHolder = document
+            .getElementById(`advance-tree-filter__wrapper-list-${componentId}`)
+            .querySelector(".ant-tree-list-holder-inner") as HTMLDivElement;
           const firstItem = treeHolder.firstElementChild.querySelector(
             ".ant-tree-node-content-wrapper .ant-tree-title div"
           ) as HTMLElement;
@@ -184,7 +186,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
           return;
       }
     },
-    [handleCloseList]
+    [componentId, handleCloseList]
   );
 
   CommonService.useClickOutside(wrapperRef, handleCloseList);
@@ -227,7 +229,10 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
           )}
         </div>
         {expanded && (
-          <div className="advance-tree-filter__list">
+          <div
+            className="advance-tree-filter__list"
+            id={`advance-tree-filter__wrapper-list-${componentId}`}
+          >
             <Tree
               getTreeData={getTreeData}
               selectedKey={selectedKey}

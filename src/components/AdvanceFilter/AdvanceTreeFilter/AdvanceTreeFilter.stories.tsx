@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 import AdvanceTreeFilter from "./AdvanceTreeFilter";
 import { Model, ModelFilter } from "react3l-common";
 import { Observable } from "rxjs";
@@ -162,6 +163,7 @@ export function AdvanceTreeFilterStories() {
             selectWithAdd={isSelectWithAdd}
             selectWithPreferOption={isSelectWithPreferOption}
             preferOptions={isSelectWithPreferOption ? list : undefined}
+            componentId={uuidv4()}
           />
         </FormItem>
       </div>

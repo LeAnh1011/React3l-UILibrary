@@ -41,6 +41,7 @@ export interface TreeSelectProps<
   selectWithAdd?: boolean;
   selectWithPreferOption?: boolean;
   preferOptions?: T[];
+  componentId?: string;
 }
 export interface filterAction {
   type: string;
@@ -82,6 +83,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     selectWithAdd,
     selectWithPreferOption,
     preferOptions,
+    componentId,
   } = props;
 
   const { run } = useDebounceFn(
@@ -169,9 +171,9 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     (event: any) => {
       switch (event.keyCode) {
         case 40:
-          const treeHolder = document.querySelector(
-            ".ant-tree-list-holder-inner"
-          ) as HTMLDivElement;
+          const treeHolder = document
+            .getElementById(`tree-select__wrapper-list-${componentId}`)
+            .querySelector(".ant-tree-list-holder-inner") as HTMLDivElement;
           const firstItem = treeHolder.firstElementChild.querySelector(
             ".ant-tree-node-content-wrapper .ant-tree-title div"
           ) as HTMLElement;
@@ -184,7 +186,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
           return;
       }
     },
-    [handleCloseList]
+    [componentId, handleCloseList]
   );
 
   CommonService.useClickOutside(wrapperRef, handleCloseList);
@@ -227,7 +229,10 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
           )}
         </div>
         {expanded && (
-          <div className="tree-select__list">
+          <div
+            className="tree-select__list"
+            id={`tree-select__wrapper-list-${componentId}`}
+          >
             <Tree
               getTreeData={getTreeData}
               selectedKey={selectedKey}

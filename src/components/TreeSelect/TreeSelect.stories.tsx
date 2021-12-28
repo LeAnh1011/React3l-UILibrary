@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 import { storiesOf } from "@storybook/react";
 import TreeSelect from "./TreeSelect";
 import { Model, ModelFilter } from "react3l-common";
@@ -163,6 +164,35 @@ function Default() {
             selectWithAdd={isSelectWithAdd}
             selectWithPreferOption={isSelectWithPreferOption}
             preferOptions={isSelectWithPreferOption ? list : undefined}
+            componentId={uuidv4()}
+          />
+        </FormItem>
+      </div>
+
+      <div style={{ margin: "10px", width: "300px" }}>
+        <FormItem
+          validateStatus={isValidated ? ValidateStatus.error : null}
+          message={isValidated ? "Error label" : ""}
+        >
+          <TreeSelect
+            checkable={isMultiple}
+            placeHolder={"Select Organization"}
+            selectable={!isMultiple}
+            classFilter={DistrictFilter}
+            onChange={handleChangeItem}
+            checkStrictly={true}
+            item={item}
+            listItem={isMultiple ? listItem : []}
+            getTreeData={demoSearchFunc}
+            type={type}
+            isUsingSearch={withSearch}
+            label={"Label"}
+            disabled={isDisabled}
+            isSmall={isSmall}
+            selectWithAdd={isSelectWithAdd}
+            selectWithPreferOption={isSelectWithPreferOption}
+            preferOptions={isSelectWithPreferOption ? list : undefined}
+            componentId={uuidv4()}
           />
         </FormItem>
       </div>

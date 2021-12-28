@@ -586,7 +586,7 @@ function OutlineButtonView() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 20000);
+    }, 2000);
   }, []);
 
   return (
@@ -1591,6 +1591,15 @@ function GhostButtonView() {
 }
 
 function BleedButtonView() {
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const handleOnClick = React.useCallback(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
   return (
     <div>
       <Tabs defaultActiveKey="1">
@@ -1604,7 +1613,14 @@ function BleedButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="bleed-primary">{"Button"}</Button>
+            <Button
+              type="bleed-primary"
+              loading={loading}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
+              {"Button"}
+            </Button>
             <Button type="bleed-primary" disabled={true}>
               {"Button"}
             </Button>
@@ -1618,7 +1634,13 @@ function BleedButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="bleed-primary" icon="tio-add">
+            <Button
+              type="bleed-primary"
+              icon="tio-add"
+              loading={loading}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
             <Button type="bleed-primary" icon="tio-add" disabled={true}>
@@ -1634,7 +1656,13 @@ function BleedButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="bleed-primary" icon="tio-down_ui">
+            <Button
+              type="bleed-primary"
+              icon="tio-down_ui"
+              loading={loading}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
             <Button type="bleed-primary" icon="tio-down_ui" disabled={true}>

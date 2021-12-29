@@ -5,6 +5,7 @@ import { RadioChangeEvent } from "antd/lib/radio";
 import FormItem from "../../FormItem/FormItem";
 import { ValidateStatus } from "./../../../config/enum";
 import { BORDER_TYPE } from "./../../../config/enum";
+import { Apple16 } from "@carbon/icons-react";
 
 export function InputNumberStories() {
   const [numberType, setNumberType] = React.useState<string>(LONG);
@@ -80,6 +81,32 @@ export function InputNumberStories() {
             type={type}
             label="Label"
             prefix="Age"
+            placeHolder={"Enter number..."}
+            className={iconName}
+            value={value}
+            onChange={handleChangeValue}
+            numberType={numberType}
+            isReverseSymb={isReverse}
+            allowPositive={isPositive}
+            isSmall={isSmall}
+            disabled={isDisabled}
+            action={{
+              name: "Help",
+              action: () => console.log("Help incoming..."),
+            }}
+          />
+        </FormItem>
+      </div>
+      <div style={{ margin: "15px 0" }}>
+        <FormItem
+          message="Helper"
+          validateStatus={isValidated ? ValidateStatus.error : null}
+        >
+          <InputNumber
+            type={type}
+            label="Label"
+            prefix={<Apple16 />}
+            suffix="Age"
             placeHolder={"Enter number..."}
             className={iconName}
             value={value}

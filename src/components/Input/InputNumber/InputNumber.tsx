@@ -291,7 +291,7 @@ function InputNumber(props: InputNumberProps) {
             {typeof prefix === "string" ? (
               <span className="p-r--xxs">{prefix}</span>
             ) : (
-              <>{prefix}</>
+              <div className="m-r--xs input-number__icon">{prefix}</div>
             )}
           </>
         )}
@@ -337,7 +337,7 @@ function InputNumber(props: InputNumberProps) {
             {typeof suffix === "string" ? (
               <span className="body-text--md m-l--xxs">{suffix}</span>
             ) : (
-              <div className="m-l--xxs">{suffix}</div>
+              <div className="m-l--xxs input-text__icon">{suffix}</div>
             )}
           </>
         )}

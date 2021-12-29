@@ -27,16 +27,9 @@
         top: 49%;
         right: 0.5rem;
         box-sizing: border-box;
-        background-color: white;
+        background-color: var(--color-white);
         justify-content: flex-end;
         align-items: center;
-
-        .date-range__icon-clear {
-            font-size: 17px;
-            &:hover {
-                opacity: 0.7;
-            }
-        }
 
         &.date-range__icon-wrapper--material {
             background-color: var(--color-surface-input);
@@ -47,11 +40,11 @@
                 }
             }
         }
-        .input-icon__clear {
-            color: #959aa3;
+        .date-range__icon-clear {
+            color: var(--palette-coolGray-50);
             &:hover {
                 cursor: pointer;
-                color: #25343a;
+                color: var(--palette-coolGrayHover-50);
             }
         }
     }
@@ -63,15 +56,15 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        outline: 1px solid var(--color-border);
+        outline: 1px solid var(--palette-gray-50);
         border: none;
-        background: white;
+        background: var(--color-white);
         height: 40px;
         border-radius: 0px;
         font-size: 14px;
 
         &.date-picker--disabled {
-            background-color: var(--color-surface-input-disabled);
+            background-color: var(--palette-grayHover-10);
             & + .component__title {
                 pointer-events: none;
             }
@@ -79,7 +72,7 @@
         &:hover,
         &:focus {
             & + .date-range__icon-wrapper--material {
-                background-color: var(--color-surface-input-hover);
+                background-color: var(--palette-grayHover-10);
             }
         }
 
@@ -88,7 +81,7 @@
         }
 
         &.ant-picker--bordered {
-            background-color: #ffffff;
+            background-color: var(--color-white);
         }
 
         &.ant-picker-focused {
@@ -97,18 +90,18 @@
             @include box-shadow--focus;
         }
         &.date-picker--material {
-            background-color: var(--color-surface-input);
+            background-color: var(--palette-gray-10);
             outline: none;
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
-            border-bottom: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--palette-gray-50);
             margin-bottom: -1px;
             .date-range-wrapper {
-                background-color: var(--color-surface-input);
+                background-color: var(--palette-gray-10);
             }
             &:hover,
             &:focus {
-                background-color: var(--color-surface-input-hover);
+                background-color: var(--palette-grayHover-10);
             }
         }
     }
@@ -121,7 +114,7 @@
     }
     .component__title--normal {
         position: absolute;
-        color: gray;
+        color: var(--palette-gray-70);
         transition: all 0.1s ease-out;
         padding: 0 4px;
         z-index: 200;
@@ -132,22 +125,22 @@
         line-height: 16px;
         letter-spacing: 0.16px;
         left: 8px;
-        background-color: white;
+        background-color: var(--color-white);
         transform: translateY(-50%) scale(0.9);
     }
 }
 
 .form-item__container--error {
     .date-range__icon-wrapper {
-        background-color: var(--color-critical-surface);
+        background-color: var(--color-critical-hover);
     }
     .date-picker--material + .date-range__icon-wrapper {
-        background-color: var(--color-critical-surface) !important;
+        background-color: var(--color-critical-hover) !important;
         &:hover {
-            background-color: var(--color-surface-input-hover) !important;
+            background-color: var(--palette-grayHover-10) !important;
         }
     }
     .date-picker--material:hover + .date-range__icon-wrapper {
-        background-color: var(--color-surface-input-hover) !important;
+        background-color: var(--palette-grayHover-10) !important;
     }
 }

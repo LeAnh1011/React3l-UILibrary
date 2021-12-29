@@ -53,13 +53,13 @@ const OutlineButton = React.forwardRef(
         {loading && (
           <button
             className={classNames(
-              "btn btn-outline-have-icon",
+              "btn btn-outline-loading-for-have-icon",
               `btn--${type}-loading`,
               disabled ? "disabled" : "",
               className
             )}
           >
-            <div className="button-content-have-icon">
+            <div className="button-content">
               <div className="children-content">{children}</div>
               <Spin indicator={antIcon} />
             </div>
@@ -88,13 +88,13 @@ const OutlineButton = React.forwardRef(
         {loading && (
           <button
             className={classNames(
-              "btn btn-outline-have-icon",
+              "btn btn-outline-loading-for-no-icon",
               `btn--${type}-loading`,
               disabled ? "disabled" : "",
               className
             )}
           >
-            <div className="button-content-have-icon">
+            <div className="button-content">
               <div className="children-content">{children}</div>
               <Spin indicator={antIcon} />
             </div>

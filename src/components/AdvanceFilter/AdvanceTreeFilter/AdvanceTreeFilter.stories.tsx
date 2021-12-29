@@ -1,15 +1,15 @@
 import React from "react";
-import { storiesOf } from "@storybook/react";
-import TreeSelect from "./TreeSelect";
+
+import AdvanceTreeFilter from "./AdvanceTreeFilter";
 import { Model, ModelFilter } from "react3l-common";
 import { Observable } from "rxjs";
 import { IdFilter } from "react3l-advanced-filters";
 import { StringFilter } from "react3l-advanced-filters";
 import { Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
-import FormItem from "../FormItem/FormItem";
-import { BORDER_TYPE } from "./../../config/enum";
-import { ValidateStatus } from "./../../config/enum";
+import FormItem from "../../FormItem";
+import { BORDER_TYPE } from "./../../../config/enum";
+import { ValidateStatus } from "./../../../config/enum";
 
 export class DistrictFilter extends ModelFilter {
   public id: IdFilter = new IdFilter();
@@ -63,7 +63,7 @@ const demoSearchFunc = (TModelFilter: ModelFilter) => {
   return demoObservable;
 };
 
-function Default() {
+export function AdvanceTreeFilterStories() {
   const [listItem, dispatch] = React.useReducer(reducerFunc, demoList);
 
   const [item, setItem] = React.useState<Model>(demoItem);
@@ -145,34 +145,7 @@ function Default() {
           validateStatus={isValidated ? ValidateStatus.error : null}
           message={isValidated ? "Error label" : ""}
         >
-          <TreeSelect
-            checkable={isMultiple}
-            placeHolder={"Select Organization"}
-            selectable={!isMultiple}
-            classFilter={DistrictFilter}
-            onChange={handleChangeItem}
-            checkStrictly={true}
-            item={item}
-            listItem={isMultiple ? listItem : []}
-            getTreeData={demoSearchFunc}
-            type={type}
-            isUsingSearch={withSearch}
-            label={"Label"}
-            disabled={isDisabled}
-            isSmall={isSmall}
-            selectWithAdd={isSelectWithAdd}
-            selectWithPreferOption={isSelectWithPreferOption}
-            preferOptions={isSelectWithPreferOption ? list : undefined}
-          />
-        </FormItem>
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <FormItem
-          validateStatus={isValidated ? ValidateStatus.error : null}
-          message={isValidated ? "Error label" : ""}
-        >
-          <TreeSelect
+          <AdvanceTreeFilter
             checkable={isMultiple}
             placeHolder={"Select Organization"}
             selectable={!isMultiple}
@@ -260,5 +233,3 @@ function Default() {
     </div>
   );
 }
-
-storiesOf("TreeSelect", module).add("Default", Default);

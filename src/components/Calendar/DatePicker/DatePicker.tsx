@@ -4,10 +4,10 @@ import classNames from "classnames";
 import { DEFAULT_DATETIME_VALUE } from "config/consts";
 import { BORDER_TYPE } from "config/enum";
 import { Moment } from "moment";
-import React, { RefObject } from "react";
+import React, { ReactSVGElement, RefObject } from "react";
 import { CommonService } from "services/common-service";
+import { CloseFilled16 } from "@carbon/icons-react";
 import "./DatePicker.scss";
-
 
 interface DatePickerAction {
   name?: string;
@@ -54,19 +54,19 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
       : value;
   }, [value]);
 
-
   const handleClearDate = React.useCallback(
-    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
       event.stopPropagation();
       onChange(null);
     },
     [onChange]
   );
 
-
-
   return (
-    <div className={classNames("date-picker__wrapper", className)} ref={wrapperRef}>
+    <div
+      className={classNames("date-picker__wrapper", className)}
+      ref={wrapperRef}
+    >
       <div className="date-picker__label m-b--xxxs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label className="component__title">
@@ -102,10 +102,7 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
           "date-picker--disabled ": disabled,
           "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,
         })}
-        placeholder={
-          placeHolder
-        }
-
+        placeholder={placeHolder}
       />
       {type === BORDER_TYPE.FLOAT_LABEL && label && (
         <label
@@ -114,7 +111,6 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
             "component__title--sm": isSmall,
             "component__title-up": internalValue,
           })}
-
         >
           {label}
           {isRequired && <span className="text-danger">&nbsp;*</span>}
@@ -127,14 +123,10 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
               type === BORDER_TYPE.MATERIAL,
           })}
         >
-          <i
-            className={classNames(
-              "input-icon__clear",
-              "m-l--xxs",
-              "tio-clear_circle"
-            )}
+          <CloseFilled16
+            className={classNames("date-picker__icon-clear", "m-l--xxs")}
             onClick={handleClearDate}
-          ></i>
+          ></CloseFilled16>
         </span>
       )}
     </div>

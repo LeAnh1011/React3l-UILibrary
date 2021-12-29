@@ -6,6 +6,7 @@ import { Radio, RadioChangeEvent } from "antd";
 import FormItem from "../../FormItem/FormItem";
 import { ValidateStatus } from "./../../../config/enum";
 import { BORDER_TYPE } from "./../../../config/enum";
+import { Apple16 } from "@carbon/icons-react";
 
 export class DemoFilter extends ModelFilter {
   name: StringFilter = new StringFilter();
@@ -54,7 +55,7 @@ export function InputTextStories() {
             type={type}
             isSmall={isSmall}
             label="First Name"
-            // prefix="Mr."
+            prefix={<Apple16 />}
             suffix="Kg"
             showCount={true}
             maxLength={100}

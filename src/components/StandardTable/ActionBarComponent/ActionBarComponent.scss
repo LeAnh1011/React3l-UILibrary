@@ -1,12 +1,12 @@
 .action-bar-container{
     height: 40px;
-    background-color: #0F62FE;
+    background-color: var(--color-primary);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     .item-selected-counter{
-        color: white;
+        color: var(--color-white);
     }
     padding: 0px 16px;
     .action-button{
@@ -15,7 +15,7 @@
         align-items: center ;
         .button-cancel{
             padding: 8px 12px;
-            color: white;
+            color: var(--color-white);
             font-weight: 400;
             &:hover{
                 cursor: pointer;

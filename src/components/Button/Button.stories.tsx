@@ -4,17 +4,27 @@ import nameof from "ts-nameof.macro";
 import Button from "./Button";
 import { Tabs } from "antd";
 import { ChevronDown16, TrashCan16, Add16 } from "@carbon/icons-react";
-
+export type LoadingStatus = "default" | "submitting" | "submitted" | "error";
 const { TabPane } = Tabs;
 function NormalButtonView() {
-  const [loading, setLoading] = React.useState<boolean>(false);
-
+  const [loadingStatus, setLoadingStatus] = React.useState<LoadingStatus>(
+    "default"
+  );
+  let i = 0;
   const handleOnClick = React.useCallback(() => {
-    setLoading(true);
+    setLoadingStatus("submitting");
     setTimeout(() => {
-      setLoading(false);
+      if (i % 2 === 0) {
+        setLoadingStatus("submitted");
+      } else {
+        setLoadingStatus("error");
+      }
+      i++;
+      setTimeout(() => {
+        setLoadingStatus("default");
+      }, 1500);
     }, 2000);
-  }, []);
+  }, [i]);
   return (
     <div>
       <Tabs defaultActiveKey="1">
@@ -31,19 +41,37 @@ function NormalButtonView() {
             <Button
               type="primary"
               className="btn--sm"
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--md">
+            <Button
+              type="primary"
+              className="btn--md"
+              loadingStatus={loadingStatus}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--lg">
+            <Button
+              type="primary"
+              className="btn--lg"
+              loadingStatus={loadingStatus}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
-            <Button type="primary" className="btn--xl">
+            <Button
+              type="primary"
+              className="btn--xl"
+              loadingStatus={loadingStatus}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
           </div>
@@ -82,7 +110,7 @@ function NormalButtonView() {
               type="primary"
               className="btn--sm"
               icon={<Add16 />}
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
@@ -153,7 +181,7 @@ function NormalButtonView() {
               type="primary"
               className="btn--sm"
               icon={<ChevronDown16 />}
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
@@ -225,19 +253,37 @@ function NormalButtonView() {
             <Button
               type="secondary"
               className="btn--sm"
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
               {"Button"}
             </Button>
-            <Button type="secondary" className="btn--md">
+            <Button
+              type="secondary"
+              className="btn--md"
+              loadingStatus={loadingStatus}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
-            <Button type="secondary" className="btn--lg">
+            <Button
+              type="secondary"
+              className="btn--lg"
+              loadingStatus={loadingStatus}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
-            <Button type="secondary" className="btn--xl">
+            <Button
+              type="secondary"
+              className="btn--xl"
+              loadingStatus={loadingStatus}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
           </div>
@@ -276,7 +322,7 @@ function NormalButtonView() {
               type="secondary"
               className="btn--sm"
               icon={<Add16 />}
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
@@ -347,7 +393,7 @@ function NormalButtonView() {
               type="secondary"
               className="btn--sm"
               icon={<ChevronDown16 />}
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
@@ -431,19 +477,37 @@ function NormalButtonView() {
             <Button
               type="danger"
               className="btn--sm"
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
               {"Button"}
             </Button>
-            <Button type="danger" className="btn--md">
+            <Button
+              type="danger"
+              className="btn--md"
+              loadingStatus={loadingStatus}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
-            <Button type="danger" className="btn--lg">
+            <Button
+              type="danger"
+              className="btn--lg"
+              loadingStatus={loadingStatus}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
-            <Button type="danger" className="btn--xl">
+            <Button
+              type="danger"
+              className="btn--xl"
+              loadingStatus={loadingStatus}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
           </div>
@@ -482,7 +546,7 @@ function NormalButtonView() {
               type="danger"
               className="btn--sm"
               icon={<TrashCan16 />}
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
@@ -553,7 +617,7 @@ function NormalButtonView() {
               type="danger"
               className="btn--sm"
               icon={<TrashCan16 />}
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
@@ -617,14 +681,24 @@ function NormalButtonView() {
   );
 }
 function OutlineButtonView() {
-  const [loading, setLoading] = React.useState<boolean>(false);
-
+  const [loadingStatus, setLoadingStatus] = React.useState<LoadingStatus>(
+    "default"
+  );
+  let i = 0;
   const handleOnClick = React.useCallback(() => {
-    setLoading(true);
+    setLoadingStatus("submitting");
     setTimeout(() => {
-      setLoading(false);
+      if (i % 2 === 0) {
+        setLoadingStatus("submitted");
+      } else {
+        setLoadingStatus("error");
+      }
+      i++;
+      setTimeout(() => {
+        setLoadingStatus("default");
+      }, 1500);
     }, 2000);
-  }, []);
+  }, [i]);
 
   return (
     <div>
@@ -642,19 +716,37 @@ function OutlineButtonView() {
             <Button
               type="outline-primary"
               className="btn--sm"
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
               {"Button"}
             </Button>
-            <Button type="outline-primary" className="btn--md">
+            <Button
+              type="outline-primary"
+              className="btn--md"
+              loadingStatus={loadingStatus}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
-            <Button type="outline-primary" className="btn--lg">
+            <Button
+              type="outline-primary"
+              className="btn--lg"
+              loadingStatus={loadingStatus}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
-            <Button type="outline-primary" className="btn--xl">
+            <Button
+              type="outline-primary"
+              className="btn--xl"
+              loadingStatus={loadingStatus}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
           </div>
@@ -693,7 +785,7 @@ function OutlineButtonView() {
               type="outline-primary"
               className="btn--sm"
               icon={<Add16 />}
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
@@ -764,7 +856,7 @@ function OutlineButtonView() {
               type="outline-primary"
               className="btn--sm"
               icon={<ChevronDown16 />}
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
@@ -848,19 +940,37 @@ function OutlineButtonView() {
             <Button
               type="outline-danger"
               className="btn--sm"
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
               {"Button"}
             </Button>
-            <Button type="outline-danger" className="btn--md">
+            <Button
+              type="outline-danger"
+              className="btn--md"
+              loadingStatus={loadingStatus}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
-            <Button type="outline-danger" className="btn--lg">
+            <Button
+              type="outline-danger"
+              className="btn--lg"
+              loadingStatus={loadingStatus}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
-            <Button type="outline-danger" className="btn--xl">
+            <Button
+              type="outline-danger"
+              className="btn--xl"
+              loadingStatus={loadingStatus}
+              onClick={handleOnClick}
+              isSubmitBtn={true}
+            >
               {"Button"}
             </Button>
           </div>
@@ -899,7 +1009,7 @@ function OutlineButtonView() {
               type="outline-danger"
               className="btn--sm"
               icon={<TrashCan16 />}
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
@@ -982,7 +1092,7 @@ function OutlineButtonView() {
               type="outline-danger"
               className="btn--sm"
               icon={<TrashCan16 />}
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
@@ -1672,14 +1782,24 @@ function GhostButtonView() {
 }
 
 function BleedButtonView() {
-  const [loading, setLoading] = React.useState<boolean>(false);
-
+  const [loadingStatus, setLoadingStatus] = React.useState<LoadingStatus>(
+    "default"
+  );
+  let i = 0;
   const handleOnClick = React.useCallback(() => {
-    setLoading(true);
+    setLoadingStatus("submitting");
     setTimeout(() => {
-      setLoading(false);
+      if (i % 2 === 0) {
+        setLoadingStatus("submitted");
+      } else {
+        setLoadingStatus("error");
+      }
+      i++;
+      setTimeout(() => {
+        setLoadingStatus("default");
+      }, 1500);
     }, 2000);
-  }, []);
+  }, [i]);
 
   return (
     <div>
@@ -1696,7 +1816,7 @@ function BleedButtonView() {
           >
             <Button
               type="bleed-primary"
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
@@ -1718,7 +1838,7 @@ function BleedButtonView() {
             <Button
               type="bleed-primary"
               icon={<Add16 />}
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >
@@ -1740,7 +1860,7 @@ function BleedButtonView() {
             <Button
               type="bleed-primary"
               icon={<ChevronDown16 />}
-              loading={loading}
+              loadingStatus={loadingStatus}
               onClick={handleOnClick}
               isSubmitBtn={true}
             >

@@ -135,3 +135,11 @@
         padding-bottom: 20px;
     }
 }
+.btn--outline-primary-loading {
+    background-color: var(--btn-outline-primary-hover);
+    color: var(--white);
+}
+.btn--outline-danger-loading {
+    background-color: var(--btn-outline-danger-hover);
+    color: var(--white);
+}

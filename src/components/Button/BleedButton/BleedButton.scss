@@ -16,8 +16,8 @@
 
   &:focus {
     background-color: var(--btn-primary-focus);
-    border: 1px solid #0f62fe;
-    box-shadow: 0px 0px 8px #0f62fe;
+    border: 1px solid var(--color-primary);
+    box-shadow: 0px 0px 8px var(--color-primary);
   }
   &.disabled {
     color: var(--btn-primary-disabled-label);
@@ -42,8 +42,8 @@
 
   &:focus {
     background-color: var(--btn-secondary-focus);
-    box-shadow: 0px 0px 8px #0f62fe;
-    border: 1px solid #0f62fe;
+    box-shadow: 0px 0px 8px var(--color-primary);
+    border: 1px solid var(--color-primary);
   }
   &.disabled {
     color: var(--btn-secondary-disabled-label);
@@ -68,4 +68,12 @@
 }
 .btn-bleed-no-icon {
   padding: 12px 64px 32px 16px !important;
+}
+.btn--bleed-primary-loading {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-label);
+}
+.btn--bleed-secondary-loading {
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-label);
 }

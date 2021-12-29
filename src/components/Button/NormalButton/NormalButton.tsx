@@ -54,8 +54,8 @@ const NormalButton = React.forwardRef(
         {loading && (
           <button
             className={classNames(
-              "btn btn-normal-have-icon no-box-shadow",
-              `btn--${type}`,
+              "btn btn-normal-have-icon",
+              `btn--${type}-loading`,
               className
             )}
           >
@@ -90,8 +90,8 @@ const NormalButton = React.forwardRef(
         {loading && (
           <button
             className={classNames(
-              "btn btn-normal-have-icon no-box-shadow",
-              `btn--${type}`,
+              "btn btn-normal-have-icon",
+              `btn--${type}-loading`,
               className
             )}
           >

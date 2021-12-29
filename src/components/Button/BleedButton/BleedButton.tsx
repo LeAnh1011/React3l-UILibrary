@@ -54,8 +54,8 @@ const BleedButton = React.forwardRef(
         {loading && (
           <button
             className={classNames(
-              "btn btn-bleed-have-icon no-box-shadow",
-              `btn--${type}`,
+              "btn btn-bleed-have-icon",
+              `btn--${type}-loading`,
               disabled ? "disabled" : "",
               className
             )}
@@ -92,8 +92,8 @@ const BleedButton = React.forwardRef(
         {loading && (
           <button
             className={classNames(
-              "btn btn-bleed-have-icon no-box-shadow",
-              `btn--${type}`,
+              "btn btn-bleed-have-icon",
+              `btn--${type}-loading`,
               disabled ? "disabled" : "",
               className
             )}

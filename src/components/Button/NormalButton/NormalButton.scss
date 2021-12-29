@@ -158,9 +158,15 @@
         padding-bottom: 20px;
     }
 }
-.box-icon{
-    .ant-spin{
-        font-size: 14px !important;
-        line-height: 1px;
-    }
+.btn--primary-loading {
+    background-color: var(--btn-primary-hover);
+    color: var(--btn-primary-label);
+}
+.btn--secondary-loading {
+    background-color: var(--btn-secondary-bg);
+    color: var(--btn-secondary-label);
+}
+.btn--danger-loading {
+    background-color: var(--btn-danger-bg);
+    color: var(--btn-danger-label);
 }

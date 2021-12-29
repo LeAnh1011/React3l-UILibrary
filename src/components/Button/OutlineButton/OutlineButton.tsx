@@ -53,8 +53,8 @@ const OutlineButton = React.forwardRef(
         {loading && (
           <button
             className={classNames(
-              "btn btn-outline-have-icon no-box-shadow",
-              `btn--${type}`,
+              "btn btn-outline-have-icon",
+              `btn--${type}-loading`,
               disabled ? "disabled" : "",
               className
             )}
@@ -88,8 +88,8 @@ const OutlineButton = React.forwardRef(
         {loading && (
           <button
             className={classNames(
-              "btn btn-outline-have-icon no-box-shadow",
-              `btn--${type}`,
+              "btn btn-outline-have-icon",
+              `btn--${type}-loading`,
               disabled ? "disabled" : "",
               className
             )}

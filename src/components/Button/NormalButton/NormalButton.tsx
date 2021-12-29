@@ -1,11 +1,21 @@
 import classNames from "classnames";
-import InlineLoading from "components/InlineLoading";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 import React, { PropsWithChildren } from "react";
 import { ButtonProps } from "../Button";
 import "./NormalButton.scss";
 
 export interface NormalButtonProps extends ButtonProps {}
-
+const antIcon = (
+  <LoadingOutlined
+    style={{
+      fontSize: 15,
+      color: "#ffffff",
+    }}
+    className="spin-loading"
+    spin
+  />
+);
 const NormalButton = React.forwardRef(
   (props: PropsWithChildren<NormalButtonProps>, ref: React.Ref<any>) => {
     const {
@@ -16,19 +26,12 @@ const NormalButton = React.forwardRef(
       icon,
       disabled,
       children,
-      loadingStatus,
-      isSubmitBtn,
+      loading,
     } = props;
 
     return icon ? (
       <>
-        {isSubmitBtn && loadingStatus !== "default" && (
-          <InlineLoading
-            status={loadingStatus}
-            className={classNames("inline-loading-normal-have-icon", className)}
-          />
-        )}
-        {loadingStatus === "default" && (
+        {!loading && (
           <button
             type={htmlType}
             onClick={onClick}
@@ -47,16 +50,27 @@ const NormalButton = React.forwardRef(
             </div>
           </button>
         )}
+        {/* // button use in loading time */}
+        {loading && (
+          <button
+            className={classNames(
+              "btn btn-normal-have-icon no-box-shadow",
+              `btn--${type}`,
+              className
+            )}
+          >
+            <div className="button-content-have-icon">
+              <div className="children-content">{children}</div>
+              <div className="box-icon">
+                <Spin indicator={antIcon} />
+              </div>
+            </div>
+          </button>
+        )}
       </>
     ) : (
       <>
-        {isSubmitBtn && loadingStatus !== "default" && (
-          <InlineLoading
-            status={loadingStatus}
-            className={classNames("inline-loading-normal-no-icon", className)}
-          />
-        )}
-        {loadingStatus === "default" && (
+        {!loading && (
           <button
             type={htmlType}
             onClick={onClick}
@@ -70,6 +84,23 @@ const NormalButton = React.forwardRef(
             )}
           >
             {children}
+          </button>
+        )}
+        {/* // button use in loading time */}
+        {loading && (
+          <button
+            className={classNames(
+              "btn btn-normal-have-icon no-box-shadow",
+              `btn--${type}`,
+              className
+            )}
+          >
+            <div className="button-content-have-icon">
+              <div className="children-content">{children}</div>
+              <div className="box-icon">
+                <Spin indicator={antIcon} />
+              </div>
+            </div>
           </button>
         )}
       </>

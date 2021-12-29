@@ -82,12 +82,14 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        height: 16px;
         .children-content {
             margin-right: 32px;
         }
         .icon-button {
             font-size: 16px;
         }
+        
     }
     &.btn--sm {
         height: 32px;
@@ -156,41 +158,9 @@
         padding-bottom: 20px;
     }
 }
-.inline-loading-normal-no-icon{
-    display: flex;
-    align-items: center;
-    &.btn--sm {
-        height: 32px;
-    }
-
-    &.btn--md {
-        height: 36px;
-    }
-
-    &.btn--lg {
-        height: 40px;
-    }
-
-    &.btn--xl {
-        height: 56px;
-    }
-}
-.inline-loading-normal-have-icon{
-    display: flex;
-    align-items: center;
-    &.btn--sm {
-        height: 32px;
-    }
-
-    &.btn--md {
-        height: 36px;
-    }
-
-    &.btn--lg {
-        height: 40px;
-    }
-
-    &.btn--xl {
-        height: 56px;
+.box-icon{
+    .ant-spin{
+        font-size: 14px !important;
+        line-height: 1px;
     }
 }

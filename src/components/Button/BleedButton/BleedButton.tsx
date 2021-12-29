@@ -1,11 +1,21 @@
 import classNames from "classnames";
-import InlineLoading from "components/InlineLoading";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 import React, { PropsWithChildren } from "react";
 import { ButtonProps } from "../Button";
 import "./BleedButton.scss";
 
 export interface BleedButtonProps extends ButtonProps {}
-
+const antIcon = (
+  <LoadingOutlined
+    style={{
+      fontSize: 16,
+      color: "#ffffff",
+    }}
+    className="spin-loading"
+    spin
+  />
+);
 const BleedButton = React.forwardRef(
   (props: PropsWithChildren<BleedButtonProps>, ref: React.Ref<any>) => {
     const {
@@ -16,26 +26,19 @@ const BleedButton = React.forwardRef(
       icon,
       disabled,
       children,
-      loadingStatus,
-      isSubmitBtn,
+      loading,
     } = props;
 
     return icon ? (
       <>
-        {isSubmitBtn && loadingStatus !== "default" && (
-          <InlineLoading
-            status={loadingStatus}
-            className={classNames("inline-loading-bleed-have-icon", className)}
-          />
-        )}
-        {loadingStatus === "default" && (
+        {!loading && (
           <button
             type={htmlType}
             onClick={onClick}
             ref={ref}
             disabled={disabled}
             className={classNames(
-              "btn btn-bleed-have-icon",
+              "btn btn-bleed-have-icon ",
               `btn--${type}`,
               disabled ? "disabled" : "",
               className
@@ -47,16 +50,29 @@ const BleedButton = React.forwardRef(
             </div>
           </button>
         )}
+        {/* // button use in loading time */}
+        {loading && (
+          <button
+            className={classNames(
+              "btn btn-bleed-have-icon no-box-shadow",
+              `btn--${type}`,
+              disabled ? "disabled" : "",
+              className
+            )}
+          >
+            <div className="button-content-have-icon">
+              <div className="children-content">{children}</div>
+              <div className="box-icon">
+                {" "}
+                <Spin indicator={antIcon} />
+              </div>
+            </div>
+          </button>
+        )}
       </>
     ) : (
       <>
-        {isSubmitBtn && loadingStatus !== "default" && (
-          <InlineLoading
-            status={loadingStatus}
-            className={classNames("inline-loading-bleed-no-icon", className)}
-          />
-        )}
-        {loadingStatus === "default" && (
+        {!loading && (
           <button
             type={htmlType}
             onClick={onClick}
@@ -70,6 +86,25 @@ const BleedButton = React.forwardRef(
             )}
           >
             {children}
+          </button>
+        )}
+        {/* // button use in loading time */}
+        {loading && (
+          <button
+            className={classNames(
+              "btn btn-bleed-have-icon no-box-shadow",
+              `btn--${type}`,
+              disabled ? "disabled" : "",
+              className
+            )}
+          >
+            <div className="button-content-have-icon">
+              <div className="children-content">{children}</div>
+              <div className="box-icon">
+                {" "}
+                <Spin indicator={antIcon} />
+              </div>
+            </div>
           </button>
         )}
       </>

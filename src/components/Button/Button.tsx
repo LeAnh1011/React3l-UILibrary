@@ -11,7 +11,6 @@ import LinkButton from "./LinkButton";
 import LinkPlainButton from "./LinkPlainButton";
 import NormalButton from "./NormalButton/NormalButton";
 import OutlineButton from "./OutlineButton";
-export type LoadingStatus = "default" | "submitting" | "submitted" | "error";
 export type ButtonType =
   | "primary"
   | "secondary"
@@ -34,9 +33,7 @@ export type ButtonType =
 export interface ButtonProps {
   type?: ButtonType;
 
-  loadingStatus?: LoadingStatus;
-
-  isSubmitBtn?: boolean;
+  loading?: boolean;
 
   htmlType?: ButtonHTMLAttributes<any>["type"];
 
@@ -101,8 +98,7 @@ Button.defaultProps = {
   type: "primary",
   htmlType: "button",
   disabled: false,
-  isSubmitBtn: false,
-  loadingStatus: 'default'
+  loading: false,
 };
 
 export default Button;

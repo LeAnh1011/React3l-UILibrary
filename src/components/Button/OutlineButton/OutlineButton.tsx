@@ -1,10 +1,20 @@
 import classNames from "classnames";
-import InlineLoading from "components/InlineLoading";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 import React, { PropsWithChildren } from "react";
 import { ButtonProps } from "../Button";
 import "./OutlineButton.scss";
 export interface OutlineButtonProps extends ButtonProps {}
-
+const antIcon = (
+  <LoadingOutlined
+    style={{
+      fontSize: 16,
+      color: "#ffffff",
+    }}
+    className="spin-loading"
+    spin
+  />
+);
 const OutlineButton = React.forwardRef(
   (props: PropsWithChildren<OutlineButtonProps>, ref: React.Ref<any>) => {
     const {
@@ -15,22 +25,12 @@ const OutlineButton = React.forwardRef(
       icon,
       disabled,
       children,
-      loadingStatus,
-      isSubmitBtn,
+      loading,
     } = props;
 
     return icon ? (
       <>
-        {isSubmitBtn && loadingStatus !== "default" && (
-          <InlineLoading
-            status={loadingStatus}
-            className={classNames(
-              "inline-loading-outline-have-icon",
-              className
-            )}
-          />
-        )}
-        {loadingStatus === "default" && (
+        {!loading && (
           <button
             type={htmlType}
             onClick={onClick}
@@ -49,16 +49,26 @@ const OutlineButton = React.forwardRef(
             </div>
           </button>
         )}
+        {/* // button use in loading time */}
+        {loading && (
+          <button
+            className={classNames(
+              "btn btn-outline-have-icon no-box-shadow",
+              `btn--${type}`,
+              disabled ? "disabled" : "",
+              className
+            )}
+          >
+            <div className="button-content-have-icon">
+              <div className="children-content">{children}</div>
+              <Spin indicator={antIcon} />
+            </div>
+          </button>
+        )}
       </>
     ) : (
       <>
-        {isSubmitBtn && loadingStatus !== "default" && (
-          <InlineLoading
-            status={loadingStatus}
-            className={classNames("inline-loading-outline-no-icon", className)}
-          />
-        )}
-        {loadingStatus === "default" && (
+        {!loading && (
           <button
             type={htmlType}
             onClick={onClick}
@@ -72,6 +82,22 @@ const OutlineButton = React.forwardRef(
             )}
           >
             {children}
+          </button>
+        )}
+        {/* // button use in loading time */}
+        {loading && (
+          <button
+            className={classNames(
+              "btn btn-outline-have-icon no-box-shadow",
+              `btn--${type}`,
+              disabled ? "disabled" : "",
+              className
+            )}
+          >
+            <div className="button-content-have-icon">
+              <div className="children-content">{children}</div>
+              <Spin indicator={antIcon} />
+            </div>
           </button>
         )}
       </>

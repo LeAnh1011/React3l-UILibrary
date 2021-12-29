@@ -1,7 +1,6 @@
 import { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import DateRange from "components/Calendar/DateRange";
-import { STANDARD_DATE_FORMAT_INVERSE } from "config/consts";
 import { BORDER_TYPE } from "config/enum";
 import { InputSelect } from "index";
 import moment, { Moment } from "moment";
@@ -201,11 +200,6 @@ function AdvanceDateRangeFilter(
   const handleClearItem = React.useCallback(() => {
     onChange(null, [null, null]);
   }, [onChange]);
-
-  React.useEffect(() => {
-    console.log('activeItem', activeItem);
-    console.log(value && value?.length && value[0]?.format(STANDARD_DATE_FORMAT_INVERSE))
-  }, [activeItem, value])
 
   return (
     <div

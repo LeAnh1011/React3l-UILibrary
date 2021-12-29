@@ -10,4 +10,4 @@ storiesOf('AdvanceFilterMaster', module)
     .add('AdvanceIdFilterMasterStories', AdvanceIdFilterMasterStories)
     .add('AdvanceDateRangeFilterMasterStories', AdvanceDateRangeFilterMasterStories)
     .add('AdvanceMultipleIdFilterMasterStories', AdvanceMultipleIdFilterMasterStories)
-    // .add('TagFilterStories', TagFilterStories);
+    .add('TagFilterStories', TagFilterStories);

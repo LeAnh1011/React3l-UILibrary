@@ -64,6 +64,17 @@
     border-radius: 0px;
     font-size: 14px;
 
+    .ant-picker-input {
+      input {
+        &::placeholder {
+          color: var(--palette-gray-60);
+        }
+        &:disabled::placeholder {
+          color: var(--palette-gray-40);
+        }
+      }
+    }
+
     &.date-picker--disabled {
       background-color: var(--palette-grayHover-10);
       & + .component__title {

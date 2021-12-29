@@ -6,7 +6,6 @@ import "./StandardTable.scss";
 import StandardTable from "./StandardTable";
 // import { Model } from "react3l-common";
 import { Key, RowSelectionType } from "antd/lib/table/interface";
-import yomatoImg from "../../assets/image/yo.jpg";
 import LayoutHeader from "./LayoutHeader/LayoutHeader";
 import LayoutCell from "./LayoutCell/LayoutCell";
 import { ModelFilter } from "react3l-common";
@@ -21,7 +20,8 @@ import { Tabs } from "antd";
 import Pagination from "./Pagination/Pagination";
 import { ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
 import { StringFilter } from "react3l-advanced-filters";
-
+const KateBishop =
+  "https://www.dualshockers.com/static/uploads/2021/11/How-Old-Is-Kate-Bishop-In-Hawkeye-TV-Show-scaled.jpeg";
 const { TabPane } = Tabs;
 export class DemoFilter extends ModelFilter {
   name: StringFilter = new StringFilter();
@@ -206,7 +206,7 @@ function Default() {
           return (
             <LayoutCell orderType={orderType} tableSize={size}>
               <OneLineText
-                avatar={yomatoImg}
+                avatar={KateBishop}
                 avatarType={avatarType}
                 value={name}
                 link="https://www.youtube.com/"
@@ -228,7 +228,7 @@ function Default() {
           return (
             <LayoutCell orderType={orderType} tableSize={size}>
               <OneLineText
-                avatar={yomatoImg}
+                avatar={KateBishop}
                 avatarType={avatarType}
                 value={name}
                 avatarSize={size}
@@ -335,7 +335,7 @@ function Default() {
           return (
             <LayoutCell orderType={orderType} tableSize="large">
               <OneLineText
-                avatar={yomatoImg}
+                avatar={KateBishop}
                 avatarType={avatarType}
                 value={name}
                 link="https://www.youtube.com/"
@@ -356,7 +356,7 @@ function Default() {
           return (
             <LayoutCell orderType={orderType} tableSize="large">
               <OneLineText
-                avatar={yomatoImg}
+                avatar={KateBishop}
                 avatarType={avatarType}
                 value={name}
                 avatarSize={"large"}
@@ -421,7 +421,7 @@ function Default() {
           return (
             <LayoutCell orderType={orderType} tableSize="large">
               <TwoLineText
-                avatar={yomatoImg}
+                avatar={KateBishop}
                 avatarType={avatarType}
                 valueLine1={version}
                 valueLine2={"facebook"}
@@ -441,7 +441,7 @@ function Default() {
           return (
             <LayoutCell orderType={orderType} tableSize="large">
               <TwoLineText
-                avatar={yomatoImg}
+                avatar={KateBishop}
                 avatarType={avatarType}
                 valueLine1={version}
                 valueLine2={"facebook"}
@@ -462,7 +462,7 @@ function Default() {
           return (
             <LayoutCell orderType={orderType} tableSize="large">
               <TwoLineText
-                avatar={yomatoImg}
+                avatar={KateBishop}
                 avatarType={avatarType}
                 valueLine1={version}
                 valueLine2={"facebook"}

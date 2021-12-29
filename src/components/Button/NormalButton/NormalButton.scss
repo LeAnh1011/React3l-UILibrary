@@ -13,12 +13,6 @@
     &:active {
         background-color: var(--btn-primary-active);
     }
-
-    &:focus {
-        background-color: var(--btn-primary-focus);
-        border: 1px solid var(--color-primary);
-        box-shadow: 0px 0px 8px var(--color-primary); 
-    }
     &.disabled {
         color: var(--btn-primary-disabled-label);
         background-color: var(--btn-primary-disabled);
@@ -39,12 +33,6 @@
     &:active {
         background-color: var(--btn-secondary-active);
     }
-
-    &:focus {
-        background-color: var(--btn-secondary-focus);
-        border: 1px solid var(--color-primary);
-        box-shadow: 0px 0px 8px var(--color-primary);
-    }
     &.disabled {
         color: var(--btn-secondary-disabled-label);
         background-color: var(--btn-secondary-disabled);
@@ -64,12 +52,6 @@
 
     &:active {
         background-color: var(--btn-danger-active);
-    }
-
-    &:focus {
-        background-color: var(--btn-danger-focus);
-        border: 1px solid var(--color-primary);
-        box-shadow: 0px 0px 8px var(--color-primary);
     }
     &.disabled {
         color: var(--btn-danger-disabled-label);

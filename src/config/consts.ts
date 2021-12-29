@@ -19,6 +19,7 @@ export const STANDARD_DATE_TIME_REGEX_WITHOUT_TIMEZONE: RegExp = /^[0-9]{4}-[0-9
 export const STANDARD_DATE_TIME_REGEX: RegExp = /^([0-9]{4}-[0-9]{2}-[0-9]{2})[\sT]([0-9]{2}:[0-9]{2}:[0-9]{2}(\.[0-9]{1,3})?)(Z|[+-][0-9]{2}:[0-9]{2})?$/;
 export const STANDARD_DATE_FORMAT: string = "YYYY-MM-DD";
 export const STANDARD_DATE_FORMAT_INVERSE: string = "DD-MM-YYYY";
+export const STANDARD_DATE_FORMAT_INVERSE_DEFAULT: string = "DD/MM/YYYY";
 export const STANDARD_TIME_FORMAT: string = "HH:mm:ss";
 export const DEFAULT_DATETIME_VALUE: string = "0001-01-01T00:00:00";
 export const STANDARD_DATE_TIME_FORMAT: string = `${STANDARD_DATE_FORMAT}${

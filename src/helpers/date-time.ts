@@ -1,6 +1,7 @@
 import {
   DEFAULT_DATETIME_VALUE,
   STANDARD_DATE_FORMAT_INVERSE,
+  STANDARD_DATE_FORMAT_INVERSE_DEFAULT,
   STANDARD_DATE_REGEX,
   STANDARD_DATE_TIME_FORMAT_VIEW,
   STANDARD_DATE_TIME_REGEX,
@@ -12,7 +13,7 @@ import moment, { Moment } from "moment";
 
 export function formatDate(
   date: Moment,
-  dateFormat: string = STANDARD_DATE_FORMAT_INVERSE,
+  dateFormat: string = STANDARD_DATE_FORMAT_INVERSE_DEFAULT
 ) {
   if (date) {
     if (typeof date === "object" && "format" in date) {
@@ -24,7 +25,7 @@ export function formatDate(
 
 export function formatTime(
   time: Moment,
-  timeFormat: string = STANDARD_TIME_FORMAT,
+  timeFormat: string = STANDARD_TIME_FORMAT
 ) {
   if (!time) return null;
   if (typeof time === "object" && "format" in time) {
@@ -35,7 +36,7 @@ export function formatTime(
 
 export function formatDateTime(
   time: Moment,
-  dateTimeFormat: string = STANDARD_DATE_TIME_FORMAT_VIEW,
+  dateTimeFormat: string = STANDARD_DATE_TIME_FORMAT_VIEW
 ) {
   if (!time) return null;
   if (typeof time === "object" && "format" in time) {
@@ -61,10 +62,10 @@ export function isDateTimeValue(time?: string) {
   );
 }
 export function formatInputDate(value: Moment | string | undefined) {
-  if (typeof value === 'object') {
+  if (typeof value === "object") {
     return value;
   }
-  if (typeof value === 'string' && value !== DEFAULT_DATETIME_VALUE) {
+  if (typeof value === "string" && value !== DEFAULT_DATETIME_VALUE) {
     /* check whether value is dateTime value, if true return moment instance */
     if (isDateTimeValue(value)) {
       return moment(value);

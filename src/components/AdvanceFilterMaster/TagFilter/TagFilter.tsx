@@ -1,55 +1,121 @@
+import { Close16 } from "@carbon/icons-react";
+import { Tooltip } from "antd";
 import classNames from "classnames";
-import React from "react";
-import { Model, ModelFilter } from "react3l-common";
-import { DateFilter, GuidFilter, IdFilter, NumberFilter, StringFilter } from "react3l-advanced-filters";
-import "./TagFilter.scss";
-import { Moment } from "moment";
+import { formatDate } from "helpers/date-time";
 import { formatNumber } from "helpers/number";
-import { formatDateTime } from "helpers/date-time";
+import { Moment } from "moment";
+import React from "react";
+import {
+  DateFilter,
+  GuidFilter,
+  IdFilter,
+  NumberFilter,
+  StringFilter,
+} from "react3l-advanced-filters";
+import { Model, ModelFilter } from "react3l-common";
+import "./TagFilter.scss";
 
 export interface TagFilterProps {
   className?: string;
   value?: ModelFilter;
   keyTranslate?: string;
+  onClear?: (t: any) => void;
 }
 
-
 function TagFilter(props: TagFilterProps) {
-  const { className, value, keyTranslate } = props;
+  const { className, value, keyTranslate, onClear } = props;
 
-  const [loading, setloading] = React.useState<boolean>(true);
-  const [list, setList,] = React.useState<Model>([]);
+  const [list, setList] = React.useState<Model>([]);
 
   React.useEffect(() => {
-    if (loading) {
+    let isLoading = false;
+    if (!isLoading) {
       const tmp = filterList(value);
       setList([...tmp]);
-      console.log('tmp', tmp)
-      setloading(false);
     }
-  }, [loading, value]);
+    return () => {
+      isLoading = true;
+    };
+  }, [value]);
   return (
     <div className={classNames("tag-filte__container", className)}>
-      <div
-        className="tag-filte__container-text"
-      >
-        {list && list?.length > 0 && list.map((item: any) => (
-          <div className="tag-detail">
-            <div className="tag-detail__title">{`${keyTranslate}.${item?.key}`}</div>
-            {item?.type === 'string' && item?.value}
-            {item?.type === 'number' && formatNumber(item?.value)}
-            {item?.type === 'date' && item?.value?.length > 0 ? formatDateTime(item?.value) : <>{item?.value.map((value: Moment) => formatDateTime(value))}</>}
+      {list &&
+        list?.length > 0 &&
+        list.map((itemTag: any, index: number) => (
+          <div className="tag-detail m--xxs" key={index}>
+            <div className="tag-filte__container-text">
+              <div className="tag-detail__title m-r--xxxs">{`${keyTranslate}.${itemTag?.key}: `}</div>
+              {itemTag?.type === "string" && itemTag?.value}
+              {itemTag?.type === "number" && formatNumber(itemTag?.value)}
+              {itemTag?.type === "date" && itemTag?.value?.length > 0 && (
+                <>
+                  {formatDate(itemTag.value[0] as Moment)}&minus;
+                  {formatDate(itemTag?.value[1])}
+                </>
+              )}
+              {itemTag?.type === "date" && !itemTag?.value?.length && (
+                <>{formatDate(itemTag?.value)}</>
+              )}
+              {itemTag?.type === "id" && itemTag?.value?.length > 0 && (
+                <>
+                  {itemTag?.value?.length > 2 ? (
+                    <>
+                      <Tooltip
+                        placement="topLeft"
+                        title={
+                          <>
+                            {itemTag?.value?.map(
+                              (itemValue: any, index: number) => (
+                                <span key={index}>
+                                  <>
+                                    <span>{itemValue?.name}</span>
+                                    {index < itemTag?.value?.length - 1 && (
+                                      <span className="m-r--xxxs">&#44;</span>
+                                    )}
+                                  </>
+                                </span>
+                              )
+                            )}
+                          </>
+                        }
+                      >
+                        <span>{itemTag?.value[0]?.name}</span>
+                        {index < itemTag?.value?.length - 1 && (
+                          <span className="m-r--xxxs">&#44;</span>
+                        )}
+                        <span>{itemTag?.value[1]?.name}</span>
+                        <span>... + {itemTag?.value?.length - 2}</span>
+                      </Tooltip>
+                    </>
+                  ) : (
+                    <>
+                      {itemTag?.value?.map((itemValue: any, index: number) => (
+                        <span key={index}>
+                          <>
+                            <span>{itemValue?.name}</span>
+                            {index < itemTag?.value?.length - 1 && (
+                              <span className="m-r--xxxs">&#44;</span>
+                            )}
+                          </>
+                        </span>
+                      ))}
+                    </>
+                  )}
+                </>
+              )}
+            </div>
+            <Close16
+              aria-label="Add"
+              className="tag-filte__container-clear"
+              onClick={() => onClear(itemTag)}
+            />
           </div>
         ))}
-        {/* {value} */}
-      </div>
-      <div className="tag-filte__container-clear"></div>
     </div>
   );
 }
 
 export default TagFilter;
-
 
 interface Tag {
   key?: string;
@@ -57,10 +123,7 @@ interface Tag {
   type?: string;
 }
 
-
-function filterList<TFilter extends ModelFilter>(
-  search: TFilter
-): Tag[] {
+function filterList<TFilter extends ModelFilter>(search: TFilter): Tag[] {
   let list = [] as any;
   if (typeof search === "object" && search !== null) {
     Object.entries<
@@ -71,12 +134,27 @@ function filterList<TFilter extends ModelFilter>(
           // filter by StringFilter
           if (typeof filterValue === "string" && filterValue !== "") {
             switch (filterKey) {
-              case 'startWith':
-                return list.push({ key, value: filterValue, type: 'string' });
-              case 'endWith':
-                return list.push({ key, value: filterValue, type: 'string' });
-              case 'contain':
-                return list.push({ key, value: filterValue, type: 'string' });
+              case "startWith":
+                return list.push({
+                  key,
+                  value: filterValue,
+                  type: "string",
+                  filterKey,
+                });
+              case "endWith":
+                return list.push({
+                  key,
+                  value: filterValue,
+                  type: "string",
+                  filterKey,
+                });
+              case "contain":
+                return list.push({
+                  key,
+                  value: filterValue,
+                  type: "string",
+                  filterKey,
+                });
               default:
                 // Do nothing
                 break;
@@ -86,23 +164,51 @@ function filterList<TFilter extends ModelFilter>(
       }
       // filter by NumberFilter
       if (value instanceof NumberFilter) {
-
         Object.entries(value).forEach(([filterKey, filterValue]) => {
-
           if (typeof filterValue === "number" && !Number.isNaN(filterValue)) {
             switch (filterKey) {
-              case 'equal':
-                return list.push({ key, value: filterValue, type: 'number' });
-              case 'notEqual':
-                return list.push({ key, value: filterValue, type: 'number' });
-              case 'less':
-                return list.push({ key, value: filterValue, type: 'number' });
-              case 'greater':
-                return list.push({ key, value: filterValue, type: 'number' });
-              case 'lessEqual':
-                return list.push({ key, value: filterValue, type: 'number' });
-              case 'greaterEqual':
-                return list.push({ key, value: filterValue, type: 'number' });
+              case "equal":
+                return list.push({
+                  key,
+                  value: filterValue,
+                  type: "number",
+                  filterKey,
+                });
+              case "notEqual":
+                return list.push({
+                  key,
+                  value: filterValue,
+                  type: "number",
+                  filterKey,
+                });
+              case "less":
+                return list.push({
+                  key,
+                  value: filterValue,
+                  type: "number",
+                  filterKey,
+                });
+              case "greater":
+                return list.push({
+                  key,
+                  value: filterValue,
+                  type: "number",
+                  filterKey,
+                });
+              case "lessEqual":
+                return list.push({
+                  key,
+                  value: filterValue,
+                  type: "number",
+                  filterKey,
+                });
+              case "greaterEqual":
+                return list.push({
+                  key,
+                  value: filterValue,
+                  type: "number",
+                  filterKey,
+                });
               default:
                 // Do nothing
                 break;
@@ -113,30 +219,43 @@ function filterList<TFilter extends ModelFilter>(
       // filter by DateFilter
       if (value instanceof DateFilter) {
         Object.entries(value).forEach(([filterKey, filterValue]) => {
-
           switch (filterKey) {
-            case 'equal':
-              return list.push({ key, value: filterValue });
-            case 'notEqual':
-              return list.push({ key, value: filterValue });
-            case 'less':
-              const lessFiltered = list.filter((t: any) => t['key'] === key);
+            case "equal":
+              return list.push({
+                key,
+                value: filterValue,
+                type: "date",
+                filterKey,
+              });
+            case "notEqual":
+              return list.push({
+                key,
+                value: filterValue,
+                type: "date",
+                filterKey,
+              });
+            case "less":
+              const lessFiltered = list.filter((t: any) => t["key"] === key);
               if (!lessFiltered || lessFiltered?.length === 0) {
-                return list.push({ key, value: [filterValue], type: 'date' });
-              }
-              else {
+                return list.push({
+                  key,
+                  value: [filterValue],
+                  type: "date",
+                  filterKey: [filterKey],
+                });
+              } else {
                 if (lessFiltered?.length === 2) {
                   list = list.map((t: any) => {
-                    if (t['key'] === key) {
-                      t['value'][0] = filterValue;
+                    if (t["key"] === key) {
+                      t["value"][0] = filterValue;
                     }
                     return t;
                   });
-                }
-                else {
+                } else {
                   list = list.map((t: any) => {
-                    if (t['key'] === key) {
-                      t['value']?.push(filterValue);
+                    if (t["key"] === key) {
+                      t["value"]?.push(filterValue);
+                      t["filterKey"]?.push(filterKey);
                     }
                     return t;
                   });
@@ -144,48 +263,56 @@ function filterList<TFilter extends ModelFilter>(
               }
 
               break;
-            case 'greater':
-              const greaterFiltered = list.filter((t: any) => t['key'] === key);
+            case "greater":
+              const greaterFiltered = list.filter((t: any) => t["key"] === key);
               if (!greaterFiltered || greaterFiltered?.length === 0) {
-                return list.push({ key, value: [filterValue], type: 'date' });
-              }
-              else {
+                return list.push({
+                  key,
+                  value: [filterValue],
+                  type: "date",
+                  filterKey: [filterKey],
+                });
+              } else {
                 if (greaterFiltered?.length === 2) {
                   list = list.map((t: any) => {
-                    if (t['key'] === key) {
-                      t['value'][1] = filterValue;
+                    if (t["key"] === key) {
+                      t["value"][1] = filterValue;
                     }
                     return t;
                   });
-                }
-                else {
+                } else {
                   list = list.map((t: any) => {
-                    if (t['key'] === key) {
-                      t['value']?.push(filterValue);
+                    if (t["key"] === key) {
+                      t["value"]?.push(filterValue);
+                      t["filterKey"]?.push(filterKey);
                     }
                     return t;
                   });
                 }
               }
               break;
-            case 'lessEqual':
+            case "lessEqual":
               const lessEqualFiltered = list.filter((t: any) => t[key]);
               if (!lessEqualFiltered || lessEqualFiltered?.length === 0) {
-                return list.push({ key, value: [filterValue], type: 'date' });
-              }
-              else {
+                return list.push({
+                  key,
+                  value: [filterValue],
+                  type: "date",
+                  filterKey: [filterKey],
+                });
+              } else {
                 if (lessEqualFiltered?.length === 2) {
                   list = list.map((t: any) => {
-                    if (t['key'] === key) {
-                      t['value'][0] = filterValue;
+                    if (t["key"] === key) {
+                      t["value"][0] = filterValue;
                     }
                     return t;
                   });
-                }
-                else {
+                } else {
                   list = list.map((t: any) => {
-                    if (t['key'] === key) {
-                      t['value']?.push(filterValue);
+                    if (t["key"] === key) {
+                      t["value"]?.push(filterValue);
+                      t["filterKey"]?.push(filterKey);
                     }
                     return t;
                   });
@@ -193,24 +320,30 @@ function filterList<TFilter extends ModelFilter>(
               }
 
               break;
-            case 'greaterEqual':
-              const greaterEqualFiltered = list.filter((t: any) => t['key'] === key);
+            case "greaterEqual":
+              const greaterEqualFiltered = list.filter(
+                (t: any) => t["key"] === key
+              );
               if (!greaterEqualFiltered || greaterEqualFiltered?.length === 0) {
-                return list.push({ key, value: [filterValue], type: 'date' });
-              }
-              else {
+                return list.push({
+                  key,
+                  value: [filterValue],
+                  type: "date",
+                  filterKey: [filterKey],
+                });
+              } else {
                 if (greaterEqualFiltered?.length === 2) {
                   list = list.map((t: any) => {
-                    if (t['key'] === key) {
-                      t['value'][1] = filterValue;
+                    if (t["key"] === key) {
+                      t["value"][1] = filterValue;
                     }
                     return t;
                   });
-                }
-                else {
+                } else {
                   list = list.map((t: any) => {
-                    if (t['key'] === key) {
-                      t['value']?.push(filterValue);
+                    if (t["key"] === key) {
+                      t["value"]?.push(filterValue);
+                      t["filterKey"]?.push(filterKey);
                     }
                     return t;
                   });
@@ -225,55 +358,45 @@ function filterList<TFilter extends ModelFilter>(
       }
       // filter by IdFilter
       if (value instanceof IdFilter || value instanceof GuidFilter) {
-        const objectKey = key.replace('Id', '');
-        console.log(search[`${objectKey}Value`]);
-        console.log(`${objectKey}Value`)
+        const objectKey = key.replace("Id", "");
+
         Object.entries(value).forEach(([filterKey, filterValue]) => {
           if (
             (typeof filterValue === "string" && filterValue !== "") ||
-            (typeof filterValue === "number" && !Number.isNaN(filterValue))
+            (typeof filterValue === "number" && !Number.isNaN(filterValue)) ||
+            Array.isArray(filterValue)
           ) {
             switch (filterKey) {
-              case 'equal':
-                if (search[`${objectKey}Value`]['name']) {
-                  return list.push({ key, value: search[`${objectKey}Value`]['name'], type: 'id' });
-                } else {
-                  return list.push({ key, value: search[`${objectKey}Value`]['displayName'] });
-                }
-              case 'notEqual':
-                if (search[`${objectKey}Value`]['name']) {
-                  return list.push({ key, value: search[`${objectKey}Value`]['name'] });
-                } else {
-                  return list.push({ key, value: search[`${objectKey}Value`]['displayName'] });
-                }
+              case "equal":
+                return list.push({
+                  key,
+                  value: [search[`${objectKey}Value`]],
+                  type: "id",
+                  filterKey,
+                });
+              case "notEqual":
+                return list.push({
+                  key,
+                  value: [search[`${objectKey}Value`]],
+                  type: "id",
+                  filterKey,
+                });
 
-              case 'in':
-                console.log((search[`${objectKey}Value`]));
-
-                const values = search[`${objectKey}Value`].map((item: any) => item['name']);
-                console.log('values', values)
-                list = list.filter((t: any) => {
-                  const v: number = t[key] as number;
-                  if (
-                    (typeof v === "number" || typeof value === "string") &&
-                    (filterValue as any) instanceof Array
-                  ) {
-                    return (filterValue as any).includes(v);
-                  }
-                  return true;
+              case "in":
+                list.push({
+                  key,
+                  value: search[`${objectKey}Value`],
+                  type: "id",
+                  filterKey,
                 });
                 break;
 
-              case 'notIn':
-                list = list.filter((t: any) => {
-                  const v: number = t[key] as number;
-                  if (
-                    (typeof v === "number" || typeof value === "string") &&
-                    (filterValue as any) instanceof Array
-                  ) {
-                    return !(filterValue as any).includes(v);
-                  }
-                  return true;
+              case "notIn":
+                list.push({
+                  key,
+                  value: search[`${objectKey}Value`],
+                  type: "id",
+                  filterKey,
                 });
                 break;
 

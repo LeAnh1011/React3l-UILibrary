@@ -3,7 +3,30 @@
 .tag-filte__container {
     display: flex;
     align-items: center;
-    padding: 6px 2px;
-    background-color: black;
-    border-radius: 12px;
+    cursor: pointer;
+    flex-wrap: wrap;
+    .tag-detail {
+        display: flex;
+        align-items: center;
+        padding: 2px 4px 2px 8px;
+        background-color: black;
+        border-radius: 12px;
+        color: white;
+        white-space: nowrap;
+        .tag-filte__container-text {
+            display: flex;
+            align-items: center;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+            letter-spacing: 0.16px;
+            .tag-detail__title {
+                margin-right: 4px;
+            }
+        }
+        .tag-filte__container-clear {
+            margin-left: 10px;
+        }
+    }
 }

@@ -12,7 +12,7 @@ export interface InlineLoadingProps {
 
 const antIcon = (
   <LoadingOutlined
-    style={{ fontSize: 16, marginRight: 8 }}
+    style={{ fontSize: 16, marginRight: 8, color: "#0F62FE" }}
     className="spin-loading"
     spin
   />
@@ -25,10 +25,10 @@ const InlineLoading = React.forwardRef(
     return (
       <div className={classNames("inline-loading", className)}>
         {status === "submitting" && (
-          <>
+          <div className="submitting-box">
             <Spin indicator={antIcon} />
             Loading...
-          </>
+          </div>
         )}
         {status === "submitted" && (
           <div className="submitted-box">
@@ -37,7 +37,7 @@ const InlineLoading = React.forwardRef(
           </div>
         )}
         {status === "error" && (
-          <div className="submitted-box">
+          <div className="error-box">
             <ErrorFilled16 className="icon-error-inline-loading" />
             Error
           </div>

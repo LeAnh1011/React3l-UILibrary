@@ -12,7 +12,7 @@
   .advance-id-filter__list-container {
     width: 100%;
     height: auto;
-    background-color: var(--color-surface-material-input);
+    background-color: var(--palette-gray-10);
     @include box-shadow--popover();
     margin-top: 5px;
     position: absolute;
@@ -22,12 +22,12 @@
       overflow-y: auto;
       max-height: 180px;
       position: relative;
-      background-color: var(--color-surface-material-input);
+      background-color: var(--palette-gray-10);
     }
     .advance-id-filter__bottom-button {
       height: 40px;
       width: 100%;
-      background-color: var(--color-surface-material-input);
+      background-color: var(--palette-gray-10);
       display: flex;
       align-items: center;
       box-shadow: inset 0px 1px 0px #e1e3e5;
@@ -75,13 +75,13 @@
       }
       &:hover,
       &:focus {
-        background-color: var(--color-surface-material-input-hover);
+        background-color: var(--palette-grayHover-10);
       }
       &:focus-visible {
         outline: none;
       }
       &.advance-id-filter__item--selected {
-        background-color: var(--color-surface-material-input-hover);
+        background-color: var(--palette-grayHover-10);
         display: flex;
         justify-content: space-between;
       }

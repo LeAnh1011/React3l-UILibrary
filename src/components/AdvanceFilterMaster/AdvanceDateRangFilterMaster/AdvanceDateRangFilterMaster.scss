@@ -103,11 +103,11 @@ $backgound-color: #f4f4f4;
             &:hover,
             &:focus {
                 background-color: var(--color-primary);
-                color: white;
+                color: var(--color-white);
             }
             &.date-range-master__bg-primary {
                 background-color: var(--color-primary);
-                color: white;
+                color: var(--color-white);
             }
         }
         .advance-date-range-filter__text {

@@ -1,5 +1,6 @@
 import classNames from "classnames";
-import React, { RefObject } from "react";
+import React, { ReactSVGElement, RefObject } from "react";
+import { CloseFilled16 } from "@carbon/icons-react";
 import "./InputNumber.scss";
 import { ReactNode } from "react";
 import { BORDER_TYPE } from "config/enum";
@@ -193,7 +194,7 @@ function InputNumber(props: InputNumberProps) {
   );
 
   const handleClearInput = React.useCallback(
-    (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
       setInternalValue("");
       inputRef.current.focus();
       if (typeof onChange === "function") {
@@ -248,7 +249,11 @@ function InputNumber(props: InputNumberProps) {
     <div className={classNames("input-number__wrapper", className)}>
       <div className="input-number__label m-b--xxxs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
-          <label className="component__title">
+          <label
+            className={classNames("component__title", {
+              "component__title--disabled": disabled,
+            })}
+          >
             {label}
             {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
@@ -286,7 +291,7 @@ function InputNumber(props: InputNumberProps) {
             {typeof prefix === "string" ? (
               <span className="p-r--xxs">{prefix}</span>
             ) : (
-              <>{prefix}</>
+              <div className="m-r--xs input-number__icon">{prefix}</div>
             )}
           </>
         )}
@@ -320,21 +325,19 @@ function InputNumber(props: InputNumberProps) {
           </label>
         )}
         {internalValue && !disabled && (
-          <i
-            className={classNames(
-              "input-icon__clear",
-              "m-l--xxs",
-              "tio-clear_circle"
-            )}
-            onClick={handleClearInput}
-          ></i>
+          <div style={{ width: "16px", height: "20px" }} className="m-l--xxs">
+            <CloseFilled16
+              className={classNames("input-icon__clear")}
+              onClick={handleClearInput}
+            ></CloseFilled16>
+          </div>
         )}
         {suffix && (
           <>
             {typeof suffix === "string" ? (
               <span className="body-text--md m-l--xxs">{suffix}</span>
             ) : (
-              <div className="m-l--xxs">{suffix}</div>
+              <div className="m-l--xxs input-text__icon">{suffix}</div>
             )}
           </>
         )}

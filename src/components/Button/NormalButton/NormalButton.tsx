@@ -9,7 +9,7 @@ export interface NormalButtonProps extends ButtonProps {}
 const antIcon = (
   <LoadingOutlined
     style={{
-      fontSize: 15,
+      fontSize: 16,
       color: "#ffffff",
     }}
     className="spin-loading"
@@ -54,12 +54,12 @@ const NormalButton = React.forwardRef(
         {loading && (
           <button
             className={classNames(
-              "btn btn-normal-have-icon",
+              "btn btn-normal-loading-for-have-icon",
               `btn--${type}-loading`,
               className
             )}
           >
-            <div className="button-content-have-icon">
+            <div className="button-content">
               <div className="children-content">{children}</div>
               <div className="box-icon">
                 <Spin indicator={antIcon} />
@@ -83,19 +83,19 @@ const NormalButton = React.forwardRef(
               className
             )}
           >
-            {children}
+            <div>{children}</div>
           </button>
         )}
         {/* // button use in loading time */}
         {loading && (
           <button
             className={classNames(
-              "btn btn-normal-have-icon",
+              "btn btn-normal-loading-for-no-icon",
               `btn--${type}-loading`,
               className
             )}
           >
-            <div className="button-content-have-icon">
+            <div className="button-content">
               <div className="children-content">{children}</div>
               <div className="box-icon">
                 <Spin indicator={antIcon} />

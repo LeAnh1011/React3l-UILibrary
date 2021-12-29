@@ -11,7 +11,7 @@ function NormalButtonView() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 40000);
   }, []);
   return (
     <div>

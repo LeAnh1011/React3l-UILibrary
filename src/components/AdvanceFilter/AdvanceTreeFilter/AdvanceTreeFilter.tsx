@@ -1,17 +1,17 @@
 import React, { RefObject, Reducer } from "react";
 import { v4 as uuidv4 } from "uuid";
-import "./TreeSelect.scss";
+import "./AdvanceTreeFilter.scss";
 import { Model, ModelFilter } from "react3l-common";
-import Tree from "../Tree/Tree";
+import Tree from "../../Tree";
 import { useDebounceFn } from "ahooks";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import { Observable } from "rxjs";
 import { CommonService } from "services/common-service";
-import InputTag from "../Input/InputTag/InputTag";
-import InputSelect from "../Input/InputSelect/InputSelect";
+import InputTag from "components/Input/InputTag";
+import InputSelect from "../../Input/InputSelect";
 import { BORDER_TYPE } from "config/enum";
 
-export interface TreeSelectProps<
+export interface AdvanceTreeFilterProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
@@ -56,7 +56,7 @@ function filterReducer(state: ModelFilter, action: filterAction): ModelFilter {
   return;
 }
 
-function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
+function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
   const {
     listItem,
     item,
@@ -194,8 +194,8 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
 
   return (
     <>
-      <div className="tree-select__container" ref={wrapperRef}>
-        <div className="tree-select__input" onClick={handleExpand}>
+      <div className="advance-tree-filter__container" ref={wrapperRef}>
+        <div className="advance-tree-filter__input" onClick={handleExpand}>
           {checkable ? (
             <InputTag
               listItem={listItem}
@@ -230,7 +230,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
           )}
         </div>
         {expanded && (
-          <div className="tree-select__list" id={componentId}>
+          <div className="advance-tree-filter__list" id={componentId}>
             <Tree
               getTreeData={getTreeData}
               selectedKey={selectedKey}
@@ -255,7 +255,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
   );
 }
 
-TreeSelect.defaultProps = {
+AdvanceTreeFilter.defaultProps = {
   placeHolder: `Select TreeSelect...`,
   searchProperty: "name",
   searchType: "contain",
@@ -268,4 +268,4 @@ TreeSelect.defaultProps = {
   treeTitleRender: (t: any) => t?.title,
 };
 
-export default TreeSelect;
+export default AdvanceTreeFilter;

@@ -4,7 +4,7 @@
   width: 100%;
   height: auto;
   max-width: 300px;
-  background-color: var(--color-surface-material-input);
+  background-color: var(--palette-gray-10);
   @include box-shadow--popover();
   &.tree-container--lg {
     max-width: 350px !important;
@@ -31,7 +31,7 @@
   .select__bottom-button {
     height: 40px;
     width: 100%;
-    background-color: var(--color-surface-material-input);
+    background-color: var(--palette-gray-10);
     display: flex;
     align-items: center;
     box-shadow: inset 0px 1px 0px #e1e3e5;
@@ -53,7 +53,7 @@
     }
   }
   .ant-tree-list {
-    background-color: var(--color-surface-material-input);
+    background-color: var(--palette-gray-10);
 
     .ant-tree-treenode {
       height: 40px;
@@ -63,8 +63,12 @@
       padding-bottom: 0px;
       transition: all 0.3s, border 0s, line-height 0s, box-shadow 0s;
 
+      &:focus-within {
+        background-color: var(--palette-grayHover-10);
+      }
+
       &:hover {
-        background-color: var(--color-surface-material-input-hover);
+        background-color: var(--palette-grayHover-10);
       }
       .ant-tree-switcher {
         display: flex;
@@ -78,7 +82,7 @@
 
     .ant-tree-treenode-selected,
     .ant-tree-treenode-checkbox-checked {
-      background-color: var(--color-surface-material-input-hover);
+      background-color: var(--palette-grayHover-10);
     }
 
     .ant-tree-node-content-wrapper:hover {
@@ -90,7 +94,7 @@
       padding-right: 15px;
       padding-left: 0px;
       &.ant-tree-node-selected {
-        background-color: var(--color-surface-material-input-hover);
+        background-color: var(--palette-grayHover-10);
       }
     }
   }
@@ -126,6 +130,6 @@
   }
 
   .ant-tree-checkbox-inner {
-    border: 1px solid var(--color-input-disabled);
+    border: 1px solid var(--palette-coolGray-30);
   }
 }

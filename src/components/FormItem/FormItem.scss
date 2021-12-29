@@ -16,7 +16,7 @@
 
   .form-item__message {
     font-size: 0.75em;
-    color: var(--color-input-disabled);
+    color: var(--palette-gray-60);
   }
 
   .form-item__icon {
@@ -33,19 +33,19 @@
 
   &.form-item__container--error {
     .component__title {
-      color: var(--color-text) !important;
+      color: var(--palette-gray-70) !important;
     }
     .form-item__content {
       .form-item__icon,
       i.input-icon {
-        color: var(--color-input-disabled);
+        color: var(--palette-gray-60);
       }
 
       .component__input,
       textarea,
       .input-tag__container,
       .ant-picker {
-        background-color: var(--color-critical-surface) !important;
+        background-color: var(--color-critical-blur) !important;
         outline-color: var(--color-critical) !important;
         border-color: var(--color-critical) !important;
       }

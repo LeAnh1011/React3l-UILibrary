@@ -54,7 +54,7 @@ export function InputTextStories() {
             type={type}
             isSmall={isSmall}
             label="First Name"
-            // prefix="Mr."
+            prefix="Mr."
             suffix="Kg"
             showCount={true}
             maxLength={100}

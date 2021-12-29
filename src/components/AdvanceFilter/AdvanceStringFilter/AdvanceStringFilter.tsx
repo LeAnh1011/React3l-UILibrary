@@ -1,6 +1,7 @@
 import classNames from "classnames";
+import { CloseFilled16 } from "@carbon/icons-react";
 import { BORDER_TYPE } from "config/enum";
-import React, { RefObject } from "react";
+import React, { ReactSVGElement, RefObject } from "react";
 import "./AdvanceStringFilter.scss";
 
 interface AdvanceStringFilterAction {
@@ -74,7 +75,7 @@ const AdvanceStringFilter = React.forwardRef(
     );
 
     const handleClearInput = React.useCallback(
-      (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
         setInternalValue("");
         if (inputRef && inputRef.current) {
           inputRef.current.focus();
@@ -100,7 +101,9 @@ const AdvanceStringFilter = React.forwardRef(
 
     const handleKeyDown = React.useCallback(
       (event) => {
-        onKeyDown(event);
+        if (typeof onKeyDown === "function") {
+          onKeyDown(event);
+        }
       },
       [onKeyDown]
     );
@@ -126,7 +129,11 @@ const AdvanceStringFilter = React.forwardRef(
       <div className={classNames("advance-string-filter__wrapper", className)}>
         <div className="advance-string-filter__label m-b--xxxs">
           {type !== BORDER_TYPE.FLOAT_LABEL && label && (
-            <label className="component__title">
+            <label
+              className={classNames("component__title", {
+                "component__title--disabled": disabled,
+              })}
+            >
               {label}
               {isRequired && <span className="text-danger">&nbsp;*</span>}
             </label>
@@ -203,14 +210,12 @@ const AdvanceStringFilter = React.forwardRef(
             </label>
           )}
           {internalValue && !disabled && (
-            <i
-              className={classNames(
-                "input-icon__clear",
-                "m-l--xxs",
-                "tio-clear_circle"
-              )}
-              onClick={handleClearInput}
-            ></i>
+            <div style={{ width: "16px", height: "20px" }} className="m-l--xxs">
+              <CloseFilled16
+                className={classNames("input-icon__clear")}
+                onClick={handleClearInput}
+              ></CloseFilled16>
+            </div>
           )}
           {suffix && (
             <>

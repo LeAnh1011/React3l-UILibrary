@@ -17,40 +17,24 @@ const GhostButton = React.forwardRef(
       children,
     } = props;
 
-    return icon ? (
+    return (
       <button
         type={htmlType}
         onClick={onClick}
         ref={ref}
         disabled={disabled}
         className={classNames(
-          "btn btn-ghost-have-icon",
+          "btn",
+          icon ? "btn-ghost-have-icon" : "btn-ghost-no-icon",
           `btn--${type}`,
           disabled ? "disabled" : "",
           className
         )}
       >
-        <div className="button-content-have-icon">
+        <div className="button-content">
           <div className="children-content">{children}</div>
-          <div className="box-icon">
-            <i className={classNames(icon, "icon-button")}></i>
-          </div>
+          <div className="box-icon">{icon}</div>
         </div>
-      </button>
-    ) : (
-      <button
-        type={htmlType}
-        onClick={onClick}
-        ref={ref}
-        disabled={disabled}
-        className={classNames(
-          "btn btn-ghost-no-icon",
-          `btn--${type}`,
-          disabled ? "disabled" : "",
-          className
-        )}
-      >
-        {children}
       </button>
     );
   }

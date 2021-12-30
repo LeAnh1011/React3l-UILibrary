@@ -862,8 +862,6 @@ function OutlineButtonView() {
               type="outline-danger"
               className="btn--sm"
               icon={<TrashCan16 />}
-              loading={loading}
-              onClick={handleOnClick}
             >
               {"Button"}
             </Button>
@@ -944,8 +942,6 @@ function OutlineButtonView() {
               type="outline-danger"
               className="btn--sm"
               icon={<TrashCan16 />}
-              loading={loading}
-              onClick={handleOnClick}
             >
               {"Button"}
             </Button>

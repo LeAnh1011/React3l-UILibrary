@@ -11,7 +11,7 @@ function NormalButtonView() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 3000);
   }, []);
   return (
     <div>
@@ -90,13 +90,7 @@ function NormalButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button
-              type="primary"
-              className="btn--sm"
-              icon={<Add16 />}
-              loading={loading}
-              onClick={handleOnClick}
-            >
+            <Button type="primary" className="btn--sm" icon={<Add16 />}>
               {"Button"}
             </Button>
             <Button type="primary" className="btn--md" icon={<Add16 />}>
@@ -160,13 +154,7 @@ function NormalButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button
-              type="primary"
-              className="btn--sm"
-              icon={<ChevronDown16 />}
-              loading={loading}
-              onClick={handleOnClick}
-            >
+            <Button type="primary" className="btn--sm" icon={<ChevronDown16 />}>
               {"Button"}
             </Button>
             <Button type="primary" className="btn--md" icon={<ChevronDown16 />}>
@@ -296,13 +284,7 @@ function NormalButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button
-              type="secondary"
-              className="btn--sm"
-              icon={<Add16 />}
-              loading={loading}
-              onClick={handleOnClick}
-            >
+            <Button type="secondary" className="btn--sm" icon={<Add16 />}>
               {"Button"}
             </Button>
             <Button type="secondary" className="btn--md" icon={<Add16 />}>
@@ -370,8 +352,6 @@ function NormalButtonView() {
               type="secondary"
               className="btn--sm"
               icon={<ChevronDown16 />}
-              loading={loading}
-              onClick={handleOnClick}
             >
               {"Button"}
             </Button>
@@ -514,83 +494,7 @@ function NormalButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button
-              type="danger"
-              className="btn--sm"
-              icon={<TrashCan16 />}
-              loading={loading}
-              onClick={handleOnClick}
-            >
-              {"Button"}
-            </Button>
-            <Button type="danger" className="btn--md" icon={<TrashCan16 />}>
-              {"Button"}
-            </Button>
-            <Button type="danger" className="btn--lg" icon={<TrashCan16 />}>
-              {"Button"}
-            </Button>
-            <Button type="danger" className="btn--xl" icon={<TrashCan16 />}>
-              {"Button"}
-            </Button>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: 700,
-              marginBottom: 30,
-            }}
-          >
-            <Button
-              type="danger"
-              className="btn--sm"
-              disabled={true}
-              icon={<TrashCan16 />}
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="danger"
-              className="btn--md"
-              disabled={true}
-              icon={<TrashCan16 />}
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="danger"
-              className="btn--lg"
-              disabled={true}
-              icon={<TrashCan16 />}
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="danger"
-              className="btn--xl"
-              disabled={true}
-              icon={<TrashCan16 />}
-            >
-              {"Button"}
-            </Button>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: 700,
-              marginBottom: 30,
-            }}
-          >
-            <Button
-              type="danger"
-              className="btn--sm"
-              icon={<TrashCan16 />}
-              loading={loading}
-              onClick={handleOnClick}
-            >
+            <Button type="danger" className="btn--sm" icon={<TrashCan16 />}>
               {"Button"}
             </Button>
             <Button type="danger" className="btn--md" icon={<TrashCan16 />}>

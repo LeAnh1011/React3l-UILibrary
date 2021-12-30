@@ -11,7 +11,6 @@ import LinkButton from "./LinkButton";
 import LinkPlainButton from "./LinkPlainButton";
 import NormalButton from "./NormalButton/NormalButton";
 import OutlineButton from "./OutlineButton";
-import { LoadingOutlined } from "@ant-design/icons";
 export type ButtonType =
   | "primary"
   | "secondary"
@@ -30,16 +29,7 @@ export type ButtonType =
   | "icon-only-danger"
   | "icon-only-outline-danger"
   | "icon-only-ghost";
-export const antIconLoadingButton = (
-  <LoadingOutlined
-    style={{
-      fontSize: 16,
-      color: "#ffffff",
-    }}
-    className="spin-loading"
-    spin
-  />
-);
+
 export interface ButtonProps {
   type?: ButtonType;
 

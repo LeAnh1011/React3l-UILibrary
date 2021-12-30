@@ -16,7 +16,7 @@
   padding: var(--space-xxs) var(--space-xs);
   border-radius:  var(--btn-radius);
   font-size: var(--font-size);
-
+  outline: none;
   transition: 0.2s;
 
   &:active {

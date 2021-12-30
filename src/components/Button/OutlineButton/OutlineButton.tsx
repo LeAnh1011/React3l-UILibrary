@@ -1,7 +1,7 @@
 import classNames from "classnames";
-import { Spin } from "antd";
+import IconLoading from "components/IconLoading";
 import React, { PropsWithChildren } from "react";
-import { antIconLoadingButton, ButtonProps } from "../Button";
+import { ButtonProps } from "../Button";
 import "./OutlineButton.scss";
 export interface OutlineButtonProps extends ButtonProps {}
 
@@ -34,9 +34,7 @@ const OutlineButton = React.forwardRef(
       >
         <div className="button-content-have-icon">
           <div className="children-content">{children}</div>
-          <div className="box-icon">
-            {loading ? <Spin indicator={antIconLoadingButton} /> : icon}
-          </div>
+          <div className="box-icon">{loading ? <IconLoading /> : icon}</div>
         </div>
       </button>
     );

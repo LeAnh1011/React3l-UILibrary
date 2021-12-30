@@ -1,7 +1,7 @@
 import classNames from "classnames";
-import { Spin } from "antd";
+import IconLoading from "components/IconLoading";
 import React, { PropsWithChildren } from "react";
-import { antIconLoadingButton, ButtonProps } from "../Button";
+import { ButtonProps } from "../Button";
 import "./NormalButton.scss";
 
 export interface NormalButtonProps extends ButtonProps {}
@@ -34,9 +34,7 @@ const NormalButton = React.forwardRef(
       >
         <div className="button-content">
           <div className="children-content">{children}</div>
-          <div className="box-icon">
-            {loading ? <Spin indicator={antIconLoadingButton} /> : icon}
-          </div>
+          <div className="box-icon">{loading ? <IconLoading /> : icon}</div>
         </div>
       </button>
     );

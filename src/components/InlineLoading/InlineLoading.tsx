@@ -1,23 +1,14 @@
 import classNames from "classnames";
 import React, { PropsWithChildren } from "react";
 import "./InlineLoading.scss";
-import { LoadingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
 import { CheckmarkFilled16, ErrorFilled16 } from "@carbon/icons-react";
+import IconLoading from "components/IconLoading";
 
 export interface InlineLoadingProps {
   className?: string;
   status?: "default" | "submitting" | "submitted" | "error";
   keyTranslate?: [string, string, string];
 }
-
-const antIcon = (
-  <LoadingOutlined
-    style={{ fontSize: 16, marginRight: 8, color: "#0F62FE" }}
-    className="spin-loading"
-    spin
-  />
-);
 
 const InlineLoading = React.forwardRef(
   (props: PropsWithChildren<InlineLoadingProps>, ref: React.Ref<any>) => {
@@ -27,8 +18,8 @@ const InlineLoading = React.forwardRef(
       <div className={classNames("inline-loading", className)}>
         {status === "submitting" && (
           <div className="submitting-box">
-            <Spin indicator={antIcon} />
-            {keyTranslate[0]}
+            <IconLoading color="#0F62FE" />
+            <div className="p-l--xxs">{keyTranslate[0]}</div>
           </div>
         )}
         {status === "submitted" && (

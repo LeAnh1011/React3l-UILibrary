@@ -205,7 +205,7 @@ function AdvanceIdFilterMaster(
     if (value !== null && value !== undefined) {
       const filterValue = new ClassFilter();
       if (isIdValue) {
-        const listFilterPreferOptions = preferOptions.filter(
+        const listFilterPreferOptions = preferOptions?.filter(
           (current) => current.id === Number(value)
         );
         if (listFilterPreferOptions && listFilterPreferOptions?.length > 0) {

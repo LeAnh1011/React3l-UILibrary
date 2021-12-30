@@ -67,7 +67,7 @@ $backgound-color: #f4f4f4;
                 outline: none;
             }
             &.filter__item--selected {
-                background-color: var(--color-surface-material-input-hover);
+                background-color: var(--palette-grayHover-10);
                 display: flex;
                 justify-content: space-between;
             }

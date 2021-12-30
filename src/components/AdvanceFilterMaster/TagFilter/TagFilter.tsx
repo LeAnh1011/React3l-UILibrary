@@ -13,30 +13,24 @@ import {
   StringFilter,
 } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
+import { TFunction } from 'i18next';
 import "./TagFilter.scss";
 
 export interface TagFilterProps {
   className?: string;
   value?: ModelFilter;
   keyTranslate?: string;
+  translate?: TFunction;
   onClear?: (t: any) => void;
 }
 
 function TagFilter(props: TagFilterProps) {
-  const { className, value, keyTranslate, onClear } = props;
+  const { className, value, keyTranslate, onClear, translate } = props;
 
-  const [list, setList] = React.useState<Model>([]);
-
-  React.useEffect(() => {
-    let isLoading = false;
-    if (!isLoading) {
-      const tmp = filterList(value);
-      setList([...tmp]);
-    }
-    return () => {
-      isLoading = true;
-    };
+  const list = React.useMemo((): Model => {
+    return filterList(value);
   }, [value]);
+
   return (
     <div className={classNames("tag-filte__container", className)}>
       {list &&
@@ -44,7 +38,7 @@ function TagFilter(props: TagFilterProps) {
         list.map((itemTag: any, index: number) => (
           <div className="tag-detail m--xxs" key={index}>
             <div className="tag-filte__container-text">
-              <div className="tag-detail__title m-r--xxxs">{`${keyTranslate}.${itemTag?.key}: `}</div>
+              <div className="tag-detail__title m-r--xxxs">{translate ? translate(`${keyTranslate}.${itemTag?.key}`) : itemTag?.key}: </div>
               {itemTag?.type === "string" && itemTag?.value}
               {itemTag?.type === "number" && formatNumber(itemTag?.value)}
               {itemTag?.type === "date" && itemTag?.value?.length > 0 && (
@@ -292,7 +286,8 @@ function filterList<TFilter extends ModelFilter>(search: TFilter): Tag[] {
               }
               break;
             case "lessEqual":
-              const lessEqualFiltered = list.filter((t: any) => t[key]);
+              const lessEqualFiltered = list.filter((t: any) => t["key"] === key);
+              console.log('lessEqualFiltered', lessEqualFiltered);
               if (!lessEqualFiltered || lessEqualFiltered?.length === 0) {
                 return list.push({
                   key,
@@ -324,6 +319,7 @@ function filterList<TFilter extends ModelFilter>(search: TFilter): Tag[] {
               const greaterEqualFiltered = list.filter(
                 (t: any) => t["key"] === key
               );
+              console.log('greaterEqualFiltered', greaterEqualFiltered);
               if (!greaterEqualFiltered || greaterEqualFiltered?.length === 0) {
                 return list.push({
                   key,
@@ -361,6 +357,7 @@ function filterList<TFilter extends ModelFilter>(search: TFilter): Tag[] {
         const objectKey = key.replace("Id", "");
 
         Object.entries(value).forEach(([filterKey, filterValue]) => {
+
           if (
             (typeof filterValue === "string" && filterValue !== "") ||
             (typeof filterValue === "number" && !Number.isNaN(filterValue)) ||

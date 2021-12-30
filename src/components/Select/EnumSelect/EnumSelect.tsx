@@ -1,42 +1,23 @@
-import { DEBOUNCE_TIME_300 } from "config/consts";
-import { Model, ModelFilter } from "react3l-common";
-import { useDebounceFn } from "ahooks";
+import { Model } from "react3l-common";
 import { Checkbox, Empty } from "antd";
-import Spin from "antd/lib/spin";
 import classNames from "classnames";
 import React, { RefObject } from "react";
-import { ErrorObserver, Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import InputSelect from "components/Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "config/enum";
 import "./EnumSelect.scss";
 import InputTag from "components/Input/InputTag";
 
-export interface SelectProps<
-  T extends Model,
-  TModelFilter extends ModelFilter
-> {
+export interface SelectProps<T extends Model> {
   model?: Model;
 
   listModel?: Model[];
-
-  modelFilter?: TModelFilter;
-
-  searchProperty?: string;
-
-  searchType?: string;
 
   placeHolder?: string;
 
   disabled?: boolean;
 
-  isMaterial?: boolean;
-
-  isEnumerable?: boolean;
-
   appendToBody?: boolean;
-
-  getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
 
   onChange?: (id: number, T?: T) => void;
 
@@ -44,55 +25,46 @@ export interface SelectProps<
 
   render?: (t: T) => string;
 
-  classFilter: new () => TModelFilter;
-
   type?: BORDER_TYPE;
 
   label?: string;
 
   selectWithAdd?: boolean;
 
-  selectWithPreferOption?: boolean;
-
   isSmall?: boolean;
 
   preferOptions?: T[];
 
   isMultiple?: boolean;
+
+  defaultListItem?: Model[];
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
   return t?.name;
 }
 
-function EnumSelect(props: SelectProps<Model, ModelFilter>) {
+function EnumSelect(props: SelectProps<Model>) {
   const {
     model,
-    modelFilter,
-    searchProperty,
-    searchType,
     placeHolder,
     disabled,
-    isEnumerable,
     appendToBody,
-    getList,
     onChange,
     render,
-    classFilter: ClassFilter,
     type,
     label,
     selectWithAdd,
     isSmall,
     isMultiple,
     listModel,
-    onChangeMultiple
+    onChangeMultiple,
+    defaultListItem,
   } = props;
 
   const internalModel = React.useMemo((): Model => {
     return model || null;
   }, [model]);
-
-  const [loading, setLoading] = React.useState<boolean>(false);
 
   const [list, setList] = React.useState<Model[]>([]);
 
@@ -108,36 +80,7 @@ function EnumSelect(props: SelectProps<Model, ModelFilter>) {
 
   const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
 
-  const [subscription] = CommonService.useSubscription();
-
-  const { run } = useDebounceFn(
-    (searchTerm: string) => {
-      const cloneModelFilter = modelFilter
-        ? { ...modelFilter }
-        : new ClassFilter();
-      if (!isEnumerable) {
-        if (searchType) {
-          cloneModelFilter[searchProperty][searchType] = searchTerm;
-        } else cloneModelFilter[searchProperty] = searchTerm;
-      }
-      setLoading(true);
-      subscription.add(getList);
-      getList(cloneModelFilter).subscribe(
-        (res: Model[]) => {
-          setList(res);
-          setLoading(false);
-        },
-        (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        }
-      );
-    },
-    {
-      wait: DEBOUNCE_TIME_300,
-    }
-  );
-
+  // use this for multiple type
   const internalList = React.useMemo(() => {
     if (list && list.length > 0) {
       list.forEach((current) => {
@@ -157,43 +100,28 @@ function EnumSelect(props: SelectProps<Model, ModelFilter>) {
   }, [list, listModel]);
 
   const handleLoadList = React.useCallback(() => {
-    try {
-      setLoading(true);
-      subscription.add(getList);
-      const filter = modelFilter ? modelFilter : new ClassFilter();
-      getList(filter).subscribe(
-        (res: Model[]) => {
-          setList(res);
-          setLoading(false);
-        },
-        (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        }
-      );
-    } catch (error) {}
-  }, [getList, modelFilter, ClassFilter, subscription]);
+    if (defaultListItem && defaultListItem.length > 0) {
+      setList(defaultListItem);
+    } else {
+      setList([]);
+    }
+  }, [defaultListItem]);
 
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (!disabled) {
         setExpand(true);
-        if (isEnumerable) {
-          if (list.length === 0) {
-            await handleLoadList();
-          }
-        } else {
-          await handleLoadList();
-        }
+        handleLoadList();
       }
     },
-    [handleLoadList, isEnumerable, list, disabled]
+    [disabled, handleLoadList]
   );
 
   const handleCloseSelect = React.useCallback(() => {
     setExpand(false);
   }, []);
 
+  // use this function for single type
   const handleClickItem = React.useCallback(
     (item: Model) => (event: any) => {
       onChange(item.id, item);
@@ -202,55 +130,50 @@ function EnumSelect(props: SelectProps<Model, ModelFilter>) {
     [handleCloseSelect, onChange]
   );
 
+  // use this function for multiple type
+  // UX: after choose an item, this item need to be on the top of the list
   const handleClickMultiItem = React.useCallback(
     (item: Model) => (event: any) => {
-      let filteredItem = internalList?.filter(
+      let filteredItem = listModel?.filter(
         (current) => current.id === item.id
       )[0];
-      const cloneModelFilter = modelFilter
-        ? { ...modelFilter }
-        : new ClassFilter();
-
-      if (!cloneModelFilter["id"]["notIn"]) {
-        cloneModelFilter["id"]["notIn"] = [item?.id];
-      } else {
-        cloneModelFilter["id"]["notIn"].push(item?.id);
-      }
-
-      getList(cloneModelFilter).subscribe(
-        (res: Model[]) => {
-          if (res) {
-            setList(res);
-          }
-          setLoading(false);
-        },
-        (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        }
-      );
 
       if (filteredItem) {
-
         onChangeMultiple(item, "REMOVE");
       } else {
+        // perform sort
+        const currentIndex = list.findIndex(
+          (current) => current.id === item.id
+        );
+        list.splice(currentIndex, 1);
+        list.unshift(item);
+        setList(list);
         onChangeMultiple(item, "UPDATE");
-
       }
     },
-    [internalList, modelFilter, ClassFilter, getList, onChangeMultiple]
+    [list, listModel, onChangeMultiple]
   );
 
-  const handleSearchChange = React.useCallback(
-    (searchTerm: string) => {
-      run(searchTerm);
+  const handleClickMultiParentItem = React.useCallback(
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      if (event && event.target === event.currentTarget) {
+        const currentItem = event.target as HTMLDivElement;
+        currentItem.firstElementChild.firstElementChild
+          .querySelector("span")
+          .click();
+      }
     },
-    [run]
+    []
   );
 
   const handleClearItem = React.useCallback(() => {
     onChange(null);
   }, [onChange]);
+
+  // use this for type multiple
+  const handleClearAll = React.useCallback(() => {
+    onChangeMultiple(null, "REMOVE_ALL");
+  }, [onChangeMultiple]);
 
   const handleKeyPress = React.useCallback(
     (event: any) => {
@@ -274,7 +197,12 @@ function EnumSelect(props: SelectProps<Model, ModelFilter>) {
     (item) => (event: any) => {
       switch (event.keyCode) {
         case 13:
-          handleClickItem(item)(null);
+          if (!isMultiple) {
+            handleClickItem(item)(null);
+          } else {
+            handleClickMultiItem(item)(null);
+          }
+
           break;
         case 40:
           if (event.target.nextElementSibling !== null) {
@@ -291,7 +219,7 @@ function EnumSelect(props: SelectProps<Model, ModelFilter>) {
       }
       return;
     },
-    [handleClickItem]
+    [handleClickItem, handleClickMultiItem, isMultiple]
   );
 
   const handleKeyEnter = React.useCallback(
@@ -348,7 +276,6 @@ function EnumSelect(props: SelectProps<Model, ModelFilter>) {
               render={render}
               placeHolder={placeHolder}
               disabled={disabled}
-              onSearch={handleSearchChange}
               onClear={handleClearItem}
               onKeyDown={handleKeyPress}
               onKeyEnter={handleKeyEnter}
@@ -356,6 +283,7 @@ function EnumSelect(props: SelectProps<Model, ModelFilter>) {
               label={label}
               isSmall={isSmall}
               isUsingSearch={false}
+              onClearMulti={handleClearAll}
             />
           ) : (
             <InputSelect
@@ -364,20 +292,20 @@ function EnumSelect(props: SelectProps<Model, ModelFilter>) {
               placeHolder={placeHolder}
               expanded={isExpand}
               disabled={disabled}
-              onSearch={handleSearchChange}
               onClear={handleClearItem}
               onKeyDown={handleKeyPress}
               onKeyEnter={handleKeyEnter}
               type={type}
               label={label}
               isSmall={isSmall}
+              isEnumerable={true}
             />
           )}
         </div>
         {isMultiple
           ? isExpand && (
               <div className="select__list-container">
-                {!loading ? (
+                {
                   <>
                     <div
                       className="select__list multiple-select__list"
@@ -395,6 +323,7 @@ function EnumSelect(props: SelectProps<Model, ModelFilter>) {
                             key={index}
                             onKeyDown={handleMove(item)}
                             tabIndex={-1}
+                            onClick={handleClickMultiParentItem}
                           >
                             <Checkbox
                               checked={item.isSelected}
@@ -411,11 +340,7 @@ function EnumSelect(props: SelectProps<Model, ModelFilter>) {
                       )}
                     </div>
                   </>
-                ) : (
-                  <div className="select__loading">
-                    <Spin tip="Loading..."></Spin>
-                  </div>
-                )}
+                }
 
                 {selectWithAdd && (
                   <div
@@ -431,7 +356,7 @@ function EnumSelect(props: SelectProps<Model, ModelFilter>) {
             )
           : isExpand && (
               <div className="select__list-container" style={appendToBodyStyle}>
-                {!loading ? (
+                {
                   <>
                     <div className="select__list" ref={selectListRef}>
                       {list.length > 0 ? (
@@ -460,11 +385,7 @@ function EnumSelect(props: SelectProps<Model, ModelFilter>) {
                       )}
                     </div>
                   </>
-                ) : (
-                  <div className="select__loading">
-                    <Spin tip="Loading..."></Spin>
-                  </div>
-                )}
+                }
                 {selectWithAdd && (
                   <div
                     className={classNames(

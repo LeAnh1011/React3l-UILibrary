@@ -21,6 +21,7 @@ export interface InputSelectProps<T extends Model> {
   label?: string;
   isRequired?: boolean;
   isSmall?: boolean;
+  isEnumerable?: boolean;
 }
 
 function InputSelect(props: InputSelectProps<Model>) {
@@ -39,6 +40,7 @@ function InputSelect(props: InputSelectProps<Model>) {
     label,
     isRequired,
     isSmall,
+    isEnumerable,
   } = props;
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
@@ -150,6 +152,7 @@ function InputSelect(props: InputSelectProps<Model>) {
                 className={classNames("component__input", {
                   "disabled-field": disabled,
                 })}
+                readOnly={isEnumerable}
               />
               {type === BORDER_TYPE.FLOAT_LABEL && label && (
                 <label

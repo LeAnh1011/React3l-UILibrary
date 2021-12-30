@@ -4,7 +4,6 @@ import { Model, ModelFilter } from "react3l-common";
 import { Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
 import React from "react";
-import { of } from "rxjs";
 import FormItem from "../../FormItem/FormItem";
 import EnumSelect from "./EnumSelect";
 import { ValidateStatus } from "./../../../config/enum";
@@ -16,20 +15,37 @@ export class DemoFilter extends ModelFilter {
   code: StringFilter = new StringFilter();
 }
 
-const demoListEnum = (TModelFilter: ModelFilter) => {
-  return of([
-    {
-      id: 1,
-      name:
-        "Option 2 very long one very long one Option 2 very long one very long one",
-      code: "E1",
-    },
-    { id: 2, name: "Enum 2", code: "E2" },
-    { id: 3, name: "Enum 3", code: "E3" },
-    { id: 4, name: "Enum 4", code: "E4" },
-    { id: 5, name: "Enum 5", code: "E5" },
-  ]);
-};
+const demoListEnum = [
+  {
+    id: 1,
+    name:
+      "Option 2 very long one very long one Option 2 very long one very long one",
+    code: "E1",
+  },
+  { id: 2, name: "Enum 2", code: "E2" },
+  { id: 3, name: "Enum 3", code: "E3" },
+  { id: 4, name: "Enum 4", code: "E4" },
+  { id: 5, name: "Enum 5", code: "E5" },
+];
+interface changeAction {
+  type: string;
+  data: Model;
+}
+
+function testReducer(currentState: Model[], action: changeAction): Model[] {
+  switch (action.type) {
+    case "UPDATE":
+      return [...currentState, action.data];
+    case "REMOVE":
+      const filteredArray = currentState.filter(
+        (item) => item.id !== action.data.id
+      );
+      return [...filteredArray];
+    case "REMOVE_ALL":
+      return [];
+  }
+  return;
+}
 
 export function EnumSelectStories() {
   const [selectModel, setSelectModel] = React.useState<Model>({
@@ -37,6 +53,8 @@ export function EnumSelectStories() {
     name: "Option 2",
     code: "FAD",
   });
+
+  const [selectListModels, dispatch] = React.useReducer(testReducer, []);
 
   const [selectModelFilter] = React.useState<DemoFilter>(new DemoFilter());
 
@@ -91,6 +109,13 @@ export function EnumSelectStories() {
     setIsMultiple(event.target.value);
   }, []);
 
+  const handleChangeModels = React.useCallback((item, type) => {
+    dispatch({
+      type: type,
+      data: item,
+    });
+  }, []);
+
   return (
     <div style={{ margin: "10px", width: "300px" }}>
       <div style={{ margin: "10px", width: "300px" }}>
@@ -101,18 +126,17 @@ export function EnumSelectStories() {
           <EnumSelect
             placeHolder={"Select Organization"}
             model={selectModel}
-            modelFilter={selectModelFilter}
-            searchProperty={"name"}
             render={handleRenderModel}
             onChange={handleSetModel}
-            getList={demoListEnum}
-            classFilter={DemoFilter}
+            defaultListItem={demoListEnum}
             type={type}
             label={"Label"}
             selectWithAdd={isSelectWithAdd}
             disabled={isDisabled}
             isSmall={isSmall}
             isMultiple={isMultiple}
+            onChangeMultiple={handleChangeModels} // if type is multiple pass this props
+            listModel={selectListModels} // if type is multiple pass this prop
           />
         </FormItem>
       </div>

@@ -640,13 +640,7 @@ function OutlineButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button
-              type="outline-primary"
-              className="btn--sm"
-              icon={<Add16 />}
-              loading={loading}
-              onClick={handleOnClick}
-            >
+            <Button type="outline-primary" className="btn--sm" icon={<Add16 />}>
               {"Button"}
             </Button>
             <Button type="outline-primary" className="btn--md" icon={<Add16 />}>
@@ -714,8 +708,6 @@ function OutlineButtonView() {
               type="outline-primary"
               className="btn--sm"
               icon={<ChevronDown16 />}
-              loading={loading}
-              onClick={handleOnClick}
             >
               {"Button"}
             </Button>
@@ -846,86 +838,6 @@ function OutlineButtonView() {
               {"Button"}
             </Button>
             <Button type="outline-danger" className="btn--xl" disabled={true}>
-              {"Button"}
-            </Button>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: 700,
-              marginBottom: 30,
-            }}
-          >
-            <Button
-              type="outline-danger"
-              className="btn--sm"
-              icon={<TrashCan16 />}
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="outline-danger"
-              className="btn--md"
-              icon={<TrashCan16 />}
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="outline-danger"
-              className="btn--lg"
-              icon={<TrashCan16 />}
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="outline-danger"
-              className="btn--xl"
-              icon={<TrashCan16 />}
-            >
-              {"Button"}
-            </Button>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: 700,
-              marginBottom: 30,
-            }}
-          >
-            <Button
-              type="outline-danger"
-              className="btn--sm"
-              disabled={true}
-              icon={<TrashCan16 />}
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="outline-danger"
-              className="btn--md"
-              disabled={true}
-              icon={<TrashCan16 />}
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="outline-danger"
-              className="btn--lg"
-              disabled={true}
-              icon={<TrashCan16 />}
-            >
-              {"Button"}
-            </Button>
-            <Button
-              type="outline-danger"
-              className="btn--xl"
-              disabled={true}
-              icon={<TrashCan16 />}
-            >
               {"Button"}
             </Button>
           </div>
@@ -1670,12 +1582,7 @@ function BleedButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button
-              type="bleed-primary"
-              icon={<Add16 />}
-              loading={loading}
-              onClick={handleOnClick}
-            >
+            <Button type="bleed-primary" icon={<Add16 />}>
               {"Button"}
             </Button>
             <Button type="bleed-primary" icon={<Add16 />} disabled={true}>
@@ -1691,12 +1598,7 @@ function BleedButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button
-              type="bleed-primary"
-              icon={<ChevronDown16 />}
-              loading={loading}
-              onClick={handleOnClick}
-            >
+            <Button type="bleed-primary" icon={<ChevronDown16 />}>
               {"Button"}
             </Button>
             <Button
@@ -1718,7 +1620,13 @@ function BleedButtonView() {
               marginBottom: 30,
             }}
           >
-            <Button type="bleed-secondary">{"Button"}</Button>
+            <Button
+              type="bleed-secondary"
+              loading={loading}
+              onClick={handleOnClick}
+            >
+              {"Button"}
+            </Button>
             <Button type="bleed-secondary" disabled={true}>
               {"Button"}
             </Button>

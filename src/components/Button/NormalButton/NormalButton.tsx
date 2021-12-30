@@ -1,21 +1,10 @@
 import classNames from "classnames";
-import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import React, { PropsWithChildren } from "react";
-import { ButtonProps } from "../Button";
+import { antIconLoadingButton, ButtonProps } from "../Button";
 import "./NormalButton.scss";
 
 export interface NormalButtonProps extends ButtonProps {}
-const antIcon = (
-  <LoadingOutlined
-    style={{
-      fontSize: 16,
-      color: "#ffffff",
-    }}
-    className="spin-loading"
-    spin
-  />
-);
 const NormalButton = React.forwardRef(
   (props: PropsWithChildren<NormalButtonProps>, ref: React.Ref<any>) => {
     const {
@@ -46,7 +35,7 @@ const NormalButton = React.forwardRef(
         <div className="button-content">
           <div className="children-content">{children}</div>
           <div className="box-icon">
-            {loading ? <Spin indicator={antIcon} /> : icon}
+            {loading ? <Spin indicator={antIconLoadingButton} /> : icon}
           </div>
         </div>
       </button>

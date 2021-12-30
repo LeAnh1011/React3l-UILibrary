@@ -8,6 +8,7 @@ import { CheckmarkFilled16, ErrorFilled16 } from "@carbon/icons-react";
 export interface InlineLoadingProps {
   className?: string;
   status?: "default" | "submitting" | "submitted" | "error";
+  keyTranslate?: [string, string, string];
 }
 
 const antIcon = (
@@ -20,26 +21,26 @@ const antIcon = (
 
 const InlineLoading = React.forwardRef(
   (props: PropsWithChildren<InlineLoadingProps>, ref: React.Ref<any>) => {
-    const { className, status } = props;
+    const { className, status, keyTranslate } = props;
 
     return (
       <div className={classNames("inline-loading", className)}>
         {status === "submitting" && (
           <div className="submitting-box">
             <Spin indicator={antIcon} />
-            Loading...
+            {keyTranslate[0]}
           </div>
         )}
         {status === "submitted" && (
           <div className="submitted-box">
             <CheckmarkFilled16 className="icon-submitted-inline-loading" />
-            Submitted
+            {keyTranslate[1]}
           </div>
         )}
         {status === "error" && (
           <div className="error-box">
             <ErrorFilled16 className="icon-error-inline-loading" />
-            Error
+            {keyTranslate[2]}
           </div>
         )}
       </div>
@@ -49,6 +50,7 @@ const InlineLoading = React.forwardRef(
 
 InlineLoading.defaultProps = {
   status: "submitting",
+  keyTranslate: ["loading...", "submitted", "error"],
 };
 
 export default InlineLoading;

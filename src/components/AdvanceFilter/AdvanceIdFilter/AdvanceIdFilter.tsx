@@ -314,7 +314,9 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                           {render(item)}
                         </span>
                         {item.id === internalModel?.id && (
-                          <Checkmark16 className="tio-done" />
+                          <div style={{ height: "16px" }}>
+                            <Checkmark16 />
+                          </div>
                         )}
                       </div>
                     ))
@@ -349,7 +351,9 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                         {render(item)}
                       </span>
                       {item.id === internalModel?.id && (
-                        <Checkmark16 className="tio tio-done" />
+                        <div style={{ height: "16px" }}>
+                          <Checkmark16 />
+                        </div>
                       )}
                     </div>
                   ))}

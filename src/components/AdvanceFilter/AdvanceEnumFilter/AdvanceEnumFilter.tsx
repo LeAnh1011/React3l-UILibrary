@@ -117,10 +117,15 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
   // use this function for single type
   const handleClickItem = React.useCallback(
     (item: Model) => (event: any) => {
+      // perform sort
+      const currentIndex = list.findIndex((current) => current.id === item.id);
+      list.splice(currentIndex, 1);
+      list.unshift(item);
+      setList(list);
       onChange(item.id, item);
       handleCloseSelect();
     },
-    [handleCloseSelect, onChange]
+    [handleCloseSelect, list, onChange]
   );
 
   // use this function for multiple type
@@ -368,7 +373,11 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                             onClick={handleClickItem(item)}
                           >
                             <span className="select__text">{render(item)}</span>
-                            {item.id === internalModel?.id && <Checkmark16 />}
+                            {item.id === internalModel?.id && (
+                              <div style={{ height: "16px" }}>
+                                <Checkmark16 />
+                              </div>
+                            )}
                           </div>
                         ))
                       ) : (

@@ -12,7 +12,7 @@ export interface ModalCustomProps extends AntModalProps {
   handleDelete?: (value?: any) => void;
   model?: any;
   size?: "large" | "medium" | "small";
-  keyTranslate?: string;
+  keyButtonTranslate?: string;
   translate?: TFunction;
 }
 function Modal(props: ModalCustomProps) {
@@ -22,7 +22,7 @@ function Modal(props: ModalCustomProps) {
     visibleFooter,
     size,
     translate,
-    keyTranslate,
+    keyButtonTranslate,
   } = props;
   const renderModalFooter = React.useMemo(
     () => (
@@ -32,8 +32,8 @@ function Modal(props: ModalCustomProps) {
           onClick={handleSave}
         >
           <span>
-            {keyTranslate && translate
-              ? translate(`${keyTranslate}.save`)
+            {keyButtonTranslate && translate
+              ? translate(`${keyButtonTranslate}.save`)
               : "Save"}
           </span>
         </button>
@@ -42,14 +42,14 @@ function Modal(props: ModalCustomProps) {
           onClick={handleCancel}
         >
           <span>
-            {keyTranslate && translate
-              ? translate(`${keyTranslate}.cancel`)
+            {keyButtonTranslate && translate
+              ? translate(`${keyButtonTranslate}.cancel`)
               : "Cancel"}
           </span>
         </button>
       </div>
     ),
-    [handleSave, keyTranslate, translate, handleCancel]
+    [handleSave, keyButtonTranslate, translate, handleCancel]
   );
   return (
     <>

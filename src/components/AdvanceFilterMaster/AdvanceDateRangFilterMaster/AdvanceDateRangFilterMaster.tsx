@@ -192,7 +192,7 @@ function AdvanceDateRangeFilter(
 
   const handleClickCustomDate = React.useCallback(() => {
     setExpandDate(true);
-    onChange(undefined, value);
+    onChange(null, value);
   }, [onChange, value]);
 
   CommonService.useClickOutside(wrapperRef, handleCloseAdvanceFilterMaster);

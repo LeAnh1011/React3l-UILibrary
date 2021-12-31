@@ -86,8 +86,8 @@ export function TagFilterStories() {
   }, [filter]);
 
   const handleChange = React.useCallback((item, dateMoment) => {
-    filter.createdAt.greaterEqual = dateMoment[0];
-    filter.createdAt.lessEqual = dateMoment[1];
+    filter.createdAt['greaterEqual'] = dateMoment[0];
+    filter.createdAt['lessEqual'] = dateMoment[1];
     setItem(item);
     setFilter({ ...filter });
     setValue(dateMoment);
@@ -96,7 +96,7 @@ export function TagFilterStories() {
 
 
   const handleClear = React.useCallback((item) => {
-    filter[item?.key] = undefined;
+    filter[item?.key] = {};
     setFilter({ ...filter });
     setItem(null);
     setValue([null, null]);

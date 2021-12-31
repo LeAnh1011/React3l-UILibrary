@@ -374,7 +374,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                       {!checkable &&
                         internalSelectedKeys &&
                         internalSelectedKeys.includes(node.key) && (
-                          <div>
+                          <div style={{ display: "flex" }}>
                             <Checkmark16 />
                           </div>
                         )}
@@ -408,7 +408,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                               {!checkable &&
                                 internalSelectedKeys &&
                                 internalSelectedKeys.includes(node.key) && (
-                                  <div>
+                                  <div style={{ display: "flex" }}>
                                     <Checkmark16 />
                                   </div>
                                 )}

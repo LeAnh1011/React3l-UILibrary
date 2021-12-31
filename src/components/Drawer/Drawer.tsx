@@ -1,3 +1,4 @@
+import { Close24 } from "@carbon/icons-react";
 import { Spin } from "antd";
 import { ModalProps as AntModalProps } from "antd/lib/modal";
 import classNames from "classnames";
@@ -21,8 +22,10 @@ export interface DrawerProps extends AntModalProps {
   model?: any;
   disableButton?: boolean;
   loading?: boolean;
-  keyTitle?: string;
+  keyTitleTranslate?: string;
+  keyButtonTranslate?: string;
   translate?: TFunction;
+  isPreview?: boolean;
 }
 
 function Drawer(props: DrawerProps) {
@@ -37,7 +40,10 @@ function Drawer(props: DrawerProps) {
     visibleCreateNext,
     disableButton,
     loading,
-    title,
+    keyTitleTranslate,
+    keyButtonTranslate,
+    isPreview,
+    translate,
   } = props;
   const ref: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(null);
 
@@ -49,7 +55,11 @@ function Drawer(props: DrawerProps) {
             className="btn component__btn-primary  mr-3"
             onClick={handleSave}
           >
-            <span>{"save"}</span>
+            <span>
+              {keyButtonTranslate && translate
+                ? translate(`${keyButtonTranslate}.save`)
+                : "Save"}
+            </span>
           </button>
         ) : (
           <>
@@ -59,7 +69,11 @@ function Drawer(props: DrawerProps) {
                 onClick={handleSave}
                 disabled={disableButton}
               >
-                <span>{"create"}</span>
+                <span>
+                  {keyButtonTranslate && translate
+                    ? translate(`${keyButtonTranslate}.create`)
+                    : "Create"}
+                </span>
               </button>
             )}
             {visibleCreateNext && (
@@ -68,7 +82,11 @@ function Drawer(props: DrawerProps) {
                 onClick={handleCreate}
                 disabled={disableButton}
               >
-                <span>{"createNext"}</span>
+                <span>
+                  {keyButtonTranslate && translate
+                    ? translate(`${keyButtonTranslate}.createNext`)
+                    : "Create Next"}
+                </span>
               </button>
             )}
           </>
@@ -78,13 +96,19 @@ function Drawer(props: DrawerProps) {
           className="btn component__btn-outline-primary"
           onClick={handleCancel}
         >
-          <span>{"close"}</span>
+          <span>
+            {keyButtonTranslate && translate
+              ? translate(`${keyButtonTranslate}.close`)
+              : "Close"}
+          </span>
         </button>
       </div>
     ),
     [
-      model,
+      model?.id,
       handleSave,
+      keyButtonTranslate,
+      translate,
       visibleCreate,
       disableButton,
       visibleCreateNext,
@@ -102,8 +126,34 @@ function Drawer(props: DrawerProps) {
         <Spin spinning={loading}>
           <div className="animation-modal__content">
             <div className="animation-modal__header">
-              <div className="animation-modal__header-text">{title}</div>
-              <i className="tio-clear" onClick={handleCancel}></i>
+              <div className="animation-modal__header-text">
+                {isPreview ? (
+                  <>
+                    {keyTitleTranslate && translate
+                      ? translate(`${keyTitleTranslate}.preview`)
+                      : "Drawer Preview"}
+                  </>
+                ) : (
+                  <>
+                    {model?.id ? (
+                      <div className=" mr-1">
+                        {keyTitleTranslate && translate
+                          ? translate(`${keyTitleTranslate}.title`)
+                          : "Drawer Title"}
+                      </div>
+                    ) : (
+                      <>
+                        {keyTitleTranslate && translate
+                          ? translate(`${keyTitleTranslate}.preview`)
+                          : "Drawer Create"}
+                      </>
+                    )}
+                  </>
+                )}
+              </div>
+              <div className="button-cancel" onClick={handleCancel}>
+                <Close24 />
+              </div>
             </div>
 
             <div className={classNames(`animation-modal__body`)} ref={ref}>
@@ -128,7 +178,6 @@ Drawer.defaultProps = {
   visibleCreateNext: true,
   disableButton: false,
   isPreview: false,
-  isTitle: true,
 };
 
 export default Drawer;

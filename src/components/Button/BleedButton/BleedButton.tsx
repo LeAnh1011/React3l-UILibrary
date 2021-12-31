@@ -22,7 +22,7 @@ const BleedButton = React.forwardRef(
       <>
         <button
           type={htmlType}
-          onClick={onClick}
+          onClick={!loading ? onClick : () => undefined}
           ref={ref}
           disabled={disabled}
           className={classNames(

@@ -21,7 +21,7 @@ const OutlineButton = React.forwardRef(
     return (
       <button
         type={htmlType}
-        onClick={onClick}
+        onClick={!loading ? onClick : () => undefined}
         ref={ref}
         disabled={disabled}
         className={classNames(

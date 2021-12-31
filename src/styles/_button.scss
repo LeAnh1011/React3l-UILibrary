@@ -44,12 +44,17 @@
     color: var(--btn-disabled-label);
   }
 }
-
-
-
-
-
-
+.button-bleed-footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .button-50{
+    width: 49.9%;
+  }
+  .button-33{
+    width: 33.15%;
+  }
+}
 .btn--full-width {
   display: flex;
   width: 100%;

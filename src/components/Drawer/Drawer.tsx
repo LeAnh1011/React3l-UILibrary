@@ -45,7 +45,7 @@ function Drawer(props: DrawerProps) {
 
   const renderModalFooter = React.useMemo(
     () => (
-      <div className="footer-button-content">
+      <div className="button-bleed-footer">
         {model?.id ? (
           <Button
             type="bleed-primary"

@@ -3,6 +3,7 @@ import "./Modal.scss";
 import AntModal, { ModalProps as AntModalProps } from "antd/lib/modal";
 import { TFunction } from "i18next";
 import classNames from "classnames";
+import Button from "components/Button";
 export interface ModalCustomProps extends AntModalProps {
   handleCancel?: () => void;
   handleSave?: (value?: any) => void;
@@ -26,19 +27,17 @@ function Modal(props: ModalCustomProps) {
   } = props;
   const renderModalFooter = React.useMemo(
     () => (
-      <div className="d-flex">
-        <button
-          className="btn component__btn-primary mr-2"
-          onClick={handleSave}
-        >
+      <div className="button-bleed-footer">
+        <Button type="bleed-primary" className="button-50" onClick={handleSave}>
           <span>
             {keyButtonTranslate && translate
               ? translate(`${keyButtonTranslate}.save`)
               : "Save"}
           </span>
-        </button>
-        <button
-          className="component__btn-outline-primary"
+        </Button>
+        <Button
+          type="bleed-secondary"
+          className="button-50"
           onClick={handleCancel}
         >
           <span>
@@ -46,7 +45,7 @@ function Modal(props: ModalCustomProps) {
               ? translate(`${keyButtonTranslate}.cancel`)
               : "Cancel"}
           </span>
-        </button>
+        </Button>
       </div>
     ),
     [handleSave, keyButtonTranslate, translate, handleCancel]

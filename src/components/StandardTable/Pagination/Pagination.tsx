@@ -2,10 +2,7 @@ import { Menu, Dropdown } from "antd";
 import React from "react";
 import { PaginationProps as AntdPaginationProps } from "antd/lib/pagination/Pagination";
 import "./Pagination.scss";
-import nextAble from "../../../assets/image/next-able.png";
-import nextUnAble from "../../../assets/image/next-disabled.png";
-import prevAble from "../../../assets/image/prev-able.png";
-import prevUnAble from "../../../assets/image/prev-disabled.png";
+import { CaretRight16, CaretLeft16 } from "@carbon/icons-react";
 import classNames from "classnames";
 
 export interface PaginationProps extends AntdPaginationProps {
@@ -92,24 +89,30 @@ function Pagination(props: PaginationProps) {
 
   const nextIcon = React.useMemo(() => {
     return currentPage < pageArray.length ? (
-      <img
+      <div
+        className="change-one-page-box"
         onClick={() => handleChangeCurrentPage(currentPage + 1)}
-        src={nextAble}
-        alt="next"
-      />
+      >
+        <CaretRight16 className="icon-change-page-able" />
+      </div>
     ) : (
-      <img src={nextUnAble} alt="next" />
+      <div className="change-one-page-box">
+        <CaretRight16 className="icon-change-page-unable" />
+      </div>
     );
   }, [currentPage, handleChangeCurrentPage, pageArray.length]);
   const prevIcon = React.useMemo(() => {
     return currentPage > 1 ? (
-      <img
+      <div
+        className="change-one-page-box"
         onClick={() => handleChangeCurrentPage(currentPage - 1)}
-        src={prevAble}
-        alt="prev"
-      />
+      >
+        <CaretLeft16 className="icon-change-page-able" />
+      </div>
     ) : (
-      <img src={prevUnAble} alt="prev" />
+      <div className="change-one-page-box">
+        <CaretLeft16 className="icon-change-page-unable" />
+      </div>
     );
   }, [currentPage, handleChangeCurrentPage]);
 

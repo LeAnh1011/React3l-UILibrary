@@ -151,12 +151,15 @@
 .btn--primary-loading {
     background-color: var(--btn-primary-hover);
     color: var(--btn-primary-label);
+    cursor: not-allowed;
 }
 .btn--secondary-loading {
     background-color: var(--btn-secondary-bg);
     color: var(--btn-secondary-label);
+    cursor: not-allowed;
 }
 .btn--danger-loading {
     background-color: var(--btn-danger-bg);
     color: var(--btn-danger-label);
+    cursor: not-allowed;
 }

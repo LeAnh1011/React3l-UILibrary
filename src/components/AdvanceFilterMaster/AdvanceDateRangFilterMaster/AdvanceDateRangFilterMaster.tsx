@@ -1,3 +1,4 @@
+import { Calendar16 } from "@carbon/icons-react";
 import { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import DateRange from "components/Calendar/DateRange";
@@ -276,7 +277,7 @@ function AdvanceDateRangeFilter(
             })}
             onClick={handleClickCustomDate}
           >
-            <i className="tio tio-calendar_month" />
+            <Calendar16 />
             <span>Custom date</span>
           </div>
           {isExpandDate && (

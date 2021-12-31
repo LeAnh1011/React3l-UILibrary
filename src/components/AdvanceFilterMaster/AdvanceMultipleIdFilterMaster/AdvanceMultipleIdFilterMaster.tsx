@@ -369,7 +369,7 @@ function AdvanceMultipleIdFilterMaster(
               {values?.length > 0 && <>({values?.length})</>}
             </span>
             <div className="advance-id-filter-master__title">
-              {title}
+              <span>{title}</span>
               <i className="filter__icon tio-chevron_down"></i>
             </div>
           </label>

@@ -205,7 +205,7 @@ function AdvanceIdFilterMaster(
     if (value !== null && value !== undefined) {
       const filterValue = new ClassFilter();
       if (isIdValue) {
-        const listFilterPreferOptions = preferOptions.filter(
+        const listFilterPreferOptions = preferOptions?.filter(
           (current) => current.id === Number(value)
         );
         if (listFilterPreferOptions && listFilterPreferOptions?.length > 0) {
@@ -272,7 +272,7 @@ function AdvanceIdFilterMaster(
         >
           <div className={classNames({ "filter-active": value })}>
             <div className="advance-id-filter-master__title">
-              {title}
+              <span> {title}</span>
               <i className="filter__icon tio-chevron_down"></i>
             </div>
           </div>

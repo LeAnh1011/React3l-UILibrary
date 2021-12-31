@@ -312,18 +312,20 @@ $palettes: (
 
   /* main colors */
   /* used for the links, the button background color,... */
-  --color-primary: #0f62fe;
+  --color-primary: #0F62FE;
   --color-primary-hover: #0050e6;
+  --color-primary-active: #002d9c;
   --color-primary-blur: #d0e2ff;
   --color-secondary: #393939;
   --color-secondary-hover: #4c4c4c;
+  --color-secondary-active: #6f6f6f;
   --color-secondary-blur: #e0e0e0;
-
   /* accent colors */
   /* used to highlight something important on the page */
   --color-accent: #eb6200;
   --color-accent-hover: #cc5500;
-  --color-accent-blur: #ffd9be;
+  --color-accent-active: #753300;
+  --color-accent-blur: #ffd9Be;
 
   /* support color */
   --color-link: #0043CE;
@@ -336,6 +338,7 @@ $palettes: (
   /* critical color */
   --color-critical: #da1e28;
   --color-critical-hover: #b81922;
+  --color-critilcal-active: #750e13;
   --color-critical-blur: #fff1f1;
 
   --white: #FFFFFF;

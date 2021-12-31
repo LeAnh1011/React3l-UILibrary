@@ -21,8 +21,8 @@ function Modal(props: ModalCustomProps) {
     handleSave,
     visibleFooter,
     size,
-    // translate,
-    // keyTranslate,
+    translate,
+    keyTranslate,
   } = props;
   const renderModalFooter = React.useMemo(
     () => (
@@ -31,17 +31,25 @@ function Modal(props: ModalCustomProps) {
           className="btn component__btn-primary mr-2"
           onClick={handleSave}
         >
-          <span>{`save`}</span>
+          <span>
+            {keyTranslate && translate
+              ? translate(`${keyTranslate}.save`)
+              : "Save"}
+          </span>
         </button>
         <button
           className="component__btn-outline-primary"
           onClick={handleCancel}
         >
-          <span>{`cancel`}</span>
+          <span>
+            {keyTranslate && translate
+              ? translate(`${keyTranslate}.cancel`)
+              : "Cancel"}
+          </span>
         </button>
       </div>
     ),
-    [handleSave, handleCancel]
+    [handleSave, keyTranslate, translate, handleCancel]
   );
   return (
     <>

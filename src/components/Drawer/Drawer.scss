@@ -50,7 +50,20 @@
         bottom: 0;
         border-top: 1px solid #f8f8fa;
         background-color: #ffffff;
-        width: 100%;
+        width: 594px;
+        .footer-button-content{
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          .button-50{
+            width: 49.9%;
+          }
+          .button-33{
+            width: 33.15%;
+          }
+        }
+        
+
       }
       .animation-modal-preview_footer {
         position: fixed;

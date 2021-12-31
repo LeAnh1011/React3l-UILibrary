@@ -2,6 +2,7 @@ import { Close24 } from "@carbon/icons-react";
 import { Spin } from "antd";
 import { ModalProps as AntModalProps } from "antd/lib/modal";
 import classNames from "classnames";
+import Button from "components/Button";
 import { TFunction } from "i18next";
 import React, { ReactNode, RefObject } from "react";
 import "./Drawer.scss";
@@ -14,9 +15,6 @@ export interface DrawerProps extends AntModalProps {
   children?: ReactNode;
 
   visibleFooter?: boolean;
-  visibleCreate?: boolean;
-
-  visibleCreateNext?: boolean;
 
   handleCreate?: () => void;
   model?: any;
@@ -36,8 +34,6 @@ function Drawer(props: DrawerProps) {
     handleCreate,
     model,
     visible,
-    visibleCreate,
-    visibleCreateNext,
     disableButton,
     loading,
     keyTitleTranslate,
@@ -49,10 +45,11 @@ function Drawer(props: DrawerProps) {
 
   const renderModalFooter = React.useMemo(
     () => (
-      <div className="d-flex justify-content-start">
+      <div className="footer-button-content">
         {model?.id ? (
-          <button
-            className="btn component__btn-primary  mr-3"
+          <Button
+            type="bleed-primary"
+            className="button-50"
             onClick={handleSave}
           >
             <span>
@@ -60,25 +57,25 @@ function Drawer(props: DrawerProps) {
                 ? translate(`${keyButtonTranslate}.save`)
                 : "Save"}
             </span>
-          </button>
+          </Button>
         ) : (
           <>
-            {visibleCreate && (
-              <button
-                className="btn component__btn-primary  mr-3"
-                onClick={handleSave}
-                disabled={disableButton}
-              >
-                <span>
-                  {keyButtonTranslate && translate
-                    ? translate(`${keyButtonTranslate}.create`)
-                    : "Create"}
-                </span>
-              </button>
-            )}
-            {visibleCreateNext && (
-              <button
-                className="btn component__btn-outline-primary mr-3"
+            <Button
+              type="bleed-primary"
+              className={classNames(handleCreate ? "button-33" : "button-50")}
+              onClick={handleSave}
+              disabled={disableButton}
+            >
+              <span>
+                {keyButtonTranslate && translate
+                  ? translate(`${keyButtonTranslate}.create`)
+                  : "Create"}
+              </span>
+            </Button>
+            {handleCreate && (
+              <Button
+                type="bleed-secondary"
+                className="button-33"
                 onClick={handleCreate}
                 disabled={disableButton}
               >
@@ -87,21 +84,36 @@ function Drawer(props: DrawerProps) {
                     ? translate(`${keyButtonTranslate}.createNext`)
                     : "Create Next"}
                 </span>
-              </button>
+              </Button>
             )}
           </>
         )}
 
-        <button
-          className="btn component__btn-outline-primary"
-          onClick={handleCancel}
-        >
-          <span>
-            {keyButtonTranslate && translate
-              ? translate(`${keyButtonTranslate}.close`)
-              : "Close"}
-          </span>
-        </button>
+        {model?.id ? (
+          <Button
+            type="bleed-secondary"
+            className="button-50"
+            onClick={handleCancel}
+          >
+            <span>
+              {keyButtonTranslate && translate
+                ? translate(`${keyButtonTranslate}.close`)
+                : "Close"}
+            </span>
+          </Button>
+        ) : (
+          <Button
+            type="bleed-secondary"
+            className={classNames(handleCreate ? "button-33" : "button-50")}
+            onClick={handleCancel}
+          >
+            <span>
+              {keyButtonTranslate && translate
+                ? translate(`${keyButtonTranslate}.close`)
+                : "Close"}
+            </span>
+          </Button>
+        )}
       </div>
     ),
     [
@@ -109,9 +121,7 @@ function Drawer(props: DrawerProps) {
       handleSave,
       keyButtonTranslate,
       translate,
-      visibleCreate,
       disableButton,
-      visibleCreateNext,
       handleCreate,
       handleCancel,
     ]

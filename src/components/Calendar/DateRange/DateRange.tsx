@@ -3,8 +3,9 @@ import { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import { BORDER_TYPE } from "config/enum";
 import { Moment } from "moment";
-import React, { RefObject } from "react";
+import React, { ReactSVGElement, RefObject } from "react";
 import { CommonService } from "services/common-service";
+import { CloseFilled16 } from "@carbon/icons-react";
 import "./DateRange.scss";
 
 const { RangePicker } = DatePicker;
@@ -57,7 +58,6 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
   );
   const dateRef = React.useRef<any>();
 
-
   const internalValue: [Moment, Moment] = React.useMemo(() => {
     return [
       typeof value[0] === "string"
@@ -70,7 +70,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
   }, [value]);
 
   const handleClearDate = React.useCallback(
-    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
       event.stopPropagation();
       onChange([null, null]);
     },
@@ -78,7 +78,10 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
   );
 
   return (
-    <div className={classNames("date-range__wrapper", className)} ref={wrapperRef} >
+    <div
+      className={classNames("date-range__wrapper", className)}
+      ref={wrapperRef}
+    >
       <div className="date-picker__label m-b--xxxs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label className="component__title">
@@ -121,7 +124,8 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
           id="component__title-id"
           className={classNames("component__title component__title--normal", {
             "component__title--sm": isSmall,
-            "component__title-up": internalValue && internalValue?.length > 0 && internalValue[0],
+            "component__title-up":
+              internalValue && internalValue?.length > 0 && internalValue[0],
           })}
         >
           {label}
@@ -132,17 +136,14 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
         <>
           <span
             className={classNames("date-range__icon-wrapper", {
-              "date-range__icon-wrapper--material": type === BORDER_TYPE.MATERIAL,
+              "date-range__icon-wrapper--material":
+                type === BORDER_TYPE.MATERIAL,
             })}
           >
-            <i
-              className={classNames(
-                "input-icon__clear",
-                "m-l--xxs",
-                "tio-clear_circle"
-              )}
+            <CloseFilled16
+              className={classNames("date-range__icon-clear", "m-l--xxs")}
               onClick={handleClearDate}
-            ></i>
+            ></CloseFilled16>
           </span>
         </>
       )}

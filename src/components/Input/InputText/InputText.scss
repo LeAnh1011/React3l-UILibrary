@@ -34,7 +34,7 @@
     align-items: center;
     width: 100%;
     outline: 1px solid var(--palette-coolGray-50);
-    background-color: white;
+    background-color: var(--color-white);
     height: 40px;
 
     &.input-text__container--sm {
@@ -124,12 +124,8 @@
     }
 
     .input-text__icon {
-      position: absolute;
-      right: 0.5rem;
-      top: 30%;
-      &:hover {
-        opacity: 0.7;
-      }
+      display: flex;
+      align-items: center;
     }
 
     span {
@@ -159,14 +155,14 @@
       &:not(:placeholder-shown) + .component__title {
         top: 0;
         left: 8px;
-        background-color: white;
+        background-color: var(--color-white);
         transform: translateY(-50%) scale(0.9);
       }
 
       &:focus + .component__title {
         top: 0;
         left: 8px;
-        background-color: white;
+        background-color: var(--color-white);
         transform: translateY(-50%) scale(0.9);
       }
 

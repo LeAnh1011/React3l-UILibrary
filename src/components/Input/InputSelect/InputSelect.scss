@@ -32,7 +32,7 @@
     background-color: var(--color-white);
     height: 40px;
 
-    .tio-chevron_down {
+    .input-select__icon {
       transition: all 0.3s ease;
       color: var(--palette-gray-60);
     }
@@ -54,7 +54,7 @@
     &:focus-within {
       outline-color: var(--color-primary);
       @include box-shadow--focus;
-      .tio-chevron_down {
+      .input-select__icon {
         transform: rotate(180deg);
         color: var(--color-primary);
       }

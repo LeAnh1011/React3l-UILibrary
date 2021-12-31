@@ -1,4 +1,5 @@
 import { DEBOUNCE_TIME_300 } from "config/consts";
+import { Add16, Checkmark16 } from "@carbon/icons-react";
 import { Model, ModelFilter } from "react3l-common";
 import { useDebounceFn } from "ahooks";
 import { Empty } from "antd";
@@ -304,9 +305,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                         onClick={handleClickItem(item)}
                       >
                         <span className="select__text">{render(item)}</span>
-                        {item.id === internalModel?.id && (
-                          <i className="tio-done" />
-                        )}
+                        {item.id === internalModel?.id && <Checkmark16 />}
                       </div>
                     ))
                   ) : (
@@ -337,9 +336,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                       onClick={handleClickItem(item)}
                     >
                       <span className="select__text">{render(item)}</span>
-                      {item.id === internalModel?.id && (
-                        <i className="tio tio-done" />
-                      )}
+                      {item.id === internalModel?.id && <Checkmark16 />}
                     </div>
                   ))}
               </div>
@@ -350,7 +347,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                   "select__bottom-button select__add-button p-y--xs"
                 )}
               >
-                <i className="tio-add m-l--xxs" />
+                <Add16 className="m-l--xxs" />
                 <span>Add new</span>
               </div>
             )}

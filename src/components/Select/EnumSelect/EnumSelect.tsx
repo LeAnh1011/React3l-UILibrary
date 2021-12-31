@@ -7,6 +7,7 @@ import InputSelect from "components/Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "config/enum";
 import "./EnumSelect.scss";
 import InputTag from "components/Input/InputTag";
+import { Add16, Checkmark16 } from "@carbon/icons-react";
 
 export interface SelectProps<T extends Model> {
   model?: Model;
@@ -340,7 +341,7 @@ function EnumSelect(props: SelectProps<Model>) {
                       "select__bottom-button select__add-button p-y--xs"
                     )}
                   >
-                    <i className="tio-add m-l--xs" />
+                    <Add16 className="m-l--xs" />
                     <span className="m-l--xs">Add new</span>
                   </div>
                 )}
@@ -367,9 +368,7 @@ function EnumSelect(props: SelectProps<Model>) {
                             onClick={handleClickItem(item)}
                           >
                             <span className="select__text">{render(item)}</span>
-                            {item.id === internalModel?.id && (
-                              <i className="tio-done" />
-                            )}
+                            {item.id === internalModel?.id && <Checkmark16 />}
                           </div>
                         ))
                       ) : (
@@ -384,7 +383,7 @@ function EnumSelect(props: SelectProps<Model>) {
                       "select__bottom-button select__add-button p-y--xs"
                     )}
                   >
-                    <i className="tio-add m-l--xxs" />
+                    <Add16 className="m-l--xxs" />
                     <span>Add new</span>
                   </div>
                 )}

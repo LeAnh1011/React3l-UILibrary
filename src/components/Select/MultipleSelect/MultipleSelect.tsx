@@ -1,4 +1,5 @@
 import { Model, ModelFilter } from "react3l-common";
+import { Add16 } from "@carbon/icons-react";
 import { useDebounceFn } from "ahooks";
 import { CommonService } from "services/common-service";
 import classNames from "classnames";
@@ -495,7 +496,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                   "select__bottom-button select__add-button p-y--xs"
                 )}
               >
-                <i className="tio-add m-l--xs" />
+                <Add16 className="m-l--xs" />
                 <span className="m-l--xs">Add new</span>
               </div>
             )}

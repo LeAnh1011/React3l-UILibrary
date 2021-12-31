@@ -1,4 +1,5 @@
 import { Model } from "react3l-common";
+import { Add16, Checkmark16 } from "@carbon/icons-react";
 import { Checkbox, Empty } from "antd";
 import classNames from "classnames";
 import React, { RefObject } from "react";
@@ -340,7 +341,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                       "select__bottom-button select__add-button p-y--xs"
                     )}
                   >
-                    <i className="tio-add m-l--xs" />
+                    <Add16 className="m-l--xs" />
                     <span className="m-l--xs">Add new</span>
                   </div>
                 )}
@@ -367,9 +368,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                             onClick={handleClickItem(item)}
                           >
                             <span className="select__text">{render(item)}</span>
-                            {item.id === internalModel?.id && (
-                              <i className="tio-done" />
-                            )}
+                            {item.id === internalModel?.id && <Checkmark16 />}
                           </div>
                         ))
                       ) : (
@@ -384,7 +383,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                       "select__bottom-button select__add-button p-y--xs"
                     )}
                   >
-                    <i className="tio-add m-l--xxs" />
+                    <Add16 className="m-l--xxs" />
                     <span>Add new</span>
                   </div>
                 )}

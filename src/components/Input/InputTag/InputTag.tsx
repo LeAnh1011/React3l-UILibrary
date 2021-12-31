@@ -1,5 +1,5 @@
 import React, { ReactSVGElement, RefObject } from "react";
-import { CloseFilled16 } from "@carbon/icons-react";
+import { CloseFilled16, ChevronDown16, Close16 } from "@carbon/icons-react";
 import "./InputTag.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
@@ -138,10 +138,10 @@ function InputTag(props: InputTagProps<Model>) {
               <span className="input-tag-item__text">
                 {internalListItem?.length}
               </span>
-              <i
-                className="input-tag-item__icon tio-clear"
+              <Close16
+                className="input-tag-item__icon"
                 onClick={handleClearMultiItem}
-              ></i>
+              ></Close16>
             </span>
           )}
           {isUsingSearch ? (
@@ -193,16 +193,11 @@ function InputTag(props: InputTagProps<Model>) {
             </div>
           )}
 
-          <i
-            className={classNames(
-              "input-icon",
-              "input-tag__icon",
-              "tio-chevron_down",
-              {
-                "input-tag__icon--disabled": disabled,
-              }
-            )}
-          ></i>
+          <ChevronDown16
+            className={classNames("input-icon", "input-tag__icon", {
+              "input-tag__icon--disabled": disabled,
+            })}
+          ></ChevronDown16>
         </div>
       </div>
     </>

@@ -346,7 +346,7 @@ $palettes: (
   /* buttons primary */
   --btn-primary-bg: var(--color-primary);
   --btn-primary-hover: var(--color-primary-hover);
-  --btn-primary-active: var(--color-primary);
+  --btn-primary-active: var(--color-primary-active);
   --btn-primary-focus: var(--color-primary);
   --btn-primary-label: var(--white);
   --btn-primary-disabled: #F4F4F4;
@@ -363,7 +363,7 @@ $palettes: (
   /* buttons secondary */
   --btn-secondary-bg: var(--color-secondary);
   --btn-secondary-hover: var(--color-secondary-hover);
-  --btn-secondary-active: var(--color-secondary);
+  --btn-secondary-active: var(--color-secondary-active);
   --btn-secondary-focus: var(--color-secondary);
   --btn-secondary-label: var(--white);
   --btn-secondary-disabled: #F4F4F4;
@@ -401,7 +401,7 @@ $palettes: (
   --color--danger-hover: var(--color-critical-hover);
   --btn-danger-bg: var(--color--danger);
   --btn-danger-hover: var(--color--danger-hover);
-  --btn-danger-active: var(--color--danger-hover);
+  --btn-danger-active: var(--color-critilcal-active);
   --btn-danger-focus: var(--color--danger);
   --btn-danger-label: var(--white);
   --btn-danger-disabled: #F4F4F4;

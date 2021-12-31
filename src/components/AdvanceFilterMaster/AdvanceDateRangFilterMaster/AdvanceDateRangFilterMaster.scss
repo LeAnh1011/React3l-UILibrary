@@ -23,7 +23,9 @@ $backgound-color: #f4f4f4;
         }
         .filter-active {
             color: var(--color-primary);
-            border-bottom: 1px solid var(--color-primary);
+            span {
+                border-bottom: 1px solid var(--color-primary);
+            }
         }
         &:hover {
             background: #e5e5e5;

@@ -227,7 +227,8 @@ function AdvanceDateRangeFilter(
             })}
           >
             <div className="advance-date-range-filter-master__title">
-              {title}
+              <span> {title}</span>
+
               <i className="filter__icon tio-chevron_down"></i>
             </div>
           </div>

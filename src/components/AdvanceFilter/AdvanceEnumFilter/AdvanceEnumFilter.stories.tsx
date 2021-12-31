@@ -5,7 +5,7 @@ import { Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
 import React from "react";
 import FormItem from "../../FormItem/FormItem";
-import EnumSelect from "./EnumSelect";
+import AdvanceEnumFilter from "./AdvanceEnumFilter";
 import { ValidateStatus } from "./../../../config/enum";
 import { BORDER_TYPE } from "./../../../config/enum";
 
@@ -47,7 +47,7 @@ function testReducer(currentState: Model[], action: changeAction): Model[] {
   return;
 }
 
-export function EnumSelectStories() {
+export function AdvanceEnumFilterStories() {
   const [selectModel, setSelectModel] = React.useState<Model>({
     id: 0,
     name: "Option 2",
@@ -121,7 +121,7 @@ export function EnumSelectStories() {
           validateStatus={isValidated ? ValidateStatus.error : null}
           message={isValidated ? "Error label" : ""}
         >
-          <EnumSelect
+          <AdvanceEnumFilter
             placeHolder={"Select Organization"}
             model={selectModel}
             render={handleRenderModel}

@@ -5,10 +5,10 @@ import React, { RefObject } from "react";
 import { CommonService } from "services/common-service";
 import InputSelect from "components/Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "config/enum";
-import "./EnumSelect.scss";
+import "./AdvanceEnumFilter.scss";
 import InputTag from "components/Input/InputTag";
 
-export interface SelectProps<T extends Model> {
+export interface AdvanceEnumProps<T extends Model> {
   model?: Model;
 
   listModel?: Model[];
@@ -44,7 +44,7 @@ function defaultRenderObject<T extends Model>(t: T) {
   return t?.name;
 }
 
-function EnumSelect(props: SelectProps<Model>) {
+function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
   const {
     model,
     placeHolder,
@@ -395,10 +395,10 @@ function EnumSelect(props: SelectProps<Model>) {
   );
 }
 
-EnumSelect.defaultProps = {
+AdvanceEnumFilter.defaultProps = {
   appendToBody: false,
   render: defaultRenderObject,
   disabled: false,
 };
 
-export default EnumSelect;
+export default AdvanceEnumFilter;

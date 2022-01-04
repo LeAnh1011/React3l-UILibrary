@@ -3,7 +3,7 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import typescript from "rollup-plugin-typescript2";
 import sass from "rollup-plugin-sass";
 // import postcss from "rollup-plugin-postcss";
-import image from '@rollup/plugin-image';
+// import image from '@rollup/plugin-image';
 import { terser } from "rollup-plugin-terser";
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -20,11 +20,29 @@ export default {
     // Dropdown list components
     "src/components/Select/SingleSelect/index.ts",
     "src/components/Select/MultipleSelect/index.ts",
+    "src/components/Select/EnumSelect/index.ts",
     "src/components/Tree/index.ts",
     "src/components/TreeSelect/index.ts",
     // AdvacenFilter master components
     "src/components/AdvanceFilterMaster/AdvanceIdFilterMaster/index.ts",
     "src/components/AdvanceFilterMaster/AdvanceMultipleIdFilterMaster/index.ts",
+    "src/components/AdvanceFilterMaster/AdvanceDateRangFilterMaster/index.ts",
+    "src/components/AdvanceFilterMaster/TagFilter/index.ts",
+    // AdvacenFilter components
+    "src/components/AdvanceFilter/AdvanceIdFilter/index.ts",
+    "src/components/AdvanceFilter/AdvanceIdMultipleFilter/index.ts",
+    "src/components/AdvanceFilter/AdvanceEnumFilter/index.ts",
+    "src/components/AdvanceFilter/AdvanceNumberFilter/index.ts",
+    "src/components/AdvanceFilter/AdvanceStringFilter/index.ts",
+    "src/components/AdvanceFilter/AdvanceTreeFilter/index.ts",
+    // Button
+    "src/components/Button/index.ts",
+    // Calendar
+    "src/components/Calendar/DatePicker/index.ts",
+    "src/components/Calendar/DateRange/index.ts",
+    // Loading/Spinner
+    "src/components/IconLoading/index.ts",
+    "src/components/InlineLoading/index.ts",
     // Standard table components
     "src/components/StandardTable/index.ts",
     "src/components/StandardTable/ActionBarComponent/index.ts",
@@ -47,7 +65,7 @@ export default {
   ],
   preserveModules: true,
   plugins: [
-    image(),
+    // image(),
     peerDepsExternal(),
     commonjs(),
     typescript({ useTsconfigDeclarationDir: true }),

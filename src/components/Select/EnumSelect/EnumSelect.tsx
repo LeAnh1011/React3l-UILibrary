@@ -5,7 +5,6 @@ import React, { RefObject } from "react";
 import { CommonService } from "services/common-service";
 import InputSelect from "components/Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "config/enum";
-import "./EnumSelect.scss";
 import InputTag from "components/Input/InputTag";
 import { Add16, Checkmark16 } from "@carbon/icons-react";
 

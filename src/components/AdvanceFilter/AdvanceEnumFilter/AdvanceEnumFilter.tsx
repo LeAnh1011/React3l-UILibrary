@@ -6,7 +6,6 @@ import React, { RefObject } from "react";
 import { CommonService } from "services/common-service";
 import InputSelect from "components/Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "config/enum";
-import "./AdvanceEnumFilter.scss";
 import InputTag from "components/Input/InputTag";
 
 export interface AdvanceEnumProps<T extends Model> {

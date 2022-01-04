@@ -11,13 +11,17 @@ export enum SIZE_TYPE {
   SMALL = "small",
 }
 function Default() {
-  const [size, setSize] = React.useState<SIZE_TYPE>(SIZE_TYPE.LARGE);
+  const [size, setSize] = React.useState<SIZE_TYPE>(SIZE_TYPE.SMALL);
   const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
     setSize(event.target.value);
   }, []);
   const [visible, setVisible] = React.useState<boolean>(true);
   function handleSave() {
     console.log("save");
+    setVisible(false);
+  }
+  function handleCreate() {
+    console.log("create");
     setVisible(false);
   }
   function handleCancel() {
@@ -154,6 +158,7 @@ function Default() {
           handleSave={handleSave}
           handleCancel={handleCancel}
           visibleFooter={true}
+          handleCreateNext={handleCreate}
           size="large"
           title="Modal Title"
         >

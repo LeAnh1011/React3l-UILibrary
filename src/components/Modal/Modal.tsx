@@ -9,7 +9,7 @@ export interface ModalCustomProps extends AntModalProps {
   handleSave?: (value?: any) => void;
   children?: ReactNode;
   visibleFooter?: boolean;
-  handleCreate?: () => void;
+  handleCreateNext?: () => void;
   handleDelete?: (value?: any) => void;
   model?: any;
   size?: "large" | "medium" | "small";
@@ -24,31 +24,67 @@ function Modal(props: ModalCustomProps) {
     size,
     translate,
     keyButtonTranslate,
+    handleCreateNext,
   } = props;
   const renderModalFooter = React.useMemo(
     () => (
-      <div className="button-bleed-footer">
-        <Button type="bleed-primary" className="button-50" onClick={handleSave}>
-          <span>
-            {keyButtonTranslate && translate
-              ? translate(`${keyButtonTranslate}.save`)
-              : "Save"}
-          </span>
-        </Button>
-        <Button
-          type="bleed-secondary"
-          className="button-50"
-          onClick={handleCancel}
+      <div className="footer-modal">
+        <div
+          className={classNames("button-bleed-footer", {
+            "width-75": handleCreateNext && size === "large",
+          })}
         >
-          <span>
-            {keyButtonTranslate && translate
-              ? translate(`${keyButtonTranslate}.cancel`)
-              : "Cancel"}
-          </span>
-        </Button>
+          <Button
+            type="bleed-secondary"
+            className={classNames(
+              handleCreateNext && size === "large" ? "button-33" : "button-50"
+            )}
+            onClick={handleSave}
+          >
+            <span>
+              {keyButtonTranslate && translate
+                ? translate(`${keyButtonTranslate}.save`)
+                : "Save"}
+            </span>
+          </Button>
+          {handleCreateNext && size === "large" && (
+            <Button
+              type="bleed-secondary"
+              className="button-33"
+              onClick={handleCreateNext}
+            >
+              <span>
+                {keyButtonTranslate && translate
+                  ? translate(`${keyButtonTranslate}.createNext`)
+                  : "Create Next"}
+              </span>
+            </Button>
+          )}
+
+          <Button
+            type="bleed-primary"
+            className={classNames(
+              handleCreateNext && size === "large" ? "button-33" : "button-50"
+            )}
+            onClick={handleCancel}
+          >
+            <span>
+              {keyButtonTranslate && translate
+                ? translate(`${keyButtonTranslate}.cancel`)
+                : "Cancel"}
+            </span>
+          </Button>
+        </div>
       </div>
     ),
-    [handleSave, keyButtonTranslate, translate, handleCancel]
+    [
+      handleCreateNext,
+      size,
+      handleSave,
+      keyButtonTranslate,
+      translate,
+      handleCancel,
+    ]
   );
   return (
     <>

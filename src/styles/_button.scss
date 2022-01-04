@@ -44,7 +44,16 @@
     color: var(--btn-disabled-label);
   }
 }
+.footer-modal{
+  display: flex;
+  justify-content: end;
+  .width-75{
+    width: 75%;
+  }
+}
+
 .button-bleed-footer{
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

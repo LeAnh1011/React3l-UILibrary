@@ -10,7 +10,6 @@ export interface ModalCustomProps extends AntModalProps {
   children?: ReactNode;
   visibleFooter?: boolean;
   handleCreateNext?: () => void;
-  handleDelete?: (value?: any) => void;
   model?: any;
   size?: "large" | "medium" | "small";
   keyButtonTranslate?: string;

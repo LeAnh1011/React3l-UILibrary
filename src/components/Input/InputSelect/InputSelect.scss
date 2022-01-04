@@ -32,7 +32,11 @@
     background-color: var(--color-white);
     height: 40px;
 
-    .tio-chevron_down {
+    &.input-select--filter-have-item {
+      outline: 1px solid var(--color-primary);
+    }
+
+    .input-select__icon {
       transition: all 0.3s ease;
       color: var(--palette-gray-60);
     }
@@ -54,7 +58,7 @@
     &:focus-within {
       outline-color: var(--color-primary);
       @include box-shadow--focus;
-      .tio-chevron_down {
+      .input-select__icon {
         transform: rotate(180deg);
         color: var(--color-primary);
       }
@@ -69,6 +73,9 @@
         color: var(--palette-gray-40) !important;
       }
       &:hover {
+        outline-color: var(--palette-coolGray-50);
+      }
+      &.input-select--filter-have-item {
         outline-color: var(--palette-coolGray-50);
       }
     }
@@ -89,6 +96,11 @@
       box-shadow: inset 0px -1px 0px var(--palette-gray-50);
       margin-bottom: -1px;
 
+      &.input-select--filter-have-item {
+        outline: 1px solid var(--color-primary);
+        box-shadow: none;
+      }
+
       &:hover {
         background-color: var(--palette-grayHover-10);
         .component__input {
@@ -103,13 +115,16 @@
       }
 
       &:focus-within {
-        border: 1px solid var(--color-primary);
+        outline: 1px solid var(--color-primary);
         @include box-shadow--focus();
       }
 
       &.input-select--disabled {
         box-shadow: none;
         background-color: var(--palette-gray-10);
+        &.input-select--filter-have-item {
+          outline: none;
+        }
       }
 
       &.input-select--float:focus-within {
@@ -197,12 +212,12 @@
 
 .form-item__container--error {
   .input-select__container {
-    .tio-chevron_down {
+    svg {
       color: var(--palette-gray-40) !important;
     }
   }
   .input-select--material {
-    border: 1px solid;
+    outline: 1px solid;
     box-shadow: none !important;
   }
 }

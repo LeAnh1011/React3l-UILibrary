@@ -7,6 +7,14 @@
   .select__item--selected {
     justify-content: flex-start !important;
   }
+  .ant-checkbox-wrapper {
+    width: 100%;
+    span:last-child {
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }
 
 .multiple-select__container {

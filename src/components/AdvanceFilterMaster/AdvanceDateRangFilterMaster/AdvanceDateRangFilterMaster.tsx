@@ -1,7 +1,7 @@
+import { Calendar16 } from "@carbon/icons-react";
 import { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import DateRange from "components/Calendar/DateRange";
-import { STANDARD_DATE_FORMAT_INVERSE } from "config/consts";
 import { BORDER_TYPE } from "config/enum";
 import { InputSelect } from "index";
 import moment, { Moment } from "moment";
@@ -193,7 +193,7 @@ function AdvanceDateRangeFilter(
 
   const handleClickCustomDate = React.useCallback(() => {
     setExpandDate(true);
-    onChange(undefined, value);
+    onChange(null, value);
   }, [onChange, value]);
 
   CommonService.useClickOutside(wrapperRef, handleCloseAdvanceFilterMaster);
@@ -201,11 +201,6 @@ function AdvanceDateRangeFilter(
   const handleClearItem = React.useCallback(() => {
     onChange(null, [null, null]);
   }, [onChange]);
-
-  React.useEffect(() => {
-    console.log('activeItem', activeItem);
-    console.log(value && value?.length && value[0]?.format(STANDARD_DATE_FORMAT_INVERSE))
-  }, [activeItem, value])
 
   return (
     <div
@@ -232,7 +227,8 @@ function AdvanceDateRangeFilter(
             })}
           >
             <div className="advance-date-range-filter-master__title">
-              {title}
+              <span> {title}</span>
+
               <i className="filter__icon tio-chevron_down"></i>
             </div>
           </div>
@@ -282,7 +278,7 @@ function AdvanceDateRangeFilter(
             })}
             onClick={handleClickCustomDate}
           >
-            <i className="tio tio-calendar_month" />
+            <Calendar16 />
             <span>Custom date</span>
           </div>
           {isExpandDate && (

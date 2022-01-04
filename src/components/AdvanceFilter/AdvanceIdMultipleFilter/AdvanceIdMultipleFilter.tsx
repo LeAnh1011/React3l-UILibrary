@@ -427,6 +427,7 @@ export function AdvanceIdMultipleFilter(
             isUsingSearch={isUsingSearch}
             onKeyDown={handleKeyPress}
             onKeyEnter={handleKeyEnter}
+            isFilter={true}
           />
         </div>
         {isExpand && (

@@ -282,6 +282,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
               isSmall={isSmall}
               isUsingSearch={false}
               onClearMulti={handleClearAll}
+              isFilter={true}
             />
           ) : (
             <InputSelect
@@ -297,6 +298,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
               label={label}
               isSmall={isSmall}
               isEnumerable={true}
+              isFilter={true}
             />
           )}
         </div>

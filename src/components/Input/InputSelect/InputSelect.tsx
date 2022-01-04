@@ -22,6 +22,7 @@ export interface InputSelectProps<T extends Model> {
   isRequired?: boolean;
   isSmall?: boolean;
   isEnumerable?: boolean;
+  isFilter?: boolean;
 }
 
 function InputSelect(props: InputSelectProps<Model>) {
@@ -41,6 +42,7 @@ function InputSelect(props: InputSelectProps<Model>) {
     isRequired,
     isSmall,
     isEnumerable,
+    isFilter,
   } = props;
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
@@ -130,6 +132,7 @@ function InputSelect(props: InputSelectProps<Model>) {
               "input-select--material": type === BORDER_TYPE.MATERIAL,
               "input-select--disabled ": disabled,
               "input-select--float": type === BORDER_TYPE.FLOAT_LABEL,
+              "input-select--filter-have-item": isFilter && model,
             }
           )}
         >

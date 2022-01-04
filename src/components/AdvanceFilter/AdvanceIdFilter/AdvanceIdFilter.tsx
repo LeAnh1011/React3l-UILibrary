@@ -285,6 +285,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
             type={type}
             label={label}
             isSmall={isSmall}
+            isFilter={true}
           />
         </div>
         {isExpand && (

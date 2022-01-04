@@ -30,6 +30,10 @@
     background-color: var(--color-white);
     height: 40px;
 
+    &.input-tag--filter-have-item {
+      outline: 1px solid var(--color-primary);
+    }
+
     .input-tag__icon {
       transition: all 0.3s ease;
       color: var(--palette-gray-60);
@@ -74,6 +78,9 @@
       &:hover {
         outline-color: var(--palette-coolGray-50);
       }
+      &.input-tag--filter-have-item {
+        outline-color: var(--palette-coolGray-50);
+      }
     }
 
     &.input-tag__container--float:focus-within {
@@ -92,6 +99,11 @@
       box-shadow: inset 0px -1px 0px var(--palette-gray-50);
       margin-bottom: -1px;
 
+      &.input-tag--filter-have-item {
+        outline: 1px solid var(--color-primary);
+        box-shadow: none;
+      }
+
       &:hover {
         background-color: var(--palette-grayHover-10);
         .component__input {
@@ -106,13 +118,16 @@
       }
 
       &:focus-within {
-        border: 1px solid var(--color-primary);
+        outline: 1px solid var(--color-primary);
         @include box-shadow--focus();
       }
 
       &.input-tag--disabled {
         box-shadow: none;
         background-color: var(--palette-gray-10);
+        &.input-tag--filter-have-item {
+          outline: none;
+        }
       }
 
       &.input-tag--float:focus-within {
@@ -254,12 +269,12 @@
 
 .form-item__container--error {
   .input-tag__container {
-    .tio-chevron_down {
+    svg.input-icon__clear {
       color: var(--palette-gray-40) !important;
     }
   }
   .input-tag__container--material {
-    border: 1px solid;
+    outline: 1px solid;
     box-shadow: none !important;
   }
 }

@@ -262,7 +262,6 @@ function AdvanceMultipleIdFilterMaster(
       );
 
       if (filteredItem) {
-        console.log('filteredItem selectedList', selectedList)
         const tmp = [...selectedList];
         const ids = selectedList?.map((item) => item?.id);
         const index = tmp.indexOf(filteredItem);
@@ -274,7 +273,6 @@ function AdvanceMultipleIdFilterMaster(
         });
         onChange([...tmp], ids as any);
       } else {
-        console.log('!filteredItem selectedList', selectedList)
         const ids = selectedList?.map((item) => item?.id);
         onChange([...selectedList, item], [...ids, item?.id] as any);
         dispatch({

@@ -14,7 +14,7 @@ import { Checkbox, Empty, Spin } from "antd";
 export interface AdvanceIdMultipleFilterProps<
   T extends Model,
   TFilter extends ModelFilter
-> {
+  > {
   models?: Model[];
 
   modelFilter?: TFilter;
@@ -31,7 +31,7 @@ export interface AdvanceIdMultipleFilterProps<
 
   getList?: (TModelFilter?: TFilter) => Observable<T[]>;
 
-  onChange?: (T?: T, type?: string) => void;
+  onChange?: (selectedList?: T[], ids?: []) => void;
 
   render?: (t: T) => string;
 
@@ -218,7 +218,7 @@ export function AdvanceIdMultipleFilter(
           setLoading(false);
         }
       );
-    } catch (error) {}
+    } catch (error) { }
   }, [getList, modelFilter, ClassFilter, subscription]);
 
   const handleToggle = React.useCallback(
@@ -265,15 +265,18 @@ export function AdvanceIdMultipleFilter(
 
       if (filteredItem) {
         const tmp = [...selectedList];
+        const ids = selectedList?.map((item) => item?.id);
         const index = tmp.indexOf(filteredItem);
         tmp.splice(index, 1);
+        ids.splice(index, 1);
         dispatch({
           type: "REMOVE",
           data: item,
         });
-        onChange(item, "REMOVE");
+        onChange([...tmp], ids as any);
       } else {
-        onChange(item, "UPDATE");
+        const ids = selectedList?.map((item) => item?.id);
+        onChange([...selectedList, item], [...ids, item?.id] as any);
         dispatch({
           type: "UPDATE",
           data: item,
@@ -302,33 +305,6 @@ export function AdvanceIdMultipleFilter(
     [run]
   );
 
-  const handleClearItem = React.useCallback(
-    (item: Model) => {
-      const cloneModelFilter = modelFilter
-        ? { ...modelFilter }
-        : new ClassFilter();
-
-      const index = cloneModelFilter["id"]["notIn"].findIndex(
-        (currentItem: { id: any }) => currentItem.id === item.id
-      );
-
-      cloneModelFilter["id"]["notIn"].splice(index, 1);
-      getList(cloneModelFilter).subscribe(
-        (res: Model[]) => {
-          if (res) {
-            setList(res);
-          }
-          setLoading(false);
-        },
-        (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        }
-      );
-      onChange(item, "REMOVE");
-    },
-    [ClassFilter, getList, modelFilter, onChange]
-  );
 
   const handleClearAll = React.useCallback(() => {
     const cloneModelFilter = new ClassFilter();
@@ -346,7 +322,11 @@ export function AdvanceIdMultipleFilter(
         setLoading(false);
       }
     );
-    onChange(null, "REMOVE_ALL");
+    onChange([], []);
+    dispatch({
+      type: "REMOVE_ALL",
+      data: [],
+    });
   }, [ClassFilter, getList, onChange]);
 
   const handleKeyPress = React.useCallback(
@@ -419,7 +399,6 @@ export function AdvanceIdMultipleFilter(
             placeHolder={placeHolder}
             disabled={disabled}
             onSearch={handleSearchChange}
-            onClear={handleClearItem}
             label={label}
             onClearMulti={handleClearAll}
             type={type}

@@ -100,53 +100,55 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
           </span>
         )}
       </div>
-      <RangePicker
-        {...props}
-        value={internalValue}
-        style={{ width: "100%" }}
-        allowClear={false}
-        format={dateFormat}
-        placeholder={placeHolder}
-        suffixIcon={<SuffixDateIcon />}
-        className={classNames("bg-white", {
-          "date-picker__wrapper--sm": isSmall,
-          "p-y--xxs": isSmall,
-          "p-x--xs": isSmall,
-          "p--xs": !isSmall,
-          "date-picker--material": type === BORDER_TYPE.MATERIAL,
-          "date-picker--disabled ": disabled,
-          "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,
-        })}
-        ref={dateRef}
-      />
-      {type === BORDER_TYPE.FLOAT_LABEL && label && (
-        <label
-          id="component__title-id"
-          className={classNames("component__title component__title--normal", {
-            "component__title--sm": isSmall,
-            "component__title-up":
-              internalValue && internalValue?.length > 0 && internalValue[0],
+      <div className="date-range__container">
+        <RangePicker
+          {...props}
+          value={internalValue}
+          style={{ width: "100%" }}
+          allowClear={false}
+          format={dateFormat}
+          placeholder={placeHolder}
+          suffixIcon={<SuffixDateIcon />}
+          className={classNames("bg-white", {
+            "date-picker__wrapper--sm": isSmall,
+            "p-y--xxs": isSmall,
+            "p-x--xs": isSmall,
+            "p--xs": !isSmall,
+            "date-picker--material": type === BORDER_TYPE.MATERIAL,
+            "date-picker--disabled ": disabled,
+            "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,
           })}
-        >
-          {label}
-          {isRequired && <span className="text-danger">&nbsp;*</span>}
-        </label>
-      )}
-      {internalValue[0] && (
-        <>
-          <span
-            className={classNames("date-range__icon-wrapper", {
-              "date-range__icon-wrapper--material":
-                type === BORDER_TYPE.MATERIAL,
+          ref={dateRef}
+        />
+        {type === BORDER_TYPE.FLOAT_LABEL && label && (
+          <label
+            id="component__title-id"
+            className={classNames("component__title component__title--normal", {
+              "component__title--sm": isSmall,
+              "component__title-up":
+                internalValue && internalValue?.length > 0 && internalValue[0],
             })}
           >
-            <CloseFilled16
-              className={classNames("date-range__icon-clear", "m-l--xxs")}
-              onClick={handleClearDate}
-            ></CloseFilled16>
-          </span>
-        </>
-      )}
+            {label}
+            {isRequired && <span className="text-danger">&nbsp;*</span>}
+          </label>
+        )}
+        {internalValue[0] && (
+          <>
+            <span
+              className={classNames("date-range__icon-wrapper", {
+                "date-range__icon-wrapper--material":
+                  type === BORDER_TYPE.MATERIAL,
+              })}
+            >
+              <CloseFilled16
+                className={classNames("date-range__icon-clear", "m-l--xxs")}
+                onClick={handleClearDate}
+              ></CloseFilled16>
+            </span>
+          </>
+        )}
+      </div>
     </div>
   );
 }

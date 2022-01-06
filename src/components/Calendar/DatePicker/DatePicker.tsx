@@ -85,50 +85,52 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
           </span>
         )}
       </div>
+      <div className="date-picker__container">
+        <DatePickerAntd
+          {...props}
+          value={internalValue}
+          style={{ width: "100%" }}
+          ref={dateRef}
+          allowClear={false}
+          format={dateFormat}
+          className={classNames("bg-white", {
+            "date-picker__wrapper--sm": isSmall,
+            "p-y--xxs": isSmall,
+            "p-x--xs": isSmall,
+            "p--xs": !isSmall,
+            "date-picker--material": type === BORDER_TYPE.MATERIAL,
+            "date-picker--disabled ": disabled,
+            "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,
+          })}
+          placeholder={placeHolder}
+        />
+        {type === BORDER_TYPE.FLOAT_LABEL && label && (
+          <label
+            id="component__title-id"
+            className={classNames("component__title component__title--normal", {
+              "component__title--sm": isSmall,
+              "component__title-up": internalValue,
+            })}
+          >
+            {label}
+            {isRequired && <span className="text-danger">&nbsp;*</span>}
+          </label>
+        )}
+        {value && String(value) !== DEFAULT_DATETIME_VALUE && (
+          <span
+            className={classNames("date-picker__icon-wrapper", {
+              "date-picker__icon-wrapper--material":
+                type === BORDER_TYPE.MATERIAL,
+            })}
+          >
+            <CloseFilled16
+              className={classNames("date-picker__icon-clear", "m-l--xxs")}
+              onClick={handleClearDate}
+            ></CloseFilled16>
+          </span>
+        )}
+      </div>
 
-      <DatePickerAntd
-        {...props}
-        value={internalValue}
-        style={{ width: "100%" }}
-        ref={dateRef}
-        allowClear={false}
-        format={dateFormat}
-        className={classNames("bg-white", {
-          "date-picker__wrapper--sm": isSmall,
-          "p-y--xxs": isSmall,
-          "p-x--xs": isSmall,
-          "p--xs": !isSmall,
-          "date-picker--material": type === BORDER_TYPE.MATERIAL,
-          "date-picker--disabled ": disabled,
-          "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,
-        })}
-        placeholder={placeHolder}
-      />
-      {type === BORDER_TYPE.FLOAT_LABEL && label && (
-        <label
-          id="component__title-id"
-          className={classNames("component__title component__title--normal", {
-            "component__title--sm": isSmall,
-            "component__title-up": internalValue,
-          })}
-        >
-          {label}
-          {isRequired && <span className="text-danger">&nbsp;*</span>}
-        </label>
-      )}
-      {value && String(value) !== DEFAULT_DATETIME_VALUE && (
-        <span
-          className={classNames("date-picker__icon-wrapper", {
-            "date-picker__icon-wrapper--material":
-              type === BORDER_TYPE.MATERIAL,
-          })}
-        >
-          <CloseFilled16
-            className={classNames("date-picker__icon-clear", "m-l--xxs")}
-            onClick={handleClearDate}
-          ></CloseFilled16>
-        </span>
-      )}
     </div>
   );
 }

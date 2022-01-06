@@ -54,7 +54,7 @@ export function EnumSelectStories() {
     code: "FAD",
   });
 
-  const [selectListModels, dispatch] = React.useReducer(testReducer, []);
+  const [models, setModels] = React.useState([]);
 
   const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
 
@@ -107,11 +107,8 @@ export function EnumSelectStories() {
     setIsMultiple(event.target.value);
   }, []);
 
-  const handleChangeModels = React.useCallback((item, type) => {
-    dispatch({
-      type: type,
-      data: item,
-    });
+  const handleChangeModels = React.useCallback((listItem, ids) => {
+    setModels([...listItem]);
   }, []);
 
   return (
@@ -134,7 +131,7 @@ export function EnumSelectStories() {
             isSmall={isSmall}
             isMultiple={isMultiple}
             onChangeMultiple={handleChangeModels} // if type is multiple pass this props
-            listModel={selectListModels} // if type is multiple pass this prop
+            listModel={models} // if type is multiple pass this prop
           />
         </FormItem>
       </div>

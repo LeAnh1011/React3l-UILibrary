@@ -56,10 +56,6 @@ export function DatePickerStories() {
           placeHolder={"Enter text..."}
           onChange={handleChange}
           disabled={isDisabled}
-          action={{
-            name: "Help",
-            action: () => console.log("Help incoming..."),
-          }}
           value={value}
         />
       </FormItem>

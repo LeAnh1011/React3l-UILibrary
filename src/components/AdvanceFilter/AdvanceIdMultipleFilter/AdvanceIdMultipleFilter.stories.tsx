@@ -33,25 +33,6 @@ const demoSearchFunc = (TModelFilter: ModelFilter) => {
   return demoObservable;
 };
 
-interface changeAction {
-  type: string;
-  data: Model;
-}
-
-function testReducer(currentState: Model[], action: changeAction): Model[] {
-  switch (action.type) {
-    case "UPDATE":
-      return [...currentState, action.data];
-    case "REMOVE":
-      const filteredArray = currentState.filter(
-        (item) => item.id !== action.data.id
-      );
-      return [...filteredArray];
-    case "REMOVE_ALL":
-      return [];
-  }
-  return;
-}
 
 class DemoFilter extends ModelFilter {
   public id: IdFilter = new IdFilter();

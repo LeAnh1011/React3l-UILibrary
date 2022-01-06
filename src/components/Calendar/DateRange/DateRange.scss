@@ -4,6 +4,11 @@
   width: 100%;
   position: relative;
 
+  .date-range__container {
+    position: relative;
+    width: 100%;
+  }
+
   .date-picker__wrapper--sm {
     height: 32px !important;
   }
@@ -129,7 +134,7 @@
     transition: all 0.1s ease-out;
     padding: 0 4px;
     z-index: 200;
-    top: 18px;
+    top: -1px;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;

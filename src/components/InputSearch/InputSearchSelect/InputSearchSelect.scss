@@ -1,0 +1,22 @@
+.input-search-select__wrapper{
+    display: flex;
+    height: 40px;
+    background-color: rgb(241, 226, 226);
+   
+    .component__input-search{
+        height: 40px;
+        border: none;
+        background-color: #E5E5E5;
+        &.visible__input-search{
+            width: 310px;
+            transition: width 0.2s;
+            outline: none;
+            padding-left: 4px;
+        }
+        &.hide__input-search{
+            width: 0px;
+            transition: width 0.2s;
+            padding: 0px;
+        }
+    }
+}

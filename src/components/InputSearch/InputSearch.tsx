@@ -242,7 +242,9 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
         onClick={handleToggle}
       >
         <div
-          className="component__input-search__icon-box"
+          className={classNames("component__input-search__icon-box", {
+            "background-type1": type === "type1",
+          })}
           onClick={() => {
             if (type !== "type3") {
               setShowInput(!showInput);
@@ -263,6 +265,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           onKeyDown={handleKeyPress}
           onKeyEnter={handleKeyEnter}
           showInput={showInput}
+          type={type}
         />
       </div>
       {isExpand && showInput && (

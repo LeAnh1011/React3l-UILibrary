@@ -47,7 +47,7 @@ function Default() {
         placeHolder="Search..."
         getList={demoListEnum}
         onChange={handleSetModel}
-        type="type3"
+        type="type1"
       />
     </div>
   );

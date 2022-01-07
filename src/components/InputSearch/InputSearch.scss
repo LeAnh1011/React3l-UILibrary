@@ -11,6 +11,9 @@
             justify-content: center;
             align-items: center;
             background-color: #e5e5e5;
+            &.background-type1{
+                background-color: #F4F4F4 !important;
+            }
         }
     }
     .select__list-container {

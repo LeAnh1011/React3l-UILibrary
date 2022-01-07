@@ -5,6 +5,9 @@
     .component__input-search-box {
         height: 40px;
         background-color: #e5e5e5;
+        &.background-type1{
+            background-color: #F4F4F4 !important;
+        }
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -20,6 +23,9 @@
             height: 40px;
             border: none !important ;
             background-color: #e5e5e5;
+            &.background-type1{
+                background-color: #F4F4F4 !important;
+            }
             &.visible__input-search {
                 width: 100% !important;
                 transition: width 0.2s;

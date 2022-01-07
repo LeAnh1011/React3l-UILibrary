@@ -3,6 +3,7 @@ import { CloseFilled16 } from "@carbon/icons-react";
 import "./InputSearchSelect.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
+import { InputSearchType } from "../InputSearch";
 
 export interface InputSelectProps<T extends Model> {
   model?: T;
@@ -14,6 +15,7 @@ export interface InputSelectProps<T extends Model> {
   onKeyDown?: (event: any) => void;
   onKeyEnter?: (event: any) => void;
   showInput?: boolean;
+  type?: InputSearchType;
 }
 
 function InputSearchSelect(props: InputSelectProps<Model>) {
@@ -27,6 +29,7 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
     onKeyDown,
     onKeyEnter,
     showInput,
+    type,
   } = props;
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
@@ -95,7 +98,8 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
         <div
           className={classNames(
             "component__input-search-box",
-            showInput ? "visible__input-search" : "hide__input-search"
+            showInput ? "visible__input-search" : "hide__input-search",
+            { "background-type1": type === "type1" }
           )}
         >
           {expanded ? (
@@ -109,7 +113,8 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
                 onKeyDown={handleKeyDown}
                 className={classNames(
                   "component__input-search",
-                  showInput ? "visible__input-search" : "hide__input-search"
+                  showInput ? "visible__input-search" : "hide__input-search",
+                  { "background-type1": type === "type1" }
                 )}
               />
 
@@ -145,7 +150,8 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
                 onKeyDown={handleEnter}
                 className={classNames(
                   "component__input-search",
-                  showInput ? "visible__input-search" : "hide__input-search"
+                  showInput ? "visible__input-search" : "hide__input-search",
+                  { "background-type1": type === "type1" }
                 )}
                 ref={inputRef}
               />

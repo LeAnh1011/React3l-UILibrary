@@ -38,18 +38,44 @@ function Default() {
   }, []);
 
   return (
-    <div style={{ width: "400px" }}>
-      <InputSearch
-        model={selectModel}
-        modelFilter={selectModelFilter}
-        searchProperty={"name"}
-        classFilter={DemoFilter}
-        placeHolder="Search..."
-        getList={demoListEnum}
-        onChange={handleSetModel}
-        type="type1"
-      />
-    </div>
+    <>
+      <div style={{ width: "400px", marginTop: 30 }}>
+        <InputSearch
+          model={selectModel}
+          modelFilter={selectModelFilter}
+          searchProperty={"name"}
+          classFilter={DemoFilter}
+          placeHolder="Search..."
+          getList={demoListEnum}
+          onChange={handleSetModel}
+          type="type1"
+        />
+      </div>
+      <div style={{ width: "400px", marginTop: 30 }}>
+        <InputSearch
+          model={selectModel}
+          modelFilter={selectModelFilter}
+          searchProperty={"name"}
+          classFilter={DemoFilter}
+          placeHolder="Search..."
+          getList={demoListEnum}
+          onChange={handleSetModel}
+          type="type2"
+        />
+      </div>
+      <div style={{ width: "400px", marginTop: 30 }}>
+        <InputSearch
+          model={selectModel}
+          modelFilter={selectModelFilter}
+          searchProperty={"name"}
+          classFilter={DemoFilter}
+          placeHolder="Search..."
+          getList={demoListEnum}
+          onChange={handleSetModel}
+          type="type3"
+        />
+      </div>
+    </>
   );
 }
 

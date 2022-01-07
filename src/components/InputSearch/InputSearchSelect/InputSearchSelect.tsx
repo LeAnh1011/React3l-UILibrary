@@ -123,7 +123,7 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
                   className="m-r--xxs"
                 >
                   <CloseFilled16
-                    className="input-icon input-icon__clear m-r--xxs"
+                    className="input-icon__clear m-r--xxs"
                     onClick={handleClearInput}
                   ></CloseFilled16>
                 </div>
@@ -133,7 +133,7 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
                   className="m-r--xxs"
                 >
                   <CloseFilled16
-                    className="input-icon input-icon__clear"
+                    className="input-icon__clear"
                     onClick={handleClearItem}
                   ></CloseFilled16>
                 </div>

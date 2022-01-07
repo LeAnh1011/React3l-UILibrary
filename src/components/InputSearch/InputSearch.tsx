@@ -25,6 +25,7 @@ export interface InputSearchProps<
   className?: string;
   onChange?: (id: number, T?: T) => void;
   placeHolder?: string;
+  animationInput?: boolean;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -42,8 +43,9 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     searchProperty,
     searchType,
     onChange,
+    animationInput,
   } = props;
-  const [showInput, setShowInput] = React.useState<boolean>(false);
+  const [showInput, setShowInput] = React.useState<boolean>(!animationInput);
 
   const [loading, setLoading] = React.useState<boolean>(false);
 
@@ -232,7 +234,11 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
         <div
           className="component__input-search__icon-box"
           onClick={() => {
-            setShowInput(!showInput);
+            if (animationInput) {
+              setShowInput(!showInput);
+            } else {
+              setShowInput(true);
+            }
           }}
         >
           <Search16 />
@@ -292,5 +298,6 @@ InputSearch.defaultProps = {
   searchProperty: "name",
   searchType: "contain",
   render: defaultRenderObject,
+  animationInput: false,
 };
 export default InputSearch;

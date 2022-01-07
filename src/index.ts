@@ -23,6 +23,8 @@ import AdvanceEnumFilter from "./components/AdvanceFilter/AdvanceEnumFilter";
 import AdvanceNumberFilter from "./components/AdvanceFilter/AdvanceNumberFilter";
 import AdvanceStringFilter from "./components/AdvanceFilter/AdvanceStringFilter";
 import AdvanceTreeFilter from "./components/AdvanceFilter/AdvanceTreeFilter";
+import AdvanceDateFilter from "./components/AdvanceFilter/AdvanceDateFilter";
+import AdvanceDateRangeFilter from "./components/AdvanceFilter/AdvanceDateRangeFilter";
 
 import Button from "./components/Button";
 
@@ -68,6 +70,8 @@ export {
   AdvanceNumberFilter,
   AdvanceStringFilter,
   AdvanceTreeFilter,
+  AdvanceDateFilter,
+  AdvanceDateRangeFilter,
   // Button component
   Button,
   // Calendar

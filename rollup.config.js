@@ -35,6 +35,8 @@ export default {
     "src/components/AdvanceFilter/AdvanceNumberFilter/index.ts",
     "src/components/AdvanceFilter/AdvanceStringFilter/index.ts",
     "src/components/AdvanceFilter/AdvanceTreeFilter/index.ts",
+    "src/components/AdvanceFilter/AdvanceDateFilter/index.ts",
+    "src/components/AdvanceFilter/AdvanceDateRangeFilter/index.ts",
     // Button
     "src/components/Button/index.ts",
     // Calendar

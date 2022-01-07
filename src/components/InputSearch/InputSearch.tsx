@@ -10,6 +10,10 @@ import { ErrorObserver, Observable } from "rxjs";
 import { useDebounceFn } from "ahooks";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import InputSearchSelect from "./InputSearchSelect/InputSearchSelect";
+export type InputSearchType =
+  | "type1" // box-icon bg white
+  | "type2" // box-icon bg e5e5e5
+  | "type3"; // not animationInput
 
 export interface InputSearchProps<
   T extends Model,
@@ -25,7 +29,7 @@ export interface InputSearchProps<
   className?: string;
   onChange?: (id: number, T?: T) => void;
   placeHolder?: string;
-  animationInput?: boolean;
+  type?: InputSearchType;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -43,9 +47,12 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     searchProperty,
     searchType,
     onChange,
-    animationInput,
+    type,
+    className,
   } = props;
-  const [showInput, setShowInput] = React.useState<boolean>(!animationInput);
+  const [showInput, setShowInput] = React.useState<boolean>(
+    type === "type3" ? true : false
+  );
 
   const [loading, setLoading] = React.useState<boolean>(false);
 
@@ -226,7 +233,10 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
   }, [isExpand]);
 
   return (
-    <div className="component__input-search-container" ref={wrapperRef}>
+    <div
+      className={classNames("component__input-search-container", className)}
+      ref={wrapperRef}
+    >
       <div
         className={classNames("component__input-search-select")}
         onClick={handleToggle}
@@ -234,7 +244,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
         <div
           className="component__input-search__icon-box"
           onClick={() => {
-            if (animationInput) {
+            if (type !== "type3") {
               setShowInput(!showInput);
             } else {
               setShowInput(true);
@@ -298,6 +308,6 @@ InputSearch.defaultProps = {
   searchProperty: "name",
   searchType: "contain",
   render: defaultRenderObject,
-  animationInput: false,
+  type: "type3",
 };
 export default InputSearch;

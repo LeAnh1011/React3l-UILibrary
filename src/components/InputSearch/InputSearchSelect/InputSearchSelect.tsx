@@ -7,16 +7,12 @@ import classNames from "classnames";
 export interface InputSelectProps<T extends Model> {
   model?: T;
   expanded?: boolean;
-  isMaterial?: boolean;
   placeHolder?: string;
   render?: (t: T) => string;
   onClear?: (T: T) => void;
   onSearch?: (T: string) => void;
   onKeyDown?: (event: any) => void;
   onKeyEnter?: (event: any) => void;
-  className?: string;
-  isRequired?: boolean;
-  isFilter?: boolean;
   showInput?: boolean;
 }
 

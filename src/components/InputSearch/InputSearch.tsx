@@ -137,7 +137,6 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      debugger;
       onChange(item.id, item);
       handleCloseSelect();
     },
@@ -225,10 +224,9 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
   }, [isExpand]);
 
   return (
-    <div className="component__input-search-container">
+    <div className="component__input-search-container" ref={wrapperRef}>
       <div
         className={classNames("component__input-search-select")}
-        ref={wrapperRef}
         onClick={handleToggle}
       >
         <div

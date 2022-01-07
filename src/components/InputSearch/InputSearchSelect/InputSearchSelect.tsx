@@ -41,7 +41,6 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
 
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      debugger;
       setInternalModel(event.target.value);
       if (typeof onSearch === "function") {
         onSearch(event.target.value);

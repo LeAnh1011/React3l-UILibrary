@@ -34,7 +34,6 @@ function Default() {
   });
 
   const handleSetModel = React.useCallback((...[, item]) => {
-    debugger;
     setSelectModel(item);
   }, []);
 

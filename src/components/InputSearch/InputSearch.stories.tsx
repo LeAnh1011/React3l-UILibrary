@@ -38,7 +38,7 @@ function Default() {
   }, []);
 
   return (
-    <div style={{ width: "500px", padding: "10px" }}>
+    <div style={{ width: "400px" }}>
       <InputSearch
         model={selectModel}
         modelFilter={selectModelFilter}

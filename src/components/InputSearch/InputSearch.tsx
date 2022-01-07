@@ -224,9 +224,9 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
   }, [isExpand]);
 
   return (
-    <>
+    <div className="component__input-search-container">
       <div
-        className={classNames("component__input-search-container")}
+        className={classNames("component__input-search-select")}
         ref={wrapperRef}
         onClick={handleToggle}
       >
@@ -239,7 +239,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           <Search16 />
         </div>
         <InputSearchSelect
-          model={internalModel} // value of input, event should change these on update
+          model={internalModel}
           render={render}
           placeHolder={placeHolder}
           expanded={isExpand}
@@ -286,7 +286,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }
 InputSearch.defaultProps = {

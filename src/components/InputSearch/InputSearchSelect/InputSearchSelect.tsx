@@ -41,6 +41,7 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
 
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
+      debugger;
       setInternalModel(event.target.value);
       if (typeof onSearch === "function") {
         onSearch(event.target.value);
@@ -96,7 +97,8 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
   return (
     <>
       <div className={classNames("input-search-select__wrapper")}>
-        <div className={classNames("component__input-search")}>
+        <div className={classNames("component__input-search-box",
+        showInput ? "visible__input-search" : "hide__input-search")}>
           {expanded ? (
             <>
               <input
@@ -112,7 +114,7 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
                 )}
               />
 
-              {internalModel ? (
+              {internalModel && showInput ? (
                 <div
                   style={{ width: "16px", height: "20px" }}
                   className="m-r--xxs"
@@ -122,7 +124,7 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
                     onClick={handleClearInput}
                   ></CloseFilled16>
                 </div>
-              ) : model ? (
+              ) : model && showInput ? (
                 <div
                   style={{ width: "16px", height: "20px" }}
                   className="m-r--xxs"
@@ -148,7 +150,7 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
                 )}
                 ref={inputRef}
               />
-              {model && (
+              {model && showInput && (
                 <div
                   style={{ width: "16px", height: "20px" }}
                   className="m-r--xxs"

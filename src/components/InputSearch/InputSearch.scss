@@ -1,12 +1,69 @@
-.component__input-search-container{
-    display: flex;
-    flex-direction: row;
-    .component__input-search__icon-box{
-        width: 40px;
-        height: 40px;
+@import "../../styles/index.scss";
+.component__input-search-container {
+    .component__input-search-select {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #E5E5E5;
+        flex-direction: row;
+        width: 100%;
+        .component__input-search__icon-box {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e5e5e5;
+        }
+    }
+    .select__list-container {
+        width: 100%;
+        height: auto;
+        background-color: var(--palette-gray-10);
+        @include box-shadow--popover();
+        position: absolute;
+        z-index: 999;
+        .select__list {
+            width: 100%;
+            overflow-y: auto;
+            max-height: 202px;
+            position: relative;
+            background-color: var(--palette-gray-10);
+        }
+        .select__loading {
+            width: 100%;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .select__item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-right: 15px;
+            font-size: 13px;
+            white-space: nowrap;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+            .select__text {
+                white-space: nowrap;
+                overflow-x: hidden;
+                text-overflow: ellipsis;
+            }
+            &:hover {
+                cursor: pointer;
+            }
+            &:hover,
+            &:focus {
+                background-color: var(--palette-grayHover-10);
+            }
+            &:focus-visible {
+                outline: none;
+            }
+            &.select__item--selected {
+                background-color: var(--palette-grayHover-10);
+                display: flex;
+                justify-content: space-between;
+            }
+        }
     }
 }

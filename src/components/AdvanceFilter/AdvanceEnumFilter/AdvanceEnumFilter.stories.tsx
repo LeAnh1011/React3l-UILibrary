@@ -1,13 +1,11 @@
-import { IdFilter } from "react3l-advanced-filters";
-import { StringFilter } from "react3l-advanced-filters";
-import { Model, ModelFilter } from "react3l-common";
 import { Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
 import React from "react";
+import { IdFilter, StringFilter } from "react3l-advanced-filters";
+import { Model, ModelFilter } from "react3l-common";
 import FormItem from "../../FormItem/FormItem";
+import { BORDER_TYPE, ValidateStatus } from "./../../../config/enum";
 import AdvanceEnumFilter from "./AdvanceEnumFilter";
-import { ValidateStatus } from "./../../../config/enum";
-import { BORDER_TYPE } from "./../../../config/enum";
 
 export class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
@@ -27,25 +25,7 @@ const demoListEnum = [
   { id: 4, name: "Enum 4", code: "E4" },
   { id: 5, name: "Enum 5", code: "E5" },
 ];
-interface changeAction {
-  type: string;
-  data: Model;
-}
 
-function testReducer(currentState: Model[], action: changeAction): Model[] {
-  switch (action.type) {
-    case "UPDATE":
-      return [...currentState, action.data];
-    case "REMOVE":
-      const filteredArray = currentState.filter(
-        (item) => item.id !== action.data.id
-      );
-      return [...filteredArray];
-    case "REMOVE_ALL":
-      return [];
-  }
-  return;
-}
 
 export function AdvanceEnumFilterStories() {
   const [selectModel, setSelectModel] = React.useState<Model>({
@@ -54,7 +34,7 @@ export function AdvanceEnumFilterStories() {
     code: "FAD",
   });
 
-  const [selectListModels, dispatch] = React.useReducer(testReducer, []);
+  const [models, setModels] = React.useState([]);
 
   const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
 
@@ -107,11 +87,8 @@ export function AdvanceEnumFilterStories() {
     setIsMultiple(event.target.value);
   }, []);
 
-  const handleChangeModels = React.useCallback((item, type) => {
-    dispatch({
-      type: type,
-      data: item,
-    });
+  const handleChangeModels = React.useCallback((listItem, ids) => {
+    setModels([...listItem]);
   }, []);
 
   return (
@@ -134,7 +111,7 @@ export function AdvanceEnumFilterStories() {
             isSmall={isSmall}
             isMultiple={isMultiple}
             onChangeMultiple={handleChangeModels} // if type is multiple pass this props
-            listModel={selectListModels} // if type is multiple pass this prop
+            listModel={models} // if type is multiple pass this prop
           />
         </FormItem>
       </div>

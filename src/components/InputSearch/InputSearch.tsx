@@ -137,6 +137,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      debugger;
       onChange(item.id, item);
       handleCloseSelect();
     },
@@ -250,7 +251,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           showInput={showInput}
         />
       </div>
-      {isExpand && (
+      {isExpand && showInput && (
         <div className="select__list-container" style={appendToBodyStyle}>
           {!loading ? (
             <>

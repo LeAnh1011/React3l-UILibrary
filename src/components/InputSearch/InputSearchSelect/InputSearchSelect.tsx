@@ -97,8 +97,12 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
   return (
     <>
       <div className={classNames("input-search-select__wrapper")}>
-        <div className={classNames("component__input-search-box",
-        showInput ? "visible__input-search" : "hide__input-search")}>
+        <div
+          className={classNames(
+            "component__input-search-box",
+            showInput ? "visible__input-search" : "hide__input-search"
+          )}
+        >
           {expanded ? (
             <>
               <input

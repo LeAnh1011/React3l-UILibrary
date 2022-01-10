@@ -50,9 +50,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     type,
     className,
   } = props;
-  const [showInput, setShowInput] = React.useState<boolean>(
-    type === "type3" ? true : false
-  );
+  const [showListItem, setShowListItem] = React.useState<boolean>();
 
   const [loading, setLoading] = React.useState<boolean>(false);
 
@@ -76,30 +74,37 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
 
   const handleCloseSelect = React.useCallback(() => {
     setExpand(false);
+    setShowListItem(false);
   }, []);
 
   const [subscription] = CommonService.useSubscription();
 
   const { run } = useDebounceFn(
     (searchTerm: string) => {
-      const cloneModelFilter = modelFilter
-        ? { ...modelFilter }
-        : new ClassFilter();
-      if (searchType) {
-        cloneModelFilter[searchProperty][searchType] = searchTerm;
-      } else cloneModelFilter[searchProperty] = searchTerm;
-      setLoading(true);
-      subscription.add(getList);
-      getList(cloneModelFilter).subscribe(
-        (res: Model[]) => {
-          setList(res);
-          setLoading(false);
-        },
-        (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        }
-      );
+      if (searchTerm !== "" && searchTerm) {
+        const cloneModelFilter = modelFilter
+          ? { ...modelFilter }
+          : new ClassFilter();
+        if (searchType) {
+          cloneModelFilter[searchProperty][searchType] = searchTerm;
+        } else cloneModelFilter[searchProperty] = searchTerm;
+        setLoading(true);
+        subscription.add(getList);
+        getList(cloneModelFilter).subscribe(
+          (res: Model[]) => {
+            setList(res);
+            setLoading(false);
+            setShowListItem(true);
+          },
+          (err: ErrorObserver<Error>) => {
+            setList([]);
+            setLoading(false);
+            setShowListItem(true);
+          }
+        );
+      } else {
+        setShowListItem(false);
+      }
     },
     {
       wait: DEBOUNCE_TIME_300,
@@ -245,13 +250,6 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           className={classNames("component__input-search__icon-box", {
             "background-type1": type === "type1",
           })}
-          onClick={() => {
-            if (type !== "type3") {
-              setShowInput(!showInput);
-            } else {
-              setShowInput(true);
-            }
-          }}
         >
           <Search16 />
         </div>
@@ -264,11 +262,10 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           onClear={handleClearItem}
           onKeyDown={handleKeyPress}
           onKeyEnter={handleKeyEnter}
-          showInput={showInput}
           type={type}
         />
       </div>
-      {isExpand && showInput && (
+      {showListItem && (
         <div className="select__list-container" style={appendToBodyStyle}>
           {!loading ? (
             <>

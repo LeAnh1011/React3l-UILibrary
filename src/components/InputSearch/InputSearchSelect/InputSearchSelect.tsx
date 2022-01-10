@@ -14,7 +14,6 @@ export interface InputSelectProps<T extends Model> {
   onSearch?: (T: string) => void;
   onKeyDown?: (event: any) => void;
   onKeyEnter?: (event: any) => void;
-  showInput?: boolean;
   type?: InputSearchType;
 }
 
@@ -28,7 +27,6 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
     onSearch,
     onKeyDown,
     onKeyEnter,
-    showInput,
     type,
   } = props;
 
@@ -114,7 +112,7 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
                 })}
               />
 
-              {internalModel && showInput ? (
+              {internalModel ? (
                 <div
                   style={{ width: "16px", height: "20px" }}
                   className="m-r--xxs"
@@ -124,7 +122,7 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
                     onClick={handleClearInput}
                   ></CloseFilled16>
                 </div>
-              ) : model && showInput ? (
+              ) : model ? (
                 <div
                   style={{ width: "16px", height: "20px" }}
                   className="m-r--xxs"
@@ -149,7 +147,7 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
                 })}
                 ref={inputRef}
               />
-              {model && showInput && (
+              {model && (
                 <div
                   style={{ width: "16px", height: "20px" }}
                   className="m-r--xxs"

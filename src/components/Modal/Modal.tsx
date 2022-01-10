@@ -5,24 +5,23 @@ import { TFunction } from "i18next";
 import classNames from "classnames";
 import Button from "components/Button";
 export interface ModalCustomProps extends AntModalProps {
-  handleCancel?: () => void;
-  handleSave?: (value?: any) => void;
   children?: ReactNode;
   visibleFooter?: boolean;
-  handleCreateNext?: () => void;
-  model?: any;
   size?: "large" | "medium" | "small";
   keyButtonTranslate?: string;
+  handleCancel?: () => void;
+  handleSave?: (value?: any) => void;
+  handleCreateNext?: () => void;
   translate?: TFunction;
 }
 function Modal(props: ModalCustomProps) {
   const {
-    handleCancel,
-    handleSave,
     visibleFooter,
     size,
-    translate,
     keyButtonTranslate,
+    handleCancel,
+    handleSave,
+    translate,
     handleCreateNext,
   } = props;
   const renderModalFooter = React.useMemo(

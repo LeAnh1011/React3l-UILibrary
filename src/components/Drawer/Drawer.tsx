@@ -3,42 +3,37 @@ import { Spin } from "antd";
 import { ModalProps as AntModalProps } from "antd/lib/modal";
 import classNames from "classnames";
 import Button from "components/Button";
+import { NUMBER_BUTTON } from "config/enum";
 import { TFunction } from "i18next";
 import React, { ReactNode, RefObject } from "react";
 import "./Drawer.scss";
 
 export interface DrawerProps extends AntModalProps {
-  handleCancel?: () => void;
-
-  handleSave?: (value?: any) => void;
-
   children?: ReactNode;
-
   visibleFooter?: boolean;
-
-  handleCreate?: () => void;
-  model?: any;
   disableButton?: boolean;
   loading?: boolean;
   keyTitleTranslate?: string;
   keyButtonTranslate?: string;
+  size?: NUMBER_BUTTON;
+  handleCancel?: () => void;
+  handleSave?: () => void;
+  handleCreate?: () => void;
   translate?: TFunction;
-  isPreview?: boolean;
 }
 
 function Drawer(props: DrawerProps) {
   const {
-    handleCancel,
-    handleSave,
     visibleFooter,
-    handleCreate,
-    model,
     visible,
     disableButton,
     loading,
     keyTitleTranslate,
     keyButtonTranslate,
-    isPreview,
+    size,
+    handleCancel,
+    handleSave,
+    handleCreate,
     translate,
   } = props;
   const ref: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(null);
@@ -46,84 +41,53 @@ function Drawer(props: DrawerProps) {
   const renderModalFooter = React.useMemo(
     () => (
       <div className="button-bleed-footer">
-        {model?.id ? (
-          <Button
-            type="bleed-primary"
-            className="button-50"
-            onClick={handleSave}
-          >
-            <span>
-              {keyButtonTranslate && translate
-                ? translate(`${keyButtonTranslate}.save`)
-                : "Save"}
-            </span>
-          </Button>
-        ) : (
-          <>
-            <Button
-              type="bleed-primary"
-              className={classNames(handleCreate ? "button-33" : "button-50")}
-              onClick={handleSave}
-              disabled={disableButton}
-            >
-              <span>
-                {keyButtonTranslate && translate
-                  ? translate(`${keyButtonTranslate}.create`)
-                  : "Create"}
-              </span>
-            </Button>
-            {handleCreate && (
-              <Button
-                type="bleed-secondary"
-                className="button-33"
-                onClick={handleCreate}
-                disabled={disableButton}
-              >
-                <span>
-                  {keyButtonTranslate && translate
-                    ? translate(`${keyButtonTranslate}.createNext`)
-                    : "Create Next"}
-                </span>
-              </Button>
-            )}
-          </>
-        )}
-
-        {model?.id ? (
+        <Button
+          type="bleed-primary"
+          className={classNames(size === NUMBER_BUTTON.THREE ? "button-33" : "button-50")}
+          onClick={handleSave}
+          disabled={disableButton}
+        >
+          <span>
+            {keyButtonTranslate && translate
+              ? translate(`${keyButtonTranslate}.create`)
+              : "Create"}
+          </span>
+        </Button>
+        {size === NUMBER_BUTTON.THREE && (
           <Button
             type="bleed-secondary"
-            className="button-50"
-            onClick={handleCancel}
+            className="button-33"
+            onClick={handleCreate}
+            disabled={disableButton}
           >
             <span>
               {keyButtonTranslate && translate
-                ? translate(`${keyButtonTranslate}.close`)
-                : "Close"}
-            </span>
-          </Button>
-        ) : (
-          <Button
-            type="bleed-secondary"
-            className={classNames(handleCreate ? "button-33" : "button-50")}
-            onClick={handleCancel}
-          >
-            <span>
-              {keyButtonTranslate && translate
-                ? translate(`${keyButtonTranslate}.close`)
-                : "Close"}
+                ? translate(`${keyButtonTranslate}.createNext`)
+                : "Create Next"}
             </span>
           </Button>
         )}
+        <Button
+          type="bleed-secondary"
+          className={classNames(size === NUMBER_BUTTON.THREE ? "button-33" : "button-50")}
+          onClick={handleCancel}
+        >
+          <span>
+            {keyButtonTranslate && translate
+              ? translate(`${keyButtonTranslate}.close`)
+              : "Close"}
+          </span>
+        </Button>
       </div>
     ),
     [
-      model?.id,
       handleSave,
-      keyButtonTranslate,
       translate,
-      disableButton,
       handleCreate,
       handleCancel,
+      size,
+      disableButton,
+      keyButtonTranslate
     ]
   );
   return (
@@ -137,29 +101,11 @@ function Drawer(props: DrawerProps) {
           <div className="animation-modal__content">
             <div className="animation-modal__header">
               <div className="animation-modal__header-text">
-                {isPreview ? (
-                  <>
-                    {keyTitleTranslate && translate
-                      ? translate(`${keyTitleTranslate}.preview`)
-                      : "Drawer Preview"}
-                  </>
-                ) : (
-                  <>
-                    {model?.id ? (
-                      <div className=" mr-1">
-                        {keyTitleTranslate && translate
-                          ? translate(`${keyTitleTranslate}.title`)
-                          : "Drawer Title"}
-                      </div>
-                    ) : (
-                      <>
-                        {keyTitleTranslate && translate
-                          ? translate(`${keyTitleTranslate}.preview`)
-                          : "Drawer Create"}
-                      </>
-                    )}
-                  </>
-                )}
+                <div className=" mr-1">
+                  {keyTitleTranslate && translate
+                    ? translate(`${keyTitleTranslate}.title`)
+                    : "Drawer Title"}
+                </div>
               </div>
               <div className="button-cancel" onClick={handleCancel}>
                 <Close24 />
@@ -187,7 +133,7 @@ Drawer.defaultProps = {
   visibleCreate: true,
   visibleCreateNext: true,
   disableButton: false,
-  isPreview: false,
+  size: NUMBER_BUTTON.TWO
 };
 
 export default Drawer;

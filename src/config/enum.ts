@@ -10,3 +10,8 @@ export enum ValidateStatus {
   error = "error",
   validating = "validating",
 }
+
+export enum NUMBER_BUTTON {
+  THREE = "three",
+  TWO = "two",
+}

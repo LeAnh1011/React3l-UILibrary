@@ -14,7 +14,7 @@
   line-height: var(--line-height);
   border: none;
   padding: var(--space-xxs) var(--space-xs);
-  border-radius:  var(--btn-radius);
+  border-radius: var(--btn-radius);
   font-size: var(--font-size);
   outline: none;
   transition: 0.2s;
@@ -30,11 +30,6 @@
   }
 }
 
-
-
-
-
-
 /* feedback */
 .btn[disabled] {
   cursor: not-allowed;
@@ -44,26 +39,7 @@
     color: var(--btn-disabled-label);
   }
 }
-.footer-modal{
-  display: flex;
-  justify-content: end;
-  .width-75{
-    width: 75%;
-  }
-}
 
-.button-bleed-footer{
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  .button-50{
-    width: 49.9%;
-  }
-  .button-33{
-    width: 33.15%;
-  }
-}
 .btn--full-width {
   display: flex;
   width: 100%;

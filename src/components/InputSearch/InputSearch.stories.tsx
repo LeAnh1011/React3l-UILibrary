@@ -39,7 +39,7 @@ function Default() {
 
   return (
     <>
-      <div style={{ width: "400px", marginTop: 30 }}>
+      {/* <div style={{ width: "400px", marginTop: 30 }}>
         <InputSearch
           model={selectModel}
           modelFilter={selectModelFilter}
@@ -50,7 +50,7 @@ function Default() {
           onChange={handleSetModel}
           type="type1"
         />
-      </div>
+      </div> */}
       <div style={{ width: "400px", marginTop: 30 }}>
         <InputSearch
           model={selectModel}
@@ -63,7 +63,7 @@ function Default() {
           type="type2"
         />
       </div>
-      <div style={{ width: "400px", marginTop: 30 }}>
+      {/* <div style={{ width: "400px", marginTop: 30 }}>
         <InputSearch
           model={selectModel}
           modelFilter={selectModelFilter}
@@ -74,7 +74,7 @@ function Default() {
           onChange={handleSetModel}
           type="type3"
         />
-      </div>
+      </div> */}
     </>
   );
 }

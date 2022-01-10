@@ -96,11 +96,9 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
     <>
       <div className={classNames("input-search-select__wrapper")}>
         <div
-          className={classNames(
-            "component__input-search-box",
-            showInput ? "visible__input-search" : "hide__input-search",
-            { "background-type1": type === "type1" }
-          )}
+          className={classNames("component__input-search-box", {
+            "background-type1": type === "type1",
+          })}
         >
           {expanded ? (
             <>
@@ -111,11 +109,9 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
                 placeholder={model ? (render(model) as string) : placeHolder}
                 ref={inputRef}
                 onKeyDown={handleKeyDown}
-                className={classNames(
-                  "component__input-search",
-                  showInput ? "visible__input-search" : "hide__input-search",
-                  { "background-type1": type === "type1" }
-                )}
+                className={classNames("component__input-search", {
+                  "background-type1": type === "type1",
+                })}
               />
 
               {internalModel && showInput ? (
@@ -148,11 +144,9 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
                 readOnly
                 placeholder={placeHolder}
                 onKeyDown={handleEnter}
-                className={classNames(
-                  "component__input-search",
-                  showInput ? "visible__input-search" : "hide__input-search",
-                  { "background-type1": type === "type1" }
-                )}
+                className={classNames("component__input-search", {
+                  "background-type1": type === "type1",
+                })}
                 ref={inputRef}
               />
               {model && showInput && (

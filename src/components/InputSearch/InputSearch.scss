@@ -3,7 +3,9 @@
     .component__input-search-select {
         display: flex;
         flex-direction: row;
-        width: 100%;
+        width: 40px;
+        transition: 0.5s;
+        overflow: hidden;
         .component__input-search__icon-box {
             width: 40px;
             height: 40px;
@@ -15,6 +17,12 @@
                 background-color: #F4F4F4 !important;
             }
         }
+    }
+    .component__input-search-select:hover {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        transition: 0.5s;
     }
     .select__list-container {
         width: 100%;

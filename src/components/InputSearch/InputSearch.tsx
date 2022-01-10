@@ -144,13 +144,8 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       setExpand(true);
       await handleLoadList();
-      if (type !== "type3") {
-        setShowInput(!showInput);
-      } else {
-        setShowInput(true);
-      }
     },
-    [handleLoadList, showInput, type]
+    [handleLoadList]
   );
 
   const handleKeyEnter = React.useCallback(
@@ -270,6 +265,9 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           className={classNames("component__input-search__icon-box", {
             "background-type1": type === "type1",
           })}
+          onClick={() => {
+            setShowInput(true);
+          }}
         >
           <Search16 />
         </div>

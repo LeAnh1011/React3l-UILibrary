@@ -32,20 +32,6 @@ interface changeAction {
   data: Model;
 }
 
-function testReducer(currentState: Model[], action: changeAction): Model[] {
-  switch (action.type) {
-    case "UPDATE":
-      return [...currentState, action.data];
-    case "REMOVE":
-      const filteredArray = currentState.filter(
-        (item) => item.id !== action.data.id
-      );
-      return [...filteredArray];
-    case "REMOVE_ALL":
-      return [];
-  }
-  return;
-}
 
 export function EnumSelectStories() {
   const [selectModel, setSelectModel] = React.useState<Model>({

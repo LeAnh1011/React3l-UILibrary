@@ -1,10 +1,10 @@
 @import "../../styles/index.scss";
 .component__input-search-container {
+    overflow: hidden;
     .component__input-search-select {
         display: flex;
         flex-direction: row;
-        width: 40px;
-        transition: 0.5s;
+        width: 100%;
         overflow: hidden;
         .component__input-search__icon-box {
             width: 40px;
@@ -17,13 +17,17 @@
                 background-color: #F4F4F4 !important;
             }
         }
+        .visible__input-search {
+            width: calc(100% - 40px);
+            transition: width 0.5s;
+        }
+        .hidden__input-search {
+            overflow: hidden;
+            width: 0px !important;
+            transition: width 0.5s;
+        }
     }
-    .component__input-search-select:hover {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        transition: 0.5s;
-    }
+    
     .select__list-container {
         width: 100%;
         height: auto;

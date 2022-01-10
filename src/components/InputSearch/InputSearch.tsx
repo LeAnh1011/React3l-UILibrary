@@ -56,6 +56,10 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
 
   const [list, setList] = React.useState<Model[]>([]);
 
+  const [showInput, setShowInput] = React.useState<boolean>(
+    type === "type3" ? true : false
+  );
+
   const internalModel = React.useMemo((): Model => {
     return model || null;
   }, [model]);
@@ -75,7 +79,12 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
   const handleCloseSelect = React.useCallback(() => {
     setExpand(false);
     setShowListItem(false);
-  }, []);
+    if (type !== "type3") {
+      setShowInput(false);
+    } else {
+      setShowInput(true);
+    }
+  }, [type]);
 
   const [subscription] = CommonService.useSubscription();
 
@@ -135,8 +144,13 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       setExpand(true);
       await handleLoadList();
+      if (type !== "type3") {
+        setShowInput(!showInput);
+      } else {
+        setShowInput(true);
+      }
     },
-    [handleLoadList]
+    [handleLoadList, showInput, type]
   );
 
   const handleKeyEnter = React.useCallback(
@@ -214,7 +228,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
   );
 
   React.useEffect(() => {
-    if (isExpand) {
+    if (isExpand && showListItem) {
       const currentPosition = wrapperRef.current.getBoundingClientRect();
       const spaceBelow = window.innerHeight - currentPosition.bottom;
       if (spaceBelow <= 200) {
@@ -238,11 +252,14 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
         });
       }
     }
-  }, [isExpand]);
+  }, [isExpand, showListItem]);
 
   return (
     <div
-      className={classNames("component__input-search-container", className)}
+      className={classNames("component__input-search-container", className, {
+        "visible__input-search": showInput,
+        "hidden__input-search": !showInput,
+      })}
       ref={wrapperRef}
     >
       <div
@@ -256,17 +273,24 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
         >
           <Search16 />
         </div>
-        <InputSearchSelect
-          model={internalModel}
-          render={render}
-          placeHolder={placeHolder}
-          expanded={isExpand}
-          onSearch={handleSearchChange}
-          onClear={handleClearItem}
-          onKeyDown={handleKeyPress}
-          onKeyEnter={handleKeyEnter}
-          type={type}
-        />
+        <div
+          className={classNames({
+            "visible__input-search": showInput,
+            "hidden__input-search": !showInput,
+          })}
+        >
+          <InputSearchSelect
+            model={internalModel}
+            render={render}
+            placeHolder={placeHolder}
+            expanded={isExpand}
+            onSearch={handleSearchChange}
+            onClear={handleClearItem}
+            onKeyDown={handleKeyPress}
+            onKeyEnter={handleKeyEnter}
+            type={type}
+          />
+        </div>
       </div>
       {showListItem && (
         <div className="select__list-container" style={appendToBodyStyle}>

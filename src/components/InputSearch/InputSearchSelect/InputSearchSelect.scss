@@ -1,5 +1,6 @@
 .input-search-select__wrapper {
-    width: calc(100% - 40px);
+    width: 100%;
+    overflow: hidden;
     display: flex;
     height: 40px;
     .component__input-search-box {

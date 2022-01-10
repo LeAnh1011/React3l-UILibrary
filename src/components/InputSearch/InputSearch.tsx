@@ -172,9 +172,11 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     (event: any) => {
       switch (event.keyCode) {
         case 40:
-          const firstItem = selectListRef.current
-            .firstElementChild as HTMLElement;
-          firstItem.focus();
+          if (showListItem) {
+            const firstItem = selectListRef.current
+              .firstElementChild as HTMLElement;
+            firstItem.focus();
+          }
           break;
         case 9:
           handleCloseSelect();
@@ -183,7 +185,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           return;
       }
     },
-    [handleCloseSelect]
+    [handleCloseSelect, showListItem]
   );
 
   const handleMove = React.useCallback(
@@ -205,6 +207,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           event.preventDefault();
           break;
       }
+
       return;
     },
     [handleClickItem]

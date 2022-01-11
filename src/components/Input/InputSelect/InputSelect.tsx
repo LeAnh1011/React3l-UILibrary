@@ -1,5 +1,5 @@
 import React, { ReactSVGElement, RefObject } from "react";
-import { CloseFilled16 } from "@carbon/icons-react";
+import { CloseFilled16, ChevronDown16 } from "@carbon/icons-react";
 import "./InputSelect.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
@@ -21,6 +21,8 @@ export interface InputSelectProps<T extends Model> {
   label?: string;
   isRequired?: boolean;
   isSmall?: boolean;
+  isEnumerable?: boolean;
+  isFilter?: boolean;
 }
 
 function InputSelect(props: InputSelectProps<Model>) {
@@ -39,6 +41,8 @@ function InputSelect(props: InputSelectProps<Model>) {
     label,
     isRequired,
     isSmall,
+    isEnumerable,
+    isFilter,
   } = props;
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
@@ -128,6 +132,7 @@ function InputSelect(props: InputSelectProps<Model>) {
               "input-select--material": type === BORDER_TYPE.MATERIAL,
               "input-select--disabled ": disabled,
               "input-select--float": type === BORDER_TYPE.FLOAT_LABEL,
+              "input-select--filter-have-item": isFilter && model,
             }
           )}
         >
@@ -150,6 +155,7 @@ function InputSelect(props: InputSelectProps<Model>) {
                 className={classNames("component__input", {
                   "disabled-field": disabled,
                 })}
+                readOnly={isEnumerable}
               />
               {type === BORDER_TYPE.FLOAT_LABEL && label && (
                 <label
@@ -187,16 +193,11 @@ function InputSelect(props: InputSelectProps<Model>) {
                   )}
                 </div>
               ) : null}
-              <i
-                className={classNames(
-                  "input-icon",
-                  "input-select__icon",
-                  "tio-chevron_down",
-                  {
-                    "input-select__icon--disabled": disabled,
-                  }
-                )}
-              ></i>
+              <ChevronDown16
+                className={classNames("input-icon", "input-select__icon", {
+                  "input-select__icon--disabled": disabled,
+                })}
+              ></ChevronDown16>
             </>
           ) : (
             <>
@@ -242,16 +243,11 @@ function InputSelect(props: InputSelectProps<Model>) {
                   )}
                 </div>
               )}
-              <i
-                className={classNames(
-                  "input-icon",
-                  "input-select__icon",
-                  "tio-chevron_down",
-                  {
-                    "input-select__icon--disabled": disabled,
-                  }
-                )}
-              ></i>
+              <ChevronDown16
+                className={classNames("input-icon", "input-select__icon", {
+                  "input-select__icon--disabled": disabled,
+                })}
+              ></ChevronDown16>
             </>
           )}
         </div>

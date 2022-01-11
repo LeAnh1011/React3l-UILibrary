@@ -56,8 +56,8 @@ export function AdvanceMultipleIdFilterMasterStories() {
     };
   }, [filter]);
 
-  const handleChangeFilter = React.useCallback((listItem) => {
-    setFilter({ ...filter, id: { in: listItem.map((currentItem) => currentItem.id) } })
+  const handleChangeFilter = React.useCallback((listItemm, ids) => {
+    setFilter({ ...filter, id: { in: ids } });
   }, [filter]);
 
 

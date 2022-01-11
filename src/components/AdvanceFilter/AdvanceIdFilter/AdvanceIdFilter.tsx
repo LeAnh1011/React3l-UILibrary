@@ -1,4 +1,5 @@
 import { DEBOUNCE_TIME_300 } from "config/consts";
+import { Add16, Checkmark16 } from "@carbon/icons-react";
 import { Model, ModelFilter } from "react3l-common";
 import { useDebounceFn } from "ahooks";
 import { Empty } from "antd";
@@ -284,6 +285,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
             type={type}
             label={label}
             isSmall={isSmall}
+            isFilter={true}
           />
         </div>
         {isExpand && (
@@ -313,7 +315,9 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                           {render(item)}
                         </span>
                         {item.id === internalModel?.id && (
-                          <i className="tio-done" />
+                          <div style={{ height: "16px" }}>
+                            <Checkmark16 />
+                          </div>
                         )}
                       </div>
                     ))
@@ -348,7 +352,9 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                         {render(item)}
                       </span>
                       {item.id === internalModel?.id && (
-                        <i className="tio tio-done" />
+                        <div style={{ height: "16px" }}>
+                          <Checkmark16 />
+                        </div>
                       )}
                     </div>
                   ))}
@@ -360,7 +366,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                   "advance-id-filter__bottom-button advance-id-filter__add-button p-y--xs"
                 )}
               >
-                <i className="tio-add m-l--xxs" />
+                <Add16 className="m-l--xxs" />
                 <span>Add new</span>
               </div>
             )}

@@ -1,7 +1,6 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import React from "react";
 import { Spin } from "antd";
-import "./IconLoading.scss";
 
 export interface IconLoadingAction {
   name?: string;

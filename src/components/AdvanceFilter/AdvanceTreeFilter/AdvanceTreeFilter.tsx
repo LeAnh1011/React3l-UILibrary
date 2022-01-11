@@ -211,6 +211,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               isUsingSearch={isUsingSearch}
               onClearMulti={handleClearMultiItem}
               onKeyDown={handleKeyPress}
+              isFilter={true}
             />
           ) : (
             <InputSelect
@@ -226,6 +227,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               label={label}
               isSmall={isSmall}
               onKeyDown={handleKeyPress}
+              isFilter={true}
             />
           )}
         </div>

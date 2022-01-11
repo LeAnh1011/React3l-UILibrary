@@ -1,14 +1,11 @@
-import { Radio } from 'antd';
-import { RadioChangeEvent } from 'antd/lib/radio';
-import { Moment } from 'moment';
 import React from 'react';
-import { BORDER_TYPE, ValidateStatus } from '../../../config/enum';
-import FormItem from "../../FormItem/FormItem";
-import DatePicker from './DatePicker';
+import AdvanceDateRangeFilter from './AdvanceDateRangeFilter';
+import { Moment } from 'moment';
+import { Radio, RadioChangeEvent } from 'antd';
+import { BORDER_TYPE } from '../../../config/enum';
 
-export function DatePickerStories() {
-
-  const [value, setValue] = React.useState<Moment>();
+export function AdvanceDateRangeFilterStories() {
+  const [value, setValue] = React.useState<[Moment, Moment]>([null, null]);
 
   const [type, setType] = React.useState<BORDER_TYPE>(
     BORDER_TYPE.FLOAT_LABEL
@@ -18,11 +15,8 @@ export function DatePickerStories() {
 
   const [isSmall, setIsSmall] = React.useState(false);
 
-  const [isValidated, setValidated] = React.useState(false);
 
   const handleChange = React.useCallback((dateMoment, dateString) => {
-
-    console.log(dateMoment)
     setValue(dateMoment);
   }, []);
 
@@ -35,31 +29,18 @@ export function DatePickerStories() {
     setIsSmall(event.target.value);
   }, []);
 
-
-  const handleChangeValidated = React.useCallback((event: RadioChangeEvent) => {
-    setValidated(event.target.value);
-  }, []);
-
   const handleChangeDisabled = React.useCallback((event: RadioChangeEvent) => {
     setIsDisabled(event.target.value);
   }, []);
 
-  return <div style={{ margin: '10px', width: '220px' }}>
-    <div style={{ margin: '10px', width: '300px' }}>
-      <FormItem
-        validateStatus={isValidated ? ValidateStatus.error : null}
-        message={'Helper text'} >
-        <DatePicker
-          type={type}
-          isSmall={isSmall}
-          label="Ngày nhập hàng"
-          placeHolder={"Enter text..."}
-          onChange={handleChange}
-          disabled={isDisabled}
-          value={value}
-        />
-      </FormItem>
-    </div>
+  return <div style={{ margin: '10px', width: '250px' }}>
+    <AdvanceDateRangeFilter
+      type={type}
+      isSmall={isSmall}
+      disabled={isDisabled}
+      onChange={handleChange}
+      value={value} />
+
     <div style={{ margin: "10px", width: "300px" }}>
       <Radio.Group onChange={handleChangeStyle} value={type}>
         <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
@@ -76,17 +57,10 @@ export function DatePickerStories() {
     </div>
 
     <div style={{ margin: "10px", width: "300px" }}>
-      <Radio.Group onChange={handleChangeValidated} value={isValidated}>
-        <Radio value={true}>Validated</Radio>
-        <Radio value={false}>Not Validated</Radio>
-      </Radio.Group>
-    </div>
-
-    <div style={{ margin: "10px", width: "300px" }}>
       <Radio.Group onChange={handleChangeDisabled} value={isDisabled}>
         <Radio value={true}>Disabled</Radio>
         <Radio value={false}>Not Disabled</Radio>
       </Radio.Group>
     </div>
-  </div >;
+  </div>;
 }

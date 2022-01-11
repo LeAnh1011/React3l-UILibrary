@@ -13,7 +13,7 @@
     max-width: 250px !important;
   }
   .tree__icon {
-    display: block;
+    display: flex;
   }
   .tree__loading {
     width: 100%;
@@ -48,7 +48,7 @@
       font-size: 12px;
       margin-left: 8px;
     }
-    .tio-add {
+    svg {
       color: var(--color-primary);
     }
   }

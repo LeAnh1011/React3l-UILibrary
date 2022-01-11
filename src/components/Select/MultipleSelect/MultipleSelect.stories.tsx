@@ -33,25 +33,6 @@ const demoSearchFunc = (TModelFilter: ModelFilter) => {
   return demoObservable;
 };
 
-interface changeAction {
-  type: string;
-  data: Model;
-}
-
-function testReducer(currentState: Model[], action: changeAction): Model[] {
-  switch (action.type) {
-    case "UPDATE":
-      return [...currentState, action.data];
-    case "REMOVE":
-      const filteredArray = currentState.filter(
-        (item) => item.id !== action.data.id
-      );
-      return [...filteredArray];
-    case "REMOVE_ALL":
-      return [];
-  }
-  return;
-}
 
 class DemoFilter extends ModelFilter {
   public id: IdFilter = new IdFilter();
@@ -60,7 +41,7 @@ class DemoFilter extends ModelFilter {
 }
 
 export function MultipleSelectStories() {
-  const [models, dispatch] = React.useReducer(testReducer, []);
+  const [models, setModels] = React.useState([]);
 
   const [selectModelFilter] = React.useState<DemoFilter>(new DemoFilter());
 
@@ -84,11 +65,8 @@ export function MultipleSelectStories() {
     setType(event.target.value);
   }, []);
 
-  const handleChangeModels = React.useCallback((item, type) => {
-    dispatch({
-      type: type,
-      data: item,
-    });
+  const handleChangeModels = React.useCallback((listItem) => {
+    setModels([...listItem]);
   }, []);
 
   const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {

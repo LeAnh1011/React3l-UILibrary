@@ -33,7 +33,7 @@ export interface AdvanceMultipleIdFilterMasterProps<
 
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
 
-  onChange?: (T?: T, type?: string) => void;
+  onChange?: (selectedList?: T[], ids?: []) => void;
 
   render?: (t: T) => string;
 
@@ -72,6 +72,7 @@ function multipleFilterReducer(
   }
   return;
 }
+
 
 function AdvanceMultipleIdFilterMaster(
   props: AdvanceMultipleIdFilterMasterProps<Model, ModelFilter>
@@ -262,15 +263,18 @@ function AdvanceMultipleIdFilterMaster(
 
       if (filteredItem) {
         const tmp = [...selectedList];
+        const ids = selectedList?.map((item) => item?.id);
         const index = tmp.indexOf(filteredItem);
         tmp.splice(index, 1);
+        ids.splice(index, 1);
         dispatch({
           type: "REMOVE",
           data: item,
         });
-        onChange([...tmp]);
+        onChange([...tmp], ids as any);
       } else {
-        onChange([...selectedList, item]);
+        const ids = selectedList?.map((item) => item?.id);
+        onChange([...selectedList, item], [...ids, item?.id] as any);
         dispatch({
           type: "UPDATE",
           data: item,

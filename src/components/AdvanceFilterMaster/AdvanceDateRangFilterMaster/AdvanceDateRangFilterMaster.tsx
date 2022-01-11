@@ -2,8 +2,8 @@ import { Calendar16 } from "@carbon/icons-react";
 import { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import DateRange from "components/Calendar/DateRange";
+import InputSelect from "components/Input/InputSelect";
 import { BORDER_TYPE } from "config/enum";
-import { InputSelect } from "index";
 import moment, { Moment } from "moment";
 import React, { RefObject } from "react";
 import { Model } from "react3l-common";
@@ -15,7 +15,7 @@ export enum ADVANCE_DATE_RANGE_TYPE {
   INPUT,
 }
 
-interface AdvanceDateRangeFilterProps {
+interface AdvanceDateRangeFilterMasterProps {
   value?: [Moment, Moment];
 
   dateFormat?: string[];
@@ -64,8 +64,8 @@ function defaultRenderObject<T extends Model>(t: T) {
   return t?.name;
 }
 
-function AdvanceDateRangeFilter(
-  props: AdvanceDateRangeFilterProps & RangePickerProps
+function AdvanceDateRangeFilterMaster(
+  props: AdvanceDateRangeFilterMasterProps & RangePickerProps
 ) {
   const {
     value,
@@ -302,7 +302,7 @@ function AdvanceDateRangeFilter(
   );
 }
 
-AdvanceDateRangeFilter.defaultProps = {
+AdvanceDateRangeFilterMaster.defaultProps = {
   isMaterial: false,
   dateFormat: ["DD/MM/YYYY", "YYYY/MM/DD"],
   placeHolder: "Chọn ngày",
@@ -311,4 +311,4 @@ AdvanceDateRangeFilter.defaultProps = {
   placeHolderSelect: "",
 };
 
-export default AdvanceDateRangeFilter;
+export default AdvanceDateRangeFilterMaster;

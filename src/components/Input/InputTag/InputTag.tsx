@@ -1,5 +1,5 @@
 import React, { ReactSVGElement, RefObject } from "react";
-import { CloseFilled16 } from "@carbon/icons-react";
+import { CloseFilled16, ChevronDown16, Close16 } from "@carbon/icons-react";
 import "./InputTag.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
@@ -23,6 +23,7 @@ export interface InputTagProps<T extends Model> {
   isUsingSearch?: boolean;
   onKeyDown?: (event: any) => void;
   onKeyEnter?: (event: any) => void;
+  isFilter?: boolean;
 }
 function InputTag(props: InputTagProps<Model>) {
   const {
@@ -37,6 +38,7 @@ function InputTag(props: InputTagProps<Model>) {
     onClearMulti,
     isUsingSearch,
     onKeyDown,
+    isFilter,
   } = props;
 
   const internalListItem = React.useMemo<Model[]>(() => {
@@ -60,10 +62,12 @@ function InputTag(props: InputTagProps<Model>) {
   );
 
   const handleClearMultiItem = React.useCallback(() => {
-    if (typeof onClearMulti === "function") {
-      onClearMulti();
+    if (!disabled) {
+      if (typeof onClearMulti === "function") {
+        onClearMulti();
+      }
     }
-  }, [onClearMulti]);
+  }, [disabled, onClearMulti]);
 
   const handleClearInput = React.useCallback(
     (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
@@ -113,6 +117,8 @@ function InputTag(props: InputTagProps<Model>) {
               "input-tag__container--bordered": type === BORDER_TYPE.BORDERED,
               "input-tag--disabled ": disabled,
               "input-tag__container--float": type === BORDER_TYPE.FLOAT_LABEL,
+              "input-tag--filter-have-item":
+                isFilter && internalListItem && internalListItem.length > 0,
             }
           )}
           onClick={() =>
@@ -138,10 +144,12 @@ function InputTag(props: InputTagProps<Model>) {
               <span className="input-tag-item__text">
                 {internalListItem?.length}
               </span>
-              <i
-                className="input-tag-item__icon tio-clear"
-                onClick={handleClearMultiItem}
-              ></i>
+              {
+                <Close16
+                  className="input-tag-item__icon"
+                  onClick={handleClearMultiItem}
+                ></Close16>
+              }
             </span>
           )}
           {isUsingSearch ? (
@@ -193,16 +201,11 @@ function InputTag(props: InputTagProps<Model>) {
             </div>
           )}
 
-          <i
-            className={classNames(
-              "input-icon",
-              "input-tag__icon",
-              "tio-chevron_down",
-              {
-                "input-tag__icon--disabled": disabled,
-              }
-            )}
-          ></i>
+          <ChevronDown16
+            className={classNames("input-icon", "input-tag__icon", {
+              "input-tag__icon--disabled": disabled,
+            })}
+          ></ChevronDown16>
         </div>
       </div>
     </>

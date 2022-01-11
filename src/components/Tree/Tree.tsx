@@ -1,4 +1,5 @@
 import { Model, ModelFilter } from "react3l-common";
+import { Add16, ChevronDown16, Checkmark16 } from "@carbon/icons-react";
 import { Empty, Spin, Tree as TreeAntd } from "antd";
 import {
   DataNode,
@@ -17,7 +18,7 @@ const { TreeNode } = TreeAntd;
 function SwitcherIcon() {
   return (
     <span className="tree__icon">
-      <i className="tio-chevron_down"></i>
+      <ChevronDown16></ChevronDown16>
     </span>
   );
 }
@@ -373,8 +374,8 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                       {!checkable &&
                         internalSelectedKeys &&
                         internalSelectedKeys.includes(node.key) && (
-                          <div>
-                            <i className="tio-done" />
+                          <div style={{ display: "flex" }}>
+                            <Checkmark16 />
                           </div>
                         )}
                     </div>
@@ -407,8 +408,8 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                               {!checkable &&
                                 internalSelectedKeys &&
                                 internalSelectedKeys.includes(node.key) && (
-                                  <div>
-                                    <i className="tio-done" />
+                                  <div style={{ display: "flex" }}>
+                                    <Checkmark16 />
                                   </div>
                                 )}
                             </div>
@@ -423,7 +424,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                       "select__bottom-button select__add-button p-y--xs"
                     )}
                   >
-                    <i className="tio-add m-l--xs" />
+                    <Add16 className="m-l--xs" />
                     <span>Add new</span>
                   </div>
                 )}

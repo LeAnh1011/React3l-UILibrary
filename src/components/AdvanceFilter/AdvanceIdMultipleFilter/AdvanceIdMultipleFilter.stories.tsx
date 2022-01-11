@@ -33,25 +33,6 @@ const demoSearchFunc = (TModelFilter: ModelFilter) => {
   return demoObservable;
 };
 
-interface changeAction {
-  type: string;
-  data: Model;
-}
-
-function testReducer(currentState: Model[], action: changeAction): Model[] {
-  switch (action.type) {
-    case "UPDATE":
-      return [...currentState, action.data];
-    case "REMOVE":
-      const filteredArray = currentState.filter(
-        (item) => item.id !== action.data.id
-      );
-      return [...filteredArray];
-    case "REMOVE_ALL":
-      return [];
-  }
-  return;
-}
 
 class DemoFilter extends ModelFilter {
   public id: IdFilter = new IdFilter();
@@ -60,7 +41,6 @@ class DemoFilter extends ModelFilter {
 }
 
 export function AdvanceIdMultipleFilterStories() {
-  const [models, dispatch] = React.useReducer(testReducer, []);
 
   const [selectModelFilter] = React.useState<DemoFilter>(new DemoFilter());
 
@@ -70,7 +50,8 @@ export function AdvanceIdMultipleFilterStories() {
   const [isValidated, setValidated] = React.useState(false);
 
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
-
+  const [filter, setFilter] = React.useState(new DemoFilter());
+  const [models, setModels] = React.useState([]);
   const [
     isSelectWithPreferOption,
     setIsSelectWithPreferOption,
@@ -84,12 +65,10 @@ export function AdvanceIdMultipleFilterStories() {
     setType(event.target.value);
   }, []);
 
-  const handleChangeModels = React.useCallback((item, type) => {
-    dispatch({
-      type: type,
-      data: item,
-    });
-  }, []);
+  const handleChangeModels = React.useCallback((listItemm, ids) => {
+    setModels([...listItemm]);
+    setFilter({ ...filter, id: { in: ids } });
+  }, [filter]);
 
   const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
     setIsSmall(event.target.value);

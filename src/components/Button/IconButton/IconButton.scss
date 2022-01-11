@@ -21,139 +21,141 @@
         height: 40px;
         padding: 12px;
     }
+    &.btn--xxl {
+        height: 48px;
+        padding: 12px;
+    } 
 }
 .btn--icon-only-primary {
-    background-color: var(--btn-primary-bg);
-    color: var(--btn-primary-label);
+    background-color: var(--color-primary);
+    color: var(--color-white);
 
     &:visited {
-        color: var(--btn-primary-label);
+        color: var(--color-white);
     }
 
     &:hover {
-        background-color: var(--btn-primary-hover);
+        background-color: var(--color-primary-hover);
     }
 
     &:active {
-        background-color: var(--btn-primary-active);
+        background-color: var(--color-primary-active);
     }
 
     &:focus {
-        background-color: var(--btn-primary-focus);
-        border: 1px solid var(--color-primary);
+        background-color: var(--color-primary);
         box-shadow: 0px 0px 8px var(--color-primary);
     }
     &.disabled {
-        color: #a8a8a8;
-        background-color: var(--btn-primary-disabled);
+        color: var(--palette-gray-50);
+        background-color: var(--palette-gray-30);
     }
 }
 .btn--icon-only-outline-primary {
-    background-color: var(--white);
-    border: 1px solid var(--btn-outline-primary-border) !important;
-    color: var(--btn-outline-primary-border);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-primary) !important;
+    color: var(--color-primary);
 
     &:hover {
-        background-color: var(--btn-outline-primary-hover);
-        color: var(--white);
+        background-color: var(--color-primary);
+        color: var(--color-white);
     }
 
     &:active {
-        color: var(--white);
-        background-color: var(--btn-outline-primary-active);
+        color: var(--color-white);
+        background-color: var(--color-primary-active);
     }
 
     &:focus {
-        background-color: var(--btn-outline-primary-active);
-        color: var(--white);
-        border: 1px solid var(--btn-outline-primary-border);
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        border: 1px solid var(--color-primary);
         box-sizing: border-box;
-        box-shadow: 0px 0px 8px var(--btn-outline-primary-border);
+        box-shadow: 0px 0px 8px var(--color-primary);
     }
     &.disabled {
-        color: var(--btn-outline-primary-disabled-label);
-        background-color: var(--white) !important;
-        border-color: var(--btn-outline-primary-disabled-border) !important;
+        color: var(--palette-gray-50); 
+        background-color: var(--color-white) !important;
+        border-color: var(--palette-gray-30) !important;
     }
 }
 .btn--icon-only-danger {
-    background-color: var(--btn-danger-bg);
-    color: var(--btn-danger-label);
+    background-color: var(--color-critical);
+    color: var(--color-white);
 
     &:visited {
-        color: var(--btn-danger-label);
+        color: var(--color-white);
     }
 
     &:hover {
-        background-color: var(--btn-danger-hover);
+        background-color: var(--color-critical-hover);
     }
 
     &:active {
-        background-color: var(--btn-danger-active);
+        background-color: var(--color-critical-active);
     }
 
     &:focus {
-        background-color: var(--btn-danger-focus);
+        background-color: var(--color-critical);
         border: 1px solid var(--color-primary);
         box-shadow: 0px 0px 8px var(--color-primary);
     }
     &.disabled {
-        color: var(--btn-danger-disabled-label);
-        background-color: var(--btn-danger-disabled);
+        color: var(--palette-gray-50);
+        background-color: var(--palette-gray-30);
     }
 }
 .btn--icon-only-outline-danger {
-    background-color: var(--white);
-    border: 1px solid var(--btn-danger-hover) !important;
-    color: var(--btn-danger-hover);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-critical) !important;
+    color: var(--color-critical);
 
     &:hover {
-        background-color: var(--btn-danger-hover);
-        color: var(--white);
+        background-color: var(--color-critical-hover);
+        color: var(--color-white);
     }
 
     &:active {
-        color: var(--white);
-        background-color: var(--btn-danger-active);
+        color: var(--color-white);
+        background-color: var(--color-critical-active);
     }
 
     &:focus {
-        background-color: var(--btn-danger-focus);
-        color: var(--white);
+        background-color: var(--color-critical);
+        color: var(--color-white);
         border: 1px solid var(--color-primary) !important;
         box-sizing: border-box;
         box-shadow: 0px 0px 8px var(--color-primary);
     }
-    &.disabled {
-        color: var(--btn-outline-primary-disabled-label);
-        background-color: var(--white) !important;
-        border-color: var(--btn-outline-primary-disabled-border) !important;
+    &.disabled { 
+        color: var(--palette-gray-50); 
+        background-color: var(--color-white) !important;
+        border-color: var(--palette-gray-30) !important;
     }
+    
 }
 .btn--icon-only-ghost {
     background-color: unset;
-    color: #000000;
+    color: var(--palette-gray-100);
   
     &:visited {
-      color: #000000;
+      color: var(--palette-gray-100);
     }
   
     &:hover {
-      background-color: var(--btn-ghost-hover);
+      background-color: var(--palette-grayHover-10);
     }
   
     &:active {
-      box-shadow: inset 0px 2px 0px rgba(0, 0, 0, 0.05);
-      background-color: var(--btn-ghost-active);
+      background-color: var(--palette-gray-30);
     }
   
     &:focus {
-      box-shadow: 0px 0px 8px var(--color-primary);
-      border: 1px solid var(--color-primary);
-      background-color: var(--white);
+      border: 2px solid var(--color-primary);
+      background-color: var(--color-white);
     }
     &.disabled {
-      color: var(--btn-ghost-disabled-label);
+      color: var(--palette-gray-50); 
       background-color: unset;
     }
   }

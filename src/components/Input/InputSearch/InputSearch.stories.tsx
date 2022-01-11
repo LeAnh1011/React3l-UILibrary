@@ -1,9 +1,7 @@
-import { storiesOf } from "@storybook/react";
 import React from "react";
 import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
 import InputSearch from "./InputSearch";
-import nameof from "ts-nameof.macro";
 import { of } from "rxjs";
 
 export class DemoFilter extends ModelFilter {
@@ -25,7 +23,7 @@ const demoListEnum = (TModelFilter: ModelFilter) => {
   ]);
 };
 
-function Default() {
+export function InputSearchStories() {
   const [selectModelFilter] = React.useState<DemoFilter>(new DemoFilter());
   const [selectModel, setSelectModel] = React.useState<Model>({
     id: 0,
@@ -78,5 +76,3 @@ function Default() {
     </>
   );
 }
-
-storiesOf("InputSearch", module).add(nameof(Default), Default);

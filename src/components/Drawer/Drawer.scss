@@ -35,6 +35,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        color: gray;
+      }
+      .button-cancel:hover {
+        cursor: pointer;
+        color: #161616;
       }
     }
 

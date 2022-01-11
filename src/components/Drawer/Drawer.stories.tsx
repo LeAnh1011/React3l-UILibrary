@@ -15,7 +15,21 @@ function Default() {
   const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
     setSize(event.target.value);
   }, []);
+  const [haveCloseIcon, setHaveCloseIcon] = React.useState<boolean>(false);
+  const [haveDescrip, setHaveDescrip] = React.useState<boolean>(false);
   const [visible, setVisible] = React.useState<boolean>(true);
+  const handleChangeHaveDescrip = React.useCallback(
+    (event: RadioChangeEvent) => {
+      setHaveDescrip(event.target.value);
+    },
+    []
+  );
+  const handleChangeHaveCloseIcon = React.useCallback(
+    (event: RadioChangeEvent) => {
+      setHaveCloseIcon(event.target.value);
+    },
+    []
+  );
   function handleSave() {
     console.log("save");
     setVisible(false);
@@ -37,6 +51,21 @@ function Default() {
             <Radio value={NUMBER_BUTTON.THREE}>3 Button</Radio>
           </Radio.Group>
         </div>
+        <div style={{ margin: "10px", width: "500px" }}>
+          <Radio.Group onChange={handleChangeHaveDescrip} value={haveDescrip}>
+            <Radio value={true}>Có Descrip</Radio>
+            <Radio value={false}>Không Descrip</Radio>
+          </Radio.Group>
+        </div>
+        <div style={{ margin: "10px", width: "500px" }}>
+          <Radio.Group
+            onChange={handleChangeHaveCloseIcon}
+            value={haveCloseIcon}
+          >
+            <Radio value={true}>Có CloseIcon</Radio>
+            <Radio value={false}>Không CloseIcon</Radio>
+          </Radio.Group>
+        </div>
       </div>
       <button
         onClick={() => {
@@ -51,6 +80,8 @@ function Default() {
         handleSave={handleSave}
         handleCancel={handleCancel}
         handleCreate={handleCreate}
+        isHaveDescription={haveDescrip}
+        isHaveCloseIcon={haveCloseIcon}
         visibleFooter={true}
         title="Drawer Title"
         loading={false}

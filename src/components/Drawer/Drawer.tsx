@@ -13,13 +13,15 @@ export interface DrawerProps extends AntModalProps {
   visibleFooter?: boolean;
   disableButton?: boolean;
   loading?: boolean;
-  keyTitleTranslate?: string;
+  keyHeaderTranslate?: string;
   keyButtonTranslate?: string;
   size?: NUMBER_BUTTON;
   handleCancel?: () => void;
   handleSave?: () => void;
   handleCreate?: () => void;
   translate?: TFunction;
+  isHaveDescription?: boolean;
+  isHaveCloseIcon?: boolean;
 }
 
 function Drawer(props: DrawerProps) {
@@ -28,13 +30,15 @@ function Drawer(props: DrawerProps) {
     visible,
     disableButton,
     loading,
-    keyTitleTranslate,
+    keyHeaderTranslate,
     keyButtonTranslate,
     size,
     handleCancel,
     handleSave,
     handleCreate,
     translate,
+    isHaveDescription,
+    isHaveCloseIcon,
   } = props;
   const ref: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(null);
 
@@ -43,7 +47,9 @@ function Drawer(props: DrawerProps) {
       <div className="button-bleed-footer">
         <Button
           type="bleed-primary"
-          className={classNames(size === NUMBER_BUTTON.THREE ? "button-33" : "button-50")}
+          className={classNames(
+            size === NUMBER_BUTTON.THREE ? "button-33" : "button-50"
+          )}
           onClick={handleSave}
           disabled={disableButton}
         >
@@ -69,7 +75,9 @@ function Drawer(props: DrawerProps) {
         )}
         <Button
           type="bleed-secondary"
-          className={classNames(size === NUMBER_BUTTON.THREE ? "button-33" : "button-50")}
+          className={classNames(
+            size === NUMBER_BUTTON.THREE ? "button-33" : "button-50"
+          )}
           onClick={handleCancel}
         >
           <span>
@@ -87,7 +95,7 @@ function Drawer(props: DrawerProps) {
       handleCancel,
       size,
       disableButton,
-      keyButtonTranslate
+      keyButtonTranslate,
     ]
   );
   return (
@@ -100,16 +108,29 @@ function Drawer(props: DrawerProps) {
         <Spin spinning={loading}>
           <div className="animation-modal__content">
             <div className="animation-modal__header">
-              <div className="animation-modal__header-text">
-                <div className=" mr-1">
-                  {keyTitleTranslate && translate
-                    ? translate(`${keyTitleTranslate}.title`)
+              <div
+                className={classNames("animation-modal__header-text", {
+                  "have-description": isHaveDescription,
+                })}
+              >
+                <div className="title mr-1">
+                  {keyHeaderTranslate && translate
+                    ? translate(`${keyHeaderTranslate}.title`)
                     : "Drawer Title"}
                 </div>
+                {isHaveDescription && (
+                  <div className="description mr-1">
+                    {keyHeaderTranslate && translate
+                      ? translate(`${keyHeaderTranslate}.description`)
+                      : "Drawer description description description description"}
+                  </div>
+                )}
               </div>
-              <div className="button-cancel" onClick={handleCancel}>
-                <Close24 />
-              </div>
+              {!isHaveDescription && isHaveCloseIcon && (
+                <div className="button-cancel" onClick={handleCancel}>
+                  <Close24 />
+                </div>
+              )}
             </div>
 
             <div className={classNames(`animation-modal__body`)} ref={ref}>
@@ -133,7 +154,8 @@ Drawer.defaultProps = {
   visibleCreate: true,
   visibleCreateNext: true,
   disableButton: false,
-  size: NUMBER_BUTTON.TWO
+  size: NUMBER_BUTTON.TWO,
+  isHaveCloseIcon: true,
 };
 
 export default Drawer;

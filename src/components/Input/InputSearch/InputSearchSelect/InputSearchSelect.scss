@@ -2,6 +2,10 @@
     &:hover .input-search-select__wrapper,&:hover .input-search-select__wrapper .component__input-search-box .component__input-search {
         background-color: #e5e5e5;
     }
+    &:focus .input-search-select__wrapper,&:focus .input-search-select__wrapper .component__input-search-box .component__input-search {
+        background-color: #e5e5e5;
+    }
+    
     .input-search-select__wrapper {
         width: 100%;
         overflow: hidden;
@@ -28,4 +32,3 @@
         }
     }
 }
-

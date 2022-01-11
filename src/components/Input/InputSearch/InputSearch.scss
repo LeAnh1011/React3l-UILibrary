@@ -6,16 +6,16 @@
         flex-direction: row;
         width: 100%;
         overflow: hidden;
+        &:hover .component__input-search__icon-box{
+            background-color: #e5e5e5;
+        }
         .component__input-search__icon-box {
             width: 40px;
             height: 40px;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #e5e5e5;
-            &.background-type1{
-                background-color: #F4F4F4 !important;
-            }
+            background-color: #F4F4F4;
         }
         .visible__input-search {
             width: calc(100% - 40px);

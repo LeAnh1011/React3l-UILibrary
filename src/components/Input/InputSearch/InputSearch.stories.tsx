@@ -25,11 +25,7 @@ const demoListEnum = (TModelFilter: ModelFilter) => {
 
 export function InputSearchStories() {
   const [selectModelFilter] = React.useState<DemoFilter>(new DemoFilter());
-  const [selectModel, setSelectModel] = React.useState<Model>({
-    id: 0,
-    name: "Option 2",
-    code: "FAD",
-  });
+  const [selectModel, setSelectModel] = React.useState<Model>(null);
 
   const handleSetModel = React.useCallback((...[, item]) => {
     setSelectModel(item);
@@ -46,7 +42,6 @@ export function InputSearchStories() {
           placeHolder="Search..."
           getList={demoListEnum}
           onChange={handleSetModel}
-          type="type1"
         />
       </div>
       <div style={{ width: "400px", marginTop: 30 }}>
@@ -58,7 +53,6 @@ export function InputSearchStories() {
           placeHolder="Search..."
           getList={demoListEnum}
           onChange={handleSetModel}
-          type="type2"
         />
       </div>
       <div style={{ width: "400px", marginTop: 30 }}>
@@ -70,7 +64,6 @@ export function InputSearchStories() {
           placeHolder="Search..."
           getList={demoListEnum}
           onChange={handleSetModel}
-          type="type3"
         />
       </div>
     </>

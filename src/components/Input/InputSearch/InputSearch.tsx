@@ -10,10 +10,6 @@ import { ErrorObserver, Observable } from "rxjs";
 import { useDebounceFn } from "ahooks";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import InputSearchSelect from "./InputSearchSelect/InputSearchSelect";
-export type InputSearchType =
-  | "type1" // box-icon bg white
-  | "type2" // box-icon bg e5e5e5
-  | "type3"; // not animationInput
 
 export interface InputSearchProps<
   T extends Model,
@@ -29,7 +25,6 @@ export interface InputSearchProps<
   className?: string;
   onChange?: (id: number, T?: T) => void;
   placeHolder?: string;
-  type?: InputSearchType;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -47,20 +42,15 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     searchProperty,
     searchType,
     onChange,
-    type,
     className,
   } = props;
   const [showListItem, setShowListItem] = React.useState<boolean>();
-  const [fullWidth, setFullWidth] = React.useState<boolean>(
-    type === "type3" ? true : false
-  );
+  const [fullWidth, setFullWidth] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const [list, setList] = React.useState<Model[]>([]);
 
-  const [showInput, setShowInput] = React.useState<boolean>(
-    type === "type3" ? true : false
-  );
+  const [showInput, setShowInput] = React.useState<boolean>(false);
 
   const internalModel = React.useMemo((): Model => {
     return model || null;
@@ -81,17 +71,12 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
   const handleCloseSelect = React.useCallback(() => {
     setExpand(false);
     setShowListItem(false);
-    if (type !== "type3") {
-      setTimeout(() => {
-        setFullWidth(false);
-      }, 500);
-      // chờ 0,5s cho transition của Input đóng lại rồi làm nhỏ width
-      setShowInput(false);
-    } else {
-      setShowInput(true);
-      setFullWidth(true);
-    }
-  }, [type]);
+    setTimeout(() => {
+      setFullWidth(false);
+    }, 500);
+    // chờ 0,5s cho transition của Input đóng lại rồi làm nhỏ width
+    setShowInput(false);
+  }, []);
 
   const [subscription] = CommonService.useSubscription();
 

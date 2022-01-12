@@ -74,7 +74,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     setTimeout(() => {
       setFullWidth(false);
     }, 500);
-    // chờ 0,5s cho transition của Input đóng lại rồi làm nhỏ width
+    // chờ 0,5s cho transition của Input co hẹp đóng lại rồi làm nhỏ width
     setShowInput(false);
   }, []);
 
@@ -243,16 +243,14 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
 
   return (
     <div
-      className={classNames("component__input-search-container", className, {
-        "visible__input-search": showInput,
-        "hidden__input-search": !showInput,
-        "full-width": fullWidth,
-        "icon-only-width": !fullWidth,
-      })}
+      className={classNames("component__input-search-container", className)}
       ref={wrapperRef}
     >
       <div
-        className={classNames("component__input-search-select")}
+        className={classNames("component__input-search-select", {
+          "full-width": fullWidth,
+          "icon-only-width": !fullWidth,
+        })}
         onClick={handleToggle}
       >
         <div

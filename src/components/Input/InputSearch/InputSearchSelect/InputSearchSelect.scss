@@ -1,4 +1,11 @@
 .component__input-search-select{
+    &.full-width .input-search-select__wrapper,&.full-width .input-search-select__wrapper .component__input-search-box .component__input-search {
+        background-color: #e5e5e5;
+    }
+    &.input-search-select__wrapper,&.input-search-select__wrapper .component__input-search-box .component__input-search {
+        background-color: #e5e5e5;
+    }
+
     &:hover .input-search-select__wrapper,&:hover .input-search-select__wrapper .component__input-search-box .component__input-search {
         background-color: #e5e5e5;
     }

@@ -1,80 +1,78 @@
 .btn--ghost {
     background-color: unset;
-    color: var(--btn-ghost-label);
+    color: var(--palette-gray-100);
 
     &:visited {
-        color: var(--btn-ghost-label);
+        color: var(--palette-gray-100);
     }
 
     &:hover {
-        background-color: var(--btn-ghost-hover);
+        background-color: var(--palette-grayHover-10);
     }
 
-    &:active {
-        box-shadow: inset 0px 2px 0px rgba(0, 0, 0, 0.05);
-        background-color: var(--btn-ghost-active);
+    &:active { 
+        background-color: var(--palette-gray-30);
     }
 
     &:focus {
-        box-shadow: 0px 0px 8px var(--color-primary);
-        border: 1px solid var(--color-primary);
-        background-color: var(--btn-ghost-focus);
+        border: 2px solid var(--color-primary);
+        background-color: unset; 
     }
     &.disabled {
-        color: var(--btn-ghost-disabled-label);
+        color:  var(--palette-gray-50);
         background-color: unset;
     }
 }
 
 .btn--ghost-primary {
     background-color: unset;
-    color: var(--btn-ghost-primary-label);
+    color: var(--color-white);
 
     &:visited {
-        color: var(--btn-ghost-primary-label);
+        color: var(--color-white);
     }
 
     &:hover {
-        background-color: var(--btn-ghost-primary-hover);
+        background-color: var(--color-primary-hover);
     }
 
     &:active {
-        background-color: var(--btn-ghost-primary-hover);
+        background-color: var(--color-primary-active);
     }
 
     &:focus {
         box-shadow: 0px 0px 8px var(--color-primary);
         border: 1px solid var(--color-primary);
-        background-color: var(--btn-ghost-primary-focus);
+        background-color: var(--color-primary-hover);
     }
     &.disabled {
-        color: var(--btn-ghost-primary-disabled-label);
+        color:  var(--palette-gray-50);
         background-color: unset;
     }
 }
 .btn--ghost-secondary {
     background-color: unset;
-    color: var(--btn-ghost-secondary-label);
+    color: var(--color-white);
 
     &:visited {
-        color: var(--btn-ghost-secondary-label);
+        color: var(--color-white);
     }
 
     &:hover {
-        background-color: var(--btn-ghost-secondary-hover);
+        background-color: var(--color-secondary-hover);
     }
 
     &:active {
-        background-color: var(--btn-ghost-secondary-hover);
+        background-color: var(--color-secondary-active);
     }
 
     &:focus {
         box-shadow: 0px 0px 8px var(--color-primary);
         border: 1px solid var(--color-primary);
-        background-color: var(--btn-ghost-secondary-focus);
+        background-color: var(--color-secondary-hover);
     }
     &.disabled {
-        color: var(--btn-ghost-secondary-disabled-label);
+        color:  var(--palette-gray-50); 
         background-color: unset;
     }
 }

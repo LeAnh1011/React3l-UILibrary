@@ -1,79 +1,79 @@
 .btn--primary {
-    background-color: var(--btn-primary-bg);
-    color: var(--btn-primary-label);
+    background-color: var(--color-primary);
+    color: var(--color-white);
 
     &:visited {
-        color: var(--btn-primary-label);
+        color: var(--color-white);
     }
 
     &:hover {
-        background-color: var(--btn-primary-hover);
+        background-color: var(--color-primary-hover);
     }
 
     &:active {
-        background-color: var(--btn-primary-active);
+        background-color: var(--color-primary-active);
     }
     &:focus-visible {
-        background-color: var(--btn-primary-focus);
+        background-color: var(--color-primary);
         border: 1px solid var(--color-primary);
         box-shadow: 0px 0px 8px var(--color-primary);
     }
     &.disabled {
-        color: var(--btn-primary-disabled-label);
-        background-color: var(--btn-primary-disabled);
+        color: var(--palette-gray-50);
+        background-color: var(--palette-gray-30);
     }
 }
 .btn--secondary {
-    background-color: var(--btn-secondary-bg);
-    color: var(--btn-secondary-label);
+    background-color: var(--color-secondary);
+    color: var(--color-white);
 
     &:visited {
-        color: var(--btn-secondary-label);
+        color: var(--color-white);
     }
 
     &:hover {
-        background-color: var(--btn-secondary-hover);
+        background-color: var(--color-secondary-hover);
     }
 
     &:active {
-        background-color: var(--btn-secondary-active);
+        background-color: var(--color-secondary-active);
     }
 
     &:focus-visible {
-        background-color: var(--btn-secondary-focus);
+        background-color: var(--color-secondary);
         border: 1px solid var(--color-primary);
         box-shadow: 0px 0px 8px var(--color-primary);
     }
 
     &.disabled {
-        color: var(--btn-secondary-disabled-label);
-        background-color: var(--btn-secondary-disabled);
+        color: var(--palette-gray-50);
+        background-color: var(--palette-gray-30);
     }
 }
 .btn--danger {
-    background-color: var(--btn-danger-bg);
-    color: var(--btn-danger-label);
+    background-color: var(--color-critical);
+    color: var(--color-white);
 
     &:visited {
-        color: var(--btn-danger-label);
+        color: var(--color-white);
     }
 
     &:hover {
-        background-color: var(--btn-danger-hover);
+        background-color: var(--color-critical-hover);
     }
 
     &:focus-visible {
-        background-color: var(--btn-danger-focus);
+        background-color: var(--color-critical);
         border: 1px solid var(--color-primary);
         box-shadow: 0px 0px 8px var(--color-primary);
     }
     
     &:active {
-        background-color: var(--btn-danger-active);
+        background-color: var(--color-critical-active);
     }
     &.disabled {
-        color: var(--btn-danger-disabled-label);
-        background-color: var(--btn-danger-disabled);
+        color: var(--palette-gray-50);
+        background-color: var(--palette-gray-30);
     }
 }
 .btn-normal-have-icon {
@@ -149,17 +149,17 @@
     
 }
 .btn--primary-loading {
-    background-color: var(--btn-primary-hover);
-    color: var(--btn-primary-label);
+    background-color: var(--color-primary-active);
+    color: var(--color-white);
     cursor: not-allowed;
 }
 .btn--secondary-loading {
-    background-color: var(--btn-secondary-bg);
-    color: var(--btn-secondary-label);
+    background-color: var(--color-secondary-active);
+    color: var(--color-white);
     cursor: not-allowed;
 }
 .btn--danger-loading {
-    background-color: var(--btn-danger-bg);
-    color: var(--btn-danger-label);
+    background-color: var(--color-critilcal-active);
+    color: var(--color-white);
     cursor: not-allowed;
 }

@@ -3,7 +3,13 @@ import { storiesOf } from "@storybook/react";
 import nameof from "ts-nameof.macro";
 import Button from "./Button";
 import { Tabs } from "antd";
-import { ChevronDown16, TrashCan16, Add16 } from "@carbon/icons-react";
+import {
+  ChevronDown16,
+  TrashCan16,
+  Add16,
+  Add24,
+  TrashCan24,
+} from "@carbon/icons-react";
 const { TabPane } = Tabs;
 function NormalButtonView() {
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -1760,6 +1766,11 @@ function IconOnlyButtonView() {
         <Button type="icon-only-primary" icon={<Add16 />} className="btn--md" />
         <Button type="icon-only-primary" icon={<Add16 />} className="btn--lg" />
         <Button type="icon-only-primary" icon={<Add16 />} className="btn--xl" />
+        <Button
+          type="icon-only-primary"
+          icon={<Add24 />}
+          className="btn--xxl"
+        />
       </div>
       <div
         style={{
@@ -1794,6 +1805,12 @@ function IconOnlyButtonView() {
           className="btn--xl"
           disabled={true}
         />
+        <Button
+          type="icon-only-primary"
+          icon={<Add24 />}
+          className="btn--xxl"
+          disabled={true}
+        />
       </div>
       <div
         style={{
@@ -1824,6 +1841,11 @@ function IconOnlyButtonView() {
           icon={<Add16 />}
           className="btn--xl"
         />
+        <Button
+          type="icon-only-outline-primary"
+          icon={<Add24 />}
+          className="btn--xxl"
+        />
       </div>
       <div
         style={{
@@ -1858,6 +1880,12 @@ function IconOnlyButtonView() {
           className="btn--xl"
           disabled={true}
         />
+        <Button
+          type="icon-only-outline-primary"
+          icon={<Add24 />}
+          className="btn--xxl"
+          disabled={true}
+        />
       </div>
       <div
         style={{
@@ -1888,6 +1916,11 @@ function IconOnlyButtonView() {
           icon={<TrashCan16 />}
           className="btn--xl"
         />
+        <Button
+          type="icon-only-danger"
+          icon={<TrashCan24 />}
+          className="btn--xxl"
+        />
       </div>
       <div
         style={{
@@ -1922,6 +1955,12 @@ function IconOnlyButtonView() {
           className="btn--xl"
           disabled={true}
         />
+        <Button
+          type="icon-only-danger"
+          icon={<TrashCan24 />}
+          className="btn--xxl"
+          disabled={true}
+        />
       </div>
       <div
         style={{
@@ -1952,6 +1991,11 @@ function IconOnlyButtonView() {
           icon={<TrashCan16 />}
           className="btn--xl"
         />
+        <Button
+          type="icon-only-outline-danger"
+          icon={<TrashCan24 />}
+          className="btn--xxl"
+        />
       </div>
       <div
         style={{
@@ -1984,6 +2028,12 @@ function IconOnlyButtonView() {
           type="icon-only-outline-danger"
           icon={<TrashCan16 />}
           className="btn--xl"
+          disabled={true}
+        />
+        <Button
+          type="icon-only-outline-danger"
+          icon={<TrashCan24 />}
+          className="btn--xxl"
           disabled={true}
         />
       </div>
@@ -2000,6 +2050,7 @@ function IconOnlyButtonView() {
         <Button type="icon-only-ghost" icon={<Add16 />} className="btn--md" />
         <Button type="icon-only-ghost" icon={<Add16 />} className="btn--lg" />
         <Button type="icon-only-ghost" icon={<Add16 />} className="btn--xl" />
+        <Button type="icon-only-ghost" icon={<Add24 />} className="btn--xxl" />
       </div>
       <div
         style={{
@@ -2032,6 +2083,12 @@ function IconOnlyButtonView() {
           type="icon-only-ghost"
           icon={<Add16 />}
           className="btn--xl"
+          disabled={true}
+        />
+        <Button
+          type="icon-only-ghost"
+          icon={<Add24 />}
+          className="btn--xxl"
           disabled={true}
         />
       </div>

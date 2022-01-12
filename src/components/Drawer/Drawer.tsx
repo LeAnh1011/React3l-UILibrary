@@ -1,6 +1,5 @@
 import { Close24 } from "@carbon/icons-react";
 import { Spin } from "antd";
-import { ModalProps as AntModalProps } from "antd/lib/modal";
 import classNames from "classnames";
 import Button from "components/Button";
 import { NUMBER_BUTTON } from "config/enum";
@@ -8,8 +7,9 @@ import { TFunction } from "i18next";
 import React, { ReactNode, RefObject } from "react";
 import "./Drawer.scss";
 
-export interface DrawerProps extends AntModalProps {
+export interface DrawerProps {
   children?: ReactNode;
+  visible?: boolean;
   visibleFooter?: boolean;
   disableButton?: boolean;
   loading?: boolean;
@@ -101,15 +101,15 @@ function Drawer(props: DrawerProps) {
   return (
     <>
       <div
-        className={classNames("animation-modal__container", {
+        className={classNames("drawer__container", {
           "slide-out": visible === true,
         })}
       >
         <Spin spinning={loading}>
-          <div className="animation-modal__content">
-            <div className="animation-modal__header">
+          <div className="drawer__content">
+            <div className="drawer__header">
               <div
-                className={classNames("animation-modal__header-text", {
+                className={classNames("drawer__header-text", {
                   "have-description": isHaveDescription,
                 })}
               >
@@ -133,15 +133,14 @@ function Drawer(props: DrawerProps) {
               )}
             </div>
 
-            <div className={classNames(`animation-modal__body`)} ref={ref}>
+            <div className={classNames(`drawer__body`)} ref={ref}>
               {props.children}
             </div>
             {visibleFooter && (
-              <div className="animation-modal_footer">{renderModalFooter}</div>
+              <div className="drawer_footer">{renderModalFooter}</div>
             )}
           </div>
         </Spin>
-        {/* )} */}
       </div>
       {visible && <div className="overlay"></div>}
     </>

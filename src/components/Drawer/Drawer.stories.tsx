@@ -9,6 +9,32 @@ import {
   ValidateStatus,
 } from "./../../config/enum";
 import React from "react";
+import AdvanceDateFilter from "../AdvanceFilter/AdvanceDateFilter/AdvanceDateFilter";
+import AdvanceIdFilter from "../AdvanceFilter/AdvanceIdFilter/AdvanceIdFilter";
+import { IdFilter, StringFilter } from "react3l-advanced-filters";
+import { ModelFilter } from "react3l-common";
+import { of } from "rxjs";
+
+export class DemoFilter extends ModelFilter {
+  id: IdFilter = new IdFilter();
+  name: StringFilter = new StringFilter();
+  code: StringFilter = new StringFilter();
+}
+
+const demoListEnum = (TModelFilter: ModelFilter) => {
+  return of([
+    {
+      id: 1,
+      name:
+        "Option 2 very long one very long one Option 2 very long one very long one",
+      code: "E1",
+    },
+    { id: 2, name: "Enum 2", code: "E2" },
+    { id: 3, name: "Enum 3", code: "E3" },
+    { id: 4, name: "Enum 4", code: "E4" },
+    { id: 5, name: "Enum 5", code: "E5" },
+  ]);
+};
 
 function Default() {
   const [size, setSize] = React.useState<NUMBER_BUTTON>(NUMBER_BUTTON.TWO);
@@ -83,7 +109,6 @@ function Default() {
         isHaveDescription={haveDescrip}
         isHaveCloseIcon={haveCloseIcon}
         visibleFooter={true}
-        title="Drawer Title"
         loading={false}
         size={size}
       >
@@ -252,6 +277,67 @@ function Default() {
               type={BORDER_TYPE.MATERIAL}
             />
           </FormItem>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            marginTop: 16,
+          }}
+        >
+          <FormItem
+            validateStatus={ValidateStatus.success}
+            message={"Field required!"}
+          >
+            <InputText
+              placeHolder={"Enter text..."}
+              type={BORDER_TYPE.MATERIAL}
+            />
+          </FormItem>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            marginTop: 16,
+          }}
+        >
+          <FormItem
+            validateStatus={ValidateStatus.success}
+            message={"Field required!"}
+          >
+            <InputText
+              placeHolder={"Enter text..."}
+              type={BORDER_TYPE.MATERIAL}
+            />
+          </FormItem>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            marginTop: 16,
+          }}
+        >
+          <AdvanceIdFilter
+            placeHolder={"Select Organization"}
+            model={null}
+            searchProperty={"name"}
+            onChange={() => {}}
+            getList={demoListEnum}
+            classFilter={DemoFilter}
+            label={"Label"}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            marginTop: 16,
+          }}
+        >
+          <AdvanceDateFilter
+            onChange={() => {}}
+            label="Ngày nhập hàng"
+            placeHolder={"Chọn ngày"}
+            value={null}
+          />
         </div>
       </Drawer>
     </div>

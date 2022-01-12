@@ -10,9 +10,9 @@ export interface ModalCustomProps extends AntModalProps {
   visibleFooter?: boolean;
   size?: "large" | "medium" | "small";
   keyButtonTranslate?: string;
-  handleCancel?: () => void;
-  handleSave?: (value?: any) => void;
-  handleCreateNext?: () => void;
+  handleCancel?: (event: any) => void;
+  handleSave?: (event: any) => void;
+  handleCreateNext?: (event: any) => void;
   translate?: TFunction;
 }
 function Modal(props: ModalCustomProps) {
@@ -20,6 +20,7 @@ function Modal(props: ModalCustomProps) {
     visibleFooter,
     size,
     keyButtonTranslate,
+    destroyOnClose,
     handleCancel,
     handleSave,
     translate,
@@ -90,7 +91,7 @@ function Modal(props: ModalCustomProps) {
       <AntModal
         {...props}
         style={{ top: 20 }}
-        destroyOnClose={true}
+        destroyOnClose={destroyOnClose}
         className={classNames("modal__container", `size-${size}`)}
         closeIcon={<Close24 />}
         footer={visibleFooter ? renderModalFooter : null}
@@ -103,5 +104,6 @@ function Modal(props: ModalCustomProps) {
 }
 Modal.defaultProps = {
   size: "large",
+  destroyOnClose: true
 };
 export default Modal;

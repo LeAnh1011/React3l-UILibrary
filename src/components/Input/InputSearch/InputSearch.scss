@@ -2,6 +2,9 @@
 .component__input-search-container {
     overflow: hidden;
     .component__input-search-select {
+        &.active-background{
+            border: 2px solid var(--color-primary);
+        }
         &.full-width{
             width: 100%;
             .component__input-search__icon-box{
@@ -28,12 +31,12 @@
         }
         .visible__input-search {
             width: calc(100% - 40px);
-            transition: width 0.5s;
+            transition: width 0.3s;
         }
         .hidden__input-search {
             overflow: hidden;
             width: 0px !important;
-            transition: width 0.5s;
+            transition: width 0.3s;
         }
     }
     

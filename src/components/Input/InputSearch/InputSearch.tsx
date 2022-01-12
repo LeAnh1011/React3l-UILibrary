@@ -46,6 +46,9 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
   } = props;
   const [showListItem, setShowListItem] = React.useState<boolean>();
   const [fullWidth, setFullWidth] = React.useState<boolean>(false);
+  const [activeBackground, setActiveBackground] = React.useState<boolean>(
+    false
+  );
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const [list, setList] = React.useState<Model[]>([]);
@@ -71,10 +74,11 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
   const handleCloseSelect = React.useCallback(() => {
     setExpand(false);
     setShowListItem(false);
+    setActiveBackground(false);
     setTimeout(() => {
       setFullWidth(false);
-    }, 500);
-    // chờ 0,5s cho transition của Input co hẹp đóng lại rồi làm nhỏ width
+    }, 300);
+    // chờ 0,3s cho transition của Input co hẹp đóng lại rồi làm nhỏ width
     setShowInput(false);
   }, []);
 
@@ -250,6 +254,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
         className={classNames("component__input-search-select", {
           "full-width": fullWidth,
           "icon-only-width": !fullWidth,
+          "active-background": activeBackground && showInput,
         })}
         onClick={handleToggle}
       >
@@ -258,6 +263,9 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           onClick={() => {
             setShowInput(true);
             setFullWidth(true);
+            setTimeout(() => {
+              setActiveBackground(true);
+            }, 300);
           }}
         >
           <Search16 />

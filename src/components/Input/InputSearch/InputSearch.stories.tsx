@@ -37,10 +37,7 @@ export function InputSearchStories() {
         style={{
           width: "400px",
           marginTop: 30,
-          height: 300,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
+          height: 500,
         }}
       >
         <InputSearch
@@ -51,7 +48,7 @@ export function InputSearchStories() {
           placeHolder="Search..."
           getList={demoListEnum}
           onChange={handleSetModel}
-          animation={false}
+          className="m-b--xl"
         />
         <InputSearch
           model={selectModel}
@@ -61,15 +58,7 @@ export function InputSearchStories() {
           placeHolder="Search..."
           getList={demoListEnum}
           onChange={handleSetModel}
-        />
-        <InputSearch
-          model={selectModel}
-          modelFilter={selectModelFilter}
-          searchProperty={"name"}
-          classFilter={DemoFilter}
-          placeHolder="Search..."
-          getList={demoListEnum}
-          onChange={handleSetModel}
+          animationInput={false}
         />
       </div>
     </>

@@ -25,7 +25,7 @@ export interface InputSearchProps<
   className?: string;
   onChange?: (id: number, T?: T) => void;
   placeHolder?: string;
-  animation?: boolean;
+  animationInput?: boolean;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -44,10 +44,10 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     searchType,
     onChange,
     className,
-    animation,
+    animationInput,
   } = props;
   const [showListItem, setShowListItem] = React.useState<boolean>();
-  const [fullWidth, setFullWidth] = React.useState<boolean>(!animation);
+  const [fullWidth, setFullWidth] = React.useState<boolean>(!animationInput);
   const [activeBackground, setActiveBackground] = React.useState<boolean>(
     false
   );
@@ -55,7 +55,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
 
   const [list, setList] = React.useState<Model[]>([]);
 
-  const [showInput, setShowInput] = React.useState<boolean>(!animation);
+  const [showInput, setShowInput] = React.useState<boolean>(!animationInput);
 
   const internalModel = React.useMemo((): Model => {
     return model || null;
@@ -78,14 +78,14 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     setShowListItem(false);
     setActiveBackground(false);
 
-    if (animation) {
+    if (animationInput) {
       setTimeout(() => {
         setFullWidth(false);
       }, 300);
       setShowInput(false);
     }
     // chờ 0,3s cho transition của Input co hẹp đóng lại rồi làm nhỏ width
-  }, [animation]);
+  }, [animationInput]);
 
   const [subscription] = CommonService.useSubscription();
 
@@ -140,24 +140,6 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
       );
     } catch (error) {}
   }, [getList, modelFilter, ClassFilter, subscription]);
-
-  const handleToggle = React.useCallback(
-    async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      setExpand(true);
-      await handleLoadList();
-    },
-    [handleLoadList]
-  );
-
-  const handleKeyEnter = React.useCallback(
-    (event: any) => {
-      if (event.key === "Enter") {
-        handleToggle(null);
-      }
-      return;
-    },
-    [handleToggle]
-  );
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -259,6 +241,25 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     }, 300);
   }, []);
 
+  const handleToggle = React.useCallback(
+    async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      setExpand(true);
+      handleClickSearchIcon();
+      await handleLoadList();
+    },
+    [handleClickSearchIcon, handleLoadList]
+  );
+
+  const handleKeyEnter = React.useCallback(
+    (event: any) => {
+      if (event.key === "Enter") {
+        handleToggle(null);
+      }
+      return;
+    },
+    [handleToggle]
+  );
+
   const handleTabEnter = React.useCallback(
     (event: any) => {
       if (event.key === "Enter") {
@@ -352,6 +353,6 @@ InputSearch.defaultProps = {
   searchProperty: "name",
   searchType: "contain",
   render: defaultRenderObject,
-  animation: true,
+  animationInput: true,
 };
 export default InputSearch;

@@ -34,6 +34,9 @@ import DateRange from "./components/Calendar/DateRange/DateRange";
 import IconLoading from "./components/IconLoading";
 import InlineLoading from "./components/InlineLoading";
 
+import Modal from "./components/Modal";
+import Drawer from "./components/Drawer";
+
 import StandardTable from "./components/StandardTable/StandardTable";
 import ActionBarComponent from "./components/StandardTable/ActionBarComponent";
 import LayoutCell from "./components/StandardTable/LayoutCell";
@@ -80,6 +83,9 @@ export {
   // Loading/Spinner
   IconLoading,
   InlineLoading,
+  //Modal/Drawer
+  Modal,
+  Drawer,
   // Standard table components
   StandardTable,
   ActionBarComponent,

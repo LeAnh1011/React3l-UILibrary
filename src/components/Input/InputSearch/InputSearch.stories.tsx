@@ -33,7 +33,16 @@ export function InputSearchStories() {
 
   return (
     <>
-      <div style={{ width: "400px", marginTop: 30 }}>
+      <div
+        style={{
+          width: "400px",
+          marginTop: 30,
+          height: 300,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
         <InputSearch
           model={selectModel}
           modelFilter={selectModelFilter}
@@ -43,8 +52,6 @@ export function InputSearchStories() {
           getList={demoListEnum}
           onChange={handleSetModel}
         />
-      </div>
-      <div style={{ width: "400px", marginTop: 30 }}>
         <InputSearch
           model={selectModel}
           modelFilter={selectModelFilter}
@@ -54,8 +61,6 @@ export function InputSearchStories() {
           getList={demoListEnum}
           onChange={handleSetModel}
         />
-      </div>
-      <div style={{ width: "400px", marginTop: 30 }}>
         <InputSearch
           model={selectModel}
           modelFilter={selectModelFilter}

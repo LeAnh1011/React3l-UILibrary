@@ -198,6 +198,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
       switch (event.keyCode) {
         case 13:
           handleClickItem(item)(null);
+          event.stopPropagation();
           break;
         case 40:
           if (event.target.nextElementSibling !== null) {
@@ -245,6 +246,25 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     }
   }, [isExpand, showListItem]);
 
+  const handleClickSearchIcon = React.useCallback(() => {
+    setShowInput(true);
+    setFullWidth(true);
+    setTimeout(() => {
+      setActiveBackground(true);
+    }, 300);
+  }, []);
+
+  const handleTabEnter = React.useCallback(
+    (event: any) => {
+      if (event.key === "Enter") {
+        handleClickSearchIcon();
+        handleToggle(null);
+      }
+      return;
+    },
+    [handleClickSearchIcon, handleToggle]
+  );
+
   return (
     <div
       className={classNames("component__input-search-container", className)}
@@ -257,16 +277,12 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           "active-background": activeBackground && showInput,
         })}
         onClick={handleToggle}
+        tabIndex={0}
+        onKeyDown={handleTabEnter}
       >
         <div
           className={classNames("component__input-search__icon-box")}
-          onClick={() => {
-            setShowInput(true);
-            setFullWidth(true);
-            setTimeout(() => {
-              setActiveBackground(true);
-            }, 300);
-          }}
+          onClick={handleClickSearchIcon}
         >
           <Search16 />
         </div>

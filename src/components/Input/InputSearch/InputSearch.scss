@@ -1,14 +1,21 @@
 @import "../../../styles/index.scss";
 .component__input-search-container {
     overflow: hidden;
+    
     .component__input-search-select {
+        &:focus-visible{
+            .component__input-search__icon-box{
+                background-color: var(--palette-grayHover-10);
+            }
+            outline: none;
+        }
         &.active-background{
             border: 2px solid var(--color-primary);
         }
         &.full-width{
             width: 100%;
             .component__input-search__icon-box{
-                background-color: #e5e5e5;
+                background-color: var(--palette-grayHover-10);
             }
         }
         &.icon-only-width{
@@ -19,7 +26,7 @@
         width: 100%;
         overflow: hidden;
         &:hover .component__input-search__icon-box{
-            background-color: #e5e5e5;
+            background-color: var(--palette-grayHover-10);
         }
         .component__input-search__icon-box {
             width: 40px;
@@ -27,7 +34,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #F4F4F4;
+            background-color: var(--palette-gray-10);
         }
         .visible__input-search {
             width: calc(100% - 40px);

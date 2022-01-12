@@ -51,7 +51,9 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     className,
   } = props;
   const [showListItem, setShowListItem] = React.useState<boolean>();
-
+  const [fullWidth, setFullWidth] = React.useState<boolean>(
+    type === "type3" ? true : false
+  );
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const [list, setList] = React.useState<Model[]>([]);
@@ -80,9 +82,14 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     setExpand(false);
     setShowListItem(false);
     if (type !== "type3") {
+      setTimeout(() => {
+        setFullWidth(false);
+      }, 500);
+      // chờ 0,5s cho transition của Input đóng lại rồi làm nhỏ width
       setShowInput(false);
     } else {
       setShowInput(true);
+      setFullWidth(true);
     }
   }, [type]);
 
@@ -254,6 +261,8 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
       className={classNames("component__input-search-container", className, {
         "visible__input-search": showInput,
         "hidden__input-search": !showInput,
+        "full-width": fullWidth,
+        "icon-only-width": !fullWidth,
       })}
       ref={wrapperRef}
     >
@@ -265,6 +274,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           className={classNames("component__input-search__icon-box")}
           onClick={() => {
             setShowInput(true);
+            setFullWidth(true);
           }}
         >
           <Search16 />

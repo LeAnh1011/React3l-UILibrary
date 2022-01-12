@@ -1,5 +1,11 @@
 @import "../../../styles/index.scss";
 .component__input-search-container {
+    &.full-width{
+        width: 100%;
+    }
+    &.icon-only-width{
+        width: 40px;
+    }
     overflow: hidden;
     .component__input-search-select {
         display: flex;

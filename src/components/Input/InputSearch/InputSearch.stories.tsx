@@ -51,6 +51,7 @@ export function InputSearchStories() {
           placeHolder="Search..."
           getList={demoListEnum}
           onChange={handleSetModel}
+          animation={false}
         />
         <InputSearch
           model={selectModel}

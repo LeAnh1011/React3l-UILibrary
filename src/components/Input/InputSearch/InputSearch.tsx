@@ -25,6 +25,7 @@ export interface InputSearchProps<
   className?: string;
   onChange?: (id: number, T?: T) => void;
   placeHolder?: string;
+  animation?: boolean;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -43,9 +44,10 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     searchType,
     onChange,
     className,
+    animation,
   } = props;
   const [showListItem, setShowListItem] = React.useState<boolean>();
-  const [fullWidth, setFullWidth] = React.useState<boolean>(false);
+  const [fullWidth, setFullWidth] = React.useState<boolean>(!animation);
   const [activeBackground, setActiveBackground] = React.useState<boolean>(
     false
   );
@@ -53,7 +55,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
 
   const [list, setList] = React.useState<Model[]>([]);
 
-  const [showInput, setShowInput] = React.useState<boolean>(false);
+  const [showInput, setShowInput] = React.useState<boolean>(!animation);
 
   const internalModel = React.useMemo((): Model => {
     return model || null;
@@ -75,12 +77,15 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     setExpand(false);
     setShowListItem(false);
     setActiveBackground(false);
-    setTimeout(() => {
-      setFullWidth(false);
-    }, 300);
+
+    if (animation) {
+      setTimeout(() => {
+        setFullWidth(false);
+      }, 300);
+      setShowInput(false);
+    }
     // chờ 0,3s cho transition của Input co hẹp đóng lại rồi làm nhỏ width
-    setShowInput(false);
-  }, []);
+  }, [animation]);
 
   const [subscription] = CommonService.useSubscription();
 
@@ -347,6 +352,6 @@ InputSearch.defaultProps = {
   searchProperty: "name",
   searchType: "contain",
   render: defaultRenderObject,
-  type: "type3",
+  animation: true,
 };
 export default InputSearch;

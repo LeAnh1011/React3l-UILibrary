@@ -57,7 +57,6 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
       if (typeof onClear === "function") {
         onClear(null);
       }
-      event.stopPropagation();
     },
     [onClear]
   );
@@ -103,7 +102,7 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
                 className={classNames("component__input-search")}
               />
 
-              {internalModel ? (
+              {internalModel && (
                 <div
                   style={{ width: "16px", height: "20px" }}
                   className="m-r--xxs"
@@ -113,17 +112,7 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
                     onClick={handleClearInput}
                   ></CloseFilled16>
                 </div>
-              ) : model ? (
-                <div
-                  style={{ width: "16px", height: "20px" }}
-                  className="m-r--xxs"
-                >
-                  <CloseFilled16
-                    className="input-icon__clear"
-                    onClick={handleClearItem}
-                  ></CloseFilled16>
-                </div>
-              ) : null}
+              )}
             </>
           ) : (
             <>

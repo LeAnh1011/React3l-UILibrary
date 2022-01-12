@@ -236,10 +236,14 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
   const handleClickSearchIcon = React.useCallback(() => {
     setShowInput(true);
     setFullWidth(true);
-    setTimeout(() => {
+    if (animationInput) {
+      setTimeout(() => {
+        setActiveBackground(true);
+      }, 300);
+    } else {
       setActiveBackground(true);
-    }, 300);
-  }, []);
+    }
+  }, [animationInput]);
 
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

@@ -11,7 +11,7 @@ export interface StandardTableCustomProps extends TableProps<any> {
   isLevel2?: boolean; //unset height for table level2
 }
 function StandardTable(props: StandardTableCustomProps) {
-  const { className, tableSize, isDragable, isLevel2 } = props;
+  const { className, tableSize, isDragable, isLevel2, expandable } = props;
 
   React.useEffect(() => {
     const antTable = document.getElementsByClassName(
@@ -71,7 +71,8 @@ function StandardTable(props: StandardTableCustomProps) {
           className={classNames(
             className,
             `table-size-${tableSize}`,
-            "custom-scrollbar"
+            "custom-scrollbar",
+            { "big-checkbox-col": !expandable }
           )}
           {...props}
         />

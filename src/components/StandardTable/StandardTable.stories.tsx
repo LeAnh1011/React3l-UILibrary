@@ -41,7 +41,6 @@ export enum ORDER_TYPE {
   CENTER = "center",
   RIGHT = "right",
 }
-
 function Default() {
   const [filter, setFilter] = React.useState<DemoFilter>(new DemoFilter());
 
@@ -174,7 +173,6 @@ function Default() {
     },
     selectedRowKeys,
     type: typeRowSelection,
-    columnWidth: "45px",
   };
 
   const columns: ColumnProps<any>[] = useMemo(
@@ -200,7 +198,6 @@ function Default() {
         dataIndex: "name",
         key: "name",
         sorter: true,
-        width: 135,
         ellipsis: true,
         render(...[name]) {
           return (
@@ -222,7 +219,6 @@ function Default() {
         dataIndex: "name",
         key: "name2",
         sorter: true,
-        width: 135,
         ellipsis: true,
         render(...[name]) {
           return (
@@ -242,7 +238,6 @@ function Default() {
         dataIndex: "location",
         key: "location",
         sorter: true,
-        width: 100,
         ellipsis: true,
         render(...[location]) {
           return (
@@ -257,7 +252,6 @@ function Default() {
         dataIndex: "platform",
         key: "platform",
         sorter: true,
-        width: 135,
         ellipsis: true,
         render(...[platform]) {
           return (
@@ -272,7 +266,6 @@ function Default() {
         dataIndex: "creator",
         key: "creator",
         sorter: true,
-        width: 135,
         ellipsis: true,
         align: "center",
         render(...[creator]) {
@@ -573,7 +566,6 @@ function Default() {
       ) : (
         <ChevronDown16 onClick={(e) => onExpand(record, e)} />
       ),
-    columnWidth: "45px",
   };
 
   return (

@@ -94,7 +94,7 @@
     }
     &.btn--sm {
         height: 32px;
-        padding: 8px 8px 8px 12px;
+        padding: 8px 12px 8px 16px;
     }
 
     &.btn--md {
@@ -131,7 +131,7 @@
     }
     &.btn--sm {
         height: 32px;
-        padding: 8px 16px 8px 12px;
+        padding: 8px 16px 8px 16px;
     }
 
     &.btn--md {
@@ -161,7 +161,7 @@
     cursor: not-allowed;
 }
 .btn--danger-loading {
-    background-color: var(--color-critilcal-active);
+    background-color: var(--color-critical-active);
     color: var(--color-white);
     cursor: not-allowed;
 }

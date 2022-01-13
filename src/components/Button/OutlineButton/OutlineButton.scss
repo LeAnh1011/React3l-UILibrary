@@ -59,7 +59,7 @@
         flex-direction: row;
         justify-content: space-between;
         .children-content {
-            margin-right: 32px;
+            margin-right: 30px;
             letter-spacing: 0.585px;
         }
         .icon-button {
@@ -68,7 +68,7 @@
     }
     &.btn--sm {
         height: 32px;
-        padding: 8px 8px 8px 12px;
+        padding: 8px 12px 8px 16px;
     }
 
     &.btn--md {
@@ -95,7 +95,7 @@
         justify-content: space-between;
         height: 16px;
         .children-content {
-            margin-right: 32px;
+            margin-right: 30px;
             letter-spacing: 0.585px;
         }
         .icon-button {
@@ -105,7 +105,7 @@
     }
     &.btn--sm {
         height: 32px;
-        padding: 8px 16px 8px 12px;
+        padding: 8px 16px 8px 16px;
     }
 
     &.btn--md {

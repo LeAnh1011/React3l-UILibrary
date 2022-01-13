@@ -1,7 +1,6 @@
 import React, { ReactSVGElement, RefObject } from "react";
 import { CloseFilled16 } from "@carbon/icons-react";
 import "./InputSearchSelect.scss";
-import { Model } from "react3l-common";
 import classNames from "classnames";
 
 export interface InputSelectProps {
@@ -81,14 +80,5 @@ function InputSearchSelect(props: InputSelectProps) {
     </>
   );
 }
-
-function defaultRenderObject<T extends Model>(t: T) {
-  return t?.name || "";
-}
-
-InputSearchSelect.defaultProps = {
-  render: defaultRenderObject,
-  expanded: false,
-};
 
 export default InputSearchSelect;

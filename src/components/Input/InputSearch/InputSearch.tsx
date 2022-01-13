@@ -4,7 +4,7 @@ import { Model, ModelFilter } from "react3l-common";
 import classNames from "classnames";
 import Spin from "antd/lib/spin";
 import { Empty } from "antd";
-import { Search16, Checkmark16 } from "@carbon/icons-react";
+import { Search16 } from "@carbon/icons-react";
 import { CommonService } from "services/common-service";
 import { ErrorObserver, Observable } from "rxjs";
 import { useDebounceFn } from "ahooks";
@@ -144,14 +144,11 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
   const handleClickItem = React.useCallback(
     (item: Model) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       onChange(item.id, item);
-      handleCloseSelect();
+      setShowListItem(false);
+      setActiveBackground(false);
     },
-    [handleCloseSelect, onChange]
+    [onChange]
   );
-
-  const handleClearItem = React.useCallback(() => {
-    onChange(null);
-  }, [onChange]);
 
   const handleSearchChange = React.useCallback(
     (searchTerm: string) => {
@@ -237,13 +234,17 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     setShowInput(true);
     setFullWidth(true);
     if (animationInput) {
-      setTimeout(() => {
+      if (fullWidth) {
         setActiveBackground(true);
-      }, 300);
+      } else {
+        setTimeout(() => {
+          setActiveBackground(true);
+        }, 300);
+      }
     } else {
       setActiveBackground(true);
     }
-  }, [animationInput]);
+  }, [animationInput, fullWidth]);
 
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -252,16 +253,6 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
       await handleLoadList();
     },
     [handleClickSearchIcon, handleLoadList]
-  );
-
-  const handleKeyEnter = React.useCallback(
-    (event: any) => {
-      if (event.key === "Enter") {
-        handleToggle(null);
-      }
-      return;
-    },
-    [handleToggle]
   );
 
   const handleTabEnter = React.useCallback(
@@ -303,14 +294,10 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           })}
         >
           <InputSearchSelect
-            model={internalModel}
-            render={render}
             placeHolder={placeHolder}
             expanded={isExpand}
             onSearch={handleSearchChange}
-            onClear={handleClearItem}
             onKeyDown={handleKeyPress}
-            onKeyEnter={handleKeyEnter}
           />
         </div>
       </div>
@@ -331,11 +318,6 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
                       onClick={handleClickItem(item)}
                     >
                       <span className="select__text">{render(item)}</span>
-                      {item.id === internalModel?.id && (
-                        <div style={{ height: "16px" }}>
-                          <Checkmark16 />
-                        </div>
-                      )}
                     </div>
                   ))
                 ) : (

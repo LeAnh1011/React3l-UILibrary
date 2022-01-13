@@ -4,28 +4,15 @@ import "./InputSearchSelect.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
 
-export interface InputSelectProps<T extends Model> {
-  model?: T;
+export interface InputSelectProps {
   expanded?: boolean;
   placeHolder?: string;
-  render?: (t: T) => string;
-  onClear?: (T: T) => void;
   onSearch?: (T: string) => void;
   onKeyDown?: (event: any) => void;
-  onKeyEnter?: (event: any) => void;
 }
 
-function InputSearchSelect(props: InputSelectProps<Model>) {
-  const {
-    model,
-    expanded,
-    placeHolder,
-    render,
-    onClear,
-    onSearch,
-    onKeyDown,
-    onKeyEnter,
-  } = props;
+function InputSearchSelect(props: InputSelectProps) {
+  const { expanded, placeHolder, onSearch, onKeyDown } = props;
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
     null
@@ -47,18 +34,8 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
     (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
       setInternalModel("");
       inputRef.current.focus();
-      event.stopPropagation();
     },
     []
-  );
-
-  const handleClearItem = React.useCallback(
-    (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
-      if (typeof onClear === "function") {
-        onClear(null);
-      }
-    },
-    [onClear]
   );
 
   const handleKeyDown = React.useCallback(
@@ -68,15 +45,6 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
       }
     },
     [onKeyDown]
-  );
-
-  const handleEnter = React.useCallback(
-    (event) => {
-      if (typeof onKeyEnter === "function") {
-        onKeyEnter(event);
-      }
-    },
-    [onKeyEnter]
   );
 
   React.useEffect(() => {
@@ -90,53 +58,23 @@ function InputSearchSelect(props: InputSelectProps<Model>) {
     <>
       <div className={classNames("input-search-select__wrapper")}>
         <div className={classNames("component__input-search-box")}>
-          {expanded ? (
-            <>
-              <input
-                type="text"
-                value={internalModel}
-                onChange={handleChange}
-                placeholder={model ? (render(model) as string) : placeHolder}
-                ref={inputRef}
-                onKeyDown={handleKeyDown}
-                className={classNames("component__input-search")}
-              />
+          <input
+            type="text"
+            value={internalModel}
+            onChange={handleChange}
+            placeholder={placeHolder}
+            ref={inputRef}
+            onKeyDown={handleKeyDown}
+            className={classNames("component__input-search")}
+          />
 
-              {internalModel && (
-                <div
-                  style={{ width: "16px", height: "20px" }}
-                  className="m-r--xxs"
-                >
-                  <CloseFilled16
-                    className="input-icon__clear m-r--xxs"
-                    onClick={handleClearInput}
-                  ></CloseFilled16>
-                </div>
-              )}
-            </>
-          ) : (
-            <>
-              <input
-                type="text"
-                value={(render(model) as string) || ""}
-                readOnly
-                placeholder={placeHolder}
-                onKeyDown={handleEnter}
-                className={classNames("component__input-search")}
-                ref={inputRef}
-              />
-              {model && (
-                <div
-                  style={{ width: "16px", height: "20px" }}
-                  className="m-r--xxs"
-                >
-                  <CloseFilled16
-                    className="input-icon input-icon__clear"
-                    onClick={handleClearItem}
-                  ></CloseFilled16>
-                </div>
-              )}
-            </>
+          {internalModel && (
+            <div style={{ width: "16px", height: "20px" }} className="m-r--xxs">
+              <CloseFilled16
+                className="input-icon__clear m-r--xxs"
+                onClick={handleClearInput}
+              ></CloseFilled16>
+            </div>
           )}
         </div>
       </div>

@@ -4,6 +4,7 @@ import InputText from "./components/Input/InputText";
 import InputNumber from "./components/Input/InputNumber";
 import InputSelect from "./components/Input/InputSelect";
 import InputTag from "./components/Input/InputTag";
+import ImportSearch from "./components/Input/InputSearch";
 import TextArea from "./components/TextArea";
 
 import Select from "./components/Select/SingleSelect/";
@@ -55,6 +56,7 @@ export {
   InputSelect,
   TextArea,
   InputTag,
+  ImportSearch,
   // Dropdown list components
   Select,
   MultipleSelect,

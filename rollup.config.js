@@ -16,6 +16,7 @@ export default {
     "src/components/Input/InputNumber/index.ts",
     "src/components/Input/InputSelect/index.ts",
     "src/components/Input/InputTag/index.ts",
+    "src/components/Input/InputSearch/index.ts",
     "src/components/TextArea/index.ts",
     // Dropdown list components
     "src/components/Select/SingleSelect/index.ts",

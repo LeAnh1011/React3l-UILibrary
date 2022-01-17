@@ -22,7 +22,7 @@ const LinkPlainButton = React.forwardRef(
           className
         )}
       >
-        {children}
+        <div>{children}</div>
       </button>
     );
   }

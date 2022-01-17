@@ -1,7 +1,7 @@
 .btn--link-plain {
     background-color: unset;
     color: var(--palette-gray-100);
-    text-decoration: underline;
+    text-decoration: underline !important;
  
     &:visited {
         color: var(--palette-gray-100);
@@ -27,6 +27,7 @@
 }
 
 .btn-link-plain {
+    letter-spacing: 0.244px;
     &.btn--sm {
         height: 32px;
         padding: 8px 8px;

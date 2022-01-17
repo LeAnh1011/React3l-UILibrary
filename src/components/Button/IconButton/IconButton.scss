@@ -49,7 +49,7 @@
 
     &:focus {
         background-color: var(--color-primary);
-        box-shadow: 0px 0px 8px var(--color-primary);
+        box-shadow: inset 0 0 0 2px var(--color-primary), inset 0 0 0 3px var(--color-white);
     }
     &.disabled {
         color: var(--palette-gray-50);
@@ -102,8 +102,7 @@
 
     &:focus {
         background-color: var(--color-critical);
-        border: 1px solid var(--color-primary);
-        box-shadow: 0px 0px 8px var(--color-primary);
+        box-shadow: inset 0 0 0 2px var(--color-primary), inset 0 0 0 3px var(--color-white);
     }
     &.disabled {
         color: var(--palette-gray-50);
@@ -128,9 +127,8 @@
     &:focus {
         background-color: var(--color-critical);
         color: var(--color-white);
-        border: 1px solid var(--color-primary) !important;
-        box-sizing: border-box;
-        box-shadow: 0px 0px 8px var(--color-primary);
+        border: none !important;
+        box-shadow: inset 0 0 0 2px var(--color-primary), inset 0 0 0 3px var(--color-white);
     }
     &.disabled { 
         color: var(--palette-gray-50); 

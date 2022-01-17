@@ -16,6 +16,7 @@ export default {
     "src/components/Input/InputNumber/index.ts",
     "src/components/Input/InputSelect/index.ts",
     "src/components/Input/InputTag/index.ts",
+    "src/components/Input/InputSearch/index.ts",
     "src/components/TextArea/index.ts",
     // Dropdown list components
     "src/components/Select/SingleSelect/index.ts",
@@ -45,6 +46,9 @@ export default {
     // Loading/Spinner
     "src/components/IconLoading/index.ts",
     "src/components/InlineLoading/index.ts",
+    //Modal/Drawer
+    "src/components/Modal/index.ts",
+    "src/components/Drawer/index.ts",
     // Standard table components
     "src/components/StandardTable/index.ts",
     "src/components/StandardTable/ActionBarComponent/index.ts",

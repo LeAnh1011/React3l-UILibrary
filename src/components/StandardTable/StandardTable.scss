@@ -19,6 +19,11 @@
   .ant-table-tbody > tr > td {
     padding: 0px 0px;
   }
+  .big-checkbox-col{
+    .ant-table-selection-col{
+      width: 40px;
+    }
+  }
   .ant-table-tbody > tr > td > .ant-table-wrapper:only-child .ant-table,
   .ant-table-tbody > tr > td > .ant-table-expanded-row-fixed > .ant-table-wrapper:only-child .ant-table {
     margin-top: 0px;

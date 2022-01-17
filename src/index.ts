@@ -4,6 +4,7 @@ import InputText from "./components/Input/InputText";
 import InputNumber from "./components/Input/InputNumber";
 import InputSelect from "./components/Input/InputSelect";
 import InputTag from "./components/Input/InputTag";
+import ImportSearch from "./components/Input/InputSearch";
 import TextArea from "./components/TextArea";
 
 import Select from "./components/Select/SingleSelect/";
@@ -34,6 +35,9 @@ import DateRange from "./components/Calendar/DateRange/DateRange";
 import IconLoading from "./components/IconLoading";
 import InlineLoading from "./components/InlineLoading";
 
+import Modal from "./components/Modal";
+import Drawer from "./components/Drawer";
+
 import StandardTable from "./components/StandardTable/StandardTable";
 import ActionBarComponent from "./components/StandardTable/ActionBarComponent";
 import LayoutCell from "./components/StandardTable/LayoutCell";
@@ -52,6 +56,7 @@ export {
   InputSelect,
   TextArea,
   InputTag,
+  ImportSearch,
   // Dropdown list components
   Select,
   MultipleSelect,
@@ -80,6 +85,9 @@ export {
   // Loading/Spinner
   IconLoading,
   InlineLoading,
+  //Modal/Drawer
+  Modal,
+  Drawer,
   // Standard table components
   StandardTable,
   ActionBarComponent,

@@ -12,12 +12,10 @@
         color: var(--color-white);
         background-color: var(--color-primary-active);
     }
-    &:focus-visible {
+    &:focus {
         background-color: var(--color-white);
         color: var(--color-primary);
-        border: 1px solid var(--color-primary);
-        box-sizing: border-box;
-        box-shadow: 0px 0px 8px var(--color-primary);
+        box-shadow: inset 0 0 0 2px var(--color-primary);
     }
     &.disabled {
         color: var(--palette-gray-50); 
@@ -39,12 +37,11 @@
         color: var(--color-white);
         background-color: var(--color-critical-active);
     }
-    &:focus-visible {
+    &:focus {
         background-color: var(--color-critical);
         color: var(--color-white);
         border: 1px solid var(--color-primary) !important;
-        box-sizing: border-box;
-        box-shadow: 0px 0px 8px var(--color-primary);
+        box-shadow: inset 0 0 0 1px var(--color-primary), inset 0 0 0 2px var(--color-white);
     }
     &.disabled {
         color: var(--palette-gray-50); 
@@ -59,7 +56,8 @@
         flex-direction: row;
         justify-content: space-between;
         .children-content {
-            margin-right: 32px;
+            margin-right: 30px;
+            letter-spacing: 0.244px;
         }
         .icon-button {
             font-size: 16px;
@@ -67,7 +65,7 @@
     }
     &.btn--sm {
         height: 32px;
-        padding: 8px 8px 8px 12px;
+        padding: 8px 12px 8px 16px;
     }
 
     &.btn--md {
@@ -94,7 +92,8 @@
         justify-content: space-between;
         height: 16px;
         .children-content {
-            margin-right: 32px;
+            margin-right: 30px;
+            letter-spacing: 0.244px;
         }
         .icon-button {
             font-size: 16px;
@@ -103,7 +102,7 @@
     }
     &.btn--sm {
         height: 32px;
-        padding: 8px 16px 8px 12px;
+        padding: 8px 16px 8px 16px;
     }
 
     &.btn--md {

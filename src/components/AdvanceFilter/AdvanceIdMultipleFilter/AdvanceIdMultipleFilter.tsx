@@ -14,7 +14,7 @@ import { Checkbox, Empty, Spin } from "antd";
 export interface AdvanceIdMultipleFilterProps<
   T extends Model,
   TFilter extends ModelFilter
-  > {
+> {
   models?: Model[];
 
   modelFilter?: TFilter;
@@ -218,7 +218,7 @@ export function AdvanceIdMultipleFilter(
           setLoading(false);
         }
       );
-    } catch (error) { }
+    } catch (error) {}
   }, [getList, modelFilter, ClassFilter, subscription]);
 
   const handleToggle = React.useCallback(
@@ -304,7 +304,6 @@ export function AdvanceIdMultipleFilter(
     },
     [run]
   );
-
 
   const handleClearAll = React.useCallback(() => {
     const cloneModelFilter = new ClassFilter();
@@ -407,6 +406,7 @@ export function AdvanceIdMultipleFilter(
             onKeyDown={handleKeyPress}
             onKeyEnter={handleKeyEnter}
             isFilter={true}
+            isNotExpand={!isExpand}
           />
         </div>
         {isExpand && (

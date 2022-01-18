@@ -14,7 +14,7 @@ import { Checkbox, Empty, Spin } from "antd";
 export interface MultipleSelectProps<
   T extends Model,
   TFilter extends ModelFilter
-  > {
+> {
   models?: Model[];
 
   modelFilter?: TFilter;
@@ -216,7 +216,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
           setLoading(false);
         }
       );
-    } catch (error) { }
+    } catch (error) {}
   }, [getList, modelFilter, ClassFilter, subscription]);
 
   const handleToggle = React.useCallback(
@@ -302,7 +302,6 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     },
     [run]
   );
-
 
   const handleClearAll = React.useCallback(() => {
     const cloneModelFilter = new ClassFilter();
@@ -404,6 +403,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
             isUsingSearch={isUsingSearch}
             onKeyDown={handleKeyPress}
             onKeyEnter={handleKeyEnter}
+            isNotExpand={!isExpand}
           />
         </div>
         {isExpand && (

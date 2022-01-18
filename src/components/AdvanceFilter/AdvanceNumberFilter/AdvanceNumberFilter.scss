@@ -83,8 +83,8 @@
       }
 
       &:focus-within {
-        border: 1px solid var(--color-primary);
-        @include box-shadow--focus();
+        outline: 2px solid var(--color-primary);
+        box-shadow: none;
       }
 
       &.advance-number-filter--disabled {
@@ -183,9 +183,19 @@
   }
 }
 
-.form-item__container--error {
-  .advance-number-filter--material {
-    border: 1px solid;
-    box-shadow: none !important;
+.form-item__container {
+  &.form-item__container--error {
+    .form-item__content {
+      .component__input {
+        &.advance-number-filter--material {
+          outline: 1px solid;
+          box-shadow: none !important;
+          &:focus-within {
+            outline-color: var(--color-primary) !important;
+            outline-width: 2px;
+          }
+        }
+      }
+    }
   }
 }

@@ -112,14 +112,17 @@
         .component__input.disabled-field {
           background-color: var(--palette-gray-10);
         }
-        .tio-chevron_down {
+        .input-tag__icon {
           color: var(--palette-gray-60);
         }
       }
 
       &:focus-within {
-        outline: 1px solid var(--color-primary);
-        @include box-shadow--focus();
+        outline: 2px solid var(--color-primary);
+        box-shadow: none;
+        .input-tag__icon {
+          color: var(--palette-gray-60);
+        }
       }
 
       &.input-tag--disabled {
@@ -137,6 +140,12 @@
     }
 
     &.input-tag__container--float {
+      &:hover {
+        outline-color: var(--palette-gray-100);
+        .input-tag__icon {
+          color: var(--palette-gray-60);
+        }
+      }
       .input-tag-item__label--small {
         height: 16px;
         padding-top: 0px;
@@ -150,7 +159,9 @@
 
         .input-tag-item__icon {
           cursor: pointer;
-          margin-right: -2px;
+          margin-right: -4px;
+          width: 16px;
+          height: 16px;
         }
       }
       .component__title {
@@ -209,7 +220,15 @@
 
       .input-tag-item__icon {
         cursor: pointer;
-        margin-right: -3px;
+
+        border-radius: 12px;
+        margin-right: -6px;
+        border-radius: 12px;
+        width: 20px;
+        height: 20px;
+        &:hover {
+          background-color: #353535;
+        }
       }
     }
 
@@ -267,14 +286,19 @@
   }
 }
 
-.form-item__container--error {
-  .input-tag__container {
-    svg.input-icon__clear {
-      color: var(--palette-gray-40) !important;
+.form-item__container {
+  &.form-item__container--error {
+    .form-item__content {
+      .component__input {
+        &.input-tag__container--material {
+          outline: 1px solid;
+          box-shadow: none !important;
+          &:focus-within {
+            outline-color: var(--color-primary) !important;
+            outline-width: 2px;
+          }
+        }
+      }
     }
-  }
-  .input-tag__container--material {
-    outline: 1px solid;
-    box-shadow: none !important;
   }
 }

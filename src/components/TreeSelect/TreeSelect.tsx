@@ -190,6 +190,16 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     [componentId, handleCloseList]
   );
 
+  const handleKeyEnter = React.useCallback(
+    (event: any) => {
+      if (event.key === "Enter") {
+        handleExpand(null);
+      }
+      return;
+    },
+    [handleExpand]
+  );
+
   CommonService.useClickOutside(wrapperRef, handleCloseList);
 
   return (
@@ -211,6 +221,8 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               isUsingSearch={isUsingSearch}
               onClearMulti={handleClearMultiItem}
               onKeyDown={handleKeyPress}
+              isNotExpand={!expanded}
+              onKeyEnter={handleKeyEnter}
             />
           ) : (
             <InputSelect
@@ -226,6 +238,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               label={label}
               isSmall={isSmall}
               onKeyDown={handleKeyPress}
+              onKeyEnter={handleKeyEnter}
             />
           )}
         </div>

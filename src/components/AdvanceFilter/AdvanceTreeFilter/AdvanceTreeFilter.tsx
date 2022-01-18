@@ -212,6 +212,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               onClearMulti={handleClearMultiItem}
               onKeyDown={handleKeyPress}
               isFilter={true}
+              isNotExpand={!expanded}
             />
           ) : (
             <InputSelect

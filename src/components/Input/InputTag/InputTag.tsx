@@ -24,6 +24,7 @@ export interface InputTagProps<T extends Model> {
   onKeyDown?: (event: any) => void;
   onKeyEnter?: (event: any) => void;
   isFilter?: boolean;
+  isNotExpand?: boolean;
 }
 function InputTag(props: InputTagProps<Model>) {
   const {
@@ -39,6 +40,8 @@ function InputTag(props: InputTagProps<Model>) {
     isUsingSearch,
     onKeyDown,
     isFilter,
+    onKeyEnter,
+    isNotExpand,
   } = props;
 
   const internalListItem = React.useMemo<Model[]>(() => {
@@ -88,6 +91,15 @@ function InputTag(props: InputTagProps<Model>) {
       }
     },
     [onKeyDown]
+  );
+
+  const handleEnter = React.useCallback(
+    (event) => {
+      if (typeof onKeyEnter === "function") {
+        onKeyEnter(event);
+      }
+    },
+    [onKeyEnter]
   );
 
   return (
@@ -163,7 +175,7 @@ function InputTag(props: InputTagProps<Model>) {
               disabled={disabled}
               onChange={handleChangeInput}
               readOnly={!isUsingSearch}
-              onKeyDown={handleKeyDown}
+              onKeyDown={isNotExpand ? handleEnter : handleKeyDown}
             />
           ) : (
             <input
@@ -173,7 +185,7 @@ function InputTag(props: InputTagProps<Model>) {
                 type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
               }
               disabled={disabled}
-              onKeyDown={handleKeyDown}
+              onKeyDown={isNotExpand ? handleEnter : handleKeyDown}
             />
           )}
 

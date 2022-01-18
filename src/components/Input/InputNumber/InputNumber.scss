@@ -64,6 +64,12 @@
       }
     }
 
+    &.input-number--float {
+      &:hover {
+        outline-color: var(--palette-gray-100);
+      }
+    }
+
     &.input-number--material {
       background-color: var(--palette-gray-10);
       outline: none;
@@ -83,8 +89,8 @@
       }
 
       &:focus-within {
-        border: 1px solid var(--color-primary);
-        @include box-shadow--focus();
+        outline: 2px solid var(--color-primary);
+        box-shadow: none;
       }
 
       &.input-number--disabled {
@@ -178,10 +184,19 @@
     }
   }
 }
-
-.form-item__container--error {
-  .input-number--material {
-    border: 1px solid;
-    box-shadow: none !important;
+.form-item__container {
+  &.form-item__container--error {
+    .form-item__content {
+      .component__input {
+        &.input-number--material {
+          outline: 1px solid;
+          box-shadow: none !important;
+          &:focus-within {
+            outline-color: var(--color-primary) !important;
+            outline-width: 2px;
+          }
+        }
+      }
+    }
   }
 }

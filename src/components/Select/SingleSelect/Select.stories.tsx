@@ -129,6 +129,31 @@ export function SingleSelectStories() {
         </FormItem>
       </div>
 
+      <div style={{ margin: "10px", width: "300px" }}>
+        <FormItem
+          validateStatus={isValidated ? ValidateStatus.error : null}
+          message={isValidated ? "Error label" : ""}
+        >
+          <Select
+            placeHolder={"Select Organization"}
+            model={selectModel}
+            modelFilter={selectModelFilter}
+            searchProperty={"name"}
+            render={handleRenderModel}
+            onChange={handleSetModel}
+            getList={demoListEnum}
+            classFilter={DemoFilter}
+            type={type}
+            label={"Label"}
+            selectWithAdd={isSelectWithAdd}
+            selectWithPreferOption={isSelectWithPreferOption}
+            disabled={isDisabled}
+            isSmall={isSmall}
+            preferOptions={isSelectWithPreferOption ? list : undefined}
+          />
+        </FormItem>
+      </div>
+
       <div style={{ margin: "10px", width: "400px" }}>
         <Radio.Group onChange={handleChangeStyle} value={type}>
           <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>

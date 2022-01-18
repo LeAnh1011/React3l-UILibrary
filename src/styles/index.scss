@@ -41,3 +41,13 @@ body {
     text-decoration: underline;
   }
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(63, 86, 175, 0.15);
+}

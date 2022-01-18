@@ -413,7 +413,7 @@ function AdvanceMultipleIdFilterMaster(
                         className=" m-l--xs m-y--xs m-r--xxs"
                         onChange={handleClickItem(item)}
                       >
-                        <span className="advance-id-filter__text">
+                        <span className="advance-id-master__text">
                           {render(item)}
                         </span>
                       </Checkbox>
@@ -445,7 +445,7 @@ function AdvanceMultipleIdFilterMaster(
                         onChange={handleClickItem(item)}
                         checked={item.isSelected}
                       >
-                        <span className="advance-id-filter__text ">
+                        <span className="advance-id-master__text">
                           {render(item)}
                         </span>
                       </Checkbox>

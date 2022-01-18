@@ -93,20 +93,10 @@ $backgound-color: #f4f4f4;
       box-shadow: inset 0px 1px 0px #e1e3e5;
       background: $backgound-color;
     }
-    .advance-id-filter__text {
+    .advance-id-master__text {
       white-space: nowrap;
-      overflow-x: hidden;
+      overflow: hidden;
       text-overflow: ellipsis;
     }
   }
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color: rgba(63, 86, 175, 0.15);
 }

@@ -1,6 +1,7 @@
 import { useDebounceFn } from "ahooks";
-import { Checkbox, Empty, Spin } from "antd";
+import { Checkbox, Empty } from "antd";
 import classNames from "classnames";
+import IconLoading from "components/IconLoading/IconLoading";
 import InputText from "components/Input/InputText";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import React, { RefObject } from "react";
@@ -425,7 +426,7 @@ function AdvanceMultipleIdFilterMaster(
               </div>
             ) : (
               <div className="advance-id-filter__loading">
-                <Spin tip="Loading..."></Spin>
+                <IconLoading color="#0F62FE" size={24}/>
               </div>
             )}
             {!loading && list.length > 0 && (

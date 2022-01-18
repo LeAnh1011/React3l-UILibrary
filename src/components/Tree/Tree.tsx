@@ -1,6 +1,6 @@
 import { Model, ModelFilter } from "react3l-common";
 import { Add16, ChevronDown16, Checkmark16 } from "@carbon/icons-react";
-import { Empty, Spin, Tree as TreeAntd } from "antd";
+import { Empty, Tree as TreeAntd } from "antd";
 import {
   DataNode,
   EventDataNode,
@@ -13,6 +13,7 @@ import "./Tree.scss";
 import { TreeNode as CustomTreeNode } from "./TreeNode";
 import { Key } from "antd/lib/table/interface";
 import classNames from "classnames";
+import IconLoading from "components/IconLoading/IconLoading";
 const { TreeNode } = TreeAntd;
 
 function SwitcherIcon() {
@@ -340,7 +341,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       <div className="tree-container">
         {loading ? (
           <div className="tree__loading">
-            <Spin tip="Loading..."></Spin>
+            <IconLoading color="#0F62FE" size={24}/>
           </div>
         ) : (
           <>

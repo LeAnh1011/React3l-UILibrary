@@ -9,7 +9,8 @@ import React, { RefObject } from "react";
 import { ErrorObserver, Observable } from "rxjs";
 import { BORDER_TYPE } from "config/enum";
 import "./AdvanceIdMultipleFilter.scss";
-import { Checkbox, Empty, Spin } from "antd";
+import { Checkbox, Empty } from "antd";
+import IconLoading from "components/IconLoading/IconLoading";
 
 export interface AdvanceIdMultipleFilterProps<
   T extends Model,
@@ -449,7 +450,7 @@ export function AdvanceIdMultipleFilter(
               </>
             ) : (
               <div className="advance-id-filter__loading">
-                <Spin tip="Loading..."></Spin>
+                <IconLoading color="#0F62FE" size={24}/>
               </div>
             )}
             {!loading && list.length > 0 && (

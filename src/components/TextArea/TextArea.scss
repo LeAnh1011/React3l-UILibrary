@@ -44,11 +44,17 @@
       background-color: var(--palette-gray-10);
     }
 
-    &.text-area--float:focus-within {
-      box-shadow: none;
-      outline-width: 2px;
-      .component__title {
-        color: var(--color-primary);
+    &.text-area--float {
+      &:hover {
+        outline-color: var(--palette-gray-100);
+      }
+
+      &:focus-within {
+        box-shadow: none;
+        outline: 1px solid var(--color-primary);
+        .component__title {
+          color: var(--color-primary);
+        }
       }
     }
 
@@ -71,18 +77,17 @@
       }
 
       &:focus-within {
-        border: 1px solid var(--color-primary);
-        @include box-shadow--focus();
+        outline: 2px solid var(--color-primary);
+        box-shadow: none;
+        .input-tag__icon {
+          color: var(--palette-gray-60);
+        }
       }
 
       &.text-area--disabled {
         box-shadow: none;
         background-color: var(--palette-grayHover-10);
-      }
-
-      &.text-area--float:focus-within {
-        box-shadow: none;
-        outline-width: 2px;
+        border-bottom: none;
       }
     }
 

@@ -62,16 +62,16 @@
       }
     }
 
-    &.input-text--float:focus-within {
-      box-shadow: none;
-      .component__title {
-        color: var(--color-primary);
-      }
-    }
-
     &.input-text--float {
       &:hover {
         outline-color: var(--palette-gray-100);
+      }
+      &:focus-within {
+        box-shadow: none;
+        outline: 1px solid var(--color-primary);
+        .component__title {
+          color: var(--color-primary);
+        }
       }
     }
 

@@ -2,7 +2,6 @@ import React, { RefObject } from "react";
 import "./InputSearch.scss";
 import { Model, ModelFilter } from "react3l-common";
 import classNames from "classnames";
-import Spin from "antd/lib/spin";
 import { Empty } from "antd";
 import { Search16 } from "@carbon/icons-react";
 import { CommonService } from "services/common-service";
@@ -10,6 +9,7 @@ import { ErrorObserver, Observable } from "rxjs";
 import { useDebounceFn } from "ahooks";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import InputSearchSelect from "./InputSearchSelect/InputSearchSelect";
+import IconLoading from "components/IconLoading/IconLoading";
 
 export interface InputSearchProps<
   T extends Model,
@@ -327,7 +327,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
             </>
           ) : (
             <div className="select__loading">
-              <Spin tip="Loading..."></Spin>
+              <IconLoading color="#0F62FE" size={24}/>
             </div>
           )}
         </div>

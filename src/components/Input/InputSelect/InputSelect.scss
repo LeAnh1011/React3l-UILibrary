@@ -80,19 +80,22 @@
       }
     }
 
-    &.input-select--float:focus-within {
-      outline-color: var(--color-primary);
-      @include box-shadow--focus;
-      .component__title {
-        color: var(--color-primary);
-      }
-    }
-
     &.input-select--float {
       &:hover {
         outline-color: var(--palette-gray-100);
         .input-select__icon {
           color: var(--palette-gray-60);
+        }
+      }
+
+      &:focus-within {
+        box-shadow: none;
+        outline: 1px solid var(--color-primary);
+        .component__title {
+          color: var(--color-primary);
+        }
+        .input-select__icon {
+          color: var(--color-primary);
         }
       }
     }

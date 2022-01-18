@@ -105,6 +105,18 @@
       outline-color: var(--color-primary);
       @include box-shadow--focus;
     }
+
+    &.date-picker--float {
+      &.ant-picker-focused {
+        border-bottom: none !important;
+        box-shadow: none !important;
+        outline: 1px solid var(--color-primary);
+        & + .component__title {
+          color: var(--color-primary);
+        }
+      }
+    }
+
     &.date-picker--material {
       background-color: var(--palette-gray-10);
       outline: none;
@@ -115,16 +127,13 @@
       .date-range-wrapper {
         background-color: var(--palette-gray-10);
       }
-      &:hover,
-      &:focus {
+      &:hover {
         background-color: var(--palette-grayHover-10);
       }
-    }
-  }
-  .date-picker--float {
-    &.ant-picker-focused {
-      & + .component__title {
-        color: var(--color-primary);
+      &.ant-picker-focused {
+        border-bottom: none !important;
+        box-shadow: none;
+        outline: 2px solid var(--color-primary);
       }
     }
   }

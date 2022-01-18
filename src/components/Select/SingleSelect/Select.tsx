@@ -3,7 +3,6 @@ import { Add16, Checkmark16 } from "@carbon/icons-react";
 import { Model, ModelFilter } from "react3l-common";
 import { useDebounceFn } from "ahooks";
 import { Empty } from "antd";
-import Spin from "antd/lib/spin";
 import classNames from "classnames";
 import React, { RefObject } from "react";
 import { ErrorObserver, Observable } from "rxjs";
@@ -11,6 +10,7 @@ import { CommonService } from "services/common-service";
 import InputSelect from "components/Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "config/enum";
 import "./Select.scss";
+import IconLoading from "components/IconLoading/IconLoading";
 
 export interface SelectProps<
   T extends Model,
@@ -319,7 +319,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
               </>
             ) : (
               <div className="select__loading">
-                <Spin tip="Loading..."></Spin>
+                <IconLoading color="#0F62FE" size={24}/>
               </div>
             )}
             {!loading && list.length > 0 && (

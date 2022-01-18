@@ -3,7 +3,6 @@ import { Add16, Checkmark16 } from "@carbon/icons-react";
 import { Model, ModelFilter } from "react3l-common";
 import { useDebounceFn } from "ahooks";
 import { Empty } from "antd";
-import Spin from "antd/lib/spin";
 import classNames from "classnames";
 import React, { RefObject } from "react";
 import { ErrorObserver, Observable } from "rxjs";
@@ -11,6 +10,7 @@ import { CommonService } from "services/common-service";
 import InputSelect from "components/Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "config/enum";
 import "./AdvanceIdFilter.scss";
+import IconLoading from "components/IconLoading/IconLoading";
 
 export interface AdvanceIdFilterProps<
   T extends Model,
@@ -328,7 +328,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
               </>
             ) : (
               <div className="advance-id-filter__loading">
-                <Spin tip="Loading..."></Spin>
+                <IconLoading color="#0F62FE" size={24}/>
               </div>
             )}
             {!loading && list.length > 0 && (

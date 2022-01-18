@@ -9,7 +9,8 @@ import React, { RefObject } from "react";
 import { ErrorObserver, Observable } from "rxjs";
 import { BORDER_TYPE } from "config/enum";
 import "./MultipleSelect.scss";
-import { Checkbox, Empty, Spin } from "antd";
+import { Checkbox, Empty } from "antd";
+import IconLoading from "components/IconLoading/IconLoading";
 
 export interface MultipleSelectProps<
   T extends Model,
@@ -443,7 +444,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
               </>
             ) : (
               <div className="select__loading">
-                <Spin tip="Loading..."></Spin>
+                <IconLoading color="#0F62FE" size={24}/>
               </div>
             )}
             {!loading && list.length > 0 && (
@@ -463,7 +464,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                         onChange={handleClickItem(item)}
                         checked={item.isSelected}
                       >
-                        <span className="select__text ">{render(item)}</span>
+                        <span className="select__text">{render(item)}</span>
                       </Checkbox>
                     </div>
                   ))}

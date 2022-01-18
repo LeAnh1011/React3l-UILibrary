@@ -4,25 +4,30 @@
     }
     &.btn--sm {
         height: 24px;
+        width: 24px;
         padding: 4px;
     }
 
     &.btn--md {
         height: 32px;
+        width: 32px;
         padding: 8px;
     }
 
     &.btn--lg {
         height: 36px;
+        width: 36px;
         padding: 10px;
     }
 
     &.btn--xl {
         height: 40px;
+        width: 40px;
         padding: 12px;
     }
     &.btn--xxl {
         height: 48px;
+        width: 48px;
         padding: 12px;
     } 
 }
@@ -44,7 +49,7 @@
 
     &:focus {
         background-color: var(--color-primary);
-        box-shadow: 0px 0px 8px var(--color-primary);
+        box-shadow: inset 0 0 0 2px var(--color-primary), inset 0 0 0 3px var(--color-white);
     }
     &.disabled {
         color: var(--palette-gray-50);
@@ -53,7 +58,7 @@
 }
 .btn--icon-only-outline-primary {
     background-color: var(--color-white);
-    border: 1px solid var(--color-primary) !important;
+    box-shadow: inset 0 0 0 1px var(--color-primary);
     color: var(--color-primary);
 
     &:hover {
@@ -67,16 +72,14 @@
     }
 
     &:focus {
-        background-color: var(--color-primary);
-        color: var(--color-white);
-        border: 1px solid var(--color-primary);
-        box-sizing: border-box;
-        box-shadow: 0px 0px 8px var(--color-primary);
+        background-color: var(--color-white);
+        color: var(--color-primary);
+        box-shadow: inset 0 0 0 2px var(--color-primary) !important;
     }
     &.disabled {
         color: var(--palette-gray-50); 
         background-color: var(--color-white) !important;
-        border-color: var(--palette-gray-30) !important;
+        box-shadow: inset 0 0 0 1px var(--palette-gray-30) !important;
     }
 }
 .btn--icon-only-danger {
@@ -97,8 +100,7 @@
 
     &:focus {
         background-color: var(--color-critical);
-        border: 1px solid var(--color-primary);
-        box-shadow: 0px 0px 8px var(--color-primary);
+        box-shadow: inset 0 0 0 2px var(--color-primary), inset 0 0 0 3px var(--color-white);
     }
     &.disabled {
         color: var(--palette-gray-50);
@@ -107,7 +109,7 @@
 }
 .btn--icon-only-outline-danger {
     background-color: var(--color-white);
-    border: 1px solid var(--color-critical) !important;
+    box-shadow: inset 0 0 0 1px var(--color-critical);
     color: var(--color-critical);
 
     &:hover {
@@ -123,9 +125,8 @@
     &:focus {
         background-color: var(--color-critical);
         color: var(--color-white);
-        border: 1px solid var(--color-primary) !important;
-        box-sizing: border-box;
-        box-shadow: 0px 0px 8px var(--color-primary);
+        border: none !important;
+        box-shadow: inset 0 0 0 2px var(--color-primary), inset 0 0 0 3px var(--color-white);
     }
     &.disabled { 
         color: var(--palette-gray-50); 
@@ -151,7 +152,7 @@
     }
   
     &:focus {
-      border: 2px solid var(--color-primary);
+      box-shadow: inset 0 0 0 2px var(--color-primary);
       background-color: var(--color-white);
     }
     &.disabled {

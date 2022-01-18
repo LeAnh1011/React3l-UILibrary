@@ -304,7 +304,7 @@ function AdvanceIdFilterMaster(
                       onKeyDown={handleMove(item)}
                       onClick={handleClickItem(item)}
                     >
-                      <span className="advance-id-filter__text">
+                      <span className="advance-id-master__text">
                         {render(item)}
                       </span>
                       {item.id === internalModel?.id && (
@@ -334,7 +334,7 @@ function AdvanceIdFilterMaster(
                       onKeyDown={handleMove(item)}
                       onClick={handleClickItem(item)}
                     >
-                      <span className="advance-id-filter__text">
+                      <span className="advance-id-master__text">
                         {render(item)}
                       </span>
                       {item.id === internalModel?.id && (

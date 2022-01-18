@@ -33,7 +33,7 @@ const GhostButton = React.forwardRef(
       >
         <div className="button-content">
           <div className="children-content">{children}</div>
-          <div className="box-icon">{icon}</div>
+          {icon && <div className="box-icon">{icon}</div>}
         </div>
       </button>
     );

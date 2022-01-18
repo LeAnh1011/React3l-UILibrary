@@ -61,13 +61,11 @@
       display: flex;
       align-items: center;
       padding-right: 15px;
-      font-size: 13px;
-      white-space: nowrap;
-      overflow-x: hidden;
-      text-overflow: ellipsis;
+      font-size: 14px;
+      line-height: 16px;
       .advance-id-filter__text {
         white-space: nowrap;
-        overflow-x: hidden;
+        overflow: hidden;
         text-overflow: ellipsis;
       }
       &:hover {

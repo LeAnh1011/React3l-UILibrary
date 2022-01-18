@@ -155,13 +155,15 @@ function Default() {
       });
     }
     return (
-      <StandardTable
-        columns={columns}
-        dataSource={data}
-        isDragable={true}
-        tableSize={size}
-        isLevel2={true}
-      />
+      <div className="expand-table-box">
+        <StandardTable
+          columns={columns}
+          dataSource={data}
+          isDragable={true}
+          tableSize={size}
+          isLevel2={true}
+        />
+      </div>
     );
   };
   const typeRowSelection: RowSelectionType = "checkbox";

@@ -1,10 +1,10 @@
 @import "color";
-@import "custom";
 @import "typography";
 @import "spacing";
 @import "button";
 @import "box-shadow";
 @import "antd/dist/antd.css";
+@import "custom-antd";
 
 html {
   box-sizing: border-box;
@@ -40,4 +40,14 @@ body {
     color: #0f62fe;
     text-decoration: underline;
   }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(63, 86, 175, 0.15);
 }

@@ -3,13 +3,7 @@ import { storiesOf } from "@storybook/react";
 import nameof from "ts-nameof.macro";
 import Button from "./Button";
 import { Tabs } from "antd";
-import {
-  ChevronDown16,
-  TrashCan16,
-  Add16,
-  Add24,
-  TrashCan24,
-} from "@carbon/icons-react";
+import { ChevronDown16, TrashCan16, Add16 } from "@carbon/icons-react";
 const { TabPane } = Tabs;
 function NormalButtonView() {
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -1706,9 +1700,6 @@ function LinkPlainAndLink() {
         <Button type="link-plain" className="btn--lg">
           {"Button"}
         </Button>
-        <Button type="link-plain" className="btn--xl">
-          {"Button"}
-        </Button>
       </div>
       <div
         style={{
@@ -1728,9 +1719,6 @@ function LinkPlainAndLink() {
         <Button type="link-plain" className="btn--lg" disabled={true}>
           {"Button"}
         </Button>
-        <Button type="link-plain" className="btn--xl" disabled={true}>
-          {"Button"}
-        </Button>
       </div>
       <h2>Button Link</h2>
       <div
@@ -1742,9 +1730,9 @@ function LinkPlainAndLink() {
           marginBottom: 30,
         }}
       >
-        <Button type="link">{"button"}</Button>
+        <Button type="link">{"Button"}</Button>
         <Button type="link" disabled={true}>
-          {"button"}
+          {"Button"}
         </Button>
       </div>
     </div>
@@ -1768,7 +1756,7 @@ function IconOnlyButtonView() {
         <Button type="icon-only-primary" icon={<Add16 />} className="btn--xl" />
         <Button
           type="icon-only-primary"
-          icon={<Add24 />}
+          icon={<Add16 />}
           className="btn--xxl"
         />
       </div>
@@ -1807,7 +1795,7 @@ function IconOnlyButtonView() {
         />
         <Button
           type="icon-only-primary"
-          icon={<Add24 />}
+          icon={<Add16 />}
           className="btn--xxl"
           disabled={true}
         />
@@ -1843,7 +1831,7 @@ function IconOnlyButtonView() {
         />
         <Button
           type="icon-only-outline-primary"
-          icon={<Add24 />}
+          icon={<Add16 />}
           className="btn--xxl"
         />
       </div>
@@ -1882,7 +1870,7 @@ function IconOnlyButtonView() {
         />
         <Button
           type="icon-only-outline-primary"
-          icon={<Add24 />}
+          icon={<Add16 />}
           className="btn--xxl"
           disabled={true}
         />
@@ -1918,7 +1906,7 @@ function IconOnlyButtonView() {
         />
         <Button
           type="icon-only-danger"
-          icon={<TrashCan24 />}
+          icon={<TrashCan16 />}
           className="btn--xxl"
         />
       </div>
@@ -1957,7 +1945,7 @@ function IconOnlyButtonView() {
         />
         <Button
           type="icon-only-danger"
-          icon={<TrashCan24 />}
+          icon={<TrashCan16 />}
           className="btn--xxl"
           disabled={true}
         />
@@ -1993,7 +1981,7 @@ function IconOnlyButtonView() {
         />
         <Button
           type="icon-only-outline-danger"
-          icon={<TrashCan24 />}
+          icon={<TrashCan16 />}
           className="btn--xxl"
         />
       </div>
@@ -2032,7 +2020,7 @@ function IconOnlyButtonView() {
         />
         <Button
           type="icon-only-outline-danger"
-          icon={<TrashCan24 />}
+          icon={<TrashCan16 />}
           className="btn--xxl"
           disabled={true}
         />
@@ -2050,7 +2038,7 @@ function IconOnlyButtonView() {
         <Button type="icon-only-ghost" icon={<Add16 />} className="btn--md" />
         <Button type="icon-only-ghost" icon={<Add16 />} className="btn--lg" />
         <Button type="icon-only-ghost" icon={<Add16 />} className="btn--xl" />
-        <Button type="icon-only-ghost" icon={<Add24 />} className="btn--xxl" />
+        <Button type="icon-only-ghost" icon={<Add16 />} className="btn--xxl" />
       </div>
       <div
         style={{
@@ -2087,7 +2075,7 @@ function IconOnlyButtonView() {
         />
         <Button
           type="icon-only-ghost"
-          icon={<Add24 />}
+          icon={<Add16 />}
           className="btn--xxl"
           disabled={true}
         />

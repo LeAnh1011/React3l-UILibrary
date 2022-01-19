@@ -1,0 +1,43 @@
+.upload-button__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .upload-button__button {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+        color: #333333;
+    }
+
+    .upload-button__list-file {
+        display: flex;
+        justify-content: flex-start;
+
+        .file-container {
+            display: flex;
+            justify-content: space-between;
+            width: 150px;
+            padding: 10px;
+            background: linear-gradient(
+                0deg,
+                rgba(94, 129, 244, 0.1),
+                rgba(94, 129, 244, 0.1)
+              ),
+              #ffffff;
+            border-radius: 4px;
+            text-align: center;
+            margin-left: 15px;
+            span {
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 20px;
+                color: #3f8cff;
+                text-decoration: underline;
+            }
+
+        }
+    }
+}

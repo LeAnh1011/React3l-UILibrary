@@ -1,8 +1,7 @@
-import { Model, ModelFilter } from "react3l-common";
-import React, { RefObject } from "react";
-import { useDropzone } from "react-dropzone";
+import { Model } from "react3l-common";
+import React, { Dispatch, RefObject, SetStateAction } from "react";
 import "./UploadFile.scss";
-import { Observable } from "rxjs";
+import { finalize, Observable } from "rxjs";
 import { TrashCan16 } from "@carbon/icons-react";
 import { notification } from "antd";
 export interface FileModel {
@@ -21,17 +20,19 @@ export interface FileModel {
   clearAction?: (fileId: string | number) => void;
   handleInput?: (e: any) => void;
 }
-export interface UploadFileProps {
+export interface UploadFileProps<T extends Model> {
   files?: FileModel[];
   isMultiple?: boolean;
   uploadContent?: string;
   isLoadingFile?: string;
-  updateList?: (files: FileModel[]) => void;
+  setIsLoadingFile?: Dispatch<SetStateAction<boolean>>;
+  updateList?: (files: FileModel[] | FileList) => void;
   uploadFile?: (files: File[] | Blob[]) => Observable<FileModel[]>;
   removeFile?: (fileId?: string | number) => Observable<boolean>;
+  classModel?: new () => T;
 }
 
-export function UploadFile(props: UploadFileProps) {
+export function UploadFile(props: UploadFileProps<Model>) {
   const {
     files,
     uploadContent,
@@ -39,6 +40,9 @@ export function UploadFile(props: UploadFileProps) {
     updateList,
     uploadFile,
     removeFile,
+    isLoadingFile,
+    setIsLoadingFile,
+    classModel: ClassModel,
   } = props;
 
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>();
@@ -49,11 +53,13 @@ export function UploadFile(props: UploadFileProps) {
 
   const handleChangeFile = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const files = event.target.files;
+      const fileList = event.target.files;
+      const files: File[] = [];
       let check = false;
       let totalSize = 0;
-      Array.from(files).forEach((file) => {
+      Array.from(fileList).forEach((file) => {
         totalSize = totalSize + file.size;
+        files.push(file);
         if (totalSize > 10000000) {
           notification.error({
             message: `Vượt quá dung lượng cho phép`,
@@ -65,10 +71,28 @@ export function UploadFile(props: UploadFileProps) {
       });
       if (check) return null;
       if (files && files.length > 0) {
-        updateList(files);
+        uploadFile(files)
+          .pipe(finalize(() => setIsLoadingFile(false)))
+          .subscribe(
+            (res: FileModel[]) => {
+              if (res && res.length > 0) {
+                debugger;
+                const fileRes: any[] = [];
+                res.forEach((current) => {
+                  const mappingObj = new ClassModel();
+                  mappingObj.fileId = current.id;
+                  mappingObj.file = current;
+                  mappingObj.name = current.name;
+                  fileRes.push(mappingObj);
+                });
+                updateList(fileRes);
+              }
+            },
+            (err) => {}
+          );
       }
     },
-    [updateList]
+    [ClassModel, setIsLoadingFile, updateList, uploadFile]
   );
 
   return (

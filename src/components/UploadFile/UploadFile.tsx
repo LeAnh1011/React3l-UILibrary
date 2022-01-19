@@ -104,7 +104,6 @@ export function UploadFile(props: UploadFileProps<Model>) {
           type={isBtnOutLine ? "outline-primary" : "primary"}
           className="btn--lg"
           onClick={handleClickButton}
-          loading={isLoadingFile}
         >
           {uploadContent}
         </Button>

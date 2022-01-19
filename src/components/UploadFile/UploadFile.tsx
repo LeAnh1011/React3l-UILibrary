@@ -1,11 +1,13 @@
 import { Model } from "react3l-common";
 import React, { Dispatch, RefObject, SetStateAction } from "react";
 import "./UploadFile.scss";
-import { finalize, Observable } from "rxjs";
-import { TrashCan16 } from "@carbon/icons-react";
+import { Observable } from "rxjs";
+import { CloseFilled16 } from "@carbon/icons-react";
 import { notification } from "antd";
+import Button from "components/Button";
 export interface FileModel {
   id?: number;
+  fileId?: string | number;
   name?: string;
   url?: string;
   appUserId?: number;
@@ -24,12 +26,13 @@ export interface UploadFileProps<T extends Model> {
   files?: FileModel[];
   isMultiple?: boolean;
   uploadContent?: string;
-  isLoadingFile?: string;
+  isLoadingFile?: boolean;
   setIsLoadingFile?: Dispatch<SetStateAction<boolean>>;
   updateList?: (files: FileModel[] | FileList) => void;
   uploadFile?: (files: File[] | Blob[]) => Observable<FileModel[]>;
-  removeFile?: (fileId?: string | number) => Observable<boolean>;
+  removeFile?: (fileId: string | number) => void;
   classModel?: new () => T;
+  isBtnOutLine?: boolean;
 }
 
 export function UploadFile(props: UploadFileProps<Model>) {
@@ -43,6 +46,7 @@ export function UploadFile(props: UploadFileProps<Model>) {
     isLoadingFile,
     setIsLoadingFile,
     classModel: ClassModel,
+    isBtnOutLine,
   } = props;
 
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>();
@@ -71,25 +75,23 @@ export function UploadFile(props: UploadFileProps<Model>) {
       });
       if (check) return null;
       if (files && files.length > 0) {
-        uploadFile(files)
-          .pipe(finalize(() => setIsLoadingFile(false)))
-          .subscribe(
-            (res: FileModel[]) => {
-              if (res && res.length > 0) {
-                debugger;
-                const fileRes: any[] = [];
-                res.forEach((current) => {
-                  const mappingObj = new ClassModel();
-                  mappingObj.fileId = current.id;
-                  mappingObj.file = current;
-                  mappingObj.name = current.name;
-                  fileRes.push(mappingObj);
-                });
-                updateList(fileRes);
-              }
-            },
-            (err) => {}
-          );
+        uploadFile(files).subscribe(
+          (res: FileModel[]) => {
+            if (res && res.length > 0) {
+              const fileRes: any[] = [];
+              res.forEach((current) => {
+                const mappingObj = new ClassModel();
+                mappingObj.fileId = current.id;
+                mappingObj.file = current;
+                mappingObj.name = current.name;
+                fileRes.push(mappingObj);
+              });
+              updateList(fileRes);
+              setIsLoadingFile(false);
+            }
+          },
+          (err) => {}
+        );
       }
     },
     [ClassModel, setIsLoadingFile, updateList, uploadFile]
@@ -97,12 +99,15 @@ export function UploadFile(props: UploadFileProps<Model>) {
 
   return (
     <div className="upload-button__container">
-      <>
-        <div onClick={handleClickButton} className="upload-button__button">
-          <span>
-            <i className="tio-attachment_diagonal"></i> {uploadContent}
-          </span>
-        </div>
+      <div>
+        <Button
+          type={isBtnOutLine ? "outline-primary" : "primary"}
+          className="btn--lg"
+          onClick={handleClickButton}
+          loading={isLoadingFile}
+        >
+          {uploadContent}
+        </Button>
         <input
           type="file"
           style={{ display: "none" }}
@@ -110,17 +115,17 @@ export function UploadFile(props: UploadFileProps<Model>) {
           ref={fileRef}
           onChange={handleChangeFile}
         />
-      </>
-      <div className="upload-button__list-file mt-2">
+      </div>
+      <div className="upload-button__list-file m-t--xxs">
         {files &&
           files.length > 0 &&
           files.map((file, index) => (
             <div className="file-container" key={index}>
-              <span>
-                <i className="tio-documents_outlined"></i>
-                {file.name}
-              </span>
-              <TrashCan16 color="red" onClick={() => removeFile(file.id)} />
+              <span>{file.name}</span>
+              <CloseFilled16
+                onClick={() => removeFile(file.fileId)}
+                className="remove-file"
+              />
             </div>
           ))}
       </div>
@@ -133,5 +138,6 @@ UploadFile.defaultProps = {
   uploadContent: "Upload",
   isViewMode: false,
   files: [],
+  isBtnOutLine: false,
 };
 export default UploadFile;

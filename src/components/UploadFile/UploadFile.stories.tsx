@@ -29,16 +29,6 @@ const demoList = [
   },
 ];
 
-const demoObservable = new Observable<FileModel[]>((observer) => {
-  setTimeout(() => {
-    observer.next(demoList);
-  }, 1000);
-});
-
-const demoUploadFile = (file: File[] | Blob[]) => {
-  return demoObservable;
-};
-
 class ModelOBJ extends Model {
   public id?: number;
   public name?: string;
@@ -53,6 +43,7 @@ class ModelMapping extends Model {
 
 function Default() {
   const [model, setModel] = React.useState<ModelOBJ>({ ...new ModelOBJ() });
+  const [isLoadingFile, setIsLoadingFile] = React.useState<boolean>(false);
   const handleUpdateList = React.useCallback(
     (listMapping) => {
       const newListFileMappings = [
@@ -60,25 +51,47 @@ function Default() {
         ...listMapping,
       ];
       setModel({
-        ...new ModelOBJ(),
+        ...model,
         fileMappings: newListFileMappings,
       });
-      console.log("list: ", listMapping);
     },
-    [model.fileMappings]
+    [model]
+  );
+  const handleRemoveFile = React.useCallback(
+    (fileId: string | number) => {
+      debugger;
+      const listFileMappings = model?.fileMappings?.filter(
+        (p) => p.fileId !== fileId
+      );
+      setModel({
+        ...model,
+        fileMappings: listFileMappings,
+      });
+    },
+    [model]
   );
 
+  const demoObservable = new Observable<FileModel[]>((observer) => {
+    setIsLoadingFile(true);
+    setTimeout(() => {
+      observer.next(demoList);
+    }, 1500);
+  });
+
+  const demoUploadFile = (file: File[] | Blob[]) => {
+    return demoObservable;
+  };
+
   return (
-    <div style={{ margin: "20px 20px", width: "600px" }}>
-      <div style={{ width: "100%", padding: "10px 10px" }}>
-        <UploadFile
-          files={model?.fileMappings || []}
-          uploadFile={demoUploadFile}
-          updateList={handleUpdateList}
-          classModel={ModelMapping}
-        ></UploadFile>
-      </div>
-    </div>
+    <UploadFile
+      files={model?.fileMappings || []}
+      uploadFile={demoUploadFile}
+      updateList={handleUpdateList}
+      classModel={ModelMapping}
+      isLoadingFile={isLoadingFile}
+      setIsLoadingFile={setIsLoadingFile}
+      removeFile={handleRemoveFile}
+    ></UploadFile>
   );
 }
 

@@ -3,7 +3,6 @@ import {
   CloseFilled16,
   WarningFilled16,
 } from "@carbon/icons-react";
-import { notification } from "antd";
 import Button from "components/Button";
 import { IconLoading } from "index";
 import React, { RefObject } from "react";
@@ -36,6 +35,7 @@ export interface UploadFileProps<T extends Model> {
   removeFile?: (fileId: string | number) => void;
   classModel?: new () => T;
   isBtnOutLine?: boolean;
+  handleValidateFile?: (filesList: FileList) => boolean;
 }
 export type LOADING_STATUS = "default" | "loading" | "done";
 export function UploadFile(props: UploadFileProps<Model>) {
@@ -48,6 +48,7 @@ export function UploadFile(props: UploadFileProps<Model>) {
     removeFile,
     classModel: ClassModel,
     isBtnOutLine,
+    handleValidateFile,
   } = props;
   const [listFileLoading, setListFileLoading] = React.useState<FileModel[]>([]);
   const [loadingStatus, setLoadingStatus] = React.useState<LOADING_STATUS>(
@@ -61,24 +62,15 @@ export function UploadFile(props: UploadFileProps<Model>) {
 
   const handleChangeFile = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const fileList = event.target.files;
+      const checkValidate = handleValidateFile(event.target.files);
+      if (checkValidate) return null;
       const files: File[] = [];
-      let check = false;
       let totalSize = 0;
-      Array.from(fileList).forEach((file) => {
+      Array.from(event.target.files).forEach((file) => {
         totalSize = totalSize + file.size;
         files.push(file);
-        if (totalSize > 10000000) {
-          notification.error({
-            message: `Vượt quá dung lượng cho phép`,
-            description: "File tải lên dung lượng phải dưới 10MB",
-            placement: "bottomRight",
-          });
-          check = true;
-        }
       });
       setListFileLoading([...files]);
-      if (check) return null;
       if (files && files.length > 0) {
         setLoadingStatus("loading");
         uploadFile(files).subscribe(
@@ -104,7 +96,7 @@ export function UploadFile(props: UploadFileProps<Model>) {
         );
       }
     },
-    [ClassModel, updateList, uploadFile]
+    [ClassModel, handleValidateFile, updateList, uploadFile]
   );
 
   const renderOldFile = React.useCallback(

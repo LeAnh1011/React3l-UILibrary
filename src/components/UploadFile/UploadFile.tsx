@@ -135,7 +135,7 @@ export function UploadFile(props: UploadFileProps<Model>) {
     [removeFile]
   );
 
-  const renderLoadedFile = React.useCallback(
+  const renderLoadingFile = React.useCallback(
     (file, index) => {
       return file?.errors ? (
         <div className="file-error" key={index}>
@@ -197,7 +197,7 @@ export function UploadFile(props: UploadFileProps<Model>) {
                 <IconLoading color="#0F62FE" />
               </div>
             ) : (
-              renderLoadedFile(file, index)
+              renderLoadingFile(file, index)
             )
           )}
         {/* hiển thị file đang loading */}

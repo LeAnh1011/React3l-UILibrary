@@ -20,7 +20,7 @@ const demoList = [
     name: "demoImage2.png",
     id: 2,
     errors: {
-      name: "file vượt quá 500KB",
+      name: "file này đang có vấn đề",
     },
   },
   {
@@ -79,7 +79,7 @@ function Default() {
   const demoObservable = new Observable<FileModel[]>((observer) => {
     setTimeout(() => {
       observer.next(demoList);
-    }, 3000);
+    }, 2000);
   });
 
   const demoUploadFile = (file: File[] | Blob[]) => {

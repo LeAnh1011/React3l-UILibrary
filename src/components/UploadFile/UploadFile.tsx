@@ -1,5 +1,5 @@
 import {
-  // CheckmarkFilled16,
+  CheckmarkFilled16,
   CloseFilled16,
   WarningFilled16,
 } from "@carbon/icons-react";
@@ -39,7 +39,7 @@ export interface UploadFileProps<T extends Model> {
 }
 export function UploadFile(props: UploadFileProps<Model>) {
   const {
-    files: loadedFiles,
+    files: oldFiles,
     uploadContent,
     isMultiple,
     updateList,
@@ -48,10 +48,8 @@ export function UploadFile(props: UploadFileProps<Model>) {
     classModel: ClassModel,
     isBtnOutLine,
   } = props;
-  // const [loadingStatus, setLoadingStatus] = React.useState<LOADINGSTATUS>(
-  //   "loading"
-  // );
   const [listFileLoading, setListFileLoading] = React.useState<File[]>([]);
+  const [listFileLoaded, setListFileLoaded] = React.useState<File[]>([]);
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>();
 
   const handleClickButton = React.useCallback(() => {
@@ -78,7 +76,6 @@ export function UploadFile(props: UploadFileProps<Model>) {
         }
       });
       setListFileLoading([...files]);
-      // setLoadingStatus("loading");
       debugger;
       if (check) return null;
       if (files && files.length > 0) {
@@ -92,11 +89,12 @@ export function UploadFile(props: UploadFileProps<Model>) {
                 mappingObj.file = current;
                 fileRes.push(mappingObj);
               });
-              // setLoadingStatus("done");
+              setListFileLoaded([...fileRes]);
+              setListFileLoading([]);
               setTimeout(() => {
-                setListFileLoading([]);
+                setListFileLoaded([]);
                 updateList(fileRes);
-              }, 700);
+              }, 1000);
             }
           },
           (err) => {}
@@ -104,6 +102,39 @@ export function UploadFile(props: UploadFileProps<Model>) {
       }
     },
     [ClassModel, updateList, uploadFile]
+  );
+
+  const renderOldFile = React.useCallback(
+    (fileMapping, index) => {
+      return fileMapping?.file?.errors ? (
+        <div className="file-error" key={index}>
+          <div className="file-container">
+            <div>
+              <span>{fileMapping.file.name}</span>
+            </div>
+            <div>
+              <WarningFilled16 color="red" className="m-r--xxxs" />
+              <CloseFilled16
+                onClick={() => removeFile(fileMapping.fileId)}
+                className="remove-file"
+              />
+            </div>
+          </div>
+          <div className="content-error">
+            {fileMapping?.file?.errors && fileMapping?.file?.errors?.name}
+          </div>
+        </div>
+      ) : (
+        <div className="file-container" key={index}>
+          <span>{fileMapping.file.name}</span>
+          <CloseFilled16
+            onClick={() => removeFile(fileMapping.fileId)}
+            className="remove-file"
+          />
+        </div>
+      );
+    },
+    [removeFile]
   );
 
   const renderLoadedFile = React.useCallback(
@@ -123,17 +154,13 @@ export function UploadFile(props: UploadFileProps<Model>) {
             </div>
           </div>
           <div className="content-error">
-            {(fileMapping?.errors && fileMapping?.errors?.name) ||
-              "lỗi lòi ra đây nè"}
+            {fileMapping?.file?.errors && fileMapping?.file?.errors?.name}
           </div>
         </div>
       ) : (
         <div className="file-container" key={index}>
           <span>{fileMapping.file.name}</span>
-          <CloseFilled16
-            onClick={() => removeFile(fileMapping.fileId)}
-            className="remove-file"
-          />
+          <CheckmarkFilled16 color="#0F62FE" />
         </div>
       );
     },
@@ -159,19 +186,24 @@ export function UploadFile(props: UploadFileProps<Model>) {
         />
       </div>
       <div className="upload-button__list-file m-t--xxs">
-        {loadedFiles &&
-          loadedFiles.length > 0 &&
-          loadedFiles.map((fileMapping, index) =>
+        {oldFiles?.length > 0 &&
+          oldFiles.map((fileMapping, index) =>
+            renderOldFile(fileMapping, index)
+          )}
+        {/* Hiển thị file đã load xong */}
+        {listFileLoaded?.length > 0 &&
+          listFileLoaded.map((fileMapping, index) =>
             renderLoadedFile(fileMapping, index)
           )}
-        {listFileLoading &&
-          listFileLoading.length > 0 &&
+        {/* hiển thị file vừa load lần gần nhất */}
+        {listFileLoading?.length > 0 &&
           listFileLoading.map((file, index) => (
             <div className="file-container" key={index}>
               <span>{file.name}</span>
               <IconLoading color="#0F62FE" />
             </div>
           ))}
+        {/* hiển thị file đang loading */}
       </div>
     </div>
   );

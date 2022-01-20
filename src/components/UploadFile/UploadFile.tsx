@@ -7,7 +7,7 @@ import Button from "components/Button";
 import { IconLoading } from "index";
 import React, { RefObject } from "react";
 import { Model } from "react3l-common";
-import { finalize, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import "./UploadFile.scss";
 export interface FileModel {
   id?: number;
@@ -62,7 +62,10 @@ export function UploadFile(props: UploadFileProps<Model>) {
 
   const handleChangeFile = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const checkValidate = handleValidateFile(event.target.files);
+      const checkValidate =
+        typeof handleValidateFile === "function"
+          ? handleValidateFile(event.target.files)
+          : false;
       if (checkValidate) return null;
       const files: File[] = [];
       let totalSize = 0;

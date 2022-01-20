@@ -7,7 +7,7 @@ import Button from "components/Button";
 import { IconLoading } from "index";
 import React, { RefObject } from "react";
 import { Model } from "react3l-common";
-import { Observable } from "rxjs";
+import { finalize, Observable } from "rxjs";
 import "./UploadFile.scss";
 export interface FileModel {
   id?: number;
@@ -73,26 +73,35 @@ export function UploadFile(props: UploadFileProps<Model>) {
       setListFileLoading([...files]);
       if (files && files.length > 0) {
         setIsLoading(true);
-        uploadFile(files).subscribe(
-          (res: FileModel[]) => {
-            if (res && res.length > 0) {
-              const fileRes: any[] = [];
-              res.forEach((current) => {
-                const mappingObj = new ClassModel();
-                mappingObj.fileId = current.id;
-                mappingObj.file = current;
-                fileRes.push(mappingObj);
-              });
-              setListFileLoading([...res]);
+        uploadFile(files)
+          .pipe(
+            finalize(() => {
+              debugger;
+            })
+          )
+          .subscribe(
+            (res: FileModel[]) => {
+              if (res && res.length > 0) {
+                const fileRes: any[] = [];
+                res.forEach((current) => {
+                  const mappingObj = new ClassModel();
+                  mappingObj.fileId = current.id;
+                  mappingObj.file = current;
+                  fileRes.push(mappingObj);
+                });
+                setListFileLoading([...res]);
+                setIsLoading(false);
+                setTimeout(() => {
+                  setListFileLoading([]);
+                  updateList(fileRes);
+                }, 1000);
+              }
+            },
+            (_err) => {
+              setListFileLoading([]);
               setIsLoading(false);
-              setTimeout(() => {
-                setListFileLoading([]);
-                updateList(fileRes);
-              }, 1000);
             }
-          },
-          (err) => {}
-        );
+          );
       }
     },
     [ClassModel, handleValidateFile, updateList, uploadFile]

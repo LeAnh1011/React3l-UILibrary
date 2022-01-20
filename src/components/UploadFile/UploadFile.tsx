@@ -1,10 +1,11 @@
-import { Model } from "react3l-common";
-import React, { Dispatch, RefObject, SetStateAction } from "react";
-import "./UploadFile.scss";
-import { Observable } from "rxjs";
-import { CloseFilled16 } from "@carbon/icons-react";
+import { CheckmarkFilled16, CloseFilled16 } from "@carbon/icons-react";
 import { notification } from "antd";
 import Button from "components/Button";
+import { IconLoading } from "index";
+import React, { RefObject } from "react";
+import { Model } from "react3l-common";
+import { Observable } from "rxjs";
+import "./UploadFile.scss";
 export interface FileModel {
   id?: number;
   fileId?: string | number;
@@ -26,29 +27,28 @@ export interface UploadFileProps<T extends Model> {
   files?: FileModel[];
   isMultiple?: boolean;
   uploadContent?: string;
-  isLoadingFile?: boolean;
-  setIsLoadingFile?: Dispatch<SetStateAction<boolean>>;
   updateList?: (files: FileModel[] | FileList) => void;
   uploadFile?: (files: File[] | Blob[]) => Observable<FileModel[]>;
   removeFile?: (fileId: string | number) => void;
   classModel?: new () => T;
   isBtnOutLine?: boolean;
 }
-
+export type LOADINGSTATUS = "loading" | "done";
 export function UploadFile(props: UploadFileProps<Model>) {
   const {
-    files,
+    files: loadedFiles,
     uploadContent,
     isMultiple,
     updateList,
     uploadFile,
     removeFile,
-    isLoadingFile,
-    setIsLoadingFile,
     classModel: ClassModel,
     isBtnOutLine,
   } = props;
-
+  const [loadingStatus, setLoadingStatus] = React.useState<LOADINGSTATUS>(
+    "loading"
+  );
+  const [listFileLoading, setListFileLoading] = React.useState<File[]>([]);
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>();
 
   const handleClickButton = React.useCallback(() => {
@@ -59,6 +59,7 @@ export function UploadFile(props: UploadFileProps<Model>) {
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const fileList = event.target.files;
       const files: File[] = [];
+
       let check = false;
       let totalSize = 0;
       Array.from(fileList).forEach((file) => {
@@ -73,6 +74,9 @@ export function UploadFile(props: UploadFileProps<Model>) {
           check = true;
         }
       });
+      setListFileLoading([...files]);
+      setLoadingStatus("loading");
+      debugger;
       if (check) return null;
       if (files && files.length > 0) {
         uploadFile(files).subscribe(
@@ -86,15 +90,18 @@ export function UploadFile(props: UploadFileProps<Model>) {
                 mappingObj.name = current.name;
                 fileRes.push(mappingObj);
               });
-              updateList(fileRes);
-              setIsLoadingFile(false);
+              setLoadingStatus("done");
+              setTimeout(() => {
+                setListFileLoading([]);
+                updateList(fileRes);
+              }, 700);
             }
           },
           (err) => {}
         );
       }
     },
-    [ClassModel, setIsLoadingFile, updateList, uploadFile]
+    [ClassModel, updateList, uploadFile]
   );
 
   return (
@@ -116,15 +123,26 @@ export function UploadFile(props: UploadFileProps<Model>) {
         />
       </div>
       <div className="upload-button__list-file m-t--xxs">
-        {files &&
-          files.length > 0 &&
-          files.map((file, index) => (
+        {loadedFiles &&
+          loadedFiles.length > 0 &&
+          loadedFiles.map((file, index) => (
             <div className="file-container" key={index}>
               <span>{file.name}</span>
               <CloseFilled16
                 onClick={() => removeFile(file.fileId)}
                 className="remove-file"
               />
+            </div>
+          ))}
+        {listFileLoading &&
+          listFileLoading.length > 0 &&
+          listFileLoading.map((file, index) => (
+            <div className="file-container" key={index}>
+              <span>{file.name}</span>
+              {loadingStatus === "loading" && <IconLoading color="#0F62FE" />}
+              {loadingStatus === "done" && (
+                <CheckmarkFilled16 color="#0F62FE" />
+              )}
             </div>
           ))}
       </div>

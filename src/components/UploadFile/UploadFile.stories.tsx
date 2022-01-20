@@ -13,20 +13,20 @@ const demoList = [
     name: "demoImage1.png",
     id: 1,
   },
-  {
-    path:
-      "https://media.discordapp.net/attachments/663753852184428596/847406738138595348/7ab2cd69-80fe-4106-ba8d-218d78b131d4.png",
-    isDelete: true,
-    name: "demoImage2.png",
-    id: 2,
-  },
-  {
-    path:
-      "https://media.discordapp.net/attachments/663753852184428596/847406738138595348/7ab2cd69-80fe-4106-ba8d-218d78b131d4.png",
-    isDelete: true,
-    name: "demoImage3.png",
-    id: 3,
-  },
+  // {
+  //   path:
+  //     "https://media.discordapp.net/attachments/663753852184428596/847406738138595348/7ab2cd69-80fe-4106-ba8d-218d78b131d4.png",
+  //   isDelete: true,
+  //   name: "demoImage2.png",
+  //   id: 2,
+  // },
+  // {
+  //   path:
+  //     "https://media.discordapp.net/attachments/663753852184428596/847406738138595348/7ab2cd69-80fe-4106-ba8d-218d78b131d4.png",
+  //   isDelete: true,
+  //   name: "demoImage3.png",
+  //   id: 3,
+  // },
 ];
 
 class ModelOBJ extends Model {
@@ -43,7 +43,7 @@ class ModelMapping extends Model {
 
 function Default() {
   const [model, setModel] = React.useState<ModelOBJ>({ ...new ModelOBJ() });
-  const [isLoadingFile, setIsLoadingFile] = React.useState<boolean>(false);
+
   const handleUpdateList = React.useCallback(
     (listMapping) => {
       const newListFileMappings = [
@@ -59,7 +59,6 @@ function Default() {
   );
   const handleRemoveFile = React.useCallback(
     (fileId: string | number) => {
-      debugger;
       const listFileMappings = model?.fileMappings?.filter(
         (p) => p.fileId !== fileId
       );
@@ -71,11 +70,14 @@ function Default() {
     [model]
   );
 
+  // React.useEffect(() => {
+  //   console.log("list: ", model);
+  // }, [model]);
+
   const demoObservable = new Observable<FileModel[]>((observer) => {
-    setIsLoadingFile(true);
     setTimeout(() => {
       observer.next(demoList);
-    }, 1500);
+    }, 3000);
   });
 
   const demoUploadFile = (file: File[] | Blob[]) => {
@@ -88,9 +90,8 @@ function Default() {
       uploadFile={demoUploadFile}
       updateList={handleUpdateList}
       classModel={ModelMapping}
-      isLoadingFile={isLoadingFile}
-      setIsLoadingFile={setIsLoadingFile}
       removeFile={handleRemoveFile}
+      isMultiple={false}
     ></UploadFile>
   );
 }

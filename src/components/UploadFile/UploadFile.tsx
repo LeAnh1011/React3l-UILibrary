@@ -37,7 +37,6 @@ export interface UploadFileProps<T extends Model> {
   isBtnOutLine?: boolean;
   handleValidateFile?: (filesList: FileList) => boolean;
 }
-export type LOADING_STATUS = "default" | "loading" | "done";
 export function UploadFile(props: UploadFileProps<Model>) {
   const {
     files: oldFiles,
@@ -51,9 +50,7 @@ export function UploadFile(props: UploadFileProps<Model>) {
     handleValidateFile,
   } = props;
   const [listFileLoading, setListFileLoading] = React.useState<FileModel[]>([]);
-  const [loadingStatus, setLoadingStatus] = React.useState<LOADING_STATUS>(
-    "default"
-  );
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>();
 
   const handleClickButton = React.useCallback(() => {
@@ -75,7 +72,7 @@ export function UploadFile(props: UploadFileProps<Model>) {
       });
       setListFileLoading([...files]);
       if (files && files.length > 0) {
-        setLoadingStatus("loading");
+        setIsLoading(true);
         uploadFile(files).subscribe(
           (res: FileModel[]) => {
             if (res && res.length > 0) {
@@ -87,10 +84,9 @@ export function UploadFile(props: UploadFileProps<Model>) {
                 fileRes.push(mappingObj);
               });
               setListFileLoading([...res]);
-              setLoadingStatus("done");
+              setIsLoading(false);
               setTimeout(() => {
                 setListFileLoading([]);
-                setLoadingStatus("default");
                 updateList(fileRes);
               }, 1000);
             }
@@ -191,7 +187,7 @@ export function UploadFile(props: UploadFileProps<Model>) {
         {/* Hiển thị file đã load xong */}
         {listFileLoading?.length > 0 &&
           listFileLoading.map((file, index) =>
-            loadingStatus === "loading" ? (
+            isLoading ? (
               <div className="file-container" key={index}>
                 <span>{file.name}</span>
                 <IconLoading color="#0F62FE" />

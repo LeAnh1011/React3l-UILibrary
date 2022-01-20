@@ -8,7 +8,7 @@ import Button from "components/Button";
 import { IconLoading } from "index";
 import React, { RefObject } from "react";
 import { Model } from "react3l-common";
-import { Observable } from "rxjs";
+import { finalize, Observable } from "rxjs";
 import "./UploadFile.scss";
 export interface FileModel {
   id?: number;
@@ -37,6 +37,7 @@ export interface UploadFileProps<T extends Model> {
   classModel?: new () => T;
   isBtnOutLine?: boolean;
 }
+export type LOADING_STATUS = "default" | "loading" | "done";
 export function UploadFile(props: UploadFileProps<Model>) {
   const {
     files: oldFiles,
@@ -48,8 +49,10 @@ export function UploadFile(props: UploadFileProps<Model>) {
     classModel: ClassModel,
     isBtnOutLine,
   } = props;
-  const [listFileLoading, setListFileLoading] = React.useState<File[]>([]);
-  const [listFileLoaded, setListFileLoaded] = React.useState<File[]>([]);
+  const [listFileLoading, setListFileLoading] = React.useState<FileModel[]>([]);
+  const [loadingStatus, setLoadingStatus] = React.useState<LOADING_STATUS>(
+    "default"
+  );
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>();
 
   const handleClickButton = React.useCallback(() => {
@@ -60,7 +63,6 @@ export function UploadFile(props: UploadFileProps<Model>) {
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const fileList = event.target.files;
       const files: File[] = [];
-
       let check = false;
       let totalSize = 0;
       Array.from(fileList).forEach((file) => {
@@ -76,9 +78,9 @@ export function UploadFile(props: UploadFileProps<Model>) {
         }
       });
       setListFileLoading([...files]);
-      debugger;
       if (check) return null;
       if (files && files.length > 0) {
+        setLoadingStatus("loading");
         uploadFile(files).subscribe(
           (res: FileModel[]) => {
             if (res && res.length > 0) {
@@ -89,10 +91,11 @@ export function UploadFile(props: UploadFileProps<Model>) {
                 mappingObj.file = current;
                 fileRes.push(mappingObj);
               });
-              setListFileLoaded([...fileRes]);
-              setListFileLoading([]);
+              setListFileLoading([...res]);
+              setLoadingStatus("done");
               setTimeout(() => {
-                setListFileLoaded([]);
+                setListFileLoading([]);
+                setLoadingStatus("default");
                 updateList(fileRes);
               }, 1000);
             }
@@ -138,28 +141,28 @@ export function UploadFile(props: UploadFileProps<Model>) {
   );
 
   const renderLoadedFile = React.useCallback(
-    (fileMapping, index) => {
-      return fileMapping?.file?.errors ? (
+    (file, index) => {
+      return file?.errors ? (
         <div className="file-error" key={index}>
           <div className="file-container">
             <div>
-              <span>{fileMapping.file.name}</span>
+              <span>{file.name}</span>
             </div>
             <div>
               <WarningFilled16 color="red" className="m-r--xxxs" />
               <CloseFilled16
-                onClick={() => removeFile(fileMapping.fileId)}
+                onClick={() => removeFile(file.id)}
                 className="remove-file"
               />
             </div>
           </div>
           <div className="content-error">
-            {fileMapping?.file?.errors && fileMapping?.file?.errors?.name}
+            {file?.errors && file?.errors?.name}
           </div>
         </div>
       ) : (
         <div className="file-container" key={index}>
-          <span>{fileMapping.file.name}</span>
+          <span>{file.name}</span>
           <CheckmarkFilled16 color="#0F62FE" />
         </div>
       );
@@ -191,18 +194,17 @@ export function UploadFile(props: UploadFileProps<Model>) {
             renderOldFile(fileMapping, index)
           )}
         {/* Hiển thị file đã load xong */}
-        {listFileLoaded?.length > 0 &&
-          listFileLoaded.map((fileMapping, index) =>
-            renderLoadedFile(fileMapping, index)
-          )}
-        {/* hiển thị file vừa load lần gần nhất */}
         {listFileLoading?.length > 0 &&
-          listFileLoading.map((file, index) => (
-            <div className="file-container" key={index}>
-              <span>{file.name}</span>
-              <IconLoading color="#0F62FE" />
-            </div>
-          ))}
+          listFileLoading.map((file, index) =>
+            loadingStatus === "loading" ? (
+              <div className="file-container" key={index}>
+                <span>{file.name}</span>
+                <IconLoading color="#0F62FE" />
+              </div>
+            ) : (
+              renderLoadedFile(file, index)
+            )
+          )}
         {/* hiển thị file đang loading */}
       </div>
     </div>

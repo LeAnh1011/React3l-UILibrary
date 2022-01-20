@@ -78,7 +78,7 @@ function Default() {
   const demoObservable = new Observable<FileModel[]>((observer) => {
     setTimeout(() => {
       observer.next(demoList);
-    }, 2000);
+    }, 3000);
   });
 
   const demoUploadFile = (file: File[] | Blob[]) => {

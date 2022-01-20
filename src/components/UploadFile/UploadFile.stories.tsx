@@ -32,13 +32,12 @@ const demoList = [
 class ModelOBJ extends Model {
   public id?: number;
   public name?: string;
-  public fileMappings?: FileModel[];
+  public fileMappings?: ModelMapping[];
 }
 class ModelMapping extends Model {
   public fileId?: number;
   public file?: File;
   public conq?: string;
-  public name?: string;
 }
 
 function Default() {

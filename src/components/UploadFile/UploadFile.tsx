@@ -1,5 +1,5 @@
 import {
-  CheckmarkFilled16,
+  // CheckmarkFilled16,
   CloseFilled16,
   // WarningFilled16,
 } from "@carbon/icons-react";
@@ -28,7 +28,7 @@ export interface FileModel {
   handleInput?: (e: any) => void;
 }
 export interface UploadFileProps<T extends Model> {
-  files?: FileModel[];
+  files?: T[];
   isMultiple?: boolean;
   uploadContent?: string;
   updateList?: (files: FileModel[] | FileList) => void;
@@ -37,7 +37,6 @@ export interface UploadFileProps<T extends Model> {
   classModel?: new () => T;
   isBtnOutLine?: boolean;
 }
-export type LOADINGSTATUS = "loading" | "done";
 export function UploadFile(props: UploadFileProps<Model>) {
   const {
     files: loadedFiles,
@@ -49,9 +48,9 @@ export function UploadFile(props: UploadFileProps<Model>) {
     classModel: ClassModel,
     isBtnOutLine,
   } = props;
-  const [loadingStatus, setLoadingStatus] = React.useState<LOADINGSTATUS>(
-    "loading"
-  );
+  // const [loadingStatus, setLoadingStatus] = React.useState<LOADINGSTATUS>(
+  //   "loading"
+  // );
   const [listFileLoading, setListFileLoading] = React.useState<File[]>([]);
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>();
 
@@ -79,7 +78,7 @@ export function UploadFile(props: UploadFileProps<Model>) {
         }
       });
       setListFileLoading([...files]);
-      setLoadingStatus("loading");
+      // setLoadingStatus("loading");
       debugger;
       if (check) return null;
       if (files && files.length > 0) {
@@ -91,10 +90,9 @@ export function UploadFile(props: UploadFileProps<Model>) {
                 const mappingObj = new ClassModel();
                 mappingObj.fileId = current.id;
                 mappingObj.file = current;
-                mappingObj.name = current.name;
                 fileRes.push(mappingObj);
               });
-              setLoadingStatus("done");
+              // setLoadingStatus("done");
               setTimeout(() => {
                 setListFileLoading([]);
                 updateList(fileRes);
@@ -129,11 +127,11 @@ export function UploadFile(props: UploadFileProps<Model>) {
       <div className="upload-button__list-file m-t--xxs">
         {loadedFiles &&
           loadedFiles.length > 0 &&
-          loadedFiles.map((file, index) => (
+          loadedFiles.map((fileMapping, index) => (
             <div className="file-container" key={index}>
-              <span>{file.name}</span>
+              <span>{fileMapping.file.name}</span>
               <CloseFilled16
-                onClick={() => removeFile(file.fileId)}
+                onClick={() => removeFile(fileMapping.fileId)}
                 className="remove-file"
               />
             </div>
@@ -143,10 +141,7 @@ export function UploadFile(props: UploadFileProps<Model>) {
           listFileLoading.map((file, index) => (
             <div className="file-container" key={index}>
               <span>{file.name}</span>
-              {loadingStatus === "loading" && <IconLoading color="#0F62FE" />}
-              {loadingStatus === "done" && (
-                <CheckmarkFilled16 color="#0F62FE" />
-              )}
+              <IconLoading color="#0F62FE" />
             </div>
           ))}
       </div>

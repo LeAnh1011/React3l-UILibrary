@@ -40,7 +40,6 @@ class ModelOBJ extends Model {
 class ModelMapping extends Model {
   public fileId?: number;
   public file?: File;
-  public conq?: string;
 }
 
 function Default() {

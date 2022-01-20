@@ -13,20 +13,23 @@ const demoList = [
     name: "demoImage1.png",
     id: 1,
   },
-  // {
-  //   path:
-  //     "https://media.discordapp.net/attachments/663753852184428596/847406738138595348/7ab2cd69-80fe-4106-ba8d-218d78b131d4.png",
-  //   isDelete: true,
-  //   name: "demoImage2.png",
-  //   id: 2,
-  // },
-  // {
-  //   path:
-  //     "https://media.discordapp.net/attachments/663753852184428596/847406738138595348/7ab2cd69-80fe-4106-ba8d-218d78b131d4.png",
-  //   isDelete: true,
-  //   name: "demoImage3.png",
-  //   id: 3,
-  // },
+  {
+    path:
+      "https://media.discordapp.net/attachments/663753852184428596/847406738138595348/7ab2cd69-80fe-4106-ba8d-218d78b131d4.png",
+    isDelete: true,
+    name: "demoImage2.png",
+    id: 2,
+    errors: {
+      name: "file vượt quá 500KB",
+    },
+  },
+  {
+    path:
+      "https://media.discordapp.net/attachments/663753852184428596/847406738138595348/7ab2cd69-80fe-4106-ba8d-218d78b131d4.png",
+    isDelete: true,
+    name: "demoImage3.png",
+    id: 3,
+  },
 ];
 
 class ModelOBJ extends Model {

@@ -1,7 +1,7 @@
 import {
   // CheckmarkFilled16,
   CloseFilled16,
-  // WarningFilled16,
+  WarningFilled16,
 } from "@carbon/icons-react";
 import { notification } from "antd";
 import Button from "components/Button";
@@ -106,6 +106,40 @@ export function UploadFile(props: UploadFileProps<Model>) {
     [ClassModel, updateList, uploadFile]
   );
 
+  const renderLoadedFile = React.useCallback(
+    (fileMapping, index) => {
+      return fileMapping?.file?.errors ? (
+        <div className="file-error" key={index}>
+          <div className="file-container">
+            <div>
+              <span>{fileMapping.file.name}</span>
+            </div>
+            <div>
+              <WarningFilled16 color="red" className="m-r--xxxs" />
+              <CloseFilled16
+                onClick={() => removeFile(fileMapping.fileId)}
+                className="remove-file"
+              />
+            </div>
+          </div>
+          <div className="content-error">
+            {(fileMapping?.errors && fileMapping?.errors?.name) ||
+              "lỗi lòi ra đây nè"}
+          </div>
+        </div>
+      ) : (
+        <div className="file-container" key={index}>
+          <span>{fileMapping.file.name}</span>
+          <CloseFilled16
+            onClick={() => removeFile(fileMapping.fileId)}
+            className="remove-file"
+          />
+        </div>
+      );
+    },
+    [removeFile]
+  );
+
   return (
     <div className="upload-button__container">
       <div>
@@ -127,15 +161,9 @@ export function UploadFile(props: UploadFileProps<Model>) {
       <div className="upload-button__list-file m-t--xxs">
         {loadedFiles &&
           loadedFiles.length > 0 &&
-          loadedFiles.map((fileMapping, index) => (
-            <div className="file-container" key={index}>
-              <span>{fileMapping.file.name}</span>
-              <CloseFilled16
-                onClick={() => removeFile(fileMapping.fileId)}
-                className="remove-file"
-              />
-            </div>
-          ))}
+          loadedFiles.map((fileMapping, index) =>
+            renderLoadedFile(fileMapping, index)
+          )}
         {listFileLoading &&
           listFileLoading.length > 0 &&
           listFileLoading.map((file, index) => (

@@ -1,4 +1,8 @@
-import { CheckmarkFilled16, CloseFilled16 } from "@carbon/icons-react";
+import {
+  CheckmarkFilled16,
+  CloseFilled16,
+  // WarningFilled16,
+} from "@carbon/icons-react";
 import { notification } from "antd";
 import Button from "components/Button";
 import { IconLoading } from "index";

@@ -74,3 +74,13 @@
 .menu-page-change::-webkit-scrollbar-thumb {
     display: none;
 }
+.change-one-page-box {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .icon-change-page-unable {
+        color: #a8a8a8;
+    }
+}

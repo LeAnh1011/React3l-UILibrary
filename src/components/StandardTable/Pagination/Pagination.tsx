@@ -87,7 +87,6 @@ function Pagination(props: PaginationProps) {
     },
     [onChange, take]
   );
-
   const nextIcon = React.useMemo(() => {
     return currentPage < pageArray.length ? (
       <Button
@@ -97,11 +96,9 @@ function Pagination(props: PaginationProps) {
         onClick={() => handleChangeCurrentPage(currentPage + 1)}
       />
     ) : (
-      <Button
-        type="icon-only-ghost"
-        icon={<CaretRight16 color="#A8A8A8" />}
-        className="btn--xl"
-      />
+      <div className="change-one-page-box">
+        <CaretRight16 className="icon-change-page-unable" />
+      </div>
     );
   }, [currentPage, handleChangeCurrentPage, pageArray.length]);
 
@@ -114,11 +111,9 @@ function Pagination(props: PaginationProps) {
         onClick={() => handleChangeCurrentPage(currentPage - 1)}
       />
     ) : (
-      <Button
-        type="icon-only-ghost"
-        icon={<CaretLeft16 color="#A8A8A8" />}
-        className="btn--xl"
-      />
+      <div className="change-one-page-box">
+        <CaretLeft16 className="icon-change-page-unable" />
+      </div>
     );
   }, [currentPage, handleChangeCurrentPage]);
 

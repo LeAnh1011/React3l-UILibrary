@@ -2,8 +2,9 @@ import { Menu, Dropdown } from "antd";
 import React from "react";
 import { PaginationProps as AntdPaginationProps } from "antd/lib/pagination/Pagination";
 import "./Pagination.scss";
-import { CaretRight16, CaretLeft16 } from "@carbon/icons-react";
+import { CaretRight16, CaretLeft16, ChevronDown16 } from "@carbon/icons-react";
 import classNames from "classnames";
+import Button from "components/Button";
 
 export interface PaginationProps extends AntdPaginationProps {
   skip?: number;
@@ -89,30 +90,35 @@ function Pagination(props: PaginationProps) {
 
   const nextIcon = React.useMemo(() => {
     return currentPage < pageArray.length ? (
-      <div
-        className="change-one-page-box"
+      <Button
+        type="icon-only-ghost"
+        icon={<CaretRight16 color="#161616" />}
+        className="btn--xl"
         onClick={() => handleChangeCurrentPage(currentPage + 1)}
-      >
-        <CaretRight16 className="icon-change-page-able" />
-      </div>
+      />
     ) : (
-      <div className="change-one-page-box">
-        <CaretRight16 className="icon-change-page-unable" />
-      </div>
+      <Button
+        type="icon-only-ghost"
+        icon={<CaretRight16 color="#A8A8A8" />}
+        className="btn--xl"
+      />
     );
   }, [currentPage, handleChangeCurrentPage, pageArray.length]);
+
   const prevIcon = React.useMemo(() => {
     return currentPage > 1 ? (
-      <div
-        className="change-one-page-box"
+      <Button
+        type="icon-only-ghost"
+        icon={<CaretLeft16 color="#161616" />}
+        className="btn--xl"
         onClick={() => handleChangeCurrentPage(currentPage - 1)}
-      >
-        <CaretLeft16 className="icon-change-page-able" />
-      </div>
+      />
     ) : (
-      <div className="change-one-page-box">
-        <CaretLeft16 className="icon-change-page-unable" />
-      </div>
+      <Button
+        type="icon-only-ghost"
+        icon={<CaretLeft16 color="#A8A8A8" />}
+        className="btn--xl"
+      />
     );
   }, [currentPage, handleChangeCurrentPage]);
 
@@ -128,10 +134,13 @@ function Pagination(props: PaginationProps) {
                 overlay={menuPageSize}
                 trigger={["click"]}
               >
-                <div className="pagination__size-options">
-                  <span className="size-options_page">{take}</span>
-                  <i className="size-options__icon tio-chevron_down"></i>
-                </div>
+                <Button
+                  type="ghost"
+                  className="btn--lg"
+                  icon={<ChevronDown16 />}
+                >
+                  {take}
+                </Button>
               </Dropdown>
             </div>
           </div>
@@ -148,10 +157,9 @@ function Pagination(props: PaginationProps) {
             overlay={menuPageChange}
             trigger={["click"]}
           >
-            <div className="pagination__size-options">
-              <span className="size-options_page">{currentPage}</span>
-              <i className="size-options__icon tio-chevron_down"></i>
-            </div>
+            <Button type="ghost" className="btn--lg" icon={<ChevronDown16 />}>
+              {currentPage}
+            </Button>
           </Dropdown>
         </div>
         <div>of {pageArray.length} pages</div>

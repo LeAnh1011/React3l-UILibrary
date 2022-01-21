@@ -1,4 +1,4 @@
-import { Close24 } from "@carbon/icons-react";
+import { Close20 } from "@carbon/icons-react";
 import { Spin } from "antd";
 import classNames from "classnames";
 import Button from "components/Button";
@@ -127,9 +127,12 @@ function Drawer(props: DrawerProps) {
                 )}
               </div>
               {!isHaveDescription && isHaveCloseIcon && (
-                <div className="button-cancel" onClick={handleCancel}>
-                  <Close24 />
-                </div>
+                <Button
+                  type="icon-only-ghost"
+                  icon={<Close20 />}
+                  className="btn--xxl"
+                  onClick={handleCancel}
+                />
               )}
             </div>
 

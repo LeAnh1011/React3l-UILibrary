@@ -38,6 +38,8 @@ import InlineLoading from "./components/InlineLoading";
 import Modal from "./components/Modal";
 import Drawer from "./components/Drawer";
 
+import UploadFile from "./components/UploadFile";
+
 import StandardTable from "./components/StandardTable/StandardTable";
 import ActionBarComponent from "./components/StandardTable/ActionBarComponent";
 import LayoutCell from "./components/StandardTable/LayoutCell";
@@ -88,6 +90,8 @@ export {
   //Modal/Drawer
   Modal,
   Drawer,
+  //UploadFile
+  UploadFile,
   // Standard table components
   StandardTable,
   ActionBarComponent,

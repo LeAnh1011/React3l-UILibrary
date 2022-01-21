@@ -49,6 +49,8 @@ export default {
     //Modal/Drawer
     "src/components/Modal/index.ts",
     "src/components/Drawer/index.ts",
+    //UploadFile
+    "src/components/UploadFile/index.ts",
     // Standard table components
     "src/components/StandardTable/index.ts",
     "src/components/StandardTable/ActionBarComponent/index.ts",

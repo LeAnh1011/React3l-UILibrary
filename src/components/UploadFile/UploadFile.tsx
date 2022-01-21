@@ -57,7 +57,7 @@ export function UploadFile(props: UploadFileProps<Model>) {
   }, []);
 
   const handleValidateFile = React.useCallback((fileList: FileList) => {
-    let checkValidate = false;
+    let checkValidate = true;
     const files: File[] = [];
     let totalSize = 0;
     Array.from(fileList).forEach((file) => {
@@ -69,7 +69,7 @@ export function UploadFile(props: UploadFileProps<Model>) {
           description: "File tải lên dung lượng phải dưới 500KB",
           placement: "bottomRight",
         });
-        checkValidate = true;
+        checkValidate = false;
       }
     });
     return { files, checkValidate };
@@ -78,7 +78,7 @@ export function UploadFile(props: UploadFileProps<Model>) {
   const handleChangeFile = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const { files, checkValidate } = handleValidateFile(event.target.files);
-      if (checkValidate) return null;
+      if (!checkValidate) return null;
       setListFileLoading([...files]);
       if (files && files.length > 0) {
         setIsLoading(true);
@@ -196,7 +196,6 @@ export function UploadFile(props: UploadFileProps<Model>) {
           oldFiles.map((fileMapping, index) =>
             renderOldFile(fileMapping, index)
           )}
-        {/* Hiển thị file đã load xong */}
         {listFileLoading?.length > 0 &&
           listFileLoading.map((file, index) =>
             isLoading ? (
@@ -208,7 +207,6 @@ export function UploadFile(props: UploadFileProps<Model>) {
               renderLoadingFile(file, index)
             )
           )}
-        {/* hiển thị file đang loading */}
       </div>
     </div>
   );

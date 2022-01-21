@@ -1,11 +1,11 @@
 .btn--outline-primary {
     background-color: var(--color-white);
-    border: 1px solid var(--color-primary) !important;
+    box-shadow: inset 0 0 0 1px var(--color-primary);
     color: var(--color-primary);
 
     &:hover {
-        background-color: var(--color-primary);
-        color: var(--color-white);
+        background-color: var(--color-primary) !important;
+        color: var(--color-white) !important;
     }
 
     &:active {
@@ -18,19 +18,19 @@
         box-shadow: inset 0 0 0 2px var(--color-primary);
     }
     &.disabled {
-        color: var(--palette-gray-50); 
+        color: var(--palette-gray-50) !important; 
         background-color: var(--color-white) !important;
-        border-color: var(--palette-gray-30) !important;
+        box-shadow: inset 0 0 0 1px var(--palette-gray-30) !important;
     }
 }
 .btn--outline-danger {
     background-color: var(--color-white);
-    border: 1px solid var(--color-critical) !important;
+    box-shadow: inset 0 0 0 1px var(--color-critical);
     color: var(--color-critical);
 
     &:hover {
-        background-color: var(--color-critical);
-        color: var(--color-white);
+        background-color: var(--color-critical) !important;
+        color: var(--color-white) !important;
     }
 
     &:active {
@@ -40,13 +40,12 @@
     &:focus {
         background-color: var(--color-critical);
         color: var(--color-white);
-        border: 1px solid var(--color-primary) !important;
-        box-shadow: inset 0 0 0 1px var(--color-primary), inset 0 0 0 2px var(--color-white);
+        box-shadow: inset 0 0 0 2px var(--color-primary), inset 0 0 0 3px var(--color-white);
     }
     &.disabled {
-        color: var(--palette-gray-50); 
+        color: var(--palette-gray-50) !important; 
         background-color: var(--color-white) !important;
-        border-color: var(--palette-gray-30) !important;
+        box-shadow: inset 0 0 0 1px var(--palette-gray-30) !important;
     }
 }
 .btn-outline-have-icon {
@@ -56,7 +55,7 @@
         flex-direction: row;
         justify-content: space-between;
         .children-content {
-            margin-right: 30px;
+            margin-right: 32px;
             letter-spacing: 0.244px;
         }
         .icon-button {
@@ -123,12 +122,10 @@
 .btn--outline-primary-loading {
     background-color: var(--color-primary-active);
     color: var(--color-white);
-    border: 1px solid var(--color-primary-active) !important;
     cursor: not-allowed;
 }
 .btn--outline-danger-loading {
     background-color: var(--color-critical-active);
     color: var(--color-white);
-    border: 1px solid var(--color-critical-active) !important;
     cursor: not-allowed;
 }

@@ -22,12 +22,14 @@
     width: 100%;
     height: 40px;
     justify-content: space-between;
+    font-size: 14px;
+    line-height: 16px;
     .number-per-page-box {
         display: flex;
         flex-direction: row;
         .number-per-page-box-1 {
             height: 40px;
-            padding: 0px 16px;
+            padding: 0px 8px 0px 16px;
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -44,28 +46,19 @@
         flex-direction: row;
         align-items: center;
         .change-page-box-1 {
-            padding-left: 16px;
             border-left: 0.5px solid #e0e0dc;
             height: 40px;
-            display: flex;
-            align-items: center;
         }
         .box-change-page-button {
             margin-left: 16px;
+            margin-right: 4px;
             display: flex;
             flex-direction: row;
         }
     }
 }
-.dropdown-pagination-per-page {
-    width: 40px;
-}
-.dropdown-pagination-page {
-    width: 45px;
-}
 .menu-page-change {
     overflow-y: scroll;
-    width: 45px;
     &.options-select-page-height {
         height: 200px;
     }
@@ -87,10 +80,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    .icon-change-page-able {
-        color: #000000;
-    }
     .icon-change-page-unable {
         color: #a8a8a8;
+        cursor: not-allowed;
     }
 }

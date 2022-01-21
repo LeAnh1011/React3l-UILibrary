@@ -7,7 +7,7 @@
     }
 
     &:hover {
-        background-color: var(--palette-grayHover-10);
+        background-color: var(--palette-grayHover-10) !important;
     }
 
     &:active { 
@@ -33,7 +33,7 @@
     }
 
     &:hover {
-        background-color: var(--color-primary-hover);
+        background-color: var(--color-primary-hover) !important;
     }
 
     &:active {
@@ -58,7 +58,7 @@
     }
 
     &:hover {
-        background-color: var(--color-secondary-hover);
+        background-color: var(--color-secondary-hover) !important;
     }
 
     &:active {

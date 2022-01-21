@@ -40,7 +40,7 @@
     }
 
     &:hover {
-        background-color: var(--color-primary-hover);
+        background-color: var(--color-primary-hover) !important;
     }
 
     &:active {
@@ -62,8 +62,8 @@
     color: var(--color-primary);
 
     &:hover {
-        background-color: var(--color-primary);
-        color: var(--color-white);
+        background-color: var(--color-primary) !important;
+        color: var(--color-white) !important;
     }
 
     &:active {
@@ -91,7 +91,7 @@
     }
 
     &:hover {
-        background-color: var(--color-critical-hover);
+        background-color: var(--color-critical-hover) !important;
     }
 
     &:active {
@@ -113,8 +113,8 @@
     color: var(--color-critical);
 
     &:hover {
-        background-color: var(--color-critical-hover);
-        color: var(--color-white);
+        background-color: var(--color-critical-hover) !important;
+        color: var(--color-white) !important;
     }
 
     &:active {
@@ -129,7 +129,7 @@
         box-shadow: inset 0 0 0 2px var(--color-primary), inset 0 0 0 3px var(--color-white);
     }
     &.disabled { 
-        color: var(--palette-gray-50); 
+        color: var(--palette-gray-50) !important; 
         background-color: var(--color-white) !important;
         border-color: var(--palette-gray-30) !important;
     }
@@ -144,7 +144,7 @@
     }
   
     &:hover {
-      background-color: var(--palette-grayHover-10);
+      background-color: var(--palette-grayHover-10) !important;
     }
   
     &:active {

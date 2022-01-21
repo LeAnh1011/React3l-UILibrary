@@ -7,7 +7,7 @@
     }
 
     &:hover {
-        background-color: var(--color-primary-hover);
+        background-color: var(--color-primary-hover) !important;
     }
 
     &:active {
@@ -31,7 +31,7 @@
     }
 
     &:hover {
-        background-color: var(--color-secondary-hover);
+        background-color: var(--color-secondary-hover) !important;
     }
 
     &:active {
@@ -57,7 +57,7 @@
     }
 
     &:hover {
-        background-color: var(--color-critical-hover);
+        background-color: var(--color-critical-hover) !important;
     }
 
     &:focus {

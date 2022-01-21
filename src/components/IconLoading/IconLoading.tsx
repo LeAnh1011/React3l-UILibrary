@@ -31,7 +31,7 @@ function IconLoading(props: IconLoadingProps) {
 
 IconLoading.defaultProps = {
   size: 16,
-  color: "red",
+  color: "white",
 };
 
 export default IconLoading;

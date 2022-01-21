@@ -7,7 +7,7 @@
     }
 
     &:hover {
-        background-color: var(--color-primary-hover);
+        background-color: var(--color-primary-hover) !important;
     }
 
     &:active {
@@ -18,8 +18,8 @@
         box-shadow: inset 0 0 0 2px var(--color-primary), inset 0 0 0 3px var(--color-white);
     }
     &.disabled {
-        color: var(--palette-gray-50);
-        background-color: var(--palette-gray-30);
+        color: var(--palette-gray-50) !important;
+        background-color: var(--palette-gray-30) !important;
     }
 }
 .btn--secondary {
@@ -31,7 +31,7 @@
     }
 
     &:hover {
-        background-color: var(--color-secondary-hover);
+        background-color: var(--color-secondary-hover) !important;
     }
 
     &:active {
@@ -44,8 +44,8 @@
     }
 
     &.disabled {
-        color: var(--palette-gray-50);
-        background-color: var(--palette-gray-30);
+        color: var(--palette-gray-50) !important;
+        background-color: var(--palette-gray-30) !important;
     }
 }
 .btn--danger {
@@ -57,7 +57,7 @@
     }
 
     &:hover {
-        background-color: var(--color-critical-hover);
+        background-color: var(--color-critical-hover) !important;
     }
 
     &:focus {
@@ -69,8 +69,8 @@
         background-color: var(--color-critical-active);
     }
     &.disabled {
-        color: var(--palette-gray-50);
-        background-color: var(--palette-gray-30);
+        color: var(--palette-gray-50) !important;
+        background-color: var(--palette-gray-30) !important;
     }
 }
 .btn-normal-have-icon {

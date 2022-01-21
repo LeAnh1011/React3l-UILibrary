@@ -7,7 +7,7 @@
     }
 
     &:hover {
-        background-color: var(--palette-grayHover-10);
+        background-color: var(--palette-grayHover-10) !important;
     }
 
     &:active { 
@@ -19,8 +19,8 @@
         box-shadow: inset 0 0 0 2px var(--color-primary);
     }
     &.disabled {
-        color:  var(--palette-gray-50);
-        background-color: unset;
+        color:  var(--palette-gray-50) !important;
+        background-color: unset !important;
     }
 }
 
@@ -33,7 +33,7 @@
     }
 
     &:hover {
-        background-color: var(--color-primary-hover);
+        background-color: var(--color-primary-hover) !important;
     }
 
     &:active {
@@ -45,8 +45,8 @@
         background-color: var(--color-primary-hover);
     }
     &.disabled {
-        color:  var(--palette-gray-50);
-        background-color: unset;
+        color:  var(--palette-gray-50) !important;
+        background-color: unset !important;
     }
 }
 .btn--ghost-secondary {
@@ -58,7 +58,7 @@
     }
 
     &:hover {
-        background-color: var(--color-secondary-hover);
+        background-color: var(--color-secondary-hover) !important;
     }
 
     &:active {
@@ -70,8 +70,8 @@
         background-color: var(--color-secondary-hover);
     }
     &.disabled {
-        color:  var(--palette-gray-50); 
-        background-color: unset;
+        color:  var(--palette-gray-50) !important;
+        background-color: unset !important;
     }
 }
 .btn-ghost-have-icon {

@@ -3,11 +3,12 @@ import {
   CloseFilled16,
   WarningFilled16,
 } from "@carbon/icons-react";
+import { notification } from "antd";
 import Button from "components/Button";
 import { IconLoading } from "index";
 import React, { RefObject } from "react";
 import { Model } from "react3l-common";
-import { finalize, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import "./UploadFile.scss";
 export interface FileModel {
   id?: number;
@@ -35,7 +36,6 @@ export interface UploadFileProps<T extends Model> {
   removeFile?: (fileId: string | number) => void;
   classModel?: new () => T;
   isBtnOutLine?: boolean;
-  handleValidateFile?: (filesList: FileList) => boolean;
 }
 export function UploadFile(props: UploadFileProps<Model>) {
   const {
@@ -47,7 +47,6 @@ export function UploadFile(props: UploadFileProps<Model>) {
     removeFile,
     classModel: ClassModel,
     isBtnOutLine,
-    handleValidateFile,
   } = props;
   const [listFileLoading, setListFileLoading] = React.useState<FileModel[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -57,51 +56,55 @@ export function UploadFile(props: UploadFileProps<Model>) {
     fileRef.current.click();
   }, []);
 
+  const handleValidateFile = React.useCallback((fileList: FileList) => {
+    let checkValidate = false;
+    const files: File[] = [];
+    let totalSize = 0;
+    Array.from(fileList).forEach((file) => {
+      files.push(file);
+      totalSize = totalSize + file.size;
+      if (totalSize > 500000) {
+        notification.error({
+          message: `Vượt quá dung lượng cho phép`,
+          description: "File tải lên dung lượng phải dưới 500KB",
+          placement: "bottomRight",
+        });
+        checkValidate = true;
+      }
+    });
+    return { files, checkValidate };
+  }, []);
+
   const handleChangeFile = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const checkValidate =
-        typeof handleValidateFile === "function"
-          ? handleValidateFile(event.target.files)
-          : false;
+      const { files, checkValidate } = handleValidateFile(event.target.files);
       if (checkValidate) return null;
-      const files: File[] = [];
-      let totalSize = 0;
-      Array.from(event.target.files).forEach((file) => {
-        totalSize = totalSize + file.size;
-        files.push(file);
-      });
       setListFileLoading([...files]);
       if (files && files.length > 0) {
         setIsLoading(true);
-        uploadFile(files)
-          .pipe(
-            finalize(() => {
-              debugger;
-            })
-          )
-          .subscribe(
-            (res: FileModel[]) => {
-              if (res && res.length > 0) {
-                const fileRes: any[] = [];
-                res.forEach((current) => {
-                  const mappingObj = new ClassModel();
-                  mappingObj.fileId = current.id;
-                  mappingObj.file = current;
-                  fileRes.push(mappingObj);
-                });
-                setListFileLoading([...res]);
-                setIsLoading(false);
-                setTimeout(() => {
-                  setListFileLoading([]);
-                  updateList(fileRes);
-                }, 1000);
-              }
-            },
-            (_err) => {
-              setListFileLoading([]);
+        uploadFile(files).subscribe(
+          (res: FileModel[]) => {
+            if (res && res.length > 0) {
+              const fileRes: any[] = [];
+              res.forEach((current) => {
+                const mappingObj = new ClassModel();
+                mappingObj.fileId = current.id;
+                mappingObj.file = current;
+                fileRes.push(mappingObj);
+              });
+              setListFileLoading([...res]);
               setIsLoading(false);
+              setTimeout(() => {
+                setListFileLoading([]);
+                updateList(fileRes);
+              }, 1000);
             }
-          );
+          },
+          (_err) => {
+            setListFileLoading([]);
+            setIsLoading(false);
+          }
+        );
       }
     },
     [ClassModel, handleValidateFile, updateList, uploadFile]

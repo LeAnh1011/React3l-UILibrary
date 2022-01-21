@@ -1,5 +1,4 @@
 import { storiesOf } from "@storybook/react";
-import { notification } from "antd";
 import React from "react";
 import { Model } from "react3l-common";
 import { Observable } from "rxjs";
@@ -76,23 +75,6 @@ function Default() {
   //   console.log("list: ", model);
   // }, [model]);
 
-  const handleValidateFile = React.useCallback((fileList: FileList) => {
-    let check = false;
-    let totalSize = 0;
-    Array.from(fileList).forEach((file) => {
-      totalSize = totalSize + file.size;
-      if (totalSize > 500000) {
-        notification.error({
-          message: `Vượt quá dung lượng cho phép`,
-          description: "File tải lên dung lượng phải dưới 500KB",
-          placement: "bottomRight",
-        });
-        check = true;
-      }
-    });
-    return check;
-  }, []);
-
   const demoObservable = new Observable<FileModel[]>((observer) => {
     setTimeout(() => {
       observer.next(demoList);
@@ -111,7 +93,6 @@ function Default() {
       classModel={ModelMapping}
       removeFile={handleRemoveFile}
       isMultiple={false}
-      handleValidateFile={handleValidateFile}
     ></UploadFile>
   );
 }

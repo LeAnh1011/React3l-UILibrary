@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { formatDate } from "helpers/date-time";
 import { formatNumber } from "helpers/number";
 import { Moment } from "moment";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import {
   DateFilter,
   GuidFilter,
@@ -16,12 +16,16 @@ import { Model, ModelFilter } from "react3l-common";
 import { TFunction } from 'i18next';
 import "./TagFilter.scss";
 
+
+
 export interface TagFilterProps {
   className?: string;
   value?: ModelFilter;
   keyTranslate?: string;
   translate?: TFunction;
   onClear?: (t: any) => void;
+  filter?: ModelFilter;
+  dispatch?: Dispatch<SetStateAction<ModelFilter>> | any;
 }
 
 interface Tag {
@@ -33,7 +37,7 @@ interface Tag {
 
 
 function TagFilter(props: TagFilterProps) {
-  const { className, value, keyTranslate, onClear, translate } = props;
+  const { className, value, keyTranslate, onClear, translate, filter, dispatch } = props;
 
   const convertList = React.useCallback((search: ModelFilter) => {
     let list = [] as Tag[];
@@ -271,7 +275,6 @@ function TagFilter(props: TagFilterProps) {
         // filter by IdFilter
         if (value instanceof IdFilter || value instanceof GuidFilter) {
           const objectKey = key.replace("Id", "");
-
           Object.entries(value).forEach(([filterKey, filterValue]) => {
 
             if (
@@ -279,6 +282,7 @@ function TagFilter(props: TagFilterProps) {
               (typeof filterValue === "number" && !Number.isNaN(filterValue)) ||
               Array.isArray(filterValue)
             ) {
+
               switch (filterKey) {
                 case "equal":
                   return list.push({
@@ -328,6 +332,13 @@ function TagFilter(props: TagFilterProps) {
   const list = React.useMemo((): Model => {
     return convertList(value);
   }, [convertList, value]);
+
+
+  const handleClear = React.useCallback((itemTag) => {
+    filter[itemTag?.key] = {};
+    dispatch({ ...filter });
+    onClear(null);
+  }, [dispatch, filter, onClear]);
 
   return (
     <div className={classNames("tag-filte__container", className)}>
@@ -399,7 +410,7 @@ function TagFilter(props: TagFilterProps) {
             <Close16
               aria-label="Add"
               className="tag-filte__container-clear"
-              onClick={() => onClear(itemTag)}
+              onClick={() => handleClear(itemTag)}
             />
           </div>
         ))}

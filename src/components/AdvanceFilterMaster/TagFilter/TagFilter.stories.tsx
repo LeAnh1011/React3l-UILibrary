@@ -1,15 +1,13 @@
-import moment, { Moment } from "moment";
-import React, { Reducer } from "react";
+import { Moment } from "moment";
+import React from "react";
 import {
   DateFilter,
   IdFilter,
   NumberFilter,
-  StringFilter,
+  StringFilter
 } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
 import { Observable } from "rxjs";
-import { AdvanceFilterAction, advanceFilterReducer, advanceFilterService } from "../../../services/advance-filter-service";
-import AdvanceIdMultipleFilter from "../../AdvanceFilter/AdvanceIdMultipleFilter/AdvanceIdMultipleFilter";
 import AdvanceDateRangFilterMaster from "../AdvanceDateRangFilterMaster/AdvanceDateRangFilterMaster";
 import AdvanceIdFilterMaster from "../AdvanceIdFilterMaster/AdvanceIdFilterMaster";
 import AdvanceMultipleIdFilterMaster from "../AdvanceMultipleIdFilterMaster/AdvanceMultipleIdFilterMaster";
@@ -95,12 +93,10 @@ export function TagFilterStories() {
 
 
 
-  const handleClear = React.useCallback((item) => {
-    filter[item?.key] = {};
-    setFilter({ ...filter });
+  const handleClear = React.useCallback(() => {
     setItem(null);
     setValue([null, null]);
-  }, [filter])
+  }, [])
   return (
     <div style={{ margin: "10px", width: "1000px" }}>
       <div style={{ width: "300px" }}>
@@ -132,7 +128,7 @@ export function TagFilterStories() {
           value={value}
         />
       </div>
-      <TagFilter value={filter} keyTranslate={"demo"} onClear={handleClear} />
+      <TagFilter value={filter} keyTranslate={"demo"} onClear={handleClear} filter={filter} dispatch={setFilter} />
     </div>
   );
 }

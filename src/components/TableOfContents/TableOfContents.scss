@@ -1,0 +1,17 @@
+.component_table-of-contents{
+    width: 200px;
+    max-height: 330px;
+    .nav-content{
+        padding-left: 8px;
+        padding-top: 8px;
+        padding-bottom: 24px;
+        border-left: 2.5px solid var(--palette-gray-10);
+        &.nav-content-active{
+            border-left: 2.5px solid var(--color-primary);
+        }
+        .nav-content-title{
+            font-size: 14px;
+            line-height: 16px;
+        }
+    }
+}

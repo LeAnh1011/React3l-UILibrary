@@ -5,7 +5,7 @@ import { BORDER_TYPE } from "config/enum";
 import { Moment } from "moment";
 import React, { ReactSVGElement, RefObject } from "react";
 import { CommonService } from "services/common-service";
-import { CloseFilled16 } from "@carbon/icons-react";
+import { Calendar16, CloseFilled16 } from "@carbon/icons-react";
 import "./DateRange.scss";
 
 const { RangePicker } = DatePicker;
@@ -13,7 +13,7 @@ const { RangePicker } = DatePicker;
 function SuffixDateIcon() {
   return (
     <span className={classNames("date-range__icon")}>
-      <i className="tio-calendar"></i>
+      <Calendar16 />
     </span>
   );
 }

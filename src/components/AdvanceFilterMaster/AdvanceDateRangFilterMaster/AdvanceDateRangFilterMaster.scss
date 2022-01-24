@@ -41,6 +41,9 @@ $backgound-color: #f4f4f4;
             display: flex;
             align-items: center;
             letter-spacing: 0.16px;
+            .filter-title {
+                margin-right: 7px;
+            }
         }
     }
     .date-range__icon-wrapper {

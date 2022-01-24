@@ -209,7 +209,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
         }
       );
     }
-    return () => {};
+    return () => { };
   }, [getTreeData, selectedKey, modelFilter, subscription, onlySelectLeaf]);
 
   const handleMove = React.useCallback(
@@ -294,7 +294,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                     internalSelectedKeys &&
                     internalSelectedKeys.includes(item.key.toString()) && (
                       <div>
-                        <i className="tio-done" />
+                        <Checkmark16 />
                       </div>
                     )}
                 </div>
@@ -325,7 +325,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                   internalSelectedKeys &&
                   internalSelectedKeys.includes(item.key.toString()) && (
                     <div>
-                      <i className="tio-done" />
+                      <Checkmark16 />
                     </div>
                   )}
               </div>
@@ -341,7 +341,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       <div className="tree-container">
         {loading ? (
           <div className="tree__loading">
-            <IconLoading color="#0F62FE" size={24}/>
+            <IconLoading color="#0F62FE" size={24} />
           </div>
         ) : (
           <>

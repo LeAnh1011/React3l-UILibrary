@@ -1,3 +1,4 @@
+import { ChevronDown16, Search16 } from "@carbon/icons-react";
 import { useDebounceFn } from "ahooks";
 import { Checkbox, Empty } from "antd";
 import classNames from "classnames";
@@ -374,8 +375,8 @@ function AdvanceMultipleIdFilterMaster(
               {values?.length > 0 && <>({values?.length})</>}
             </span>
             <div className="advance-id-filter-master__title">
-              <span>{title}</span>
-              <i className="filter__icon tio-chevron_down"></i>
+              <span className="filter-title"> {title}</span>
+              <ChevronDown16 />
             </div>
           </label>
 
@@ -389,7 +390,7 @@ function AdvanceMultipleIdFilterMaster(
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
                 suffix={
-                  <i className="tio tio-search" />
+                  <Search16 />
                 }
                 isMaterial={isMaterial}
                 ref={inputRef}
@@ -426,7 +427,7 @@ function AdvanceMultipleIdFilterMaster(
               </div>
             ) : (
               <div className="advance-id-filter__loading">
-                <IconLoading color="#0F62FE" size={24}/>
+                <IconLoading color="#0F62FE" size={24} />
               </div>
             )}
             {!loading && list.length > 0 && (

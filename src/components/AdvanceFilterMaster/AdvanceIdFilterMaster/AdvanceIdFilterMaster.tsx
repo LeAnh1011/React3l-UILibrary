@@ -1,3 +1,4 @@
+import { Checkmark16, ChevronDown16, Search16 } from "@carbon/icons-react";
 import { useDebounceFn } from "ahooks";
 import { Empty } from "antd";
 import classNames from "classnames";
@@ -273,8 +274,8 @@ function AdvanceIdFilterMaster(
         >
           <div className={classNames({ "filter-active": value })}>
             <div className="advance-id-filter-master__title">
-              <span> {title}</span>
-              <i className="filter__icon tio-chevron_down"></i>
+              <span className="filter-title"> {title}</span>
+              <ChevronDown16 />
             </div>
           </div>
         </div>
@@ -287,7 +288,7 @@ function AdvanceIdFilterMaster(
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
                 suffix={
-                  <i className="tio tio-search" />
+                  <Search16 />
                 }
                 isMaterial={isMaterial}
                 ref={inputRef}
@@ -309,7 +310,7 @@ function AdvanceIdFilterMaster(
                         {render(item)}
                       </span>
                       {item.id === internalModel?.id && (
-                        <i className="tio tio-done" />
+                        <Checkmark16 />
                       )}
                     </div>
                   ))
@@ -319,7 +320,7 @@ function AdvanceIdFilterMaster(
               </div>
             ) : (
               <div className="advance-id-filter__loading">
-                <IconLoading color="#0F62FE" size={24}/>
+                <IconLoading color="#0F62FE" size={24} />
               </div>
             )}
             {!loading && list.length > 0 && (
@@ -339,7 +340,7 @@ function AdvanceIdFilterMaster(
                         {render(item)}
                       </span>
                       {item.id === internalModel?.id && (
-                        <i className="tio tio-done" />
+                        <Checkmark16 />
                       )}
                     </div>
                   ))}

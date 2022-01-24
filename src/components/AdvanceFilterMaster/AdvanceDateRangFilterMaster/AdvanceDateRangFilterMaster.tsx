@@ -1,4 +1,4 @@
-import { Calendar16 } from "@carbon/icons-react";
+import { Calendar16, ChevronDown16 } from "@carbon/icons-react";
 import { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import DateRange from "components/Calendar/DateRange";
@@ -227,9 +227,8 @@ function AdvanceDateRangeFilterMaster(
             })}
           >
             <div className="advance-date-range-filter-master__title">
-              <span> {title}</span>
-
-              <i className="filter__icon tio-chevron_down"></i>
+              <span className="filter-title"> {title}</span>
+              <ChevronDown16 />
             </div>
           </div>
         </div>

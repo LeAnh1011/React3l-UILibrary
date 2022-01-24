@@ -4,7 +4,7 @@ import AntModal, { ModalProps as AntModalProps } from "antd/lib/modal";
 import { TFunction } from "i18next";
 import classNames from "classnames";
 import Button from "components/Button";
-import { Close24 } from "@carbon/icons-react";
+import { Close20 } from "@carbon/icons-react";
 export interface ModalCustomProps extends AntModalProps {
   children?: ReactNode;
   visibleFooter?: boolean;
@@ -93,7 +93,13 @@ function Modal(props: ModalCustomProps) {
         style={{ top: 20 }}
         destroyOnClose={destroyOnClose}
         className={classNames("modal__container", `size-${size}`)}
-        closeIcon={<Close24 />}
+        closeIcon={
+          <Button
+            type="icon-only-ghost"
+            icon={<Close20 />}
+            className="btn--xxl"
+          />
+        }
         footer={visibleFooter ? renderModalFooter : null}
         onCancel={handleCancel}
       >
@@ -104,6 +110,6 @@ function Modal(props: ModalCustomProps) {
 }
 Modal.defaultProps = {
   size: "large",
-  destroyOnClose: true
+  destroyOnClose: true,
 };
 export default Modal;

@@ -28,7 +28,9 @@
     &.btn--xxl {
         height: 48px;
         width: 48px;
-        padding: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     } 
 }
 .btn--icon-only-primary {

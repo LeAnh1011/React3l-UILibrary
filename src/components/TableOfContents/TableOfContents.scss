@@ -13,5 +13,17 @@
             font-size: 14px;
             line-height: 16px;
         }
+        .ant-radio-checked .ant-radio-inner::after{
+            background-color: var(--color-primary) !important;
+        }
+        .ant-radio-checked .ant-radio-inner{
+            border-color: var(--color-primary) !important;
+        }
+        .ant-radio:hover .ant-radio-inner{
+            border-color: var(--color-primary) !important;
+        }
+        .ant-radio-input:focus+.ant-radio-inner{
+            border-color: var(--color-primary) !important;
+        }
     }
 }

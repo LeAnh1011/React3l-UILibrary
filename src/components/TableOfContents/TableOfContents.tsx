@@ -19,12 +19,31 @@ function TableOfContents(props: TableOfContentsProps) {
   );
 
   const onChange = (e: any) => {
-    console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
 
+  const handleOnWheel = React.useCallback(
+    (event) => {
+      if (event.deltaY < 0) {
+        // console.log("wheel up");
+        if (value === 1) return null;
+        else {
+          const newNB = value - 1;
+          setValue(newNB);
+        }
+      } else if (event.deltaY > 0) {
+        // console.log("wheel down");
+        if (value === list.length) return null;
+        else {
+          const newNB = value + 1;
+          setValue(newNB);
+        }
+      }
+    },
+    [list.length, value]
+  );
   return (
-    <div className="component_table-of-contents">
+    <div className="component_table-of-contents" onWheel={handleOnWheel}>
       <Radio.Group onChange={onChange} value={value}>
         {list?.length > 0 &&
           list.map((item) => {

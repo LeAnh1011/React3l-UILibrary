@@ -27,5 +27,8 @@
         .ant-radio-input:focus+.ant-radio-inner{
             border-color: var(--color-primary) !important;
         }
+        .ant-radio-inner{
+            border-color: var(--palette-gray-100) !important;
+        }
     }
 }

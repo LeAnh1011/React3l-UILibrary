@@ -30,7 +30,16 @@ const listEnum = [
   },
 ];
 function Default() {
-  return <ProcessIndicator list={listEnum} />;
+  const [currentSessionId, setCurrentSessionId] = React.useState<number>(
+    Number(listEnum[0]?.sessionId) || 1
+  );
+  return (
+    <ProcessIndicator
+      list={listEnum}
+      currentSessionId={currentSessionId}
+      setCurrentSessionId={setCurrentSessionId}
+    />
+  );
 }
 
 storiesOf("ProcessIndicator", module).add(nameof(Default), Default);

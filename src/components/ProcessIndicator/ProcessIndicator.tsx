@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import "./ProcessIndicator.scss";
 import { Radio } from "antd";
 import classNames from "classnames";
@@ -10,47 +10,47 @@ export interface ProcessIndicatorModel {
 
 export interface ProcessIndicatorProps {
   list?: ProcessIndicatorModel[];
+  currentSessionId?: number;
+  setCurrentSessionId: Dispatch<SetStateAction<number>>;
 }
 
 function ProcessIndicator(props: ProcessIndicatorProps) {
-  const { list } = props;
-  const [value, setValue] = React.useState<number>(
-    Number(list[0]?.sessionId) || 1
-  );
+  const { list, currentSessionId, setCurrentSessionId } = props;
 
   const onChange = (e: any) => {
-    setValue(e.target.value);
+    setCurrentSessionId(e.target.value);
   };
 
   const handleOnWheel = React.useCallback(
     (event) => {
       if (event.deltaY < 0) {
         // console.log("wheel up");
-        if (value === 1) return null;
+        if (currentSessionId === 1) return null;
         else {
-          const newNB = value - 1;
-          setValue(newNB);
+          const newNB = currentSessionId - 1;
+          setCurrentSessionId(newNB);
         }
       } else if (event.deltaY > 0) {
         // console.log("wheel down");
-        if (value === list.length) return null;
+        if (currentSessionId === list.length) return null;
         else {
-          const newNB = value + 1;
-          setValue(newNB);
+          const newNB = currentSessionId + 1;
+          setCurrentSessionId(newNB);
         }
       }
     },
-    [list.length, value]
+    [currentSessionId, setCurrentSessionId, list.length]
   );
   return (
     <div className="component_process-indicator" onWheel={handleOnWheel}>
-      <Radio.Group onChange={onChange} value={value}>
+      <Radio.Group onChange={onChange} value={currentSessionId}>
         {list?.length > 0 &&
           list.map((item) => {
             return (
               <div
                 className={classNames("nav-content", {
-                  "nav-content-active": Number(item.sessionId) === value,
+                  "nav-content-active":
+                    Number(item.sessionId) === currentSessionId,
                 })}
                 key={item.sessionId}
               >

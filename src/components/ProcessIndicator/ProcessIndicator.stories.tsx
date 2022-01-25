@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import nameof from "ts-nameof.macro";
-import TableOfContents from "./TableOfContents";
+import ProcessIndicator from "./ProcessIndicator";
 
 const listEnum = [
   {
@@ -30,7 +30,7 @@ const listEnum = [
   },
 ];
 function Default() {
-  return <TableOfContents list={listEnum} />;
+  return <ProcessIndicator list={listEnum} />;
 }
 
-storiesOf("TableOfContents", module).add(nameof(Default), Default);
+storiesOf("ProcessIndicator", module).add(nameof(Default), Default);

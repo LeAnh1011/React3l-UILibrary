@@ -1,18 +1,18 @@
 import React from "react";
-import "./TableOfContents.scss";
+import "./ProcessIndicator.scss";
 import { Radio } from "antd";
 import classNames from "classnames";
 
-export interface TableOfContentsModel {
+export interface ProcessIndicatorModel {
   sessionName?: string;
   sessionId?: string | number;
 }
 
-export interface TableOfContentsProps {
-  list?: TableOfContentsModel[];
+export interface ProcessIndicatorProps {
+  list?: ProcessIndicatorModel[];
 }
 
-function TableOfContents(props: TableOfContentsProps) {
+function ProcessIndicator(props: ProcessIndicatorProps) {
   const { list } = props;
   const [value, setValue] = React.useState<number>(
     Number(list[0]?.sessionId) || 1
@@ -43,7 +43,7 @@ function TableOfContents(props: TableOfContentsProps) {
     [list.length, value]
   );
   return (
-    <div className="component_table-of-contents" onWheel={handleOnWheel}>
+    <div className="component_process-indicator" onWheel={handleOnWheel}>
       <Radio.Group onChange={onChange} value={value}>
         {list?.length > 0 &&
           list.map((item) => {
@@ -70,8 +70,8 @@ function TableOfContents(props: TableOfContentsProps) {
   );
 }
 
-TableOfContents.defaultProps = {
+ProcessIndicator.defaultProps = {
   list: [],
 };
 
-export default TableOfContents;
+export default ProcessIndicator;

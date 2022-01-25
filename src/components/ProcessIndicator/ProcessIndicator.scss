@@ -1,6 +1,8 @@
 .component_process-indicator{
     width: 200px;
-    max-height: 330px;
+    .ant-radio-group {
+        width: 200px !important;
+    }
     .nav-content{
         padding-left: 8px;
         padding-top: 8px;

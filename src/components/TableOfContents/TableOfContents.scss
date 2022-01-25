@@ -11,7 +11,7 @@
         }
         .nav-content-title{
             font-size: 14px;
-            line-height: 16px;
+            line-height: 16px !important;
         }
         .ant-radio-checked .ant-radio-inner::after{
             background-color: var(--color-primary) !important;

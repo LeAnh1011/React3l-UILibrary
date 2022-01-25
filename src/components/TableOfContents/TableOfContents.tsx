@@ -59,9 +59,7 @@ function TableOfContents(props: TableOfContentsProps) {
                     value={item.sessionId}
                     className="table-of-contents-radio"
                   >
-                    <span className="nav-content-title">
-                      {item.sessionName}
-                    </span>
+                    <div className="nav-content-title">{item.sessionName}</div>
                   </Radio>
                 </div>
               </div>

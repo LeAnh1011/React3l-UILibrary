@@ -1,22 +1,22 @@
-import React, { Dispatch, SetStateAction } from "react";
-import "./ProcessIndicator.scss";
+import React from "react";
+import "./ProgressIndicator.scss";
 import { Radio } from "antd";
 import classNames from "classnames";
 
-export interface ProcessIndicatorModel {
+export interface ProgressIndicatorModel {
   sessionName?: string;
   sessionId?: string | number;
 }
 
-export interface ProcessIndicatorProps {
-  list?: ProcessIndicatorModel[];
-  currentSessionId?: number;
-  setCurrentSessionId: Dispatch<SetStateAction<number>>;
+export interface ProgressIndicatorProps {
+  list?: ProgressIndicatorModel[];
 }
 
-function ProcessIndicator(props: ProcessIndicatorProps) {
-  const { list, currentSessionId, setCurrentSessionId } = props;
-
+function ProgressIndicator(props: ProgressIndicatorProps) {
+  const { list } = props;
+  const [currentSessionId, setCurrentSessionId] = React.useState<number>(
+    Number(list[0]?.sessionId) || 1
+  );
   const onChange = (e: any) => {
     setCurrentSessionId(e.target.value);
   };
@@ -25,6 +25,7 @@ function ProcessIndicator(props: ProcessIndicatorProps) {
     (event) => {
       if (event.deltaY < 0) {
         // console.log("wheel up");
+        event.preventDefault();
         if (currentSessionId === 1) return null;
         else {
           const newNB = currentSessionId - 1;
@@ -32,6 +33,7 @@ function ProcessIndicator(props: ProcessIndicatorProps) {
         }
       } else if (event.deltaY > 0) {
         // console.log("wheel down");
+        event.preventDefault();
         if (currentSessionId === list.length) return null;
         else {
           const newNB = currentSessionId + 1;
@@ -70,8 +72,8 @@ function ProcessIndicator(props: ProcessIndicatorProps) {
   );
 }
 
-ProcessIndicator.defaultProps = {
+ProgressIndicator.defaultProps = {
   list: [],
 };
 
-export default ProcessIndicator;
+export default ProgressIndicator;

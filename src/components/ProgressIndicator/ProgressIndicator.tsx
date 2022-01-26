@@ -10,24 +10,43 @@ export interface ProgressIndicatorModel {
 
 export interface ProgressIndicatorProps {
   list?: ProgressIndicatorModel[];
-  heightContent?: number;
 }
 
-function disabledWheel(e: any) {
-  e.preventDefault();
+function disabledWheel(event: any) {
+  event.preventDefault();
   return false;
 }
 
+function elementInViewport(el: any) {
+  var top = el.offsetTop;
+  var left = el.offsetLeft;
+  var width = el.offsetWidth;
+  var height = el.offsetHeight;
+
+  while (el.offsetParent) {
+    el = el.offsetParent;
+    top += el.offsetTop;
+    left += el.offsetLeft;
+  }
+
+  return (
+    top >= window.pageYOffset &&
+    left >= window.pageXOffset &&
+    top + height <= window.pageYOffset + window.innerHeight &&
+    left + width <= window.pageXOffset + window.innerWidth
+  );
+}
+
 function ProgressIndicator(props: ProgressIndicatorProps) {
-  const { list, heightContent } = props;
+  const { list } = props;
   const [currentSessionId, setCurrentSessionId] = React.useState<number>(
     Number(list[0]?.sessionId) || 1
   );
-  const onChange = (e: any) => {
+  const handleChange = React.useCallback((e: any) => {
     document.querySelector(`#frame-${e.target.value}`).scrollIntoView({
       behavior: "smooth",
     });
-  };
+  }, []);
 
   const handleOnWheel = React.useCallback(
     (event) => {
@@ -65,20 +84,28 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
   }, []);
 
   React.useEffect(() => {
-    document.onscroll = () => {
-      const a = Math.floor(window.scrollY / heightContent);
-      setCurrentSessionId(a + 1);
-    };
-  }, [heightContent]);
+    if (list) {
+      document.onscroll = () => {
+        const sessionOnView = list.filter((current) => {
+          return elementInViewport(
+            document.getElementById(`frame-${current.sessionId}`)
+          );
+        })[0];
+        if (sessionOnView && sessionOnView.sessionId) {
+          setCurrentSessionId(sessionOnView.sessionId as number);
+        }
+      };
+    }
+  }, [list]);
 
   return (
     <div
-      className="component_process-indicator"
+      className="component_progress-indicator"
       onWheel={handleOnWheel}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <Radio.Group onChange={onChange} value={currentSessionId}>
+      <Radio.Group onChange={handleChange} value={currentSessionId}>
         {list?.length > 0 &&
           list.map((item) => {
             return (
@@ -107,7 +134,6 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
 
 ProgressIndicator.defaultProps = {
   list: [],
-  heightContent: 1080,
 };
 
 export default ProgressIndicator;

@@ -39,28 +39,40 @@ function Default() {
       <div style={{ width: 900 }}>
         <div
           id="frame-1"
-          style={{ height: 1080, backgroundColor: "red" }}
-        ></div>
+          style={{ height: 400, backgroundColor: "red" }}
+        >
+          {listEnum[0].sessionName}
+        </div>
         <div
           id="frame-2"
-          style={{ height: 1080, backgroundColor: "yellow" }}
-        ></div>
+          style={{ height: 400, backgroundColor: "yellow" }}
+        >
+          {listEnum[1].sessionName}
+        </div>
         <div
           id="frame-3"
-          style={{ height: 1080, backgroundColor: "blue" }}
-        ></div>
+          style={{ height: 400, backgroundColor: "blue" }}
+        >
+          {listEnum[2].sessionName}
+        </div>
         <div
           id="frame-4"
-          style={{ height: 1080, backgroundColor: "green" }}
-        ></div>
+          style={{ height: 400, backgroundColor: "green" }}
+        >
+          {listEnum[3].sessionName}
+        </div>
         <div
           id="frame-5"
-          style={{ height: 1080, backgroundColor: "gray" }}
-        ></div>
+          style={{ height: 400, backgroundColor: "gray" }}
+        >
+          {listEnum[4].sessionName}
+        </div>
         <div
           id="frame-6"
-          style={{ height: 1080, backgroundColor: "pink" }}
-        ></div>
+          style={{ height: 400, backgroundColor: "pink" }}
+        >
+          {listEnum[5].sessionName}
+        </div>
       </div>
     </div>
   );

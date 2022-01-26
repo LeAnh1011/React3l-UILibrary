@@ -40,6 +40,8 @@ import Drawer from "./components/Drawer";
 
 import UploadFile from "./components/UploadFile";
 
+import ProgressIndicator from "./components/ProgressIndicator";
+
 import StandardTable from "./components/StandardTable/StandardTable";
 import ActionBarComponent from "./components/StandardTable/ActionBarComponent";
 import LayoutCell from "./components/StandardTable/LayoutCell";
@@ -92,6 +94,8 @@ export {
   Drawer,
   //UploadFile
   UploadFile,
+  // Progress Indicator
+  ProgressIndicator,
   // Standard table components
   StandardTable,
   ActionBarComponent,

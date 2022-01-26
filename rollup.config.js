@@ -51,6 +51,8 @@ export default {
     "src/components/Drawer/index.ts",
     //UploadFile
     "src/components/UploadFile/index.ts",
+    // ProgressIndicator
+    "src/components/ProgressIndicator/index.ts",
     // Standard table components
     "src/components/StandardTable/index.ts",
     "src/components/StandardTable/ActionBarComponent/index.ts",

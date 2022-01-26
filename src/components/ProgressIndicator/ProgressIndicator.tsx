@@ -12,6 +12,11 @@ export interface ProgressIndicatorProps {
   list?: ProgressIndicatorModel[];
 }
 
+function disabledWheel(e: any) {
+  e.preventDefault();
+  return false;
+}
+
 function ProgressIndicator(props: ProgressIndicatorProps) {
   const { list } = props;
   const [currentSessionId, setCurrentSessionId] = React.useState<number>(
@@ -27,41 +32,49 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
   const handleOnWheel = React.useCallback(
     (event) => {
       if (event.deltaY < 0) {
-        // console.log("wheel up");
         if (currentSessionId === 1) return null;
         else {
           const newNB = currentSessionId - 1;
           setCurrentSessionId(newNB);
-          console.log(`#frame-${newNB}`);
-          setTimeout(() => {
-            document
-              .querySelector(`#frame-${currentSessionId - 1}`)
-              .scrollIntoView({
-                behavior: "smooth",
-              });
-          }, 300);
+          document
+            .querySelector(`#frame-${currentSessionId - 1}`)
+            .scrollIntoView({
+              behavior: "smooth",
+            });
         }
       } else if (event.deltaY > 0) {
-        // console.log("wheel down");
         if (currentSessionId === list.length) return null;
         else {
           const newNB = currentSessionId + 1;
           setCurrentSessionId(newNB);
-          console.log(`#frame-${newNB}`);
-          setTimeout(() => {
-            document
-              .querySelector(`#frame-${currentSessionId + 1}`)
-              .scrollIntoView({
-                behavior: "smooth",
-              });
-          }, 300);
+          document
+            .querySelector(`#frame-${currentSessionId + 1}`)
+            .scrollIntoView({
+              behavior: "smooth",
+            });
         }
       }
     },
     [currentSessionId, setCurrentSessionId, list.length]
   );
+
+  const handleMouseEnter = React.useCallback(() => {
+    document.addEventListener("wheel", disabledWheel, {
+      passive: false,
+    });
+  }, []);
+
+  const handleMouseLeave = React.useCallback(() => {
+    document.removeEventListener("wheel", disabledWheel);
+  }, []);
+
   return (
-    <div className="component_process-indicator" onWheel={handleOnWheel}>
+    <div
+      className="component_process-indicator"
+      onWheel={handleOnWheel}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <Radio.Group onChange={onChange} value={currentSessionId}>
         {list?.length > 0 &&
           list.map((item) => {

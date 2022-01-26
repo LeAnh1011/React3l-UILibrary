@@ -26,35 +26,37 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
 
   const handleOnWheel = React.useCallback(
     (event) => {
+      event.preventDefault();
       if (event.deltaY < 0) {
         // console.log("wheel up");
-        event.preventDefault();
         if (currentSessionId === 1) return null;
         else {
           const newNB = currentSessionId - 1;
           setCurrentSessionId(newNB);
           console.log(`#frame-${newNB}`);
-          debugger;
-          document
-            .querySelector(`#frame-${currentSessionId - 1}`)
-            .scrollIntoView({
-              behavior: "smooth",
-            });
+
+          setTimeout(() => {
+            document
+              .querySelector(`#frame-${currentSessionId - 1}`)
+              .scrollIntoView({
+                behavior: "smooth",
+              });
+          }, 500);
         }
       } else if (event.deltaY > 0) {
         // console.log("wheel down");
-        event.preventDefault();
         if (currentSessionId === list.length) return null;
         else {
           const newNB = currentSessionId + 1;
           setCurrentSessionId(newNB);
           console.log(`#frame-${newNB}`);
-          debugger;
-          document
-            .querySelector(`#frame-${currentSessionId + 1}`)
-            .scrollIntoView({
-              behavior: "smooth",
-            });
+          setTimeout(() => {
+            document
+              .querySelector(`#frame-${currentSessionId + 1}`)
+              .scrollIntoView({
+                behavior: "smooth",
+              });
+          }, 500);
         }
       }
     },

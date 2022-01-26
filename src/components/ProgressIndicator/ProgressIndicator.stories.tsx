@@ -59,7 +59,7 @@ function Default() {
         ></div>
         <div
           id="frame-6"
-          style={{ height: 1080, backgroundColor: "gray" }}
+          style={{ height: 1080, backgroundColor: "pink" }}
         ></div>
       </div>
     </div>

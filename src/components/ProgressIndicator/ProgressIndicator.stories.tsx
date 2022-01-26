@@ -73,6 +73,11 @@ function Default() {
         >
           {listEnum[5].sessionName}
         </div>
+        <div
+          style={{ height: 200, backgroundColor: "black" }}
+        >
+          {'Footer'}
+        </div>
       </div>
     </div>
   );

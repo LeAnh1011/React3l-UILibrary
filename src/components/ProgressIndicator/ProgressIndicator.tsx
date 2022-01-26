@@ -66,7 +66,6 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
 
   // dựa vào window đã scroll bao nhiêu px để tính xem đang ở session nào
   document.onscroll = () => {
-    console.log(window.scrollY);
     const a = Math.floor(window.scrollY / heightContent);
     setCurrentSessionId(a + 1);
   };

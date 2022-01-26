@@ -19,6 +19,9 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
   );
   const onChange = (e: any) => {
     setCurrentSessionId(e.target.value);
+    document.querySelector(`#frame-${e.target.value}`).scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   const handleOnWheel = React.useCallback(
@@ -30,6 +33,13 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
         else {
           const newNB = currentSessionId - 1;
           setCurrentSessionId(newNB);
+          console.log(`#frame-${newNB}`);
+          debugger;
+          document
+            .querySelector(`#frame-${currentSessionId - 1}`)
+            .scrollIntoView({
+              behavior: "smooth",
+            });
         }
       } else if (event.deltaY > 0) {
         // console.log("wheel down");
@@ -38,6 +48,13 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
         else {
           const newNB = currentSessionId + 1;
           setCurrentSessionId(newNB);
+          console.log(`#frame-${newNB}`);
+          debugger;
+          document
+            .querySelector(`#frame-${currentSessionId + 1}`)
+            .scrollIntoView({
+              behavior: "smooth",
+            });
         }
       }
     },

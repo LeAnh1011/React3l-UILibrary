@@ -30,18 +30,37 @@ const listEnum = [
   },
 ];
 function Default() {
+  // const [currentId,setCurrentId] = React.useState<number>(1);
   return (
     <div style={{ display: "flex" }}>
       <div style={{ width: 200 }}>
         <ProgressIndicator list={listEnum} />
       </div>
       <div style={{ width: 900 }}>
-        <div id="#1" style={{ height: 1080, backgroundColor: "red" }}></div>
-        <div id="#2" style={{ height: 1080, backgroundColor: "yellow" }}></div>
-        <div id="#3" style={{ height: 1080, backgroundColor: "blue" }}></div>
-        <div id="#4" style={{ height: 1080, backgroundColor: "green" }}></div>
-        <div id="#5" style={{ height: 1080, backgroundColor: "gray" }}></div>
-        <div id="#7" style={{ height: 1080, backgroundColor: "gray" }}></div>
+        <div
+          id="frame-1"
+          style={{ height: 1080, backgroundColor: "red" }}
+        ></div>
+        <div
+          id="frame-2"
+          style={{ height: 1080, backgroundColor: "yellow" }}
+        ></div>
+        <div
+          id="frame-3"
+          style={{ height: 1080, backgroundColor: "blue" }}
+        ></div>
+        <div
+          id="frame-4"
+          style={{ height: 1080, backgroundColor: "green" }}
+        ></div>
+        <div
+          id="frame-5"
+          style={{ height: 1080, backgroundColor: "gray" }}
+        ></div>
+        <div
+          id="frame-6"
+          style={{ height: 1080, backgroundColor: "gray" }}
+        ></div>
       </div>
     </div>
   );

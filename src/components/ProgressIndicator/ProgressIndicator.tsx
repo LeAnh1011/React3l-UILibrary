@@ -26,7 +26,6 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
 
   const handleOnWheel = React.useCallback(
     (event) => {
-      event.preventDefault();
       if (event.deltaY < 0) {
         // console.log("wheel up");
         if (currentSessionId === 1) return null;

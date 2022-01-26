@@ -10,6 +10,7 @@ export interface ProgressIndicatorModel {
 
 export interface ProgressIndicatorProps {
   list?: ProgressIndicatorModel[];
+  heightContent?: number; // truyền vào giá trị chiều cao tương đối của phần hiển thị detail
 }
 
 function disabledWheel(e: any) {
@@ -18,12 +19,11 @@ function disabledWheel(e: any) {
 }
 
 function ProgressIndicator(props: ProgressIndicatorProps) {
-  const { list } = props;
+  const { list, heightContent } = props;
   const [currentSessionId, setCurrentSessionId] = React.useState<number>(
     Number(list[0]?.sessionId) || 1
   );
   const onChange = (e: any) => {
-    setCurrentSessionId(e.target.value);
     document.querySelector(`#frame-${e.target.value}`).scrollIntoView({
       behavior: "smooth",
     });
@@ -34,8 +34,6 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
       if (event.deltaY < 0) {
         if (currentSessionId === 1) return null;
         else {
-          const newNB = currentSessionId - 1;
-          setCurrentSessionId(newNB);
           document
             .querySelector(`#frame-${currentSessionId - 1}`)
             .scrollIntoView({
@@ -45,8 +43,6 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
       } else if (event.deltaY > 0) {
         if (currentSessionId === list.length) return null;
         else {
-          const newNB = currentSessionId + 1;
-          setCurrentSessionId(newNB);
           document
             .querySelector(`#frame-${currentSessionId + 1}`)
             .scrollIntoView({
@@ -55,7 +51,7 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
         }
       }
     },
-    [currentSessionId, setCurrentSessionId, list.length]
+    [currentSessionId, list.length]
   );
 
   const handleMouseEnter = React.useCallback(() => {
@@ -68,6 +64,12 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
     document.removeEventListener("wheel", disabledWheel);
   }, []);
 
+  // dựa vào window đã scroll bao nhiêu px để tính xem đang ở session nào
+  document.onscroll = () => {
+    console.log(window.scrollY);
+    const a = Math.floor(window.scrollY / heightContent);
+    setCurrentSessionId(a + 1);
+  };
   return (
     <div
       className="component_process-indicator"
@@ -104,6 +106,7 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
 
 ProgressIndicator.defaultProps = {
   list: [],
+  heightContent: 1080,
 };
 
 export default ProgressIndicator;

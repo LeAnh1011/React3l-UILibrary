@@ -10,7 +10,7 @@ export interface ProgressIndicatorModel {
 
 export interface ProgressIndicatorProps {
   list?: ProgressIndicatorModel[];
-  heightContent?: number; // truyền vào giá trị chiều cao tương đối của phần hiển thị detail
+  heightContent?: number;
 }
 
 function disabledWheel(e: any) {
@@ -64,11 +64,13 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
     document.removeEventListener("wheel", disabledWheel);
   }, []);
 
-  // dựa vào window đã scroll bao nhiêu px để tính xem đang ở session nào
-  document.onscroll = () => {
-    const a = Math.floor(window.scrollY / heightContent);
-    setCurrentSessionId(a + 1);
-  };
+  React.useEffect(() => {
+    document.onscroll = () => {
+      const a = Math.floor(window.scrollY / heightContent);
+      setCurrentSessionId(a + 1);
+    };
+  }, [heightContent]);
+
   return (
     <div
       className="component_process-indicator"

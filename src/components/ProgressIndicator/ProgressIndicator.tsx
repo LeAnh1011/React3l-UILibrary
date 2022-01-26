@@ -34,14 +34,13 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
           const newNB = currentSessionId - 1;
           setCurrentSessionId(newNB);
           console.log(`#frame-${newNB}`);
-
           setTimeout(() => {
             document
               .querySelector(`#frame-${currentSessionId - 1}`)
               .scrollIntoView({
                 behavior: "smooth",
               });
-          }, 500);
+          }, 300);
         }
       } else if (event.deltaY > 0) {
         // console.log("wheel down");
@@ -56,7 +55,7 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
               .scrollIntoView({
                 behavior: "smooth",
               });
-          }, 500);
+          }, 300);
         }
       }
     },

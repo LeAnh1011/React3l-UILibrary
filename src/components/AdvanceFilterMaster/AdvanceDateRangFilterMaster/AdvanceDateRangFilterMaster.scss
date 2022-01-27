@@ -135,4 +135,9 @@ $backgound-color: #f4f4f4;
             }
         }
     }
+    .date-range__wrapper {
+        &.ant-picker {
+            width: 288px;
+        }
+    }
 }

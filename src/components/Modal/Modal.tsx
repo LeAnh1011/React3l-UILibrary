@@ -10,9 +10,9 @@ export interface ModalCustomProps extends AntModalProps {
   visibleFooter?: boolean;
   size?: "large" | "medium" | "small";
   keyButtonTranslate?: string;
-  handleCancel?: (event: any) => void;
-  handleSave?: (event: any) => void;
-  handleCreateNext?: (event: any) => void;
+  handleCancel?: () => void;
+  handleSave?: (item: any) => void;
+  handleCreateNext?: (item: any) => void;
   translate?: TFunction;
 }
 function Modal(props: ModalCustomProps) {

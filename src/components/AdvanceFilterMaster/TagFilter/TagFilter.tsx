@@ -335,8 +335,11 @@ function TagFilter(props: TagFilterProps) {
 
 
   const handleClear = React.useCallback((itemTag) => {
-    filter[itemTag?.key] = {};
-    dispatch({ ...filter });
+    const newFilter = { ...filter };
+    const objectKey = itemTag?.key.replace("Id", "");
+    newFilter[itemTag?.key] = {};
+    newFilter[`${objectKey}Value`] = undefined;
+    dispatch({ ...newFilter });
     onClear(null);
   }, [dispatch, filter, onClear]);
 

@@ -1,5 +1,4 @@
 @import "../../styles/index.scss";
-
 .page-table {
   .ant-table-thead > tr > th {
     font-size: 12px;
@@ -69,10 +68,6 @@
 }
 .ant-table-body.active-draggable {
   cursor: grabbing;
-}
-.height-500px{
-  max-height: 500px;
-  overflow: scroll;
 }
 .expand-table-box{
   padding: 28px 24px 28px 48px;

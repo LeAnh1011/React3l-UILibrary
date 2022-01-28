@@ -16,7 +16,7 @@ const IconButton = React.forwardRef(
         ref={ref}
         disabled={disabled}
         className={classNames(
-          "button btn-only-icon",
+          "btn-component btn-only-icon",
           `btn--${type}`,
           disabled ? "disabled" : "",
           className

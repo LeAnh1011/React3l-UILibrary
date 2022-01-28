@@ -25,7 +25,7 @@ const NormalButton = React.forwardRef(
         ref={ref}
         disabled={disabled}
         className={classNames(
-          "btn",
+          "btn-component",
           icon ? "btn-normal-have-icon" : "btn-normal-no-icon",
           !loading ? `btn--${type}` : `btn--${type}-loading`,
           disabled ? "disabled" : "",

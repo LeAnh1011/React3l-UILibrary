@@ -26,7 +26,7 @@ const BleedButton = React.forwardRef(
           ref={ref}
           disabled={disabled}
           className={classNames(
-            "btn btn-bleed",
+            "button btn-bleed",
             !loading ? `btn--${type}` : `btn--${type}-loading`,
             disabled ? "disabled" : "",
             className

@@ -16,7 +16,7 @@ const LinkButton = React.forwardRef(
         ref={ref}
         disabled={disabled}
         className={classNames(
-          "btn btn-link",
+          "button btn-link",
           `btn--${type}`,
           disabled ? "disabled" : "",
           className

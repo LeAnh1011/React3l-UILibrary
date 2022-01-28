@@ -24,7 +24,7 @@ const GhostButton = React.forwardRef(
         ref={ref}
         disabled={disabled}
         className={classNames(
-          "btn",
+          "btn-component",
           icon ? "btn-ghost-have-icon" : "btn-ghost-no-icon",
           `btn--${type}`,
           disabled ? "disabled" : "",

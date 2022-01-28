@@ -16,8 +16,8 @@
         text-decoration: underline;
     }
     &.disabled {
-        color: var(--color-gray-50);
-        background-color: var(--color-white);
+        color: var(--palette-gray-50) !important ;
+        background-color: var(--color-white) !important;
         &:hover{
             text-decoration: none;
         }

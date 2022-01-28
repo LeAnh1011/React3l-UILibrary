@@ -22,7 +22,7 @@ interface AdvanceDateRangeFilterMasterProps {
 
   isMaterial?: boolean;
 
-  onChange?: (item: any, value: [Moment, Moment]) => void;
+  onChange?: (item?: any, value?: [Moment, Moment]) => void;
 
   title?: string;
 

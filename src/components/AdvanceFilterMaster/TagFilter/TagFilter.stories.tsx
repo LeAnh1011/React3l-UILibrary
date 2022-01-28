@@ -128,7 +128,7 @@ export function TagFilterStories() {
           value={value}
         />
       </div>
-      <TagFilter value={filter} keyTranslate={"demo"} onClear={handleClear} filter={filter} dispatch={setFilter} />
+      <TagFilter value={filter} keyTranslate={"demo"} onClear={handleClear} dispatch={setFilter} />
     </div>
   );
 }

@@ -285,7 +285,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           className={classNames("component__input-search__icon-box")}
           onClick={handleClickSearchIcon}
         >
-          <Search16 />
+          <Search16 className="icon-input-search" />
         </div>
         <div
           className={classNames({
@@ -327,7 +327,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
             </>
           ) : (
             <div className="select__loading">
-              <IconLoading color="#0F62FE" size={24}/>
+              <IconLoading color="#0F62FE" size={24} />
             </div>
           )}
         </div>

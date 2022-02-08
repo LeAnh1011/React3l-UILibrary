@@ -12,11 +12,14 @@
         &.active-background{
             border: 2px solid var(--color-primary);
             .component__input-search__icon-box{
-                background-color: var(--palette-grayHover-10);
+                background-color: var(--palette-grayHover-10) !important;
             }
         }
         &.full-width{
             width: 100%;
+            .component__input-search__icon-box {
+                background-color: var(--palette-gray-10);
+            }
         }
         &.icon-only-width{
             width: 40px;
@@ -34,7 +37,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: var(--palette-gray-10);
+            background-color: var(--color-white);
+            :hover{
+                background-color: var(--palette-grayHover-10);
+            }
         }
         .visible__input-search {
             width: calc(100% - 40px);

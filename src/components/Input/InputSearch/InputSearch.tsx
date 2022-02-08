@@ -288,7 +288,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           <Search16 className="icon-input-search" />
         </div>
         <div
-          className={classNames({
+          className={classNames("box-input-search", {
             "visible__input-search": showInput,
             "hidden__input-search": !showInput,
           })}

@@ -3,6 +3,7 @@
     overflow: hidden;
     
     .component__input-search-select {
+        height: 40px !important;
         &:focus-visible{
             outline: none;
         }
@@ -25,23 +26,24 @@
         width: 100%;
         overflow: hidden;
         .component__input-search__icon-box {
-            width: 40px;
-            height: 40px;
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-left: 12px;
+            margin-right: 12px;
         }
         .box-input-search{
             display: flex;
             align-items: center;
+            width: calc(100% - 40px);
         }
-        .visible__input-search {
-            width: calc(70% - 40px);
+        &.visible__input-search {
+            width: 100%;
             transition: width 0.3s;
         }
-        .hidden__input-search {
+        &.hidden__input-search {
             overflow: hidden;
-            width: 0px !important;
+            width: 40px !important;
             transition: width 0.3s;
         }
     }

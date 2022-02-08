@@ -6,7 +6,9 @@
         display: flex;
         line-height: 16px;
         .component__input-search-box {
-            width: 100% ;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
             .component__input-search {
                 border: none !important ;
                 width: 100% ;

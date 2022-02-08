@@ -68,9 +68,12 @@ function InputSearchSelect(props: InputSelectProps) {
           />
 
           {internalModel && (
-            <div style={{ width: "16px", height: "20px" }} className="m-r--xxs">
+            <div
+              style={{ width: "16px", height: "20px", paddingTop: 2 }}
+              className="m-r--xxs"
+            >
               <CloseFilled16
-                className="input-icon__clear m-r--xxs"
+                className="input-icon__clear m-r--xxs mt--xxxs"
                 onClick={handleClearInput}
               ></CloseFilled16>
             </div>

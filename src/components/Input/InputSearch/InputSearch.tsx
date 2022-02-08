@@ -276,6 +276,8 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           "full-width": fullWidth,
           "icon-only-width": !fullWidth,
           "active-background": activeBackground && showInput,
+          "visible__input-search": showInput,
+          "hidden__input-search": !showInput,
         })}
         onClick={handleToggle}
         tabIndex={0}
@@ -287,12 +289,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
         >
           <Search16 className="icon-input-search" />
         </div>
-        <div
-          className={classNames("box-input-search", {
-            "visible__input-search": showInput,
-            "hidden__input-search": !showInput,
-          })}
-        >
+        <div className={classNames("box-input-search")}>
           <InputSearchSelect
             placeHolder={placeHolder}
             expanded={isExpand}

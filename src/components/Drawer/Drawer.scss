@@ -11,7 +11,18 @@
   z-index: 1000;
 
   &.slide-out {
-    width: 594px;
+    &.drawer-small{
+      width: 400px;
+      .drawer_footer {
+        width: 400px;
+      }
+    }
+    &.drawer-large{
+      width: 594px;
+      .drawer_footer {
+        width: 594px;
+      }
+    }
   }
 
   .drawer__content {
@@ -66,7 +77,6 @@
       bottom: 0;
       border-top: 1px solid #f8f8fa;
       background-color: #ffffff;
-      width: 594px;
       .button-bleed-footer {
         width: 100%;
         display: flex;

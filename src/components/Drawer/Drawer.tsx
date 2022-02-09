@@ -15,13 +15,14 @@ export interface DrawerProps {
   loading?: boolean;
   keyHeaderTranslate?: string;
   keyButtonTranslate?: string;
-  size?: NUMBER_BUTTON;
+  numberButton?: NUMBER_BUTTON;
   handleCancel?: () => void;
   handleSave?: () => void;
   handleCreate?: () => void;
   translate?: TFunction;
   isHaveDescription?: boolean;
   isHaveCloseIcon?: boolean;
+  size?: "small" | "large";
 }
 
 function Drawer(props: DrawerProps) {
@@ -32,13 +33,14 @@ function Drawer(props: DrawerProps) {
     loading,
     keyHeaderTranslate,
     keyButtonTranslate,
-    size,
+    numberButton,
     handleCancel,
     handleSave,
     handleCreate,
     translate,
     isHaveDescription,
     isHaveCloseIcon,
+    size,
   } = props;
   const ref: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(null);
 
@@ -48,7 +50,7 @@ function Drawer(props: DrawerProps) {
         <Button
           type="bleed-primary"
           className={classNames(
-            size === NUMBER_BUTTON.THREE ? "button-33" : "button-50"
+            numberButton === NUMBER_BUTTON.THREE ? "button-33" : "button-50"
           )}
           onClick={handleSave}
           disabled={disableButton}
@@ -59,7 +61,7 @@ function Drawer(props: DrawerProps) {
               : "Create"}
           </span>
         </Button>
-        {size === NUMBER_BUTTON.THREE && (
+        {numberButton === NUMBER_BUTTON.THREE && (
           <Button
             type="bleed-secondary"
             className="button-33"
@@ -76,7 +78,7 @@ function Drawer(props: DrawerProps) {
         <Button
           type="bleed-secondary"
           className={classNames(
-            size === NUMBER_BUTTON.THREE ? "button-33" : "button-50"
+            numberButton === NUMBER_BUTTON.THREE ? "button-33" : "button-50"
           )}
           onClick={handleCancel}
         >
@@ -93,7 +95,7 @@ function Drawer(props: DrawerProps) {
       translate,
       handleCreate,
       handleCancel,
-      size,
+      numberButton,
       disableButton,
       keyButtonTranslate,
     ]
@@ -101,7 +103,7 @@ function Drawer(props: DrawerProps) {
   return (
     <>
       <div
-        className={classNames("drawer__container", {
+        className={classNames(`drawer__container drawer-${size}`, {
           "slide-out": visible === true,
         })}
       >
@@ -156,8 +158,9 @@ Drawer.defaultProps = {
   visibleCreate: true,
   visibleCreateNext: true,
   disableButton: false,
-  size: NUMBER_BUTTON.TWO,
+  numberButton: NUMBER_BUTTON.TWO,
   isHaveCloseIcon: true,
+  size: "small",
 };
 
 export default Drawer;

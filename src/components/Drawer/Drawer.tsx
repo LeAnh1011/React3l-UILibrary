@@ -52,17 +52,16 @@ function Drawer(props: DrawerProps) {
     () => (
       <div className="button-bleed-footer">
         <Button
-          type="bleed-primary"
+          type="bleed-secondary"
           className={classNames(
             numberButton === NUMBER_BUTTON.THREE ? "button-33" : "button-50"
           )}
-          onClick={handleSave}
-          disabled={disableButton}
+          onClick={handleCancel}
         >
           <span>
-            {keyButtonApply && translate
-              ? translate(`${keyButtonApply}`)
-              : "Apply"}
+            {keyButtonCancel && translate
+              ? translate(`${keyButtonCancel}`)
+              : "Cancel"}
           </span>
         </Button>
         {numberButton === NUMBER_BUTTON.THREE && (
@@ -80,16 +79,17 @@ function Drawer(props: DrawerProps) {
           </Button>
         )}
         <Button
-          type="bleed-secondary"
+          type="bleed-primary"
           className={classNames(
             numberButton === NUMBER_BUTTON.THREE ? "button-33" : "button-50"
           )}
-          onClick={handleCancel}
+          onClick={handleSave}
+          disabled={disableButton}
         >
           <span>
-            {keyButtonCancel && translate
-              ? translate(`${keyButtonCancel}`)
-              : "Cancel"}
+            {keyButtonApply && translate
+              ? translate(`${keyButtonApply}`)
+              : "Apply"}
           </span>
         </Button>
       </div>

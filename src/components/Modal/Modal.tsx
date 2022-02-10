@@ -43,14 +43,15 @@ function Modal(props: ModalCustomProps) {
             className={classNames(
               handleApplyNext && size === "large" ? "button-33" : "button-50"
             )}
-            onClick={handleSave}
+            onClick={handleCancel}
           >
             <span>
-              {keyButtonApply && translate
-                ? translate(`${keyButtonApply}`)
-                : "Apply"}
+              {keyButtonCancel && translate
+                ? translate(`${keyButtonCancel}`)
+                : "Cancel"}
             </span>
           </Button>
+
           {handleApplyNext && size === "large" && (
             <Button
               type="bleed-secondary"
@@ -64,18 +65,17 @@ function Modal(props: ModalCustomProps) {
               </span>
             </Button>
           )}
-
           <Button
             type="bleed-primary"
             className={classNames(
               handleApplyNext && size === "large" ? "button-33" : "button-50"
             )}
-            onClick={handleCancel}
+            onClick={handleSave}
           >
             <span>
-              {keyButtonCancel && translate
-                ? translate(`${keyButtonCancel}`)
-                : "Cancel"}
+              {keyButtonApply && translate
+                ? translate(`${keyButtonApply}`)
+                : "Apply"}
             </span>
           </Button>
         </div>

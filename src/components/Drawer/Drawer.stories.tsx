@@ -37,7 +37,16 @@ const demoListEnum = (TModelFilter: ModelFilter) => {
 };
 
 function Default() {
-  const [size, setSize] = React.useState<NUMBER_BUTTON>(NUMBER_BUTTON.TWO);
+  const [numberButton, setNumberButton] = React.useState<NUMBER_BUTTON>(
+    NUMBER_BUTTON.TWO
+  );
+  const handleChangeNumberButton = React.useCallback(
+    (event: RadioChangeEvent) => {
+      setNumberButton(event.target.value);
+    },
+    []
+  );
+  const [size, setSize] = React.useState<"sm" | "lg">("sm");
   const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
     setSize(event.target.value);
   }, []);
@@ -73,14 +82,20 @@ function Default() {
       <div>
         <div style={{ margin: "10px", width: "500px" }}>
           <Radio.Group onChange={handleChangeSize} value={size}>
+            <Radio value="sm">Small Size</Radio>
+            <Radio value="lg">Large Size</Radio>
+          </Radio.Group>
+        </div>
+        <div style={{ margin: "10px", width: "500px" }}>
+          <Radio.Group onChange={handleChangeNumberButton} value={numberButton}>
             <Radio value={NUMBER_BUTTON.TWO}>2 Button</Radio>
             <Radio value={NUMBER_BUTTON.THREE}>3 Button</Radio>
           </Radio.Group>
         </div>
         <div style={{ margin: "10px", width: "500px" }}>
           <Radio.Group onChange={handleChangeHaveDescrip} value={haveDescrip}>
-            <Radio value={true}>Có Descrip</Radio>
-            <Radio value={false}>Không Descrip</Radio>
+            <Radio value={true}>Has Description</Radio>
+            <Radio value={false}>None Description</Radio>
           </Radio.Group>
         </div>
         <div style={{ margin: "10px", width: "500px" }}>
@@ -88,8 +103,8 @@ function Default() {
             onChange={handleChangeHaveCloseIcon}
             value={haveCloseIcon}
           >
-            <Radio value={true}>Có CloseIcon</Radio>
-            <Radio value={false}>Không CloseIcon</Radio>
+            <Radio value={true}>Has CloseIcon</Radio>
+            <Radio value={false}>None CloseIcon</Radio>
           </Radio.Group>
         </div>
       </div>
@@ -110,6 +125,7 @@ function Default() {
         isHaveCloseIcon={haveCloseIcon}
         visibleFooter={true}
         loading={false}
+        numberButton={numberButton}
         size={size}
       >
         <div

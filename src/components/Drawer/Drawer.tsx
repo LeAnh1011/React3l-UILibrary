@@ -13,14 +13,16 @@ export interface DrawerProps {
   visibleFooter?: boolean;
   disableButton?: boolean;
   loading?: boolean;
-  keyHeaderTranslate?: string;
-  keyButtonTranslate?: string;
+  title?: string;
+  description?: string;
+  keyButtonApply?: string;
+  keyButtonApplyNext?: string;
+  keyButtonCancel?: string;
   numberButton?: NUMBER_BUTTON;
   handleCancel?: () => void;
   handleSave?: () => void;
-  handleCreate?: () => void;
+  handleApplyNext?: () => void;
   translate?: TFunction;
-  isHaveDescription?: boolean;
   isHaveCloseIcon?: boolean;
   size?: "small" | "large";
 }
@@ -31,14 +33,16 @@ function Drawer(props: DrawerProps) {
     visible,
     disableButton,
     loading,
-    keyHeaderTranslate,
-    keyButtonTranslate,
+    title,
+    description,
+    keyButtonApply,
+    keyButtonApplyNext,
+    keyButtonCancel,
     numberButton,
     handleCancel,
     handleSave,
-    handleCreate,
+    handleApplyNext,
     translate,
-    isHaveDescription,
     isHaveCloseIcon,
     size,
   } = props;
@@ -56,22 +60,22 @@ function Drawer(props: DrawerProps) {
           disabled={disableButton}
         >
           <span>
-            {keyButtonTranslate && translate
-              ? translate(`${keyButtonTranslate}.create`)
-              : "Create"}
+            {keyButtonApply && translate
+              ? translate(`${keyButtonApply}`)
+              : "Apply"}
           </span>
         </Button>
         {numberButton === NUMBER_BUTTON.THREE && (
           <Button
             type="bleed-secondary"
             className="button-33"
-            onClick={handleCreate}
+            onClick={handleApplyNext}
             disabled={disableButton}
           >
             <span>
-              {keyButtonTranslate && translate
-                ? translate(`${keyButtonTranslate}.createNext`)
-                : "Create Next"}
+              {keyButtonApplyNext && translate
+                ? translate(`${keyButtonApplyNext}`)
+                : "Apply Next"}
             </span>
           </Button>
         )}
@@ -83,21 +87,23 @@ function Drawer(props: DrawerProps) {
           onClick={handleCancel}
         >
           <span>
-            {keyButtonTranslate && translate
-              ? translate(`${keyButtonTranslate}.close`)
-              : "Close"}
+            {keyButtonCancel && translate
+              ? translate(`${keyButtonCancel}`)
+              : "Cancel"}
           </span>
         </Button>
       </div>
     ),
     [
-      handleSave,
-      translate,
-      handleCreate,
-      handleCancel,
       numberButton,
+      handleSave,
       disableButton,
-      keyButtonTranslate,
+      keyButtonApply,
+      translate,
+      handleApplyNext,
+      keyButtonApplyNext,
+      handleCancel,
+      keyButtonCancel,
     ]
   );
   return (
@@ -112,23 +118,21 @@ function Drawer(props: DrawerProps) {
             <div className="drawer__header">
               <div
                 className={classNames("drawer__header-text", {
-                  "have-description": isHaveDescription,
+                  "have-description": description,
                 })}
               >
                 <div className="title mr-1">
-                  {keyHeaderTranslate && translate
-                    ? translate(`${keyHeaderTranslate}.title`)
-                    : "Drawer Title"}
+                  {title && translate ? translate(`${title}`) : "Drawer Title"}
                 </div>
-                {isHaveDescription && (
+                {description && (
                   <div className="description mr-1">
-                    {keyHeaderTranslate && translate
-                      ? translate(`${keyHeaderTranslate}.description`)
+                    {translate
+                      ? translate(`${description}`)
                       : "Drawer description description description description"}
                   </div>
                 )}
               </div>
-              {!isHaveDescription && isHaveCloseIcon && (
+              {!description && isHaveCloseIcon && (
                 <Button
                   type="icon-only-ghost"
                   icon={<Close20 />}
@@ -154,9 +158,6 @@ function Drawer(props: DrawerProps) {
 
 Drawer.defaultProps = {
   visibleFooter: true,
-  closable: false,
-  visibleCreate: true,
-  visibleCreateNext: true,
   disableButton: false,
   numberButton: NUMBER_BUTTON.TWO,
   isHaveCloseIcon: true,

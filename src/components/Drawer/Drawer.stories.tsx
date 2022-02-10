@@ -51,14 +51,7 @@ function Default() {
     setSize(event.target.value);
   }, []);
   const [haveCloseIcon, setHaveCloseIcon] = React.useState<boolean>(false);
-  const [haveDescrip, setHaveDescrip] = React.useState<boolean>(false);
   const [visible, setVisible] = React.useState<boolean>(true);
-  const handleChangeHaveDescrip = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setHaveDescrip(event.target.value);
-    },
-    []
-  );
   const handleChangeHaveCloseIcon = React.useCallback(
     (event: RadioChangeEvent) => {
       setHaveCloseIcon(event.target.value);
@@ -93,12 +86,6 @@ function Default() {
           </Radio.Group>
         </div>
         <div style={{ margin: "10px", width: "500px" }}>
-          <Radio.Group onChange={handleChangeHaveDescrip} value={haveDescrip}>
-            <Radio value={true}>Có Descrip</Radio>
-            <Radio value={false}>Không Descrip</Radio>
-          </Radio.Group>
-        </div>
-        <div style={{ margin: "10px", width: "500px" }}>
           <Radio.Group
             onChange={handleChangeHaveCloseIcon}
             value={haveCloseIcon}
@@ -120,8 +107,7 @@ function Default() {
         visible={visible}
         handleSave={handleSave}
         handleCancel={handleCancel}
-        handleCreate={handleCreate}
-        isHaveDescription={haveDescrip}
+        handleApplyNext={handleCreate}
         isHaveCloseIcon={haveCloseIcon}
         visibleFooter={true}
         loading={false}

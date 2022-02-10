@@ -22,7 +22,7 @@ export interface DrawerProps {
   translate?: TFunction;
   isHaveDescription?: boolean;
   isHaveCloseIcon?: boolean;
-  size?: "small" | "large";
+  size?: "sm" | "lg";
 }
 
 function Drawer(props: DrawerProps) {
@@ -160,7 +160,7 @@ Drawer.defaultProps = {
   disableButton: false,
   numberButton: NUMBER_BUTTON.TWO,
   isHaveCloseIcon: true,
-  size: "small",
+  size: "sm",
 };
 
 export default Drawer;

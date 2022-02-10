@@ -158,7 +158,7 @@ function Default() {
           handleSave={handleSave}
           handleCancel={handleCancel}
           visibleFooter={true}
-          handleCreateNext={handleCreate}
+          handleApplyNext={handleCreate}
           size="large"
           title="Modal Title"
         >

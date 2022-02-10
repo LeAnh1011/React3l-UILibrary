@@ -9,54 +9,58 @@ export interface ModalCustomProps extends AntModalProps {
   children?: ReactNode;
   visibleFooter?: boolean;
   size?: "large" | "medium" | "small";
-  keyButtonTranslate?: string;
+  keyButtonApply?: string;
+  keyButtonApplyNext?: string;
+  keyButtonCancel?: string;
   handleCancel?: (event: any) => void;
   handleSave?: (event: any) => void;
-  handleCreateNext?: (event: any) => void;
+  handleApplyNext?: (event: any) => void;
   translate?: TFunction;
 }
 function Modal(props: ModalCustomProps) {
   const {
     visibleFooter,
     size,
-    keyButtonTranslate,
+    keyButtonApply,
+    keyButtonApplyNext,
+    keyButtonCancel,
     destroyOnClose,
     handleCancel,
     handleSave,
     translate,
-    handleCreateNext,
+    handleApplyNext,
   } = props;
   const renderModalFooter = React.useMemo(
     () => (
       <div className="footer-modal">
         <div
           className={classNames("button-bleed-footer", {
-            "width-75": handleCreateNext && size === "large",
+            "width-75": handleApplyNext && size === "large",
           })}
         >
           <Button
             type="bleed-secondary"
             className={classNames(
-              handleCreateNext && size === "large" ? "button-33" : "button-50"
+              handleApplyNext && size === "large" ? "button-33" : "button-50"
             )}
             onClick={handleSave}
           >
             <span>
-              {keyButtonTranslate && translate
-                ? translate(`${keyButtonTranslate}.save`)
-                : "Save"}
+              {keyButtonApply && translate
+                ? translate(`${keyButtonApply}`)
+                : "Apply"}
             </span>
           </Button>
-          {handleCreateNext && size === "large" && (
+          {handleApplyNext && size === "large" && (
             <Button
               type="bleed-secondary"
               className="button-33"
-              onClick={handleCreateNext}
+              onClick={handleApplyNext}
             >
               <span>
-                {keyButtonTranslate && translate
-                  ? translate(`${keyButtonTranslate}.createNext`)
-                  : "Create Next"}
+                {keyButtonApplyNext && translate
+                  ? translate(`${keyButtonApplyNext}`)
+                  : "Apply Next"}
               </span>
             </Button>
           )}
@@ -64,13 +68,13 @@ function Modal(props: ModalCustomProps) {
           <Button
             type="bleed-primary"
             className={classNames(
-              handleCreateNext && size === "large" ? "button-33" : "button-50"
+              handleApplyNext && size === "large" ? "button-33" : "button-50"
             )}
             onClick={handleCancel}
           >
             <span>
-              {keyButtonTranslate && translate
-                ? translate(`${keyButtonTranslate}.cancel`)
+              {keyButtonCancel && translate
+                ? translate(`${keyButtonCancel}`)
                 : "Cancel"}
             </span>
           </Button>
@@ -78,12 +82,14 @@ function Modal(props: ModalCustomProps) {
       </div>
     ),
     [
-      handleCreateNext,
+      handleApplyNext,
       size,
       handleSave,
-      keyButtonTranslate,
+      keyButtonApply,
       translate,
+      keyButtonApplyNext,
       handleCancel,
+      keyButtonCancel,
     ]
   );
   return (

@@ -333,7 +333,7 @@ function EnumSelect(props: SelectProps<Model>) {
         <div className="select__input" onClick={handleToggle}>
           {isMultiple ? (
             <InputTag
-              listItem={listModel} // value of input, event should change these on update
+              listItem={listModel}
               render={render}
               placeHolder={placeHolder}
               disabled={disabled}
@@ -349,7 +349,7 @@ function EnumSelect(props: SelectProps<Model>) {
             />
           ) : (
             <InputSelect
-              model={internalModel} // value of input, event should change these on update
+              model={internalModel}
               render={render}
               placeHolder={placeHolder}
               expanded={isExpand}

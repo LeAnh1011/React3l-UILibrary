@@ -19,6 +19,7 @@ export interface DrawerProps {
   keyButtonApplyNext?: string;
   keyButtonCancel?: string;
   numberButton?: NUMBER_BUTTON;
+  handleClose?: () => void;
   handleCancel?: () => void;
   handleSave?: () => void;
   handleApplyNext?: () => void;
@@ -39,6 +40,7 @@ function Drawer(props: DrawerProps) {
     keyButtonApplyNext,
     keyButtonCancel,
     numberButton,
+    handleClose,
     handleCancel,
     handleSave,
     handleApplyNext,
@@ -137,7 +139,7 @@ function Drawer(props: DrawerProps) {
                   type="icon-only-ghost"
                   icon={<Close20 />}
                   className="btn--xxl"
-                  onClick={handleCancel}
+                  onClick={handleClose}
                 />
               )}
             </div>

@@ -17,15 +17,12 @@ function Default() {
   }, []);
   const [visible, setVisible] = React.useState<boolean>(true);
   function handleSave() {
-    console.log("save");
     setVisible(false);
   }
   function handleCreate() {
-    console.log("create");
     setVisible(false);
   }
   function handleCancel() {
-    console.log("cancel");
     setVisible(false);
   }
 

@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { formatDate } from "helpers/date-time";
 import { formatNumber } from "helpers/number";
 import { Moment } from "moment";
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import {
   DateFilter,
   GuidFilter,
@@ -24,7 +24,7 @@ export interface TagFilterProps {
   keyTranslate?: string;
   translate?: TFunction;
   onClear?: (t: any) => void;
-  dispatch?: Dispatch<SetStateAction<ModelFilter>> | any;
+  handleChangeFilter?: (modelFilter: ModelFilter) => void;
 }
 
 interface Tag {
@@ -37,7 +37,7 @@ interface Tag {
 
 
 function TagFilter(props: TagFilterProps) {
-  const { className, value, keyTranslate, onClear, translate, dispatch } = props;
+  const { className, value, keyTranslate, onClear, translate, handleChangeFilter } = props;
 
   const convertList = React.useCallback((search: ModelFilter) => {
     let list = [] as Tag[];
@@ -357,9 +357,11 @@ function TagFilter(props: TagFilterProps) {
     const objectKey = itemTag?.key.replace("Id", "");
     newFilter[itemTag?.key] = new itemTag.classFilter();
     newFilter[`${objectKey}Value`] = undefined;
-    dispatch({ ...newFilter });
-    onClear(null);
-  }, [dispatch, value, onClear]);
+    handleChangeFilter({ ...newFilter });
+    if (typeof onClear !== undefined) {
+      onClear(null);
+    }
+  }, [handleChangeFilter, value, onClear]);
 
   return (
     <div className={classNames("tag-filte__container", className)}>

@@ -210,12 +210,10 @@ const InputText = React.forwardRef(
             </label>
           )}
           {internalValue && !disabled && (
-            <div style={{ width: "16px", height: "20px" }} className="m-l--xxs">
-              <CloseFilled16
-                className={classNames("input-icon__clear")}
-                onClick={handleClearInput}
-              ></CloseFilled16>
-            </div>
+            <CloseFilled16
+              className={classNames("input-icon__clear", "m-l--xxs")}
+              onClick={handleClearInput}
+            ></CloseFilled16>
           )}
           {suffix && (
             <>

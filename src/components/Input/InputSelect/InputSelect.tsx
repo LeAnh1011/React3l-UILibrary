@@ -170,17 +170,19 @@ function InputSelect(props: InputSelectProps<Model>) {
                   {isRequired && <span className="text-danger">&nbsp;*</span>}
                 </label>
               )}
-              {internalModel && !disabled && (
-                <div
-                  style={{ width: "16px", height: "20px" }}
-                  className="m-r--xxs"
-                >
+              {internalModel && !disabled ? (
+                <CloseFilled16
+                  className="input-icon input-icon__clear m-r--xxs"
+                  onClick={handleClearInput}
+                ></CloseFilled16>
+              ) : model ? (
+                !disabled && (
                   <CloseFilled16
                     className="input-icon input-icon__clear m-r--xxs"
-                    onClick={handleClearInput}
+                    onClick={handleClearItem}
                   ></CloseFilled16>
-                </div>
-              )}
+                )
+              ) : null}
               <ChevronDown16
                 className={classNames("input-icon", "input-select__icon", {
                   "input-select__icon--disabled": disabled,
@@ -219,15 +221,10 @@ function InputSelect(props: InputSelectProps<Model>) {
                 </label>
               )}
               {model && !disabled && (
-                <div
-                  style={{ width: "16px", height: "20px" }}
-                  className="m-r--xxs"
-                >
-                  <CloseFilled16
-                    className="input-icon input-icon__clear"
-                    onClick={handleClearItem}
-                  ></CloseFilled16>
-                </div>
+                <CloseFilled16
+                  className="input-icon input-icon__clear"
+                  onClick={handleClearItem}
+                ></CloseFilled16>
               )}
               <ChevronDown16
                 className={classNames("input-icon", "input-select__icon", {

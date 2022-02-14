@@ -58,6 +58,10 @@ function Default() {
     },
     []
   );
+  function handleClose() {
+    console.log("close");
+    setVisible(false);
+  }
   function handleSave() {
     console.log("save");
     setVisible(false);
@@ -107,6 +111,7 @@ function Default() {
         visible={visible}
         handleSave={handleSave}
         handleCancel={handleCancel}
+        handleClose={handleClose}
         handleApplyNext={handleCreate}
         isHaveCloseIcon={haveCloseIcon}
         visibleFooter={true}

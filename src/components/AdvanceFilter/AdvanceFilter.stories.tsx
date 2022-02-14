@@ -6,7 +6,7 @@ import { AdvanceIdMultipleFilterStories } from "./AdvanceIdMultipleFilter/Advanc
 import { AdvanceTreeFilterStories } from "./AdvanceTreeFilter/AdvanceTreeFilter.stories";
 import { AdvanceEnumFilterStories } from "./AdvanceEnumFilter/AdvanceEnumFilter.stories";
 import { AdvanceDateRangeFilterStories } from "./AdvanceDateRangeFilter/AdvanceDateRangeFilter.stories";
-import { AdvanceDateFilterStories } from "./AdvanceDateFilter/AdvanceFilterDate.stories";
+import { AdvanceDateFilterStories } from "./AdvanceDateFilter/AdvanceDateFilter.stories";
 storiesOf("AdvanceFilter", module)
   .add("AdvanceStringFilterStories", AdvanceStringFilterStories)
   .add("AdvanceNumberFilterStories", AdvanceNumberFilterStories)

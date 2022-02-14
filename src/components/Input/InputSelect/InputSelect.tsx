@@ -170,7 +170,7 @@ function InputSelect(props: InputSelectProps<Model>) {
                   {isRequired && <span className="text-danger">&nbsp;*</span>}
                 </label>
               )}
-              {internalModel && !disabled ? (
+              {internalModel && !disabled && (
                 <div
                   style={{ width: "16px", height: "20px" }}
                   className="m-r--xxs"
@@ -180,19 +180,7 @@ function InputSelect(props: InputSelectProps<Model>) {
                     onClick={handleClearInput}
                   ></CloseFilled16>
                 </div>
-              ) : model ? (
-                <div
-                  style={{ width: "16px", height: "20px" }}
-                  className="m-r--xxs"
-                >
-                  {!disabled && (
-                    <CloseFilled16
-                      className="input-icon input-icon__clear"
-                      onClick={handleClearItem}
-                    ></CloseFilled16>
-                  )}
-                </div>
-              ) : null}
+              )}
               <ChevronDown16
                 className={classNames("input-icon", "input-select__icon", {
                   "input-select__icon--disabled": disabled,
@@ -230,17 +218,15 @@ function InputSelect(props: InputSelectProps<Model>) {
                   {isRequired && <span className="text-danger">&nbsp;*</span>}
                 </label>
               )}
-              {model && (
+              {model && !disabled && (
                 <div
                   style={{ width: "16px", height: "20px" }}
                   className="m-r--xxs"
                 >
-                  {!disabled && (
-                    <CloseFilled16
-                      className="input-icon input-icon__clear"
-                      onClick={handleClearItem}
-                    ></CloseFilled16>
-                  )}
+                  <CloseFilled16
+                    className="input-icon input-icon__clear"
+                    onClick={handleClearItem}
+                  ></CloseFilled16>
                 </div>
               )}
               <ChevronDown16

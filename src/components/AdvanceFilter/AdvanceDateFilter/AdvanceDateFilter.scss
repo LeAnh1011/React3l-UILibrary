@@ -1,4 +1,175 @@
-.advance-filter-date__container {
+@import "../../../styles/index.scss";
+/* Style for DatePicker.tsx */
+
+.advance-date-filter__wrapper {
+  width: 100%;
+  position: relative;
+  .advance-date-filter__container {
     position: relative;
     width: 100%;
+  }
+  .advance-date-filter__wrapper--sm {
+    height: 32px !important;
+  }
+
+  .advance-date-filter__label {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    label {
+      font-size: 0.75em;
+      white-space: nowrap;
+    }
+  }
+
+  .advance-date-filter__icon-wrapper {
+    position: absolute;
+    display: flex;
+    height: 1.5rem;
+    width: 2rem;
+    top: 49%;
+    right: 0.5rem;
+    box-sizing: border-box;
+    background-color: var(--color-white);
+    justify-content: flex-end;
+    align-items: center;
+
+    &.advance-date-filter__icon-wrapper--material {
+      background-color: var(--palette-gray-10);
+
+      .advance-date-filter__icon-clear {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    .advance-date-filter__icon-clear {
+      color: var(--palette-coolGray-50);
+      &:hover {
+        cursor: pointer;
+        color: var(--palette-coolGrayHover-50);
+      }
+    }
+  }
+
+  .ant-picker {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    outline: 1px solid var(--palette-gray-50);
+    border: none;
+    background: var(--color-white);
+    height: 40px;
+    border-radius: 0px;
+    font-size: 14px;
+
+    .ant-picker-input {
+      input {
+        &::placeholder {
+          color: var(--palette-gray-60);
+        }
+        &:disabled::placeholder {
+          color: var(--palette-gray-40);
+        }
+      }
+    }
+
+    &.advance-date-filter--disabled {
+      background-color: var(--palette-grayHover-10);
+      & + .component__title {
+        pointer-events: none;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      & + .advance-date-filter__icon-wrapper--material {
+        background-color: var(--palette-grayHover-10);
+      }
+    }
+    &:hover {
+      outline-color: var(--color-primary);
+      & + .component__title {
+        color: var(--color-primary);
+      }
+    }
+
+    &.ant-picker--bordered {
+      background-color: var(--color-white);
+    }
+
+    &.ant-picker-focused {
+      border-bottom: none !important;
+      outline-color: var(--color-primary);
+      @include box-shadow--focus;
+    }
+
+    &.advance-date-filter--float {
+      &.ant-picker-focused {
+        border-bottom: none !important;
+        box-shadow: none !important;
+        outline: 1px solid var(--color-primary);
+        & + .component__title {
+          color: var(--color-primary);
+        }
+      }
+    }
+
+    &.advance-date-filter--material {
+      background-color: var(--palette-gray-10);
+      outline: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom: 1px solid var(--palette-gray-50);
+      margin-bottom: -1px;
+      .advance-date-filter__icon-wrapper {
+        background-color: var(--palette-gray-10);
+      }
+      &:hover{
+        background-color: var(--palette-grayHover-10);
+      }
+
+      &.ant-picker-focused {
+        border-bottom: none !important;
+        box-shadow: none;
+        outline: 2px solid var(--color-primary);
+      }
+    }
+  }
+
+
+  .component__title--normal {
+    position: absolute;
+    color: gray;
+    transition: all 0.1s ease-out;
+    padding: 0 4px;
+    z-index: 200;
+    top: -1px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.16px;
+    left: 8px;
+    background-color: var(--color-white);
+    transform: translateY(-50%) scale(0.9);
+  }
+}
+.form-item__container--error {
+  .advance-date-filter__icon-wrapper {
+    background-color: var(--color-critical-hover);
+  }
+  .advance-date-filter--material + .advance-date-filter__icon-wrapper {
+    background-color: var(--color-critical-hover) !important;
+    &:hover {
+      background-color: var(--palette-grayHover-10) !important;
+    }
+  }
+  .advance-date-filter--material:hover + .advance-date-filter__icon-wrapper {
+    background-color: var(--palette-grayHover-10) !important;
+  }
 }

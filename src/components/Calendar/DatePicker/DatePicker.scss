@@ -93,6 +93,9 @@
     }
     &:hover {
       outline-color: var(--color-primary);
+      & + .component__title {
+        color: var(--color-primary);
+      }
     }
 
     &.ant-picker--bordered {

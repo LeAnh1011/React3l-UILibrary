@@ -38,8 +38,6 @@ interface AdvanceDateRangeFilterMasterProps {
 
   label?: string;
 
-  placeholder?: string;
-
   activeItem?: any;
 
   type?: ADVANCE_DATE_RANGE_TYPE;

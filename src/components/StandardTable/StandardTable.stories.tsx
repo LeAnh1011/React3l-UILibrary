@@ -50,7 +50,6 @@ function Default() {
       // if (typeof handleSearch === "function") {
       //   handleSearch();
       // }
-      console.log(filter);
     },
     [filter, setFilter]
   );

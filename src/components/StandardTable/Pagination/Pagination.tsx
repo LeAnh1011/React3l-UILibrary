@@ -26,7 +26,6 @@ function Pagination(props: PaginationProps) {
   const pageArray = React.useMemo(() => {
     const ind = (total - (total % take)) / take;
     const arrTmp = [];
-    console.log(ind);
     for (let i = 1; i <= ind; i++) {
       arrTmp.push(i);
     }

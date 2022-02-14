@@ -29,7 +29,6 @@ export function InputSearchStories() {
 
   const handleSetModel = React.useCallback((...[, item]) => {
     setSelectModel(item);
-    console.log(item);
   }, []);
 
   return (

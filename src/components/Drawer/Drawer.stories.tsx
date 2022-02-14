@@ -59,18 +59,13 @@ function Default() {
     []
   );
   function handleClose() {
-    console.log("close");
     setVisible(false);
   }
   function handleSave() {
-    console.log("save");
     setVisible(false);
   }
-  function handleCreate() {
-    console.log("create");
-  }
+  function handleCreate() {}
   function handleCancel() {
-    console.log("cancel");
     setVisible(false);
   }
 

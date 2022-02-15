@@ -8,6 +8,7 @@ import {
 } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
 import { Observable } from "rxjs";
+import AdvanceStringFilter from "../../AdvanceFilter/AdvanceStringFilter/AdvanceStringFilter";
 import AdvanceDateRangFilterMaster from "../AdvanceDateRangFilterMaster/AdvanceDateRangFilterMaster";
 import AdvanceIdFilterMaster from "../AdvanceIdFilterMaster/AdvanceIdFilterMaster";
 import AdvanceMultipleIdFilterMaster from "../AdvanceMultipleIdFilterMaster/AdvanceMultipleIdFilterMaster";
@@ -92,11 +93,17 @@ export function TagFilterStories() {
   }, [filter]);
 
 
-
   const handleClear = React.useCallback(() => {
     setItem(null);
     setValue([null, null]);
-  }, [])
+  }, []);
+
+  const handleChangeAllFilter = React.useCallback(
+    (data: any) => {
+      setFilter({ ...data });
+    },
+    [setFilter]
+  );
   return (
     <div style={{ margin: "10px", width: "1000px" }}>
       <div style={{ width: "300px" }}>
@@ -127,8 +134,10 @@ export function TagFilterStories() {
           activeItem={item}
           value={value}
         />
+
+
       </div>
-      <TagFilter value={filter} keyTranslate={"demo"} onClear={handleClear} dispatch={setFilter} />
+      <TagFilter value={filter} keyTranslate={"demo"} onClear={handleClear} handleChangeFilter={handleChangeAllFilter} />
     </div>
   );
 }

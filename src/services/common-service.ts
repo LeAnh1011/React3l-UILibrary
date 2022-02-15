@@ -37,6 +37,32 @@ export const CommonService = {
     }, [callback, handleClickOutside, ref]);
   },
 
+  useClickOutsideMultiple(
+    refFirst: RefObject<any>,
+    ref: RefObject<any>,
+    callback: () => void
+  ) {
+    const handleClickOutside = React.useCallback(
+      (event) => {
+        if (
+          (ref?.current && !ref?.current?.contains(event.target)) ||
+          (refFirst?.current && !refFirst?.current?.contains(event.target))
+        ) {
+          if (typeof callback === "function") {
+            callback();
+          }
+        }
+      },
+      [callback, ref, refFirst]
+    );
+
+    React.useEffect(() => {
+      document.addEventListener("mousedown", handleClickOutside);
+      return function cleanup() {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [callback, handleClickOutside, ref]);
+  },
   toMomentDate(date: string): Moment {
     return moment(date);
   },

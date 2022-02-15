@@ -233,7 +233,7 @@ function AdvanceDateRangeFilterMaster(
       ) : (
         <div className="select__input" onClick={handleToggle}>
           <InputSelect
-            model={activeItem} // value of input, event should change these on update
+            value={activeItem} // value of input, event should change these on update
             render={render}
             placeHolder={placeHolderSelect}
             expanded={isExpand}

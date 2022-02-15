@@ -101,6 +101,13 @@ export function TagFilterStories() {
     setItem(null);
     setValue([null, null]);
   }, []);
+
+  const handleChangeAllFilter = React.useCallback(
+    (data: any) => {
+      setFilter({ ...data });
+    },
+    [setFilter]
+  );
   return (
     <div style={{ margin: "10px", width: "1000px" }}>
       <div style={{ width: "300px" }}>
@@ -132,7 +139,12 @@ export function TagFilterStories() {
           value={value}
         />
       </div>
-      <TagFilter value={filter} keyTranslate={"demo"} onClear={handleClear} />
+      <TagFilter
+        value={filter}
+        keyTranslate={"demo"}
+        onClear={handleClear}
+        handleChangeFilter={handleChangeAllFilter}
+      />
     </div>
   );
 }

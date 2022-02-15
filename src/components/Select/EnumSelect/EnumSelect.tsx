@@ -9,9 +9,9 @@ import InputTag from "components/Input/InputTag";
 import { Add16, Checkmark16 } from "@carbon/icons-react";
 
 export interface SelectProps<T extends Model> {
-  model?: Model;
+  value?: Model;
 
-  listModel?: Model[];
+  listValue?: Model[];
 
   placeHolder?: string;
 
@@ -69,7 +69,7 @@ function multipleSelectReducer(
 
 function EnumSelect(props: SelectProps<Model>) {
   const {
-    model,
+    value,
     placeHolder,
     disabled,
     appendToBody,
@@ -80,14 +80,14 @@ function EnumSelect(props: SelectProps<Model>) {
     selectWithAdd,
     isSmall,
     isMultiple,
-    listModel,
+    listValue,
     onChangeMultiple,
     listItem,
   } = props;
 
-  const internalModel = React.useMemo((): Model => {
-    return model || null;
-  }, [model]);
+  const internalValue = React.useMemo((): Model => {
+    return value || null;
+  }, [value]);
 
   const [list, setList] = React.useState<Model[]>([]);
 
@@ -112,9 +112,9 @@ function EnumSelect(props: SelectProps<Model>) {
     if (list && list.length > 0) {
       list.forEach((current) => {
         let filteredItem =
-          listModel &&
-          listModel.length > 0 &&
-          listModel?.filter((item) => item.id === current.id)[0];
+          listValue &&
+          listValue.length > 0 &&
+          listValue?.filter((item) => item.id === current.id)[0];
         if (filteredItem) {
           current.isSelected = true;
         } else {
@@ -124,7 +124,7 @@ function EnumSelect(props: SelectProps<Model>) {
       return [...list];
     }
     return [];
-  }, [list, listModel]);
+  }, [list, listValue]);
 
   React.useEffect(() => {
     if (firstLoad) {
@@ -176,7 +176,7 @@ function EnumSelect(props: SelectProps<Model>) {
   // UX: after choose an item, this item need to be on top of the list
   const handleClickMultiItem = React.useCallback(
     (item: Model) => (event: any) => {
-      let filteredItem = listModel?.filter(
+      let filteredItem = listValue?.filter(
         (current) => current.id === item.id
       )[0];
 
@@ -208,7 +208,7 @@ function EnumSelect(props: SelectProps<Model>) {
         });
       }
     },
-    [list, listModel, onChangeMultiple, selectedList]
+    [list, listValue, onChangeMultiple, selectedList]
   );
 
   const handleClickMultiParentItem = React.useCallback(
@@ -333,7 +333,7 @@ function EnumSelect(props: SelectProps<Model>) {
         <div className="select__input" onClick={handleToggle}>
           {isMultiple ? (
             <InputTag
-              listItem={listModel}
+              listItem={listValue}
               render={render}
               placeHolder={placeHolder}
               disabled={disabled}
@@ -349,7 +349,7 @@ function EnumSelect(props: SelectProps<Model>) {
             />
           ) : (
             <InputSelect
-              model={internalModel}
+              value={internalValue}
               render={render}
               placeHolder={placeHolder}
               expanded={isExpand}
@@ -428,7 +428,7 @@ function EnumSelect(props: SelectProps<Model>) {
                               "select__item p-l--xs p-y--xs",
                               {
                                 "select__item--selected":
-                                  item.id === internalModel?.id,
+                                  item.id === internalValue?.id,
                               }
                             )}
                             tabIndex={-1}
@@ -437,7 +437,7 @@ function EnumSelect(props: SelectProps<Model>) {
                             onClick={handleClickItem(item)}
                           >
                             <span className="select__text">{render(item)}</span>
-                            {item.id === internalModel?.id && (
+                            {item.id === internalValue?.id && (
                               <div style={{ height: "16px" }}>
                                 <Checkmark16 />
                               </div>

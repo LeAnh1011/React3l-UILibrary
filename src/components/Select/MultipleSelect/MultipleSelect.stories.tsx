@@ -33,7 +33,6 @@ const demoSearchFunc = (TModelFilter: ModelFilter) => {
   return demoObservable;
 };
 
-
 class DemoFilter extends ModelFilter {
   public id: IdFilter = new IdFilter();
   public name: StringFilter = new StringFilter();
@@ -110,11 +109,11 @@ export function MultipleSelectStories() {
           message={isValidated ? "Error label" : ""}
         >
           <MultipleSelect
-            models={models}
+            values={models}
             placeHolder={"Select an option"}
             onChange={handleChangeModels}
             getList={demoSearchFunc}
-            modelFilter={selectModelFilter}
+            valueFilter={selectModelFilter}
             classFilter={DemoFilter}
             label={"Label"}
             type={type}

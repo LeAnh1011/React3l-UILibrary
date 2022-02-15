@@ -4,7 +4,7 @@ import {
   DateFilter,
   IdFilter,
   NumberFilter,
-  StringFilter
+  StringFilter,
 } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
 import { Observable } from "rxjs";
@@ -23,8 +23,6 @@ export class DemoFilter extends ModelFilter {
   appUserId: IdFilter = new IdFilter();
   organizationId: IdFilter = new IdFilter();
 }
-
-
 
 const orgObservable = new Observable<Model[]>((observer) => {
   setTimeout(() => {
@@ -70,33 +68,39 @@ export function TagFilterStories() {
   const [item, setItem] = React.useState<any>(null);
   const [value, setValue] = React.useState<[Moment, Moment]>([null, null]);
 
+  const handleChangeOrganization = React.useCallback(
+    (id, item) => {
+      filter.appUserId.equal = id;
+      filter["appUserValue"] = item;
+      setFilter({ ...filter });
+    },
+    [filter]
+  );
 
-  const handleChangeOrganization = React.useCallback((id, item) => {
-    filter.appUserId.equal = id;
-    filter['appUserValue'] = item;
-    setFilter({ ...filter });
-  }, [filter]);
+  const handleChangeFilter = React.useCallback(
+    (listItem) => {
+      filter.organizationId.in = listItem.map((currentItem) => currentItem.id);
+      filter["organizationValue"] = listItem;
+      setFilter({ ...filter });
+    },
+    [filter]
+  );
 
-  const handleChangeFilter = React.useCallback((listItem) => {
-    filter.organizationId.in = listItem.map((currentItem) => currentItem.id);
-    filter['organizationValue'] = listItem;
-    setFilter({ ...filter })
-  }, [filter]);
-
-  const handleChange = React.useCallback((item, dateMoment) => {
-    filter.createdAt['greaterEqual'] = dateMoment[0];
-    filter.createdAt['lessEqual'] = dateMoment[1];
-    setItem(item);
-    setFilter({ ...filter });
-    setValue(dateMoment);
-  }, [filter]);
-
-
+  const handleChange = React.useCallback(
+    (item, dateMoment) => {
+      filter.createdAt["greaterEqual"] = dateMoment[0];
+      filter.createdAt["lessEqual"] = dateMoment[1];
+      setItem(item);
+      setFilter({ ...filter });
+      setValue(dateMoment);
+    },
+    [filter]
+  );
 
   const handleClear = React.useCallback(() => {
     setItem(null);
     setValue([null, null]);
-  }, [])
+  }, []);
   return (
     <div style={{ margin: "10px", width: "1000px" }}>
       <div style={{ width: "300px" }}>
@@ -104,21 +108,21 @@ export function TagFilterStories() {
           value={filter?.appUserId?.equal}
           placeHolder={"Tìm kiếm..."}
           classFilter={DemoFilter}
-          modelFilter={filter}
-          searchProperty={'name'}
+          valueFilter={filter}
+          searchProperty={"name"}
           onChange={handleChangeOrganization}
           getList={appUserSearchFunc}
-          title={'Người vận chuyển'}
+          title={"Người vận chuyển"}
         />
 
         <AdvanceMultipleIdFilterMaster
           values={filter?.organizationId?.in}
           placeHolder={"Tìm kiếm..."}
           classFilter={DemoFilter}
-          searchProperty={'name'}
+          searchProperty={"name"}
           onChange={handleChangeFilter}
           getList={orgSearchFunc}
-          title={'Đơn vị'}
+          title={"Đơn vị"}
         />
 
         <AdvanceDateRangFilterMaster
@@ -128,7 +132,7 @@ export function TagFilterStories() {
           value={value}
         />
       </div>
-      <TagFilter value={filter} keyTranslate={"demo"} onClear={handleClear} dispatch={setFilter} />
+      <TagFilter value={filter} keyTranslate={"demo"} onClear={handleClear} />
     </div>
   );
 }

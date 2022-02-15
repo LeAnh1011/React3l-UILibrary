@@ -16,9 +16,9 @@ export interface AdvanceIdMultipleFilterProps<
   T extends Model,
   TFilter extends ModelFilter
 > {
-  models?: Model[];
+  values?: Model[];
 
-  modelFilter?: TFilter;
+  valueFilter?: TFilter;
 
   searchProperty?: string;
 
@@ -84,8 +84,8 @@ export function AdvanceIdMultipleFilter(
   props: AdvanceIdMultipleFilterProps<Model, ModelFilter>
 ) {
   const {
-    models,
-    modelFilter,
+    values,
+    valueFilter,
     searchProperty,
     searchType,
     placeHolder,
@@ -125,13 +125,13 @@ export function AdvanceIdMultipleFilter(
 
   const { run } = useDebounceFn(
     (searchTerm: string) => {
-      const cloneModelFilter = modelFilter
-        ? { ...modelFilter }
+      const cloneValueFilter = valueFilter
+        ? { ...valueFilter }
         : new ClassFilter();
-      cloneModelFilter[searchProperty][searchType] = searchTerm;
+      cloneValueFilter[searchProperty][searchType] = searchTerm;
       setLoading(true);
       subscription.add(getList);
-      getList(cloneModelFilter).subscribe(
+      getList(cloneValueFilter).subscribe(
         (res: Model[]) => {
           setList(res);
           setLoading(false);
@@ -151,9 +151,9 @@ export function AdvanceIdMultipleFilter(
     if (list && list.length > 0) {
       list.forEach((current) => {
         let filteredItem =
-          models &&
-          models.length > 0 &&
-          models?.filter((item) => item.id === current.id)[0];
+          values &&
+          values.length > 0 &&
+          values?.filter((item) => item.id === current.id)[0];
         if (filteredItem) {
           current.isSelected = true;
         } else {
@@ -163,15 +163,15 @@ export function AdvanceIdMultipleFilter(
       return [...list];
     }
     return [];
-  }, [list, models]);
+  }, [list, values]);
 
   const internalPreferOptions = React.useMemo(() => {
     if (preferOptions && preferOptions.length > 0) {
       preferOptions.forEach((current) => {
         let filteredItem =
-          models &&
-          models?.length > 0 &&
-          models.filter((item) => item.id === current.id)[0];
+          values &&
+          values?.length > 0 &&
+          values.filter((item) => item.id === current.id)[0];
         if (filteredItem) {
           current.isSelected = true;
         } else {
@@ -181,7 +181,7 @@ export function AdvanceIdMultipleFilter(
       return [...preferOptions];
     }
     return [];
-  }, [preferOptions, models]);
+  }, [preferOptions, values]);
 
   React.useEffect(() => {
     if (firstLoad) {
@@ -206,7 +206,7 @@ export function AdvanceIdMultipleFilter(
     try {
       setLoading(true);
       subscription.add(getList);
-      const filter = modelFilter ? modelFilter : new ClassFilter();
+      const filter = valueFilter ? valueFilter : new ClassFilter();
       getList(filter).subscribe(
         (res: Model[]) => {
           if (res) {
@@ -220,7 +220,7 @@ export function AdvanceIdMultipleFilter(
         }
       );
     } catch (error) {}
-  }, [getList, modelFilter, ClassFilter, subscription]);
+  }, [getList, valueFilter, ClassFilter, subscription]);
 
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -241,17 +241,17 @@ export function AdvanceIdMultipleFilter(
       let filteredItem = selectedList?.filter(
         (current) => current.id === item.id
       )[0];
-      const cloneModelFilter = modelFilter
-        ? { ...modelFilter }
+      const cloneValueFilter = valueFilter
+        ? { ...valueFilter }
         : new ClassFilter();
 
-      if (!cloneModelFilter["id"]["notIn"]) {
-        cloneModelFilter["id"]["notIn"] = [item?.id];
+      if (!cloneValueFilter["id"]["notIn"]) {
+        cloneValueFilter["id"]["notIn"] = [item?.id];
       } else {
-        cloneModelFilter["id"]["notIn"].push(item?.id);
+        cloneValueFilter["id"]["notIn"].push(item?.id);
       }
 
-      getList(cloneModelFilter).subscribe(
+      getList(cloneValueFilter).subscribe(
         (res: Model[]) => {
           if (res) {
             setList(res);
@@ -284,7 +284,7 @@ export function AdvanceIdMultipleFilter(
         });
       }
     },
-    [modelFilter, ClassFilter, getList, selectedList, onChange]
+    [valueFilter, ClassFilter, getList, selectedList, onChange]
   );
 
   const handleClickParentItem = React.useCallback(
@@ -307,10 +307,10 @@ export function AdvanceIdMultipleFilter(
   );
 
   const handleClearAll = React.useCallback(() => {
-    const cloneModelFilter = new ClassFilter();
+    const cloneValueFilter = new ClassFilter();
 
-    cloneModelFilter["id"]["notIn"] = [];
-    getList(cloneModelFilter).subscribe(
+    cloneValueFilter["id"]["notIn"] = [];
+    getList(cloneValueFilter).subscribe(
       (res: Model[]) => {
         if (res) {
           setList(res);
@@ -393,7 +393,7 @@ export function AdvanceIdMultipleFilter(
       >
         <div className="advance-id-filter__input" onClick={handleToggle}>
           <InputTag
-            listItem={models}
+            listItem={values}
             isMaterial={isMaterial}
             render={render}
             placeHolder={placeHolder}
@@ -450,7 +450,7 @@ export function AdvanceIdMultipleFilter(
               </>
             ) : (
               <div className="advance-id-filter__loading">
-                <IconLoading color="#0F62FE" size={24}/>
+                <IconLoading color="#0F62FE" size={24} />
               </div>
             )}
             {!loading && list.length > 0 && (

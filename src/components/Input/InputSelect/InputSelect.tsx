@@ -6,7 +6,7 @@ import classNames from "classnames";
 import { BORDER_TYPE } from "config/enum";
 
 export interface InputSelectProps<T extends Model> {
-  model?: T;
+  value?: T;
   disabled?: boolean;
   expanded?: boolean;
   isMaterial?: boolean;
@@ -27,7 +27,7 @@ export interface InputSelectProps<T extends Model> {
 
 function InputSelect(props: InputSelectProps<Model>) {
   const {
-    model,
+    value,
     disabled,
     expanded,
     placeHolder,
@@ -49,11 +49,11 @@ function InputSelect(props: InputSelectProps<Model>) {
     null
   );
 
-  const [internalModel, setInternalModel] = React.useState("");
+  const [internalValue, setInternalValue] = React.useState("");
 
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setInternalModel(event.target.value);
+      setInternalValue(event.target.value);
       if (typeof onSearch === "function") {
         onSearch(event.target.value);
       }
@@ -63,7 +63,7 @@ function InputSelect(props: InputSelectProps<Model>) {
 
   const handleClearInput = React.useCallback(
     (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
-      setInternalModel("");
+      setInternalValue("");
       inputRef.current.focus();
       event.stopPropagation();
     },
@@ -100,7 +100,7 @@ function InputSelect(props: InputSelectProps<Model>) {
 
   React.useEffect(() => {
     if (expanded) {
-      setInternalModel("");
+      setInternalValue("");
       inputRef.current.focus();
     }
   }, [expanded]);
@@ -132,7 +132,7 @@ function InputSelect(props: InputSelectProps<Model>) {
               "input-select--material": type === BORDER_TYPE.MATERIAL,
               "input-select--disabled ": disabled,
               "input-select--float": type === BORDER_TYPE.FLOAT_LABEL,
-              "input-select--filter-have-item": isFilter && model,
+              "input-select--filter-have-item": isFilter && value,
             }
           )}
         >
@@ -140,11 +140,11 @@ function InputSelect(props: InputSelectProps<Model>) {
             <>
               <input
                 type="text"
-                value={internalModel}
+                value={internalValue}
                 onChange={handleChange}
                 placeholder={
-                  model
-                    ? (render(model) as string)
+                  value
+                    ? (render(value) as string)
                     : type === BORDER_TYPE.FLOAT_LABEL && label
                     ? " "
                     : placeHolder
@@ -170,12 +170,12 @@ function InputSelect(props: InputSelectProps<Model>) {
                   {isRequired && <span className="text-danger">&nbsp;*</span>}
                 </label>
               )}
-              {internalModel && !disabled ? (
+              {internalValue && !disabled ? (
                 <CloseFilled16
                   className="input-icon input-icon__clear m-r--xxs"
                   onClick={handleClearInput}
                 ></CloseFilled16>
-              ) : model ? (
+              ) : value ? (
                 !disabled && (
                   <CloseFilled16
                     className="input-icon input-icon__clear m-r--xxs"
@@ -193,7 +193,7 @@ function InputSelect(props: InputSelectProps<Model>) {
             <>
               <input
                 type="text"
-                value={(render(model) as string) || ""}
+                value={(render(value) as string) || ""}
                 readOnly
                 placeholder={
                   type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
@@ -220,7 +220,7 @@ function InputSelect(props: InputSelectProps<Model>) {
                   {isRequired && <span className="text-danger">&nbsp;*</span>}
                 </label>
               )}
-              {model && !disabled && (
+              {value && !disabled && (
                 <CloseFilled16
                   className="input-icon input-icon__clear"
                   onClick={handleClearItem}

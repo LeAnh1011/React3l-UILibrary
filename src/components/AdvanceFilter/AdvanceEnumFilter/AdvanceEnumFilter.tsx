@@ -9,9 +9,9 @@ import { Model } from "react3l-common";
 import { CommonService } from "services/common-service";
 
 export interface AdvanceEnumProps<T extends Model> {
-  model?: Model;
+  value?: Model;
 
-  listModel?: Model[];
+  listValue?: Model[];
 
   placeHolder?: string;
 
@@ -68,7 +68,7 @@ function multipleSelectReducer(
 
 function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
   const {
-    model,
+    value,
     placeHolder,
     disabled,
     appendToBody,
@@ -79,14 +79,14 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
     selectWithAdd,
     isSmall,
     isMultiple,
-    listModel,
+    listValue,
     onChangeMultiple,
     listItem,
   } = props;
 
-  const internalModel = React.useMemo((): Model => {
-    return model || null;
-  }, [model]);
+  const internalValue = React.useMemo((): Model => {
+    return value || null;
+  }, [value]);
 
   const [list, setList] = React.useState<Model[]>([]);
 
@@ -111,9 +111,9 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
     if (list && list.length > 0) {
       list.forEach((current) => {
         let filteredItem =
-          listModel &&
-          listModel.length > 0 &&
-          listModel?.filter((item) => item.id === current.id)[0];
+          listValue &&
+          listValue.length > 0 &&
+          listValue?.filter((item) => item.id === current.id)[0];
         if (filteredItem) {
           current.isSelected = true;
         } else {
@@ -123,7 +123,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
       return [...list];
     }
     return [];
-  }, [list, listModel]);
+  }, [list, listValue]);
 
   React.useEffect(() => {
     if (firstLoad) {
@@ -176,7 +176,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
   // UX: after choose an item, this item need to be on top of the list
   const handleClickMultiItem = React.useCallback(
     (item: Model) => (event: any) => {
-      let filteredItem = listModel?.filter(
+      let filteredItem = listValue?.filter(
         (current) => current.id === item.id
       )[0];
 
@@ -208,7 +208,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
         });
       }
     },
-    [list, listModel, onChangeMultiple, selectedList]
+    [list, listValue, onChangeMultiple, selectedList]
   );
 
   const handleClickMultiParentItem = React.useCallback(
@@ -333,7 +333,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
         <div className="select__input" onClick={handleToggle}>
           {isMultiple ? (
             <InputTag
-              listItem={listModel} // value of input, event should change these on update
+              listItem={listValue} // value of input, event should change these on update
               render={render}
               placeHolder={placeHolder}
               disabled={disabled}
@@ -350,7 +350,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
             />
           ) : (
             <InputSelect
-              model={internalModel} // value of input, event should change these on update
+              value={internalValue} // value of input, event should change these on update
               render={render}
               placeHolder={placeHolder}
               expanded={isExpand}
@@ -430,7 +430,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                               "select__item p-l--xs p-y--xs",
                               {
                                 "select__item--selected":
-                                  item.id === internalModel?.id,
+                                  item.id === internalValue?.id,
                               }
                             )}
                             tabIndex={-1}
@@ -439,7 +439,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                             onClick={handleClickItem(item)}
                           >
                             <span className="select__text">{render(item)}</span>
-                            {item.id === internalModel?.id && (
+                            {item.id === internalValue?.id && (
                               <div style={{ height: "16px" }}>
                                 <Checkmark16 />
                               </div>

@@ -15,8 +15,8 @@ export interface InputSearchProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
-  model?: T;
-  modelFilter?: TModelFilter;
+  value?: T;
+  valueFilter?: TModelFilter;
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
   classFilter: new () => TModelFilter;
   render?: (t: T) => string;
@@ -34,11 +34,11 @@ function defaultRenderObject<T extends Model>(t: T) {
 
 function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
   const {
-    model,
+    value,
     placeHolder,
     getList,
     render,
-    modelFilter,
+    valueFilter,
     classFilter: ClassFilter,
     searchProperty,
     searchType,
@@ -57,9 +57,9 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
 
   const [showInput, setShowInput] = React.useState<boolean>(!animationInput);
 
-  const internalModel = React.useMemo((): Model => {
-    return model || null;
-  }, [model]);
+  const internalValue = React.useMemo((): Model => {
+    return value || null;
+  }, [value]);
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
@@ -92,15 +92,15 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
   const { run } = useDebounceFn(
     (searchTerm: string) => {
       if (searchTerm !== "" && searchTerm) {
-        const cloneModelFilter = modelFilter
-          ? { ...modelFilter }
+        const cloneValueFilter = valueFilter
+          ? { ...valueFilter }
           : new ClassFilter();
         if (searchType) {
-          cloneModelFilter[searchProperty][searchType] = searchTerm;
-        } else cloneModelFilter[searchProperty] = searchTerm;
+          cloneValueFilter[searchProperty][searchType] = searchTerm;
+        } else cloneValueFilter[searchProperty] = searchTerm;
         setLoading(true);
         subscription.add(getList);
-        getList(cloneModelFilter).subscribe(
+        getList(cloneValueFilter).subscribe(
           (res: Model[]) => {
             setList(res);
             setLoading(false);
@@ -127,7 +127,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     try {
       setLoading(true);
       subscription.add(getList);
-      const filter = modelFilter ? modelFilter : new ClassFilter();
+      const filter = valueFilter ? valueFilter : new ClassFilter();
       getList(filter).subscribe(
         (res: Model[]) => {
           setList(res);
@@ -139,7 +139,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
         }
       );
     } catch (error) {}
-  }, [getList, modelFilter, ClassFilter, subscription]);
+  }, [getList, valueFilter, ClassFilter, subscription]);
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -307,7 +307,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
                   list.map((item, index) => (
                     <div
                       className={classNames("select__item p-l--xs p-y--xs", {
-                        "select__item--selected": item.id === internalModel?.id,
+                        "select__item--selected": item.id === internalValue?.id,
                       })}
                       tabIndex={-1}
                       key={index}

@@ -333,7 +333,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
         <div className="select__input" onClick={handleToggle}>
           {isMultiple ? (
             <InputTag
-              listItem={listValue} // value of input, event should change these on update
+              listValue={listValue} // value of input, event should change these on update
               render={render}
               placeHolder={placeHolder}
               disabled={disabled}

@@ -43,6 +43,14 @@ export enum ORDER_TYPE {
 }
 function Default() {
   const [filter, setFilter] = React.useState<DemoFilter>(new DemoFilter());
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const handleLoading = React.useCallback(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 4000);
+  }, []);
 
   const handlePagination = React.useCallback(
     (skip: number, take: number) => {
@@ -587,6 +595,7 @@ function Default() {
             tableSize={size}
             rowSelection={rowSelection}
             expandable={expandable}
+            loading={loading}
           />
           <div>
             <Pagination
@@ -625,6 +634,11 @@ function Default() {
       </Tabs>
 
       <div>
+        <div>
+          <Button type="primary" className="btn--sm" onClick={handleLoading}>
+            {"Loading"}
+          </Button>
+        </div>
         <div style={{ margin: "10px", width: "500px" }}>
           <Radio.Group onChange={handleChangeAvatarType} value={avatarType}>
             <Radio value={AVATAR_TYPE.CIRCLE}>circle</Radio>

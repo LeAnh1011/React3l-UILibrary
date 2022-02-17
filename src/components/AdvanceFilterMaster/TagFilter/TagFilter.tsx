@@ -49,10 +49,13 @@ function TagFilter(props: TagFilterProps) {
       Object.entries<
         StringFilter | DateFilter | NumberFilter | IdFilter | GuidFilter
       >(search as any).forEach(([key, value]) => {
+        debugger
         if (value instanceof StringFilter) {
+
           Object.entries(value).forEach(([filterKey, filterValue]) => {
             // filter by StringFilter
             if (typeof filterValue === "string" && filterValue !== "") {
+
               switch (filterKey) {
                 case "startWith":
                   return list.push({

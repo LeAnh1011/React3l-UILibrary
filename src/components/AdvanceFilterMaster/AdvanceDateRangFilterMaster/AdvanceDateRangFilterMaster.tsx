@@ -92,6 +92,11 @@ function AdvanceDateRangeFilterMaster(
     null
   );
 
+  const panelRef = React.useRef(
+    null
+  );
+
+
   const formatDateFilter = React.useCallback((item: any): [Moment, Moment] => {
     if (item) {
       switch (item.id) {
@@ -194,7 +199,15 @@ function AdvanceDateRangeFilterMaster(
     onChange(null, value);
   }, [onChange, value]);
 
-  CommonService.useClickOutside(wrapperRef, handleCloseAdvanceFilterMaster);
+  const handleGetRef = React.useCallback(() => {
+    return document.getElementsByClassName('date-range-master');
+  }, []);
+
+  const handleOpenChange = React.useCallback(() => () => {
+    panelRef.current = handleGetRef()[0];
+  }, [handleGetRef]);
+
+  CommonService.useClickOutsideMultiple(wrapperRef, panelRef, handleCloseAdvanceFilterMaster);
 
   const handleClearItem = React.useCallback(() => {
     onChange(null, [null, null]);
@@ -290,6 +303,8 @@ function AdvanceDateRangeFilterMaster(
                   document.getElementById("list-container")
                 }
                 placeHolder={placeholder}
+                dropdownClassName="date-range-master"
+                onOpenChange={handleOpenChange}
               />
             </>
           )}

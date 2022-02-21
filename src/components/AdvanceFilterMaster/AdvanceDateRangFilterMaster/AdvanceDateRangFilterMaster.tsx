@@ -92,10 +92,8 @@ function AdvanceDateRangeFilterMaster(
     null
   );
 
-  const panelRef = React.useRef(
-    null
-  );
-
+  const panelRef = React.useRef(null);
+  const listRef = React.useRef(null);
 
   const formatDateFilter = React.useCallback((item: any): [Moment, Moment] => {
     if (item) {
@@ -166,7 +164,10 @@ function AdvanceDateRangeFilterMaster(
 
   const handleChange = React.useCallback(
     (values: [Moment, Moment], formatString: [string, string]) => {
-      onChange(undefined, [values[0]?.startOf("day"), values[1]?.endOf("day")]);
+      onChange({ id: 9, name: "Custom date", code: "customdate" }, [
+        values[0]?.startOf("day"),
+        values[1]?.endOf("day"),
+      ]);
     },
     [onChange]
   );
@@ -175,9 +176,13 @@ function AdvanceDateRangeFilterMaster(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (!disabled) {
         setExpand(true);
+        setTimeout(() => {
+          console.log(listRef.current);
+          listRef.current.focus();
+        }, 300);
       }
     },
-    [disabled]
+    [disabled, listRef]
   );
 
   const handleCloseAdvanceFilterMaster = React.useCallback(() => {
@@ -196,18 +201,67 @@ function AdvanceDateRangeFilterMaster(
 
   const handleClickCustomDate = React.useCallback(() => {
     setExpandDate(true);
-    onChange(null, value);
+    onChange({ id: 9, name: "Custom date", code: "customdate" }, value);
   }, [onChange, value]);
 
   const handleGetRef = React.useCallback(() => {
-    return document.getElementsByClassName('date-range-master');
+    return document.getElementsByClassName("date-range-master");
   }, []);
 
-  const handleOpenChange = React.useCallback(() => () => {
-    panelRef.current = handleGetRef()[0];
-  }, [handleGetRef]);
+  const handleOpenChange = React.useCallback(
+    () => () => {
+      panelRef.current = handleGetRef()[0];
+    },
+    [handleGetRef]
+  );
 
-  CommonService.useClickOutsideMultiple(wrapperRef, panelRef, handleCloseAdvanceFilterMaster);
+  const handleKeyDown = React.useCallback(
+    (event) => {
+      switch (event.keyCode) {
+        case 40:
+          const firstItem = selectListRef.current
+            .firstElementChild as HTMLElement;
+          firstItem.focus();
+          break;
+        case 9:
+          handleCloseAdvanceFilterMaster();
+          break;
+        default:
+          return;
+      }
+    },
+    [handleCloseAdvanceFilterMaster]
+  );
+
+  const handleMove = React.useCallback(
+    (item) => (event: any) => {
+      switch (event.keyCode) {
+        case 13:
+          handleClickItem(item)(null);
+          break;
+        case 40:
+          if (event.target.nextElementSibling !== null) {
+            event.target.nextElementSibling.focus();
+          }
+          event.preventDefault();
+          break;
+        case 38:
+          if (event.target.previousElementSibling !== null) {
+            event.target.previousElementSibling.focus();
+          }
+          event.preventDefault();
+          break;
+      }
+      return;
+    },
+    [handleClickItem]
+  );
+
+  CommonService.useClickOutsideMultiple(
+    wrapperRef,
+    panelRef,
+    handleCloseAdvanceFilterMaster
+  );
 
   const handleClearItem = React.useCallback(() => {
     onChange(null, [null, null]);
@@ -255,6 +309,7 @@ function AdvanceDateRangeFilterMaster(
             type={inputType}
             label={title}
             isSmall={isSmall}
+            onKeyDown={handleKeyDown}
           />
         </div>
       )}
@@ -262,7 +317,13 @@ function AdvanceDateRangeFilterMaster(
       {isExpand && (
         <div
           id="list-container"
-          className="date-range-filter-master__list-container m-t--xxxs"
+          className={classNames("date-range-filter-master__list-container", {
+            "date-range-filter-master__list-border":
+              type === ADVANCE_DATE_RANGE_TYPE.SHORT,
+            "":
+              type === ADVANCE_DATE_RANGE_TYPE.INPUT,
+          })}
+          ref={listRef}
         >
           <div className="advance-date-range-master__list" ref={selectListRef}>
             {list.length > 0 &&
@@ -275,6 +336,7 @@ function AdvanceDateRangeFilterMaster(
                   tabIndex={-1}
                   key={index}
                   onClick={handleClickItem(item)}
+                  onKeyDown={handleMove(item)}
                 >
                   <span className="advance-date-range-filter__text">
                     {render(item)}
@@ -284,7 +346,7 @@ function AdvanceDateRangeFilterMaster(
           </div>
           <div
             className={classNames("date-range-master__prefer-option p--xs", {
-              "date-range-master__bg-primary": activeItem === undefined,
+              "date-range-master__bg-primary": activeItem?.id === 9,
             })}
             onClick={handleClickCustomDate}
           >

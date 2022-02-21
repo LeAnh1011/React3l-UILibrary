@@ -150,12 +150,13 @@ function AdvanceIdFilterMaster(
       if (!disabled) {
         setExpand(true);
         setTimeout(() => {
+          console.log(inputRef.current)
           inputRef.current.children[0].focus();
-        }, 400);
+        }, 300);
         await handleLoadList();
       }
     },
-    [handleLoadList, disabled, inputRef]
+    [handleLoadList, disabled]
   );
 
   const handleCloseAdvanceIdFilterMaster = React.useCallback(() => {

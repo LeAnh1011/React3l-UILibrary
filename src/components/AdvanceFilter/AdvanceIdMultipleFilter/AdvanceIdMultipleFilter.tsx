@@ -15,7 +15,7 @@ import IconLoading from "components/IconLoading/IconLoading";
 export interface AdvanceIdMultipleFilterProps<
   T extends Model,
   TFilter extends ModelFilter
-> {
+  > {
   values?: Model[];
 
   valueFilter?: TFilter;
@@ -219,7 +219,7 @@ export function AdvanceIdMultipleFilter(
           setLoading(false);
         }
       );
-    } catch (error) {}
+    } catch (error) { }
   }, [getList, valueFilter, ClassFilter, subscription]);
 
   const handleToggle = React.useCallback(
@@ -393,7 +393,7 @@ export function AdvanceIdMultipleFilter(
       >
         <div className="advance-id-filter__input" onClick={handleToggle}>
           <InputTag
-            listItem={values}
+            listValue={values}
             isMaterial={isMaterial}
             render={render}
             placeHolder={placeHolder}

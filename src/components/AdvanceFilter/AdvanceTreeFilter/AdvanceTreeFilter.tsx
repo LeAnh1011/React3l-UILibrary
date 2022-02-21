@@ -14,7 +14,7 @@ import { BORDER_TYPE } from "config/enum";
 export interface AdvanceTreeFilterProps<
   T extends Model,
   TModelFilter extends ModelFilter
-> {
+  > {
   title?: string;
   listItem?: Model[];
   item?: Model;
@@ -198,7 +198,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
         <div className="advance-tree-filter__input" onClick={handleExpand}>
           {checkable ? (
             <InputTag
-              listItem={listItem}
+              listValue={listItem}
               isMaterial={isMaterial}
               render={render}
               placeHolder={placeHolder}

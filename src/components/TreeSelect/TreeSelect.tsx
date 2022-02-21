@@ -14,7 +14,7 @@ import { BORDER_TYPE } from "config/enum";
 export interface TreeSelectProps<
   T extends Model,
   TModelFilter extends ModelFilter
-> {
+  > {
   title?: string;
   listItem?: Model[];
   item?: Model;
@@ -208,7 +208,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
         <div className="tree-select__input" onClick={handleExpand}>
           {checkable ? (
             <InputTag
-              listItem={listItem}
+              listValue={listItem}
               isMaterial={isMaterial}
               render={render}
               placeHolder={placeHolder}

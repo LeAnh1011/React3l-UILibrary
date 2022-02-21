@@ -1,102 +1,32 @@
 @import "../../../styles/index.scss";
+/* Style for TreeSelect.tsx */
+.advance-tree-filter-master__container {
+  width: 100%;
 
-$backgound-color: #f4f4f4;
-
-/* Style for advance-id-filter.tsx */
-.advance-id-filter-master__wrapper {
   position: relative;
-  .advance-id-filter-master__container {
-    width: fit-content;
-    cursor: pointer;
-    &.filter-bg {
-      background-color: var(--palette-gray-30);
-      &:hover {
-        background-color: var(--palette-gray-30);
-      }
-    }
-    &.p-b---active {
-      padding-bottom: 11px !important;
-    }
-    .filter-active {
-      color: var(--color-primary);
-      span {
-        border-bottom: 1px solid var(--color-primary);
-      }
-    }
-    &:hover {
-      background: #e5e5e5;
-    }
-    .filter__icon {
-      font-size: 16px;
-    }
-    .advance-id-filter-master__title {
-      font-style: normal;
-      font-weight: normal;
-      font-size: 14px;
-      line-height: 16px;
-      display: flex;
-      align-items: center;
-      letter-spacing: 0.16px;
-      .filter-title {
-        margin-right: 7px;
-      }
+
+  .ant-checkbox-checked {
+    .ant-checkbox-inner {
+      background-color: var(--color-text);
+      border-color: var(--color-text);
     }
   }
 
-  .advance-id-filter-master__list-container {
-    min-width: 280px;
-    width: auto;
-    height: auto;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2), 0px 2px 10px rgba(0, 0, 0, 0.1);
+  .ant-checkbox:hover,
+  .ant-checkbox-checked:hover {
+    .ant-checkbox-inner {
+      border-color: var(--color-text);
+    }
+  }
+
+  .advance-tree-filter-master__input {
+    width: 100%;
+  }
+
+  .advance-tree-filter-master__list {
+    width: 100%;
+    margin-top: 5px;
     position: absolute;
     z-index: 999;
-    background-color: white;
-    .advance-id-filter__input {
-      background-color: white;
-    }
-    .advance-id-master__list {
-      background-color: $backgound-color;
-      width: 100%;
-      overflow-y: auto;
-      max-height: 160px;
-    }
-    .advance-id-filter__loading {
-      width: 100%;
-      min-height: 100px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    .advance-id-filter__item {
-      &:hover,
-      &:focus {
-        background-color: #e5e5e5;
-      }
-      &:focus-visible {
-        outline: none;
-      }
-      &.select__item--selected {
-        background-color: var(--palette-grayHover-10);
-        display: flex;
-        justify-content: space-between;
-      }
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 14px;
-      line-height: 16px;
-      cursor: pointer;
-    }
-    .advance-id-master__list-prefer {
-      box-shadow: inset 0px 1px 0px #e1e3e5;
-      background: $backgound-color;
-    }
-    .advance-id-master__text {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
   }
 }

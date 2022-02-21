@@ -196,8 +196,11 @@ function AdvanceTreeFilterMaster(
 
   return (
     <>
-      <div className="advance-tree-filter__container" ref={wrapperRef}>
-        <div className="advance-tree-filter__input" onClick={handleExpand}>
+      <div className="advance-tree-filter-master__container" ref={wrapperRef}>
+        <div
+          className="advance-tree-filter-master__input"
+          onClick={handleExpand}
+        >
           {checkable ? (
             <InputTag
               listValue={listItem}
@@ -235,7 +238,7 @@ function AdvanceTreeFilterMaster(
           )}
         </div>
         {expanded && (
-          <div className="advance-tree-filter__list" id={componentId}>
+          <div className="advance-tree-filter-master__list" id={componentId}>
             <Tree
               getTreeData={getTreeData}
               selectedKey={selectedKey}

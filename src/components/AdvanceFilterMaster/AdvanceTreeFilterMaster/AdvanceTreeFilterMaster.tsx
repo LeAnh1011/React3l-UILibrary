@@ -7,11 +7,10 @@ import { useDebounceFn } from "ahooks";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import { Observable } from "rxjs";
 import { CommonService } from "services/common-service";
-import InputTag from "components/Input/InputTag";
-import InputSelect from "../../Input/InputSelect";
+import InputText from "components/Input/InputText";
 import { BORDER_TYPE } from "config/enum";
 import classNames from "classnames";
-import { ChevronDown16 } from "@carbon/icons-react";
+import { ChevronDown16, Search16 } from "@carbon/icons-react";
 
 export interface AdvanceTreeFilterMasterProps<
   T extends Model,
@@ -44,6 +43,7 @@ export interface AdvanceTreeFilterMasterProps<
   selectWithAdd?: boolean;
   selectWithPreferOption?: boolean;
   preferOptions?: T[];
+  maxLength?: number;
 }
 export interface filterAction {
   type: string;
@@ -76,20 +76,16 @@ function AdvanceTreeFilterMaster(
     placeHolder,
     selectedKey,
     onlySelectLeaf,
-    render,
     getTreeData,
     onChange,
-    type,
-    label,
-    isSmall,
-    isUsingSearch,
     treeTitleRender,
     selectWithAdd,
     selectWithPreferOption,
     preferOptions,
     title,
+    maxLength,
   } = props;
-
+  const inputRef: any = React.useRef<any>(null);
   const componentId = React.useMemo(() => uuidv4(), []);
 
   const { run } = useDebounceFn(
@@ -119,33 +115,12 @@ function AdvanceTreeFilterMaster(
     Reducer<ModelFilter, filterAction>
   >(filterReducer, new ClassFilter());
 
-  const handleClearItem = React.useCallback(
-    (item: Model) => {
-      if (checkable) {
-        const newListItem = listItem.filter(
-          (currentItem) => currentItem.id !== item?.id
-        );
-        onChange(newListItem, checkable);
-      } else {
-        onChange([null], checkable);
-      }
-    },
-    [listItem, onChange, checkable]
-  );
-
-  const handleClearMultiItem = React.useCallback(() => {
-    if (typeof onChange === "function") {
-      onChange([], checkable);
-    }
-  }, [checkable, onChange]);
-
-  const handleSearchItem = React.useCallback(
+  const handleSearchChange = React.useCallback(
     (searchTerm: string) => {
       run(searchTerm);
     },
     [run]
   );
-
   const handleCloseList = React.useCallback(() => {
     setExpanded(false);
   }, []);
@@ -154,6 +129,9 @@ function AdvanceTreeFilterMaster(
     (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (!disabled) {
         if (!expanded) {
+          setTimeout(() => {
+            inputRef.current.children[0].focus();
+          }, 400);
           const filterData = valueFilter
             ? { ...valueFilter }
             : new ClassFilter();
@@ -201,58 +179,38 @@ function AdvanceTreeFilterMaster(
     <>
       <div className="advance-tree-filter-master__container" ref={wrapperRef}>
         <div
-          className="advance-tree-filter-master__input"
           onClick={handleExpand}
-        >
-          <div
-            className={classNames({
+          className={classNames(
+            "button-toggle p-l--sm p-t--xs p-r--xs p-b--xs",
+            {
               "filter-active": !checkable ? item : listItem?.length > 0,
-            })}
-          >
-            <div className="advance-tree-filter-master__title">
-              <span className="filter-title"> {title}</span>
-              <ChevronDown16 />
-            </div>
+              "active-bg": expanded,
+            }
+          )}
+        >
+          <div className="advance-tree-filter-master__title">
+            <span className="filter-title">
+              {checkable &&
+                listItem?.length > 0 &&
+                "(" + listItem?.length + ") "}
+              {title}
+            </span>
+            <ChevronDown16 />
           </div>
         </div>
         {expanded && (
-          <>
-            <div>
-              {checkable ? (
-                <InputTag
-                  listValue={listItem}
-                  isMaterial={isMaterial}
-                  render={render}
-                  placeHolder={placeHolder}
-                  disabled={disabled}
-                  onSearch={handleSearchItem}
-                  onClear={handleClearItem}
-                  type={type}
-                  label={label}
-                  isSmall={isSmall}
-                  isUsingSearch={isUsingSearch}
-                  onClearMulti={handleClearMultiItem}
-                  onKeyDown={handleKeyPress}
-                  isFilter={true}
-                  isNotExpand={!expanded}
-                />
-              ) : (
-                <InputSelect
-                  value={item}
-                  render={render}
-                  isMaterial={isMaterial}
-                  placeHolder={placeHolder}
-                  expanded={expanded}
-                  disabled={disabled}
-                  onSearch={handleSearchItem}
-                  onClear={handleClearItem}
-                  type={type}
-                  label={label}
-                  isSmall={isSmall}
-                  onKeyDown={handleKeyPress}
-                  isFilter={true}
-                />
-              )}
+          <div className="advance-tree-filter-master__box-search">
+            <div className="advance-tree-filter-master__input p--xs">
+              <InputText
+                isSmall={false}
+                maxLength={maxLength}
+                onChange={handleSearchChange}
+                placeHolder={placeHolder}
+                suffix={<Search16 />}
+                isMaterial={isMaterial}
+                ref={inputRef}
+                onKeyDown={handleKeyPress}
+              />
             </div>
             <div className="advance-tree-filter-master__list" id={componentId}>
               <Tree
@@ -273,7 +231,7 @@ function AdvanceTreeFilterMaster(
                 isExpand={expanded}
               />
             </div>
-          </>
+          </div>
         )}
       </div>
     </>

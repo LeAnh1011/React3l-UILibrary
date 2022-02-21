@@ -7,8 +7,11 @@
 
   .button-toggle{
     width: fit-content;
-    &:hover, &.active-bg{
-      background-color: var(--palette-gray-30);
+    &:hover{
+      background-color: var(--palette-gray-20);
+    }
+    &.active-bg{
+      background-color: var(--palette-gray-30) !important;
     }
   }
   .ant-checkbox-checked {

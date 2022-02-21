@@ -15,11 +15,11 @@ import TwoLineText from "./DataCellComponent/TwoLineText/TwoLineText";
 import OneLineText from "./DataCellComponent/OneLineText/OneLineText";
 import StatusLine from "./DataCellComponent/StatusLine/StatusLine";
 import { ColumnProps } from "antd/lib/table";
-import { Button } from "antd";
 import { Tabs } from "antd";
 import Pagination from "./Pagination/Pagination";
-import { ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
+import { Add16, ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
 import { StringFilter } from "react3l-advanced-filters";
+import Button from "../Button/Button";
 const KateBishop =
   "https://www.dualshockers.com/static/uploads/2021/11/How-Old-Is-Kate-Bishop-In-Hawkeye-TV-Show-scaled.jpeg";
 const { TabPane } = Tabs;
@@ -585,7 +585,16 @@ function Default() {
             selectedRowKeys={selectedRowKeys}
             setSelectedRowKeys={setSelectedRowKeys}
           >
-            <Button>Button demo</Button>
+            <Button type="ghost-primary" className="btn--lg" icon={<Add16 />}>
+              {"Button"}
+            </Button>
+            <Button
+              type="ghost-primary"
+              className="btn--lg"
+              icon={<ChevronDown16 />}
+            >
+              {"Button"}
+            </Button>
           </ActionBarComponent>
           <StandardTable
             columns={columns}
@@ -611,7 +620,16 @@ function Default() {
             selectedRowKeys={selectedRowKeys}
             setSelectedRowKeys={setSelectedRowKeys}
           >
-            <Button>Button demo</Button>
+            <Button type="ghost-primary" className="btn--lg" icon={<Add16 />}>
+              {"Button"}
+            </Button>
+            <Button
+              type="ghost-primary"
+              className="btn--lg"
+              icon={<ChevronDown16 />}
+            >
+              {"Button"}
+            </Button>
           </ActionBarComponent>
           <StandardTable
             columns={columns2}
@@ -635,8 +653,8 @@ function Default() {
 
       <div>
         <div>
-          <Button type="primary" className="btn--sm" onClick={handleLoading}>
-            {"Loading"}
+          <Button type="primary" className="btn--lg" onClick={handleLoading}>
+            {"Button"}
           </Button>
         </div>
         <div style={{ margin: "10px", width: "500px" }}>

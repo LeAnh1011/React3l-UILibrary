@@ -10,6 +10,8 @@ import { CommonService } from "services/common-service";
 import InputTag from "components/Input/InputTag";
 import InputSelect from "../../Input/InputSelect";
 import { BORDER_TYPE } from "config/enum";
+import classNames from "classnames";
+import { ChevronDown16 } from "@carbon/icons-react";
 
 export interface AdvanceTreeFilterMasterProps<
   T extends Model,
@@ -85,6 +87,7 @@ function AdvanceTreeFilterMaster(
     selectWithAdd,
     selectWithPreferOption,
     preferOptions,
+    title,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -201,62 +204,76 @@ function AdvanceTreeFilterMaster(
           className="advance-tree-filter-master__input"
           onClick={handleExpand}
         >
-          {checkable ? (
-            <InputTag
-              listValue={listItem}
-              isMaterial={isMaterial}
-              render={render}
-              placeHolder={placeHolder}
-              disabled={disabled}
-              onSearch={handleSearchItem}
-              onClear={handleClearItem}
-              type={type}
-              label={label}
-              isSmall={isSmall}
-              isUsingSearch={isUsingSearch}
-              onClearMulti={handleClearMultiItem}
-              onKeyDown={handleKeyPress}
-              isFilter={true}
-              isNotExpand={!expanded}
-            />
-          ) : (
-            <InputSelect
-              value={item}
-              render={render}
-              isMaterial={isMaterial}
-              placeHolder={placeHolder}
-              expanded={expanded}
-              disabled={disabled}
-              onSearch={handleSearchItem}
-              onClear={handleClearItem}
-              type={type}
-              label={label}
-              isSmall={isSmall}
-              onKeyDown={handleKeyPress}
-              isFilter={true}
-            />
-          )}
+          <div
+            className={classNames({
+              "filter-active": !checkable ? item : listItem?.length > 0,
+            })}
+          >
+            <div className="advance-tree-filter-master__title">
+              <span className="filter-title"> {title}</span>
+              <ChevronDown16 />
+            </div>
+          </div>
         </div>
         {expanded && (
-          <div className="advance-tree-filter-master__list" id={componentId}>
-            <Tree
-              getTreeData={getTreeData}
-              selectedKey={selectedKey}
-              onlySelectLeaf={onlySelectLeaf}
-              checkedKeys={listIds}
-              valueFilter={filter}
-              checkStrictly={checkStrictly}
-              height={300}
-              onChange={handleOnchange}
-              selectable={selectable}
-              checkable={checkable}
-              titleRender={treeTitleRender}
-              selectWithAdd={selectWithAdd}
-              selectWithPreferOption={selectWithPreferOption}
-              preferOptions={preferOptions}
-              isExpand={expanded}
-            />
-          </div>
+          <>
+            <div>
+              {checkable ? (
+                <InputTag
+                  listValue={listItem}
+                  isMaterial={isMaterial}
+                  render={render}
+                  placeHolder={placeHolder}
+                  disabled={disabled}
+                  onSearch={handleSearchItem}
+                  onClear={handleClearItem}
+                  type={type}
+                  label={label}
+                  isSmall={isSmall}
+                  isUsingSearch={isUsingSearch}
+                  onClearMulti={handleClearMultiItem}
+                  onKeyDown={handleKeyPress}
+                  isFilter={true}
+                  isNotExpand={!expanded}
+                />
+              ) : (
+                <InputSelect
+                  value={item}
+                  render={render}
+                  isMaterial={isMaterial}
+                  placeHolder={placeHolder}
+                  expanded={expanded}
+                  disabled={disabled}
+                  onSearch={handleSearchItem}
+                  onClear={handleClearItem}
+                  type={type}
+                  label={label}
+                  isSmall={isSmall}
+                  onKeyDown={handleKeyPress}
+                  isFilter={true}
+                />
+              )}
+            </div>
+            <div className="advance-tree-filter-master__list" id={componentId}>
+              <Tree
+                getTreeData={getTreeData}
+                selectedKey={selectedKey}
+                onlySelectLeaf={onlySelectLeaf}
+                checkedKeys={listIds}
+                valueFilter={filter}
+                checkStrictly={checkStrictly}
+                height={300}
+                onChange={handleOnchange}
+                selectable={selectable}
+                checkable={checkable}
+                titleRender={treeTitleRender}
+                selectWithAdd={selectWithAdd}
+                selectWithPreferOption={selectWithPreferOption}
+                preferOptions={preferOptions}
+                isExpand={expanded}
+              />
+            </div>
+          </>
         )}
       </div>
     </>

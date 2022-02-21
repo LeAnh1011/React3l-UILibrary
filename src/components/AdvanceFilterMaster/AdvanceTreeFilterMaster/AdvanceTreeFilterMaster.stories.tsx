@@ -134,6 +134,7 @@ export function AdvanceTreeFilterMasterStories() {
     <div style={{ margin: "10px", width: "300px" }}>
       <div style={{ margin: "10px", width: "300px" }}>
         <AdvanceTreeFilterMaster
+          title="Đơn vị"
           checkable={isMultiple}
           placeHolder={"Select Organization"}
           selectable={!isMultiple}

@@ -8,7 +8,6 @@ import { DEBOUNCE_TIME_300 } from "config/consts";
 import { Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import InputText from "components/Input/InputText";
-import { BORDER_TYPE } from "config/enum";
 import classNames from "classnames";
 import { ChevronDown16, Search16 } from "@carbon/icons-react";
 
@@ -28,19 +27,12 @@ export interface AdvanceTreeFilterMasterProps<
   disabled?: boolean;
   valueFilter?: TModelFilter;
   placeHolder?: string;
-  error?: string;
   selectedKey?: number;
   onlySelectLeaf?: boolean;
-  render?: (T: T) => string;
   getTreeData?: (TModelFilter?: TModelFilter) => Observable<T[]>;
   onChange?: (T: Model[], TT: boolean) => void;
   classFilter?: new () => TModelFilter;
-  type?: BORDER_TYPE;
-  label?: string;
-  isSmall?: boolean;
-  isUsingSearch?: boolean;
   treeTitleRender?: (T: T) => string;
-  selectWithAdd?: boolean;
   selectWithPreferOption?: boolean;
   preferOptions?: T[];
   maxLength?: number;
@@ -79,7 +71,6 @@ function AdvanceTreeFilterMaster(
     getTreeData,
     onChange,
     treeTitleRender,
-    selectWithAdd,
     selectWithPreferOption,
     preferOptions,
     title,
@@ -225,7 +216,7 @@ function AdvanceTreeFilterMaster(
                 selectable={selectable}
                 checkable={checkable}
                 titleRender={treeTitleRender}
-                selectWithAdd={selectWithAdd}
+                selectWithAdd={false}
                 selectWithPreferOption={selectWithPreferOption}
                 preferOptions={preferOptions}
                 isExpand={expanded}

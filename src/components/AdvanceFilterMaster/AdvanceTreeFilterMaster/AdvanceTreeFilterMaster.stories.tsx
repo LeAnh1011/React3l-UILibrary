@@ -7,7 +7,6 @@ import { IdFilter } from "react3l-advanced-filters";
 import { StringFilter } from "react3l-advanced-filters";
 import { Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
-import { BORDER_TYPE } from "./../../../config/enum";
 
 export class DistrictFilter extends ModelFilter {
   public id: IdFilter = new IdFilter();
@@ -67,25 +66,10 @@ export function AdvanceTreeFilterMasterStories() {
   const [item, setItem] = React.useState<Model>(demoItem);
 
   const [isMultiple, setMultiple] = React.useState(false);
-
-  const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
-
-  const [isSmall, setIsSmall] = React.useState<boolean>(false);
-
-  const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
-
   const [
     isSelectWithPreferOption,
     setIsSelectWithPreferOption,
   ] = React.useState<boolean>(false);
-
-  const [isSelectWithAdd, setIsSelectWithAdd] = React.useState<boolean>(false);
-
-  const [withSearch, setWithSearch] = React.useState(true);
-
-  const handleChangeType = React.useCallback((event: RadioChangeEvent) => {
-    setType(event.target.value);
-  }, []);
 
   const handleChangeRadio = React.useCallback((event: RadioChangeEvent) => {
     if (event.target.value) setItem(undefined);
@@ -101,31 +85,9 @@ export function AdvanceTreeFilterMasterStories() {
     }
   }, []);
 
-  const handleChangeSelectWithAdd = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setIsSelectWithAdd(event.target.value);
-    },
-    []
-  );
-
   const handleChangeSelectWithPreferOption = React.useCallback(
     (event: RadioChangeEvent) => {
       setIsSelectWithPreferOption(event.target.value);
-    },
-    []
-  );
-
-  const handleChangeDisabled = React.useCallback((event: RadioChangeEvent) => {
-    setIsDisabled(event.target.value);
-  }, []);
-
-  const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
-    setIsSmall(event.target.value);
-  }, []);
-
-  const handleChangeWithSearch = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setWithSearch(event.target.value);
     },
     []
   );
@@ -136,7 +98,7 @@ export function AdvanceTreeFilterMasterStories() {
         <AdvanceTreeFilterMaster
           title="Đơn vị"
           checkable={isMultiple}
-          placeHolder={"Select Organization"}
+          placeHolder={"Chọn đơn vị"}
           selectable={!isMultiple}
           classFilter={DistrictFilter}
           onChange={handleChangeItem}
@@ -144,12 +106,7 @@ export function AdvanceTreeFilterMasterStories() {
           item={item}
           listItem={isMultiple ? listItem : []}
           getTreeData={demoSearchFunc}
-          type={type}
-          isUsingSearch={withSearch}
-          label={null}
-          disabled={isDisabled}
-          isSmall={isSmall}
-          selectWithAdd={false}
+          disabled={false}
           selectWithPreferOption={isSelectWithPreferOption}
           preferOptions={isSelectWithPreferOption ? list : undefined}
         />
@@ -162,31 +119,6 @@ export function AdvanceTreeFilterMasterStories() {
         </Radio.Group>
       </div>
 
-      <div style={{ margin: "10px", width: "400px" }}>
-        <Radio.Group onChange={handleChangeType} value={type}>
-          <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
-          <Radio value={BORDER_TYPE.FLOAT_LABEL}>Float Label</Radio>
-          <Radio value={BORDER_TYPE.BORDERED}>Bordered</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeDisabled} value={isDisabled}>
-          <Radio value={true}>Disabled</Radio>
-          <Radio value={false}>Not Disabled</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "400px" }}>
-        <Radio.Group
-          onChange={handleChangeSelectWithAdd}
-          value={isSelectWithAdd}
-        >
-          <Radio value={true}>Select with add</Radio>
-          <Radio value={false}>Not select with add</Radio>
-        </Radio.Group>
-      </div>
-
       <div style={{ margin: "10px", width: "800px" }}>
         <Radio.Group
           onChange={handleChangeSelectWithPreferOption}
@@ -196,21 +128,6 @@ export function AdvanceTreeFilterMasterStories() {
           <Radio value={false}>Not select with prefer option</Radio>
         </Radio.Group>
       </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeSize} value={isSmall}>
-          <Radio value={true}>Small</Radio>
-          <Radio value={false}>Default</Radio>
-        </Radio.Group>
-      </div>
-      {isMultiple && (
-        <div style={{ margin: "10px", width: "300px" }}>
-          <Radio.Group onChange={handleChangeWithSearch} value={withSearch}>
-            <Radio value={true}>Using Search</Radio>
-            <Radio value={false}>Not Using Search</Radio>
-          </Radio.Group>
-        </div>
-      )}
     </div>
   );
 }

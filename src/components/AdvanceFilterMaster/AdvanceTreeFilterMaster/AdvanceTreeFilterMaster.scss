@@ -48,6 +48,7 @@
     min-width: 280px;
     width: auto;
     height: auto;
+    margin-top: 5px;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2), 0px 2px 10px rgba(0, 0, 0, 0.1);
     .advance-tree-filter-master__input {
       width: 100%;
@@ -55,7 +56,6 @@
     }
     .advance-tree-filter-master__list {
       width: 100%;
-      margin-top: 5px;
       position: absolute;
       z-index: 999;
     }

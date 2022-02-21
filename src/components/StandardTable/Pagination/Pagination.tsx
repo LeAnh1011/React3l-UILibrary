@@ -53,7 +53,11 @@ function Pagination(props: PaginationProps) {
 
   const menuPageSize = React.useMemo(() => {
     return (
-      <Menu onClick={handleMenuTakeClick} selectedKeys={["" + take]}>
+      <Menu
+        className="menu-page-size"
+        onClick={handleMenuTakeClick}
+        selectedKeys={["" + take]}
+      >
         {pageSizeOptions.map((page, index) => {
           return <Menu.Item key={page}>{page}</Menu.Item>;
         })}

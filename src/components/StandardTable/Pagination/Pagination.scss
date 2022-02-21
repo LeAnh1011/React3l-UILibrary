@@ -57,10 +57,33 @@
         }
     }
 }
+.menu-page-size {
+    &.ant-dropdown-menu{
+        padding: 0px 0px;
+        .ant-dropdown-menu-item, .ant-dropdown-menu-submenu-title {
+            background-color: var(--palette-gray-10);
+        }
+        .ant-dropdown-menu-item-selected, .ant-dropdown-menu-submenu-title-selected{
+            color: var(--palette-gray-100);
+            background-color: var(--palette-gray-20);
+        }
+    }
+    
+}
 .menu-page-change {
     overflow-y: scroll;
     &.options-select-page-height {
         height: 200px;
+    }
+    &.ant-dropdown-menu{
+        padding: 0px 0px;
+        .ant-dropdown-menu-item, .ant-dropdown-menu-submenu-title {
+            background-color: var(--palette-gray-10);
+        }
+        .ant-dropdown-menu-item-selected, .ant-dropdown-menu-submenu-title-selected{
+            color: var(--palette-gray-100);
+            background-color: var(--palette-gray-20);
+        }
     }
 }
 .menu-page-change::-webkit-scrollbar {

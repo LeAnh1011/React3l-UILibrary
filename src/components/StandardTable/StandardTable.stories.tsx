@@ -15,11 +15,11 @@ import TwoLineText from "./DataCellComponent/TwoLineText/TwoLineText";
 import OneLineText from "./DataCellComponent/OneLineText/OneLineText";
 import StatusLine from "./DataCellComponent/StatusLine/StatusLine";
 import { ColumnProps } from "antd/lib/table";
-import { Button } from "antd";
 import { Tabs } from "antd";
 import Pagination from "./Pagination/Pagination";
-import { ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
+import { Add16, ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
 import { StringFilter } from "react3l-advanced-filters";
+import Button from "../Button/Button";
 const KateBishop =
   "https://www.dualshockers.com/static/uploads/2021/11/How-Old-Is-Kate-Bishop-In-Hawkeye-TV-Show-scaled.jpeg";
 const { TabPane } = Tabs;
@@ -43,6 +43,14 @@ export enum ORDER_TYPE {
 }
 function Default() {
   const [filter, setFilter] = React.useState<DemoFilter>(new DemoFilter());
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const handleLoading = React.useCallback(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 4000);
+  }, []);
 
   const handlePagination = React.useCallback(
     (skip: number, take: number) => {
@@ -577,7 +585,16 @@ function Default() {
             selectedRowKeys={selectedRowKeys}
             setSelectedRowKeys={setSelectedRowKeys}
           >
-            <Button>Button demo</Button>
+            <Button type="ghost-primary" className="btn--lg" icon={<Add16 />}>
+              {"Button"}
+            </Button>
+            <Button
+              type="ghost-primary"
+              className="btn--lg"
+              icon={<ChevronDown16 />}
+            >
+              {"Button"}
+            </Button>
           </ActionBarComponent>
           <StandardTable
             columns={columns}
@@ -587,6 +604,7 @@ function Default() {
             tableSize={size}
             rowSelection={rowSelection}
             expandable={expandable}
+            loading={loading}
           />
           <div>
             <Pagination
@@ -602,7 +620,16 @@ function Default() {
             selectedRowKeys={selectedRowKeys}
             setSelectedRowKeys={setSelectedRowKeys}
           >
-            <Button>Button demo</Button>
+            <Button type="ghost-primary" className="btn--lg" icon={<Add16 />}>
+              {"Button"}
+            </Button>
+            <Button
+              type="ghost-primary"
+              className="btn--lg"
+              icon={<ChevronDown16 />}
+            >
+              {"Button"}
+            </Button>
           </ActionBarComponent>
           <StandardTable
             columns={columns2}
@@ -625,6 +652,11 @@ function Default() {
       </Tabs>
 
       <div>
+        <div>
+          <Button type="primary" className="btn--lg" onClick={handleLoading}>
+            {"Button"}
+          </Button>
+        </div>
         <div style={{ margin: "10px", width: "500px" }}>
           <Radio.Group onChange={handleChangeAvatarType} value={avatarType}>
             <Radio value={AVATAR_TYPE.CIRCLE}>circle</Radio>

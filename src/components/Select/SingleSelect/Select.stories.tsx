@@ -111,8 +111,8 @@ export function SingleSelectStories() {
         >
           <Select
             placeHolder={"Select Organization"}
-            model={selectModel}
-            modelFilter={selectModelFilter}
+            value={selectModel}
+            valueFilter={selectModelFilter}
             searchProperty={"name"}
             render={handleRenderModel}
             onChange={handleSetModel}
@@ -136,8 +136,8 @@ export function SingleSelectStories() {
         >
           <Select
             placeHolder={"Select Organization"}
-            model={selectModel}
-            modelFilter={selectModelFilter}
+            value={selectModel}
+            valueFilter={selectModelFilter}
             searchProperty={"name"}
             render={handleRenderModel}
             onChange={handleSetModel}

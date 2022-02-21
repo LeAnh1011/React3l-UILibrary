@@ -26,7 +26,6 @@ const demoListEnum = [
   { id: 5, name: "Enum 5", code: "E5" },
 ];
 
-
 export function AdvanceEnumFilterStories() {
   const [selectModel, setSelectModel] = React.useState<Model>({
     id: 0,
@@ -100,7 +99,7 @@ export function AdvanceEnumFilterStories() {
         >
           <AdvanceEnumFilter
             placeHolder={"Select Organization"}
-            model={selectModel}
+            value={selectModel}
             render={handleRenderModel}
             onChange={handleSetModel}
             listItem={demoListEnum}
@@ -111,7 +110,7 @@ export function AdvanceEnumFilterStories() {
             isSmall={isSmall}
             isMultiple={isMultiple}
             onChangeMultiple={handleChangeModels} // if type is multiple pass this props
-            listModel={models} // if type is multiple pass this prop
+            listValue={models} // if type is multiple pass this prop
           />
         </FormItem>
       </div>

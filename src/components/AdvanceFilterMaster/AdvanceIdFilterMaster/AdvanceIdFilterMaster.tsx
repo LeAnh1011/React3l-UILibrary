@@ -14,12 +14,12 @@ import "./AdvanceIdFilterMaster.scss";
 export interface AdvanceIdFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
-  > {
+> {
   value?: number | string;
 
   title: string;
 
-  modelFilter?: TModelFilter;
+  valueFilter?: TModelFilter;
 
   searchProperty?: string;
 
@@ -39,7 +39,7 @@ export interface AdvanceIdFilterMasterProps<
 
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
 
-  onChange?: (T: number, model?: T) => void;
+  onChange?: (T: number, value?: T) => void;
 
   render?: (t: T) => string;
 
@@ -60,7 +60,7 @@ function AdvanceIdFilterMaster(
   props: AdvanceIdFilterMasterProps<Model, ModelFilter>
 ) {
   const {
-    modelFilter,
+    valueFilter,
     title,
     value,
     searchProperty,
@@ -77,10 +77,10 @@ function AdvanceIdFilterMaster(
     classFilter: ClassFilter,
     className,
     preferOptions,
-    maxLength
+    maxLength,
   } = props;
 
-  const [internalModel, setInternalModel] = React.useState<Model>();
+  const [internalValue, setInternalValue] = React.useState<Model>();
 
   const [loading, setLoading] = React.useState<boolean>(false);
 
@@ -101,17 +101,17 @@ function AdvanceIdFilterMaster(
 
   const { run } = useDebounceFn(
     (searchTerm: string) => {
-      const cloneModelFilter = modelFilter
-        ? { ...modelFilter }
+      const cloneValueFilter = valueFilter
+        ? { ...valueFilter }
         : new ClassFilter();
       if (!isEnumList) {
         if (searchType) {
-          cloneModelFilter[searchProperty][searchType] = searchTerm;
-        } else cloneModelFilter[searchProperty] = searchTerm;
+          cloneValueFilter[searchProperty][searchType] = searchTerm;
+        } else cloneValueFilter[searchProperty] = searchTerm;
       }
       setLoading(true);
       subscription.add(getList);
-      getList(cloneModelFilter).subscribe(
+      getList(cloneValueFilter).subscribe(
         (res: Model[]) => {
           setList(res);
           setLoading(false);
@@ -131,7 +131,7 @@ function AdvanceIdFilterMaster(
     try {
       setLoading(true);
       subscription.add(getList);
-      const filter = modelFilter ? { ...modelFilter } : new ClassFilter();
+      const filter = valueFilter ? { ...valueFilter } : new ClassFilter();
       getList(filter).subscribe(
         (res: Model[]) => {
           setList(res);
@@ -142,8 +142,8 @@ function AdvanceIdFilterMaster(
           setLoading(false);
         }
       );
-    } catch (error) { }
-  }, [getList, modelFilter, subscription, ClassFilter]);
+    } catch (error) {}
+  }, [getList, valueFilter, subscription, ClassFilter]);
 
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -165,11 +165,11 @@ function AdvanceIdFilterMaster(
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      setInternalModel(item);
+      setInternalValue(item);
       onChange(item.id, item);
       handleCloseAdvanceIdFilterMaster();
     },
-    [handleCloseAdvanceIdFilterMaster, setInternalModel, onChange]
+    [handleCloseAdvanceIdFilterMaster, setInternalValue, onChange]
   );
 
   const handleSearchChange = React.useCallback(
@@ -212,7 +212,7 @@ function AdvanceIdFilterMaster(
           (current) => current.id === Number(value)
         );
         if (listFilterPreferOptions && listFilterPreferOptions?.length > 0) {
-          setInternalModel(listFilterPreferOptions[0]);
+          setInternalValue(listFilterPreferOptions[0]);
         } else {
           filterValue["id"]["equal"] = Number(value);
           subscription.add(getList);
@@ -222,18 +222,18 @@ function AdvanceIdFilterMaster(
                 (current) => current.id === Number(value)
               );
               if (filterList && filterList?.length > 0) {
-                setInternalModel(filterList[0]);
+                setInternalValue(filterList[0]);
               }
             }
           });
         }
       } else {
-        setInternalModel({
+        setInternalValue({
           [typeRender]: value,
         });
       }
     } else {
-      setInternalModel(null);
+      setInternalValue(null);
     }
     return function cleanup() {
       subscription.unsubscribe();
@@ -267,10 +267,13 @@ function AdvanceIdFilterMaster(
         ref={wrapperRef}
       >
         <div
-          className={classNames("advance-id-filter-master__container p-l--sm p-t--xs p-r--xs p-b--xs", {
-            "filter-bg": isExpand,
-            "p-b---active": value,
-          })}
+          className={classNames(
+            "advance-id-filter-master__container p-l--sm p-t--xs p-r--xs p-b--xs",
+            {
+              "filter-bg": isExpand,
+              "p-b---active": value,
+            }
+          )}
           onClick={handleToggle}
         >
           <div className={classNames({ "filter-active": value })}>
@@ -288,9 +291,7 @@ function AdvanceIdFilterMaster(
                 maxLength={maxLength}
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
-                suffix={
-                  <Search16 />
-                }
+                suffix={<Search16 />}
                 isMaterial={isMaterial}
                 ref={inputRef}
                 onKeyDown={handleKeyDown}
@@ -310,9 +311,7 @@ function AdvanceIdFilterMaster(
                       <span className="advance-id-master__text">
                         {render(item)}
                       </span>
-                      {item.id === internalModel?.id && (
-                        <Checkmark16 />
-                      )}
+                      {item.id === internalValue?.id && <Checkmark16 />}
                     </div>
                   ))
                 ) : (
@@ -340,9 +339,7 @@ function AdvanceIdFilterMaster(
                       <span className="advance-id-master__text">
                         {render(item)}
                       </span>
-                      {item.id === internalModel?.id && (
-                        <Checkmark16 />
-                      )}
+                      {item.id === internalValue?.id && <Checkmark16 />}
                     </div>
                   ))}
               </div>

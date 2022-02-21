@@ -3,15 +3,23 @@ import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
 import { Observable } from "rxjs";
 import nameof from "ts-nameof.macro";
-import { AdvanceFilterAction, advanceFilterReducer, advanceFilterService } from '../../../services/advance-filter-service';
-import AdvanceIdFilterMaster from './AdvanceIdFilterMaster';
-
+import {
+  AdvanceFilterAction,
+  advanceFilterReducer,
+  advanceFilterService,
+} from "../../../services/advance-filter-service";
+import AdvanceIdFilterMaster from "./AdvanceIdFilterMaster";
 
 const demoObservable = new Observable<Model[]>((observer) => {
   setTimeout(() => {
     observer.next([
       { id: 4, name: "Ban hành chính", code: "FAD" },
-      { id: 1, name: "Ban công nghệ thông tin Ban công nghệ thông tin Ban công nghệ thông tin Ban công nghệ thông tin", code: "FIM" },
+      {
+        id: 1,
+        name:
+          "Ban công nghệ thông tin Ban công nghệ thông tin Ban công nghệ thông tin Ban công nghệ thông tin",
+        code: "FIM",
+      },
       { id: 2, name: "Ban nhân sự", code: "FHR" },
       { id: 3, name: "Ban tài chính", code: "FAF" },
       { id: 5, name: "Ban đời sống", code: "DSS" },
@@ -25,7 +33,7 @@ const demoObservable = new Observable<Model[]>((observer) => {
 const list = [
   { id: 9, name: "Phòng Muti Media", code: "MEDIA" },
   { id: 10, name: "Phòng truyền thông", code: "PTT" },
-]
+];
 
 export class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
@@ -41,7 +49,6 @@ const demoSearchFunc = (TModelFilter: ModelFilter) => {
 };
 
 export function AdvanceIdFilterMasterStories() {
-
   const [filter, dispatch] = React.useReducer<
     Reducer<DemoFilter, AdvanceFilterAction<DemoFilter>>
   >(advanceFilterReducer, filterValue);
@@ -50,9 +57,8 @@ export function AdvanceIdFilterMasterStories() {
     filter,
     dispatch,
     "id",
-    "equal",
+    "equal"
   );
-
 
   return (
     <div style={{ margin: "10px", width: "250px" }}>
@@ -60,11 +66,11 @@ export function AdvanceIdFilterMasterStories() {
         value={id}
         placeHolder={"Tìm kiếm..."}
         classFilter={DemoFilter}
-        modelFilter={filter}
+        valueFilter={filter}
         searchProperty={nameof(DemoFilter.name)}
         onChange={setValue}
         getList={demoSearchFunc}
-        title={'Đơn vị'}
+        title={"Đơn vị"}
         preferOptions={list}
       />
     </div>

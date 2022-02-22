@@ -4,6 +4,7 @@ import { AdvanceIdFilterMasterStories } from "./AdvanceIdFilterMaster/AdvanceIdF
 import { AdvanceMultipleIdFilterMasterStories } from "./AdvanceMultipleIdFilterMaster/AdvanceMultipleIdFilterMaster.stories";
 import { AdvanceTreeFilterMasterStories } from "./AdvanceTreeFilterMaster/AdvanceTreeFilterMaster.stories";
 import { TagFilterStories } from "./TagFilter/TagFilter.stories";
+import { AdvanceEnumFilterMasterStories } from "./AdvanceEnumFilterMaster/AdvanceEnumFilterMaster.stories";
 
 storiesOf("AdvanceFilterMaster", module)
   .add("AdvanceIdFilterMasterStories", AdvanceIdFilterMasterStories)
@@ -16,4 +17,5 @@ storiesOf("AdvanceFilterMaster", module)
     AdvanceMultipleIdFilterMasterStories
   )
   .add("AdvanceTreeFilterMasterStories", AdvanceTreeFilterMasterStories)
-  .add("TagFilterStories", TagFilterStories);
+  .add("TagFilterStories", TagFilterStories)
+  .add("EnumFilterStories", AdvanceEnumFilterMasterStories);

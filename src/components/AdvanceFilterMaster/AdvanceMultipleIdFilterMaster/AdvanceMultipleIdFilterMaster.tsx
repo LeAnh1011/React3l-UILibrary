@@ -237,6 +237,7 @@ function AdvanceMultipleIdFilterMaster(
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: any) => {
+      debugger;
       let filteredItem = selectedList?.filter(
         (current) => current.id === item.id
       )[0];

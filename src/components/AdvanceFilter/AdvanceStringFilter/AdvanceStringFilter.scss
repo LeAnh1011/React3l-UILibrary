@@ -46,8 +46,7 @@
     }
 
     &:focus-within {
-      outline-color: var(--color-primary);
-      @include box-shadow--focus;
+      outline: 2px solid var(--color-primary);
     }
 
     &.advance-string-filter--disabled {

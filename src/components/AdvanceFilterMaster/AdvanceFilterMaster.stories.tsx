@@ -3,6 +3,7 @@ import { AdvanceDateRangeFilterMasterStories } from "./AdvanceDateRangFilterMast
 import { AdvanceEnumFilterMasterStories } from "./AdvanceEnumFilterMaster/AdvanceEnumFilterMaster.stories";
 import { AdvanceIdFilterMasterStories } from "./AdvanceIdFilterMaster/AdvanceIdFilterMaster.stories";
 import { AdvanceMultipleIdFilterMasterStories } from "./AdvanceMultipleIdFilterMaster/AdvanceMultipleIdFilterMaster.stories";
+import { AdvanceTreeFilterMasterStories } from "./AdvanceTreeFilterMaster/AdvanceTreeFilterMaster.stories";
 import { TagFilterStories } from "./TagFilter/TagFilter.stories";
 
 storiesOf("AdvanceFilterMaster", module)
@@ -15,5 +16,6 @@ storiesOf("AdvanceFilterMaster", module)
     "AdvanceMultipleIdFilterMasterStories",
     AdvanceMultipleIdFilterMasterStories
   )
-  .add("TagFilterStories", TagFilterStories)
-  .add("EnumFilterStories", AdvanceEnumFilterMasterStories);
+  .add("EnumFilterStories", AdvanceEnumFilterMasterStories)
+  .add("AdvanceTreeFilterMasterStories", AdvanceTreeFilterMasterStories)
+  .add("TagFilterStories", TagFilterStories);

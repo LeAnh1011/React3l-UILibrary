@@ -55,8 +55,7 @@
     }
 
     &:focus-within {
-      outline-color: var(--color-primary);
-      @include box-shadow--focus;
+      outline: 2px solid var(--color-primary);
       .input-tag__icon {
         transform: rotate(180deg);
         color: var(--color-primary);
@@ -141,7 +140,7 @@
 
       &:focus-within {
         box-shadow: none;
-        outline: 1px solid var(--color-primary);
+        outline: 2px solid var(--color-primary);
         .component__title {
           color: var(--color-primary);
         }

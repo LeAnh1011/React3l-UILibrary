@@ -41,8 +41,7 @@
     }
 
     &:focus-within {
-      outline-color: var(--color-primary);
-      @include box-shadow--focus;
+      outline: 2px solid var(--color-primary);
     }
 
     &.input-number--disabled {
@@ -64,7 +63,7 @@
 
       &:focus-within {
         box-shadow: none;
-        outline: 1px solid var(--color-primary);
+        outline: 2px solid var(--color-primary);
         .component__title {
           color: var(--color-primary);
         }

@@ -105,15 +105,14 @@
 
     &.ant-picker-focused {
       border-bottom: none !important;
-      outline-color: var(--color-primary);
-      @include box-shadow--focus;
+      outline: 2px solid var(--color-primary);
     }
 
     &.date-picker--float {
       &.ant-picker-focused {
         border-bottom: none !important;
         box-shadow: none !important;
-        outline: 1px solid var(--color-primary);
+        outline: 2px solid var(--color-primary);
         & + .component__title {
           color: var(--color-primary);
         }

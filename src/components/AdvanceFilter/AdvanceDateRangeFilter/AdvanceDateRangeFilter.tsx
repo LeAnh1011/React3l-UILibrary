@@ -138,13 +138,25 @@ function AdvanceDateRangeFilter(
         {internalValue[0] && (
           <>
             <span
-              className={classNames("advance-date-range-filter__icon-wrapper", {
-                "advance-date-range-filter__icon-wrapper--material":
-                  type === BORDER_TYPE.MATERIAL,
-              })}
+              className={classNames(
+                "advance-date-range-filter__icon-wrapper",
+                {
+                  "advance-date-range-filter__icon-wrapper--material":
+                    type === BORDER_TYPE.MATERIAL,
+                },
+                {
+                  "advance-date-range-filter__icon-wrapper--sm": isSmall,
+                },
+                {
+                  "advance-date-range-filter__icon-wrapper--disabled": disabled,
+                }
+              )}
             >
               <CloseFilled16
-                className={classNames("advance-date-range-filter__icon-clear", "m-l--xxs")}
+                className={classNames(
+                  "advance-date-range-filter__icon-clear",
+                  "m-l--xxs"
+                )}
                 onClick={handleClearDate}
               ></CloseFilled16>
             </span>

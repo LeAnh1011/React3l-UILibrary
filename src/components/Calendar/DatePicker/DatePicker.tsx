@@ -116,7 +116,7 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
             {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
-        {value && String(value) !== DEFAULT_DATETIME_VALUE && (
+        {value && String(value) !== DEFAULT_DATETIME_VALUE && !disabled && (
           <span
             className={classNames(
               "date-picker__icon-wrapper",

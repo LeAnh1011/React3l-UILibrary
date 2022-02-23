@@ -133,7 +133,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
             {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
-        {internalValue[0] && (
+        {internalValue[0] && !disabled && (
           <>
             <span
               className={classNames(

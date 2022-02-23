@@ -63,6 +63,7 @@ function AdvanceDateFilter(
     },
     [onChange]
   );
+  console.log("internalValue", internalValue);
 
   return (
     <div
@@ -118,19 +119,30 @@ function AdvanceDateFilter(
             {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
-        {value && String(value) !== DEFAULT_DATETIME_VALUE && (
-          <span
-            className={classNames("advance-date-filter__icon-wrapper", {
-              "advance-date-filter__icon-wrapper--material":
-                type === BORDER_TYPE.MATERIAL,
-            })}
-          >
-            <CloseFilled16
-              className={classNames("advance-date-filter__icon-clear", "m-l--xxs")}
-              onClick={handleClearDate}
-            ></CloseFilled16>
-          </span>
-        )}
+        {internalValue &&
+          String(internalValue) !== DEFAULT_DATETIME_VALUE &&
+          !disabled && (
+            <span
+              className={classNames(
+                "advance-date-filter__icon-wrapper",
+                {
+                  "advance-date-filter__icon-wrapper--material":
+                    type === BORDER_TYPE.MATERIAL,
+                },
+                {
+                  "advance-date-filter__icon-wrapper--sm": isSmall,
+                }
+              )}
+            >
+              <CloseFilled16
+                className={classNames(
+                  "advance-date-filter__icon-clear",
+                  "m-l--xxs"
+                )}
+                onClick={handleClearDate}
+              ></CloseFilled16>
+            </span>
+          )}
       </div>
     </div>
   );

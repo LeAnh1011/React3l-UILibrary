@@ -43,7 +43,6 @@ export function AdvanceEnumFilterMasterStories() {
   const [multifilter, setFilter] = React.useState(new DemoFilter());
   const handleChangeFilter = React.useCallback(
     (ids) => {
-      debugger;
       setFilter({ ...multifilter, id: { in: ids } });
     },
     [multifilter]

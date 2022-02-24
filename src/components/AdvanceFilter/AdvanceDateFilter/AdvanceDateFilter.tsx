@@ -63,7 +63,6 @@ function AdvanceDateFilter(
     },
     [onChange]
   );
-  console.log("internalValue", internalValue);
 
   return (
     <div

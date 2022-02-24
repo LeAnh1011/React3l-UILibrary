@@ -121,7 +121,6 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
     }
     return [];
   }, [list, listValue]);
-  console.log("internalList", internalList);
 
   React.useEffect(() => {
     if (firstLoad) {

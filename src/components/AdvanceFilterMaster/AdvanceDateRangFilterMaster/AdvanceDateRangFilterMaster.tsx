@@ -177,7 +177,7 @@ function AdvanceDateRangeFilterMaster(
       if (!disabled) {
         setExpand(true);
         setTimeout(() => {
-          console.log(listRef.current);
+          // console.log(listRef.current);
           listRef.current.focus();
         }, 300);
       }
@@ -320,8 +320,7 @@ function AdvanceDateRangeFilterMaster(
           className={classNames("date-range-filter-master__list-container", {
             "date-range-filter-master__list-border":
               type === ADVANCE_DATE_RANGE_TYPE.SHORT,
-            "":
-              type === ADVANCE_DATE_RANGE_TYPE.INPUT,
+            "": type === ADVANCE_DATE_RANGE_TYPE.INPUT,
           })}
           ref={listRef}
         >

@@ -150,7 +150,7 @@ function AdvanceIdFilterMaster(
       if (!disabled) {
         setExpand(true);
         setTimeout(() => {
-          console.log(inputRef.current)
+          // console.log(inputRef.current)
           inputRef.current.children[0].focus();
         }, 300);
         await handleLoadList();

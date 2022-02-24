@@ -29,15 +29,17 @@
     display: flex;
     height: 1.5rem;
     width: 2rem;
-    top: 49%;
+    top: 0.5rem;
     right: 0.5rem;
     box-sizing: border-box;
     background-color: var(--color-white);
     justify-content: flex-end;
     align-items: center;
-
+    &.date-range__icon-wrapper--disabled{
+      background-color: var(--palette-grayHover-10) !important;
+    }
     &.date-range__icon-wrapper--material {
-      background-color: var(--color-surface-input);
+      background-color: var(--palette-gray-10) ;
       .date-range__icon-clear {
         &:hover {
           cursor: pointer;
@@ -45,6 +47,10 @@
         }
       }
     }
+    &.date-range__icon-wrapper--sm {
+      top: 0.3rem !important;
+    }
+   
     .date-range__icon-clear {
       color: var(--palette-coolGray-50);
       &:hover {
@@ -160,10 +166,10 @@
 
 .form-item__container--error {
   .date-range__icon-wrapper {
-    background-color: var(--color-critical-hover);
+    background-color: var(--color-critical-blur);
   }
   .date-picker--material + .date-range__icon-wrapper {
-    background-color: var(--color-critical-hover) !important;
+    background-color: var(--color-critical-blur) !important;
     &:hover {
       background-color: var(--palette-grayHover-10) !important;
     }

@@ -28,6 +28,8 @@ export default {
     "src/components/AdvanceFilterMaster/AdvanceIdFilterMaster/index.ts",
     "src/components/AdvanceFilterMaster/AdvanceMultipleIdFilterMaster/index.ts",
     "src/components/AdvanceFilterMaster/AdvanceDateRangFilterMaster/index.ts",
+    "src/components/AdvanceFilterMaster/AdvanceEnumFilterMaster/index.ts",
+    "src/components/AdvanceFilterMaster/AdvanceTreeFilterMaster/index.ts",
     "src/components/AdvanceFilterMaster/TagFilter/index.ts",
     // AdvacenFilter components
     "src/components/AdvanceFilter/AdvanceIdFilter/index.ts",

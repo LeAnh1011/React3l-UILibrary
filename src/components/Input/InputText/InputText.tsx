@@ -156,7 +156,7 @@ const InputText = React.forwardRef(
         </div>
         <div
           className={classNames(
-            "component__input input-text__container bg-white",
+            "component__input input-text__container",
             {
               "input-text__container--sm": isSmall,
               "p-y--xxs": isSmall,

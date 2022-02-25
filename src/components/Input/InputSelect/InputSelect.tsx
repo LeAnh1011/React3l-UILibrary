@@ -123,7 +123,7 @@ function InputSelect(props: InputSelectProps<Model>) {
         </div>
         <div
           className={classNames(
-            "component__input input-select__container p--xs bg-white",
+            "component__input input-select__container p--xs",
             {
               "input-select__container--sm": isSmall,
               "py--xxs": isSmall,
@@ -146,8 +146,8 @@ function InputSelect(props: InputSelectProps<Model>) {
                   value
                     ? (render(value) as string)
                     : type === BORDER_TYPE.FLOAT_LABEL && label
-                    ? " "
-                    : placeHolder
+                      ? " "
+                      : placeHolder
                 }
                 ref={inputRef}
                 disabled={disabled}

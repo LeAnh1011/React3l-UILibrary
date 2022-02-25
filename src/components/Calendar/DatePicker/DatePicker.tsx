@@ -93,7 +93,7 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
           ref={dateRef}
           allowClear={false}
           format={dateFormat}
-          className={classNames("bg-white", {
+          className={classNames({
             "date-picker__wrapper--sm": isSmall,
             "p-y--xxs": isSmall,
             "p-x--xs": isSmall,

@@ -95,7 +95,7 @@ function AdvanceDateFilter(
           ref={dateRef}
           allowClear={false}
           format={dateFormat}
-          className={classNames("bg-white", {
+          className={classNames({
             "advance-date-filter__wrapper--sm": isSmall,
             "p-y--xxs": isSmall,
             "p-x--xs": isSmall,

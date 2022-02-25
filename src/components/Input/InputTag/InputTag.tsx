@@ -119,7 +119,7 @@ function InputTag(props: InputTagProps<Model>) {
         </div>
         <div
           className={classNames(
-            "component__input input-tag__container bg-white",
+            "component__input input-tag__container",
             {
               "input-tag__container--sm": isSmall,
               "p-y--xxs": isSmall,

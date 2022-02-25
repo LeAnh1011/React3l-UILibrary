@@ -111,7 +111,7 @@ function AdvanceDateRangeFilter(
           format={dateFormat}
           placeholder={placeHolder}
           suffixIcon={<SuffixDateIcon />}
-          className={classNames("bg-white", {
+          className={classNames({
             "date-picker__wrapper--sm": isSmall,
             "p-y--xxs": isSmall,
             "p-x--xs": isSmall,

@@ -156,7 +156,7 @@ const AdvanceStringFilter = React.forwardRef(
         </div>
         <div
           className={classNames(
-            "component__input advance-string-filter__container bg-white",
+            "component__input advance-string-filter__container",
             {
               "advance-string-filter__container--sm": isSmall,
               "p-y--xxs": isSmall,

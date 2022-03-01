@@ -265,7 +265,11 @@ function Default() {
         render(...[platform]) {
           return (
             <LayoutCell orderType={orderType} tableSize={size}>
-              <OneLineText icon="tio-calendar_month" value={platform} />
+              <OneLineText
+                icon="tio-calendar_month"
+                value={platform}
+                maxLength={25}
+              />
             </LayoutCell>
           );
         },
@@ -284,6 +288,7 @@ function Default() {
                 value={creator}
                 backgroundColor="#FFECB3"
                 color="#ED6700"
+                maxLength={25}
               />
             </LayoutCell>
           );
@@ -558,10 +563,10 @@ function Default() {
       type: "Diamond",
       location: "Hill",
       weight: "50kg",
-      platform: "iOS",
+      platform: "iOS iOS iOS iOS iOS iOS iOS iOS iOS iOS",
       version: "10.3.4.5654",
       upgradeNum: 500,
-      creator: "Jack Gealish",
+      creator: "Jack Gealish Jack Gealish Jack Gealish Jack Gealish",
       status: "hoạt động",
       createdAt: "2014-12-24 23:12:00",
     });

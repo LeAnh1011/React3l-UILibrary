@@ -1,17 +1,20 @@
 import classNames from "classnames";
-import React, { ReactNode } from "react";
+import React from "react";
 import "./TwoLineText.scss";
+import { Tooltip } from "antd";
+import { CommonService } from "services/common-service";
 
 export interface TwoLineTextProps {
   className?: string;
   avatar?: string;
   avatarType?: "circle" | "square";
   icon?: string;
-  valueLine1?: string | number | ReactNode;
-  valueLine2?: string | number | ReactNode;
+  valueLine1?: string;
+  valueLine2?: string;
   classNameFirstLine?: string;
   classNameSecondLine?: string;
   link?: string;
+  maxLength?: number;
 }
 
 function TwoLineText(props: TwoLineTextProps) {
@@ -25,6 +28,7 @@ function TwoLineText(props: TwoLineTextProps) {
     classNameFirstLine,
     classNameSecondLine,
     link,
+    maxLength,
   } = props;
   return (
     <>
@@ -52,7 +56,13 @@ function TwoLineText(props: TwoLineTextProps) {
                 className={classNames(icon, `icon-two-line-text m-r--xxs`)}
               ></i>
             )}
-            {valueLine1}
+            {maxLength && valueLine1?.length > maxLength ? (
+              <Tooltip title={valueLine1}>
+                {CommonService.limitWord(valueLine1, maxLength)}
+              </Tooltip>
+            ) : (
+              valueLine1
+            )}
           </div>
           <div
             className={classNames(
@@ -68,10 +78,24 @@ function TwoLineText(props: TwoLineTextProps) {
                 rel="noopener noreferrer"
                 className="link-text"
               >
-                {valueLine2}
+                {maxLength && valueLine2?.length > maxLength ? (
+                  <Tooltip title={valueLine2}>
+                    {CommonService.limitWord(valueLine2, maxLength)}
+                  </Tooltip>
+                ) : (
+                  valueLine2
+                )}
               </a>
             ) : (
-              valueLine2
+              <span>
+                {maxLength && valueLine2?.length > maxLength ? (
+                  <Tooltip title={valueLine2}>
+                    {CommonService.limitWord(valueLine2, maxLength)}
+                  </Tooltip>
+                ) : (
+                  valueLine2
+                )}
+              </span>
             )}
           </div>
         </div>

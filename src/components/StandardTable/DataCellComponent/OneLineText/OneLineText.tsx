@@ -2,7 +2,6 @@ import classNames from "classnames";
 import React from "react";
 import "./OneLineText.scss";
 import { Tooltip } from "antd";
-import { CommonService } from "services/common-service";
 
 export interface OneLineTextProps {
   className?: string;
@@ -12,7 +11,6 @@ export interface OneLineTextProps {
   value?: string;
   avatarSize?: "large" | "medium" | "small";
   link?: string;
-  maxLength?: number;
 }
 
 function OneLineText(props: OneLineTextProps) {
@@ -24,7 +22,6 @@ function OneLineText(props: OneLineTextProps) {
     avatarSize,
     link,
     avatarType,
-    maxLength,
   } = props;
   return (
     <>
@@ -47,24 +44,10 @@ function OneLineText(props: OneLineTextProps) {
               rel="noopener noreferrer"
               className="link-text"
             >
-              {maxLength && value?.length > maxLength ? (
-                <Tooltip title={value}>
-                  {CommonService.limitWord(value, maxLength)}
-                </Tooltip>
-              ) : (
-                value
-              )}
+              <Tooltip title={value}>{value}</Tooltip>
             </a>
           ) : (
-            <span>
-              {maxLength && value?.length > maxLength ? (
-                <Tooltip title={value}>
-                  {CommonService.limitWord(value, maxLength)}
-                </Tooltip>
-              ) : (
-                value
-              )}
-            </span>
+            <Tooltip title={value}>{value}</Tooltip>
           )}
         </div>
       )}
@@ -78,23 +61,11 @@ function OneLineText(props: OneLineTextProps) {
               rel="noopener noreferrer"
               className="link-text"
             >
-              {maxLength && value?.length > maxLength ? (
-                <Tooltip title={value}>
-                  {CommonService.limitWord(value, maxLength)}
-                </Tooltip>
-              ) : (
-                value
-              )}
+              <Tooltip title={value}>{value}</Tooltip>
             </a>
           ) : (
             <span>
-              {maxLength && value?.length > maxLength ? (
-                <Tooltip title={value}>
-                  {CommonService.limitWord(value, maxLength)}
-                </Tooltip>
-              ) : (
-                value
-              )}
+              <Tooltip title={value}>{value}</Tooltip>
             </span>
           )}
         </div>

@@ -14,7 +14,7 @@ import "./AdvanceMultipleIdFilterMaster.scss";
 export interface AdvanceMultipleIdFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
-> {
+  > {
   values?: any[];
 
   title: string;
@@ -215,7 +215,7 @@ function AdvanceMultipleIdFilterMaster(
           setLoading(false);
         }
       );
-    } catch (error) {}
+    } catch (error) { }
   }, [getList, valueFilter, subscription, ClassFilter]);
 
   const handleToggle = React.useCallback(
@@ -402,7 +402,7 @@ function AdvanceMultipleIdFilterMaster(
                 {internalList.length > 0 ? (
                   internalList.map((item, index) => (
                     <div
-                      className={classNames("advance-id-filter__item", {
+                      className={classNames("advance-id-filter__item p-l--xs p-y--xs p-r--xxs", {
                         "advance-id-filter__item--selected": item.isSelected,
                       })}
                       key={index}
@@ -412,7 +412,6 @@ function AdvanceMultipleIdFilterMaster(
                     >
                       <Checkbox
                         checked={item.isSelected}
-                        className=" m-l--xs m-y--xs m-r--xxs"
                         onChange={handleClickItem(item)}
                       >
                         <span className="advance-id-master__text">

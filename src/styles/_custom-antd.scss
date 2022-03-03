@@ -39,3 +39,6 @@ tr > .ant-picker-cell-in-view.ant-picker-cell-range-hover-end:first-child::after
 .ant-picker-cell-in-view.ant-picker-cell-range-hover-start::after {
     border-left: 1px dashed var(--color-primary);
 }
+.ant-modal-wrap {
+    z-index: 1010;
+}

@@ -1,7 +1,6 @@
-import deleteImage from "./../../../../../assets/images/upload-file/delete.svg";
-import editImage from "./../../../../../assets/images/upload-file/edit.svg";
 import React from "react";
 import { FileModel } from "../UploadImage";
+import { Edit32, TrashCan32 } from "@carbon/icons-react";
 
 interface ImageItemProps extends FileModel {}
 
@@ -23,12 +22,8 @@ const ImageItem = (props: ImageItemProps) => {
     >
       {props.isDelete && (
         <div className="image-item__action-block">
-          {handleInput !== null && (
-            <img src={editImage} alt="icon" onClick={handleInput}></img>
-          )}
-          {handleDelete !== null && (
-            <img src={deleteImage} alt="icon" onClick={handleDelete}></img>
-          )}
+          {handleInput !== null && <Edit32 onClick={handleInput} />}
+          {handleDelete !== null && <TrashCan32 onClick={handleDelete} />}
         </div>
       )}
     </div>

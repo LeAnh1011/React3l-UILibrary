@@ -3,10 +3,11 @@ import { notification } from "antd";
 import classNames from "classnames";
 import React, { Reducer, RefObject } from "react";
 import { useDropzone } from "react-dropzone";
-import uploadImage from "../../../../../assets/images/upload-file/upload.svg";
+
 import { UploadImageProps } from "../UploadImage";
 import CroppedModal, { ImageResult } from "./CroppedModal/CroppedModal";
 import "./UploadImage.scss";
+import { CloudUpload24 } from "@carbon/icons-react";
 
 export interface ImageFile {
   fileId: string | number;
@@ -160,11 +161,11 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
         >
           {!currentAvatar ? (
             <div onClick={handleInput}>
-              <img
-                className="icon-upload"
-                src={iconUrl ? iconUrl : uploadImage}
-                alt="icon"
-              ></img>
+              {iconUrl ? (
+                <img className="icon-upload" src={iconUrl} alt="icon"></img>
+              ) : (
+                <CloudUpload24 />
+              )}
             </div>
           ) : (
             renderImage

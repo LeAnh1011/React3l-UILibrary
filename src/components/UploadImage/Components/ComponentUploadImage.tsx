@@ -2,13 +2,12 @@ import { Model, ModelFilter } from "react3l-common";
 import React, { Reducer, RefObject } from "react";
 import { useDropzone } from "react-dropzone";
 import { UploadImageProps } from "../UploadImage";
-import uploadImage from "../../../../../assets/images/upload-file/upload.svg";
-import editImage from "../../../../../assets/images/upload-file/edit.svg";
 import CroppedModal, { ImageResult } from "./CroppedModal/CroppedModal";
 import "./UploadImage.scss";
 import { Menu } from "./ComponentMenuImage";
 import classNames from "classnames";
 import { notification } from "antd";
+import { CloudUpload24, Edit24 } from "@carbon/icons-react";
 
 export interface ImageFile {
   fileId: string | number;
@@ -218,7 +217,7 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
               {menuFile.map((menu) => (
                 <>{menu}</>
               ))}
-              <img className="upload-icon" src={uploadImage} alt="icon"></img>
+              <CloudUpload24 />
             </div>
           )}
           {isMultiple && isMinimized && (
@@ -235,16 +234,12 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
                     {files.length > 1 ? `${files.length - 1}+` : ""}
                   </div>
                   <div className="upload-image--minimized__act">
-                    <img src={editImage} alt="icon" onClick={handleInput} />
+                    <Edit24 />
                   </div>
                 </div>
               ) : (
                 <div onClick={handleInput}>
-                  <img
-                    className="upload-icon"
-                    src={uploadImage}
-                    alt="icon"
-                  ></img>
+                  <CloudUpload24 />
                 </div>
               )}
             </>
@@ -253,11 +248,7 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
             <>
               {files.length === 0 ? (
                 <div onClick={handleInput}>
-                  <img
-                    className="upload-icon"
-                    src={uploadImage}
-                    alt="icon"
-                  ></img>
+                  <CloudUpload24 />
                 </div>
               ) : (
                 <div className="upload-image__list">{menuFile[0]}</div>

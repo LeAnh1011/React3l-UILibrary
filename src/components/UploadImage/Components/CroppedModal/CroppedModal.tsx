@@ -7,13 +7,14 @@ import { ImageFile } from "../ComponentUploadImage";
 import "./CroppedModal.scss";
 import classNames from "classnames";
 import { formatFileSize } from "helpers/file";
-
-import uploadImage from "./../../../../../../assets/images/upload-file/upload.svg";
-import deleteImage from "./../../../../../../assets/images/upload-file/delete.svg";
-import cutImage from "./../../../../../../assets/images/upload-file/cut.svg";
-import uploadIcon from "./../../../../../../assets/images/upload-file/confirm_upload.svg";
-import cancelIcon from "./../../../../../../assets/images/upload-file/cancel_upload.svg";
 import { ModalCustomProps } from "components/Modal/Modal";
+import {
+  Close16,
+  CloudUpload24,
+  Crop20,
+  TrashCan32,
+  Upload16,
+} from "@carbon/icons-react";
 
 const { Option } = Select;
 
@@ -517,11 +518,7 @@ export default function CroppedModal(props: CroppedModalProps) {
                           className="image-item__delete"
                           onClick={() => handleDelete(index)}
                         >
-                          <img
-                            src={deleteImage}
-                            alt="icon"
-                            style={{ width: "100%", height: "100%" }}
-                          ></img>
+                          <TrashCan32 />
                         </div>
                       </div>
                     );
@@ -534,7 +531,7 @@ export default function CroppedModal(props: CroppedModalProps) {
                         })}
                         onClick={() => moreRef.current.click()}
                       >
-                        <img src={uploadImage} alt="icon"></img>
+                        <CloudUpload24 />
                         <input
                           type="file"
                           ref={moreRef}
@@ -602,7 +599,7 @@ export default function CroppedModal(props: CroppedModalProps) {
                     </div>
                     <div style={{ marginLeft: 56 }}>
                       <Button onClick={makeCropImage}>
-                        <img src={cutImage} alt="icon" />
+                        <Crop20 />
                         Cắt
                       </Button>
                     </div>
@@ -654,11 +651,11 @@ export default function CroppedModal(props: CroppedModalProps) {
                 <div className="cropped-modal__footer">
                   <Button type="primary" onClick={handleConfirm}>
                     Tải lên
-                    <img src={uploadIcon} alt="icon" />
+                    <Upload16 />
                   </Button>
                   <Button onClick={handleCancelModal}>
                     Hủy
-                    <img src={cancelIcon} alt="icon" />
+                    <Close16 />
                   </Button>
                 </div>
               </div>

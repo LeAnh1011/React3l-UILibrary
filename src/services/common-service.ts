@@ -44,12 +44,15 @@ export const CommonService = {
   ) {
     const handleClickOutside = React.useCallback(
       (event) => {
-        if (
-          (ref?.current && !ref?.current?.contains(event.target)) ||
-          (refFirst?.current && !refFirst?.current?.contains(event.target))
-        ) {
+        if (refFirst?.current && !refFirst?.current?.contains(event.target)) {
           if (typeof callback === "function") {
-            callback();
+            if (ref.current) {
+              if (!ref.current.contains(event.target)) {
+                callback();
+              }
+            } else {
+              callback();
+            }
           }
         }
       },

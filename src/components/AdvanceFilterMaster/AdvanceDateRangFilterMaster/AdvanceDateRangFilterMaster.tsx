@@ -45,6 +45,8 @@ interface AdvanceDateRangeFilterMasterProps {
   inputType?: BORDER_TYPE;
 
   placeHolderSelect?: string;
+
+  appendToBody?: boolean;
 }
 
 const list = [
@@ -72,6 +74,7 @@ function AdvanceDateRangeFilterMaster(
     className,
     disabled,
     render,
+    appendToBody,
     typeCustomDate,
     isSmall,
     activeItem,
@@ -208,9 +211,10 @@ function AdvanceDateRangeFilterMaster(
     return document.getElementsByClassName("date-range-master");
   }, []);
 
-  const handleOpenChange = React.useCallback(
-    () => () => {
-      panelRef.current = handleGetRef()[0];
+  const handleOpenChange = React.useCallback(() => {
+      setTimeout(() => {
+        panelRef.current = handleGetRef()[0];
+      }, 100);
     },
     [handleGetRef]
   );
@@ -360,8 +364,8 @@ function AdvanceDateRangeFilterMaster(
                 isSmall={isSmall}
                 onChange={handleChange}
                 value={internalValue}
-                getPopupContainer={() =>
-                  document.getElementById("list-container")
+                getPopupContainer={!appendToBody ? () =>
+                  document.getElementById("list-container") : null
                 }
                 placeHolder={placeholder}
                 dropdownClassName="date-range-master"
@@ -382,6 +386,7 @@ AdvanceDateRangeFilterMaster.defaultProps = {
   render: defaultRenderObject,
   type: ADVANCE_DATE_RANGE_TYPE.SHORT,
   placeHolderSelect: "",
+  appendToBody: false
 };
 
 export default AdvanceDateRangeFilterMaster;

@@ -31,6 +31,7 @@ export function AdvanceDateRangeFilterMasterStories() {
       type={type}
       value={value}
       inputType={typeInput}
+      appendToBody={false}
     />
 
     <div style={{ margin: "10px", width: "400px" }}>

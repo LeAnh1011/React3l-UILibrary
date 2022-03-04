@@ -2,7 +2,6 @@ import classNames from "classnames";
 import React from "react";
 import "./TwoLineText.scss";
 import { Tooltip } from "antd";
-import { CommonService } from "services/common-service";
 
 export interface TwoLineTextProps {
   className?: string;
@@ -14,7 +13,6 @@ export interface TwoLineTextProps {
   classNameFirstLine?: string;
   classNameSecondLine?: string;
   link?: string;
-  maxLength?: number;
 }
 
 function TwoLineText(props: TwoLineTextProps) {
@@ -28,11 +26,20 @@ function TwoLineText(props: TwoLineTextProps) {
     classNameFirstLine,
     classNameSecondLine,
     link,
-    maxLength,
   } = props;
+
+  const getFrameStyle = React.useMemo(() => {
+    if (avatar) {
+      return { width: "calc(100% - 40px)" };
+    } else if (icon) {
+      return { width: "calc(100% - 24px)" };
+    }
+    return { width: "100%" };
+  }, [avatar, icon]);
+
   return (
     <>
-      <div className="cell-two-line">
+      <div className={classNames("cell-two-line", className)}>
         {avatar && (
           <div className="m-r--xxs">
             {avatar && (
@@ -47,7 +54,7 @@ function TwoLineText(props: TwoLineTextProps) {
             )}
           </div>
         )}
-        <div className={className}>
+        <div className="frame-text" style={getFrameStyle}>
           <div
             className={classNames(classNameFirstLine, "line-text first-line")}
           >
@@ -56,13 +63,7 @@ function TwoLineText(props: TwoLineTextProps) {
                 className={classNames(icon, `icon-two-line-text m-r--xxs`)}
               ></i>
             )}
-            {maxLength && valueLine1?.length > maxLength ? (
-              <Tooltip title={valueLine1}>
-                {CommonService.limitWord(valueLine1, maxLength)}
-              </Tooltip>
-            ) : (
-              valueLine1
-            )}
+            <Tooltip title={valueLine1}>{valueLine1}</Tooltip>
           </div>
           <div
             className={classNames(
@@ -78,24 +79,10 @@ function TwoLineText(props: TwoLineTextProps) {
                 rel="noopener noreferrer"
                 className="link-text"
               >
-                {maxLength && valueLine2?.length > maxLength ? (
-                  <Tooltip title={valueLine2}>
-                    {CommonService.limitWord(valueLine2, maxLength)}
-                  </Tooltip>
-                ) : (
-                  valueLine2
-                )}
+                <Tooltip title={valueLine2}>{valueLine2}</Tooltip>
               </a>
             ) : (
-              <span>
-                {maxLength && valueLine2?.length > maxLength ? (
-                  <Tooltip title={valueLine2}>
-                    {CommonService.limitWord(valueLine2, maxLength)}
-                  </Tooltip>
-                ) : (
-                  valueLine2
-                )}
-              </span>
+              <Tooltip title={valueLine2}>{valueLine2}</Tooltip>
             )}
           </div>
         </div>

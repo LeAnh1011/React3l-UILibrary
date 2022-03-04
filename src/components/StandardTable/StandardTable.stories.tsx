@@ -265,11 +265,7 @@ function Default() {
         render(...[platform]) {
           return (
             <LayoutCell orderType={orderType} tableSize={size}>
-              <OneLineText
-                icon="tio-calendar_month"
-                value={platform}
-                maxLength={25}
-              />
+              <OneLineText icon="tio-calendar_month" value={platform} />
             </LayoutCell>
           );
         },
@@ -288,7 +284,6 @@ function Default() {
                 value={creator}
                 backgroundColor="#FFECB3"
                 color="#ED6700"
-                maxLength={25}
               />
             </LayoutCell>
           );
@@ -331,77 +326,7 @@ function Default() {
           );
         },
       },
-      {
-        title: <LayoutHeader orderType={orderType} title="Type" />,
-        dataIndex: "name",
-        key: "name",
-        sorter: true,
-        width: 135,
-        ellipsis: true,
-        render(...[name]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize="large">
-              <OneLineText
-                avatar={KateBishop}
-                avatarType={avatarType}
-                value={name}
-                link="https://www.youtube.com/"
-                avatarSize={"large"}
-              />
-            </LayoutCell>
-          );
-        },
-      },
-      {
-        title: <LayoutHeader orderType={orderType} title="Type" />,
-        dataIndex: "name",
-        key: "name2",
-        sorter: true,
-        width: 135,
-        ellipsis: true,
-        render(...[name]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize="large">
-              <OneLineText
-                avatar={KateBishop}
-                avatarType={avatarType}
-                value={name}
-                avatarSize={"large"}
-              />
-            </LayoutCell>
-          );
-        },
-      },
-      {
-        title: <LayoutHeader orderType={orderType} title="Location" />,
-        dataIndex: "location",
-        key: "location",
-        sorter: true,
-        width: 100,
-        ellipsis: true,
-        render(...[location]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize="large">
-              <OneLineText value={location} link="https://www.youtube.com/" />
-            </LayoutCell>
-          );
-        },
-      },
-      {
-        title: <LayoutHeader orderType={orderType} title="Platform" />,
-        dataIndex: "platform",
-        key: "platform",
-        sorter: true,
-        width: 135,
-        ellipsis: true,
-        render(...[platform]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize="large">
-              <OneLineText icon="tio-calendar_month" value={platform} />
-            </LayoutCell>
-          );
-        },
-      },
+
       {
         title: <LayoutHeader orderType={orderType} title="Version" />,
         dataIndex: "version",
@@ -559,14 +484,14 @@ function Default() {
   for (let i = 0; i < 8; ++i) {
     data.push({
       key: i,
-      name: "Screem",
-      type: "Diamond",
-      location: "Hill",
+      name: "Screem iOS iOS iOS iOS iOS iOS iOS",
+      type: "Diamond iOS iOS iOS iOS iOS iOS iOS",
+      location: "Hill iOS iOS iOS iOS iOS iOS iOS",
       weight: "50kg",
       platform: "iOS iOS iOS iOS iOS iOS iOS iOS iOS iOS",
-      version: "10.3.4.5654",
+      version: "10.3.4.5654 OS iOS iOS iOS iOS iOS iOS",
       upgradeNum: 500,
-      creator: "Jack Gealish Jack Gealish Jack Gealish Jack Gealish",
+      creator: "Jack Gealish ",
       status: "hoạt động",
       createdAt: "2014-12-24 23:12:00",
     });

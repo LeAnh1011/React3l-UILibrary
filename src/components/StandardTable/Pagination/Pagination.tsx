@@ -26,7 +26,6 @@ function Pagination(props: PaginationProps) {
   const pageArray = React.useMemo(() => {
     const ind = (total - (total % take)) / take;
     const arrTmp = [];
-    console.log(ind);
     for (let i = 1; i <= ind; i++) {
       arrTmp.push(i);
     }
@@ -54,7 +53,11 @@ function Pagination(props: PaginationProps) {
 
   const menuPageSize = React.useMemo(() => {
     return (
-      <Menu onClick={handleMenuTakeClick} selectedKeys={["" + take]}>
+      <Menu
+        className="menu-page-size"
+        onClick={handleMenuTakeClick}
+        selectedKeys={["" + take]}
+      >
         {pageSizeOptions.map((page, index) => {
           return <Menu.Item key={page}>{page}</Menu.Item>;
         })}

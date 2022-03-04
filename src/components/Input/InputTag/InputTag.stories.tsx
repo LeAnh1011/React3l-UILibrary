@@ -91,7 +91,7 @@ export function InputTagStories() {
         >
           <InputTag
             type={type}
-            listItem={listItem}
+            listValue={listItem}
             placeHolder={"Select an option"}
             onSearch={handleSearchItem}
             onClear={handleClearItem}

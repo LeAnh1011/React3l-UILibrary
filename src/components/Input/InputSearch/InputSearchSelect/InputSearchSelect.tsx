@@ -17,11 +17,11 @@ function InputSearchSelect(props: InputSelectProps) {
     null
   );
 
-  const [internalModel, setInternalModel] = React.useState("");
+  const [internalValue, setInternalValue] = React.useState("");
 
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setInternalModel(event.target.value);
+      setInternalValue(event.target.value);
       if (typeof onSearch === "function") {
         onSearch(event.target.value);
       }
@@ -31,7 +31,7 @@ function InputSearchSelect(props: InputSelectProps) {
 
   const handleClearInput = React.useCallback(
     (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
-      setInternalModel("");
+      setInternalValue("");
       inputRef.current.focus();
     },
     []
@@ -48,7 +48,7 @@ function InputSearchSelect(props: InputSelectProps) {
 
   React.useEffect(() => {
     if (expanded) {
-      setInternalModel("");
+      setInternalValue("");
       inputRef.current.focus();
     }
   }, [expanded]);
@@ -59,7 +59,7 @@ function InputSearchSelect(props: InputSelectProps) {
         <div className={classNames("component__input-search-box")}>
           <input
             type="text"
-            value={internalModel}
+            value={internalValue}
             onChange={handleChange}
             placeholder={placeHolder}
             ref={inputRef}
@@ -67,10 +67,13 @@ function InputSearchSelect(props: InputSelectProps) {
             className={classNames("component__input-search")}
           />
 
-          {internalModel && (
-            <div style={{ width: "16px", height: "20px" }} className="m-r--xxs">
+          {internalValue && (
+            <div
+              style={{ width: "16px", height: "20px", paddingTop: 2 }}
+              className="m-r--xxs"
+            >
               <CloseFilled16
-                className="input-icon__clear m-r--xxs"
+                className="input-icon__clear m-r--xxs mt--xxxs"
                 onClick={handleClearInput}
               ></CloseFilled16>
             </div>

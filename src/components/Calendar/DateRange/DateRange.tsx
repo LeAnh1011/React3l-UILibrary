@@ -109,7 +109,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
           format={dateFormat}
           placeholder={placeHolder}
           suffixIcon={<SuffixDateIcon />}
-          className={classNames("bg-white", {
+          className={classNames({
             "date-picker__wrapper--sm": isSmall,
             "p-y--xxs": isSmall,
             "p-x--xs": isSmall,
@@ -133,13 +133,20 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
             {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
-        {internalValue[0] && (
+        {internalValue[0] && !disabled && (
           <>
             <span
-              className={classNames("date-range__icon-wrapper", {
-                "date-range__icon-wrapper--material":
-                  type === BORDER_TYPE.MATERIAL,
-              })}
+              className={classNames(
+                "date-range__icon-wrapper",
+                {
+                  "date-range__icon-wrapper--material":
+                    type === BORDER_TYPE.MATERIAL,
+                },
+                { "date-range__icon-wrapper--disabled": disabled },
+                {
+                  "date-range__icon-wrapper--sm": isSmall,
+                }
+              )}
             >
               <CloseFilled16
                 className={classNames("date-range__icon-clear", "m-l--xxs")}

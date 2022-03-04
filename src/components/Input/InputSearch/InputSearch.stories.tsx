@@ -29,7 +29,6 @@ export function InputSearchStories() {
 
   const handleSetModel = React.useCallback((...[, item]) => {
     setSelectModel(item);
-    console.log(item);
   }, []);
 
   return (
@@ -42,8 +41,8 @@ export function InputSearchStories() {
         }}
       >
         <InputSearch
-          model={selectModel}
-          modelFilter={selectModelFilter}
+          value={selectModel}
+          valueFilter={selectModelFilter}
           searchProperty={"name"}
           classFilter={DemoFilter}
           placeHolder="Search..."
@@ -52,8 +51,8 @@ export function InputSearchStories() {
           className="m-b--xl"
         />
         <InputSearch
-          model={selectModel}
-          modelFilter={selectModelFilter}
+          value={selectModel}
+          valueFilter={selectModelFilter}
           searchProperty={"name"}
           classFilter={DemoFilter}
           placeHolder="Search..."

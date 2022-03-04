@@ -33,7 +33,6 @@ const demoSearchFunc = (TModelFilter: ModelFilter) => {
   return demoObservable;
 };
 
-
 class DemoFilter extends ModelFilter {
   public id: IdFilter = new IdFilter();
   public name: StringFilter = new StringFilter();
@@ -41,7 +40,6 @@ class DemoFilter extends ModelFilter {
 }
 
 export function AdvanceIdMultipleFilterStories() {
-
   const [selectModelFilter] = React.useState<DemoFilter>(new DemoFilter());
 
   const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
@@ -65,10 +63,13 @@ export function AdvanceIdMultipleFilterStories() {
     setType(event.target.value);
   }, []);
 
-  const handleChangeModels = React.useCallback((listItemm, ids) => {
-    setModels([...listItemm]);
-    setFilter({ ...filter, id: { in: ids } });
-  }, [filter]);
+  const handleChangeModels = React.useCallback(
+    (listItemm, ids) => {
+      setModels([...listItemm]);
+      setFilter({ ...filter, id: { in: ids } });
+    },
+    [filter]
+  );
 
   const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
     setIsSmall(event.target.value);
@@ -111,11 +112,11 @@ export function AdvanceIdMultipleFilterStories() {
           message={isValidated ? "Error label" : ""}
         >
           <AdvanceIdMultipleFilter
-            models={models}
+            values={models}
             placeHolder={"Select an option"}
             onChange={handleChangeModels}
             getList={demoSearchFunc}
-            modelFilter={selectModelFilter}
+            valueFilter={selectModelFilter}
             classFilter={DemoFilter}
             label={"Label"}
             type={type}

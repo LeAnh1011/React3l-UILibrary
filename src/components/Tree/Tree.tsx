@@ -25,7 +25,7 @@ function SwitcherIcon() {
 }
 export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   treeData?: CustomTreeNode<T>[];
-  modelFilter?: TModelFilter;
+  valueFilter?: TModelFilter;
   expandedKeys?: number[];
   checkedKeys?: number[];
   checkable?: boolean;
@@ -44,7 +44,7 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
 function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const {
     treeData = [],
-    modelFilter,
+    valueFilter,
     expandedKeys,
     checkedKeys,
     checkable,
@@ -187,7 +187,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     if (typeof getTreeData === "function") {
       subscription.add(getTreeData);
       setLoading(true);
-      getTreeData(modelFilter).subscribe(
+      getTreeData(valueFilter).subscribe(
         (res: Model[]) => {
           if (res) {
             const [treeData, internalExpandedKeys] = CommonService.buildTree(
@@ -209,8 +209,8 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
         }
       );
     }
-    return () => { };
-  }, [getTreeData, selectedKey, modelFilter, subscription, onlySelectLeaf]);
+    return () => {};
+  }, [getTreeData, selectedKey, valueFilter, subscription, onlySelectLeaf]);
 
   const handleMove = React.useCallback(
     (item) => (event: any) => {

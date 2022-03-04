@@ -8,10 +8,9 @@ export interface StandardTableCustomProps extends TableProps<any> {
   isDragable?: boolean;
   className?: string;
   tableSize?: "large" | "medium" | "small";
-  isLevel2?: boolean; //unset height for table level2
 }
 function StandardTable(props: StandardTableCustomProps) {
-  const { className, tableSize, isDragable, isLevel2, expandable } = props;
+  const { className, tableSize, isDragable, expandable } = props;
 
   React.useEffect(() => {
     const antTable = document.getElementsByClassName(
@@ -66,7 +65,7 @@ function StandardTable(props: StandardTableCustomProps) {
 
   return (
     <>
-      <div className={classNames("page-table", isLevel2 ? "" : "height-500px")}>
+      <div className={classNames("page-table")}>
         <Table
           className={classNames(
             className,

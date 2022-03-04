@@ -15,7 +15,9 @@ import TreeSelect from "./components/TreeSelect";
 
 import AdvanceIdFilterMaster from "./components/AdvanceFilterMaster/AdvanceIdFilterMaster";
 import AdvanceMultipleIdFilterMaster from "./components/AdvanceFilterMaster/AdvanceMultipleIdFilterMaster";
-import AdvanceDateRangeFilterMaster from "./components/AdvanceFilterMaster/AdvanceDateRangFilterMaster/AdvanceDateRangFilterMaster";
+import AdvanceDateRangeFilterMaster from "./components/AdvanceFilterMaster/AdvanceDateRangFilterMaster";
+import AdvanceEnumFilterMaster from "./components/AdvanceFilterMaster/AdvanceEnumFilterMaster";
+import AdvanceTreeFilterMaster from "./components/AdvanceFilterMaster/AdvanceTreeFilterMaster";
 import TagFilter from "./components/AdvanceFilterMaster/TagFilter";
 
 import AdvanceIdFilter from "./components/AdvanceFilter/AdvanceIdFilter";
@@ -71,6 +73,8 @@ export {
   AdvanceIdFilterMaster,
   AdvanceMultipleIdFilterMaster,
   AdvanceDateRangeFilterMaster,
+  AdvanceEnumFilterMaster,
+  AdvanceTreeFilterMaster,
   TagFilter,
   // AdvanceFilter components
   AdvanceIdFilter,

@@ -6,7 +6,7 @@ import classNames from "classnames";
 import { BORDER_TYPE } from "config/enum";
 
 export interface InputTagProps<T extends Model> {
-  listItem?: T[];
+  listValue?: T[];
   title?: string;
   placeHolder?: string;
   disabled?: boolean;
@@ -28,7 +28,7 @@ export interface InputTagProps<T extends Model> {
 }
 function InputTag(props: InputTagProps<Model>) {
   const {
-    listItem,
+    listValue,
     placeHolder,
     disabled,
     onSearch,
@@ -44,9 +44,9 @@ function InputTag(props: InputTagProps<Model>) {
     isNotExpand,
   } = props;
 
-  const internalListItem = React.useMemo<Model[]>(() => {
-    return listItem;
-  }, [listItem]);
+  const internalListValue = React.useMemo<Model[]>(() => {
+    return listValue;
+  }, [listValue]);
 
   const [searchTerm, setSearchTerm] = React.useState<string>("");
 
@@ -119,7 +119,7 @@ function InputTag(props: InputTagProps<Model>) {
         </div>
         <div
           className={classNames(
-            "component__input input-tag__container bg-white",
+            "component__input input-tag__container",
             {
               "input-tag__container--sm": isSmall,
               "p-y--xxs": isSmall,
@@ -130,7 +130,7 @@ function InputTag(props: InputTagProps<Model>) {
               "input-tag--disabled ": disabled,
               "input-tag__container--float": type === BORDER_TYPE.FLOAT_LABEL,
               "input-tag--filter-have-item":
-                isFilter && internalListItem && internalListItem.length > 0,
+                isFilter && internalListValue && internalListValue.length > 0,
             }
           )}
           onClick={() =>
@@ -140,7 +140,7 @@ function InputTag(props: InputTagProps<Model>) {
           }
           ref={inputContainerRef}
         >
-          {internalListItem && internalListItem.length > 0 && (
+          {internalListValue && internalListValue.length > 0 && (
             <span
               className={classNames(
                 "input-tag-item__label m-r--xxxs m-b--xxxs",
@@ -154,7 +154,7 @@ function InputTag(props: InputTagProps<Model>) {
               onClick={(e) => e.stopPropagation()}
             >
               <span className="input-tag-item__text">
-                {internalListItem?.length}
+                {internalListValue?.length}
               </span>
               {
                 <Close16
@@ -195,7 +195,7 @@ function InputTag(props: InputTagProps<Model>) {
                 "component__title component__title--normal",
                 {
                   "component__title--sm": isSmall,
-                  "component__title--top": listItem && listItem.length > 0,
+                  "component__title--top": listValue && listValue.length > 0,
                 }
               )}
             >

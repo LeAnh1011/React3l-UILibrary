@@ -8,13 +8,13 @@ export class TreeNode<T extends Model> implements DataNode {
   public children: TreeNode<T>[];
   public disabled: boolean;
 
-  constructor(model?: T) {
-    if (model) {
-      this.key = model.id;
-      this.item = { ...model };
+  constructor(value?: T) {
+    if (value) {
+      this.key = value.id;
+      this.item = { ...value };
       this.children = [];
-      this.title = model.name;
-      this.disabled = model.disabled;
+      this.title = value.name;
+      this.disabled = value.disabled;
     } else {
       this.title = "";
       this.key = null;

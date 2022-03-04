@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { formatDate } from "helpers/date-time";
 import { formatNumber } from "helpers/number";
 import { Moment } from "moment";
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import {
   DateFilter,
   GuidFilter,
@@ -13,10 +13,8 @@ import {
   StringFilter,
 } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
-import { TFunction } from 'i18next';
+import { TFunction } from "i18next";
 import "./TagFilter.scss";
-
-
 
 export interface TagFilterProps {
   className?: string;
@@ -24,8 +22,7 @@ export interface TagFilterProps {
   keyTranslate?: string;
   translate?: TFunction;
   onClear?: (t: any) => void;
-  filter?: ModelFilter;
-  dispatch?: Dispatch<SetStateAction<ModelFilter>> | any;
+  handleChangeFilter?: (valueFilter: ModelFilter) => void;
 }
 
 interface Tag {
@@ -33,11 +30,18 @@ interface Tag {
   value?: String | Number | Array<Model> | any;
   type?: string;
   filterKey: string | string[];
+  classFilter?: new () => ModelFilter;
 }
 
-
 function TagFilter(props: TagFilterProps) {
-  const { className, value, keyTranslate, onClear, translate, filter, dispatch } = props;
+  const {
+    className,
+    value,
+    keyTranslate,
+    onClear,
+    translate,
+    handleChangeFilter,
+  } = props;
 
   const convertList = React.useCallback((search: ModelFilter) => {
     let list = [] as Tag[];
@@ -46,9 +50,11 @@ function TagFilter(props: TagFilterProps) {
         StringFilter | DateFilter | NumberFilter | IdFilter | GuidFilter
       >(search as any).forEach(([key, value]) => {
         if (value instanceof StringFilter) {
+
           Object.entries(value).forEach(([filterKey, filterValue]) => {
             // filter by StringFilter
             if (typeof filterValue === "string" && filterValue !== "") {
+
               switch (filterKey) {
                 case "startWith":
                   return list.push({
@@ -56,6 +62,7 @@ function TagFilter(props: TagFilterProps) {
                     value: filterValue,
                     type: "string",
                     filterKey,
+                    classFilter: StringFilter,
                   });
                 case "endWith":
                   return list.push({
@@ -63,6 +70,7 @@ function TagFilter(props: TagFilterProps) {
                     value: filterValue,
                     type: "string",
                     filterKey,
+                    classFilter: StringFilter,
                   });
                 case "contain":
                   return list.push({
@@ -70,6 +78,7 @@ function TagFilter(props: TagFilterProps) {
                     value: filterValue,
                     type: "string",
                     filterKey,
+                    classFilter: StringFilter,
                   });
                 default:
                   // Do nothing
@@ -89,6 +98,7 @@ function TagFilter(props: TagFilterProps) {
                     value: filterValue,
                     type: "number",
                     filterKey,
+                    classFilter: NumberFilter,
                   });
                 case "notEqual":
                   return list.push({
@@ -103,6 +113,7 @@ function TagFilter(props: TagFilterProps) {
                     value: filterValue,
                     type: "number",
                     filterKey,
+                    classFilter: NumberFilter,
                   });
                 case "greater":
                   return list.push({
@@ -110,6 +121,7 @@ function TagFilter(props: TagFilterProps) {
                     value: filterValue,
                     type: "number",
                     filterKey,
+                    classFilter: NumberFilter,
                   });
                 case "lessEqual":
                   return list.push({
@@ -117,6 +129,7 @@ function TagFilter(props: TagFilterProps) {
                     value: filterValue,
                     type: "number",
                     filterKey,
+                    classFilter: NumberFilter,
                   });
                 case "greaterEqual":
                   return list.push({
@@ -124,6 +137,7 @@ function TagFilter(props: TagFilterProps) {
                     value: filterValue,
                     type: "number",
                     filterKey,
+                    classFilter: NumberFilter,
                   });
                 default:
                   // Do nothing
@@ -142,6 +156,7 @@ function TagFilter(props: TagFilterProps) {
                   value: filterValue,
                   type: "date",
                   filterKey,
+                  classFilter: DateFilter,
                 });
               case "notEqual":
                 return list.push({
@@ -149,6 +164,7 @@ function TagFilter(props: TagFilterProps) {
                   value: filterValue,
                   type: "date",
                   filterKey,
+                  classFilter: DateFilter,
                 });
               case "less":
                 const lessFiltered = list.filter((t: any) => t["key"] === key);
@@ -158,6 +174,7 @@ function TagFilter(props: TagFilterProps) {
                     value: [filterValue],
                     type: "date",
                     filterKey: [filterKey],
+                    classFilter: DateFilter,
                   });
                 } else {
                   if (lessFiltered?.length === 2) {
@@ -180,13 +197,16 @@ function TagFilter(props: TagFilterProps) {
 
                 break;
               case "greater":
-                const greaterFiltered = list.filter((t: any) => t["key"] === key);
+                const greaterFiltered = list.filter(
+                  (t: any) => t["key"] === key
+                );
                 if (!greaterFiltered || greaterFiltered?.length === 0) {
                   return list.push({
                     key,
                     value: [filterValue],
                     type: "date",
                     filterKey: [filterKey],
+                    classFilter: DateFilter,
                   });
                 } else {
                   if (greaterFiltered?.length === 2) {
@@ -208,13 +228,16 @@ function TagFilter(props: TagFilterProps) {
                 }
                 break;
               case "lessEqual":
-                const lessEqualFiltered = list.filter((t: any) => t["key"] === key);
+                const lessEqualFiltered = list.filter(
+                  (t: any) => t["key"] === key
+                );
                 if (!lessEqualFiltered || lessEqualFiltered?.length === 0) {
                   return list.push({
                     key,
                     value: [filterValue],
                     type: "date",
                     filterKey: [filterKey],
+                    classFilter: DateFilter,
                   });
                 } else {
                   if (lessEqualFiltered?.length === 2) {
@@ -240,12 +263,16 @@ function TagFilter(props: TagFilterProps) {
                 const greaterEqualFiltered = list.filter(
                   (t: any) => t["key"] === key
                 );
-                if (!greaterEqualFiltered || greaterEqualFiltered?.length === 0) {
+                if (
+                  !greaterEqualFiltered ||
+                  greaterEqualFiltered?.length === 0
+                ) {
                   return list.push({
                     key,
                     value: [filterValue],
                     type: "date",
                     filterKey: [filterKey],
+                    classFilter: DateFilter,
                   });
                 } else {
                   if (greaterEqualFiltered?.length === 2) {
@@ -276,13 +303,11 @@ function TagFilter(props: TagFilterProps) {
         if (value instanceof IdFilter || value instanceof GuidFilter) {
           const objectKey = key.replace("Id", "");
           Object.entries(value).forEach(([filterKey, filterValue]) => {
-
             if (
               (typeof filterValue === "string" && filterValue !== "") ||
               (typeof filterValue === "number" && !Number.isNaN(filterValue)) ||
               Array.isArray(filterValue)
             ) {
-
               switch (filterKey) {
                 case "equal":
                   return list.push({
@@ -290,6 +315,7 @@ function TagFilter(props: TagFilterProps) {
                     value: [search[`${objectKey}Value`]],
                     type: "id",
                     filterKey,
+                    classFilter: IdFilter,
                   });
                 case "notEqual":
                   return list.push({
@@ -297,6 +323,7 @@ function TagFilter(props: TagFilterProps) {
                     value: [search[`${objectKey}Value`]],
                     type: "id",
                     filterKey,
+                    classFilter: IdFilter,
                   });
 
                 case "in":
@@ -305,6 +332,7 @@ function TagFilter(props: TagFilterProps) {
                     value: search[`${objectKey}Value`],
                     type: "id",
                     filterKey,
+                    classFilter: IdFilter,
                   });
                   break;
 
@@ -314,6 +342,7 @@ function TagFilter(props: TagFilterProps) {
                     value: search[`${objectKey}Value`],
                     type: "id",
                     filterKey,
+                    classFilter: IdFilter,
                   });
                   break;
 
@@ -327,21 +356,25 @@ function TagFilter(props: TagFilterProps) {
       });
     }
     return list;
-  }, [])
+  }, []);
 
   const list = React.useMemo((): Model => {
     return convertList(value);
   }, [convertList, value]);
 
-
-  const handleClear = React.useCallback((itemTag) => {
-    const newFilter = { ...filter };
-    const objectKey = itemTag?.key.replace("Id", "");
-    newFilter[itemTag?.key] = {};
-    newFilter[`${objectKey}Value`] = undefined;
-    dispatch({ ...newFilter });
-    onClear(null);
-  }, [dispatch, filter, onClear]);
+  const handleClear = React.useCallback(
+    (itemTag: Tag) => {
+      const newFilter = { ...value };
+      const objectKey = itemTag?.key.replace("Id", "");
+      newFilter[itemTag?.key] = new itemTag.classFilter();
+      newFilter[`${objectKey}Value`] = undefined;
+      handleChangeFilter({ ...newFilter });
+      if (typeof onClear !== undefined) {
+        onClear(null);
+      }
+    },
+    [handleChangeFilter, value, onClear]
+  );
 
   return (
     <div className={classNames("tag-filte__container", className)}>
@@ -350,7 +383,12 @@ function TagFilter(props: TagFilterProps) {
         list.map((itemTag: Tag, index: number) => (
           <div className="tag-detail m--xxs" key={index}>
             <div className="tag-filte__container-text">
-              <div className="tag-detail__title m-r--xxxs">{translate ? translate(`${keyTranslate}.${itemTag?.key}`) : itemTag?.key}: </div>
+              <div className="tag-detail__title m-r--xxxs">
+                {translate
+                  ? translate(`${keyTranslate}.${itemTag?.key}`)
+                  : itemTag?.key}
+                :{" "}
+              </div>
               {itemTag?.type === "string" && itemTag?.value}
               {itemTag?.type === "number" && formatNumber(itemTag?.value)}
               {itemTag?.type === "date" && itemTag?.value?.length > 0 && (

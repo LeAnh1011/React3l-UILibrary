@@ -27,11 +27,10 @@ const demoListEnum = [
   { id: 4, name: "Enum 4", code: "E4" },
   { id: 5, name: "Enum 5", code: "E5" },
 ];
-interface changeAction {
-  type: string;
-  data: Model;
-}
-
+// interface changeAction {
+//   type: string;
+//   data: Model;
+// }
 
 export function EnumSelectStories() {
   const [selectModel, setSelectModel] = React.useState<Model>({
@@ -106,7 +105,7 @@ export function EnumSelectStories() {
         >
           <EnumSelect
             placeHolder={"Select Organization"}
-            model={selectModel}
+            value={selectModel}
             render={handleRenderModel}
             onChange={handleSetModel}
             listItem={demoListEnum}
@@ -117,7 +116,7 @@ export function EnumSelectStories() {
             isSmall={isSmall}
             isMultiple={isMultiple}
             onChangeMultiple={handleChangeModels} // if type is multiple pass this props
-            listModel={models} // if type is multiple pass this prop
+            listValue={models} // if type is multiple pass this prop
           />
         </FormItem>
       </div>

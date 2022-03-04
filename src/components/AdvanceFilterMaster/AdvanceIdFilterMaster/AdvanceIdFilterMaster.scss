@@ -9,12 +9,9 @@ $backgound-color: #f4f4f4;
     width: fit-content;
     cursor: pointer;
     &.filter-bg {
-      background-color: var(--white);
-      border: 1px solid var(--color-primary);
-      box-sizing: border-box;
-      box-shadow: 0px 0px 8px var(--color-primary);
+      background-color: var(--palette-gray-30);
       &:hover {
-        background-color: var(--white);
+        background-color: var(--palette-gray-30);
       }
     }
     &.p-b---active {

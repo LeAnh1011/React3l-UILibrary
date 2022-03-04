@@ -2,6 +2,7 @@ import React, { ReactNode, Dispatch, SetStateAction } from "react";
 import "./ActionBarComponent.scss";
 import classNames from "classnames";
 import { Key } from "antd/lib/table/interface";
+import Button from "components/Button";
 
 export interface ActionBarComponentProps {
   name?: string;
@@ -43,9 +44,14 @@ function ActionBarComponent(props: ActionBarComponentProps) {
       {selectedRowKeys?.length > 0 && (
         <div className="action-button">
           {children}
-          <div className="button-cancel" onClick={handleCancel}>
+          <div></div>
+          <Button
+            type="ghost-primary"
+            className="btn--lg"
+            onClick={handleCancel}
+          >
             {translateTitleCancelButton}
-          </div>
+          </Button>
         </div>
       )}
     </div>

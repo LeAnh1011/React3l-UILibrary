@@ -1,5 +1,4 @@
 @import "../../styles/index.scss";
-
 .page-table {
   .ant-table-thead > tr > th {
     font-size: 12px;
@@ -18,6 +17,9 @@
   }
   .ant-table-tbody > tr > td {
     padding: 0px 0px;
+  }
+  .ant-table-thead th.ant-table-column-has-sorters{
+    padding-right: 8px;
   }
   .big-checkbox-col{
     .ant-table-selection-col{
@@ -69,10 +71,6 @@
 }
 .ant-table-body.active-draggable {
   cursor: grabbing;
-}
-.height-500px{
-  max-height: 500px;
-  overflow: scroll;
 }
 .expand-table-box{
   padding: 28px 24px 28px 48px;

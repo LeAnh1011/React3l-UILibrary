@@ -156,7 +156,7 @@ const InputText = React.forwardRef(
         </div>
         <div
           className={classNames(
-            "component__input input-text__container bg-white",
+            "component__input input-text__container",
             {
               "input-text__container--sm": isSmall,
               "p-y--xxs": isSmall,
@@ -210,12 +210,10 @@ const InputText = React.forwardRef(
             </label>
           )}
           {internalValue && !disabled && (
-            <div style={{ width: "16px", height: "20px" }} className="m-l--xxs">
-              <CloseFilled16
-                className={classNames("input-icon__clear")}
-                onClick={handleClearInput}
-              ></CloseFilled16>
-            </div>
+            <CloseFilled16
+              className={classNames("input-icon__clear", "m-l--xxs")}
+              onClick={handleClearInput}
+            ></CloseFilled16>
           )}
           {suffix && (
             <>

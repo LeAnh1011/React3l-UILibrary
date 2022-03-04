@@ -16,9 +16,9 @@ export interface AdvanceIdFilterProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
-  model?: Model;
+  value?: Model;
 
-  modelFilter?: TModelFilter;
+  valueFilter?: TModelFilter;
 
   searchProperty?: string;
 
@@ -61,8 +61,8 @@ function defaultRenderObject<T extends Model>(t: T) {
 
 function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
   const {
-    model,
-    modelFilter,
+    value,
+    valueFilter,
     searchProperty,
     searchType,
     placeHolder,
@@ -80,9 +80,9 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
     preferOptions,
   } = props;
 
-  const internalModel = React.useMemo((): Model => {
-    return model || null;
-  }, [model]);
+  const internalValue = React.useMemo((): Model => {
+    return value || null;
+  }, [value]);
 
   const [loading, setLoading] = React.useState<boolean>(false);
 
@@ -104,17 +104,17 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
 
   const { run } = useDebounceFn(
     (searchTerm: string) => {
-      const cloneModelFilter = modelFilter
-        ? { ...modelFilter }
+      const cloneValueFilter = valueFilter
+        ? { ...valueFilter }
         : new ClassFilter();
       if (!isEnumerable) {
         if (searchType) {
-          cloneModelFilter[searchProperty][searchType] = searchTerm;
-        } else cloneModelFilter[searchProperty] = searchTerm;
+          cloneValueFilter[searchProperty][searchType] = searchTerm;
+        } else cloneValueFilter[searchProperty] = searchTerm;
       }
       setLoading(true);
       subscription.add(getList);
-      getList(cloneModelFilter).subscribe(
+      getList(cloneValueFilter).subscribe(
         (res: Model[]) => {
           setList(res);
           setLoading(false);
@@ -134,7 +134,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
     try {
       setLoading(true);
       subscription.add(getList);
-      const filter = modelFilter ? modelFilter : new ClassFilter();
+      const filter = valueFilter ? valueFilter : new ClassFilter();
       getList(filter).subscribe(
         (res: Model[]) => {
           setList(res);
@@ -146,7 +146,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
         }
       );
     } catch (error) {}
-  }, [getList, modelFilter, ClassFilter, subscription]);
+  }, [getList, valueFilter, ClassFilter, subscription]);
 
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -273,7 +273,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
       <div className="advance-id-filter__container" ref={wrapperRef}>
         <div className="select__input" onClick={handleToggle}>
           <InputSelect
-            model={internalModel} // value of input, event should change these on update
+            value={internalValue} // value of input, event should change these on update
             render={render}
             placeHolder={placeHolder}
             expanded={isExpand}
@@ -303,7 +303,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                           "advance-id-filter__item p-l--xs p-y--xs",
                           {
                             "advance-id-filter__item--selected":
-                              item.id === internalModel?.id,
+                              item.id === internalValue?.id,
                           }
                         )}
                         tabIndex={-1}
@@ -314,7 +314,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                         <span className="advance-id-filter__text">
                           {render(item)}
                         </span>
-                        {item.id === internalModel?.id && (
+                        {item.id === internalValue?.id && (
                           <div style={{ height: "16px" }}>
                             <Checkmark16 />
                           </div>
@@ -328,7 +328,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
               </>
             ) : (
               <div className="advance-id-filter__loading">
-                <IconLoading color="#0F62FE" size={24}/>
+                <IconLoading color="#0F62FE" size={24} />
               </div>
             )}
             {!loading && list.length > 0 && (
@@ -341,7 +341,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                         "advance-id-filter__prefer-option advance-id-filter__item p--xs",
                         {
                           "advance-id-filter__item--selected":
-                            item.id === internalModel?.id,
+                            item.id === internalValue?.id,
                         }
                       )}
                       key={index}
@@ -351,7 +351,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                       <span className="advance-id-filter__text">
                         {render(item)}
                       </span>
-                      {item.id === internalModel?.id && (
+                      {item.id === internalValue?.id && (
                         <div style={{ height: "16px" }}>
                           <Checkmark16 />
                         </div>

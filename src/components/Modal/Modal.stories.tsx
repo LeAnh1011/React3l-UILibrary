@@ -17,15 +17,12 @@ function Default() {
   }, []);
   const [visible, setVisible] = React.useState<boolean>(true);
   function handleSave() {
-    console.log("save");
     setVisible(false);
   }
   function handleCreate() {
-    console.log("create");
     setVisible(false);
   }
   function handleCancel() {
-    console.log("cancel");
     setVisible(false);
   }
 
@@ -158,7 +155,7 @@ function Default() {
           handleSave={handleSave}
           handleCancel={handleCancel}
           visibleFooter={true}
-          handleCreateNext={handleCreate}
+          handleApplyNext={handleCreate}
           size="large"
           title="Modal Title"
         >

@@ -93,7 +93,7 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
           ref={dateRef}
           allowClear={false}
           format={dateFormat}
-          className={classNames("bg-white", {
+          className={classNames({
             "date-picker__wrapper--sm": isSmall,
             "p-y--xxs": isSmall,
             "p-x--xs": isSmall,
@@ -116,12 +116,18 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
             {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
-        {value && String(value) !== DEFAULT_DATETIME_VALUE && (
+        {value && String(value) !== DEFAULT_DATETIME_VALUE && !disabled && (
           <span
-            className={classNames("date-picker__icon-wrapper", {
-              "date-picker__icon-wrapper--material":
-                type === BORDER_TYPE.MATERIAL,
-            })}
+            className={classNames(
+              "date-picker__icon-wrapper",
+              {
+                "date-picker__icon-wrapper--material":
+                  type === BORDER_TYPE.MATERIAL,
+              },
+
+              { "date-picker__icon-wrapper--disabled": disabled },
+              { "date-picker__icon-wrapper--sm": isSmall }
+            )}
           >
             <CloseFilled16
               className={classNames("date-picker__icon-clear", "m-l--xxs")}
@@ -130,7 +136,6 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
           </span>
         )}
       </div>
-
     </div>
   );
 }

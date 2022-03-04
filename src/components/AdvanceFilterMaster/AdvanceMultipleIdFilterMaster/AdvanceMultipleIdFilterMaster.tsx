@@ -19,7 +19,7 @@ export interface AdvanceMultipleIdFilterMasterProps<
 
   title: string;
 
-  modelFilter?: TModelFilter;
+  valueFilter?: TModelFilter;
 
   searchProperty?: string;
 
@@ -75,12 +75,11 @@ function multipleFilterReducer(
   return;
 }
 
-
 function AdvanceMultipleIdFilterMaster(
   props: AdvanceMultipleIdFilterMasterProps<Model, ModelFilter>
 ) {
   const {
-    modelFilter,
+    valueFilter,
     title,
     values,
     searchProperty,
@@ -175,17 +174,17 @@ function AdvanceMultipleIdFilterMaster(
   }, [firstLoad, internalList, internalPreferOptions]);
   const { run } = useDebounceFn(
     (searchTerm: string) => {
-      const cloneModelFilter = modelFilter
-        ? { ...modelFilter }
+      const cloneValueFilter = valueFilter
+        ? { ...valueFilter }
         : new ClassFilter();
       if (!isEnumList) {
         if (searchType) {
-          cloneModelFilter[searchProperty][searchType] = searchTerm;
-        } else cloneModelFilter[searchProperty] = searchTerm;
+          cloneValueFilter[searchProperty][searchType] = searchTerm;
+        } else cloneValueFilter[searchProperty] = searchTerm;
       }
       setLoading(true);
       subscription.add(getList);
-      getList(cloneModelFilter).subscribe(
+      getList(cloneValueFilter).subscribe(
         (res: Model[]) => {
           setList(res);
           setLoading(false);
@@ -205,7 +204,7 @@ function AdvanceMultipleIdFilterMaster(
     try {
       setLoading(true);
       subscription.add(getList);
-      const filter = modelFilter ? { ...modelFilter } : new ClassFilter();
+      const filter = valueFilter ? { ...valueFilter } : new ClassFilter();
       getList(filter).subscribe(
         (res: Model[]) => {
           setList(res);
@@ -217,7 +216,7 @@ function AdvanceMultipleIdFilterMaster(
         }
       );
     } catch (error) { }
-  }, [getList, modelFilter, subscription, ClassFilter]);
+  }, [getList, valueFilter, subscription, ClassFilter]);
 
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -241,16 +240,16 @@ function AdvanceMultipleIdFilterMaster(
       let filteredItem = selectedList?.filter(
         (current) => current.id === item.id
       )[0];
-      const cloneModelFilter = modelFilter
-        ? { ...modelFilter }
+      const cloneValueFilter = valueFilter
+        ? { ...valueFilter }
         : new ClassFilter();
 
-      if (!cloneModelFilter["id"]["notIn"]) {
-        cloneModelFilter["id"]["notIn"] = [item?.id];
+      if (!cloneValueFilter["id"]["notIn"]) {
+        cloneValueFilter["id"]["notIn"] = [item?.id];
       } else {
-        cloneModelFilter["id"]["notIn"].push(item?.id);
+        cloneValueFilter["id"]["notIn"].push(item?.id);
       }
-      getList(cloneModelFilter).subscribe(
+      getList(cloneValueFilter).subscribe(
         (res: Model[]) => {
           if (res) {
             setList(res);
@@ -283,7 +282,7 @@ function AdvanceMultipleIdFilterMaster(
         });
       }
     },
-    [selectedList, modelFilter, ClassFilter, getList, onChange]
+    [selectedList, valueFilter, ClassFilter, getList, onChange]
   );
 
   const handleSearchChange = React.useCallback(
@@ -370,7 +369,11 @@ function AdvanceMultipleIdFilterMaster(
           )}
           onClick={handleToggle}
         >
-          <label className={classNames("d-flex", { "filter-active": values?.length > 0, })}>
+          <label
+            className={classNames("d-flex", {
+              "filter-active": values?.length > 0,
+            })}
+          >
             <span className="advance-count-item__text p-r--xxxs">
               {values?.length > 0 && <>({values?.length})</>}
             </span>
@@ -379,7 +382,6 @@ function AdvanceMultipleIdFilterMaster(
               <ChevronDown16 />
             </div>
           </label>
-
         </div>
         {isExpand && (
           <div className="advance-id-filter-master__list-container m-t--xxxs">
@@ -389,9 +391,7 @@ function AdvanceMultipleIdFilterMaster(
                 maxLength={maxLength}
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
-                suffix={
-                  <Search16 />
-                }
+                suffix={<Search16 />}
                 isMaterial={isMaterial}
                 ref={inputRef}
                 onKeyDown={handleKeyDown}
@@ -402,7 +402,7 @@ function AdvanceMultipleIdFilterMaster(
                 {internalList.length > 0 ? (
                   internalList.map((item, index) => (
                     <div
-                      className={classNames("advance-id-filter__item", {
+                      className={classNames("advance-id-filter__item p-l--xs p-y--xs p-r--xxs", {
                         "advance-id-filter__item--selected": item.isSelected,
                       })}
                       key={index}
@@ -412,7 +412,6 @@ function AdvanceMultipleIdFilterMaster(
                     >
                       <Checkbox
                         checked={item.isSelected}
-                        className=" m-l--xs m-y--xs m-r--xxs"
                         onChange={handleClickItem(item)}
                       >
                         <span className="advance-id-master__text">

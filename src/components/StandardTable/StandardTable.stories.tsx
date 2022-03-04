@@ -15,11 +15,11 @@ import TwoLineText from "./DataCellComponent/TwoLineText/TwoLineText";
 import OneLineText from "./DataCellComponent/OneLineText/OneLineText";
 import StatusLine from "./DataCellComponent/StatusLine/StatusLine";
 import { ColumnProps } from "antd/lib/table";
-import { Button } from "antd";
 import { Tabs } from "antd";
 import Pagination from "./Pagination/Pagination";
-import { ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
+import { Add16, ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
 import { StringFilter } from "react3l-advanced-filters";
+import Button from "../Button/Button";
 const KateBishop =
   "https://www.dualshockers.com/static/uploads/2021/11/How-Old-Is-Kate-Bishop-In-Hawkeye-TV-Show-scaled.jpeg";
 const { TabPane } = Tabs;
@@ -43,6 +43,14 @@ export enum ORDER_TYPE {
 }
 function Default() {
   const [filter, setFilter] = React.useState<DemoFilter>(new DemoFilter());
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const handleLoading = React.useCallback(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 4000);
+  }, []);
 
   const handlePagination = React.useCallback(
     (skip: number, take: number) => {
@@ -50,7 +58,6 @@ function Default() {
       // if (typeof handleSearch === "function") {
       //   handleSearch();
       // }
-      console.log(filter);
     },
     [filter, setFilter]
   );
@@ -258,7 +265,11 @@ function Default() {
         render(...[platform]) {
           return (
             <LayoutCell orderType={orderType} tableSize={size}>
-              <OneLineText icon="tio-calendar_month" value={platform} />
+              <OneLineText
+                icon="tio-calendar_month"
+                value={platform}
+                maxLength={25}
+              />
             </LayoutCell>
           );
         },
@@ -277,6 +288,7 @@ function Default() {
                 value={creator}
                 backgroundColor="#FFECB3"
                 color="#ED6700"
+                maxLength={25}
               />
             </LayoutCell>
           );
@@ -551,10 +563,10 @@ function Default() {
       type: "Diamond",
       location: "Hill",
       weight: "50kg",
-      platform: "iOS",
+      platform: "iOS iOS iOS iOS iOS iOS iOS iOS iOS iOS",
       version: "10.3.4.5654",
       upgradeNum: 500,
-      creator: "Jack Gealish",
+      creator: "Jack Gealish Jack Gealish Jack Gealish Jack Gealish",
       status: "hoạt động",
       createdAt: "2014-12-24 23:12:00",
     });
@@ -578,7 +590,16 @@ function Default() {
             selectedRowKeys={selectedRowKeys}
             setSelectedRowKeys={setSelectedRowKeys}
           >
-            <Button>Button demo</Button>
+            <Button type="ghost-primary" className="btn--lg" icon={<Add16 />}>
+              {"Button"}
+            </Button>
+            <Button
+              type="ghost-primary"
+              className="btn--lg"
+              icon={<ChevronDown16 />}
+            >
+              {"Button"}
+            </Button>
           </ActionBarComponent>
           <StandardTable
             columns={columns}
@@ -588,6 +609,7 @@ function Default() {
             tableSize={size}
             rowSelection={rowSelection}
             expandable={expandable}
+            loading={loading}
           />
           <div>
             <Pagination
@@ -603,7 +625,16 @@ function Default() {
             selectedRowKeys={selectedRowKeys}
             setSelectedRowKeys={setSelectedRowKeys}
           >
-            <Button>Button demo</Button>
+            <Button type="ghost-primary" className="btn--lg" icon={<Add16 />}>
+              {"Button"}
+            </Button>
+            <Button
+              type="ghost-primary"
+              className="btn--lg"
+              icon={<ChevronDown16 />}
+            >
+              {"Button"}
+            </Button>
           </ActionBarComponent>
           <StandardTable
             columns={columns2}
@@ -626,6 +657,11 @@ function Default() {
       </Tabs>
 
       <div>
+        <div>
+          <Button type="primary" className="btn--lg" onClick={handleLoading}>
+            {"Button"}
+          </Button>
+        </div>
         <div style={{ margin: "10px", width: "500px" }}>
           <Radio.Group onChange={handleChangeAvatarType} value={avatarType}>
             <Radio value={AVATAR_TYPE.CIRCLE}>circle</Radio>

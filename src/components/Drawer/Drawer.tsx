@@ -13,15 +13,19 @@ export interface DrawerProps {
   visibleFooter?: boolean;
   disableButton?: boolean;
   loading?: boolean;
-  keyHeaderTranslate?: string;
-  keyButtonTranslate?: string;
-  size?: NUMBER_BUTTON;
+  title?: string;
+  description?: string;
+  keyButtonApply?: string;
+  keyButtonApplyNext?: string;
+  keyButtonCancel?: string;
+  numberButton?: NUMBER_BUTTON;
+  handleClose?: () => void;
   handleCancel?: () => void;
   handleSave?: () => void;
-  handleCreate?: () => void;
+  handleApplyNext?: () => void;
   translate?: TFunction;
-  isHaveDescription?: boolean;
   isHaveCloseIcon?: boolean;
+  size?: "sm" | "lg";
 }
 
 function Drawer(props: DrawerProps) {
@@ -30,15 +34,19 @@ function Drawer(props: DrawerProps) {
     visible,
     disableButton,
     loading,
-    keyHeaderTranslate,
-    keyButtonTranslate,
-    size,
+    title,
+    description,
+    keyButtonApply,
+    keyButtonApplyNext,
+    keyButtonCancel,
+    numberButton,
+    handleClose,
     handleCancel,
     handleSave,
-    handleCreate,
+    handleApplyNext,
     translate,
-    isHaveDescription,
     isHaveCloseIcon,
+    size,
   } = props;
   const ref: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(null);
 
@@ -46,62 +54,64 @@ function Drawer(props: DrawerProps) {
     () => (
       <div className="button-bleed-footer">
         <Button
+          type="bleed-secondary"
+          className={classNames(
+            numberButton === NUMBER_BUTTON.THREE ? "button-33" : "button-50"
+          )}
+          onClick={handleCancel}
+        >
+          <span>
+            {keyButtonCancel && translate
+              ? translate(`${keyButtonCancel}`)
+              : "Cancel"}
+          </span>
+        </Button>
+        {numberButton === NUMBER_BUTTON.THREE && (
+          <Button
+            type="bleed-secondary"
+            className="button-33"
+            onClick={handleApplyNext}
+            disabled={disableButton}
+          >
+            <span>
+              {keyButtonApplyNext && translate
+                ? translate(`${keyButtonApplyNext}`)
+                : "Apply Next"}
+            </span>
+          </Button>
+        )}
+        <Button
           type="bleed-primary"
           className={classNames(
-            size === NUMBER_BUTTON.THREE ? "button-33" : "button-50"
+            numberButton === NUMBER_BUTTON.THREE ? "button-33" : "button-50"
           )}
           onClick={handleSave}
           disabled={disableButton}
         >
           <span>
-            {keyButtonTranslate && translate
-              ? translate(`${keyButtonTranslate}.create`)
-              : "Create"}
-          </span>
-        </Button>
-        {size === NUMBER_BUTTON.THREE && (
-          <Button
-            type="bleed-secondary"
-            className="button-33"
-            onClick={handleCreate}
-            disabled={disableButton}
-          >
-            <span>
-              {keyButtonTranslate && translate
-                ? translate(`${keyButtonTranslate}.createNext`)
-                : "Create Next"}
-            </span>
-          </Button>
-        )}
-        <Button
-          type="bleed-secondary"
-          className={classNames(
-            size === NUMBER_BUTTON.THREE ? "button-33" : "button-50"
-          )}
-          onClick={handleCancel}
-        >
-          <span>
-            {keyButtonTranslate && translate
-              ? translate(`${keyButtonTranslate}.close`)
-              : "Close"}
+            {keyButtonApply && translate
+              ? translate(`${keyButtonApply}`)
+              : "Apply"}
           </span>
         </Button>
       </div>
     ),
     [
+      numberButton,
       handleSave,
-      translate,
-      handleCreate,
-      handleCancel,
-      size,
       disableButton,
-      keyButtonTranslate,
+      keyButtonApply,
+      translate,
+      handleApplyNext,
+      keyButtonApplyNext,
+      handleCancel,
+      keyButtonCancel,
     ]
   );
   return (
     <>
       <div
-        className={classNames("drawer__container", {
+        className={classNames(`drawer__container drawer-${size}`, {
           "slide-out": visible === true,
         })}
       >
@@ -110,28 +120,26 @@ function Drawer(props: DrawerProps) {
             <div className="drawer__header">
               <div
                 className={classNames("drawer__header-text", {
-                  "have-description": isHaveDescription,
+                  "have-description": description,
                 })}
               >
                 <div className="title mr-1">
-                  {keyHeaderTranslate && translate
-                    ? translate(`${keyHeaderTranslate}.title`)
-                    : "Drawer Title"}
+                  {title && translate ? translate(`${title}`) : "Drawer Title"}
                 </div>
-                {isHaveDescription && (
+                {description && (
                   <div className="description mr-1">
-                    {keyHeaderTranslate && translate
-                      ? translate(`${keyHeaderTranslate}.description`)
+                    {translate
+                      ? translate(`${description}`)
                       : "Drawer description description description description"}
                   </div>
                 )}
               </div>
-              {!isHaveDescription && isHaveCloseIcon && (
+              {!description && isHaveCloseIcon && (
                 <Button
                   type="icon-only-ghost"
                   icon={<Close20 />}
                   className="btn--xxl"
-                  onClick={handleCancel}
+                  onClick={handleClose}
                 />
               )}
             </div>
@@ -152,12 +160,10 @@ function Drawer(props: DrawerProps) {
 
 Drawer.defaultProps = {
   visibleFooter: true,
-  closable: false,
-  visibleCreate: true,
-  visibleCreateNext: true,
   disableButton: false,
-  size: NUMBER_BUTTON.TWO,
+  numberButton: NUMBER_BUTTON.TWO,
   isHaveCloseIcon: true,
+  size: "sm",
 };
 
 export default Drawer;

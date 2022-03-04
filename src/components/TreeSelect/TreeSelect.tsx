@@ -14,7 +14,7 @@ import { BORDER_TYPE } from "config/enum";
 export interface TreeSelectProps<
   T extends Model,
   TModelFilter extends ModelFilter
-> {
+  > {
   title?: string;
   listItem?: Model[];
   item?: Model;
@@ -25,7 +25,7 @@ export interface TreeSelectProps<
   selectable?: boolean;
   checkStrictly?: boolean;
   disabled?: boolean;
-  modelFilter?: TModelFilter;
+  valueFilter?: TModelFilter;
   placeHolder?: string;
   error?: string;
   selectedKey?: number;
@@ -68,7 +68,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     selectable,
     disabled,
     classFilter: ClassFilter,
-    modelFilter,
+    valueFilter,
     placeHolder,
     selectedKey,
     onlySelectLeaf,
@@ -89,7 +89,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
 
   const { run } = useDebounceFn(
     (searchTerm: string) => {
-      const cloneFilter = modelFilter ? { ...modelFilter } : { ...filter };
+      const cloneFilter = valueFilter ? { ...valueFilter } : { ...filter };
       cloneFilter[searchProperty][searchType] = searchTerm;
       dispatch({ type: "UPDATE", data: cloneFilter });
     },
@@ -149,15 +149,15 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (!disabled) {
         if (!expanded) {
-          const filterData = modelFilter
-            ? { ...modelFilter }
+          const filterData = valueFilter
+            ? { ...valueFilter }
             : new ClassFilter();
           dispatch({ type: "UPDATE", data: filterData });
         }
         setExpanded(true);
       }
     },
-    [ClassFilter, disabled, expanded, modelFilter]
+    [ClassFilter, disabled, expanded, valueFilter]
   );
 
   const handleOnchange = React.useCallback(
@@ -208,7 +208,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
         <div className="tree-select__input" onClick={handleExpand}>
           {checkable ? (
             <InputTag
-              listItem={listItem}
+              listValue={listItem}
               isMaterial={isMaterial}
               render={render}
               placeHolder={placeHolder}
@@ -226,7 +226,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
             />
           ) : (
             <InputSelect
-              model={item}
+              value={item}
               render={render}
               isMaterial={isMaterial}
               placeHolder={placeHolder}
@@ -249,7 +249,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               selectedKey={selectedKey}
               onlySelectLeaf={onlySelectLeaf}
               checkedKeys={listIds}
-              modelFilter={filter}
+              valueFilter={filter}
               checkStrictly={checkStrictly}
               height={300}
               onChange={handleOnchange}

@@ -6,7 +6,7 @@ import { useDropzone } from "react-dropzone";
 
 import { UploadImageProps } from "../UploadImage";
 import CroppedModal, { ImageResult } from "./CroppedModal/CroppedModal";
-import "./UploadImage.scss";
+import "./ComponentUploadImage.scss";
 import { CloudUpload24 } from "@carbon/icons-react";
 
 export interface ImageFile {

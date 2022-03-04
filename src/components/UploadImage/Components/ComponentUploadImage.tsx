@@ -3,7 +3,7 @@ import React, { Reducer, RefObject } from "react";
 import { useDropzone } from "react-dropzone";
 import { UploadImageProps } from "../UploadImage";
 import CroppedModal, { ImageResult } from "./CroppedModal/CroppedModal";
-import "./UploadImage.scss";
+import "./ComponentUploadImage.scss";
 import { Menu } from "./ComponentMenuImage";
 import classNames from "classnames";
 import { notification } from "antd";

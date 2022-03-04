@@ -412,7 +412,7 @@ export default function CroppedModal(props: CroppedModalProps) {
   );
 
   const handleCancelModal = React.useCallback(() => {
-    handleCancel();
+    handleCancel(null);
   }, [handleCancel]);
 
   React.useEffect(() => {

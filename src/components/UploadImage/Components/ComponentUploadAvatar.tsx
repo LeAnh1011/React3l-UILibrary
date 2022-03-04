@@ -42,7 +42,7 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
     uploadSingleImage,
     updateSingleImage,
     classNameProps,
-    iconUrl,
+    icon,
   } = props;
 
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
@@ -160,13 +160,7 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
           {...getRootProps()}
         >
           {!currentAvatar ? (
-            <div onClick={handleInput}>
-              {iconUrl ? (
-                <img className="icon-upload" src={iconUrl} alt="icon"></img>
-              ) : (
-                <CloudUpload24 />
-              )}
-            </div>
+            <div onClick={handleInput}>{icon ? icon : <CloudUpload24 />}</div>
           ) : (
             renderImage
           )}

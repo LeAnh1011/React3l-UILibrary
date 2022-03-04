@@ -1,5 +1,5 @@
 import { Model, ModelFilter } from "react3l-common";
-import React from "react";
+import React, { ReactNode } from "react";
 import { Observable } from "rxjs";
 import { ComponentUploadAvatar } from "./Components/ComponentUploadAvatar";
 import { ComponentUploadImage } from "./Components/ComponentUploadImage";
@@ -51,7 +51,7 @@ export interface UploadImageProps<
   updateList?: (files: FileModel[] | FileList) => void;
   getListFile?: (TModelFilter?: TModelFilter) => Observable<T[]>;
   uploadFile?: (files: File[] | Blob[]) => Observable<FileModel[]>;
-  iconUrl?: string;
+  icon?: ReactNode;
   currentAvatar?: File;
   uploadSingleImage?: (file: File | Blob) => Observable<FileModel>;
   updateSingleImage?: (files: FileModel) => void;

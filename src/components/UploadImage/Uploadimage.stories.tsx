@@ -1,3 +1,4 @@
+import { Camera32 } from "@carbon/icons-react";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { Observable } from "rxjs";
@@ -83,7 +84,7 @@ function Default() {
           // sử dụng hàm khác
           uploadSingleImage={demoUploadAvatar}
           updateSingleImage={handleChangeAvatar}
-          // iconUrl=""
+          icon={<Camera32 />}
         ></UploadImage>
       </div>
       <div style={{ width: "100%", padding: "10px 10px" }}>

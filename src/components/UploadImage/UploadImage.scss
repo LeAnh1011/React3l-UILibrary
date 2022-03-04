@@ -2,9 +2,10 @@
     width: 100%;
 }
 .avatar-css-demo {
-    width: 100px !important;
-    height: 100px !important;
-    border-radius: 8px;
+    width: 140px !important;
+    height: 140px !important;
+    border-radius: 71px !important;
+    border: none !important;
     &:hover {
         cursor: pointer !important;
     }

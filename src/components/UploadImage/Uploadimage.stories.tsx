@@ -74,7 +74,7 @@ function Default() {
   return (
     <div style={{ margin: "20px 20px", width: "600px" }}>
       <div style={{ width: "100%", padding: "10px 10px" }}>
-        Loại Avatar
+        Loại Avatar, có nhiều kiểu, có viền có khung vuông ...
         <UploadImage
           currentAvatar={avatar}
           classNameProps="avatar-css-demo"

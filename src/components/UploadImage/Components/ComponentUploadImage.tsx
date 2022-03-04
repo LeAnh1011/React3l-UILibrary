@@ -213,12 +213,16 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
       >
         <div className="upload-image__drop-zone" {...getRootProps()}>
           {isMultiple && !isMinimized && (
-            <div className="upload-image__list" onClick={handleInput}>
-              {menuFile.map((menu) => (
-                <>{menu}</>
-              ))}
-              <CloudUpload24 />
-            </div>
+            <>
+              <div className="upload-image__list" onClick={handleInput}>
+                {menuFile.map((menu) => (
+                  <>{menu}</>
+                ))}
+              </div>
+              <div className="m-t--xxs">
+                <CloudUpload24 />
+              </div>
+            </>
           )}
           {isMultiple && isMinimized && (
             <>
@@ -233,7 +237,7 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
                   <div className="upload-image--minimized__num">
                     {files.length > 1 ? `${files.length - 1}+` : ""}
                   </div>
-                  <div className="upload-image--minimized__act">
+                  <div className="upload-image--minimized__act p-t--xxs">
                     <Edit24 />
                   </div>
                 </div>

@@ -225,7 +225,7 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
               {files?.length > 0 ? (
                 <div
                   style={{
-                    background: `linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${files[0].path})`,
+                    background: `linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${files[0].url})`,
                     backgroundSize: "cover",
                   }}
                   className="upload-image--minimized"

@@ -1,5 +1,4 @@
-import { Button, Input, Select, Slider } from "antd";
-import Modal from "components/Modal";
+import { Button, Input, Select, Slider, Modal } from "antd";
 import React, { Reducer } from "react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
@@ -480,12 +479,10 @@ export default function CroppedModal(props: CroppedModalProps) {
     <>
       <Modal
         visible={visible}
-        width={946}
-        visibleFooter={false}
+        width={1000}
         closable={false}
         bodyStyle={{ borderRadius: 10 }}
-        handleSave={handleConfirm}
-        handleCancel={handleCancelModal}
+        footer={null}
       >
         <div className="cropped-modal__container">
           <div className="cropped-modal__content">
@@ -640,7 +637,7 @@ export default function CroppedModal(props: CroppedModalProps) {
                       style={{
                         width: PREVIEW_WIDTH,
                         height: PREVIEW_HEIGHT,
-                        backgroundColor: "#171725",
+                        backgroundColor: "#ededf7",
                       }}
                       className="cropped-modal__preview"
                     >

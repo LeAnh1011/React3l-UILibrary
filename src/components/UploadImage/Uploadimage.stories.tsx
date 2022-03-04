@@ -5,21 +5,21 @@ import UploadImage, { UPLOADTYPE_IMAGE } from "./UploadImage";
 
 const menu = [
   {
-    path:
+    url:
       "https://media.discordapp.net/attachments/663753852184428596/847406738138595348/7ab2cd69-80fe-4106-ba8d-218d78b131d4.png",
     isDelete: true,
     name: "demoImage1.png",
     id: 1,
   },
   {
-    path:
+    url:
       "https://media.discordapp.net/attachments/663753852184428596/847406738138595348/7ab2cd69-80fe-4106-ba8d-218d78b131d4.png",
     isDelete: true,
     name: "demoImage2.png",
     id: 2,
   },
   {
-    path:
+    url:
       "https://media.discordapp.net/attachments/663753852184428596/847406738138595348/7ab2cd69-80fe-4106-ba8d-218d78b131d4.png",
     isDelete: true,
     name: "demoImage3.png",
@@ -32,8 +32,9 @@ function Default() {
     <div style={{ margin: "20px 20px", width: "600px" }}>
       <div style={{ width: "100%", padding: "10px 10px" }}>
         <UploadImage
-          files={[]}
-          type={UPLOADTYPE_IMAGE.IMAGE}
+          currentAvatar={menu[0]}
+          classNameProps="avatar-css-demo"
+          type={UPLOADTYPE_IMAGE.AVATAR}
           isMultiple={false}
           size="normal"
         ></UploadImage>

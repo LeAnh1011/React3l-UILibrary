@@ -1,3 +1,11 @@
 .upload-file__container{
     width: 100%;
 }
+.avatar-css-demo {
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 8px;
+    &:hover {
+        cursor: pointer !important;
+    }
+}

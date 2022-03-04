@@ -1,6 +1,6 @@
 import React from "react";
 import { FileModel } from "../UploadImage";
-import { Edit32, TrashCan32 } from "@carbon/icons-react";
+import { Edit24, TrashCan24 } from "@carbon/icons-react";
 
 interface ImageItemProps extends FileModel {}
 
@@ -14,7 +14,7 @@ const ImageItem = (props: ImageItemProps) => {
   return (
     <div
       className="image-item__container"
-      style={{ backgroundImage: `url(${props.path})` }}
+      style={{ backgroundImage: `url(${props.url})` }}
       onClick={(event) => {
         event.stopPropagation();
         event.preventDefault();
@@ -22,8 +22,12 @@ const ImageItem = (props: ImageItemProps) => {
     >
       {props.isDelete && (
         <div className="image-item__action-block">
-          {handleInput !== null && <Edit32 onClick={handleInput} />}
-          {handleDelete !== null && <TrashCan32 onClick={handleDelete} />}
+          {handleInput !== null && (
+            <Edit24 color="white" onClick={handleInput} />
+          )}
+          {handleDelete !== null && (
+            <TrashCan24 color="white" onClick={handleDelete} />
+          )}
         </div>
       )}
     </div>

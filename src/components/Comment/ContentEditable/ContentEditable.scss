@@ -1,0 +1,56 @@
+.content-editable__container {
+    position: relative;
+    width: 100%;
+
+    div[contentEditable=true] {
+        outline: none;
+        max-width: 100%;
+        padding: 5px;
+        overflow-y: auto;
+        max-height: 35px;
+        white-space: pre-wrap;
+    }
+
+    [contentEditable=true]:empty:before{
+        content: attr(placeholder);
+        pointer-events: none;
+        display: block; /* For Firefox */
+        color: gray;
+        opacity: 0.9;
+    }
+
+    .hightlight__text {
+        color: mediumblue;
+        text-decoration: underline;
+    }
+
+    .content-editable__comment {
+        word-break: break-word;
+        width: auto;
+        overflow: auto;
+        a {
+            text-decoration: underline !important;
+        }
+
+        img {
+            height: 40px;
+        }
+    }
+
+    .content-editable__suggest-list {
+        position: absolute;
+        bottom: 55px;
+        width: 100%;
+        border-radius: 7px;
+        box-sizing: border-box;
+        box-shadow: 0px 7px 64px rgba(0, 0, 0, 0.07);
+        background-color: #ffffff;
+        ul {
+            max-height: 250px;
+            overflow-y: auto;
+            li {
+                cursor: pointer;
+            }
+        }
+    }
+}

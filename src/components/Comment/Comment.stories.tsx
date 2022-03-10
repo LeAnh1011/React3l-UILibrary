@@ -149,7 +149,7 @@ const demoGetList = (value: any) => {
 
 function Default() {
   return (
-    <div style={{ width: "880px", height: "600px" }}>
+    <div style={{ width: "880px", maxHeight: "600px" }}>
       <Comment
         getMessages={demoSearchFunc}
         countMessages={demoCountFunc}
@@ -168,6 +168,7 @@ function Default() {
         titleSave="Lưu"
         titleCancel="Hủy"
         isShowHeader={true}
+        canSend={true}
       />
     </div>
   );

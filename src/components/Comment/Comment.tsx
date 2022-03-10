@@ -17,6 +17,7 @@ import IconLoading from "components/IconLoading";
 
 export interface CommentProps<TFilter extends ModelFilter> {
   userInfo: Creator;
+  canSend?: boolean;
   placeholder?: string;
   title?: string;
   titleSave?: string;
@@ -141,6 +142,7 @@ function Comment(props: CommentProps<ModelFilter>) {
     titleCancel,
     titleSave,
     placeholder,
+    canSend,
   } = props;
 
   const [sortType, setSortType] = React.useState<any>({
@@ -477,44 +479,47 @@ function Comment(props: CommentProps<ModelFilter>) {
             })}
           </InfiniteScroll>
         </div>
-        <div className="comment__footer">
-          <div className="img-cont-msg">
-            {userInfo.avatar ? (
-              <img
-                src={userInfo?.avatar}
-                className="rounded-circle user_img_msg"
-                alt="IMG"
+        {canSend && (
+          <div className="comment__footer">
+            <div className="img-cont-msg">
+              {userInfo.avatar ? (
+                <img
+                  src={userInfo?.avatar}
+                  className="rounded-circle user_img_msg"
+                  alt="IMG"
+                />
+              ) : (
+                <div className="rounded-circle user_div">
+                  {shortcutName(userInfo.displayName)}
+                </div>
+              )}
+            </div>
+
+            <div className="w-100">
+              <ContentEditable
+                ref={contentEditableRef}
+                suggestList={suggestList}
+                sendValue={handleSend}
+                loading={isLoad}
+                placeholder={placeholder}
+                inputFileRef={inputFileRef}
+                handleAttachFile={handleAttachFile}
               />
-            ) : (
-              <div className="rounded-circle user_div">
-                {shortcutName(userInfo.displayName)}
+              <div className="content-button">
+                <Button type="primary" className="btn--sm" onClick={handleSend}>
+                  {titleSave}
+                </Button>
+                <Button
+                  type="secondary"
+                  className="btn--sm"
+                  onClick={handleCancelSend}
+                >
+                  {titleCancel}
+                </Button>
               </div>
-            )}
-          </div>
-          <div className="w-100">
-            <ContentEditable
-              ref={contentEditableRef}
-              suggestList={suggestList}
-              sendValue={handleSend}
-              loading={isLoad}
-              placeholder={placeholder}
-              inputFileRef={inputFileRef}
-              handleAttachFile={handleAttachFile}
-            />
-            <div className="content-button">
-              <Button type="primary" className="btn--sm" onClick={handleSend}>
-                {titleSave}
-              </Button>
-              <Button
-                type="secondary"
-                className="btn--sm"
-                onClick={handleCancelSend}
-              >
-                {titleCancel}
-              </Button>
             </div>
           </div>
-        </div>
+        )}
       </div>
       <Modal
         visible={isPreview}
@@ -537,6 +542,7 @@ Comment.defaultProps = {
   titleSave: "Lưu",
   titleCancel: "Hủy",
   title: "Bình luận",
+  canSend: true,
 };
 
 export default Comment;

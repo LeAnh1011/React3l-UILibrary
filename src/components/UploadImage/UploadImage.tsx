@@ -53,11 +53,11 @@ export interface UploadImageProps<
   uploadFile?: (files: File[] | Blob[]) => Observable<FileModel[]>;
   icon?: ReactNode;
   currentAvatar?: File;
-  uploadSingleImage?: (file: File | Blob) => Observable<FileModel>;
-  updateSingleImage?: (files: FileModel) => void;
+  uploadAvatar?: (file: File | Blob) => Observable<FileModel>;
+  updateAvatar?: (files: FileModel) => void;
   removeFile?: (fileId?: string | number) => Observable<boolean>;
   size?: "large" | "normal" | "small" | "smaller";
-  classNameProps?: string;
+  className?: string;
 }
 
 function UploadImage(props: UploadImageProps<Model, ModelFilter>) {

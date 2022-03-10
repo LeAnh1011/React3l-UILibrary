@@ -21,7 +21,7 @@ import { Add16, ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
 import { StringFilter } from "react3l-advanced-filters";
 import Button from "../Button/Button";
 const KateBishop =
-  "https://www.dualshockers.com/static/uploads/2021/11/How-Old-Is-Kate-Bishop-In-Hawkeye-TV-Show-scaled.jpeg";
+  "https://cdn.searchenginejournal.com/wp-content/uploads/2019/07/the-essential-guide-to-using-images-legally-online-1520x800.png";
 const { TabPane } = Tabs;
 export class DemoFilter extends ModelFilter {
   name: StringFilter = new StringFilter();
@@ -32,9 +32,9 @@ export enum AVATAR_TYPE {
   SQUARE = "square",
 }
 export enum SIZE_TYPE {
-  LARGE = "large",
-  MEDIUM = "medium",
-  SMALL = "small",
+  LARGE = "lg",
+  MEDIUM = "md",
+  SMALL = "sm",
 }
 export enum ORDER_TYPE {
   LEFT = "left",
@@ -320,7 +320,7 @@ function Default() {
         ellipsis: true,
         render(...[type]) {
           return (
-            <LayoutCell orderType={orderType} tableSize="large">
+            <LayoutCell orderType={orderType} tableSize="lg">
               <OneLineText value={type} />
             </LayoutCell>
           );
@@ -336,7 +336,7 @@ function Default() {
         ellipsis: true,
         render(...[version]) {
           return (
-            <LayoutCell orderType={orderType} tableSize="large">
+            <LayoutCell orderType={orderType} tableSize="lg">
               <TwoLineText valueLine1={version} valueLine2={"facebook"} />
             </LayoutCell>
           );
@@ -351,7 +351,7 @@ function Default() {
         ellipsis: true,
         render(...[version]) {
           return (
-            <LayoutCell orderType={orderType} tableSize="large">
+            <LayoutCell orderType={orderType} tableSize="lg">
               <TwoLineText
                 avatar={KateBishop}
                 avatarType={avatarType}
@@ -371,7 +371,7 @@ function Default() {
         ellipsis: true,
         render(...[version]) {
           return (
-            <LayoutCell orderType={orderType} tableSize="large">
+            <LayoutCell orderType={orderType} tableSize="lg">
               <TwoLineText
                 avatar={KateBishop}
                 avatarType={avatarType}
@@ -392,7 +392,7 @@ function Default() {
         ellipsis: true,
         render(...[version]) {
           return (
-            <LayoutCell orderType={orderType} tableSize="large">
+            <LayoutCell orderType={orderType} tableSize="lg">
               <TwoLineText
                 avatar={KateBishop}
                 avatarType={avatarType}
@@ -412,7 +412,7 @@ function Default() {
         ellipsis: true,
         render(...[upgradeNum]) {
           return (
-            <LayoutCell orderType={orderType} tableSize="large">
+            <LayoutCell orderType={orderType} tableSize="lg">
               <TwoLineText
                 icon="tio-calendar_month"
                 valueLine1={upgradeNum + " alod dlkjwer"}
@@ -431,7 +431,7 @@ function Default() {
         ellipsis: true,
         render(...[upgradeNum]) {
           return (
-            <LayoutCell orderType={orderType} tableSize="large">
+            <LayoutCell orderType={orderType} tableSize="lg">
               <TwoLineText
                 icon="tio-calendar_month"
                 valueLine1={upgradeNum + " alod dlkjwer"}
@@ -452,7 +452,7 @@ function Default() {
         align: "center",
         render(...[creator]) {
           return (
-            <LayoutCell orderType={orderType} tableSize="large">
+            <LayoutCell orderType={orderType} tableSize="lg">
               <BadgeText
                 value={creator}
                 backgroundColor="#FFECB3"
@@ -471,7 +471,7 @@ function Default() {
         dataIndex: "status",
         render(...[status]) {
           return (
-            <LayoutCell orderType={orderType} tableSize="large">
+            <LayoutCell orderType={orderType} tableSize="lg">
               <StatusLine value={status} active={true} />
             </LayoutCell>
           );
@@ -545,7 +545,7 @@ function Default() {
             />
           </div>
         </TabPane>
-        <TabPane tab="Table only size large" key="2">
+        <TabPane tab="Table only size lg" key="2">
           <ActionBarComponent
             selectedRowKeys={selectedRowKeys}
             setSelectedRowKeys={setSelectedRowKeys}
@@ -566,7 +566,7 @@ function Default() {
             dataSource={data}
             isDragable={true}
             isExpandable={true}
-            tableSize={"large"}
+            tableSize="lg"
             rowSelection={rowSelection}
           />
           <div>
@@ -595,9 +595,9 @@ function Default() {
         </div>
         <div style={{ margin: "10px", width: "500px" }}>
           <Radio.Group onChange={handleChangeSize} value={size}>
-            <Radio value={SIZE_TYPE.LARGE}>Large</Radio>
-            <Radio value={SIZE_TYPE.MEDIUM}>medium</Radio>
-            <Radio value={SIZE_TYPE.SMALL}>small</Radio>
+            <Radio value={SIZE_TYPE.LARGE}>lg</Radio>
+            <Radio value={SIZE_TYPE.MEDIUM}>md</Radio>
+            <Radio value={SIZE_TYPE.SMALL}>sm</Radio>
           </Radio.Group>
         </div>
         <div style={{ margin: "10px", width: "500px" }}>

@@ -6,7 +6,7 @@ export interface LayoutCellProps {
   className?: string;
   orderType?: "left" | "right" | "center";
   children: ReactNode;
-  tableSize?: "large" | "medium" | "small";
+  tableSize?: "lg" | "md" | "sm";
 }
 
 function LayoutCell(props: LayoutCellProps) {
@@ -25,5 +25,6 @@ function LayoutCell(props: LayoutCellProps) {
 }
 LayoutCell.defaultProps = {
   orderType: "left",
+  tableSize: "lg",
 };
 export default LayoutCell;

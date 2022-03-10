@@ -8,7 +8,7 @@ import { Close20 } from "@carbon/icons-react";
 export interface ModalCustomProps extends AntModalProps {
   children?: ReactNode;
   visibleFooter?: boolean;
-  size?: "large" | "medium" | "small";
+  size?: "lg" | "md" | "sm";
   keyButtonApply?: string;
   keyButtonApplyNext?: string;
   keyButtonCancel?: string;
@@ -35,13 +35,13 @@ function Modal(props: ModalCustomProps) {
       <div className="footer-modal">
         <div
           className={classNames("button-bleed-footer", {
-            "width-75": handleApplyNext && size === "large",
+            "width-75": handleApplyNext && size === "lg",
           })}
         >
           <Button
             type="bleed-secondary"
             className={classNames(
-              handleApplyNext && size === "large" ? "button-33" : "button-50"
+              handleApplyNext && size === "lg" ? "button-33" : "button-50"
             )}
             onClick={handleCancel}
           >
@@ -52,7 +52,7 @@ function Modal(props: ModalCustomProps) {
             </span>
           </Button>
 
-          {handleApplyNext && size === "large" && (
+          {handleApplyNext && size === "lg" && (
             <Button
               type="bleed-secondary"
               className="button-33"
@@ -68,7 +68,7 @@ function Modal(props: ModalCustomProps) {
           <Button
             type="bleed-primary"
             className={classNames(
-              handleApplyNext && size === "large" ? "button-33" : "button-50"
+              handleApplyNext && size === "lg" ? "button-33" : "button-50"
             )}
             onClick={handleSave}
           >
@@ -115,7 +115,7 @@ function Modal(props: ModalCustomProps) {
   );
 }
 Modal.defaultProps = {
-  size: "large",
+  size: "lg",
   destroyOnClose: true,
 };
 export default Modal;

@@ -56,7 +56,7 @@ export interface UploadImageProps<
   uploadAvatar?: (file: File | Blob) => Observable<FileModel>;
   updateAvatar?: (files: FileModel) => void;
   removeFile?: (fileId?: string | number) => Observable<boolean>;
-  size?: "large" | "normal" | "small" | "smaller";
+  size?: "lg" | "md" | "sm" | "xs";
   className?: string;
 }
 
@@ -84,7 +84,7 @@ UploadImage.defaultProps = {
   isMultiple: true,
   isMinimized: false,
   autoUpload: false,
-  size: "large",
+  size: "lg",
   isSingle: false,
 };
 

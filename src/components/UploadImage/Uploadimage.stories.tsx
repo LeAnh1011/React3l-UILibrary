@@ -81,7 +81,6 @@ function Default() {
           currentAvatar={avatar}
           className="avatar-css-demo"
           type={UPLOADTYPE_IMAGE.AVATAR}
-          size="normal"
           // sử dụng hàm khác
           uploadAvatar={demoUploadAvatar}
           updateAvatar={handleChangeAvatar}

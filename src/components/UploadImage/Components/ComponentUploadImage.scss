@@ -1,0 +1,232 @@
+$size: 144px;
+$icon-size: 56px;
+$icon-padding: 10.89px;
+
+@mixin size($btn-size, $icon-size, $icon-padding) {
+  height: $btn-size;
+
+  .upload-image__drop-zone {
+    width: $btn-size;
+    height: $btn-size;
+  }
+
+  .upload-icon {
+    width: $icon-size;
+    height: $icon-size;
+    padding: $icon-padding;
+    border-radius: 4px;
+  }
+}
+
+.upload-image__container {
+  &.upload-image--large {
+    @include size(144px, 56px, 10.89px);
+  }
+
+  &.upload-image--normal {
+    @include size(112px, 43.56px, 8.47px);
+  }
+
+  &.upload-image--small {
+    @include size(88px, 34.22px, 6.65px);
+  }
+
+  &.upload-image--smaller {
+    @include size(56px, 21.78px, 4.23px);
+  }
+}
+
+.upload-image__container {
+  display: flex;
+  height: auto;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 7px;
+
+  &.multiple {
+    width: 648px;
+
+    .upload-image__drop-zone {
+      width: 100%;
+      justify-content: flex-start;
+    }
+
+    .upload-image__list {
+      display: flex;
+      justify-content: center;
+      height: 48px;
+      width: 60%;
+      margin-top: 20px;
+      margin-left: 0;
+
+      .image-item__container {
+        width: 48px;
+        height: 48px;
+        border-radius: 4px;
+      }
+
+      .upload-icon {
+        width: 48px;
+        height: 48px;
+        padding: 9.33px;
+        margin-left: 8px;
+      }
+
+      .image-item__container:not(:first-child) {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  &.minimized {
+    height: 100%;
+    width: 100%;
+  }
+
+  .upload-image__drop-zone {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fafafc;
+    border-radius: 8px;
+    border: 1px dashed #052F5F;
+
+    &:hover {
+      background: #e2e2ea;
+    }
+
+    p {
+      color: #000000;
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 16px;
+      margin-bottom: 0;
+    }
+  }
+
+  .upload-image__list {
+    display: block;
+    height: 100%;
+    width: 100%;
+
+    .image-item__container {
+      height: 100%;
+      width: 100%;
+      background-color: #ffffff;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 7px;
+      position: relative;
+
+      .image-item__action-block {
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border-radius: 4px;
+
+        img {
+          width: calc(100% / 4.8);
+          height: calc(100% / 4.8);
+          visibility: hidden;
+
+          filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 1));
+          -webkit-filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 1));
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.5);
+
+          img {
+            visibility: visible;
+          }
+        }
+      }
+    }
+
+    .horizontal-menu {
+      position: relative;
+
+      .scroll-menu-arrow {
+        z-index: 1;
+
+        .arrow__next {
+          position: absolute;
+          top: 40%;
+          right: 2%;
+        }
+
+        .arrow__previous {
+          position: absolute;
+          top: 40%;
+          left: 6%;
+        }
+      }
+
+      .menu-item-wrapper {
+        outline: none !important;
+      }
+
+      .arrow__container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ffffff;
+        border: 1px solid #ececf2;
+        box-sizing: border-box;
+        border-radius: 8px;
+        width: 40px;
+        height: 40px;
+        .arrow {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  .upload-image--minimized {
+    width: 100%;
+    height: 100%;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 40px;
+    color: #ffffff;
+
+    &:hover {
+      .upload-image--minimized__num {
+        display: none;
+      }
+
+      .upload-image--minimized__act {
+        display: block;
+      }
+    }
+
+    .upload-image--minimized__act {
+      display: none;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+.image-in-content{
+  padding: 2px !important;
+}

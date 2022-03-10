@@ -8,11 +8,11 @@ import React, { RefObject } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ErrorObserver, forkJoin, Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
-import spinner from "../../../assets/images/spinner.svg";
 import Modal from "../Modal/Modal";
 import { Creator, FileModel, Message } from "./Comment.model";
 import "./Comment.scss";
 import ContentEditable from "./ContentEditable/ContentEditable";
+import IconLoading from "components/IconLoading";
 
 export interface CommentProps<TFilter extends ModelFilter> {
   userInfo: Creator;
@@ -47,11 +47,7 @@ const sortList = [
   { type: "oldest", title: "Cũ nhất" },
 ];
 
-const loading = (
-  <div className="comment__loading">
-    <img src={spinner} alt="Loading..." />
-  </div>
-);
+const loading = <IconLoading color="#0F62FE" size={24} />;
 
 function formatDateTime(
   time: Moment,
@@ -447,12 +443,7 @@ function Comment(props: CommentProps<ModelFilter>) {
                 <div
                   key={index}
                   onMouseLeave={handleMouseLeave}
-                  className={classNames(
-                    "comment__content d-flex mb-4 p-2",
-                    currentItem.creatorId === userInfo?.id
-                      ? "reverse-row"
-                      : "justify-content-start"
-                  )}
+                  className={classNames("comment__content d-flex")}
                 >
                   <div className="img-cont-msg">
                     {currentItem.creator.avatar ? (
@@ -467,61 +458,44 @@ function Comment(props: CommentProps<ModelFilter>) {
                       </div>
                     )}
                   </div>
-                  <div
-                    className={classNames(
-                      "msg-container",
-                      currentItem.creatorId === userInfo?.id
-                        ? "msg-container--owner"
-                        : "msg-container--not-owner"
-                    )}
-                  >
+                  <div className={classNames("msg-container")}>
+                    <div className="msg-creator-name">
+                      {currentItem.creator.displayName}
+                      <span className="msg-time">
+                        {formatDateTime(currentItem.createdAt)}
+                      </span>
+                    </div>
                     <div
+                      className="msg-content"
                       dangerouslySetInnerHTML={{ __html: currentItem.content }}
                     />
-                    <span className="msg-time">
-                      {formatDateTime(currentItem.createdAt)}
-                    </span>
                   </div>
-                  {currentItem.isOwner && (
-                    <div className="msg-icon">
-                      {currentItem.isPopup ? (
-                        <div className="confirm-box">
-                          <span
-                            className="confirm-box__delete-button"
-                            onClick={handleOk(currentItem)}
-                          >
-                            Xóa
-                          </span>
-                          <span
-                            className="confirm-box__cancel-button"
-                            onClick={handleCancel(currentItem)}
-                          >
-                            Hủy
-                          </span>
-                        </div>
-                      ) : (
-                        <div>
-                          <i
-                            className="error-text tio-remove_from_trash"
-                            onClick={popupConfirm(currentItem)}
-                          />
-                        </div>
-                      )}
-                    </div>
-                  )}
                 </div>
               );
             })}
           </InfiniteScroll>
         </div>
         <div className="comment__footer">
+          <div className="img-cont-msg">
+            {userInfo.avatar ? (
+              <img
+                src={userInfo?.avatar}
+                className="rounded-circle user_img_msg"
+                alt="IMG"
+              />
+            ) : (
+              <div className="rounded-circle user_div">
+                {shortcutName(userInfo.displayName)}
+              </div>
+            )}
+          </div>
           <ContentEditable
             ref={contentEditableRef}
             suggestList={suggestList}
             sendValue={handleSend}
             loading={isLoad}
           />
-          <div className="comment__action">
+          {/* <div className="comment__action">
             <input
               type="file"
               ref={inputRef}
@@ -541,7 +515,7 @@ function Comment(props: CommentProps<ModelFilter>) {
             >
               Gửi
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
       <Modal

@@ -4,6 +4,11 @@
     background-color: var(--palette-gray-10);
     padding: 4px 0px 30px 12px;
     box-shadow: inset 0px -1px 0px #8D8D8D;
+    transition: 0.5s;
+    &:focus-within{
+        padding-bottom: 80px;
+        transition: 0.5s;
+    }
     div[contentEditable=true] {
         outline: none;
         max-width: 100%;

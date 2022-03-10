@@ -1,9 +1,10 @@
 import { StringFilter } from "react3l-advanced-filters";
 import { ModelFilter, Model } from "react3l-common";
 import { ASSETS_IMAGE } from "config/consts";
-import React, { forwardRef, MutableRefObject } from "react";
+import React, { forwardRef, MutableRefObject, RefObject } from "react";
 import { Observable } from "rxjs";
 import "./ContentEditable.scss";
+import classNames from "classnames";
 
 export interface contentAction {
   action: string;
@@ -23,6 +24,9 @@ export interface ContentEditableProps<TFilter extends ModelFilter> {
   suggestList?: (filter: TFilter) => Observable<Model[]>;
   sendValue?: () => void;
   loading?: boolean;
+  placeholder?: string;
+  inputFileRef?: RefObject<HTMLInputElement>;
+  handleAttachFile?: (files: FileList) => void;
 }
 
 const ContentEditable = forwardRef<
@@ -33,7 +37,14 @@ const ContentEditable = forwardRef<
     props: ContentEditableProps<ModelFilter>,
     contentEditableRef: MutableRefObject<HTMLDivElement | null>
   ) => {
-    const { suggestList, sendValue, loading } = props;
+    const {
+      suggestList,
+      sendValue,
+      loading,
+      placeholder,
+      inputFileRef,
+      handleAttachFile,
+    } = props;
 
     const [userList, setUserList] = React.useState([]);
 
@@ -215,17 +226,34 @@ const ContentEditable = forwardRef<
 
     return (
       <>
-        <div className="content-editable__container">
-          <div
-            className="content-editable__comment"
-            ref={contentEditableRef}
-            onInput={handleInput}
-            onKeyDown={handleKeyDown}
-            onKeyUp={handleKeyUp}
-            onPaste={handlePaste}
-            contentEditable={true}
-            placeholder="Nhập bình luận..."
-          ></div>
+        <div className={classNames("content-editable__container")}>
+          <div className="content-editable-body">
+            <div
+              className="content-editable__comment"
+              ref={contentEditableRef}
+              onInput={handleInput}
+              onKeyDown={handleKeyDown}
+              onKeyUp={handleKeyUp}
+              onPaste={handlePaste}
+              contentEditable={true}
+              placeholder={placeholder}
+            ></div>
+            <div className="action__attach">
+              <input
+                type="file"
+                ref={inputFileRef}
+                style={{ display: "none" }}
+                onChange={(e) => handleAttachFile(e.target.files)}
+              />
+              <i
+                className="tio-attachment_diagonal"
+                onClick={() => {
+                  inputFileRef.current.click();
+                }}
+              ></i>
+            </div>
+          </div>
+
           {showSuggestList && (
             <div className="content-editable__suggest-list">
               {userList.length > 0 ? (

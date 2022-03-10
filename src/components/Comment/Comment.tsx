@@ -9,6 +9,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { ErrorObserver, forkJoin, Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
 import Modal from "../Modal/Modal";
+import Button from "components/Button";
 import { Creator, FileModel, Message } from "./Comment.model";
 import "./Comment.scss";
 import ContentEditable from "./ContentEditable/ContentEditable";
@@ -16,6 +17,10 @@ import IconLoading from "components/IconLoading";
 
 export interface CommentProps<TFilter extends ModelFilter> {
   userInfo: Creator;
+  placeholder?: string;
+  title?: string;
+  titleSave?: string;
+  titleCancel?: string;
   discussionId: string;
   isShowHeader: boolean;
   classFilter?: new () => TFilter;
@@ -122,6 +127,7 @@ function updateList(state: Message[], listAction: listAction) {
 
 function Comment(props: CommentProps<ModelFilter>) {
   const {
+    title,
     userInfo,
     discussionId,
     isShowHeader,
@@ -132,6 +138,9 @@ function Comment(props: CommentProps<ModelFilter>) {
     deleteMessage,
     attachFile,
     suggestList,
+    titleCancel,
+    titleSave,
+    placeholder,
   } = props;
 
   const [sortType, setSortType] = React.useState<any>({
@@ -161,7 +170,7 @@ function Comment(props: CommentProps<ModelFilter>) {
 
   const [imageSrc, setImageSrc] = React.useState<string>();
 
-  const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>();
+  const inputFileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>();
 
   const contentEditableRef: React.LegacyRef<HTMLDivElement> = React.useRef<HTMLDivElement>();
   const [isLoad, setLoad] = React.useState<boolean>(false);
@@ -275,7 +284,11 @@ function Comment(props: CommentProps<ModelFilter>) {
     }
   }, [discussionId, userInfo, postMessage, getListMessages, bindEventClick]);
 
-  const popupConfirm = React.useCallback(
+  const handleCancelSend = React.useCallback(() => {
+    contentEditableRef.current.innerHTML = "";
+  }, []);
+
+  const popupConfirmDeleteMessage = React.useCallback(
     (message: Message) => (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
@@ -291,7 +304,7 @@ function Comment(props: CommentProps<ModelFilter>) {
     [list]
   );
 
-  const handleOk = React.useCallback(
+  const handleOkDeleteMessage = React.useCallback(
     (message: Message) => (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
@@ -311,7 +324,7 @@ function Comment(props: CommentProps<ModelFilter>) {
     [deleteMessage, subscription, list]
   );
 
-  const handleCancel = React.useCallback(
+  const handleCancelDeleteMessage = React.useCallback(
     (message: Message) => (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
@@ -358,7 +371,7 @@ function Comment(props: CommentProps<ModelFilter>) {
     (selectorFiles: FileList) => {
       if (attachFile && typeof attachFile === "function") {
         const fileValue = selectorFiles[0];
-        inputRef.current.value = null;
+        inputFileRef.current.value = null;
         const fileSubcription = attachFile(fileValue).subscribe(
           (res: FileModel) => {
             if (res) {
@@ -413,18 +426,7 @@ function Comment(props: CommentProps<ModelFilter>) {
         {isShowHeader && (
           <div className="comment__header">
             <div className="comment__title">
-              <span>{"Bình luận"}</span>
-            </div>
-            <div className="comment__sort">
-              <span>SORT:</span>
-              <Dropdown overlay={menuSort} trigger={["click"]}>
-                <div className="sort__options">
-                  <span className="sort__page">
-                    {sortType?.title.toUpperCase()}
-                  </span>
-                  <i className="sort__icon tio-chevron_down"></i>
-                </div>
-              </Dropdown>
+              <span>{title}</span>
             </div>
           </div>
         )}
@@ -489,33 +491,29 @@ function Comment(props: CommentProps<ModelFilter>) {
               </div>
             )}
           </div>
-          <ContentEditable
-            ref={contentEditableRef}
-            suggestList={suggestList}
-            sendValue={handleSend}
-            loading={isLoad}
-          />
-          {/* <div className="comment__action">
-            <input
-              type="file"
-              ref={inputRef}
-              style={{ display: "none" }}
-              onChange={(e) => handleAttachFile(e.target.files)}
+          <div className="w-100">
+            <ContentEditable
+              ref={contentEditableRef}
+              suggestList={suggestList}
+              sendValue={handleSend}
+              loading={isLoad}
+              placeholder={placeholder}
+              inputFileRef={inputFileRef}
+              handleAttachFile={handleAttachFile}
             />
-            <i
-              className="tio-attachment_diagonal"
-              onClick={() => {
-                inputRef.current.click();
-              }}
-            ></i>
-            <button
-              className="btn btn-sm component__btn-primary"
-              onClick={handleSend}
-              disabled={isLoad ? true : false}
-            >
-              Gửi
-            </button>
-          </div> */}
+            <div className="content-button">
+              <Button type="primary" className="btn--sm" onClick={handleSend}>
+                {titleSave}
+              </Button>
+              <Button
+                type="secondary"
+                className="btn--sm"
+                onClick={handleCancelSend}
+              >
+                {titleCancel}
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
       <Modal
@@ -535,6 +533,10 @@ function Comment(props: CommentProps<ModelFilter>) {
 
 Comment.defaultProps = {
   isShowHeader: false,
+  placeholder: "Nhập bình luận...",
+  titleSave: "Lưu",
+  titleCancel: "Hủy",
+  title: "Bình luận",
 };
 
 export default Comment;

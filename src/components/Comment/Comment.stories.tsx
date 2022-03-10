@@ -164,6 +164,10 @@ function Default() {
           displayName: "Hangntt123",
           avatar: "",
         }}
+        placeholder="Nhập bình luận..."
+        titleSave="Lưu"
+        titleCancel="Hủy"
+        isShowHeader={true}
       />
     </div>
   );

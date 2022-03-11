@@ -506,12 +506,12 @@ function Comment(props: CommentProps<ModelFilter>) {
                 handleAttachFile={handleAttachFile}
               />
               <div className="content-button">
-                <Button type="primary" className="btn--sm" onClick={handleSend}>
+                <Button type="primary" className="btn--md" onClick={handleSend}>
                   {titleSave}
                 </Button>
                 <Button
                   type="secondary"
-                  className="btn--sm"
+                  className="btn--md"
                   onClick={handleCancelSend}
                 >
                   {titleCancel}

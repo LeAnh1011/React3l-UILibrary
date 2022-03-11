@@ -41,6 +41,7 @@ import Modal from "./components/Modal";
 import Drawer from "./components/Drawer";
 
 import UploadFile from "./components/UploadFile";
+import UploadImage from "./components/UploadImage";
 
 import ProgressIndicator from "./components/ProgressIndicator";
 
@@ -98,6 +99,7 @@ export {
   Drawer,
   //UploadFile
   UploadFile,
+  UploadImage,
   // Progress Indicator
   ProgressIndicator,
   // Standard table components

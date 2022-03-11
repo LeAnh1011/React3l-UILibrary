@@ -7,7 +7,7 @@ import { TableProps } from "antd/lib/table";
 export interface StandardTableCustomProps extends TableProps<any> {
   isDragable?: boolean;
   className?: string;
-  tableSize?: "large" | "medium" | "small";
+  tableSize?: "lg" | "md" | "sm";
 }
 function StandardTable(props: StandardTableCustomProps) {
   const { className, tableSize, isDragable, expandable } = props;
@@ -81,7 +81,7 @@ function StandardTable(props: StandardTableCustomProps) {
 }
 StandardTable.defaultProps = {
   isExpandable: false,
-  tableSize: "large",
+  tableSize: "lg",
   isLevel2: false,
   pagination: false,
 };

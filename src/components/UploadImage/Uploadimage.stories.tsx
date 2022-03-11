@@ -74,26 +74,25 @@ function Default() {
   return (
     <div style={{ margin: "20px 20px", width: "600px" }}>
       <div style={{ width: "100%", padding: "10px 10px" }}>
-        Loại Avatar, có nhiều kiểu, có viền có khung vuông ...
+        Type Avatar, có nhiều kiểu, có viền có khung vuông... hiển thị trên
+        currentAvatar, thêm css vào bằng className, sử dụng uploadAvatar và
+        updateAvatar riêng
         <UploadImage
           currentAvatar={avatar}
-          classNameProps="avatar-css-demo"
+          className="avatar-css-demo"
           type={UPLOADTYPE_IMAGE.AVATAR}
-          isMultiple={false}
-          size="normal"
           // sử dụng hàm khác
-          uploadSingleImage={demoUploadAvatar}
-          updateSingleImage={handleChangeAvatar}
+          uploadAvatar={demoUploadAvatar}
+          updateAvatar={handleChangeAvatar}
           icon={<Camera32 />}
         ></UploadImage>
       </div>
       <div style={{ width: "100%", padding: "10px 10px" }}>
-        Loại Thường
+        Loại Thường , multiple false
         <UploadImage
           files={listImage}
           type={UPLOADTYPE_IMAGE.IMAGE}
           isMultiple={false}
-          size="small"
           uploadFile={demoUploadListImage}
           updateList={handleChangeListImage}
         ></UploadImage>
@@ -101,10 +100,23 @@ function Default() {
 
       <div style={{ width: "100%", padding: "10px 10px", display: "flex" }}>
         <div>
+          Loại thường, multiple = true, IsMinimized = true,
           <UploadImage
             files={listImage}
             type={UPLOADTYPE_IMAGE.IMAGE}
             isMinimized={true}
+            uploadFile={demoUploadListImage}
+            updateList={handleChangeListImage}
+          ></UploadImage>
+        </div>
+      </div>
+      <div style={{ width: "100%", padding: "10px 10px", display: "flex" }}>
+        <div>
+          Loại thường, multiple = true, IsMinimized = false,
+          <UploadImage
+            files={listImage}
+            type={UPLOADTYPE_IMAGE.IMAGE}
+            isMinimized={false}
             uploadFile={demoUploadListImage}
             updateList={handleChangeListImage}
           ></UploadImage>

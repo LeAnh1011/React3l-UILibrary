@@ -1,11 +1,11 @@
 .modal__container {
-  &.size-large {
+  &.size-lg {
     width: 720px !important;
   }
-  &.size-medium {
+  &.size-md {
     width: 520px !important;
   }
-  &.size-small {
+  &.size-sm {
     width: 320px !important;
   }
   .ant-modal-header {

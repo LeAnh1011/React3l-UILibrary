@@ -35,15 +35,7 @@ export interface ComponentUploadAvatarProps
   extends UploadImageProps<Model, ModelFilter> {}
 
 export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
-  const {
-    currentAvatar,
-    isMultiple,
-    isMinimized,
-    uploadSingleImage,
-    updateSingleImage,
-    classNameProps,
-    icon,
-  } = props;
+  const { currentAvatar, uploadAvatar, updateAvatar, className, icon } = props;
 
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
     null
@@ -72,7 +64,7 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
 
   const handleSaveCropped = React.useCallback(
     (imageCroppedList: ImageResult[]) => {
-      if (imageCroppedList && imageCroppedList.length) {
+      if (imageCroppedList && imageCroppedList.length > 0) {
         let file = imageCroppedList[imageCroppedList.length - 1].file;
         let check = false;
         if (file.size > 5000000) {
@@ -86,15 +78,15 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
           check = true;
         }
         if (check) return null;
-        uploadSingleImage(file).subscribe((res) => {
+        uploadAvatar(file).subscribe((res) => {
           if (res) {
-            updateSingleImage(res);
+            updateAvatar(res);
           }
         });
       }
     },
     // []
-    [uploadSingleImage, updateSingleImage]
+    [updateAvatar, uploadAvatar]
   );
 
   const onDrop = React.useCallback((acceptedFiles, fileRejections) => {
@@ -135,12 +127,12 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
       <div>
         <img
           src={currentAvatar?.url}
-          className={classNames(classNameProps, "image-in-content")}
+          className={classNames(className, "image-in-content")}
           alt="avatar"
         />
       </div>
     );
-  }, [classNameProps, currentAvatar]);
+  }, [className, currentAvatar]);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -149,14 +141,9 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
 
   return (
     <>
-      <div
-        className={classNames(`upload-image__container`, {
-          multiple: isMultiple && !isMinimized,
-          minimized: isMultiple && isMinimized,
-        })}
-      >
+      <div className={classNames(`upload-image__container`)}>
         <div
-          className={classNames("upload-image__drop-zone", classNameProps)}
+          className={classNames("upload-image__drop-zone", className)}
           {...getRootProps()}
         >
           {!currentAvatar ? (
@@ -180,7 +167,10 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
           handleCancel={handleClosePreview}
           handleSave={handleSaveCropped}
           listImage={[image]}
-          isMultiple={isMultiple}
+          isMultiple={true}
+          // chỗ isMultiple này để true để không làm ảnh hưởng đến
+          // những component khác cùng sử dụng CroppedModal
+          // Đã xử lý nó trong handleSaveCropped
         />
       )}
     </>

@@ -9,7 +9,7 @@ export interface OneLineTextProps {
   avatarType?: "circle" | "square";
   icon?: string;
   value?: string;
-  avatarSize?: "large" | "medium" | "small";
+  avatarSize?: "lg" | "md" | "sm";
   link?: string;
 }
 
@@ -27,7 +27,7 @@ function OneLineText(props: OneLineTextProps) {
     <>
       {avatar && (
         <div className={classNames(className, "text-in-table-cell")}>
-          {avatar && avatarSize !== "small" && (
+          {avatar && avatarSize !== "sm" && (
             <img
               src={avatar}
               className={classNames(
@@ -76,7 +76,7 @@ function OneLineText(props: OneLineTextProps) {
 OneLineText.defaultProps = {
   avatar: null,
   icon: null,
-  tableSize: "large",
+  tableSize: "lg",
   avatarType: "circle",
 };
 export default OneLineText;

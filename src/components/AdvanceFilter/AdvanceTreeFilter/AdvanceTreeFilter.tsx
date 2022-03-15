@@ -10,11 +10,12 @@ import { CommonService } from "services/common-service";
 import InputTag from "components/Input/InputTag";
 import InputSelect from "../../Input/InputSelect";
 import { BORDER_TYPE } from "config/enum";
+import { IdFilter } from "react3l-advanced-filters";
 
 export interface AdvanceTreeFilterProps<
   T extends Model,
   TModelFilter extends ModelFilter
-  > {
+> {
   title?: string;
   listItem?: Model[];
   item?: Model;
@@ -87,17 +88,6 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
 
   const componentId = React.useMemo(() => uuidv4(), []);
 
-  const { run } = useDebounceFn(
-    (searchTerm: string) => {
-      const cloneFilter = valueFilter ? { ...valueFilter } : { ...filter };
-      cloneFilter[searchProperty][searchType] = searchTerm;
-      dispatch({ type: "UPDATE", data: cloneFilter });
-    },
-    {
-      wait: DEBOUNCE_TIME_300,
-    }
-  );
-
   const [expanded, setExpanded] = React.useState<boolean>(false);
 
   const listIds = React.useMemo(() => {
@@ -113,6 +103,26 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
   const [filter, dispatch] = React.useReducer<
     Reducer<ModelFilter, filterAction>
   >(filterReducer, new ClassFilter());
+
+  const { run } = useDebounceFn(
+    (searchTerm: string) => {
+      const cloneFilter = valueFilter ? { ...valueFilter } : { ...filter };
+      cloneFilter[searchProperty][searchType] = searchTerm;
+      cloneFilter["isFilterTree"] = true;
+      if (listIds.length > 1) {
+        cloneFilter["activeNodeIds"] = { ...new IdFilter(), in: [...listIds] };
+      } else {
+        cloneFilter["activeNodeId"] = {
+          ...new IdFilter(),
+          equal: listIds.length > 0 ? listIds[0] : undefined,
+        };
+      }
+      dispatch({ type: "UPDATE", data: cloneFilter });
+    },
+    {
+      wait: DEBOUNCE_TIME_300,
+    }
+  );
 
   const handleClearItem = React.useCallback(
     (item: Model) => {

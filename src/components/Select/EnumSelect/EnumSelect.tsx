@@ -19,6 +19,8 @@ export interface SelectProps<T extends Model> {
 
   appendToBody?: boolean;
 
+  isRequired?: boolean;
+
   onChange?: (id: number, T?: T) => void;
 
   onChangeMultiple?: (selectedList?: T[], ids?: []) => void;
@@ -73,6 +75,7 @@ function EnumSelect(props: SelectProps<Model>) {
     placeHolder,
     disabled,
     appendToBody,
+    isRequired,
     onChange,
     render,
     type,
@@ -346,6 +349,7 @@ function EnumSelect(props: SelectProps<Model>) {
               isUsingSearch={false}
               onClearMulti={handleClearAll}
               isNotExpand={!isExpand}
+              isRequired={isRequired}
             />
           ) : (
             <InputSelect
@@ -361,6 +365,7 @@ function EnumSelect(props: SelectProps<Model>) {
               label={label}
               isSmall={isSmall}
               isEnumerable={true}
+              isRequired={isRequired}
             />
           )}
         </div>

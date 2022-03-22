@@ -31,6 +31,8 @@ export interface TreeSelectProps<
   error?: string;
   selectedKey?: number;
   onlySelectLeaf?: boolean;
+  isRequired?: boolean;
+  appendToBody?: boolean;
   render?: (T: T) => string;
   getTreeData?: (TModelFilter?: TModelFilter) => Observable<T[]>;
   onChange?: (T: Model[], TT: boolean) => void;
@@ -73,6 +75,8 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     placeHolder,
     selectedKey,
     onlySelectLeaf,
+    isRequired,
+    appendToBody,
     render,
     getTreeData,
     onChange,
@@ -89,6 +93,8 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
   const componentId = React.useMemo(() => uuidv4(), []);
 
   const [expanded, setExpanded] = React.useState<boolean>(false);
+
+  const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
 
   const listIds = React.useMemo(() => {
     if (item) return [item.id];
@@ -213,6 +219,32 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
 
   CommonService.useClickOutside(wrapperRef, handleCloseList);
 
+  React.useEffect(() => {
+    if (expanded && appendToBody) {
+      const currentPosition = wrapperRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - currentPosition.bottom;
+      if (spaceBelow <= 200) {
+        setTimeout(() => {
+          const treeListRef = document.getElementById(componentId);
+          const listHeight = treeListRef ? treeListRef.clientHeight : 180;
+          setAppendToBodyStyle({
+            position: "fixed",
+            top: currentPosition.top - (listHeight + 30),
+            left: currentPosition.left,
+            maxWidth: wrapperRef.current.clientWidth,
+          });
+        }, 100);
+      } else {
+        setAppendToBodyStyle({
+          position: "fixed",
+          top: currentPosition.top + wrapperRef.current.clientHeight,
+          left: currentPosition.left,
+          maxWidth: wrapperRef.current.clientWidth,
+        });
+      }
+    }
+  }, [appendToBody, componentId, expanded]);
+
   return (
     <>
       <div className="tree-select__container" ref={wrapperRef}>
@@ -234,6 +266,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               onKeyDown={handleKeyPress}
               isNotExpand={!expanded}
               onKeyEnter={handleKeyEnter}
+              isRequired={isRequired}
             />
           ) : (
             <InputSelect
@@ -250,11 +283,16 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               isSmall={isSmall}
               onKeyDown={handleKeyPress}
               onKeyEnter={handleKeyEnter}
+              isRequired={isRequired}
             />
           )}
         </div>
         {expanded && (
-          <div className="tree-select__list" id={componentId}>
+          <div
+            className="tree-select__list"
+            id={componentId}
+            style={appendToBodyStyle}
+          >
             <Tree
               getTreeData={getTreeData}
               selectedKey={selectedKey}

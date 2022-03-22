@@ -20,6 +20,7 @@ export interface TagFilterProps {
   className?: string;
   value?: ModelFilter;
   keyTranslate?: string;
+  exceptField?: string[];
   translate?: TFunction;
   onClear?: (t: any) => void;
   handleChangeFilter?: (valueFilter: ModelFilter) => void;
@@ -38,6 +39,7 @@ function TagFilter(props: TagFilterProps) {
     className,
     value,
     keyTranslate,
+    exceptField,
     onClear,
     translate,
     handleChangeFilter,
@@ -48,13 +50,11 @@ function TagFilter(props: TagFilterProps) {
     if (typeof search === "object" && search !== null) {
       Object.entries<
         StringFilter | DateFilter | NumberFilter | IdFilter | GuidFilter
-      >(search as any).forEach(([key, value]) => {
+      >(search as ModelFilter).forEach(([key, value]) => {
         if (value instanceof StringFilter) {
-
           Object.entries(value).forEach(([filterKey, filterValue]) => {
             // filter by StringFilter
             if (typeof filterValue === "string" && filterValue !== "") {
-
               switch (filterKey) {
                 case "startWith":
                   return list.push({
@@ -358,6 +358,19 @@ function TagFilter(props: TagFilterProps) {
     return list;
   }, []);
 
+  const handleCheckField = React.useCallback(
+    (field: string) => {
+      if (exceptField && exceptField.length > 0) {
+        const filteredField = exceptField.filter(
+          (current) => current === field
+        );
+        return filteredField && filteredField.length > 0 ? true : false;
+      }
+      return false;
+    },
+    [exceptField]
+  );
+
   const list = React.useMemo((): Model => {
     return convertList(value);
   }, [convertList, value]);
@@ -450,8 +463,16 @@ function TagFilter(props: TagFilterProps) {
             </div>
             <Close16
               aria-label="Add"
-              className="tag-filte__container-clear"
-              onClick={() => handleClear(itemTag)}
+              className={classNames("tag-filter__container-clear", {
+                "tag-filter__container-clear--disabled": handleCheckField(
+                  itemTag.key
+                ),
+              })}
+              onClick={() => {
+                if (!handleCheckField(itemTag.key)) {
+                  handleClear(itemTag);
+                }
+              }}
             />
           </div>
         ))}

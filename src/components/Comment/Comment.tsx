@@ -1,7 +1,5 @@
 import { Model, ModelFilter, OrderType } from "react3l-common";
 import { CommonService } from "services/common-service";
-import { Dropdown } from "antd";
-import Menu from "antd/lib/menu";
 import classNames from "classnames";
 import moment, { Moment } from "moment";
 import React, { RefObject } from "react";
@@ -14,6 +12,7 @@ import { Creator, FileModel, Message } from "./Comment.model";
 import "./Comment.scss";
 import ContentEditable from "./ContentEditable/ContentEditable";
 import IconLoading from "components/IconLoading";
+import { Popconfirm } from "antd";
 
 export interface CommentProps<TFilter extends ModelFilter> {
   userInfo: Creator;
@@ -28,6 +27,8 @@ export interface CommentProps<TFilter extends ModelFilter> {
   getMessages?: (TModelFilter?: TFilter) => Observable<Message[]>;
   countMessages?: (TModelFilter?: TFilter) => Observable<number>;
   postMessage?: (Message: Message) => Observable<Message>;
+  updateMessage?: (Message: Message) => Observable<Message>;
+  canEditMessage?: boolean;
   deleteMessage?: (Message: Message) => Observable<boolean>;
   suggestList?: (filter: TFilter) => Observable<Model[]>;
   attachFile?: (File: File) => Observable<FileModel>;
@@ -47,11 +48,6 @@ export interface listAction {
   data?: Message[];
   message?: Message;
 }
-
-const sortList = [
-  { type: "latest", title: "Mới nhất" },
-  { type: "oldest", title: "Cũ nhất" },
-];
 
 const loading = <IconLoading color="#0F62FE" size={24} />;
 
@@ -123,6 +119,18 @@ function updateList(state: Message[], listAction: listAction) {
       return combined;
     case "ADD_SINGLE":
       return [listAction.message, ...state];
+
+    case "UPDATE_SINGLE":
+      const newState = state.map((item) => {
+        if (listAction.message.id === item.id) {
+          return {
+            ...item,
+            content: listAction.message.content,
+          };
+        }
+        return item;
+      });
+      return [...newState];
   }
 }
 
@@ -135,8 +143,10 @@ function Comment(props: CommentProps<ModelFilter>) {
     classFilter: ClassFilter,
     getMessages,
     countMessages,
+    updateMessage,
     postMessage,
     deleteMessage,
+    canEditMessage,
     attachFile,
     suggestList,
     titleCancel,
@@ -144,11 +154,6 @@ function Comment(props: CommentProps<ModelFilter>) {
     placeholder,
     canSend,
   } = props;
-
-  const [sortType, setSortType] = React.useState<any>({
-    type: "latest",
-    title: "Mới nhất",
-  });
 
   const [filter, dispatchFilter] = React.useReducer(
     updateFilter,
@@ -158,6 +163,10 @@ function Comment(props: CommentProps<ModelFilter>) {
       classFilter: ClassFilter,
     },
     initFilter
+  );
+
+  const [messageCurrentEdit, setMessageCurrentEdit] = React.useState<Message>(
+    new Message()
   );
 
   const [list, dispatchList] = React.useReducer(updateList, []);
@@ -247,16 +256,33 @@ function Comment(props: CommentProps<ModelFilter>) {
     return;
   }, [filter, discussionId, getMessages, countMessages, bindEventClick]);
 
-  const handleMenuClick = React.useCallback((e: any) => {
-    const sortType = sortList.filter((current) => current.type === e.key)[0];
-    setSortType(sortType);
-    dispatchFilter({
-      action: "ORDER",
-      order: sortType.type,
-    });
-  }, []);
+  const handleUpdateMessage = React.useCallback(() => {
+    const message: Message = {
+      ...messageCurrentEdit,
+      content: contentEditableRef.current.innerHTML,
+    };
+    if (message.content !== null) {
+      setLoad(true);
+      updateMessage(message)
+        .pipe(finalize(() => setLoad(false)))
+        .subscribe(
+          (res: Message) => {
+            dispatchList({
+              action: "UPDATE_SINGLE",
+              message: res,
+            });
+            contentEditableRef.current.innerHTML = "";
+            setTimeout(() => {
+              bindEventClick();
+            }, 200);
+            getListMessages();
+          },
+          (err: ErrorObserver<Error>) => {}
+        );
+    }
+  }, [messageCurrentEdit, updateMessage, getListMessages, bindEventClick]);
 
-  const handleSend = React.useCallback(() => {
+  const handleCreateMessage = React.useCallback(() => {
     const message = new Message({
       discussionId: discussionId,
       content: contentEditableRef.current.innerHTML,
@@ -286,30 +312,24 @@ function Comment(props: CommentProps<ModelFilter>) {
     }
   }, [discussionId, userInfo, postMessage, getListMessages, bindEventClick]);
 
+  const handleSendMessage = React.useCallback(() => {
+    if (messageCurrentEdit.id) {
+      handleUpdateMessage();
+    } else {
+      handleCreateMessage();
+    }
+  }, [handleCreateMessage, handleUpdateMessage, messageCurrentEdit.id]);
+
   const handleCancelSend = React.useCallback(() => {
     contentEditableRef.current.innerHTML = "";
-  }, []);
-
-  const popupConfirmDeleteMessage = React.useCallback(
-    (message: Message) => (
-      event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
-      const newListMessages = list.map((currentItem, index) => {
-        if (currentItem.id === message.id) currentItem.isPopup = true;
-        return currentItem;
-      });
-      dispatchList({
-        action: "UPDATE",
-        data: newListMessages,
-      });
-    },
-    [list]
-  );
+    if (messageCurrentEdit.id) {
+      setMessageCurrentEdit({ ...new Message() });
+      debugger;
+    }
+  }, [messageCurrentEdit.id]);
 
   const handleOkDeleteMessage = React.useCallback(
-    (message: Message) => (
-      event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
+    (message: Message) => {
       const deleteSub = deleteMessage(message).subscribe((res: boolean) => {
         if (res) {
           const newListMessages = list.filter((currentItem) => {
@@ -326,12 +346,14 @@ function Comment(props: CommentProps<ModelFilter>) {
     [deleteMessage, subscription, list]
   );
 
+  const handleEditMessage = React.useCallback((message: Message) => {
+    setMessageCurrentEdit({ ...message });
+    contentEditableRef.current.innerHTML = message.content;
+  }, []);
+
   const handleCancelDeleteMessage = React.useCallback(
-    (message: Message) => (
-      event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
+    (message: Message) => {
       const newListMessages = list.map((currentItem) => {
-        currentItem.isPopup = false;
         return currentItem;
       });
       dispatchList({
@@ -410,18 +432,6 @@ function Comment(props: CommentProps<ModelFilter>) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [discussionId]);
 
-  const menuSort = React.useMemo(() => {
-    return (
-      <Menu onClick={handleMenuClick} selectedKeys={[sortType.type]}>
-        {sortList.map((item, index) => {
-          return (
-            <Menu.Item key={item.type}>{item.title.toUpperCase()}</Menu.Item>
-          );
-        })}
-      </Menu>
-    );
-  }, [handleMenuClick, sortType]);
-
   return (
     <>
       <div className="comment__container">
@@ -473,6 +483,31 @@ function Comment(props: CommentProps<ModelFilter>) {
                       className="msg-content"
                       dangerouslySetInnerHTML={{ __html: currentItem.content }}
                     />
+                    {currentItem.creatorId === userInfo.id && (
+                      <div className="action-owner-message">
+                        {canEditMessage && (
+                          <Button
+                            type="link"
+                            onClick={() => handleEditMessage(currentItem)}
+                          >
+                            {"Sửa"}
+                          </Button>
+                        )}
+                        <Popconfirm
+                          placement="leftTop"
+                          title={"Bạn có chắc chắn muốn xóa?"}
+                          onConfirm={() => handleOkDeleteMessage(currentItem)}
+                          onCancel={() =>
+                            handleCancelDeleteMessage(currentItem)
+                          }
+                          okText="Xóa"
+                          cancelText="Hủy"
+                          okType="danger"
+                        >
+                          <Button type="link">{"Xóa"}</Button>
+                        </Popconfirm>
+                      </div>
+                    )}
                   </div>
                 </div>
               );
@@ -499,14 +534,18 @@ function Comment(props: CommentProps<ModelFilter>) {
               <ContentEditable
                 ref={contentEditableRef}
                 suggestList={suggestList}
-                sendValue={handleSend}
+                sendValue={handleSendMessage}
                 loading={isLoad}
                 placeholder={placeholder}
                 inputFileRef={inputFileRef}
                 handleAttachFile={handleAttachFile}
               />
               <div className="content-button">
-                <Button type="primary" className="btn--md" onClick={handleSend}>
+                <Button
+                  type="primary"
+                  className="btn--md"
+                  onClick={handleSendMessage}
+                >
                   {titleSave}
                 </Button>
                 <Button
@@ -543,6 +582,7 @@ Comment.defaultProps = {
   titleCancel: "Hủy",
   title: "Bình luận",
   canSend: true,
+  canEditMessage: true,
 };
 
 export default Comment;

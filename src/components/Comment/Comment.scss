@@ -123,16 +123,6 @@
         img {
           height: 50px;
         }
-      }
-
-      .msg-icon {
-        display: none;
-        position: relative;
-
-        i {
-          font-size: 20px;
-        }
-
         .confirm-box {
           display: flex;
           justify-content: space-around;
@@ -147,6 +137,17 @@
             color: gray;
           }
         }
+      }
+
+      .msg-icon {
+        display: none;
+        position: relative;
+
+        i {
+          font-size: 20px;
+        }
+
+        
       }
 
       &:hover > .msg-icon {

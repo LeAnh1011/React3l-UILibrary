@@ -3,7 +3,6 @@ import { Spin } from "antd";
 import classNames from "classnames";
 import Button from "components/Button";
 import { NUMBER_BUTTON } from "config/enum";
-import { TFunction } from "i18next";
 import React, { ReactNode, RefObject } from "react";
 import "./Drawer.scss";
 
@@ -15,15 +14,14 @@ export interface DrawerProps {
   loading?: boolean;
   title?: string;
   description?: string;
-  keyButtonApply?: string;
-  keyButtonApplyNext?: string;
-  keyButtonCancel?: string;
+  titleButtonApply?: string;
+  titleButtonApplyNext?: string;
+  titleButtonCancel?: string;
   numberButton?: NUMBER_BUTTON;
   handleClose?: () => void;
   handleCancel?: () => void;
   handleSave?: () => void;
   handleApplyNext?: () => void;
-  translate?: TFunction;
   isHaveCloseIcon?: boolean;
   size?: "sm" | "lg";
 }
@@ -36,15 +34,14 @@ function Drawer(props: DrawerProps) {
     loading,
     title,
     description,
-    keyButtonApply,
-    keyButtonApplyNext,
-    keyButtonCancel,
+    titleButtonApply,
+    titleButtonApplyNext,
+    titleButtonCancel,
     numberButton,
     handleClose,
     handleCancel,
     handleSave,
     handleApplyNext,
-    translate,
     isHaveCloseIcon,
     size,
   } = props;
@@ -60,11 +57,7 @@ function Drawer(props: DrawerProps) {
           )}
           onClick={handleCancel}
         >
-          <span>
-            {keyButtonCancel && translate
-              ? translate(`${keyButtonCancel}`)
-              : "Cancel"}
-          </span>
+          <span>{titleButtonCancel ? titleButtonCancel : "Cancel"}</span>
         </Button>
         {numberButton === NUMBER_BUTTON.THREE && (
           <Button
@@ -74,9 +67,7 @@ function Drawer(props: DrawerProps) {
             disabled={disableButton}
           >
             <span>
-              {keyButtonApplyNext && translate
-                ? translate(`${keyButtonApplyNext}`)
-                : "Apply Next"}
+              {titleButtonApplyNext ? titleButtonApplyNext : "Apply Next"}
             </span>
           </Button>
         )}
@@ -88,11 +79,7 @@ function Drawer(props: DrawerProps) {
           onClick={handleSave}
           disabled={disableButton}
         >
-          <span>
-            {keyButtonApply && translate
-              ? translate(`${keyButtonApply}`)
-              : "Apply"}
-          </span>
+          <span>{titleButtonApply ? titleButtonApply : "Apply"}</span>
         </Button>
       </div>
     ),
@@ -100,12 +87,11 @@ function Drawer(props: DrawerProps) {
       numberButton,
       handleSave,
       disableButton,
-      keyButtonApply,
-      translate,
+      titleButtonApply,
       handleApplyNext,
-      keyButtonApplyNext,
+      titleButtonApplyNext,
       handleCancel,
-      keyButtonCancel,
+      titleButtonCancel,
     ]
   );
   return (
@@ -124,14 +110,10 @@ function Drawer(props: DrawerProps) {
                 })}
               >
                 <div className="title mr-1">
-                  {title && translate ? translate(`${title}`) : "Drawer Title"}
+                  {title ? title : "Drawer Title"}
                 </div>
                 {description && (
-                  <div className="description mr-1">
-                    {translate
-                      ? translate(`${description}`)
-                      : "Drawer description description description description"}
-                  </div>
+                  <div className="description mr-1">{description}</div>
                 )}
               </div>
               {!description && isHaveCloseIcon && (

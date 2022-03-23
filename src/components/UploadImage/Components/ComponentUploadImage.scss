@@ -19,19 +19,19 @@ $icon-padding: 10.89px;
 }
 
 .upload-image__container {
-  &.upload-image--large {
+  &.upload-image--lg {
     @include size(144px, 56px, 10.89px);
   }
 
-  &.upload-image--normal {
+  &.upload-image--md {
     @include size(112px, 43.56px, 8.47px);
   }
 
-  &.upload-image--small {
+  &.upload-image--sm {
     @include size(88px, 34.22px, 6.65px);
   }
 
-  &.upload-image--smaller {
+  &.upload-image--xs {
     @include size(56px, 21.78px, 4.23px);
   }
 }

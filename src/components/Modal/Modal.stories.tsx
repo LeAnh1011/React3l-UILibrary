@@ -6,9 +6,9 @@ import InputText from "../Input/InputText/InputText";
 import { BORDER_TYPE, ValidateStatus } from "./../../config/enum";
 import React from "react";
 export enum SIZE_TYPE {
-  LARGE = "large",
-  MEDIUM = "medium",
-  SMALL = "small",
+  LARGE = "lg",
+  MEDIUM = "md",
+  SMALL = "sm",
 }
 function Default() {
   const [size, setSize] = React.useState<SIZE_TYPE>(SIZE_TYPE.SMALL);
@@ -31,9 +31,9 @@ function Default() {
       <div>
         <div style={{ margin: "10px", width: "500px" }}>
           <Radio.Group onChange={handleChangeSize} value={size}>
-            <Radio value={SIZE_TYPE.LARGE}>Large</Radio>
-            <Radio value={SIZE_TYPE.MEDIUM}>medium</Radio>
-            <Radio value={SIZE_TYPE.SMALL}>small</Radio>
+            <Radio value={SIZE_TYPE.LARGE}>lg</Radio>
+            <Radio value={SIZE_TYPE.MEDIUM}>md</Radio>
+            <Radio value={SIZE_TYPE.SMALL}>sm</Radio>
           </Radio.Group>
         </div>
       </div>
@@ -44,13 +44,13 @@ function Default() {
       >
         show modal
       </button>
-      {size === "small" && (
+      {size === "lg" && (
         <Modal
           visible={visible}
           handleSave={handleSave}
           handleCancel={handleCancel}
           visibleFooter={true}
-          size="small"
+          size="lg"
           title="Modal Title"
         >
           <div
@@ -87,13 +87,13 @@ function Default() {
           </div>
         </Modal>
       )}
-      {size === "medium" && (
+      {size === "md" && (
         <Modal
           visible={visible}
           handleSave={handleSave}
           handleCancel={handleCancel}
           visibleFooter={true}
-          size="medium"
+          size="md"
           title="Modal Title"
         >
           <div style={{ marginBottom: "16px", marginTop: 16 }}>
@@ -149,14 +149,14 @@ function Default() {
           </div>
         </Modal>
       )}
-      {size === "large" && (
+      {size === "lg" && (
         <Modal
           visible={visible}
           handleSave={handleSave}
           handleCancel={handleCancel}
           visibleFooter={true}
           handleApplyNext={handleCreate}
-          size="large"
+          size="lg"
           title="Modal Title"
         >
           <div

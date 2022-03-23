@@ -34,6 +34,8 @@ export interface SelectProps<
 
   appendToBody?: boolean;
 
+  isRequired?: boolean;
+
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
 
   onChange?: (id: number, T?: T) => void;
@@ -69,6 +71,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
     disabled,
     isEnumerable,
     appendToBody,
+    isRequired,
     getList,
     onChange,
     render,
@@ -282,6 +285,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
             onClear={handleClearItem}
             onKeyDown={handleKeyPress}
             onKeyEnter={handleKeyEnter}
+            isRequired={isRequired}
             type={type}
             label={label}
             isSmall={isSmall}

@@ -30,6 +30,10 @@ export interface MultipleSelectProps<
 
   isMaterial?: boolean;
 
+  isRequired?: boolean;
+
+  appendToBody?: boolean;
+
   getList?: (TModelFilter?: TFilter) => Observable<T[]>;
 
   onChange?: (selectedList?: T[], ids?: []) => void;
@@ -89,6 +93,8 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     placeHolder,
     disabled,
     isMaterial,
+    isRequired,
+    appendToBody,
     getList,
     onChange,
     render,
@@ -118,6 +124,8 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
   const selectListRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
     null
   );
+
+  const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
 
   const [subscription] = CommonService.useSubscription();
 
@@ -381,6 +389,33 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     [handleToggle]
   );
 
+  React.useEffect(() => {
+    if (isExpand && appendToBody) {
+      const currentPosition = wrapperRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - currentPosition.bottom;
+      if (spaceBelow <= 200) {
+        setTimeout(() => {
+          const listHeight = selectListRef.current
+            ? selectListRef.current.clientHeight
+            : 180;
+          setAppendToBodyStyle({
+            position: "fixed",
+            top: currentPosition.top - (listHeight + 30),
+            left: currentPosition.left,
+            maxWidth: wrapperRef.current.clientWidth,
+          });
+        }, 100);
+      } else {
+        setAppendToBodyStyle({
+          position: "fixed",
+          top: currentPosition.top + wrapperRef.current.clientHeight,
+          left: currentPosition.left,
+          maxWidth: wrapperRef.current.clientWidth,
+        });
+      }
+    }
+  }, [appendToBody, isExpand]);
+
   CommonService.useClickOutside(wrapperRef, handleCloseSelect);
 
   return (
@@ -405,10 +440,11 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
             onKeyDown={handleKeyPress}
             onKeyEnter={handleKeyEnter}
             isNotExpand={!isExpand}
+            isRequired={isRequired}
           />
         </div>
         {isExpand && (
-          <div className="select__list-container">
+          <div className="select__list-container" style={appendToBodyStyle}>
             {!loading ? (
               <>
                 <div

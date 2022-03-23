@@ -10,11 +10,12 @@ import { CommonService } from "services/common-service";
 import InputTag from "../Input/InputTag/InputTag";
 import InputSelect from "../Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "config/enum";
+import { IdFilter } from "react3l-advanced-filters";
 
 export interface TreeSelectProps<
   T extends Model,
   TModelFilter extends ModelFilter
-  > {
+> {
   title?: string;
   listItem?: Model[];
   item?: Model;
@@ -30,6 +31,8 @@ export interface TreeSelectProps<
   error?: string;
   selectedKey?: number;
   onlySelectLeaf?: boolean;
+  isRequired?: boolean;
+  appendToBody?: boolean;
   render?: (T: T) => string;
   getTreeData?: (TModelFilter?: TModelFilter) => Observable<T[]>;
   onChange?: (T: Model[], TT: boolean) => void;
@@ -72,6 +75,8 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     placeHolder,
     selectedKey,
     onlySelectLeaf,
+    isRequired,
+    appendToBody,
     render,
     getTreeData,
     onChange,
@@ -87,18 +92,9 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
 
   const componentId = React.useMemo(() => uuidv4(), []);
 
-  const { run } = useDebounceFn(
-    (searchTerm: string) => {
-      const cloneFilter = valueFilter ? { ...valueFilter } : { ...filter };
-      cloneFilter[searchProperty][searchType] = searchTerm;
-      dispatch({ type: "UPDATE", data: cloneFilter });
-    },
-    {
-      wait: DEBOUNCE_TIME_300,
-    }
-  );
-
   const [expanded, setExpanded] = React.useState<boolean>(false);
+
+  const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
 
   const listIds = React.useMemo(() => {
     if (item) return [item.id];
@@ -113,6 +109,26 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
   const [filter, dispatch] = React.useReducer<
     Reducer<ModelFilter, filterAction>
   >(filterReducer, new ClassFilter());
+
+  const { run } = useDebounceFn(
+    (searchTerm: string) => {
+      const cloneFilter = valueFilter ? { ...valueFilter } : { ...filter };
+      cloneFilter[searchProperty][searchType] = searchTerm;
+      cloneFilter["isFilterTree"] = true;
+      if (listIds.length > 1) {
+        cloneFilter["activeNodeIds"] = { ...new IdFilter(), in: [...listIds] };
+      } else {
+        cloneFilter["activeNodeId"] = {
+          ...new IdFilter(),
+          equal: listIds.length > 0 ? listIds[0] : undefined,
+        };
+      }
+      dispatch({ type: "UPDATE", data: cloneFilter });
+    },
+    {
+      wait: DEBOUNCE_TIME_300,
+    }
+  );
 
   const handleClearItem = React.useCallback(
     (item: Model) => {
@@ -152,6 +168,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
           const filterData = valueFilter
             ? { ...valueFilter }
             : new ClassFilter();
+          filterData["isFilterTree"] = false;
           dispatch({ type: "UPDATE", data: filterData });
         }
         setExpanded(true);
@@ -202,6 +219,32 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
 
   CommonService.useClickOutside(wrapperRef, handleCloseList);
 
+  React.useEffect(() => {
+    if (expanded && appendToBody) {
+      const currentPosition = wrapperRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - currentPosition.bottom;
+      if (spaceBelow <= 200) {
+        setTimeout(() => {
+          const treeListRef = document.getElementById(componentId);
+          const listHeight = treeListRef ? treeListRef.clientHeight : 180;
+          setAppendToBodyStyle({
+            position: "fixed",
+            top: currentPosition.top - (listHeight + 30),
+            left: currentPosition.left,
+            maxWidth: wrapperRef.current.clientWidth,
+          });
+        }, 100);
+      } else {
+        setAppendToBodyStyle({
+          position: "fixed",
+          top: currentPosition.top + wrapperRef.current.clientHeight,
+          left: currentPosition.left,
+          maxWidth: wrapperRef.current.clientWidth,
+        });
+      }
+    }
+  }, [appendToBody, componentId, expanded]);
+
   return (
     <>
       <div className="tree-select__container" ref={wrapperRef}>
@@ -223,6 +266,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               onKeyDown={handleKeyPress}
               isNotExpand={!expanded}
               onKeyEnter={handleKeyEnter}
+              isRequired={isRequired}
             />
           ) : (
             <InputSelect
@@ -239,11 +283,16 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               isSmall={isSmall}
               onKeyDown={handleKeyPress}
               onKeyEnter={handleKeyEnter}
+              isRequired={isRequired}
             />
           )}
         </div>
         {expanded && (
-          <div className="tree-select__list" id={componentId}>
+          <div
+            className="tree-select__list"
+            id={componentId}
+            style={appendToBodyStyle}
+          >
             <Tree
               getTreeData={getTreeData}
               selectedKey={selectedKey}

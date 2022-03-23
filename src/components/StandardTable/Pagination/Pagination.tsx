@@ -24,7 +24,7 @@ function Pagination(props: PaginationProps) {
     canChangePageSize,
   } = props;
   const pageArray = React.useMemo(() => {
-    const ind = (total - (total % take)) / take;
+    const ind = Math.ceil(total / take);
     const arrTmp = [];
     for (let i = 1; i <= ind; i++) {
       arrTmp.push(i);

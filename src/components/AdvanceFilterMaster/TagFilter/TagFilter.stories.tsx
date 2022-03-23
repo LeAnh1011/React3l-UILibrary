@@ -144,6 +144,7 @@ export function TagFilterStories() {
         keyTranslate={"demo"}
         onClear={handleClear}
         handleChangeFilter={handleChangeAllFilter}
+        exceptField={['appUserId']}
       />
     </div>
   );

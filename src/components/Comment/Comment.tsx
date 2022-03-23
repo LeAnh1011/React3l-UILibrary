@@ -324,7 +324,6 @@ function Comment(props: CommentProps<ModelFilter>) {
     contentEditableRef.current.innerHTML = "";
     if (messageCurrentEdit.id) {
       setMessageCurrentEdit({ ...new Message() });
-      debugger;
     }
   }, [messageCurrentEdit.id]);
 

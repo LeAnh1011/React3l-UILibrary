@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import "./Modal.scss";
 import AntModal, { ModalProps as AntModalProps } from "antd/lib/modal";
-import { TFunction } from "i18next";
 import classNames from "classnames";
 import Button from "components/Button";
 import { Close20 } from "@carbon/icons-react";
@@ -9,25 +8,23 @@ export interface ModalCustomProps extends AntModalProps {
   children?: ReactNode;
   visibleFooter?: boolean;
   size?: "lg" | "md" | "sm";
-  keyButtonApply?: string;
-  keyButtonApplyNext?: string;
-  keyButtonCancel?: string;
+  titleButtonApply?: string;
+  titleButtonApplyNext?: string;
+  titleButtonCancel?: string;
   handleCancel?: (event: any) => void;
   handleSave?: (event: any) => void;
   handleApplyNext?: (event: any) => void;
-  translate?: TFunction;
 }
 function Modal(props: ModalCustomProps) {
   const {
     visibleFooter,
     size,
-    keyButtonApply,
-    keyButtonApplyNext,
-    keyButtonCancel,
+    titleButtonApply,
+    titleButtonApplyNext,
+    titleButtonCancel,
     destroyOnClose,
     handleCancel,
     handleSave,
-    translate,
     handleApplyNext,
   } = props;
   const renderModalFooter = React.useMemo(
@@ -45,11 +42,7 @@ function Modal(props: ModalCustomProps) {
             )}
             onClick={handleCancel}
           >
-            <span>
-              {keyButtonCancel && translate
-                ? translate(`${keyButtonCancel}`)
-                : "Cancel"}
-            </span>
+            <span>{titleButtonCancel ? titleButtonCancel : "Cancel"}</span>
           </Button>
 
           {handleApplyNext && size === "lg" && (
@@ -59,9 +52,7 @@ function Modal(props: ModalCustomProps) {
               onClick={handleApplyNext}
             >
               <span>
-                {keyButtonApplyNext && translate
-                  ? translate(`${keyButtonApplyNext}`)
-                  : "Apply Next"}
+                {titleButtonApplyNext ? titleButtonApplyNext : "Apply Next"}
               </span>
             </Button>
           )}
@@ -72,11 +63,7 @@ function Modal(props: ModalCustomProps) {
             )}
             onClick={handleSave}
           >
-            <span>
-              {keyButtonApply && translate
-                ? translate(`${keyButtonApply}`)
-                : "Apply"}
-            </span>
+            <span>{titleButtonApply ? titleButtonApply : "Apply"}</span>
           </Button>
         </div>
       </div>
@@ -85,11 +72,10 @@ function Modal(props: ModalCustomProps) {
       handleApplyNext,
       size,
       handleSave,
-      keyButtonApply,
-      translate,
-      keyButtonApplyNext,
+      titleButtonApply,
+      titleButtonApplyNext,
       handleCancel,
-      keyButtonCancel,
+      titleButtonCancel,
     ]
   );
   return (

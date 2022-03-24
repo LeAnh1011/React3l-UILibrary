@@ -193,7 +193,7 @@ const ContentEditable = forwardRef<
     );
 
     const selectUser = React.useCallback(
-      (currentUser) => (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+      (currentUser) => {
         setShowSuggestList(false);
         const contentValue = contentEditableRef.current.innerHTML.split(
           '<span class="mention-tag">'
@@ -226,9 +226,13 @@ const ContentEditable = forwardRef<
 
     return (
       <>
-        <div className={classNames("content-editable__container")}>
+        <div
+          className={classNames("content-editable__container")}
+          id="container-message"
+        >
           <div className="content-editable-body">
             <div
+              id="content-message"
               className="content-editable__comment"
               ref={contentEditableRef}
               onInput={handleInput}
@@ -257,19 +261,21 @@ const ContentEditable = forwardRef<
           {showSuggestList && (
             <div className="content-editable__suggest-list">
               {userList.length > 0 ? (
-                <ul className="list-group">
+                <div className="list-group">
                   {userList.map((currentUser, index) => {
                     return (
-                      <li
+                      <div
                         key={index}
-                        className="list-group-item"
-                        onClick={selectUser(currentUser)}
+                        className={classNames("list-group-item", {
+                          "border-top": index > 0,
+                        })}
+                        onClick={() => selectUser(currentUser)}
                       >
                         {currentUser?.displayName}
-                      </li>
+                      </div>
                     );
                   })}
-                </ul>
+                </div>
               ) : (
                 <img
                   className="img-emty"

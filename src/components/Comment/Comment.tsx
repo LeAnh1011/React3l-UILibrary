@@ -171,6 +171,8 @@ function Comment(props: CommentProps<ModelFilter>) {
 
   const [list, dispatchList] = React.useReducer(updateList, []);
 
+  const [showButton, setShowButton] = React.useState<boolean>(false);
+
   const [countMessage, setCountMessage] = React.useState<number>();
 
   const [hasMore, setHasMore] = React.useState<boolean>(true);
@@ -185,6 +187,21 @@ function Comment(props: CommentProps<ModelFilter>) {
 
   const contentEditableRef: React.LegacyRef<HTMLDivElement> = React.useRef<HTMLDivElement>();
   const [isLoad, setLoad] = React.useState<boolean>(false);
+  const elementContainer = document.getElementById("container-message");
+  const elementContent = document.getElementById("content-message");
+  if (elementContent && elementContainer) {
+    elementContent.addEventListener("focus", () => {
+      setShowButton(true);
+    });
+    elementContainer.addEventListener("focusout", () => {
+      if (
+        contentEditableRef?.current?.innerHTML === "" ||
+        !contentEditableRef?.current?.innerHTML
+      ) {
+        setShowButton(false);
+      }
+    });
+  }
 
   const handleClosePreview = React.useCallback(() => {
     setIsPreview(false);
@@ -271,6 +288,7 @@ function Comment(props: CommentProps<ModelFilter>) {
               action: "UPDATE_SINGLE",
               message: res,
             });
+            setMessageCurrentEdit({ ...new Message() });
             contentEditableRef.current.innerHTML = "";
             setTimeout(() => {
               bindEventClick();
@@ -321,6 +339,7 @@ function Comment(props: CommentProps<ModelFilter>) {
   }, [handleCreateMessage, handleUpdateMessage, messageCurrentEdit.id]);
 
   const handleCancelSend = React.useCallback(() => {
+    setShowButton(false);
     contentEditableRef.current.innerHTML = "";
     if (messageCurrentEdit.id) {
       setMessageCurrentEdit({ ...new Message() });
@@ -539,22 +558,27 @@ function Comment(props: CommentProps<ModelFilter>) {
                 inputFileRef={inputFileRef}
                 handleAttachFile={handleAttachFile}
               />
-              <div className="content-button">
-                <Button
-                  type="primary"
-                  className="btn--md"
-                  onClick={handleSendMessage}
-                >
-                  {titleSave}
-                </Button>
-                <Button
-                  type="secondary"
-                  className="btn--md"
-                  onClick={handleCancelSend}
-                >
-                  {titleCancel}
-                </Button>
-              </div>
+              {showButton && (
+                <div className="content-button">
+                  <Button
+                    type="primary"
+                    className="btn--md"
+                    onClick={() => {
+                      handleSendMessage();
+                      setShowButton(false);
+                    }}
+                  >
+                    {titleSave}
+                  </Button>
+                  <Button
+                    type="secondary"
+                    className="btn--md"
+                    onClick={handleCancelSend}
+                  >
+                    {titleCancel}
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         )}

@@ -7,6 +7,19 @@ import nameof from "ts-nameof.macro";
 import Comment from "./Comment";
 import { FileModel, Message } from "./Comment.model";
 
+const demoMessageUpdate = {
+  id: 1,
+  discussionId: "930cd7ca-b3b0-4105-8c82-6e45d2f64ef7",
+  content: "<a>Đây là message update.</a>",
+  creatorId: 10,
+  createdAt: moment(),
+  creator: {
+    id: 10,
+    userName: "Nguyen Thi Thu Hang",
+    displayName: "Hangntt123",
+    avatar: "",
+  },
+};
 const listMessageDemo = [
   {
     id: 1,
@@ -105,6 +118,13 @@ const demoObservable = new Observable<Message[]>((observer) => {
   }, 1000);
 });
 
+const demoObservableUpdate = new Observable<Message>((observer) => {
+  setTimeout(() => {
+    observer.next(demoMessageUpdate);
+    observer.complete();
+  }, 1000);
+});
+
 const countObservable = new Observable<number>((observer) => {
   setTimeout(() => {
     observer.next(50);
@@ -114,6 +134,10 @@ const countObservable = new Observable<number>((observer) => {
 
 const demoSearchFunc = (TModelFilter: ModelFilter) => {
   return demoObservable;
+};
+
+const demoUpdateMessageFunc = (TModelFilter: ModelFilter) => {
+  return demoObservableUpdate;
 };
 
 const demoCountFunc = (TModelFilter: ModelFilter) => {
@@ -154,6 +178,7 @@ function Default() {
         getMessages={demoSearchFunc}
         countMessages={demoCountFunc}
         postMessage={demoPostFunc}
+        updateMessage={demoUpdateMessageFunc}
         deleteMessage={demoDeleteFunc}
         attachFile={demoAttachFunc}
         suggestList={demoGetList}

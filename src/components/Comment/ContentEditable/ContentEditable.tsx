@@ -27,6 +27,7 @@ export interface ContentEditableProps<TFilter extends ModelFilter> {
   placeholder?: string;
   inputFileRef?: RefObject<HTMLInputElement>;
   handleAttachFile?: (files: FileList) => void;
+  showButton?: boolean;
 }
 
 const ContentEditable = forwardRef<
@@ -44,6 +45,7 @@ const ContentEditable = forwardRef<
       placeholder,
       inputFileRef,
       handleAttachFile,
+      showButton,
     } = props;
 
     const [userList, setUserList] = React.useState([]);
@@ -224,10 +226,18 @@ const ContentEditable = forwardRef<
       }
     }, [contentEditable, suggestList]);
 
+    React.useEffect(() => {
+      if (!showButton && showSuggestList) {
+        setShowSuggestList(false);
+      }
+    }, [showButton, showSuggestList]);
+
     return (
       <>
         <div
-          className={classNames("content-editable__container")}
+          className={classNames("content-editable__container", {
+            expand: showButton,
+          })}
           id="container-message"
         >
           <div className="content-editable-body">

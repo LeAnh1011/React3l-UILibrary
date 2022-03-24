@@ -557,6 +557,7 @@ function Comment(props: CommentProps<ModelFilter>) {
                 placeholder={placeholder}
                 inputFileRef={inputFileRef}
                 handleAttachFile={handleAttachFile}
+                showButton={showButton}
               />
               {showButton && (
                 <div className="content-button">

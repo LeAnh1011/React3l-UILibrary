@@ -18,7 +18,7 @@
     background-color: #ffffff;
   }
   .hightlight__text {
-    color: mediumblue;
+    color: var(--palette-gray-70);
     text-decoration: underline;
   }
 
@@ -91,7 +91,7 @@
         color: var(--palette-gray-70);
         a {
           text-decoration: underline;
-          color: mediumblue;
+          color: var(--palette-gray-70);
         }
 
         .msg-creator-name{
@@ -122,20 +122,6 @@
         }
         img {
           height: 50px;
-        }
-        .confirm-box {
-          display: flex;
-          justify-content: space-around;
-
-          .confirm-box__delete-button {
-            text-decoration: underline;
-            color: #e91616;
-          }
-
-          .confirm-box__cancel-button {
-            margin-left: 5px;
-            color: gray;
-          }
         }
       }
 

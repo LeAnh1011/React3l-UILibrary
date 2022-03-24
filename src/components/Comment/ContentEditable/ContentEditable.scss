@@ -27,7 +27,7 @@
     }
 
     .hightlight__text {
-        color: mediumblue;
+        color: var(--palette-gray-70);
         text-decoration: underline;
     }
 
@@ -42,6 +42,7 @@
         color: var(--palette-gray-70);
         a {
             text-decoration: underline !important;
+            color: var(--palette-gray-70);
         }
         img {
             height: 40px;

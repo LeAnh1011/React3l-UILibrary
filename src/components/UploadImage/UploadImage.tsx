@@ -48,7 +48,7 @@ export interface UploadImageProps<
   isMinimized?: boolean;
   files?: FileModel[];
   fileFilter?: (file: unknown, index: number, files: unknown[]) => boolean;
-  updateList?: (files: FileModel[] | FileList) => void;
+  updateList?: (files: FileModel[]) => void;
   getListFile?: (TModelFilter?: TModelFilter) => Observable<T[]>;
   uploadFile?: (files: File[] | Blob[]) => Observable<FileModel[]>;
   icon?: ReactNode;

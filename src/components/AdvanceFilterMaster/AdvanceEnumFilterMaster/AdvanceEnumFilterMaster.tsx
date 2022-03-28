@@ -83,7 +83,13 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
     title,
     className,
   } = props;
-  const [internalValue, setInternalValue] = React.useState<Model>();
+  const [internalValue, setInternalValue] = React.useState<Model>(
+    value
+      ? {
+          id: value,
+        }
+      : null
+  );
 
   const [list, setList] = React.useState<Model[]>([]);
 

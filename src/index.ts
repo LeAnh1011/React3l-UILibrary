@@ -45,6 +45,8 @@ import UploadImage from "./components/UploadImage";
 
 import ProgressIndicator from "./components/ProgressIndicator";
 
+import Comment from "./components/Comment";
+
 import StandardTable from "./components/StandardTable/StandardTable";
 import ActionBarComponent from "./components/StandardTable/ActionBarComponent";
 import LayoutCell from "./components/StandardTable/LayoutCell";
@@ -102,6 +104,8 @@ export {
   UploadImage,
   // Progress Indicator
   ProgressIndicator,
+  // Comment
+  Comment,
   // Standard table components
   StandardTable,
   ActionBarComponent,

@@ -56,6 +56,8 @@ export default {
     "src/components/UploadImage/index.ts",
     // ProgressIndicator
     "src/components/ProgressIndicator/index.ts",
+    // Comment
+    "src/components/Comment/index.ts",
     // Standard table components
     "src/components/StandardTable/index.ts",
     "src/components/StandardTable/ActionBarComponent/index.ts",

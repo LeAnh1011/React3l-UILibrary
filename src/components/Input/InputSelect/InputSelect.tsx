@@ -16,6 +16,7 @@ export interface InputSelectProps<T extends Model> {
   onSearch?: (T: string) => void;
   onKeyDown?: (event: any) => void;
   onKeyEnter?: (event: any) => void;
+  handleClearInput?: () => void;
   className?: string;
   type?: BORDER_TYPE;
   label?: string;
@@ -31,6 +32,7 @@ function InputSelect(props: InputSelectProps<Model>) {
     disabled,
     expanded,
     placeHolder,
+    handleClearInput: onClearInput,
     render,
     onClear,
     onSearch,
@@ -66,8 +68,11 @@ function InputSelect(props: InputSelectProps<Model>) {
       setInternalValue("");
       inputRef.current.focus();
       event.stopPropagation();
+      if(typeof handleClearInput !== undefined) {
+        onClearInput();
+      }
     },
-    []
+    [onClearInput]
   );
 
   const handleClearItem = React.useCallback(
@@ -175,13 +180,6 @@ function InputSelect(props: InputSelectProps<Model>) {
                   className="input-icon input-icon__clear m-r--xxs"
                   onClick={handleClearInput}
                 ></CloseFilled16>
-              ) : value ? (
-                !disabled && (
-                  <CloseFilled16
-                    className="input-icon input-icon__clear m-r--xxs"
-                    onClick={handleClearItem}
-                  ></CloseFilled16>
-                )
               ) : null}
               <ChevronDown16
                 className={classNames("input-icon", "input-select__icon", {

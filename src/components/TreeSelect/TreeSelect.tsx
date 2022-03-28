@@ -108,13 +108,12 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
 
   const [filter, dispatch] = React.useReducer<
     Reducer<ModelFilter, filterAction>
-  >(filterReducer, new ClassFilter());
+  >(filterReducer, null);
 
   const { run } = useDebounceFn(
     (searchTerm: string) => {
       const cloneFilter = valueFilter ? { ...valueFilter } : { ...filter };
       cloneFilter[searchProperty][searchType] = searchTerm;
-      cloneFilter["isFilterTree"] = true;
       if (listIds.length > 1) {
         cloneFilter["activeNodeIds"] = { ...new IdFilter(), in: [...listIds] };
       } else {
@@ -168,7 +167,6 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
           const filterData = valueFilter
             ? { ...valueFilter }
             : new ClassFilter();
-          filterData["isFilterTree"] = false;
           dispatch({ type: "UPDATE", data: filterData });
         }
         setExpanded(true);
@@ -216,6 +214,12 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     },
     [handleExpand]
   );
+
+  const handleClearInput = React.useCallback(() => {
+    const cloneFilter = valueFilter ? { ...valueFilter } : { ...filter };
+    cloneFilter[searchProperty][searchType] = null;
+    dispatch({ type: "UPDATE", data: cloneFilter });
+  }, [filter, searchProperty, searchType, valueFilter]);
 
   CommonService.useClickOutside(wrapperRef, handleCloseList);
 
@@ -278,6 +282,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               disabled={disabled}
               onSearch={handleSearchItem}
               onClear={handleClearItem}
+              handleClearInput={handleClearInput}
               type={type}
               label={label}
               isSmall={isSmall}
@@ -299,7 +304,10 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               onlySelectLeaf={onlySelectLeaf}
               checkedKeys={listIds}
               valueFilter={filter}
+              classFilter={ClassFilter}
               checkStrictly={checkStrictly}
+              searchProperty={searchProperty}
+              searchType={searchType}
               height={300}
               onChange={handleOnchange}
               selectable={selectable}

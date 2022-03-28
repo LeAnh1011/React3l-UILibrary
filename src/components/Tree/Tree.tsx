@@ -7,13 +7,14 @@ import {
   TreeProps as AntdTreeProps,
 } from "antd/lib/tree";
 import React, { ReactNode, RefObject } from "react";
-import { ErrorObserver, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import "./Tree.scss";
 import { TreeNode as CustomTreeNode } from "./TreeNode";
 import { Key } from "antd/lib/table/interface";
 import classNames from "classnames";
 import IconLoading from "components/IconLoading/IconLoading";
+
 const { TreeNode } = TreeAntd;
 
 function SwitcherIcon() {
@@ -31,9 +32,12 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   checkable?: boolean;
   selectedKey?: number;
   onlySelectLeaf?: boolean;
+  searchProperty?: string;
+  searchType?: string;
   getTreeData?: (TModelFilter?: TModelFilter) => Observable<T[]>;
   onChange?: (treeNode: CustomTreeNode<T>[]) => void;
   titleRender?: (treeNode: CustomTreeNode<T>) => string | ReactNode;
+  classFilter?: new () => TModelFilter;
   isMultiple?: boolean;
   selectWithAdd?: boolean;
   selectWithPreferOption?: boolean;
@@ -50,6 +54,9 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     checkable,
     selectedKey,
     onlySelectLeaf,
+    searchProperty,
+    searchType,
+    classFilter: ClassFilter,
     getTreeData,
     onChange,
     titleRender,
@@ -60,6 +67,10 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const [internalTreeData, setInternalTreeData] = React.useState<
     CustomTreeNode<Model>[]
   >(treeData);
+
+  const [staticTreeData, setStaticTreeData] = React.useState<
+    CustomTreeNode<Model>[]
+  >();
 
   const [autoExpandParent, setAutoExpandParent] = React.useState<boolean>(true);
 
@@ -94,7 +105,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     return [];
   }, [onlySelectLeaf, preferOptions, selectedKey]);
 
-  const searchTreeNode: any = React.useCallback(
+  const searchTreeNodeById: any = React.useCallback(
     (element: CustomTreeNode<Model>, key: number) => {
       if (element.key === +key) {
         return element;
@@ -102,7 +113,33 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
         var i;
         var result = null;
         for (i = 0; result == null && i < element.children.length; i++) {
-          result = searchTreeNode(element.children[i], +key);
+          result = searchTreeNodeById(element.children[i], +key);
+        }
+        return result;
+      }
+      return null;
+    },
+    []
+  );
+
+  const searchTreeNodeByString: any = React.useCallback(
+    (
+      element: CustomTreeNode<Model>,
+      searchString: string,
+      fieldName: string
+    ) => {
+      const fieldSearch = element.item[fieldName] as string;
+      if (fieldSearch.toLowerCase().includes(searchString.toLowerCase())) {
+        return element;
+      } else if (element.children != null) {
+        var i;
+        var result = null;
+        for (i = 0; result == null && i < element.children.length; i++) {
+          result = searchTreeNodeByString(
+            element.children[i],
+            searchString,
+            fieldName
+          );
         }
         return result;
       }
@@ -117,13 +154,13 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
 
       treeNodes.forEach((currentTree) => {
         listKeys.forEach((currentKey) => {
-          const node = searchTreeNode(currentTree, currentKey);
+          const node = searchTreeNodeById(currentTree, currentKey);
           if (node) nodes.push(node);
         });
       });
       return nodes;
     },
-    [searchTreeNode]
+    [searchTreeNodeById]
   );
 
   const handleExpandKey = React.useCallback((expandedKeys: Key[]) => {
@@ -187,8 +224,8 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     if (typeof getTreeData === "function") {
       subscription.add(getTreeData);
       setLoading(true);
-      getTreeData(valueFilter).subscribe(
-        (res: Model[]) => {
+      getTreeData(new ClassFilter()).subscribe({
+        next: (res: Model[]) => {
           if (res) {
             const [treeData, internalExpandedKeys] = CommonService.buildTree(
               res
@@ -200,17 +237,51 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
               CommonService.setOnlySelectLeaf(treeData);
             }
             setInternalTreeData(treeData);
+            setStaticTreeData(treeData);
             setInternalExpandedKeys(internalExpandedKeys);
           } else setInternalTreeData([]);
           setLoading(false);
         },
-        (err: ErrorObserver<Error>) => {
+        error: () => {
           setLoading(false);
-        }
-      );
+        },
+      });
     }
     return () => {};
-  }, [getTreeData, selectedKey, valueFilter, subscription, onlySelectLeaf]);
+  }, [getTreeData, selectedKey, ClassFilter, subscription, onlySelectLeaf]);
+
+  React.useEffect(() => {
+    if (valueFilter && valueFilter[searchProperty][searchType]) {
+      const searchValue = valueFilter[searchProperty][searchType];
+      if (searchValue && searchValue.length > 0) {
+        var currentTreeData: CustomTreeNode<Model>[] = JSON.parse(
+          JSON.stringify(staticTreeData)
+        );
+        if (currentTreeData && currentTreeData.length > 0) {
+          const foundNodes: CustomTreeNode<Model>[] = [];
+          currentTreeData.forEach((element: CustomTreeNode<Model>) => {
+            const node = searchTreeNodeByString(
+              element,
+              searchValue,
+              searchProperty
+            );
+            if (node as CustomTreeNode<Model>) {
+              foundNodes.push(node);
+            }
+          });
+          setInternalTreeData(foundNodes);
+        }
+      }
+    } else {
+      setInternalTreeData(staticTreeData);
+    }
+  }, [
+    valueFilter,
+    searchProperty,
+    searchType,
+    staticTreeData,
+    searchTreeNodeByString,
+  ]);
 
   const handleMove = React.useCallback(
     (item) => (event: any) => {

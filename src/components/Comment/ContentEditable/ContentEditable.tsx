@@ -1,7 +1,7 @@
 import { StringFilter } from "react3l-advanced-filters";
 import { ModelFilter, Model } from "react3l-common";
 import { ASSETS_IMAGE } from "config/consts";
-import React, { forwardRef, MutableRefObject, RefObject } from "react";
+import React, { ForwardedRef, forwardRef, MutableRefObject, RefObject } from "react";
 import { Observable } from "rxjs";
 import "./ContentEditable.scss";
 import classNames from "classnames";
@@ -36,7 +36,7 @@ const ContentEditable = forwardRef<
 >(
   (
     props: ContentEditableProps<ModelFilter>,
-    contentEditableRef: MutableRefObject<HTMLDivElement | null>
+    contentEditableRef: ForwardedRef<HTMLDivElement>
   ) => {
     const {
       suggestList,
@@ -64,8 +64,8 @@ const ContentEditable = forwardRef<
       if (document.createRange) {
         range = document.createRange();
         range.setStart(
-          contentEditableRef.current,
-          contentEditableRef.current.childNodes.length
+          (contentEditableRef as MutableRefObject<HTMLDivElement>).current,
+          (contentEditableRef as MutableRefObject<HTMLDivElement>).current.childNodes.length
         );
         range.collapse(true);
         selection = window.getSelection();
@@ -91,12 +91,12 @@ const ContentEditable = forwardRef<
           }
 
           if (
-            contentEditableRef.current.innerHTML.includes(
+            (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerHTML.includes(
               '<span class="mention-tag">@</span>'
             )
           ) {
-            var lastChild = contentEditableRef.current.lastElementChild;
-            contentEditableRef.current.removeChild(lastChild);
+            var lastChild = (contentEditableRef as MutableRefObject<HTMLDivElement>).current.lastElementChild;
+            (contentEditableRef as MutableRefObject<HTMLDivElement>).current.removeChild(lastChild);
             setShowSuggestList(false);
             setEndContentEditable();
           }
@@ -116,10 +116,10 @@ const ContentEditable = forwardRef<
         }
 
         if (event.key === " " && showSuggestList) {
-          var lastElementChild = contentEditableRef.current.lastElementChild;
+          var lastElementChild = (contentEditableRef as MutableRefObject<HTMLDivElement>).current.lastElementChild;
           var contentText = lastElementChild.textContent;
-          contentEditableRef.current.removeChild(lastElementChild);
-          contentEditableRef.current.innerHTML += contentText;
+          (contentEditableRef as MutableRefObject<HTMLDivElement>).current.removeChild(lastElementChild);
+          (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerHTML += contentText;
           setEndContentEditable();
           setShowSuggestList(false);
           return;
@@ -145,14 +145,14 @@ const ContentEditable = forwardRef<
       (event: React.KeyboardEvent<HTMLDivElement>) => {
         if (event.key === "Enter" && event.shiftKey) {
           if (showSuggestList) {
-            var lastElementChild = contentEditableRef.current.lastElementChild;
+            var lastElementChild = (contentEditableRef as MutableRefObject<HTMLDivElement>).current.lastElementChild;
             var contentText = lastElementChild.textContent;
-            contentEditableRef.current.removeChild(lastElementChild);
-            contentEditableRef.current.innerHTML += contentText;
+            (contentEditableRef as MutableRefObject<HTMLDivElement>).current.removeChild(lastElementChild);
+            (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerHTML += contentText;
             setShowSuggestList(false);
           }
-          contentEditableRef.current.innerHTML =
-            contentEditableRef.current.innerHTML.trim() + "<br><br>";
+          (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerHTML =
+          (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerHTML.trim() + "<br><br>";
           setEndContentEditable();
           return;
         }
@@ -172,10 +172,10 @@ const ContentEditable = forwardRef<
     const handleInput = React.useCallback(
       (event: React.FormEvent<HTMLDivElement>): void => {
         if (
-          contentEditableRef.current.innerText.includes("@") &&
+          (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerText.includes("@") &&
           showSuggestList
         ) {
-          const stringValue = contentEditableRef.current.innerText.split(
+          const stringValue = (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerText.split(
             "@"
           )[1];
           dispatchContentEditable({
@@ -185,8 +185,8 @@ const ContentEditable = forwardRef<
           return;
         }
         if (
-          !contentEditableRef.current.innerText ||
-          contentEditableRef.current.innerHTML
+          !(contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerText ||
+          (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerHTML
         ) {
           setShowSuggestList(false);
         }
@@ -197,10 +197,10 @@ const ContentEditable = forwardRef<
     const selectUser = React.useCallback(
       (currentUser) => {
         setShowSuggestList(false);
-        const contentValue = contentEditableRef.current.innerHTML.split(
+        const contentValue = (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerHTML.split(
           '<span class="mention-tag">'
         );
-        contentEditableRef.current.innerHTML =
+        (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerHTML =
           contentValue[0] +
           '<span class="hightlight__text">' +
           currentUser.displayName +

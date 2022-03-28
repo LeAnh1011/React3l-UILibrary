@@ -29,6 +29,7 @@
     "react-dropzone": "^11.5.1",
     "react-i18next": "^11.11.4",
     "react-image-crop": "^9.0.5",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-scripts": "4.0.3",
     "react3l-advanced-filters": "^6.0.0-rc.1",
     "react3l-axios-observable": "^6.0.0-rc.1",

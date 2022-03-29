@@ -511,6 +511,8 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   );
 }
 
-Tree.defaultProps = {};
+Tree.defaultProps = {
+  classFilter: ModelFilter,
+};
 
 export default Tree;

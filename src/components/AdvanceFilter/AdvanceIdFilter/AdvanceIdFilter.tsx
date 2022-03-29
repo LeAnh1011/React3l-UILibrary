@@ -114,16 +114,16 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
       }
       setLoading(true);
       subscription.add(getList);
-      getList(cloneValueFilter).subscribe(
-        (res: Model[]) => {
+      getList(cloneValueFilter).subscribe({
+        next: (res: Model[]) => {
           setList(res);
           setLoading(false);
         },
-        (err: ErrorObserver<Error>) => {
+        error: (err: ErrorObserver<Error>) => {
           setList([]);
           setLoading(false);
-        }
-      );
+        },
+      });
     },
     {
       wait: DEBOUNCE_TIME_300,
@@ -135,16 +135,16 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
       setLoading(true);
       subscription.add(getList);
       const filter = valueFilter ? valueFilter : new ClassFilter();
-      getList(filter).subscribe(
-        (res: Model[]) => {
+      getList(filter).subscribe({
+        next: (res: Model[]) => {
           setList(res);
           setLoading(false);
         },
-        (err: ErrorObserver<Error>) => {
+        error: (err: ErrorObserver<Error>) => {
           setList([]);
           setLoading(false);
-        }
-      );
+        },
+      });
     } catch (error) {}
   }, [getList, valueFilter, ClassFilter, subscription]);
 
@@ -186,6 +186,10 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
   const handleClearItem = React.useCallback(() => {
     onChange(null);
   }, [onChange]);
+
+  const handleClearInput = React.useCallback(() => {
+    handleLoadList();
+  }, [handleLoadList]);
 
   const handleKeyPress = React.useCallback(
     (event: any) => {
@@ -278,6 +282,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
             placeHolder={placeHolder}
             expanded={isExpand}
             disabled={disabled}
+            handleClearInput={handleClearInput}
             onSearch={handleSearchChange}
             onClear={handleClearItem}
             onKeyDown={handleKeyPress}

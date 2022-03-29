@@ -15,7 +15,7 @@ import IconLoading from "components/IconLoading/IconLoading";
 export interface MultipleSelectProps<
   T extends Model,
   TFilter extends ModelFilter
-  > {
+> {
   values?: Model[];
 
   valueFilter?: TFilter;
@@ -213,19 +213,19 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
       setLoading(true);
       subscription.add(getList);
       const filter = valueFilter ? valueFilter : new ClassFilter();
-      getList(filter).subscribe(
-        (res: Model[]) => {
+      getList(filter).subscribe({
+        next: (res: Model[]) => {
           if (res) {
             setList(res);
           }
           setLoading(false);
         },
-        (err: ErrorObserver<Error>) => {
+        error: (err: ErrorObserver<Error>) => {
           setList([]);
           setLoading(false);
-        }
-      );
-    } catch (error) { }
+        },
+      });
+    } catch (error) {}
   }, [getList, valueFilter, ClassFilter, subscription]);
 
   const handleToggle = React.useCallback(

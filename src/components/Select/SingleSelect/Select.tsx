@@ -105,6 +105,24 @@ function Select(props: SelectProps<Model, ModelFilter>) {
 
   const [subscription] = CommonService.useSubscription();
 
+  const handleLoadList = React.useCallback(() => {
+    try {
+      setLoading(true);
+      subscription.add(getList);
+      const filter = valueFilter ? valueFilter : new ClassFilter();
+      getList(filter).subscribe({
+        next: (res: Model[]) => {
+          setList(res);
+          setLoading(false);
+        },
+        error: (err: ErrorObserver<Error>) => {
+          setList([]);
+          setLoading(false);
+        },
+      });
+    } catch (error) {}
+  }, [getList, valueFilter, ClassFilter, subscription]);
+
   const { run } = useDebounceFn(
     (searchTerm: string) => {
       const cloneValueFilter = valueFilter
@@ -117,39 +135,25 @@ function Select(props: SelectProps<Model, ModelFilter>) {
       }
       setLoading(true);
       subscription.add(getList);
-      getList(cloneValueFilter).subscribe(
-        (res: Model[]) => {
+      getList(cloneValueFilter).subscribe({
+        next: (res: Model[]) => {
           setList(res);
           setLoading(false);
         },
-        (err: ErrorObserver<Error>) => {
+        error: (err: ErrorObserver<Error>) => {
           setList([]);
           setLoading(false);
-        }
-      );
+        },
+      });
     },
     {
       wait: DEBOUNCE_TIME_300,
     }
   );
 
-  const handleLoadList = React.useCallback(() => {
-    try {
-      setLoading(true);
-      subscription.add(getList);
-      const filter = valueFilter ? valueFilter : new ClassFilter();
-      getList(filter).subscribe(
-        (res: Model[]) => {
-          setList(res);
-          setLoading(false);
-        },
-        (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        }
-      );
-    } catch (error) {}
-  }, [getList, valueFilter, ClassFilter, subscription]);
+  const handleClearInput = React.useCallback(() => {
+    handleLoadList();
+  }, [handleLoadList]);
 
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -285,6 +289,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
             onClear={handleClearItem}
             onKeyDown={handleKeyPress}
             onKeyEnter={handleKeyEnter}
+            handleClearInput={handleClearInput}
             isRequired={isRequired}
             type={type}
             label={label}

@@ -5,11 +5,12 @@ import {
 } from "@carbon/icons-react";
 import { notification } from "antd";
 import Button from "components/Button";
-import { IconLoading } from "index";
 import React, { RefObject } from "react";
 import { Model } from "react3l-common";
 import { Observable } from "rxjs";
 import "./UploadFile.scss";
+import IconLoading from "components/IconLoading";
+
 export interface FileModel {
   id?: number;
   fileId?: string | number;

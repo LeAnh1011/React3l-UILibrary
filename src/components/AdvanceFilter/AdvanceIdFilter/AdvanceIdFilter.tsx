@@ -134,7 +134,9 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
     try {
       setLoading(true);
       subscription.add(getList);
-      const filter = valueFilter ? valueFilter : new ClassFilter();
+      const filter = valueFilter
+        ? JSON.parse(JSON.stringify(valueFilter))
+        : new ClassFilter();
       getList(filter).subscribe({
         next: (res: Model[]) => {
           setList(res);

@@ -126,7 +126,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
   const { run } = useDebounceFn(
     (searchTerm: string) => {
       const cloneValueFilter = valueFilter
-        ? { ...valueFilter }
+        ? JSON.parse(JSON.stringify(valueFilter))
         : new ClassFilter();
       if (!isEnumerable) {
         if (searchType) {

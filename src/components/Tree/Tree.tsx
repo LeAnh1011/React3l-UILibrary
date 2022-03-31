@@ -270,11 +270,11 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
             }
           });
           setInternalTreeData(foundNodes);
+          return;
         }
       }
-    } else {
-      setInternalTreeData(staticTreeData);
     }
+    setInternalTreeData(staticTreeData);
   }, [
     valueFilter,
     searchProperty,
@@ -513,6 +513,8 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
 
 Tree.defaultProps = {
   classFilter: ModelFilter,
+  searchProperty: "name",
+  searchType: "contain",
 };
 
 export default Tree;

@@ -102,11 +102,11 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
 
   const [filter, dispatch] = React.useReducer<
     Reducer<ModelFilter, filterAction>
-  >(filterReducer, new ClassFilter());
+  >(filterReducer, {...new ClassFilter(), valueFilter});
 
   const { run } = useDebounceFn(
     (searchTerm: string) => {
-      const cloneFilter = valueFilter ? { ...valueFilter } : { ...filter };
+      const cloneFilter = { ...filter };
       cloneFilter[searchProperty][searchType] = searchTerm;
       cloneFilter["isFilterTree"] = true;
       if (listIds.length > 1) {
@@ -200,6 +200,12 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
     [componentId, handleCloseList]
   );
 
+  const handleClearInput = React.useCallback(() => {
+    const cloneFilter = { ...filter };
+    cloneFilter[searchProperty][searchType] = null;
+    dispatch({ type: "UPDATE", data: cloneFilter });
+  }, [filter, searchProperty, searchType]);
+
   CommonService.useClickOutside(wrapperRef, handleCloseList);
 
   return (
@@ -232,6 +238,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               placeHolder={placeHolder}
               expanded={expanded}
               disabled={disabled}
+              handleClearInput={handleClearInput}
               onSearch={handleSearchItem}
               onClear={handleClearItem}
               type={type}
@@ -250,6 +257,8 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               onlySelectLeaf={onlySelectLeaf}
               checkedKeys={listIds}
               valueFilter={filter}
+              searchProperty={searchProperty}
+              searchType={searchType}
               checkStrictly={checkStrictly}
               height={300}
               onChange={handleOnchange}

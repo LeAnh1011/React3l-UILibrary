@@ -132,7 +132,6 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
         });
       }
     },
-    // []
     [uploadFile, maximumSize, updateList]
   );
 
@@ -176,10 +175,7 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
 
   React.useEffect(() => {
     if (typeof getListFile === "function") {
-      getListFile().subscribe(
-        (res) => {},
-        (err) => {}
-      );
+      getListFile().subscribe((res) => {});
     } else {
       if (files && files.length > 0) {
         let loadedFiles = [...files];

@@ -94,11 +94,11 @@ function AdvanceTreeFilterMaster(
 
   const [filter, dispatch] = React.useReducer<
     Reducer<ModelFilter, filterAction>
-  >(filterReducer, new ClassFilter());
+  >(filterReducer, {...new ClassFilter(), valueFilter});
 
   const { run } = useDebounceFn(
     (searchTerm: string) => {
-      const cloneFilter = valueFilter ? { ...valueFilter } : { ...filter };
+      const cloneFilter =  { ...filter };
       cloneFilter[searchProperty][searchType] = searchTerm;
       cloneFilter["isFilterTree"] = true;
       if (listIds.length > 1) {

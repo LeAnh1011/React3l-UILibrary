@@ -5,7 +5,7 @@ import { Model } from "react3l-common";
 import { TreeNode } from "components/Tree/TreeNode";
 export const CommonService = {
   useSubscription() {
-    var subscription = React.useRef(new Subscription()).current;
+    const subscription = React.useRef(new Subscription()).current;
     React.useEffect(
       function () {
         return function cleanup() {

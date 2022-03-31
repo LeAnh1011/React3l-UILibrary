@@ -87,8 +87,8 @@ export function UploadFile(props: UploadFileProps) {
       setListFileLoading([...files]);
       if (files && files.length > 0) {
         setIsLoading(true);
-        uploadFile(files).subscribe(
-          (res: FileModel[]) => {
+        uploadFile(files).subscribe({
+          next: (res: FileModel[]) => {
             if (res && res.length > 0) {
               setListFileLoading([...res]);
               setIsLoading(false);
@@ -98,11 +98,11 @@ export function UploadFile(props: UploadFileProps) {
               }, 1000);
             }
           },
-          (_err) => {
+          error: () => {
             setListFileLoading([]);
             setIsLoading(false);
-          }
-        );
+          },
+        });
       }
     },
     [handleValidateFile, updateList, uploadFile]

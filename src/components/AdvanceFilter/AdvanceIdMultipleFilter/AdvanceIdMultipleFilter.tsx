@@ -15,7 +15,7 @@ import IconLoading from "components/IconLoading/IconLoading";
 export interface AdvanceIdMultipleFilterProps<
   T extends Model,
   TFilter extends ModelFilter
-  > {
+> {
   values?: Model[];
 
   valueFilter?: TFilter;
@@ -57,29 +57,6 @@ function defaultRenderObject<T extends Model>(t: T) {
   return t?.name;
 }
 
-interface changeAction {
-  type: string;
-  data: Model;
-}
-
-function multipleSelectReducer(
-  currentState: Model[],
-  action: changeAction
-): Model[] {
-  switch (action.type) {
-    case "UPDATE":
-      return [...currentState, action.data];
-    case "REMOVE":
-      const filteredArray = currentState.filter(
-        (item) => item.id !== action.data.id
-      );
-      return [...filteredArray];
-    case "REMOVE_ALL":
-      return [];
-  }
-  return;
-}
-
 export function AdvanceIdMultipleFilter(
   props: AdvanceIdMultipleFilterProps<Model, ModelFilter>
 ) {
@@ -105,11 +82,7 @@ export function AdvanceIdMultipleFilter(
 
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  const [firstLoad, setFirstLoad] = React.useState<boolean>(true);
-
   const [list, setList] = React.useState<Model[]>([]);
-
-  const [selectedList, dispatch] = React.useReducer(multipleSelectReducer, []);
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
@@ -123,24 +96,31 @@ export function AdvanceIdMultipleFilter(
 
   const [subscription] = CommonService.useSubscription();
 
-  const { run } = useDebounceFn(
-    (searchTerm: string) => {
-      const cloneValueFilter = valueFilter
-        ? { ...valueFilter }
-        : new ClassFilter();
-      cloneValueFilter[searchProperty][searchType] = searchTerm;
+  const handleGetList = React.useCallback(
+    async (filterValue: ModelFilter) => {
       setLoading(true);
       subscription.add(getList);
-      getList(cloneValueFilter).subscribe(
-        (res: Model[]) => {
+      getList(filterValue).subscribe({
+        next: (res: Model[]) => {
           setList(res);
           setLoading(false);
         },
-        (err: ErrorObserver<Error>) => {
+        error: (err: ErrorObserver<Error>) => {
           setList([]);
           setLoading(false);
-        }
-      );
+        },
+      });
+    },
+    [getList, subscription]
+  );
+
+  const { run } = useDebounceFn(
+    (searchTerm: string) => {
+      const cloneValueFilter = valueFilter
+        ? JSON.parse(JSON.stringify(valueFilter))
+        : new ClassFilter();
+      cloneValueFilter[searchProperty][searchType] = searchTerm;
+      handleGetList(cloneValueFilter);
     },
     {
       wait: DEBOUNCE_TIME_300,
@@ -183,44 +163,12 @@ export function AdvanceIdMultipleFilter(
     return [];
   }, [preferOptions, values]);
 
-  React.useEffect(() => {
-    if (firstLoad) {
-      if (internalList && internalList?.length > 0) {
-        const tempList = [...internalList, ...internalPreferOptions];
-        if (tempList && tempList?.length > 0) {
-          tempList.forEach((item) => {
-            if (item?.isSelected === true) {
-              dispatch({
-                type: "UPDATE",
-                data: item,
-              });
-            }
-          });
-          setFirstLoad(false);
-        }
-      }
-    }
-  }, [firstLoad, internalList, internalPreferOptions]);
-
   const handleLoadList = React.useCallback(() => {
     try {
-      setLoading(true);
-      subscription.add(getList);
       const filter = valueFilter ? valueFilter : new ClassFilter();
-      getList(filter).subscribe(
-        (res: Model[]) => {
-          if (res) {
-            setList(res);
-          }
-          setLoading(false);
-        },
-        (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        }
-      );
-    } catch (error) { }
-  }, [getList, valueFilter, ClassFilter, subscription]);
+      handleGetList(filter);
+    } catch (error) {}
+  }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -238,53 +186,20 @@ export function AdvanceIdMultipleFilter(
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: any) => {
-      let filteredItem = selectedList?.filter(
-        (current) => current.id === item.id
-      )[0];
-      const cloneValueFilter = valueFilter
-        ? { ...valueFilter }
-        : new ClassFilter();
-
-      if (!cloneValueFilter["id"]["notIn"]) {
-        cloneValueFilter["id"]["notIn"] = [item?.id];
-      } else {
-        cloneValueFilter["id"]["notIn"].push(item?.id);
-      }
-
-      getList(cloneValueFilter).subscribe(
-        (res: Model[]) => {
-          if (res) {
-            setList(res);
-          }
-          setLoading(false);
-        },
-        (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        }
-      );
-
+      let filteredItem = values?.filter((current) => current.id === item.id)[0];
       if (filteredItem) {
-        const tmp = [...selectedList];
-        const ids = selectedList?.map((item) => item?.id);
+        const tmp = [...values];
+        const ids = values?.map((item) => item?.id);
         const index = tmp.indexOf(filteredItem);
         tmp.splice(index, 1);
         ids.splice(index, 1);
-        dispatch({
-          type: "REMOVE",
-          data: item,
-        });
         onChange([...tmp], ids as any);
       } else {
-        const ids = selectedList?.map((item) => item?.id);
-        onChange([...selectedList, item], [...ids, item?.id] as any);
-        dispatch({
-          type: "UPDATE",
-          data: item,
-        });
+        const ids = values?.map((item) => item?.id);
+        onChange([...values, item], [...ids, item?.id] as any);
       }
     },
-    [valueFilter, ClassFilter, getList, selectedList, onChange]
+    [values, onChange]
   );
 
   const handleClickParentItem = React.useCallback(
@@ -308,26 +223,10 @@ export function AdvanceIdMultipleFilter(
 
   const handleClearAll = React.useCallback(() => {
     const cloneValueFilter = new ClassFilter();
-
     cloneValueFilter["id"]["notIn"] = [];
-    getList(cloneValueFilter).subscribe(
-      (res: Model[]) => {
-        if (res) {
-          setList(res);
-        }
-        setLoading(false);
-      },
-      (err: ErrorObserver<Error>) => {
-        setList([]);
-        setLoading(false);
-      }
-    );
+    handleGetList(cloneValueFilter);
     onChange([], []);
-    dispatch({
-      type: "REMOVE_ALL",
-      data: [],
-    });
-  }, [ClassFilter, getList, onChange]);
+  }, [ClassFilter, handleGetList, onChange]);
 
   const handleKeyPress = React.useCallback(
     (event: any) => {

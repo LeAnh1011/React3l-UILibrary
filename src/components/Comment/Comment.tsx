@@ -313,20 +313,17 @@ function Comment(props: CommentProps<ModelFilter>) {
       setLoad(true);
       postMessage(message)
         .pipe(finalize(() => setLoad(false)))
-        .subscribe(
-          (res: Message) => {
-            dispatchList({
-              action: "ADD_SINGLE",
-              message: res,
-            });
-            contentEditableRef.current.innerHTML = "";
-            setTimeout(() => {
-              bindEventClick();
-            }, 200);
-            getListMessages();
-          },
-          (err: ErrorObserver<Error>) => {}
-        );
+        .subscribe((res: Message) => {
+          dispatchList({
+            action: "ADD_SINGLE",
+            message: res,
+          });
+          contentEditableRef.current.innerHTML = "";
+          setTimeout(() => {
+            bindEventClick();
+          }, 200);
+          getListMessages();
+        });
     }
   }, [discussionId, userInfo, postMessage, getListMessages, bindEventClick]);
 
@@ -427,8 +424,7 @@ function Comment(props: CommentProps<ModelFilter>) {
               contentEditableRef.current.innerHTML += hrefItem;
               setEndContentEditable();
             }
-          },
-          (err) => {}
+          }
         );
         subscription.add(fileSubcription);
       }

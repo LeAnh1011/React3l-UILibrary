@@ -102,19 +102,11 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
 
   const [subscription] = CommonService.useSubscription();
 
-  const { run } = useDebounceFn(
-    (searchTerm: string) => {
-      const cloneValueFilter = valueFilter
-        ? { ...valueFilter }
-        : new ClassFilter();
-      if (!isEnumerable) {
-        if (searchType) {
-          cloneValueFilter[searchProperty][searchType] = searchTerm;
-        } else cloneValueFilter[searchProperty] = searchTerm;
-      }
+  const handleGetList = React.useCallback(
+    (valueFilter: ModelFilter) => {
       setLoading(true);
       subscription.add(getList);
-      getList(cloneValueFilter).subscribe({
+      getList(valueFilter).subscribe({
         next: (res: Model[]) => {
           setList(res);
           setLoading(false);
@@ -125,6 +117,21 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
         },
       });
     },
+    [getList, subscription]
+  );
+
+  const { run } = useDebounceFn(
+    (searchTerm: string) => {
+      const cloneValueFilter = valueFilter
+        ? { ...valueFilter }
+        : new ClassFilter();
+      if (!isEnumerable) {
+        if (searchType) {
+          cloneValueFilter[searchProperty][searchType] = searchTerm;
+        } else cloneValueFilter[searchProperty] = searchTerm;
+      }
+      handleGetList(cloneValueFilter);
+    },
     {
       wait: DEBOUNCE_TIME_300,
     }
@@ -132,23 +139,12 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
 
   const handleLoadList = React.useCallback(() => {
     try {
-      setLoading(true);
-      subscription.add(getList);
       const filter = valueFilter
         ? JSON.parse(JSON.stringify(valueFilter))
         : new ClassFilter();
-      getList(filter).subscribe({
-        next: (res: Model[]) => {
-          setList(res);
-          setLoading(false);
-        },
-        error: (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        },
-      });
+      handleGetList(filter);
     } catch (error) {}
-  }, [getList, valueFilter, ClassFilter, subscription]);
+  }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

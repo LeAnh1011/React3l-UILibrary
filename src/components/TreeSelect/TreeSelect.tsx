@@ -108,11 +108,11 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
 
   const [filter, dispatch] = React.useReducer<
     Reducer<ModelFilter, filterAction>
-  >(filterReducer, null);
+  >(filterReducer, {...new ClassFilter(), valueFilter});
 
   const { run } = useDebounceFn(
     (searchTerm: string) => {
-      const cloneFilter = valueFilter ? { ...valueFilter } : { ...filter };
+      const cloneFilter = { ...filter };
       cloneFilter[searchProperty][searchType] = searchTerm;
       if (listIds.length > 1) {
         cloneFilter["activeNodeIds"] = { ...new IdFilter(), in: [...listIds] };
@@ -216,10 +216,10 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
   );
 
   const handleClearInput = React.useCallback(() => {
-    const cloneFilter = valueFilter ? { ...valueFilter } : { ...filter };
+    const cloneFilter = { ...filter };
     cloneFilter[searchProperty][searchType] = null;
     dispatch({ type: "UPDATE", data: cloneFilter });
-  }, [filter, searchProperty, searchType, valueFilter]);
+  }, [filter, searchProperty, searchType]);
 
   CommonService.useClickOutside(wrapperRef, handleCloseList);
 

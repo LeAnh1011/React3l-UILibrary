@@ -35,7 +35,14 @@ export interface ComponentUploadAvatarProps
   extends UploadImageProps<Model, ModelFilter> {}
 
 export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
-  const { currentAvatar, uploadAvatar, updateAvatar, className, icon } = props;
+  const {
+    currentAvatar,
+    uploadAvatar,
+    updateAvatar,
+    className,
+    icon,
+    maximumSize,
+  } = props;
 
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
     null
@@ -67,11 +74,13 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
       if (imageCroppedList && imageCroppedList.length > 0) {
         let file = imageCroppedList[imageCroppedList.length - 1].file;
         let check = false;
-        if (file.size > 5000000) {
+        if (file.size > maximumSize) {
           notification.error({
             // type: messageType.ERROR,
             message: `Ảnh vượt quá dung lượng cho phép`,
-            description: "Dung lượng ảnh tải lên phải dưới 5MB",
+            description: `Dung lượng ảnh tải lên phải dưới ${(
+              maximumSize / 1000000
+            ).toFixed(2)}MB`,
             placement: "bottomRight",
             duration: 5,
           });
@@ -86,7 +95,7 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
       }
     },
     // []
-    [updateAvatar, uploadAvatar]
+    [maximumSize, updateAvatar, uploadAvatar]
   );
 
   const onDrop = React.useCallback((acceptedFiles, fileRejections) => {

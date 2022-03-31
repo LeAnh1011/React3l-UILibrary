@@ -58,6 +58,7 @@ export interface UploadImageProps<
   removeFile?: (fileId?: string | number) => Observable<boolean>;
   size?: "lg" | "md" | "sm" | "xs";
   className?: string;
+  maximumSize?: number;
 }
 
 function UploadImage(props: UploadImageProps<Model, ModelFilter>) {
@@ -86,6 +87,7 @@ UploadImage.defaultProps = {
   autoUpload: false,
   size: "lg",
   isSingle: false,
+  maximumSize: 5000000,
 };
 
 export default UploadImage;

@@ -66,6 +66,7 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
     uploadFile,
     removeFile,
     updateList,
+    maximumSize,
   } = props;
 
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
@@ -112,11 +113,12 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
         let totalSize = 0;
         Array.from(files).forEach((file) => {
           totalSize = totalSize + file.size;
-          if (file.size > 5000000 || totalSize > 10000000) {
+          if (totalSize > maximumSize) {
             notification.error({
               message: `Ảnh vượt quá dung lượng cho phép`,
-              description:
-                "Mỗi ảnh tải lên dung lượng phải dưới 5MB và tổng dung lượng phải dưới 10MB",
+              description: `Tổng dung lượng phải dưới ${(
+                maximumSize / 1000000
+              ).toFixed(2)}MB`,
               placement: "bottomRight",
             });
             check = true;
@@ -131,7 +133,7 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
       }
     },
     // []
-    [uploadFile, updateList]
+    [uploadFile, maximumSize, updateList]
   );
 
   const handleClearItem = React.useCallback(

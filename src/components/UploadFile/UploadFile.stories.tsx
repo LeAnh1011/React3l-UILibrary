@@ -35,37 +35,28 @@ const demoList = [
 class ModelOBJ extends Model {
   public id?: number;
   public name?: string;
-  public fileMappings?: ModelMapping[];
-}
-class ModelMapping extends Model {
-  public fileId?: number;
-  public file?: File;
+  public files?: FileModel[];
 }
 
 function Default() {
   const [model, setModel] = React.useState<ModelOBJ>({ ...new ModelOBJ() });
 
   const handleUpdateList = React.useCallback(
-    (listMapping) => {
-      const newListFileMappings = [
-        ...(model.fileMappings || []),
-        ...listMapping,
-      ];
+    (listFile: FileModel[]) => {
+      const newListFiles = [...(model.files || []), ...listFile];
       setModel({
         ...model,
-        fileMappings: newListFileMappings,
+        files: newListFiles,
       });
     },
     [model]
   );
   const handleRemoveFile = React.useCallback(
     (fileId: string | number) => {
-      const listFileMappings = model?.fileMappings?.filter(
-        (p) => p.fileId !== fileId
-      );
+      const listFile = model?.files?.filter((p) => p.id !== fileId);
       setModel({
         ...model,
-        fileMappings: listFileMappings,
+        files: listFile,
       });
     },
     [model]
@@ -87,10 +78,9 @@ function Default() {
 
   return (
     <UploadFile
-      files={model?.fileMappings || []}
+      files={model?.files || []}
       uploadFile={demoUploadFile}
       updateList={handleUpdateList}
-      classModel={ModelMapping}
       removeFile={handleRemoveFile}
       isMultiple={false}
     ></UploadFile>

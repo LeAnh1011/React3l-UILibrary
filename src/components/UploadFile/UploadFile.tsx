@@ -3,11 +3,10 @@ import {
   CloseFilled16,
   WarningFilled16,
 } from "@carbon/icons-react";
-import { notification } from "antd";
+import { notification, Popconfirm } from "antd";
 import Button from "components/Button";
 import { IconLoading } from "index";
 import React, { RefObject } from "react";
-import { Model } from "react3l-common";
 import { Observable } from "rxjs";
 import "./UploadFile.scss";
 export interface FileModel {
@@ -27,17 +26,17 @@ export interface FileModel {
   clearAction?: (fileId: string | number) => void;
   handleInput?: (e: any) => void;
 }
-export interface UploadFileProps<T extends Model> {
-  files?: T[];
+export interface UploadFileProps {
+  files?: FileModel[];
   isMultiple?: boolean;
   uploadContent?: string;
-  updateList?: (files: FileModel[] | FileList) => void;
+  updateList?: (files: FileModel[]) => void;
   uploadFile?: (files: File[] | Blob[]) => Observable<FileModel[]>;
   removeFile?: (fileId: string | number) => void;
-  classModel?: new () => T;
   isBtnOutLine?: boolean;
+  maximumSize?: number;
 }
-export function UploadFile(props: UploadFileProps<Model>) {
+export function UploadFile(props: UploadFileProps) {
   const {
     files: oldFiles,
     uploadContent,
@@ -45,8 +44,8 @@ export function UploadFile(props: UploadFileProps<Model>) {
     updateList,
     uploadFile,
     removeFile,
-    classModel: ClassModel,
     isBtnOutLine,
+    maximumSize,
   } = props;
   const [listFileLoading, setListFileLoading] = React.useState<FileModel[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -56,24 +55,29 @@ export function UploadFile(props: UploadFileProps<Model>) {
     fileRef.current.click();
   }, []);
 
-  const handleValidateFile = React.useCallback((fileList: FileList) => {
-    let checkValidate = true;
-    const files: File[] = [];
-    let totalSize = 0;
-    Array.from(fileList).forEach((file) => {
-      files.push(file);
-      totalSize = totalSize + file.size;
-      if (totalSize > 500000) {
-        notification.error({
-          message: `Vượt quá dung lượng cho phép`,
-          description: "File tải lên dung lượng phải dưới 500KB",
-          placement: "bottomRight",
-        });
-        checkValidate = false;
-      }
-    });
-    return { files, checkValidate };
-  }, []);
+  const handleValidateFile = React.useCallback(
+    (fileList: FileList) => {
+      let checkValidate = true;
+      const files: File[] = [];
+      let totalSize = 0;
+      Array.from(fileList).forEach((file) => {
+        files.push(file);
+        totalSize = totalSize + file.size;
+        if (totalSize > maximumSize) {
+          notification.error({
+            message: `Vượt quá dung lượng cho phép`,
+            description: `File tải lên dung lượng phải dưới ${(
+              maximumSize / 1000000
+            ).toFixed(2)}MB`,
+            placement: "bottomRight",
+          });
+          checkValidate = false;
+        }
+      });
+      return { files, checkValidate };
+    },
+    [maximumSize]
+  );
 
   const handleChangeFile = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,18 +89,11 @@ export function UploadFile(props: UploadFileProps<Model>) {
         uploadFile(files).subscribe(
           (res: FileModel[]) => {
             if (res && res.length > 0) {
-              const fileRes: any[] = [];
-              res.forEach((current) => {
-                const mappingObj = new ClassModel();
-                mappingObj.fileId = current.id;
-                mappingObj.file = current;
-                fileRes.push(mappingObj);
-              });
               setListFileLoading([...res]);
               setIsLoading(false);
               setTimeout(() => {
                 setListFileLoading([]);
-                updateList(fileRes);
+                updateList([...res]);
               }, 1000);
             }
           },
@@ -107,36 +104,48 @@ export function UploadFile(props: UploadFileProps<Model>) {
         );
       }
     },
-    [ClassModel, handleValidateFile, updateList, uploadFile]
+    [handleValidateFile, updateList, uploadFile]
   );
 
   const renderOldFile = React.useCallback(
-    (fileMapping, index) => {
-      return fileMapping?.file?.errors ? (
+    (file, index) => {
+      return file?.errors ? (
         <div className="file-error" key={index}>
           <div className="file-container">
             <div>
-              <span>{fileMapping.file.name}</span>
+              <span>{file.name}</span>
             </div>
             <div>
               <WarningFilled16 color="red" className="m-r--xxxs" />
-              <CloseFilled16
-                onClick={() => removeFile(fileMapping.fileId)}
-                className="remove-file"
-              />
+              <Popconfirm
+                placement="leftTop"
+                title={"Bạn có chắc chắn muốn xóa?"}
+                onConfirm={() => removeFile(file.id)}
+                okText="Xóa"
+                cancelText="Hủy"
+                okType="danger"
+              >
+                <CloseFilled16 className="remove-file" />
+              </Popconfirm>
             </div>
           </div>
           <div className="content-error">
-            {fileMapping?.file?.errors && fileMapping?.file?.errors?.name}
+            {file?.errors && file?.errors?.name}
           </div>
         </div>
       ) : (
         <div className="file-container" key={index}>
-          <span>{fileMapping.file.name}</span>
-          <CloseFilled16
-            onClick={() => removeFile(fileMapping.fileId)}
-            className="remove-file"
-          />
+          <span>{file.name}</span>
+          <Popconfirm
+            placement="leftTop"
+            title={"Bạn có chắc chắn muốn xóa?"}
+            onConfirm={() => removeFile(file.id)}
+            okText="Xóa"
+            cancelText="Hủy"
+            okType="danger"
+          >
+            <CloseFilled16 className="remove-file" />
+          </Popconfirm>
         </div>
       );
     },
@@ -193,9 +202,7 @@ export function UploadFile(props: UploadFileProps<Model>) {
       </div>
       <div className="upload-button__list-file m-t--xxs">
         {oldFiles?.length > 0 &&
-          oldFiles.map((fileMapping, index) =>
-            renderOldFile(fileMapping, index)
-          )}
+          oldFiles.map((file, index) => renderOldFile(file, index))}
         {listFileLoading?.length > 0 &&
           listFileLoading.map((file, index) =>
             isLoading ? (
@@ -218,5 +225,6 @@ UploadFile.defaultProps = {
   isViewMode: false,
   files: [],
   isBtnOutLine: false,
+  maximumSize: 5000000,
 };
 export default UploadFile;

@@ -67,7 +67,7 @@ export default {
     "src/components/StandardTable/DataCellComponent/BadgeText/index.ts",
     "src/components/StandardTable/DataCellComponent/OneLineText/index.ts",
     "src/components/StandardTable/DataCellComponent/TwoLineText/index.ts",
-    "src/components/StandardTable/DataCellComponent/StatusLine/index.ts"
+    "src/components/StandardTable/DataCellComponent/StatusLine/index.ts",
   ],
   output: [
     {
@@ -93,5 +93,14 @@ export default {
     }),
     terser(),
   ],
-  external: ["react", "react-dom"],
+  external: [
+    "antd",
+    "react",
+    "react-dom",
+    "react3l-advanced-filters",
+    "react3l-axios-observable",
+    "react3l-common",
+    "react3l-decorators",
+    "react3l-localization",
+  ],
 };

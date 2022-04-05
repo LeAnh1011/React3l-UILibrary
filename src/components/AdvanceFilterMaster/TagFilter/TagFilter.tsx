@@ -21,6 +21,7 @@ export interface TagFilterProps {
   value?: ModelFilter;
   keyTranslate?: string;
   exceptField?: string[];
+  mappingField?: { [key: string]: string };
   translate?: TFunction;
   onClear?: (t: any) => void;
   handleChangeFilter?: (valueFilter: ModelFilter) => void;
@@ -40,10 +41,18 @@ function TagFilter(props: TagFilterProps) {
     value,
     keyTranslate,
     exceptField,
+    mappingField,
     onClear,
     translate,
     handleChangeFilter,
   } = props;
+
+  const checkMappingField = React.useCallback(
+    (keyProp: string): string => {
+      return mappingField && mappingField[keyProp];
+    },
+    [mappingField]
+  );
 
   const convertList = React.useCallback((search: ModelFilter) => {
     let list = [] as Tag[];
@@ -425,7 +434,13 @@ function TagFilter(props: TagFilterProps) {
                               (itemValue: any, index: number) => (
                                 <span key={index}>
                                   <>
-                                    <span>{itemValue?.name}</span>
+                                    <span>
+                                      {checkMappingField(itemTag.key)
+                                        ? itemValue[
+                                            checkMappingField(itemTag.key)
+                                          ]
+                                        : itemValue?.name}
+                                    </span>
                                     {index < itemTag?.value?.length - 1 && (
                                       <span className="m-r--xxxs">&#44;</span>
                                     )}
@@ -436,11 +451,21 @@ function TagFilter(props: TagFilterProps) {
                           </>
                         }
                       >
-                        <span>{itemTag?.value[0]?.name}</span>
+                        <span>
+                          {itemTag?.value[0]?.name}
+                          {checkMappingField(itemTag.key)
+                            ? itemTag?.value[0][checkMappingField(itemTag.key)]
+                            : itemTag?.value[0]?.name}
+                        </span>
                         {index < itemTag?.value?.length - 1 && (
                           <span className="m-r--xxxs">&#44;</span>
                         )}
-                        <span>{itemTag?.value[1]?.name}</span>
+                        <span>
+                          {" "}
+                          {checkMappingField(itemTag.key)
+                            ? itemTag?.value[1][checkMappingField(itemTag.key)]
+                            : itemTag?.value[1]?.name}
+                        </span>
                         <span>... + {itemTag?.value?.length - 2}</span>
                       </Tooltip>
                     </>
@@ -449,7 +474,11 @@ function TagFilter(props: TagFilterProps) {
                       {itemTag?.value?.map((itemValue: any, index: number) => (
                         <span key={index}>
                           <>
-                            <span>{itemValue?.name}</span>
+                            <span>
+                              {checkMappingField(itemTag.key)
+                                ? itemValue[checkMappingField(itemTag.key)]
+                                : itemValue?.name}
+                            </span>
                             {index < itemTag?.value?.length - 1 && (
                               <span className="m-r--xxxs">&#44;</span>
                             )}

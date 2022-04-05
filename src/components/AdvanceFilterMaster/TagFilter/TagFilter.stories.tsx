@@ -141,6 +141,7 @@ export function TagFilterStories() {
       </div>
       <TagFilter
         value={filter}
+        mappingField={{appUserId: 'code'}}
         keyTranslate={"demo"}
         onClear={handleClear}
         handleChangeFilter={handleChangeAllFilter}

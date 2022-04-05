@@ -78,6 +78,19 @@ function Modal(props: ModalCustomProps) {
       titleButtonCancel,
     ]
   );
+
+  const CloseButton = React.useMemo(() => {
+    return (
+      <div
+        className={classNames(
+          "btn-component btn-only-icon btn--xxl btn--icon-only-ghost"
+        )}
+      >
+        <Close20 />
+      </div>
+    );
+  }, []);
+
   return (
     <>
       <AntModal
@@ -85,13 +98,7 @@ function Modal(props: ModalCustomProps) {
         style={{ top: 20 }}
         destroyOnClose={destroyOnClose}
         className={classNames("modal__container", `size-${size}`)}
-        closeIcon={
-          <Button
-            type="icon-only-ghost"
-            icon={<Close20 />}
-            className="btn--xxl"
-          />
-        }
+        closeIcon={CloseButton}
         footer={visibleFooter ? renderModalFooter : null}
         onCancel={handleCancel}
       >

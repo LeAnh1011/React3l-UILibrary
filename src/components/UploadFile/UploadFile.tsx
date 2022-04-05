@@ -5,10 +5,11 @@ import {
 } from "@carbon/icons-react";
 import { notification, Popconfirm } from "antd";
 import Button from "components/Button";
-import { IconLoading } from "index";
 import React, { RefObject } from "react";
 import { Observable } from "rxjs";
 import "./UploadFile.scss";
+import IconLoading from "components/IconLoading";
+
 export interface FileModel {
   id?: number;
   fileId?: string | number;
@@ -86,8 +87,8 @@ export function UploadFile(props: UploadFileProps) {
       setListFileLoading([...files]);
       if (files && files.length > 0) {
         setIsLoading(true);
-        uploadFile(files).subscribe(
-          (res: FileModel[]) => {
+        uploadFile(files).subscribe({
+          next: (res: FileModel[]) => {
             if (res && res.length > 0) {
               setListFileLoading([...res]);
               setIsLoading(false);
@@ -97,11 +98,11 @@ export function UploadFile(props: UploadFileProps) {
               }, 1000);
             }
           },
-          (_err) => {
+          error: () => {
             setListFileLoading([]);
             setIsLoading(false);
-          }
-        );
+          },
+        });
       }
     },
     [handleValidateFile, updateList, uploadFile]

@@ -99,28 +99,35 @@ function AdvanceIdFilterMaster(
   );
   const [subscription] = CommonService.useSubscription();
 
+  const handleGetList = React.useCallback(
+    async (filterValue: ModelFilter) => {
+      setLoading(true);
+      subscription.add(getList);
+      getList(filterValue).subscribe({
+        next: (res: Model[]) => {
+          setList(res);
+          setLoading(false);
+        },
+        error: (err: ErrorObserver<Error>) => {
+          setList([]);
+          setLoading(false);
+        },
+      });
+    },
+    [getList, subscription]
+  );
+
   const { run } = useDebounceFn(
     (searchTerm: string) => {
       const cloneValueFilter = valueFilter
-        ? { ...valueFilter }
+        ? JSON.parse(JSON.stringify(valueFilter))
         : new ClassFilter();
       if (!isEnumList) {
         if (searchType) {
           cloneValueFilter[searchProperty][searchType] = searchTerm;
         } else cloneValueFilter[searchProperty] = searchTerm;
       }
-      setLoading(true);
-      subscription.add(getList);
-      getList(cloneValueFilter).subscribe(
-        (res: Model[]) => {
-          setList(res);
-          setLoading(false);
-        },
-        (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        }
-      );
+      handleGetList(cloneValueFilter);
     },
     {
       wait: DEBOUNCE_TIME_300,
@@ -129,28 +136,16 @@ function AdvanceIdFilterMaster(
 
   const handleLoadList = React.useCallback(() => {
     try {
-      setLoading(true);
-      subscription.add(getList);
       const filter = valueFilter ? { ...valueFilter } : new ClassFilter();
-      getList(filter).subscribe(
-        (res: Model[]) => {
-          setList(res);
-          setLoading(false);
-        },
-        (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        }
-      );
+      handleGetList(filter);
     } catch (error) {}
-  }, [getList, valueFilter, subscription, ClassFilter]);
+  }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (!disabled) {
         setExpand(true);
         setTimeout(() => {
-          // console.log(inputRef.current)
           inputRef.current.children[0].focus();
         }, 300);
         await handleLoadList();

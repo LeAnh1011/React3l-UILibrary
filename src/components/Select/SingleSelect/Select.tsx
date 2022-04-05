@@ -105,46 +105,41 @@ function Select(props: SelectProps<Model, ModelFilter>) {
 
   const [subscription] = CommonService.useSubscription();
 
+  const handleGetList = React.useCallback((valueFilter: ModelFilter) => {
+    setLoading(true);
+    subscription.add(getList);
+    getList(valueFilter).subscribe({
+      next: (res: Model[]) => {
+        setList(res);
+        setLoading(false);
+      },
+      error: (err: ErrorObserver<Error>) => {
+        setList([]);
+        setLoading(false);
+      },
+    });
+  }, [getList, subscription])
+
   const handleLoadList = React.useCallback(() => {
     try {
       setLoading(true);
       subscription.add(getList);
       const filter = valueFilter ? valueFilter : new ClassFilter();
-      getList(filter).subscribe({
-        next: (res: Model[]) => {
-          setList(res);
-          setLoading(false);
-        },
-        error: (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        },
-      });
+      handleGetList(filter)
     } catch (error) {}
-  }, [getList, valueFilter, ClassFilter, subscription]);
+  }, [subscription, getList, valueFilter, ClassFilter, handleGetList]);
 
   const { run } = useDebounceFn(
     (searchTerm: string) => {
       const cloneValueFilter = valueFilter
-        ? { ...valueFilter }
+        ? JSON.parse(JSON.stringify(valueFilter))
         : new ClassFilter();
       if (!isEnumerable) {
         if (searchType) {
           cloneValueFilter[searchProperty][searchType] = searchTerm;
         } else cloneValueFilter[searchProperty] = searchTerm;
       }
-      setLoading(true);
-      subscription.add(getList);
-      getList(cloneValueFilter).subscribe({
-        next: (res: Model[]) => {
-          setList(res);
-          setLoading(false);
-        },
-        error: (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        },
-      });
+      handleGetList(cloneValueFilter);
     },
     {
       wait: DEBOUNCE_TIME_300,

@@ -128,16 +128,16 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
       setLoading(true);
       subscription.add(getList);
       const filter = valueFilter ? valueFilter : new ClassFilter();
-      getList(filter).subscribe(
-        (res: Model[]) => {
+      getList(filter).subscribe({
+        next: (res: Model[]) => {
           setList(res);
           setLoading(false);
         },
-        (err: ErrorObserver<Error>) => {
+        error: (err: ErrorObserver<Error>) => {
           setList([]);
           setLoading(false);
-        }
-      );
+        },
+      });
     } catch (error) {}
   }, [getList, valueFilter, ClassFilter, subscription]);
 

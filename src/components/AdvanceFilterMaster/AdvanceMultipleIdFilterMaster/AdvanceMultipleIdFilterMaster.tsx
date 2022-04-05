@@ -14,7 +14,7 @@ import "./AdvanceMultipleIdFilterMaster.scss";
 export interface AdvanceMultipleIdFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
-  > {
+> {
   values?: any[];
 
   title: string;
@@ -99,8 +99,6 @@ function AdvanceMultipleIdFilterMaster(
 
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  const [firstLoad, setFirstLoad] = React.useState<boolean>(true);
-
   const [list, setList] = React.useState<Model[]>([]);
 
   const [selectedList, dispatch] = React.useReducer(multipleFilterReducer, []);
@@ -117,6 +115,24 @@ function AdvanceMultipleIdFilterMaster(
   const inputRef: any = React.useRef<any>(null);
 
   const [subscription] = CommonService.useSubscription();
+
+  const handleGetList = React.useCallback(
+    (filterValue: ModelFilter) => {
+      setLoading(true);
+      subscription.add(getList);
+      getList(filterValue).subscribe({
+        next: (res: Model[]) => {
+          setList(res);
+          setLoading(false);
+        },
+        error: (err: ErrorObserver<Error>) => {
+          setList([]);
+          setLoading(false);
+        },
+      });
+    },
+    [getList, subscription]
+  );
 
   const internalList = React.useMemo(() => {
     if (list && list.length > 0) {
@@ -154,24 +170,6 @@ function AdvanceMultipleIdFilterMaster(
     return [];
   }, [preferOptions, values]);
 
-  React.useEffect(() => {
-    if (firstLoad) {
-      if (internalList && internalList?.length > 0) {
-        const tempList = [...internalList, ...internalPreferOptions];
-        if (tempList && tempList?.length > 0) {
-          tempList.forEach((item) => {
-            if (item?.isSelected === true) {
-              dispatch({
-                type: "UPDATE",
-                data: item,
-              });
-            }
-          });
-          setFirstLoad(false);
-        }
-      }
-    }
-  }, [firstLoad, internalList, internalPreferOptions]);
   const { run } = useDebounceFn(
     (searchTerm: string) => {
       const cloneValueFilter = valueFilter
@@ -182,18 +180,7 @@ function AdvanceMultipleIdFilterMaster(
           cloneValueFilter[searchProperty][searchType] = searchTerm;
         } else cloneValueFilter[searchProperty] = searchTerm;
       }
-      setLoading(true);
-      subscription.add(getList);
-      getList(cloneValueFilter).subscribe(
-        (res: Model[]) => {
-          setList(res);
-          setLoading(false);
-        },
-        (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        }
-      );
+      handleGetList(cloneValueFilter);
     },
     {
       wait: DEBOUNCE_TIME_300,
@@ -202,21 +189,10 @@ function AdvanceMultipleIdFilterMaster(
 
   const handleLoadList = React.useCallback(() => {
     try {
-      setLoading(true);
-      subscription.add(getList);
       const filter = valueFilter ? { ...valueFilter } : new ClassFilter();
-      getList(filter).subscribe(
-        (res: Model[]) => {
-          setList(res);
-          setLoading(false);
-        },
-        (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        }
-      );
-    } catch (error) { }
-  }, [getList, valueFilter, subscription, ClassFilter]);
+      handleGetList(filter);
+    } catch (error) {}
+  }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -249,19 +225,6 @@ function AdvanceMultipleIdFilterMaster(
       } else {
         cloneValueFilter["id"]["notIn"].push(item?.id);
       }
-      getList(cloneValueFilter).subscribe(
-        (res: Model[]) => {
-          if (res) {
-            setList(res);
-          }
-          setLoading(false);
-        },
-        (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        }
-      );
-
       if (filteredItem) {
         const tmp = [...selectedList];
         const ids = selectedList?.map((item) => item?.id);
@@ -282,7 +245,7 @@ function AdvanceMultipleIdFilterMaster(
         });
       }
     },
-    [selectedList, valueFilter, ClassFilter, getList, onChange]
+    [selectedList, valueFilter, ClassFilter, onChange]
   );
 
   const handleSearchChange = React.useCallback(
@@ -402,9 +365,12 @@ function AdvanceMultipleIdFilterMaster(
                 {internalList.length > 0 ? (
                   internalList.map((item, index) => (
                     <div
-                      className={classNames("advance-id-filter__item p-l--xs p-y--xs p-r--xxs", {
-                        "advance-id-filter__item--selected": item.isSelected,
-                      })}
+                      className={classNames(
+                        "advance-id-filter__item p-l--xs p-y--xs p-r--xxs",
+                        {
+                          "advance-id-filter__item--selected": item.isSelected,
+                        }
+                      )}
                       key={index}
                       onKeyDown={handleMove(item)}
                       tabIndex={-1}

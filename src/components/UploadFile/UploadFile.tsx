@@ -113,7 +113,7 @@ export function UploadFile(props: UploadFileProps) {
       return file?.errors ? (
         <div className="file-error" key={index}>
           <div className="file-container">
-            <div>
+            <div className="w-file-name">
               <span>{file.name}</span>
             </div>
             <div>
@@ -136,17 +136,21 @@ export function UploadFile(props: UploadFileProps) {
         </div>
       ) : (
         <div className="file-container" key={index}>
-          <span>{file.name}</span>
-          <Popconfirm
-            placement="leftTop"
-            title={"Bạn có chắc chắn muốn xóa?"}
-            onConfirm={() => removeFile(file.id)}
-            okText="Xóa"
-            cancelText="Hủy"
-            okType="danger"
-          >
-            <CloseFilled16 className="remove-file" />
-          </Popconfirm>
+          <div className="w-file-name">
+            <span>{file.name}</span>
+          </div>
+          <div>
+            <Popconfirm
+              placement="leftTop"
+              title={"Bạn có chắc chắn muốn xóa?"}
+              onConfirm={() => removeFile(file.id)}
+              okText="Xóa"
+              cancelText="Hủy"
+              okType="danger"
+            >
+              <CloseFilled16 className="remove-file" />
+            </Popconfirm>
+          </div>
         </div>
       );
     },

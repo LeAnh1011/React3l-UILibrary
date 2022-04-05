@@ -1,6 +1,6 @@
 .upload-button__container {
     .upload-button__list-file {
-        max-width: 300px;
+        width: 100%;
         
         .file-container {
             display: flex;
@@ -9,7 +9,7 @@
             padding: 12px 16px;
             background:var(--palette-gray-10);
             margin-bottom: 8px;
-            text-align: center;
+            text-align: left;
             span {
                 font-style: normal;
                 font-weight: normal;
@@ -22,6 +22,9 @@
                 &:hover{
                     cursor: pointer;
                 }
+            }
+            .w-file-name{
+                width: calc(100% - 40px);
             }
 
         }

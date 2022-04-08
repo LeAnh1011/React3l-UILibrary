@@ -22,6 +22,10 @@
       font-size: 0.75em;
       white-space: nowrap;
     }
+
+    .component__title--disabled {
+      color: var(--palette-gray-40);
+    }
   }
 
   .advance-date-range-filter__icon-wrapper {

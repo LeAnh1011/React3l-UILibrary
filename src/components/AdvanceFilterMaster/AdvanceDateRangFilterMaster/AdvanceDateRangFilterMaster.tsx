@@ -180,7 +180,6 @@ function AdvanceDateRangeFilterMaster(
       if (!disabled) {
         setExpand(true);
         setTimeout(() => {
-          // console.log(listRef.current);
           listRef.current.focus();
         }, 300);
       }

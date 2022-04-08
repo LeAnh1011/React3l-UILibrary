@@ -3,15 +3,8 @@
 .tree-container {
   width: 100%;
   height: auto;
-  max-width: 300px;
   background-color: var(--palette-gray-10);
   @include box-shadow--popover();
-  &.tree-container--lg {
-    max-width: 350px !important;
-  }
-  &.tree-container--sm {
-    max-width: 250px !important;
-  }
   .tree__icon {
     display: flex;
   }

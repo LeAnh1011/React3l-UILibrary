@@ -204,8 +204,8 @@ function AdvanceDateRangeFilterMaster(
 
   const handleClickCustomDate = React.useCallback(() => {
     setExpandDate(true);
-    onChange({ id: 9, name: "Custom date", code: "customdate" }, value);
-  }, [onChange, value]);
+    onChange({ id: 9, name: "Custom date", code: "customdate" }, null);
+  }, [onChange]);
 
   const handleGetRef = React.useCallback(() => {
     return document.getElementsByClassName("date-range-master");

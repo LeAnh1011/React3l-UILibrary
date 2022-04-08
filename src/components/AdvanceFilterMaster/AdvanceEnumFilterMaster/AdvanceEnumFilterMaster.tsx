@@ -83,13 +83,14 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
     title,
     className,
   } = props;
-  const [internalValue, setInternalValue] = React.useState<Model>(
-    value
+
+  const internalValue = React.useMemo<Model>(() => {
+    return value
       ? {
           id: value,
         }
-      : null
-  );
+      : null;
+  }, [value]);
 
   const [list, setList] = React.useState<Model[]>([]);
 
@@ -170,7 +171,6 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
       list.unshift(item);
       setList(list);
       onChange(item.id, item);
-      setInternalValue(item);
       handleCloseSelect();
     },
     [handleCloseSelect, list, onChange]

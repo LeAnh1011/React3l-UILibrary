@@ -38,7 +38,11 @@ const demoList = [
   { id: 4, name: "Ban truyền thông", code: "FCC", parentId: 2 },
   { id: 5, name: "Ban công nghệ", code: "FTI", parentId: 4 },
   { id: 6, name: "Ban giám đốc", code: "BOD", parentId: 3 },
-  { id: 7, name: "Ban quản trị", code: "BOM", parentId: 4 },
+  { id: 7, name: "Ban quản trị", code: "BOM 1", parentId: 4 },
+  { id: 8, name: "Ban quản trị 2", code: "BOM 2", parentId: 4 },
+  { id: 9, name: "Ban quản trị 3", code: "BOM 3", parentId: 4 },
+  { id: 10, name: "Ban quản trị 4", code: "BOM 4", parentId: 4 },
+  { id: 11, name: "Ban quản trị 5", code: "BOM 5", parentId: null },
 ];
 
 const list = [

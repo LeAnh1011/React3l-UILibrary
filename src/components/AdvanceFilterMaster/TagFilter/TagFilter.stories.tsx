@@ -88,8 +88,10 @@ export function TagFilterStories() {
 
   const handleChange = React.useCallback(
     (item, dateMoment) => {
-      filter.createdAt["greaterEqual"] = dateMoment[0];
-      filter.createdAt["lessEqual"] = dateMoment[1];
+      if (dateMoment && dateMoment.length > 0) {
+        filter.createdAt["greaterEqual"] = dateMoment[0];
+        filter.createdAt["lessEqual"] = dateMoment[1];
+      }
       setItem(item);
       setFilter({ ...filter });
       setValue(dateMoment);

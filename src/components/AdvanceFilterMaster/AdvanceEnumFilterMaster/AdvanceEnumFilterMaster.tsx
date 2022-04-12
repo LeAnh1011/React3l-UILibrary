@@ -85,7 +85,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
   } = props;
 
   const internalValue = React.useMemo<Model>(() => {
-    return value
+    return value !== null && value !== undefined
       ? {
           id: value,
         }

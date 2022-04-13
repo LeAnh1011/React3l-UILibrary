@@ -155,14 +155,16 @@ function AdvanceDateRangeFilterMaster(
   }, []);
 
   const internalValue: [Moment, Moment] = React.useMemo(() => {
-    return [
-      value && value?.length > 0 && typeof value[0] === "string"
-        ? CommonService.toMomentDate(value[0])
-        : value[0],
-      value && value?.length > 0 && typeof value[1] === "string"
-        ? CommonService.toMomentDate(value[1])
-        : value[1],
-    ];
+    return value && value.length > 0
+      ? [
+          typeof value[0] === "string"
+            ? CommonService.toMomentDate(value[0])
+            : value[0],
+          typeof value[1] === "string"
+            ? CommonService.toMomentDate(value[1])
+            : value[1],
+        ]
+      : [null, null];
   }, [value]);
 
   const handleChange = React.useCallback(
@@ -189,8 +191,11 @@ function AdvanceDateRangeFilterMaster(
 
   const handleCloseAdvanceFilterMaster = React.useCallback(() => {
     setExpand(false);
+    if (internalValue[0] || internalValue[1]) {
+      return
+    }
     setExpandDate(false);
-  }, []);
+  }, [internalValue]);
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -211,12 +216,10 @@ function AdvanceDateRangeFilterMaster(
   }, []);
 
   const handleOpenChange = React.useCallback(() => {
-      setTimeout(() => {
-        panelRef.current = handleGetRef()[0];
-      }, 100);
-    },
-    [handleGetRef]
-  );
+    setTimeout(() => {
+      panelRef.current = handleGetRef()[0];
+    }, 100);
+  }, [handleGetRef]);
 
   const handleKeyDown = React.useCallback(
     (event) => {
@@ -363,8 +366,10 @@ function AdvanceDateRangeFilterMaster(
                 isSmall={isSmall}
                 onChange={handleChange}
                 value={internalValue}
-                getPopupContainer={!appendToBody ? () =>
-                  document.getElementById("list-container") : null
+                getPopupContainer={
+                  !appendToBody
+                    ? () => document.getElementById("list-container")
+                    : null
                 }
                 placeHolder={placeholder}
                 dropdownClassName="date-range-master"
@@ -385,7 +390,7 @@ AdvanceDateRangeFilterMaster.defaultProps = {
   render: defaultRenderObject,
   type: ADVANCE_DATE_RANGE_TYPE.SHORT,
   placeHolderSelect: "",
-  appendToBody: false
+  appendToBody: false,
 };
 
 export default AdvanceDateRangeFilterMaster;

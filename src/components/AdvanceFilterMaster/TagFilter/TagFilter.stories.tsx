@@ -28,7 +28,7 @@ const orgObservable = new Observable<Model[]>((observer) => {
   setTimeout(() => {
     observer.next([
       { id: 4, name: "Ban hành chính", code: "FAD" },
-      { id: 1, name: "Ban công nghệ thông tin", code: "FIM" },
+      { id: 0, name: "Ban công nghệ thông tin", code: "FIM" },
       { id: 2, name: "Ban nhân sự", code: "FHR" },
       { id: 3, name: "Ban tài chính", code: "FAF" },
       { id: 5, name: "Ban đời sống", code: "DSS" },
@@ -43,7 +43,7 @@ const appUserObservable = new Observable<Model[]>((observer) => {
   setTimeout(() => {
     observer.next([
       { id: 4, name: "Lê Đại M", code: "FAD" },
-      { id: 1, name: "Nguyễn Văn A", code: "FIM" },
+      { id: 0, name: "Nguyễn Văn A", code: "FIM" },
       { id: 2, name: "Bùi Văn V", code: "FHR" },
       { id: 3, name: "Phạm Thị H", code: "FAF" },
     ]);

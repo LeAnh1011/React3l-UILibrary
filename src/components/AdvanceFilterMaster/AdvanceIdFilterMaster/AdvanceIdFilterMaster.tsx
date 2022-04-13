@@ -271,7 +271,7 @@ function AdvanceIdFilterMaster(
           )}
           onClick={handleToggle}
         >
-          <div className={classNames({ "filter-active": value })}>
+          <div className={classNames({ "filter-active": typeof value === 'number' || typeof value === 'string' })}>
             <div className="advance-id-filter-master__title">
               <span className="filter-title"> {title}</span>
               <ChevronDown16 />

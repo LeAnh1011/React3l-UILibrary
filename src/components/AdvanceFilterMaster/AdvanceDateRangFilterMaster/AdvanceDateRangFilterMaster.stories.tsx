@@ -10,7 +10,6 @@ export function AdvanceDateRangeFilterMasterStories() {
   const [type, setType] = React.useState<ADVANCE_DATE_RANGE_TYPE>(ADVANCE_DATE_RANGE_TYPE.SHORT);
   const [typeInput, setTypeInput] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
   const handleChange = React.useCallback((item, dateMoment) => {
-    debugger
     setValue(dateMoment);
     setItem(item);
   }, []);

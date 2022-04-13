@@ -6,6 +6,7 @@ import InputSelect from "components/Input/InputSelect";
 import { BORDER_TYPE } from "config/enum";
 import moment, { Moment } from "moment";
 import React, { RefObject } from "react";
+import { useTranslation } from "react-i18next";
 import { Model } from "react3l-common";
 import { CommonService } from "services/common-service";
 import "./AdvanceDateRangFilterMaster.scss";
@@ -30,8 +31,6 @@ interface AdvanceDateRangeFilterMasterProps {
 
   disabled?: boolean;
 
-  render?: (t: Model) => string;
-
   typeCustomDate?: BORDER_TYPE;
 
   isSmall?: boolean;
@@ -50,30 +49,26 @@ interface AdvanceDateRangeFilterMasterProps {
 }
 
 const list = [
-  { id: 1, name: "Today", code: "today" },
-  { id: 2, name: "Yesterday", code: "yesterday" },
-  { id: 3, name: "This week", code: "thisweek" },
-  { id: 4, name: "Last week", code: "lastweek" },
-  { id: 5, name: "This month", code: "thismonth" },
-  { id: 6, name: "Last month", code: "lastmonth" },
-  { id: 7, name: "This quarter", code: "thisquarter" },
-  { id: 8, name: "Last quarter", code: "lastquarter" },
+  { id: 1, name: "general.filter.today", code: "today" },
+  { id: 2, name: "general.filter.yesterday", code: "yesterday" },
+  { id: 3, name: "general.filter.thisWeek", code: "thisweek" },
+  { id: 4, name: "general.filter.lastWeek", code: "lastweek" },
+  { id: 5, name: "general.filter.thisMonth", code: "thismonth" },
+  { id: 6, name: "general.filter.lastMonth", code: "lastmonth" },
+  { id: 7, name: "general.filter.thisQuarter", code: "thisquarter" },
+  { id: 8, name: "general.filter.lastQuarter", code: "lastquarter" },
 ];
-
-function defaultRenderObject<T extends Model>(t: T) {
-  return t?.name;
-}
 
 function AdvanceDateRangeFilterMaster(
   props: AdvanceDateRangeFilterMasterProps & RangePickerProps
 ) {
+  const [translate] = useTranslation();
   const {
     value,
     onChange,
     title,
     className,
     disabled,
-    render,
     appendToBody,
     typeCustomDate,
     isSmall,
@@ -208,7 +203,7 @@ function AdvanceDateRangeFilterMaster(
 
   const handleClickCustomDate = React.useCallback(() => {
     setExpandDate(true);
-    onChange({ id: 9, name: "Custom date", code: "customdate" }, null);
+    onChange({ id: 9, name: "general.filter.customDate", code: "customdate" }, null);
   }, [onChange]);
 
   const handleGetRef = React.useCallback(() => {
@@ -307,7 +302,6 @@ function AdvanceDateRangeFilterMaster(
         <div className="select__input" onClick={handleToggle}>
           <InputSelect
             value={activeItem} // value of input, event should change these on update
-            render={render}
             placeHolder={placeHolderSelect}
             expanded={isExpand}
             disabled={disabled}
@@ -344,7 +338,7 @@ function AdvanceDateRangeFilterMaster(
                   onKeyDown={handleMove(item)}
                 >
                   <span className="advance-date-range-filter__text">
-                    {render(item)}
+                    {translate(item?.name)}
                   </span>
                 </div>
               ))}
@@ -356,7 +350,7 @@ function AdvanceDateRangeFilterMaster(
             onClick={handleClickCustomDate}
           >
             <Calendar16 />
-            <span>Custom date</span>
+            <span>{translate("general.filter.customDate")}</span>
           </div>
           {isExpandDate && (
             <>
@@ -387,7 +381,6 @@ AdvanceDateRangeFilterMaster.defaultProps = {
   isMaterial: false,
   dateFormat: ["DD/MM/YYYY", "YYYY/MM/DD"],
   placeHolder: "Chọn ngày",
-  render: defaultRenderObject,
   type: ADVANCE_DATE_RANGE_TYPE.SHORT,
   placeHolderSelect: "",
   appendToBody: false,

@@ -380,7 +380,7 @@ function AdvanceDateRangeFilterMaster(
 AdvanceDateRangeFilterMaster.defaultProps = {
   isMaterial: false,
   dateFormat: ["DD/MM/YYYY", "YYYY/MM/DD"],
-  placeHolder: "Chọn ngày",
+  placeholder: ["Từ ngày", "Đến ngày"],
   type: ADVANCE_DATE_RANGE_TYPE.SHORT,
   placeHolderSelect: "",
   appendToBody: false,

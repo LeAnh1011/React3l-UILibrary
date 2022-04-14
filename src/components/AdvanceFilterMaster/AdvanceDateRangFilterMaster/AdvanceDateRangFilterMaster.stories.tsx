@@ -3,8 +3,10 @@ import AdvanceDateRangFilterMaster, { ADVANCE_DATE_RANGE_TYPE } from './AdvanceD
 import { Moment } from 'moment';
 import { Radio, RadioChangeEvent } from 'antd';
 import { BORDER_TYPE } from '../../../config/enum';
+import { useTranslation } from "react-i18next";
 
 export function AdvanceDateRangeFilterMasterStories() {
+  const [translate] = useTranslation()
   const [value, setValue] = React.useState<[Moment, Moment]>([null, null]);
   const [item, setItem] = React.useState<any>(null);
   const [type, setType] = React.useState<ADVANCE_DATE_RANGE_TYPE>(ADVANCE_DATE_RANGE_TYPE.SHORT);
@@ -32,6 +34,7 @@ export function AdvanceDateRangeFilterMasterStories() {
       value={value}
       inputType={typeInput}
       appendToBody={false}
+      translate={translate}
     />
 
     <div style={{ margin: "10px", width: "400px" }}>

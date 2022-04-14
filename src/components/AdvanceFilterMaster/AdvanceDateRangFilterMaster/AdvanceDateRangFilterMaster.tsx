@@ -6,7 +6,7 @@ import InputSelect from "components/Input/InputSelect";
 import { BORDER_TYPE } from "config/enum";
 import moment, { Moment } from "moment";
 import React, { RefObject } from "react";
-import { useTranslation } from "react-i18next";
+import { TFunction } from "i18next";
 import { Model } from "react3l-common";
 import { CommonService } from "services/common-service";
 import "./AdvanceDateRangFilterMaster.scss";
@@ -46,6 +46,8 @@ interface AdvanceDateRangeFilterMasterProps {
   placeHolderSelect?: string;
 
   appendToBody?: boolean;
+
+  translate?: TFunction;
 }
 
 const list = [
@@ -62,7 +64,6 @@ const list = [
 function AdvanceDateRangeFilterMaster(
   props: AdvanceDateRangeFilterMasterProps & RangePickerProps
 ) {
-  const [translate] = useTranslation();
   const {
     value,
     onChange,
@@ -77,6 +78,7 @@ function AdvanceDateRangeFilterMaster(
     type,
     inputType,
     placeHolderSelect,
+    translate,
   } = props;
 
   const [isExpand, setExpand] = React.useState<boolean>(false);

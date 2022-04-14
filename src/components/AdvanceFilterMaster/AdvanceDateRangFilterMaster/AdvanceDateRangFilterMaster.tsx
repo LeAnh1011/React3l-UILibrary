@@ -166,7 +166,7 @@ function AdvanceDateRangeFilterMaster(
 
   const handleChange = React.useCallback(
     (values: [Moment, Moment], formatString: [string, string]) => {
-      onChange({ id: 9, name: "Custom date", code: "customdate" }, [
+      onChange({ id: 9, name: "general.filter.customDate", code: "customdate" }, [
         values[0]?.startOf("day"),
         values[1]?.endOf("day"),
       ]);

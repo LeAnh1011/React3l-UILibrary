@@ -1,7 +1,7 @@
 {
   "homepage": "http://leanh1011.github.io/React3l-UILibrary",
   "name": "react3l-ui-library",
-  "version": "0.1.40",
+  "version": "0.1.41",
   "main": "build/index.js",
   "files": [
     "build"
@@ -41,7 +41,8 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "predeploy": "npm run build-storybook",
-    "deploy": "gh-pages -d storybook-static"
+    "deploy": "gh-pages -d storybook-static",
+    "publish-package": "npm version patch && npm publish"
   },
   "eslintConfig": {
     "extends": [

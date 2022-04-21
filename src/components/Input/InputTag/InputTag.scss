@@ -76,6 +76,7 @@
       }
       &:hover {
         outline-color: var(--palette-coolGray-50);
+        cursor: not-allowed;
       }
       &.input-tag--filter-have-item {
         outline-color: var(--palette-coolGray-50);
@@ -131,7 +132,7 @@
     }
 
     &.input-tag__container--float {
-      &:hover {
+      &:hover:not(.input-tag--disabled) {
         outline-color: var(--palette-gray-100);
         .input-tag__icon {
           color: var(--palette-gray-60);
@@ -250,8 +251,13 @@
         color: var(--palette-gray-60);
       }
 
-      &:disabled::placeholder {
-        color: var(--palette-gray-40);
+      &:disabled {
+        &:hover {
+          cursor: not-allowed;
+        }
+        &::placeholder {
+          color: var(--palette-gray-40);
+        }
       }
 
       &:not(:placeholder-shown) + .component__title {

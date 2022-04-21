@@ -142,6 +142,10 @@
       &:hover {
         background-color: var(--palette-grayHover-10);
       }
+      &.date-picker--disabled {
+        border-bottom: none;
+        background-color: var(--palette-gray-10);
+      }
       &.ant-picker-focused {
         border-bottom: none !important;
         box-shadow: none;

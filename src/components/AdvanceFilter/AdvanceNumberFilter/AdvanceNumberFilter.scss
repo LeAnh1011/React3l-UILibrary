@@ -47,19 +47,29 @@
     &.advance-number-filter--disabled {
       outline-color: var(--palette-coolGray-30);
       background-color: var(--palette-gray-10);
+      &:hover {
+        cursor: not-allowed;
+      }
 
       span {
         color: var(--palette-gray-40);
       }
+
       input {
         color: var(--palette-gray-40) !important;
       }
     }
 
-    &.advance-number-filter--float:focus-within {
-      box-shadow: none;
-      .component__title {
-        color: var(--color-primary);
+    &.advance-number-filter--float {
+      &:hover:not(.advance-number-filter--disabled) {
+        outline-color: var(--palette-gray-100);
+      }
+      &:focus-within {
+        box-shadow: none;
+        outline: 2px solid var(--color-primary);
+        .component__title {
+          color: var(--color-primary);
+        }
       }
     }
 
@@ -147,8 +157,13 @@
         color: var(--palette-gray-60);
       }
 
-      &:disabled::placeholder {
-        color: var(--palette-gray-40);
+      &:disabled {
+        &:hover {
+          cursor: not-allowed;
+        }
+        &::placeholder {
+          color: var(--palette-gray-40);
+        }
       }
 
       &:not(:placeholder-shown) + .component__title {

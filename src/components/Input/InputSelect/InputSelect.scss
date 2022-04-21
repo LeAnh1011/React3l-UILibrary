@@ -73,6 +73,7 @@
       }
       &:hover {
         outline-color: var(--palette-coolGray-50);
+        cursor: not-allowed;
       }
       &.input-select--filter-have-item {
         outline-color: var(--palette-coolGray-50);
@@ -80,7 +81,7 @@
     }
 
     &.input-select--float {
-      &:hover {
+      &:hover:not(.input-select--disabled) {
         outline-color: var(--palette-gray-100);
         .input-select__icon {
           color: var(--palette-gray-60);
@@ -187,8 +188,13 @@
         color: var(--palette-gray-60);
       }
 
-      &:disabled::placeholder {
-        color: var(--palette-gray-40);
+      &:disabled {
+        &::placeholder {
+          color: var(--palette-gray-40);
+        }
+        &:hover {
+          cursor: not-allowed;
+        }
       }
 
       &:not(:placeholder-shown) + .component__title {

@@ -53,6 +53,9 @@
       outline-color: var(--palette-coolGray-30);
       background-color: var(--palette-gray-10);
 
+      &:hover {
+        cursor: not-allowed;
+      }
       span {
         color: var(--palette-gray-40);
       }
@@ -62,7 +65,7 @@
     }
 
     &.input-text--float {
-      &:hover {
+      &:hover:not(.input-text--disabled) {
         outline-color: var(--palette-gray-100);
       }
       &:focus-within {
@@ -153,8 +156,13 @@
         color: var(--palette-gray-60);
       }
 
-      &:disabled::placeholder {
-        color: var(--palette-gray-40);
+      &:disabled {
+        &::placeholder {
+          color: var(--palette-gray-40);
+        }
+        &:hover {
+          cursor: not-allowed;
+        }
       }
 
       &:not(:placeholder-shown) + .component__title {

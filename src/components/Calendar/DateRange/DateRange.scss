@@ -22,7 +22,7 @@
       font-size: 0.75em;
       white-space: nowrap;
     }
-    
+
     .component__title--disabled {
       color: var(--palette-gray-40);
     }
@@ -39,11 +39,11 @@
     background-color: var(--color-white);
     justify-content: flex-end;
     align-items: center;
-    &.date-range__icon-wrapper--disabled{
+    &.date-range__icon-wrapper--disabled {
       background-color: var(--palette-grayHover-10) !important;
     }
     &.date-range__icon-wrapper--material {
-      background-color: var(--palette-gray-10) ;
+      background-color: var(--palette-gray-10);
       .date-range__icon-clear {
         &:hover {
           cursor: pointer;
@@ -54,7 +54,7 @@
     &.date-range__icon-wrapper--sm {
       top: 0.3rem !important;
     }
-   
+
     .date-range__icon-clear {
       color: var(--palette-coolGray-50);
       &:hover {
@@ -89,12 +89,6 @@
       }
     }
 
-    &.date-picker--disabled {
-      background-color: var(--palette-grayHover-10);
-      & + .component__title {
-        pointer-events: none;
-      }
-    }
     &:hover,
     &:focus {
       & + .date-range__icon-wrapper--material {
@@ -102,10 +96,18 @@
       }
     }
 
-    &:hover {
+    &:hover:not(.date-picker--disabled) {
       outline-color: var(--color-primary);
       & + .component__title {
         color: var(--color-primary);
+      }
+    }
+
+    &.date-picker--disabled {
+      outline-color: var(--palette-coolGray-30);
+      background-color: var(--palette-gray-10);
+      & + .component__title {
+        pointer-events: none;
       }
     }
 
@@ -114,16 +116,21 @@
     }
 
     &.ant-picker-focused {
-      border-bottom: none !important;
-      outline-color: var(--color-primary);
-      @include box-shadow--focus;
+      box-shadow: none;
+      outline: 2px solid var(--color-primary);
     }
 
     &.date-picker--float {
+      &:hover:not(.date-picker--disabled) {
+        outline-color: var(--palette-gray-100);
+        & + .component__title {
+          color: var(--palette-gray-100);
+        }
+      }
+
       &.ant-picker-focused {
-        border-bottom: none !important;
-        box-shadow: none !important;
-        outline: 1px solid var(--color-primary);
+        box-shadow: none;
+        outline: 2px solid var(--color-primary);
         & + .component__title {
           color: var(--color-primary);
         }
@@ -142,6 +149,10 @@
       }
       &:hover {
         background-color: var(--palette-grayHover-10);
+      }
+      &.date-picker--disabled {
+        border-bottom: none;
+        background-color: var(--palette-gray-10);
       }
       &.ant-picker-focused {
         border-bottom: none !important;

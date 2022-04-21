@@ -134,8 +134,14 @@
       .advance-date-filter__icon-wrapper {
         background-color: var(--palette-gray-10);
       }
+
       &:hover {
         background-color: var(--palette-grayHover-10);
+      }
+
+      &.advance-date-filter--disabled {
+        border-bottom: none;
+        background-color: var(--palette-gray-10);
       }
 
       &.ant-picker-focused {

@@ -51,13 +51,18 @@
       span {
         color: var(--palette-gray-40);
       }
+
       input {
         color: var(--palette-gray-40) !important;
+      }
+
+      &:hover {
+        cursor: not-allowed;
       }
     }
 
     &.input-number--float {
-      &:hover {
+      &:hover:not(.input-number--disabled) {
         outline-color: var(--palette-gray-100);
       }
 
@@ -150,8 +155,13 @@
         color: var(--palette-gray-60);
       }
 
-      &:disabled::placeholder {
-        color: var(--palette-gray-40);
+      &:disabled {
+        &::placeholder {
+          color: var(--palette-gray-40);
+        }
+        &:hover {
+          cursor: not-allowed;
+        }
       }
 
       &:not(:placeholder-shown) + .component__title {

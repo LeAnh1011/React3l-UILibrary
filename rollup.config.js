@@ -1,8 +1,8 @@
 import commonjs from "@rollup/plugin-commonjs";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import typescript from "rollup-plugin-typescript2";
-import sass from "rollup-plugin-sass";
-// import postcss from "rollup-plugin-postcss";
+// import sass from "rollup-plugin-sass";
+import postcss from "rollup-plugin-postcss";
 // import image from '@rollup/plugin-image';
 import { terser } from "rollup-plugin-terser";
 
@@ -84,13 +84,14 @@ export default {
     peerDepsExternal(),
     commonjs(),
     typescript({ useTsconfigDeclarationDir: true }),
-    // postcss({
-    //   modules: true,
-    //   use: ["sass"],
-    // }),
-    sass({
-      insert: true,
+    postcss({
+      extract: false,
+      modules: true,
+      use: ["sass"],
     }),
+    // sass({
+    //   insert: true,
+    // }),
     terser(),
   ],
   external: [

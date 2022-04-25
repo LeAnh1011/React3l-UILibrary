@@ -152,7 +152,6 @@ function Default() {
       {size === "sm" && (
         <Modal
           visible={visible}
-          handleSave={handleSave}
           handleCancel={handleCancel}
           visibleFooter={true}
           handleApplyNext={handleCreate}

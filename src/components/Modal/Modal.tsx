@@ -56,15 +56,19 @@ function Modal(props: ModalCustomProps) {
               </span>
             </Button>
           )}
-          <Button
-            type="bleed-primary"
-            className={classNames(
-              handleApplyNext && size === "lg" ? "button-33" : "button-50"
-            )}
-            onClick={handleSave}
-          >
-            <span>{titleButtonApply ? titleButtonApply : "Apply"}</span>
-          </Button>
+          {
+            handleSave &&
+            <Button
+              type="bleed-primary"
+              className={classNames(
+                handleApplyNext && size === "lg" ? "button-33" : "button-50"
+              )}
+              onClick={handleSave}
+            >
+              <span>{titleButtonApply ? titleButtonApply : "Apply"}</span>
+            </Button>
+          }
+
         </div>
       </div>
     ),

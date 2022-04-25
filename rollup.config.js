@@ -88,7 +88,7 @@ export default {
       use: ["sass"],
       //modules: true,
       sourceMap: true,
-      extract: true
+      extract: false
     }),
     // sass({
     //   insert: true,

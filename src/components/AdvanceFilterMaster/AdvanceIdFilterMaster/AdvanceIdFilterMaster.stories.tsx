@@ -61,7 +61,7 @@ export function AdvanceIdFilterMasterStories() {
   );
 
   return (
-    <div style={{ margin: "10px", width: "250px" }}>
+    <div style={{ margin: "10px", width: "400px" }}>
       <AdvanceIdFilterMaster
         value={id}
         placeHolder={"Tìm kiếm..."}

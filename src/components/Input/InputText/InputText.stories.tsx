@@ -56,7 +56,7 @@ export function InputTextStories() {
             isSmall={isSmall}
             label="First Name"
             prefix={<Apple16 />}
-            suffix="Kg"
+            suffix={<Apple16 />}
             showCount={true}
             maxLength={100}
             value={inputValue}

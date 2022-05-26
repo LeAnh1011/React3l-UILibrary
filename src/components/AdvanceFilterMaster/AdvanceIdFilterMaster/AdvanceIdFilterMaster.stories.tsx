@@ -72,6 +72,7 @@ export function AdvanceIdFilterMasterStories() {
         getList={demoSearchFunc}
         title={"Đơn vị"}
         preferOptions={list}
+        maxLengthItem={40}
       />
     </div>
   );

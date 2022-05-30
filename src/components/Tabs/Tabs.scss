@@ -1,9 +1,8 @@
 @import "../../styles/index.scss";
 
-/* Style for FormValidation.tsx */
+/* Style for Tabs.tsx */
 .tabs__container {
   .ant-tabs {
-    
     .ant-tabs-tab {
       padding: 0;
       box-shadow: inset 0px -1px 0px #e1e3e5;
@@ -11,13 +10,12 @@
         box-shadow: inset 0px -2px 0px #5f5d5a;
         color: var(--palette-gray-70);
       }
-      &:focus-within  {
+      &:focus-within {
         outline: 2px solid var(--palette-blue-60);
         outline-offset: -2px;
       }
-     
     }
-    .ant-tabs-tab-btn { 
+    .ant-tabs-tab-btn {
       padding: 12px 64px 12px 16px;
     }
     .ant-tabs-tab + .ant-tabs-tab {
@@ -31,7 +29,10 @@
         color: var(--palette-gray-100);
       }
     }
-    .ant-tabs-tab-btn:focus, .ant-tabs-tab-remove:focus, .ant-tabs-tab-btn:active, .ant-tabs-tab-remove:active {
+    .ant-tabs-tab-btn:focus,
+    .ant-tabs-tab-remove:focus,
+    .ant-tabs-tab-btn:active,
+    .ant-tabs-tab-remove:active {
       color: var(--palette-gray-100);
       font-weight: 500;
       font-size: 14px;
@@ -59,7 +60,7 @@
           border: none;
           background-color: var(--palette-gray-20);
           box-shadow: -0.0625rem 0 0 0 var(--palette-gray-50);
-          
+
           &.ant-tabs-tab-active {
             background: var(--palette-gray-10);
             box-shadow: inset 0px 2px 0px var(--palette-blue-60);

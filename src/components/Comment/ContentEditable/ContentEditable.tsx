@@ -5,6 +5,7 @@ import React, { ForwardedRef, forwardRef, MutableRefObject, RefObject } from "re
 import { Observable } from "rxjs";
 import "./ContentEditable.scss";
 import classNames from "classnames";
+import { Attachment16 } from "@carbon/icons-react";
 
 export interface contentAction {
   action: string;
@@ -259,12 +260,10 @@ const ContentEditable = forwardRef<
                 style={{ display: "none" }}
                 onChange={(e) => handleAttachFile(e.target.files)}
               />
-              <i
-                className="tio-attachment_diagonal"
-                onClick={() => {
+              <Attachment16 onClick={() => {
                   inputFileRef.current.click();
-                }}
-              ></i>
+                }}/>
+              
             </div>
           </div>
 

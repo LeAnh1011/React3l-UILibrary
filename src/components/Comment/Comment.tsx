@@ -304,10 +304,6 @@ function Comment(props: CommentProps<ModelFilter>) {
     const message = new Message({
       discussionId: discussionId,
       content: contentEditableRef.current.innerHTML,
-      creatorId: userInfo.id,
-      creator: userInfo,
-      createdAt: moment(),
-      isOwner: true,
     });
     if (message.content !== null) {
       setLoad(true);
@@ -325,7 +321,7 @@ function Comment(props: CommentProps<ModelFilter>) {
           getListMessages();
         });
     }
-  }, [discussionId, userInfo, postMessage, getListMessages, bindEventClick]);
+  }, [discussionId, postMessage, getListMessages, bindEventClick]);
 
   const handleSendMessage = React.useCallback(() => {
     if (messageCurrentEdit.id) {

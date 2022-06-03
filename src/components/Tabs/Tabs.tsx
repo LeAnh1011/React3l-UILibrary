@@ -1,8 +1,6 @@
 import { Tabs as TabsAntd } from "antd";
 import { TabsType } from "antd/lib/tabs";
 import classNames from "classnames";
-import { ValidateStatus } from "config/enum";
-import { ReactNode } from "react";
 import "./Tabs.scss";
 
 const { TabPane } = TabsAntd;

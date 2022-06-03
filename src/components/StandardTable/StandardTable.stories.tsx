@@ -17,9 +17,16 @@ import StatusLine from "./DataCellComponent/StatusLine/StatusLine";
 import { ColumnProps } from "antd/lib/table";
 import { Tabs } from "antd";
 import Pagination from "./Pagination/Pagination";
-import { Add16, ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
+import {
+  Add16,
+  ArrowDown20,
+  ArrowUp20,
+  ChevronDown16,
+  ChevronUp16,
+} from "@carbon/icons-react";
 import { StringFilter } from "react3l-advanced-filters";
 import Button from "../Button/Button";
+import Sorter from "./Sorter/Sorter";
 const KateBishop =
   "https://cdn.searchenginejournal.com/wp-content/uploads/2019/07/the-essential-guide-to-using-images-legally-online-1520x800.png";
 const { TabPane } = Tabs;
@@ -184,6 +191,21 @@ function Default() {
     type: typeRowSelection,
   };
 
+  React.useEffect(()=>{
+    let test = document.getElementsByClassName("ant-table-cell")[0];
+          console.log(test)
+          if(test) {
+
+            test.addEventListener(
+              "mouseover",
+              function (event) {
+                console.log(event);
+              },
+              false
+            );
+          }
+  },[])
+
   const columns: ColumnProps<any>[] = useMemo(
     () => [
       {
@@ -203,10 +225,21 @@ function Default() {
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} title="Type" />,
+        title: ({ sortColumns }) => {
+          const sortedColumn = sortColumns?.find(
+            ({ column }) => column.key === "name"
+          );
+          return (
+            <div>
+              <LayoutHeader orderType={orderType} title="Type" />
+              <Sorter sortedColumn={sortedColumn}></Sorter>
+            </div>
+          );
+        },
         dataIndex: "name",
         key: "name",
         sorter: true,
+
         ellipsis: true,
         render(...[name]) {
           return (
@@ -223,25 +256,6 @@ function Default() {
         },
       },
 
-      {
-        title: <LayoutHeader orderType={orderType} title="Type" />,
-        dataIndex: "name",
-        key: "name2",
-        sorter: true,
-        ellipsis: true,
-        render(...[name]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize={size}>
-              <OneLineText
-                avatar={KateBishop}
-                avatarType={avatarType}
-                value={name}
-                avatarSize={size}
-              />
-            </LayoutCell>
-          );
-        },
-      },
       {
         title: <LayoutHeader orderType={orderType} title="Location" />,
         dataIndex: "location",

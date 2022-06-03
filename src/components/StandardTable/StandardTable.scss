@@ -12,17 +12,20 @@
   .ant-table-thead > tr > th {
     font-size: 12px;
     font-weight: bold;
-    background-color: #e0e0e0;
+    background-color: var(--palette-gray-20);
   }
   .ant-table-tbody > tr.ant-table-row:hover > td,
   .ant-table-tbody > tr > td.ant-table-cell-row-hover {
     background-color: #e5e5e5;
   }
   .ant-table-tbody > tr.ant-table-row-selected > td {
-    background-color: #f4f4f4;
+    background-color: var(--palette-gray-10);
   }
   .ant-table-thead > tr > th {
     padding: 0px 0px;
+  }
+  .ant-table-thead th.ant-table-cell:hover {
+    background-color: var(--palette-grayHover-20);
   }
   .ant-table-tbody > tr > td {
     padding: 0px 0px;

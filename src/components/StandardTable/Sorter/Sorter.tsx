@@ -1,18 +1,16 @@
 import { ArrowDown16, ArrowUp16 } from "@carbon/icons-react";
 import React from "react";
+import './Sorter.scss';
 
 export interface SorterProps {
   sortedColumn?: any;
+  isShowAll?: boolean;
+
 }
 
 function Sorter(props: SorterProps) {
-  const { sortedColumn } = props;
+  const { sortedColumn,isShowAll = false } = props;
 
-
-
-  React.useEffect(() => {
-    console.log(sortedColumn)
-  }, [sortedColumn]);
 
   return (
     <div className="sorter-container">
@@ -20,13 +18,17 @@ function Sorter(props: SorterProps) {
         sortedColumn.order === "ascend" ? (
           <ArrowUp16 />
         ) : (
-          <>{sortedColumn.order === "descend" && <ArrowDown16 />}</>
+          <>{sortedColumn.order === "descend" && <ArrowUp16  className="sorter-down"/>}</>
         )
       ) : null}
-      <div className="sort-action">
+      {
+        isShowAll && 
+        <div className="sort-action">
         <ArrowUp16 />
         <ArrowDown16 />
-      </div>
+      </div> 
+      }
+      
 
     </div>
   );

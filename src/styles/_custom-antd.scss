@@ -146,3 +146,25 @@ tr
   + .ant-tabs-tab {
   margin-left: 0px;
 }
+
+//header table
+
+.ant-table-thead {
+  th:focus{
+    border: 2px solid var(--palette-blue-60);
+    outline-offset: -2px;
+  }
+}
+
+.ant-table-column-sorters {
+  height: 100%;
+  .ant-table-column-title {
+    height: 100%;
+    div {
+      height: 100%;
+    }
+  }
+  .ant-table-column-sorter {
+    display: none;
+  }
+}

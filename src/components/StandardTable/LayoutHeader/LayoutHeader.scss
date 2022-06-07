@@ -1,25 +1,7 @@
 .layout-header-left {
     padding-left: 16px;
     padding-right: 8px;
-    .sorter-container {
-        .sort-action {
-            display: none;
-        }
-    }
-    &:hover {
-        .sorter-container {
-            .sort-action {
-                display: block;
-            }
-        }
-    }
-    &:focus {
-        .sorter-container {
-            .sort-action {
-                display: none;
-            }
-        }
-    }
+    
 }
 .layout-header-right {
     padding-right: 16px;
@@ -28,4 +10,19 @@
 .layout-header-center {
     padding-left: 8px;
     padding-right: 8px;
+}
+
+.layout-header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &:focus-within, &:focus-visible {
+        outline: 2px solid var(--palette-blue-60);
+        outline-offset: -2px;
+    }
+}
+
+.layout-header__container:focus-within {
+    outline: 2px solid var(--palette-blue-60);
+        outline-offset: -2px;
 }

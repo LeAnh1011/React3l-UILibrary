@@ -1,0 +1,9 @@
+.sorter-container {
+    display: flex;
+    align-items: center;
+    .sorter-down {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        transition: transform 0.5s linear;
+    }
+}

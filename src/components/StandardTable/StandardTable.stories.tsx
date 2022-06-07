@@ -260,7 +260,6 @@ function Default() {
         title: <LayoutHeader orderType={orderType} title="Location" />,
         dataIndex: "location",
         key: "location",
-        sorter: true,
         ellipsis: true,
         render(...[location]) {
           return (

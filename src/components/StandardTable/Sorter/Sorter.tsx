@@ -1,4 +1,4 @@
-import { ArrowDown20, ArrowUp20 } from "@carbon/icons-react";
+import { ArrowDown16, ArrowUp16 } from "@carbon/icons-react";
 import React from "react";
 
 export interface SorterProps {
@@ -8,22 +8,26 @@ export interface SorterProps {
 function Sorter(props: SorterProps) {
   const { sortedColumn } = props;
 
-  const ref = React.useRef(null);
 
 
-  React.useEffect(()=>{
-    console.log(ref)
-  },[ref]);
+  React.useEffect(() => {
+    console.log(sortedColumn)
+  }, [sortedColumn]);
 
   return (
-    <div className="sorter-container" ref={ref}>
+    <div className="sorter-container">
       {sortedColumn ? (
         sortedColumn.order === "ascend" ? (
-          <ArrowUp20 />
+          <ArrowUp16 />
         ) : (
-          <ArrowDown20 />
+          <>{sortedColumn.order === "descend" && <ArrowDown16 />}</>
         )
       ) : null}
+      <div className="sort-action">
+        <ArrowUp16 />
+        <ArrowDown16 />
+      </div>
+
     </div>
   );
 }

@@ -26,7 +26,7 @@ import {
 } from "@carbon/icons-react";
 import { StringFilter } from "react3l-advanced-filters";
 import Button from "../Button/Button";
-import Sorter from "./Sorter/Sorter";
+
 const KateBishop =
   "https://cdn.searchenginejournal.com/wp-content/uploads/2019/07/the-essential-guide-to-using-images-legally-online-1520x800.png";
 const { TabPane } = Tabs;
@@ -191,20 +191,20 @@ function Default() {
     type: typeRowSelection,
   };
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     let test = document.getElementsByClassName("ant-table-cell")[0];
-          console.log(test)
-          if(test) {
+    console.log(test)
+    if (test) {
 
-            test.addEventListener(
-              "mouseover",
-              function (event) {
-                console.log(event);
-              },
-              false
-            );
-          }
-  },[])
+      test.addEventListener(
+        "mouseover",
+        function (event) {
+          console.log(event);
+        },
+        false
+      );
+    }
+  }, [])
 
   const columns: ColumnProps<any>[] = useMemo(
     () => [
@@ -231,8 +231,8 @@ function Default() {
           );
           return (
             <div>
-              <LayoutHeader orderType={orderType} title="Type" />
-              <Sorter sortedColumn={sortedColumn}></Sorter>
+              <LayoutHeader orderType={orderType} title="Type" sortedColumn={sortedColumn} isSorter />
+
             </div>
           );
         },

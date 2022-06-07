@@ -1,12 +1,31 @@
-.layout-header-left{
+.layout-header-left {
     padding-left: 16px;
     padding-right: 8px;
+    .sorter-container {
+        .sort-action {
+            display: none;
+        }
+    }
+    &:hover {
+        .sorter-container {
+            .sort-action {
+                display: block;
+            }
+        }
+    }
+    &:focus {
+        .sorter-container {
+            .sort-action {
+                display: none;
+            }
+        }
+    }
 }
-.layout-header-right{
+.layout-header-right {
     padding-right: 16px;
     padding-left: 8px;
 }
-.layout-header-center{
+.layout-header-center {
     padding-left: 8px;
     padding-right: 8px;
 }

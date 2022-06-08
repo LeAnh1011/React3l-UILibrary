@@ -1,31 +1,28 @@
+import {
+  Add16, ChevronDown16,
+  ChevronUp16
+} from "@carbon/icons-react";
 import { storiesOf } from "@storybook/react";
-import nameof from "ts-nameof.macro";
-import React, { useMemo } from "react";
+import { Tabs } from "antd";
 import Radio, { RadioChangeEvent } from "antd/lib/radio";
-import "./StandardTable.scss";
-import StandardTable from "./StandardTable";
+import { ColumnProps } from "antd/lib/table";
 // import { Model } from "react3l-common";
 import { Key, RowSelectionType } from "antd/lib/table/interface";
-import LayoutHeader from "./LayoutHeader/LayoutHeader";
-import LayoutCell from "./LayoutCell/LayoutCell";
+import React, { useMemo } from "react";
+import { StringFilter } from "react3l-advanced-filters";
 import { ModelFilter } from "react3l-common";
+import nameof from "ts-nameof.macro";
+import Button from "../Button/Button";
 import ActionBarComponent from "./ActionBarComponent/ActionBarComponent";
 import BadgeText from "./DataCellComponent/BadgeText/BadgeText";
-import TwoLineText from "./DataCellComponent/TwoLineText/TwoLineText";
 import OneLineText from "./DataCellComponent/OneLineText/OneLineText";
 import StatusLine from "./DataCellComponent/StatusLine/StatusLine";
-import { ColumnProps } from "antd/lib/table";
-import { Tabs } from "antd";
+import TwoLineText from "./DataCellComponent/TwoLineText/TwoLineText";
+import LayoutCell from "./LayoutCell/LayoutCell";
+import LayoutHeader from "./LayoutHeader/LayoutHeader";
 import Pagination from "./Pagination/Pagination";
-import {
-  Add16,
-  ArrowDown20,
-  ArrowUp20,
-  ChevronDown16,
-  ChevronUp16,
-} from "@carbon/icons-react";
-import { StringFilter } from "react3l-advanced-filters";
-import Button from "../Button/Button";
+import StandardTable from "./StandardTable";
+import "./StandardTable.scss";
 
 const KateBishop =
   "https://cdn.searchenginejournal.com/wp-content/uploads/2019/07/the-essential-guide-to-using-images-legally-online-1520x800.png";

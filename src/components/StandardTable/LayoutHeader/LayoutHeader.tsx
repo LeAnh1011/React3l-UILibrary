@@ -1,15 +1,11 @@
-import classNames from "classnames";
-import "./LayoutHeader.scss";
 import { Tooltip } from "antd";
+import classNames from "classnames";
+import React, {
+  useCallback, useState
+} from "react";
 import { CommonService } from "services/common-service";
 import Sorter from "../Sorter/Sorter";
-import React, {
-  MouseEventHandler,
-  RefObject,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import "./LayoutHeader.scss";
 
 export interface LayoutHeaderProps {
   className?: string;

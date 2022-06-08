@@ -82,6 +82,8 @@ function Default() {
 
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
 
+  const [filter] = React.useState<DistrictFilter>(new DistrictFilter());
+
 
   const [
     isSelectWithPreferOption,
@@ -168,6 +170,7 @@ function Default() {
             selectWithAdd={isSelectWithAdd}
             selectWithPreferOption={isSelectWithPreferOption}
             preferOptions={isSelectWithPreferOption ? list : undefined}
+            valueFilter={{...filter, id: {equal: 1}}}
           />
         </FormItem>
       </div>

@@ -64,6 +64,9 @@
           &.ant-tabs-tab-active {
             background: var(--palette-gray-10);
             box-shadow: inset 0px 2px 0px var(--palette-blue-60);
+            &+.ant-tabs-tab {
+              box-shadow: none;
+            }
 
             .ant-tabs-tab-btn {
               font-weight: 500;

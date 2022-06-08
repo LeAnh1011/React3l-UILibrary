@@ -26,21 +26,6 @@ function LayoutHeader(props: LayoutHeaderProps) {
     sortedColumn,
   } = props;
 
-  const [isShowAll, setIsShowAll] = useState<boolean>(false);
-
-  const handleClick = useCallback(() => {
-    
-    if(typeof sortedColumn === undefined) {
-      setIsShowAll(false)
-    }else {
-      if(sortedColumn?.order === 'descend') {
-        setIsShowAll(true);
-      }else {
-        setIsShowAll(false)
-      }
-    }
-  }, [sortedColumn]);
-
 
   return (
     <button
@@ -48,7 +33,6 @@ function LayoutHeader(props: LayoutHeaderProps) {
         className,
         `layout-header-${orderType} layout-header__container`
       )}
-      onClick={handleClick}
     >
       {maxLength && title?.length > maxLength ? (
         <Tooltip title={title}>
@@ -57,7 +41,7 @@ function LayoutHeader(props: LayoutHeaderProps) {
       ) : (
         title
       )}
-      {isSorter && <Sorter sortedColumn={sortedColumn} isShowAll={isShowAll}></Sorter>}
+      {isSorter && <Sorter sortedColumn={sortedColumn} ></Sorter>}
     </button>
   );
 }

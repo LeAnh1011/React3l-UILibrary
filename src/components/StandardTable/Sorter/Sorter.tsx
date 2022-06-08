@@ -5,11 +5,10 @@ import "./Sorter.scss";
 
 export interface SorterProps {
   sortedColumn?: any;
-  isShowAll?: boolean;
 }
 
 function Sorter(props: SorterProps) {
-  const { sortedColumn, isShowAll = false } = props;
+  const { sortedColumn } = props;
 
   return (
     <div className="sorter-container">
@@ -26,10 +25,7 @@ function Sorter(props: SorterProps) {
       ) : null}
 
       <div
-        className={classNames("sort-action", {
-          "sort-action__none": !isShowAll,
-          "sort-action__block": isShowAll,
-        })}
+        className={classNames("sort-action")}
       >
         <ArrowUp16 />
         <ArrowDown16 />

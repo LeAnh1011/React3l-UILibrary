@@ -14,6 +14,13 @@
     font-weight: bold;
     background-color: var(--palette-gray-20);
   }
+
+  .ant-table-thead
+    th.ant-table-column-has-sorters.ant-table-cell-fix-left:hover,
+  .ant-table-thead
+    th.ant-table-column-has-sorters.ant-table-cell-fix-right:hover {
+    background: var(--palette-grayHover-20);
+  }
   .ant-table-tbody > tr.ant-table-row:hover > td,
   .ant-table-tbody > tr > td.ant-table-cell-row-hover {
     background-color: #e5e5e5;
@@ -77,7 +84,7 @@
   .ant-checkbox-input:focus + .ant-checkbox-inner {
     border-color: black;
   }
- 
+
   .ant-checkbox-checked::after {
     border: 1px solid black;
   }

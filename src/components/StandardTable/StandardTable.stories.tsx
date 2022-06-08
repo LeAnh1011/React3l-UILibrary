@@ -209,7 +209,16 @@ function Default() {
   const columns: ColumnProps<any>[] = useMemo(
     () => [
       {
-        title: <LayoutHeader orderType={orderType} title="Title" />,
+        title: ({ sortColumns }) => {
+          const sortedColumn = sortColumns?.find(
+            ({ column }) => column.key === "type"
+          );
+          return (
+            <div>
+              <LayoutHeader orderType={orderType} title="Title" sortedColumn={sortedColumn} isSorter />
+            </div>
+          );
+        },
         dataIndex: "type",
         key: "type",
         sorter: true,
@@ -231,8 +240,7 @@ function Default() {
           );
           return (
             <div>
-              <LayoutHeader orderType={orderType} title="Type" sortedColumn={sortedColumn} isSorter />
-
+              <LayoutHeader orderType={orderType} title="Name" sortedColumn={sortedColumn} isSorter />
             </div>
           );
         },
@@ -257,9 +265,19 @@ function Default() {
       },
 
       {
-        title: <LayoutHeader orderType={orderType} title="Location" />,
+        title: ({ sortColumns }) => {
+          const sortedColumn = sortColumns?.find(
+            ({ column }) => column.key === "location"
+          );
+          return (
+            <div>
+              <LayoutHeader orderType={orderType} title="Location" sortedColumn={sortedColumn} isSorter />
+            </div>
+          );
+        },
         dataIndex: "location",
         key: "location",
+        sorter: true,
         ellipsis: true,
         render(...[location]) {
           return (
@@ -270,7 +288,16 @@ function Default() {
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} title="Platform" />,
+        title: ({ sortColumns }) => {
+          const sortedColumn = sortColumns?.find(
+            ({ column }) => column.key === "platform"
+          );
+          return (
+            <div>
+              <LayoutHeader orderType={orderType} title="Platform" sortedColumn={sortedColumn} isSorter />
+            </div>
+          );
+        },
         dataIndex: "platform",
         key: "platform",
         sorter: true,
@@ -284,7 +311,16 @@ function Default() {
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} title="Creator" />,
+        title: ({ sortColumns }) => {
+          const sortedColumn = sortColumns?.find(
+            ({ column }) => column.key === "creator"
+          );
+          return (
+            <div>
+              <LayoutHeader orderType={orderType} title="Creator" sortedColumn={sortedColumn} isSorter />
+            </div>
+          );
+        },
         dataIndex: "creator",
         key: "creator",
         sorter: true,

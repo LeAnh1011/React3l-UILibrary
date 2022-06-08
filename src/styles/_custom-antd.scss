@@ -156,15 +156,21 @@ tr
   }
 }
 
-.ant-table-column-sorters {
-  height: 100%;
-  .ant-table-column-title {
+.ant-table-cell {
+  .ant-table-cell-content{
     height: 100%;
-    div {
+  }
+  .ant-table-column-sorters {
+    height: 100%;
+    .ant-table-column-title {
       height: 100%;
+      div {
+        height: 100%;
+      }
+    }
+    .ant-table-column-sorter {
+      display: none;
     }
   }
-  .ant-table-column-sorter {
-    display: none;
-  }
 }
+

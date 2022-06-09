@@ -166,10 +166,10 @@ function AdvanceDateRangeFilterMaster(
 
   const handleChange = React.useCallback(
     (values: [Moment, Moment], formatString: [string, string]) => {
-      onChange({ id: 9, name: "general.filter.customDate", code: "customdate" }, [
-        values[0]?.startOf("day"),
-        values[1]?.endOf("day"),
-      ]);
+      onChange(
+        { id: 9, name: "general.filter.customDate", code: "customdate" },
+        [values[0]?.startOf("day"), values[1]?.endOf("day")]
+      );
     },
     [onChange]
   );
@@ -189,7 +189,7 @@ function AdvanceDateRangeFilterMaster(
   const handleCloseAdvanceFilterMaster = React.useCallback(() => {
     setExpand(false);
     if (internalValue[0] || internalValue[1]) {
-      return
+      return;
     }
     setExpandDate(false);
   }, [internalValue]);

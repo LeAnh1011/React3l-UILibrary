@@ -1,6 +1,6 @@
 import { ChevronDown16, Search16 } from "@carbon/icons-react";
 import { useDebounceFn } from "ahooks";
-import { Checkbox, Empty } from "antd";
+import { Checkbox, Empty, Tooltip } from "antd";
 import classNames from "classnames";
 import IconLoading from "components/IconLoading/IconLoading";
 import InputText from "components/Input/InputText";
@@ -46,6 +46,8 @@ export interface AdvanceMultipleIdFilterMasterProps<
   preferOptions?: T[];
 
   maxLength?: number;
+
+  maxLengthItem?: number;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -95,6 +97,7 @@ function AdvanceMultipleIdFilterMaster(
     className,
     preferOptions,
     maxLength,
+    maxLengthItem = 30,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -380,9 +383,13 @@ function AdvanceMultipleIdFilterMaster(
                         checked={item.isSelected}
                         onChange={handleClickItem(item)}
                       >
-                        <span className="advance-id-master__text">
-                          {render(item)}
-                        </span>
+                         {maxLengthItem && item?.name?.length > maxLengthItem ? (
+                        <Tooltip title={item?.name}>
+                          {CommonService.limitWord(item?.name, maxLengthItem)}
+                        </Tooltip>
+                      ) : (
+                        item?.name
+                      )}
                       </Checkbox>
                     </div>
                   ))

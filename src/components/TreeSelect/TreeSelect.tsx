@@ -113,6 +113,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
   const { run } = useDebounceFn(
     (searchTerm: string) => {
       const cloneFilter = { ...filter };
+     
       cloneFilter[searchProperty][searchType] = searchTerm;
       if (listIds.length > 1) {
         cloneFilter["activeNodeIds"] = { ...new IdFilter(), in: [...listIds] };
@@ -128,6 +129,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
       wait: DEBOUNCE_TIME_300,
     }
   );
+
 
   const handleClearItem = React.useCallback(
     (item: Model) => {

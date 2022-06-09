@@ -6,11 +6,11 @@ export class Message extends Model {
   discussionId: string;
   content?: string;
   mobileContent?: string;
-  creatorId: number;
+  creatorId?: number;
   createdAt?: Moment;
   updatedAt?: Moment;
   deletedAt?: Moment;
-  creator: Creator;
+  creator?: Creator;
   isOwner?: boolean;
   isPopup?: boolean;
   constructor(message?: Message) {
@@ -19,12 +19,7 @@ export class Message extends Model {
       this.discussionId = message.discussionId ? message.discussionId : null;
       this.content = message.content ? message.content : null;
       this.mobileContent = message.mobileContent ? message.mobileContent : null;
-      this.createdAt = message.createdAt ? message.createdAt : null;
-      this.updatedAt = message.updatedAt ? message.updatedAt : null;
-      this.deletedAt = message.deletedAt ? message.deletedAt : null;
-      this.creatorId = message.creator.id;
-      this.creator = { ...message.creator };
-      this.isOwner = message.isOwner;
+      
     }
   }
 }

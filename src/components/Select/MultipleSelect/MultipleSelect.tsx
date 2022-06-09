@@ -9,7 +9,7 @@ import React, { RefObject } from "react";
 import { ErrorObserver, Observable } from "rxjs";
 import { BORDER_TYPE } from "config/enum";
 import "./MultipleSelect.scss";
-import { Checkbox, Empty } from "antd";
+import { Checkbox, Empty, Tooltip } from "antd";
 import IconLoading from "components/IconLoading/IconLoading";
 
 export interface MultipleSelectProps<
@@ -192,9 +192,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: any) => {
-      let filteredItem = values?.filter(
-        (current) => current.id === item.id
-      )[0];
+      let filteredItem = values?.filter((current) => current.id === item.id)[0];
       if (filteredItem) {
         const tmp = [...values];
         const ids = values?.map((item) => item?.id);
@@ -326,24 +324,65 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
         ref={wrapperRef}
       >
         <div className="select__input" onClick={handleToggle}>
-          <InputTag
-            listValue={values}
-            isMaterial={isMaterial}
-            render={render}
-            placeHolder={placeHolder}
-            disabled={disabled}
-            onSearch={handleSearchChange}
-            label={label}
-            onClearMulti={handleClearAll}
-            type={type}
-            isSmall={isSmall}
-            isUsingSearch={isUsingSearch}
-            onKeyDown={handleKeyPress}
-            onKeyEnter={handleKeyEnter}
-            isNotExpand={!isExpand}
-            isRequired={isRequired}
-          />
+          {values && values?.length > 0 ? (
+            <Tooltip
+              placement="topLeft"
+              title={
+                <>
+                  {values?.map((itemValue: any, index: number) => (
+                    <span key={index}>
+                      <>
+                        <span>{itemValue?.name}</span>
+                        {index < values?.length - 1 && (
+                          <span className="m-r--xxxs">&#44;</span>
+                        )}
+                      </>
+                    </span>
+                  ))}
+                </>
+              }
+            >
+              <div>
+                <InputTag
+                  listValue={values}
+                  isMaterial={isMaterial}
+                  render={render}
+                  placeHolder={placeHolder}
+                  disabled={disabled}
+                  onSearch={handleSearchChange}
+                  label={label}
+                  onClearMulti={handleClearAll}
+                  type={type}
+                  isSmall={isSmall}
+                  isUsingSearch={isUsingSearch}
+                  onKeyDown={handleKeyPress}
+                  onKeyEnter={handleKeyEnter}
+                  isNotExpand={!isExpand}
+                  isRequired={isRequired}
+                />
+              </div>
+            </Tooltip>
+          ) : (
+            <InputTag
+              listValue={values}
+              isMaterial={isMaterial}
+              render={render}
+              placeHolder={placeHolder}
+              disabled={disabled}
+              onSearch={handleSearchChange}
+              label={label}
+              onClearMulti={handleClearAll}
+              type={type}
+              isSmall={isSmall}
+              isUsingSearch={isUsingSearch}
+              onKeyDown={handleKeyPress}
+              onKeyEnter={handleKeyEnter}
+              isNotExpand={!isExpand}
+              isRequired={isRequired}
+            />
+          )}
         </div>
+
         {isExpand && (
           <div className="select__list-container" style={appendToBodyStyle}>
             {!loading ? (

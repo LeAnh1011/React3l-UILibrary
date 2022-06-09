@@ -1,19 +1,39 @@
-import classNames from "classnames";
-import "./LayoutHeader.scss";
 import { Tooltip } from "antd";
+import classNames from "classnames";
+import React, {
+  useCallback, useState
+} from "react";
 import { CommonService } from "services/common-service";
+import Sorter from "../Sorter/Sorter";
+import "./LayoutHeader.scss";
 
 export interface LayoutHeaderProps {
   className?: string;
   orderType?: "left" | "right" | "center";
   title?: string;
   maxLength?: number;
+  isSorter?: boolean;
+  sortedColumn?: any;
 }
 
 function LayoutHeader(props: LayoutHeaderProps) {
-  const { className, orderType, title, maxLength } = props;
+  const {
+    className,
+    orderType,
+    title,
+    maxLength,
+    isSorter,
+    sortedColumn,
+  } = props;
+
+
   return (
-    <div className={classNames(className, `layout-header-${orderType}`)}>
+    <button
+      className={classNames(
+        className,
+        `layout-header-${orderType} layout-header__container`
+      )}
+    >
       {maxLength && title?.length > maxLength ? (
         <Tooltip title={title}>
           {CommonService.limitWord(title, maxLength)}
@@ -21,7 +41,8 @@ function LayoutHeader(props: LayoutHeaderProps) {
       ) : (
         title
       )}
-    </div>
+      {isSorter && <Sorter sortedColumn={sortedColumn} ></Sorter>}
+    </button>
   );
 }
 LayoutHeader.defaultProps = {

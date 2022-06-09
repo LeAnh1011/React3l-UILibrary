@@ -23,7 +23,8 @@ export interface InputSearchProps<
   searchType?: string;
   searchProperty?: string;
   className?: string;
-  onChange?: (id: number, T?: T) => void;
+  onChangeSearchField?: (id: number, T?: T) => void;
+  onChange?:(value: string) => void;
   placeHolder?: string;
   animationInput?: boolean;
 }
@@ -42,9 +43,10 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     classFilter: ClassFilter,
     searchProperty,
     searchType,
-    onChange,
+    onChangeSearchField,
     className,
     animationInput,
+    onChange,
   } = props;
   const [showListItem, setShowListItem] = React.useState<boolean>();
   const [fullWidth, setFullWidth] = React.useState<boolean>(!animationInput);
@@ -143,11 +145,11 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      onChange(item.id, item);
+      onChangeSearchField(item.id, item);
       setShowListItem(false);
       setActiveBackground(false);
     },
-    [onChange]
+    [onChangeSearchField]
   );
 
   const handleSearchChange = React.useCallback(
@@ -156,6 +158,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     },
     [run]
   );
+
 
   const handleKeyPress = React.useCallback(
     (event: any) => {
@@ -290,12 +293,20 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           <Search16 className="icon-input-search" />
         </div>
         <div className={classNames("box-input-search")}>
-          <InputSearchSelect
-            placeHolder={placeHolder}
-            expanded={isExpand}
-            onSearch={handleSearchChange}
-            onKeyDown={handleKeyPress}
-          />
+          {getList && typeof getList === "function" ? (
+            <InputSearchSelect
+              placeHolder={placeHolder}
+              expanded={isExpand}
+              onSearch={handleSearchChange}
+              onKeyDown={handleKeyPress}
+            />
+          ) : (
+            <InputSearchSelect
+              placeHolder={placeHolder}
+              expanded={isExpand}
+              onSearch={onChange}
+            />
+          )}
         </div>
       </div>
       {showListItem && (

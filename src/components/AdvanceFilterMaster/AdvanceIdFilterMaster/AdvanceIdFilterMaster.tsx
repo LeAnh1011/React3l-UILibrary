@@ -1,6 +1,6 @@
 import { Checkmark16, ChevronDown16, Search16 } from "@carbon/icons-react";
 import { useDebounceFn } from "ahooks";
-import { Empty } from "antd";
+import { Empty, Tooltip } from "antd";
 import classNames from "classnames";
 import IconLoading from "components/IconLoading/IconLoading";
 import InputText from "components/Input/InputText";
@@ -50,10 +50,12 @@ export interface AdvanceIdFilterMasterProps<
   preferOptions?: T[];
 
   maxLength?: number;
+
+  maxLengthItem?: number;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
-  return t?.name;
+  return CommonService.limitWord(t?.name, 25);
 }
 
 function AdvanceIdFilterMaster(
@@ -78,6 +80,7 @@ function AdvanceIdFilterMaster(
     className,
     preferOptions,
     maxLength,
+    maxLengthItem = 30
   } = props;
 
   const [internalValue, setInternalValue] = React.useState<Model>();
@@ -303,9 +306,13 @@ function AdvanceIdFilterMaster(
                       onKeyDown={handleMove(item)}
                       onClick={handleClickItem(item)}
                     >
-                      <span className="advance-id-master__text">
-                        {render(item)}
-                      </span>
+                      {maxLengthItem && item?.name?.length > maxLengthItem ? (
+                        <Tooltip title={item?.name}>
+                          {CommonService.limitWord(item?.name, maxLengthItem)}
+                        </Tooltip>
+                      ) : (
+                        item?.name
+                      )}
                       {item.id === internalValue?.id && <Checkmark16 />}
                     </div>
                   ))

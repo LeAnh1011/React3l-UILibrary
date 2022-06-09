@@ -1,33 +1,55 @@
 @import "../../styles/index.scss";
 .page-table {
+  .ant-checkbox-indeterminate .ant-checkbox-inner {
+    background-color: #161616;
+  }
+
+  .ant-checkbox-indeterminate .ant-checkbox-inner::after {
+    width: 8px;
+    height: 2px;
+    background-color: white;
+  }
   .ant-table-thead > tr > th {
     font-size: 12px;
     font-weight: bold;
-    background-color: #E0E0E0;
+    background-color: var(--palette-gray-20);
+  }
+
+  .ant-table-thead
+    th.ant-table-column-has-sorters.ant-table-cell-fix-left:hover,
+  .ant-table-thead
+    th.ant-table-column-has-sorters.ant-table-cell-fix-right:hover {
+    background: var(--palette-grayHover-20);
   }
   .ant-table-tbody > tr.ant-table-row:hover > td,
   .ant-table-tbody > tr > td.ant-table-cell-row-hover {
-    background-color: #E5E5E5;
+    background-color: #e5e5e5;
   }
   .ant-table-tbody > tr.ant-table-row-selected > td {
-    background-color: #F4F4F4;
+    background-color: var(--palette-gray-10);
   }
   .ant-table-thead > tr > th {
     padding: 0px 0px;
+  }
+  .ant-table-thead th.ant-table-cell:hover {
+    background-color: var(--palette-grayHover-20);
   }
   .ant-table-tbody > tr > td {
     padding: 0px 0px;
   }
-  .ant-table-thead th.ant-table-column-has-sorters{
-    padding-right: 8px;
-  }
-  .big-checkbox-col{
-    .ant-table-selection-col{
+
+  .big-checkbox-col {
+    .ant-table-selection-col {
       width: 40px;
     }
   }
   .ant-table-tbody > tr > td > .ant-table-wrapper:only-child .ant-table,
-  .ant-table-tbody > tr > td > .ant-table-expanded-row-fixed > .ant-table-wrapper:only-child .ant-table {
+  .ant-table-tbody
+    > tr
+    > td
+    > .ant-table-expanded-row-fixed
+    > .ant-table-wrapper:only-child
+    .ant-table {
     margin-top: 0px;
     margin-bottom: 0px;
     margin-right: 0px;
@@ -62,9 +84,7 @@
   .ant-checkbox-input:focus + .ant-checkbox-inner {
     border-color: black;
   }
-  .ant-checkbox-indeterminate .ant-checkbox-inner::after {
-    background-color: black;
-  }
+
   .ant-checkbox-checked::after {
     border: 1px solid black;
   }
@@ -72,7 +92,7 @@
 .ant-table-body.active-draggable {
   cursor: grabbing;
 }
-.expand-table-box{
+.expand-table-box {
   padding: 28px 24px 28px 48px;
   background: rgba(13, 24, 33, 0.04);
 }

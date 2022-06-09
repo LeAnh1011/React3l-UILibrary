@@ -224,7 +224,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     if (typeof getTreeData === "function") {
       subscription.add(getTreeData);
       setLoading(true);
-      getTreeData(new ClassFilter()).subscribe({
+      getTreeData(valueFilter).subscribe({
         next: (res: Model[]) => {
           if (res) {
             const [treeData, internalExpandedKeys] = CommonService.buildTree(
@@ -248,7 +248,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       });
     }
     return () => {};
-  }, [getTreeData, selectedKey, ClassFilter, subscription, onlySelectLeaf]);
+  }, [getTreeData, selectedKey, ClassFilter, subscription, onlySelectLeaf, valueFilter]);
 
   React.useEffect(() => {
     if (valueFilter && valueFilter[searchProperty][searchType]) {

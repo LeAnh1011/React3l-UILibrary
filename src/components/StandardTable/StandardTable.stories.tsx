@@ -1,25 +1,29 @@
+import {
+  Add16, ChevronDown16,
+  ChevronUp16
+} from "@carbon/icons-react";
 import { storiesOf } from "@storybook/react";
-import nameof from "ts-nameof.macro";
-import React, { useMemo } from "react";
+import { Tabs } from "antd";
 import Radio, { RadioChangeEvent } from "antd/lib/radio";
-import "./StandardTable.scss";
-import StandardTable from "./StandardTable";
+import { ColumnProps } from "antd/lib/table";
 // import { Model } from "react3l-common";
 import { Key, RowSelectionType } from "antd/lib/table/interface";
-import LayoutHeader from "./LayoutHeader/LayoutHeader";
-import LayoutCell from "./LayoutCell/LayoutCell";
+import React, { useMemo } from "react";
+import { StringFilter } from "react3l-advanced-filters";
 import { ModelFilter } from "react3l-common";
+import nameof from "ts-nameof.macro";
+import Button from "../Button/Button";
 import ActionBarComponent from "./ActionBarComponent/ActionBarComponent";
 import BadgeText from "./DataCellComponent/BadgeText/BadgeText";
-import TwoLineText from "./DataCellComponent/TwoLineText/TwoLineText";
 import OneLineText from "./DataCellComponent/OneLineText/OneLineText";
 import StatusLine from "./DataCellComponent/StatusLine/StatusLine";
-import { ColumnProps } from "antd/lib/table";
-import { Tabs } from "antd";
+import TwoLineText from "./DataCellComponent/TwoLineText/TwoLineText";
+import LayoutCell from "./LayoutCell/LayoutCell";
+import LayoutHeader from "./LayoutHeader/LayoutHeader";
 import Pagination from "./Pagination/Pagination";
-import { Add16, ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
-import { StringFilter } from "react3l-advanced-filters";
-import Button from "../Button/Button";
+import StandardTable from "./StandardTable";
+import "./StandardTable.scss";
+
 const KateBishop =
   "https://cdn.searchenginejournal.com/wp-content/uploads/2019/07/the-essential-guide-to-using-images-legally-online-1520x800.png";
 const { TabPane } = Tabs;
@@ -184,10 +188,34 @@ function Default() {
     type: typeRowSelection,
   };
 
+  React.useEffect(() => {
+    let test = document.getElementsByClassName("ant-table-cell")[0];
+    console.log(test)
+    if (test) {
+
+      test.addEventListener(
+        "mouseover",
+        function (event) {
+          console.log(event);
+        },
+        false
+      );
+    }
+  }, [])
+
   const columns: ColumnProps<any>[] = useMemo(
     () => [
       {
-        title: <LayoutHeader orderType={orderType} title="Title" />,
+        title: ({ sortColumns }) => {
+          const sortedColumn = sortColumns?.find(
+            ({ column }) => column.key === "type"
+          );
+          return (
+            <div>
+              <LayoutHeader orderType={orderType} title="Title" sortedColumn={sortedColumn} isSorter />
+            </div>
+          );
+        },
         dataIndex: "type",
         key: "type",
         sorter: true,
@@ -203,10 +231,20 @@ function Default() {
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} title="Type" />,
+        title: ({ sortColumns }) => {
+          const sortedColumn = sortColumns?.find(
+            ({ column }) => column.key === "name"
+          );
+          return (
+            <div>
+              <LayoutHeader orderType={orderType} title="Name" sortedColumn={sortedColumn} isSorter />
+            </div>
+          );
+        },
         dataIndex: "name",
         key: "name",
         sorter: true,
+
         ellipsis: true,
         render(...[name]) {
           return (
@@ -224,26 +262,16 @@ function Default() {
       },
 
       {
-        title: <LayoutHeader orderType={orderType} title="Type" />,
-        dataIndex: "name",
-        key: "name2",
-        sorter: true,
-        ellipsis: true,
-        render(...[name]) {
+        title: ({ sortColumns }) => {
+          const sortedColumn = sortColumns?.find(
+            ({ column }) => column.key === "location"
+          );
           return (
-            <LayoutCell orderType={orderType} tableSize={size}>
-              <OneLineText
-                avatar={KateBishop}
-                avatarType={avatarType}
-                value={name}
-                avatarSize={size}
-              />
-            </LayoutCell>
+            <div>
+              <LayoutHeader orderType={orderType} title="Location" sortedColumn={sortedColumn} isSorter />
+            </div>
           );
         },
-      },
-      {
-        title: <LayoutHeader orderType={orderType} title="Location" />,
         dataIndex: "location",
         key: "location",
         sorter: true,
@@ -257,7 +285,16 @@ function Default() {
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} title="Platform" />,
+        title: ({ sortColumns }) => {
+          const sortedColumn = sortColumns?.find(
+            ({ column }) => column.key === "platform"
+          );
+          return (
+            <div>
+              <LayoutHeader orderType={orderType} title="Platform" sortedColumn={sortedColumn} isSorter />
+            </div>
+          );
+        },
         dataIndex: "platform",
         key: "platform",
         sorter: true,
@@ -271,7 +308,16 @@ function Default() {
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} title="Creator" />,
+        title: ({ sortColumns }) => {
+          const sortedColumn = sortColumns?.find(
+            ({ column }) => column.key === "creator"
+          );
+          return (
+            <div>
+              <LayoutHeader orderType={orderType} title="Creator" sortedColumn={sortedColumn} isSorter />
+            </div>
+          );
+        },
         dataIndex: "creator",
         key: "creator",
         sorter: true,

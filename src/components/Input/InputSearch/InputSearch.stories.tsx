@@ -26,9 +26,14 @@ const demoListEnum = (TModelFilter: ModelFilter) => {
 export function InputSearchStories() {
   const [selectModelFilter] = React.useState<DemoFilter>(new DemoFilter());
   const [selectModel, setSelectModel] = React.useState<Model>(null);
+  const [value, setValue] = React.useState<String>(null);
 
   const handleSetModel = React.useCallback((...[, item]) => {
     setSelectModel(item);
+  }, []);
+
+  const handleSearchChange = React.useCallback((value) => {
+    setValue(value);
   }, []);
 
   return (
@@ -42,14 +47,12 @@ export function InputSearchStories() {
       >
         <InputSearch
           value={selectModel}
-          valueFilter={selectModelFilter}
-          searchProperty={"name"}
           classFilter={DemoFilter}
           placeHolder="Search..."
-          getList={demoListEnum}
-          onChange={handleSetModel}
+          onChange={handleSearchChange}
           className="m-b--xl"
         />
+
         <InputSearch
           value={selectModel}
           valueFilter={selectModelFilter}
@@ -57,7 +60,18 @@ export function InputSearchStories() {
           classFilter={DemoFilter}
           placeHolder="Search..."
           getList={demoListEnum}
-          onChange={handleSetModel}
+          onChangeSearchField={handleSetModel}
+          className="m-b--xl"
+        />
+
+        <InputSearch
+          value={selectModel}
+          valueFilter={selectModelFilter}
+          searchProperty={"name"}
+          classFilter={DemoFilter}
+          placeHolder="Search..."
+          getList={demoListEnum}
+          onChangeSearchField={handleSetModel}
           animationInput={false}
         />
       </div>

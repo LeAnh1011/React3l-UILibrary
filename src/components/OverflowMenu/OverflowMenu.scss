@@ -1,1 +1,96 @@
-
+@import "../../styles/index.scss";
+.overflow-menu__container {
+    .select__list-container {
+        width: 160px;
+        height: auto;
+        @include box-shadow--popover();
+        position: absolute;
+        z-index: 999;
+        
+        .select__list {
+          width: 100%;
+          overflow-y: auto;
+          max-height: 202px;
+          position: relative;
+          color: black;
+        }
+        .select__list::before {
+            color: burlywood;
+            top: -0.1875rem;
+            left: 0;
+            width: 2.5rem;
+            height: 0.1875rem;
+        }
+        .select__list::after {
+            color: red;
+            top: -0.1875rem;
+            left: 0;
+            width: 2.5rem;
+            height: 0.1875rem;
+        }
+        .select__bottom-button {
+          height: 40px;
+          width: 100%;
+          background-color: var(--palette-gray-10);
+          display: flex;
+          align-items: center;
+          box-shadow: inset 0px 1px 0px #e1e3e5;
+          span {
+            font-size: 14px;
+          }
+          &:hover {
+            cursor: pointer;
+          }
+        }
+        .select__add-button {
+          span {
+            color: var(--color-primary);
+            font-size: 12px;
+            margin-left: 7px;
+          }
+          svg {
+            color: var(--color-primary);
+          }
+        }
+        .select__loading {
+          width: 100%;
+          min-height: 100px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+        .select__item {
+          position: relative;
+          display: flex;
+          align-items: center;
+          padding-right: 15px;
+          font-size: 14px;
+          line-height: 16px;
+          .select__text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          &:hover {
+            cursor: pointer;
+          }
+          &:hover,
+          &:focus {
+            background-color: var(--palette-grayHover-10);
+          }
+          &:focus-visible {
+            outline: none;
+          }
+          &.select__item--selected {
+            background-color: var(--palette-grayHover-10);
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+    
+        .select__list-prefer {
+          box-shadow: inset 0px 1px 0px #e1e3e5;
+        }
+      }
+}

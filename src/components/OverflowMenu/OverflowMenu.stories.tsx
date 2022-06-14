@@ -16,24 +16,24 @@ function Default() {
 
   const children = React.useMemo(
     () => (
-      <div className="select__list">
-        <div className={classNames("select__item p-l--xs p-y--xs")}>
+      <>
+        <div className={classNames("select__item p-l--xs p-y--xxs")}>
           <span className="select__text">Thêm</span>
         </div>
-        <div className={classNames("select__item p-l--xs p-y--xs")}>
+        <div className={classNames("select__item p-l--xs p-y--xxs")}>
           <span className="select__text">Sửa</span>
         </div>
-        <div className={classNames("select__item p-l--xs p-y--xs")}>
+        <div className={classNames("select__item p-l--xs p-y--xxs")}>
           <span className="select__text">Xóa</span>
         </div>
-      </div>
+      </>
     ),
     []
   );
 
   return (
     <div style={{width: "600px"}}>
-      <OverflowMenu size="sm" children={children}></OverflowMenu>
+      <OverflowMenu size="md" children={children}></OverflowMenu>
     </div>
   );
 }

@@ -35,13 +35,15 @@ function OverflowMenu(props: ModalCustomProps) {
     }, 300);
   }, []);
 
+  console.log(selectListRef.current)
+
   return (
     <>
       <div className="overflow-menu__container">
-        <div  className={classNames("overflow-menu__button",{
-              "overflow-menu__button--md": size === "md",
-              "overflow-menu__button--xl": size === "xl",
-            })}>
+        <div className={classNames("overflow-menu__button", {
+          "overflow-menu__button--md": size === "md",
+          "overflow-menu__button--xl": size === "xl",
+        })}>
           <Button
             type="icon-only-ghost"
             icon={<OverflowMenuVertical16 />}
@@ -54,20 +56,22 @@ function OverflowMenu(props: ModalCustomProps) {
         </div>
         {isExpand && (
           <div className="select__list-container" style={appendToBodyStyle}>
-            <div
-              className="select__list"
-              data-floating-menu-direction="bottom"
-              onClick={() => setExpand(false)}
-              ref={selectListRef}
-            >
-              {!loading ? (
+
+            {!loading ? (
+              <div
+                className="select__list"
+                data-floating-menu-direction="bottom"
+                onClick={() => setExpand(false)}
+                ref={selectListRef}
+              >
                 <>{children}</>
-              ) : (
-                <div className="select__loading">
-                  <IconLoading color="#0F62FE" size={24} />
-                </div>
-              )}
-            </div>
+              </div>
+
+            ) : (
+              <div className="select__loading">
+                <IconLoading color="#0F62FE" size={24} />
+              </div>
+            )}
           </div>
         )}
       </div>

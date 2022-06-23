@@ -31,7 +31,7 @@ function Default() {
 
   return (
     <div style={{width: "600px"}}>
-      <OverflowMenu size="md" children={children} appendToBody={true}></OverflowMenu>
+      <OverflowMenu size="md" children={children} ></OverflowMenu>
     </div>
   );
 }

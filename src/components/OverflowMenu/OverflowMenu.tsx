@@ -52,7 +52,7 @@ function OverflowMenu(props: ModalCustomProps) {
           setAppendToBodyStyle({
             position: "fixed",
             top: currentPosition.top - (listHeight + 30),
-            left: currentPosition.left,
+            left: currentPosition.right - 160,
             maxWidth: wrapperRef.current.clientWidth,
           });
         }, 100);
@@ -61,7 +61,7 @@ function OverflowMenu(props: ModalCustomProps) {
         setAppendToBodyStyle({
           position: "fixed",
           top: currentPosition.top + wrapperRef.current.clientHeight,
-          left: currentPosition.left,
+          left: currentPosition.right - 160,
           maxWidth: wrapperRef.current.clientWidth,
         });
         setCheck(false);

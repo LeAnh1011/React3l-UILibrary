@@ -3,9 +3,8 @@
   position: relative;
  
   .overflow-menu__button {
-    button {
-      left: 128px;
-    }
+    float: right;
+    right: 0;
     .btn--shadow {
       @include box-shadow--popover();
       &:hover {
@@ -33,6 +32,8 @@
     @include box-shadow--popover();
     position: absolute;
     z-index: 999;
+    right: 0;
+    top: 32px;
 
     .select__list {
       width: 100%;

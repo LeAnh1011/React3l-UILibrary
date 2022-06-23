@@ -33,8 +33,11 @@ function InputSearchSelect(props: InputSelectProps) {
     (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
       setInternalValue("");
       inputRef.current.focus();
+      if (typeof onSearch === "function") {
+        onSearch('');
+      }
     },
-    []
+    [onSearch]
   );
 
   const handleKeyDown = React.useCallback(

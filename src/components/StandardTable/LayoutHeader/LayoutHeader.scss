@@ -33,7 +33,7 @@
   }
   &:focus,
   &:focus-within {
-    outline: 2px solid var(--palette-blue-60);
+    outline: 2px solid var(--palette-blue-60) !important;
     outline-offset: -2px;
   }
 }

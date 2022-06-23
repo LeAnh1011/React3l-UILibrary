@@ -1,18 +1,17 @@
-import {
-  Add16, ChevronDown16,
-  ChevronUp16
-} from "@carbon/icons-react";
+import { Add16, ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
 import { storiesOf } from "@storybook/react";
 import { Tabs } from "antd";
 import Radio, { RadioChangeEvent } from "antd/lib/radio";
 import { ColumnProps } from "antd/lib/table";
 // import { Model } from "react3l-common";
 import { Key, RowSelectionType } from "antd/lib/table/interface";
+import classNames from "classnames";
 import React, { useMemo } from "react";
 import { StringFilter } from "react3l-advanced-filters";
 import { ModelFilter } from "react3l-common";
 import nameof from "ts-nameof.macro";
 import Button from "../Button/Button";
+import OverflowMenu from "../OverflowMenu/OverflowMenu";
 import ActionBarComponent from "./ActionBarComponent/ActionBarComponent";
 import BadgeText from "./DataCellComponent/BadgeText/BadgeText";
 import OneLineText from "./DataCellComponent/OneLineText/OneLineText";
@@ -190,9 +189,7 @@ function Default() {
 
   React.useEffect(() => {
     let test = document.getElementsByClassName("ant-table-cell")[0];
-    console.log(test)
     if (test) {
-
       test.addEventListener(
         "mouseover",
         function (event) {
@@ -201,7 +198,24 @@ function Default() {
         false
       );
     }
-  }, [])
+  }, []);
+
+  const children = React.useMemo(
+    () => (
+      <>
+        <button className={classNames("select__item p-l--xs p-y--xxs")}>
+          <span className="select__text">Thêm</span>
+        </button>
+        <button className={classNames("select__item p-l--xs p-y--xxs")}>
+          <span className="select__text">Sửa</span>
+        </button>
+        <button className={classNames("select__item p-l--xs p-y--xxs")}>
+          <span className="select__text">Xóa</span>
+        </button>
+      </>
+    ),
+    []
+  );
 
   const columns: ColumnProps<any>[] = useMemo(
     () => [
@@ -212,7 +226,12 @@ function Default() {
           );
           return (
             <div>
-              <LayoutHeader orderType={orderType} title="Title" sortedColumn={sortedColumn} isSorter />
+              <LayoutHeader
+                orderType={orderType}
+                title="Title"
+                sortedColumn={sortedColumn}
+                isSorter
+              />
             </div>
           );
         },
@@ -237,7 +256,12 @@ function Default() {
           );
           return (
             <div>
-              <LayoutHeader orderType={orderType} title="Name" sortedColumn={sortedColumn} isSorter />
+              <LayoutHeader
+                orderType={orderType}
+                title="Name"
+                sortedColumn={sortedColumn}
+                isSorter
+              />
             </div>
           );
         },
@@ -268,7 +292,12 @@ function Default() {
           );
           return (
             <div>
-              <LayoutHeader orderType={orderType} title="Location" sortedColumn={sortedColumn} isSorter />
+              <LayoutHeader
+                orderType={orderType}
+                title="Location"
+                sortedColumn={sortedColumn}
+                isSorter
+              />
             </div>
           );
         },
@@ -291,7 +320,12 @@ function Default() {
           );
           return (
             <div>
-              <LayoutHeader orderType={orderType} title="Platform" sortedColumn={sortedColumn} isSorter />
+              <LayoutHeader
+                orderType={orderType}
+                title="Platform"
+                sortedColumn={sortedColumn}
+                isSorter
+              />
             </div>
           );
         },
@@ -314,7 +348,12 @@ function Default() {
           );
           return (
             <div>
-              <LayoutHeader orderType={orderType} title="Creator" sortedColumn={sortedColumn} isSorter />
+              <LayoutHeader
+                orderType={orderType}
+                title="Creator"
+                sortedColumn={sortedColumn}
+                isSorter
+              />
             </div>
           );
         },
@@ -338,8 +377,7 @@ function Default() {
       {
         title: <LayoutHeader orderType={orderType} title="Action" />,
         key: "status",
-        width: 150,
-        fixed: "right",
+
         ellipsis: true,
         dataIndex: "status",
         render(...[status]) {
@@ -350,8 +388,27 @@ function Default() {
           );
         },
       },
+      {
+        title: <LayoutHeader orderType={orderType} title="Thao thác" />,
+        key: "id",
+        width: 150,
+        fixed: "right",
+        ellipsis: true,
+        dataIndex: "id",
+        render() {
+          return (
+            <div className="d-flex align-items-center justify-content-center">
+              <OverflowMenu
+                size="md"
+                children={children}
+                appendToBody={true}
+              ></OverflowMenu>
+            </div>
+          );
+        },
+      },
     ],
-    [avatarType, orderType, size]
+    [avatarType, children, orderType, size]
   );
 
   const columns2: ColumnProps<any>[] = useMemo(
@@ -526,6 +583,7 @@ function Default() {
     ],
     [avatarType, orderType]
   );
+
   const data = [];
   for (let i = 0; i < 8; ++i) {
     data.push({

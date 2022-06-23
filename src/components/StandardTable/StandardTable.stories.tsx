@@ -401,7 +401,6 @@ function Default() {
               <OverflowMenu
                 size="md"
                 children={children}
-                appendToBody={true}
               ></OverflowMenu>
             </div>
           );

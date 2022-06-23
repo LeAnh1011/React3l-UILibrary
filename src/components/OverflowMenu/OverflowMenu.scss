@@ -6,6 +6,7 @@
     float: right;
     right: 0;
     .btn--shadow {
+      margin: 1px;
       @include box-shadow--popover();
       &:hover {
         background-color: #ffffff !important;
@@ -26,14 +27,17 @@
       }
     }
   }
-  .select__list-container {
+  
+}
+
+.overflow__list {
+  &.select__list-container {
     width: 160px;
     height: auto;
     @include box-shadow--popover();
     position: absolute;
-    z-index: 999;
     right: 0;
-    top: 32px;
+    z-index: 1000;
 
     .select__list {
       width: 100%;

@@ -1,9 +1,17 @@
 @import "../../styles/index.scss";
 .overflow-menu__container {
   position: relative;
+ 
   .overflow-menu__button {
-    display: flex;
-    justify-content: flex-end;
+    button {
+      left: 128px;
+    }
+    .btn--shadow {
+      @include box-shadow--popover();
+      &:hover {
+        background-color: #ffffff !important;
+      }
+    }
   }
   .overflow-menu__button--md {
     &+.select__list-container {
@@ -25,7 +33,6 @@
     @include box-shadow--popover();
     position: absolute;
     z-index: 999;
-    right: 0;
 
     .select__list {
       width: 100%;
@@ -82,6 +89,9 @@
       padding-right: 15px;
       font-size: 14px;
       line-height: 16px;
+      border: none;
+      width: 100%;
+      background-color: #ffffff;
       .select__text {
         white-space: nowrap;
         overflow: hidden;
@@ -92,19 +102,11 @@
         background-color: var(--palette-grayHover-10);
       }
       
-      &:focus {
-        background-color: var(--palette-grayHover-10);
+      &:focus,&:focus-within, &:active {
         outline: 2px solid var(--color-primary);
         outline-offset: -2px;
       }
-      &:focus-visible {
-        outline: none;
-      }
-      &.select__item--selected {
-        background-color: var(--palette-grayHover-10);
-        display: flex;
-        justify-content: space-between;
-      }
+     
     }
 
     .select__list-prefer {

@@ -1,39 +1,37 @@
 import { storiesOf } from "@storybook/react";
-import { RadioChangeEvent } from "antd/lib/radio";
-import OverflowMenu from "./OverflowMenu";
-import React from "react";
 import classNames from "classnames";
+import React from "react";
+import OverflowMenu from "./OverflowMenu";
 export enum SIZE_TYPE {
   LARGE = "lg",
   MEDIUM = "md",
   SMALL = "sm",
 }
 function Default() {
-  const [size, setSize] = React.useState<SIZE_TYPE>(SIZE_TYPE.SMALL);
-  const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
-    setSize(event.target.value);
-  }, []);
+ 
 
   const children = React.useMemo(
     () => (
       <>
-        <div className={classNames("select__item p-l--xs p-y--xxs")}>
+        <button className={classNames("select__item p-l--xs p-y--xxs")}>
           <span className="select__text">Thêm</span>
-        </div>
-        <div className={classNames("select__item p-l--xs p-y--xxs")}>
+        </button>
+        <button className={classNames("select__item p-l--xs p-y--xxs")}>
           <span className="select__text">Sửa</span>
-        </div>
-        <div className={classNames("select__item p-l--xs p-y--xxs")}>
+        </button>
+        <button className={classNames("select__item p-l--xs p-y--xxs")}>
           <span className="select__text">Xóa</span>
-        </div>
+        </button>
       </>
     ),
     []
   );
 
+
+
   return (
     <div style={{width: "600px"}}>
-      <OverflowMenu size="md" children={children}></OverflowMenu>
+      <OverflowMenu size="md" children={children} appendToBody={true}></OverflowMenu>
     </div>
   );
 }

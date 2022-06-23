@@ -153,6 +153,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (!disabled) {
+        console.log(selectListRef)
         setExpand(true);
         if (isEnumerable) {
           if (list.length === 0) {

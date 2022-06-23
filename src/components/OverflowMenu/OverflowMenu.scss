@@ -1,0 +1,121 @@
+@import "../../styles/index.scss";
+.overflow-menu__container {
+  position: relative;
+ 
+  .overflow-menu__button {
+    float: right;
+    right: 0;
+    .btn--shadow {
+      margin: 1px;
+      @include box-shadow--popover();
+      &:hover {
+        background-color: #ffffff !important;
+      }
+    }
+  }
+  .overflow-menu__button--md {
+    &+.select__list-container {
+      .select__list[data-floating-menu-direction="bottom"]::after {
+        width: 32px;
+      }
+    }
+  }
+  .overflow-menu__button--xl {
+    &+.select__list-container {
+      .select__list[data-floating-menu-direction="bottom"]::after {
+        width: 40px;
+      }
+    }
+  }
+  
+}
+
+.overflow__list {
+  &.select__list-container {
+    width: 160px;
+    height: auto;
+    @include box-shadow--popover();
+    position: absolute;
+    right: 0;
+    z-index: 1000;
+
+    .select__list {
+      width: 100%;
+      max-height: 202px;
+      right: 0;
+    }
+    .select__list[data-floating-menu-direction="bottom"]::after {
+      top: -0.2rem;
+      right: 0;
+      width: 32px;
+      height: 0.1875rem;
+      position: absolute;
+      display: block;
+      background-color: #ffffff;
+      content: "";
+    }
+ 
+    .select__bottom-button {
+      height: 40px;
+      width: 100%;
+      background-color: var(--palette-gray-10);
+      display: flex;
+      align-items: center;
+      box-shadow: inset 0px 1px 0px #e1e3e5;
+      span {
+        font-size: 14px;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .select__add-button {
+      span {
+        color: var(--color-primary);
+        font-size: 12px;
+        margin-left: 7px;
+      }
+      svg {
+        color: var(--color-primary);
+      }
+    }
+    .select__loading {
+      width: 100%;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .select__item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding-right: 15px;
+      font-size: 14px;
+      line-height: 16px;
+      border: none;
+      width: 100%;
+      background-color: #ffffff;
+      .select__text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: var(--palette-grayHover-10);
+      }
+      
+      &:focus,&:focus-within, &:active {
+        outline: 2px solid var(--color-primary);
+        outline-offset: -2px;
+      }
+     
+    }
+
+    .select__list-prefer {
+      box-shadow: inset 0px 1px 0px #e1e3e5;
+    }
+  }
+}

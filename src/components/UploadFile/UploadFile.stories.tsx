@@ -83,6 +83,7 @@ function Default() {
       updateList={handleUpdateList}
       removeFile={handleRemoveFile}
       isMultiple={false}
+      type="link"
     ></UploadFile>
   );
 }

@@ -1,6 +1,7 @@
 import {
   CheckmarkFilled16,
   CloseFilled16,
+  Upload16,
   WarningFilled16,
 } from "@carbon/icons-react";
 import { notification, Popconfirm } from "antd";
@@ -36,6 +37,7 @@ export interface UploadFileProps {
   removeFile?: (fileId: string | number) => void;
   isBtnOutLine?: boolean;
   maximumSize?: number;
+  type?: "link" | "button";
 }
 export function UploadFile(props: UploadFileProps) {
   const {
@@ -47,6 +49,7 @@ export function UploadFile(props: UploadFileProps) {
     removeFile,
     isBtnOutLine,
     maximumSize,
+    type = "button",
   } = props;
   const [listFileLoading, setListFileLoading] = React.useState<FileModel[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -190,13 +193,21 @@ export function UploadFile(props: UploadFileProps) {
   return (
     <div className="upload-button__container">
       <div>
-        <Button
-          type={isBtnOutLine ? "outline-primary" : "primary"}
-          className="btn--lg"
-          onClick={handleClickButton}
-        >
-          {uploadContent}
-        </Button>
+        {type === "link" ? (
+          <div className="upload-link" onClick={handleClickButton}>
+            <Upload16 />
+            <span className="upload-content m-l--xxs">{uploadContent}</span>
+          </div>
+        ) : (
+          <Button
+            type={isBtnOutLine ? "outline-primary" : "primary"}
+            className="btn--lg"
+            onClick={handleClickButton}
+          >
+            {uploadContent}
+          </Button>
+        )}
+
         <input
           type="file"
           style={{ display: "none" }}

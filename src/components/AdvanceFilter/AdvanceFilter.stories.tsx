@@ -7,6 +7,7 @@ import { AdvanceTreeFilterStories } from "./AdvanceTreeFilter/AdvanceTreeFilter.
 import { AdvanceEnumFilterStories } from "./AdvanceEnumFilter/AdvanceEnumFilter.stories";
 import { AdvanceDateRangeFilterStories } from "./AdvanceDateRangeFilter/AdvanceDateRangeFilter.stories";
 import { AdvanceDateFilterStories } from "./AdvanceDateFilter/AdvanceDateFilter.stories";
+import { AdvanceInputRangeFilterStories } from "./AdvanceInputRangeFilter/AdvanceInputRangeFilter.stories";
 storiesOf("AdvanceFilter", module)
   .add("AdvanceStringFilterStories", AdvanceStringFilterStories)
   .add("AdvanceNumberFilterStories", AdvanceNumberFilterStories)
@@ -15,4 +16,5 @@ storiesOf("AdvanceFilter", module)
   .add("AdvanceTreeFilterStories", AdvanceTreeFilterStories)
   .add("AdvanceEnumFilter", AdvanceEnumFilterStories)
   .add("AdvanceDateFilterStories", AdvanceDateFilterStories)
+  .add("AdvanceInputRangeFilterStories", AdvanceInputRangeFilterStories)
   .add("AdvanceDateRangeFilterStories", AdvanceDateRangeFilterStories);

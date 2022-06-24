@@ -1,5 +1,6 @@
 import { storiesOf } from "@storybook/react";
 import { InputNumberStories } from "./InputNumber/InputNumber.stories";
+import { InputRangeStories } from "./InputRange/InputRange.stories";
 import { InputSearchStories } from "./InputSearch/InputSearch.stories";
 import { InputSelectStories } from "./InputSelect/InputSelect.stories";
 import { InputTagStories } from "./InputTag/InputTag.stories";
@@ -10,4 +11,5 @@ storiesOf("Input", module)
   .add("InputTextStories", InputTextStories)
   .add("InputSelectStories", InputSelectStories)
   .add("InputTagStories", InputTagStories)
-  .add("InputSearchStories", InputSearchStories);
+  .add("InputSearchStories", InputSearchStories)
+  .add("InputRangeStories", InputRangeStories);

@@ -33,7 +33,7 @@ export function AdvanceInputRangeFilterStories() {
   }, [filter]);
 
   return (
-    <div style={{ width: "250px", margin: "10px" }}>
+    <div style={{ width: "300px", margin: "10px" }}>
       <div style={{ margin: "10px", width: "250px" }}>
         <FormItem message={"Field required!"}>
           <AdvanceInputRangeFilter
@@ -42,6 +42,7 @@ export function AdvanceInputRangeFilterStories() {
             valueRange={numberRange}
             onChangeRange={handleChangeFilter}
             isSmall={isSmall}
+            label={"Ngày xuất kho"}
           />
         </FormItem>
       </div>

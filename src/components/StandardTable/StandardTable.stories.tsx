@@ -244,7 +244,7 @@ function Default() {
         render(...[type]) {
           return (
             <LayoutCell orderType={orderType} tableSize={size}>
-              <OneLineText value={type} />
+              <OneLineText value={type} countCharacters={5}/>
             </LayoutCell>
           );
         },

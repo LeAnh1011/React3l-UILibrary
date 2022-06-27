@@ -8,16 +8,18 @@ export interface InputSelectProps {
   placeHolder?: string;
   onSearch?: (T: string) => void;
   onKeyDown?: (event: any) => void;
+  value?: string;
 }
 
 function InputSearchSelect(props: InputSelectProps) {
-  const { expanded, placeHolder, onSearch, onKeyDown } = props;
+  const { expanded, placeHolder, onSearch, onKeyDown, value } = props;
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
     null
   );
 
-  const [internalValue, setInternalValue] = React.useState("");
+
+  const [internalValue, setInternalValue] = React.useState(value);
 
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -299,12 +299,14 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
               expanded={isExpand}
               onSearch={handleSearchChange}
               onKeyDown={handleKeyPress}
+              value={valueFilter['search']}
             />
           ) : (
             <InputSearchSelect
               placeHolder={placeHolder}
               expanded={isExpand}
               onSearch={onChange}
+              value={valueFilter['search']}
             />
           )}
         </div>

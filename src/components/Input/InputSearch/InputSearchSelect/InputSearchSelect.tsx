@@ -2,13 +2,14 @@ import React, { ReactSVGElement, RefObject } from "react";
 import { CloseFilled16 } from "@carbon/icons-react";
 import "./InputSearchSelect.scss";
 import classNames from "classnames";
+import { Model } from "react3l-common";
 
 export interface InputSelectProps {
   expanded?: boolean;
   placeHolder?: string;
   onSearch?: (T: string) => void;
   onKeyDown?: (event: any) => void;
-  value?: string;
+  value?: Model | string | undefined | null;
 }
 
 function InputSearchSelect(props: InputSelectProps) {
@@ -57,6 +58,7 @@ function InputSearchSelect(props: InputSelectProps) {
       inputRef.current.focus();
     }
   }, [expanded]);
+ 
 
   return (
     <>
@@ -64,7 +66,7 @@ function InputSearchSelect(props: InputSelectProps) {
         <div className={classNames("component__input-search-box")}>
           <input
             type="text"
-            value={internalValue}
+            value={internalValue as string}
             onChange={handleChange}
             placeholder={placeHolder}
             ref={inputRef}

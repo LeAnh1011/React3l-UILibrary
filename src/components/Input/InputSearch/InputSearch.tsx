@@ -15,7 +15,7 @@ export interface InputSearchProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
-  value?: T;
+  value?: T | string | undefined | null;
   valueFilter?: TModelFilter;
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
   classFilter: new () => TModelFilter;
@@ -59,7 +59,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
 
   const [showInput, setShowInput] = React.useState<boolean>(!animationInput);
 
-  const internalValue = React.useMemo((): Model => {
+  const internalValue = React.useMemo((): any => {
     return value || null;
   }, [value]);
 
@@ -269,6 +269,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     [handleClickSearchIcon, handleToggle]
   );
 
+
   return (
     <div
       className={classNames("component__input-search-container", className)}
@@ -299,14 +300,14 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
               expanded={isExpand}
               onSearch={handleSearchChange}
               onKeyDown={handleKeyPress}
-              value={valueFilter['search']}
+              value={internalValue}
             />
           ) : (
             <InputSearchSelect
               placeHolder={placeHolder}
-              expanded={isExpand}
+              expanded={false}
               onSearch={onChange}
-              value={valueFilter['search']}
+              value={internalValue}
             />
           )}
         </div>
@@ -320,7 +321,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
                   list.map((item, index) => (
                     <div
                       className={classNames("select__item p-l--xs p-y--xs", {
-                        "select__item--selected": item.id === internalValue?.id,
+                        "select__item--selected": item.id === internalValue?.id ,
                       })}
                       tabIndex={-1}
                       key={index}

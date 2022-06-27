@@ -348,7 +348,7 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
 
 AdvanceNumberFilter.defaultProps = {
   label: "",
-  type: BORDER_TYPE.BORDERED,
+  type: BORDER_TYPE.MATERIAL,
   isSmall: false,
   isRequired: false,
   allowPositive: false,

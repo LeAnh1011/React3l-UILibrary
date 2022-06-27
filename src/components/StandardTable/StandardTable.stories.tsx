@@ -20,6 +20,7 @@ import LayoutCell from "./LayoutCell/LayoutCell";
 import LayoutHeader from "./LayoutHeader/LayoutHeader";
 import Pagination from "./Pagination/Pagination";
 import StandardTable from "./StandardTable";
+import OverflowMenu from '../OverflowMenu/OverflowMenu';
 import "./StandardTable.scss";
 
 const KateBishop =
@@ -387,25 +388,24 @@ function Default() {
           );
         },
       },
-      // {
-      //   title: <LayoutHeader orderType={orderType} title="Thao thác" />,
-      //   key: "id",
-      //   width: 150,
-      //   fixed: "right",
-      //   ellipsis: true,
-      //   dataIndex: "id",
-      //   render() {
-      //     return (
-      //       <div className="d-flex align-items-center justify-content-center">
-      //         <OverflowMenu
-      //           size="md"
-      //           children={children}
-      //           appendToBody={true}
-      //         ></OverflowMenu>
-      //       </div>
-      //     );
-      //   },
-      // },
+      {
+        title: <LayoutHeader orderType={orderType} title="Thao thác" />,
+        key: "id",
+        width: 150,
+        fixed: "right",
+        ellipsis: true,
+        dataIndex: "id",
+        render() {
+          return (
+            <div className="d-flex align-items-center justify-content-center">
+              <OverflowMenu
+                size="md"
+                children={children}
+              ></OverflowMenu>
+            </div>
+          );
+        },
+      },
     ],
     [avatarType, orderType, size]
   );

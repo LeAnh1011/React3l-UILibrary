@@ -46,7 +46,7 @@ export function InputSearchStories() {
         }}
       >
         <InputSearch
-          value={selectModel}
+          value={"hello"}
           classFilter={DemoFilter}
           placeHolder="Search..."
           onChange={handleSearchChange}

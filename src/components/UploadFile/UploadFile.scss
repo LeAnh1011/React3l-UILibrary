@@ -1,4 +1,13 @@
 .upload-button__container {
+    .upload-link {
+        display: flex;
+        align-items: center;
+        color: var(--color-primary);
+        cursor: pointer;
+        .upload-content {
+            text-decoration: underline;
+        }
+    }
     .upload-button__list-file {
         width: 100%;
         

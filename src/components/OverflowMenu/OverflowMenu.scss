@@ -1,32 +1,60 @@
-@import "../../../styles/index.scss";
-/* Style for Select.tsx */
-.select__container {
-  width: 100%;
-
+@import "../../styles/index.scss";
+.overflow-menu__container {
   position: relative;
-
-  .select__input {
-    width: 100%;
+ 
+  .overflow-menu__button {
+    float: right;
+    right: 0;
+    .btn--shadow {
+      margin: 1px;
+      @include box-shadow--popover();
+      &:hover {
+        background-color: #ffffff !important;
+      }
+    }
   }
-  .component__input  {
-    cursor: auto;
+  .overflow-menu__button--md {
+    &+.select__list-container {
+      .select__list[data-floating-menu-direction="bottom"]::after {
+        width: 32px;
+      }
+    }
   }
+  .overflow-menu__button--xl {
+    &+.select__list-container {
+      .select__list[data-floating-menu-direction="bottom"]::after {
+        width: 40px;
+      }
+    }
+  }
+  
+}
 
-  .select__list-container {
-    width: 100%;
+.overflow__list {
+  &.select__list-container {
+    width: 160px;
     height: auto;
-    background-color: var(--palette-gray-10);
     @include box-shadow--popover();
-    margin-top: 5px;
     position: absolute;
-    z-index: 999;
+    right: 0;
+    z-index: 1000;
+
     .select__list {
       width: 100%;
-      overflow-y: auto;
       max-height: 202px;
-      position: relative;
-      background-color: var(--palette-gray-10);
+      right: 0;
     }
+    .select__list[data-floating-menu-direction="bottom"]::after {
+      top: -0.2rem;
+      right: 0;
+      width: 32px;
+      height: 0.1875rem;
+      position: absolute;
+      display: block;
+      background-color: #ffffff;
+      content: "";
+    }
+ 
     .select__bottom-button {
       height: 40px;
       width: 100%;
@@ -66,6 +94,9 @@
       padding-right: 15px;
       font-size: 14px;
       line-height: 16px;
+      border: none;
+      width: 100%;
+      background-color: #ffffff;
       .select__text {
         white-space: nowrap;
         overflow: hidden;
@@ -73,19 +104,14 @@
       }
       &:hover {
         cursor: pointer;
-      }
-      &:hover,
-      &:focus {
         background-color: var(--palette-grayHover-10);
       }
-      &:focus-visible {
-        outline: none;
+      
+      &:focus,&:focus-within, &:active {
+        outline: 2px solid var(--color-primary);
+        outline-offset: -2px;
       }
-      &.select__item--selected {
-        background-color: var(--palette-grayHover-10);
-        display: flex;
-        justify-content: space-between;
-      }
+     
     }
 
     .select__list-prefer {

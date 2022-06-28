@@ -20,7 +20,7 @@ import LayoutCell from "./LayoutCell/LayoutCell";
 import LayoutHeader from "./LayoutHeader/LayoutHeader";
 import Pagination from "./Pagination/Pagination";
 import StandardTable from "./StandardTable";
-import OverflowMenu from '../OverflowMenu/OverflowMenu';
+import OverflowMenu from "../OverflowMenu/OverflowMenu";
 import "./StandardTable.scss";
 
 const KateBishop =
@@ -200,22 +200,34 @@ function Default() {
     }
   }, []);
 
-  const children = React.useMemo(
-    () => (
-      <>
-        <button className={classNames("select__item p-l--xs p-y--xxs")}>
-          <span className="select__text">Thêm</span>
-        </button>
-        <button className={classNames("select__item p-l--xs p-y--xxs")}>
-          <span className="select__text">Sửa</span>
-        </button>
-        <button className={classNames("select__item p-l--xs p-y--xxs")}>
-          <span className="select__text">Xóa</span>
-        </button>
-      </>
-    ),
-    []
-  );
+  const handleAdd = React.useCallback(() => {
+    console.log("handleAdd");
+  }, []);
+
+  const handleEdit = React.useCallback(() => {
+    console.log("handleEdit");
+  }, []);
+
+  const handleDelete = React.useCallback(() => {
+    console.log("handleDelete");
+  }, []);
+
+  const list: any = React.useMemo(()=> {
+    return [
+      {
+        name: "Thêm",
+        action: handleAdd,
+      },
+      {
+        name: "Sửa",
+        action: handleEdit,
+      },
+      {
+        name: "Xóa",
+        action: handleDelete,
+      },
+    ];
+  },[handleAdd, handleDelete, handleEdit]);
 
   const columns: ColumnProps<any>[] = useMemo(
     () => [
@@ -244,7 +256,7 @@ function Default() {
         render(...[type]) {
           return (
             <LayoutCell orderType={orderType} tableSize={size}>
-              <OneLineText value={type} />
+              <OneLineText value={type} countCharacters={5} />
             </LayoutCell>
           );
         },
@@ -389,25 +401,21 @@ function Default() {
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} title="Thao thác" />,
         key: "id",
-        width: 150,
+        width: 80,
         fixed: "right",
         ellipsis: true,
         dataIndex: "id",
         render() {
           return (
             <div className="d-flex align-items-center justify-content-center">
-              <OverflowMenu
-                size="md"
-                children={children}
-              ></OverflowMenu>
+              <OverflowMenu size="md" children={list}></OverflowMenu>
             </div>
           );
         },
       },
     ],
-    [avatarType, orderType, size]
+    [avatarType, list, orderType, size]
   );
 
   const columns2: ColumnProps<any>[] = useMemo(

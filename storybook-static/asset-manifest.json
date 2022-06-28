@@ -1,5 +1,6 @@
 {
   "files": {
+<<<<<<< HEAD
     "0.e74d9fa0.iframe.bundle.js": "./0.e74d9fa0.iframe.bundle.js",
     "main.css": "./static/css/main.34a4d929.chunk.css",
     "main.js": "./main.db7ede36.iframe.bundle.js",
@@ -27,5 +28,34 @@
     "vendors~main.c6c8d5e4.iframe.bundle.js",
     "static/css/main.34a4d929.chunk.css",
     "main.db7ede36.iframe.bundle.js"
+=======
+    "0.0055e2fe.iframe.bundle.js": "./0.0055e2fe.iframe.bundle.js",
+    "main.css": "./static/css/main.24ae75d2.chunk.css",
+    "main.js": "./main.7dbdfa38.iframe.bundle.js",
+    "main.css.map": "./static/css/main.24ae75d2.chunk.css.map",
+    "runtime~main.js": "./runtime~main.6db8bf78.iframe.bundle.js",
+    "vendors~main.css": "./static/css/vendors~main.e3a779ae.chunk.css",
+    "vendors~main.js": "./vendors~main.49539650.iframe.bundle.js",
+    "vendors~main.css.map": "./static/css/vendors~main.e3a779ae.chunk.css.map",
+    "vendors~main.js.map": "./vendors~main.49539650.iframe.bundle.js.map",
+    "4.6769fefd.iframe.bundle.js": "./4.6769fefd.iframe.bundle.js",
+    "4.6769fefd.iframe.bundle.js.map": "./4.6769fefd.iframe.bundle.js.map",
+    "5.b1d2975a.iframe.bundle.js": "./5.b1d2975a.iframe.bundle.js",
+    "6.3d1bbf17.iframe.bundle.js": "./6.3d1bbf17.iframe.bundle.js",
+    "6.3d1bbf17.iframe.bundle.js.map": "./6.3d1bbf17.iframe.bundle.js.map",
+    "7.3085d11e.iframe.bundle.js": "./7.3085d11e.iframe.bundle.js",
+    "4.6769fefd.iframe.bundle.js.LICENSE.txt": "./4.6769fefd.iframe.bundle.js.LICENSE.txt",
+    "6.3d1bbf17.iframe.bundle.js.LICENSE.txt": "./6.3d1bbf17.iframe.bundle.js.LICENSE.txt",
+    "iframe.html": "./iframe.html",
+    "static/media/tio.scss": "./static/media/The-Icon-of.eca84ca8.ttf",
+    "vendors~main.49539650.iframe.bundle.js.LICENSE.txt": "./vendors~main.49539650.iframe.bundle.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "runtime~main.6db8bf78.iframe.bundle.js",
+    "static/css/vendors~main.e3a779ae.chunk.css",
+    "vendors~main.49539650.iframe.bundle.js",
+    "static/css/main.24ae75d2.chunk.css",
+    "main.7dbdfa38.iframe.bundle.js"
+>>>>>>> da3f7c10f8336967400b3ae28819bc499476c0dd
   ]
 }

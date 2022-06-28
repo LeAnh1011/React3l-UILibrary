@@ -65,7 +65,7 @@
     }
 
     &.input-text--float {
-      &:hover:not(.input-text--disabled) {
+      &:hover:not(.input-text--disabled):not(:focus-within) {
         outline-color: var(--palette-gray-100);
       }
       &:focus-within {

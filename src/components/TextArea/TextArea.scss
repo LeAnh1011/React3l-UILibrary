@@ -30,13 +30,12 @@
     background-color: var(--color-white);
     height: inherit;
 
-    &:hover {
-      outline-color: var(--color-primary);
+    &:hover:not(:focus-within){
+      outline-color: var(--palette-gray-100);
     }
 
     &:focus-within {
-      outline-color: var(--color-primary);
-      @include box-shadow--focus;
+      outline: 2px solid var(--color-primary);
     }
 
     &.text-area--disabled {
@@ -45,13 +44,13 @@
     }
 
     &.text-area--float {
-      &:hover {
+      &:hover:not(:focus-within) {
         outline-color: var(--palette-gray-100);
       }
 
       &:focus-within {
         box-shadow: none;
-        outline: 1px solid var(--color-primary);
+        outline: 2px solid var(--color-primary);
         .component__title {
           color: var(--color-primary);
         }
@@ -79,6 +78,7 @@
       &:focus-within {
         outline: 2px solid var(--color-primary);
         box-shadow: none;
+        border: none;
         .input-tag__icon {
           color: var(--palette-gray-60);
         }

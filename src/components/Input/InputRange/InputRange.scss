@@ -1,17 +1,10 @@
 /* Style for InputRange.tsx */
 .input-range__container {
-    width: 100%;
     display: flex;
-    
-    .input-range__input-number {
-        width: 45%;
-    }
-
-    .input-range__icon {
-        width: 10%;
-        padding: 0px 5px;
-        display: flex;
-        align-items: center;
-        align-content: center;
+    align-items: center;
+    .input-range__input-number-to {
+        .component__title {
+            visibility: hidden;
+        }
     }
 }

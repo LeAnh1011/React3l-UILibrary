@@ -20,7 +20,7 @@ import LayoutCell from "./LayoutCell/LayoutCell";
 import LayoutHeader from "./LayoutHeader/LayoutHeader";
 import Pagination from "./Pagination/Pagination";
 import StandardTable from "./StandardTable";
-import OverflowMenu from '../OverflowMenu/OverflowMenu';
+import OverflowMenu from "../OverflowMenu/OverflowMenu";
 import "./StandardTable.scss";
 
 const KateBishop =
@@ -200,34 +200,34 @@ function Default() {
     }
   }, []);
 
-  const handleAdd = React.useCallback(()=>{
-    console.log('handleAdd')
-},[]);
+  const handleAdd = React.useCallback(() => {
+    console.log("handleAdd");
+  }, []);
 
-const handleEdit = React.useCallback(()=>{
-    console.log('handleEdit')
-},[]);
+  const handleEdit = React.useCallback(() => {
+    console.log("handleEdit");
+  }, []);
 
-const handleDelete = React.useCallback(()=>{
-    console.log('handleDelete')
-},[])
+  const handleDelete = React.useCallback(() => {
+    console.log("handleDelete");
+  }, []);
 
-
-const list: any = [
-{
-    name: 'Thêm',
-    action: handleAdd
-},
-{
-    name: 'Sửa',
-    action: handleEdit
-},
-{
-    name: 'Xóa',
-    action: handleDelete
-}
-];
-
+  const list: any = React.useMemo(()=> {
+    return [
+      {
+        name: "Thêm",
+        action: handleAdd,
+      },
+      {
+        name: "Sửa",
+        action: handleEdit,
+      },
+      {
+        name: "Xóa",
+        action: handleDelete,
+      },
+    ];
+  },[handleAdd, handleDelete, handleEdit]);
 
   const columns: ColumnProps<any>[] = useMemo(
     () => [
@@ -256,7 +256,7 @@ const list: any = [
         render(...[type]) {
           return (
             <LayoutCell orderType={orderType} tableSize={size}>
-              <OneLineText value={type} countCharacters={5}/>
+              <OneLineText value={type} countCharacters={5} />
             </LayoutCell>
           );
         },
@@ -409,10 +409,7 @@ const list: any = [
         render() {
           return (
             <div className="d-flex align-items-center justify-content-center">
-              <OverflowMenu
-                size="md"
-                children={list}
-              ></OverflowMenu>
+              <OverflowMenu size="md" children={list}></OverflowMenu>
             </div>
           );
         },

@@ -200,22 +200,34 @@ function Default() {
     }
   }, []);
 
-  const children = React.useMemo(
-    () => (
-      <>
-        <button className={classNames("select__item p-l--xs p-y--xxs")}>
-          <span className="select__text">Thêm</span>
-        </button>
-        <button className={classNames("select__item p-l--xs p-y--xxs")}>
-          <span className="select__text">Sửa</span>
-        </button>
-        <button className={classNames("select__item p-l--xs p-y--xxs")}>
-          <span className="select__text">Xóa</span>
-        </button>
-      </>
-    ),
-    []
-  );
+  const handleAdd = React.useCallback(()=>{
+    console.log('handleAdd')
+},[]);
+
+const handleEdit = React.useCallback(()=>{
+    console.log('handleEdit')
+},[]);
+
+const handleDelete = React.useCallback(()=>{
+    console.log('handleDelete')
+},[])
+
+
+const list: any = [
+{
+    name: 'Thêm',
+    action: handleAdd
+},
+{
+    name: 'Sửa',
+    action: handleEdit
+},
+{
+    name: 'Xóa',
+    action: handleDelete
+}
+];
+
 
   const columns: ColumnProps<any>[] = useMemo(
     () => [
@@ -400,14 +412,14 @@ function Default() {
             <div className="d-flex align-items-center justify-content-center">
               <OverflowMenu
                 size="md"
-                children={children}
+                children={list}
               ></OverflowMenu>
             </div>
           );
         },
       },
     ],
-    [avatarType, orderType, size]
+    [avatarType, list, orderType, size]
   );
 
   const columns2: ColumnProps<any>[] = useMemo(

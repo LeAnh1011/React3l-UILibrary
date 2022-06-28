@@ -72,7 +72,7 @@ function OverflowMenu(props: CustomProps) {
 
   const handleCloseList = React.useCallback(() => {
     setExpand(false);
-    setCheck(true);
+    // setCheck(true);
   }, []);
 
   CommonService.useClickOutside(selectListRef, handleCloseList);

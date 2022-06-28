@@ -132,7 +132,7 @@
     }
 
     &.input-tag__container--float {
-      &:hover:not(.input-tag--disabled) {
+      &:hover:not(.input-tag--disabled):not(:focus-within) {
         outline-color: var(--palette-gray-100);
         .input-tag__icon {
           color: var(--palette-gray-60);

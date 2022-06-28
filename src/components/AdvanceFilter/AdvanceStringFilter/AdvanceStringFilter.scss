@@ -65,8 +65,9 @@
     }
 
     &.advance-string-filter--float {
-      &:hover:not(.advance-string-filter--disabled) {
+      &:hover:not(.advance-string-filter--disabled):not(:focus-within) {
         outline-color: var(--palette-gray-100);
+        outline-offset: -1px;
       }
       &:focus-within {
         box-shadow: none;

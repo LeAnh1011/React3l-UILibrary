@@ -402,7 +402,7 @@ const list: any = [
       },
       {
         key: "id",
-        width: 150,
+        width: 80,
         fixed: "right",
         ellipsis: true,
         dataIndex: "id",

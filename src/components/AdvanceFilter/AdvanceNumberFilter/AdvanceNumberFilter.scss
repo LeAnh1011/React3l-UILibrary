@@ -61,7 +61,7 @@
     }
 
     &.advance-number-filter--float {
-      &:hover:not(.advance-number-filter--disabled) {
+      &:hover:not(.advance-number-filter--disabled):not(:focus-within) {
         outline-color: var(--palette-gray-100);
       }
       &:focus-within {

@@ -88,6 +88,16 @@
   .ant-checkbox-checked::after {
     border: 1px solid black;
   }
+  .ant-table-cell  {
+    .ant-table-cell-content {
+      .overflow-menu__container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1px;
+      }
+    }
+  }
 }
 .ant-table-body.active-draggable {
   cursor: grabbing;

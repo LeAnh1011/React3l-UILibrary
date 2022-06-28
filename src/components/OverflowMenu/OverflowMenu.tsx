@@ -56,14 +56,14 @@ function OverflowMenu(props: CustomProps) {
         setAppendToBodyStyle({
           position: "absolute",
           top: currentPosition.top + 32,
-          left: currentPosition.left - (160 - 32 + 1),
+          left: currentPosition.left - (160 - 32),
         });
         setCheck(false);
       } else {
         setAppendToBodyStyle({
           position: "absolute",
           top: currentPosition.top + 40,
-          left: currentPosition.left - (160 - 40 + 1),
+          left: currentPosition.left - (160 - 40),
         });
         setCheck(false);
       }

@@ -6,7 +6,6 @@
     float: right;
     right: 0;
     .btn--shadow {
-      margin: 1px;
       @include box-shadow--popover();
       &:hover {
         background-color: #ffffff !important;

@@ -401,7 +401,6 @@ const list: any = [
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} title="Thao thác" />,
         key: "id",
         width: 150,
         fixed: "right",

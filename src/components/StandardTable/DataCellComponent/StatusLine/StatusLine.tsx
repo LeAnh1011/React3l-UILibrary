@@ -10,10 +10,11 @@ export interface StatusLineProps {
   active?: boolean;
   value?: string;
   countCharacters?: number;
+  color?: string;
 }
 
 function StatusLine(props: StatusLineProps) {
-  const { className, active, value, countCharacters } = props;
+  const { className, value, countCharacters, color } = props;
   return (
     <>
       <div
@@ -23,7 +24,7 @@ function StatusLine(props: StatusLineProps) {
           "status-line-data"
         )}
       >
-        <DotMark16 className={active ? "status-active" : "status-inactive"} />
+        <DotMark16 className="status" style={{color: color}}/>
         {countCharacters && countCharacters > 0 ? (
           <Tooltip title={value}>
             {CommonService.limitWord(value, countCharacters)}

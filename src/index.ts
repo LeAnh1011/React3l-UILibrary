@@ -56,6 +56,7 @@ import BadgeText from "./components/StandardTable/DataCellComponent/BadgeText";
 import OneLineText from "./components/StandardTable/DataCellComponent/OneLineText";
 import TwoLineText from "./components/StandardTable/DataCellComponent/TwoLineText";
 import StatusLine from "./components/StandardTable/DataCellComponent/StatusLine";
+import OverflowMenu from "components/OverflowMenu";
 
 export {
   FormItem,
@@ -116,4 +117,5 @@ export {
   OneLineText,
   TwoLineText,
   StatusLine,
+  OverflowMenu,
 };

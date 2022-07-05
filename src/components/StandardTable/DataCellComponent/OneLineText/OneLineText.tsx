@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React from "react";
 import "./OneLineText.scss";
 import { Tooltip } from "antd";
+import { CommonService } from "services/common-service";
 
 export interface OneLineTextProps {
   className?: string;
@@ -11,6 +12,7 @@ export interface OneLineTextProps {
   value?: string;
   avatarSize?: "lg" | "md" | "sm";
   link?: string;
+  countCharacters?: number;
 }
 
 function OneLineText(props: OneLineTextProps) {
@@ -22,6 +24,7 @@ function OneLineText(props: OneLineTextProps) {
     avatarSize,
     link,
     avatarType,
+    countCharacters,
   } = props;
   return (
     <>
@@ -44,10 +47,24 @@ function OneLineText(props: OneLineTextProps) {
               rel="noopener noreferrer"
               className="link-text"
             >
-              <Tooltip title={value}>{value}</Tooltip>
+              {countCharacters && countCharacters > 0 ? (
+                <Tooltip title={value}>
+                  {CommonService.limitWord(value, countCharacters)}
+                </Tooltip>
+              ) : (
+                <>{value}</>
+              )}
             </a>
           ) : (
-            <Tooltip title={value}>{value}</Tooltip>
+            <>
+              {countCharacters && countCharacters > 0 ? (
+                <Tooltip title={value}>
+                  {CommonService.limitWord(value, countCharacters)}
+                </Tooltip>
+              ) : (
+                <>{value}</>
+              )}
+            </>
           )}
         </div>
       )}
@@ -61,11 +78,23 @@ function OneLineText(props: OneLineTextProps) {
               rel="noopener noreferrer"
               className="link-text"
             >
-              <Tooltip title={value}>{value}</Tooltip>
+              {countCharacters && countCharacters > 0 ? (
+                <Tooltip title={value}>
+                  {CommonService.limitWord(value, countCharacters)}
+                </Tooltip>
+              ) : (
+                <>{value}</>
+              )}
             </a>
           ) : (
             <span>
-              <Tooltip title={value}>{value}</Tooltip>
+              {countCharacters && countCharacters > 0 ? (
+                <Tooltip title={value}>
+                  {CommonService.limitWord(value, countCharacters)}
+                </Tooltip>
+              ) : (
+                <>{value}</>
+              )}
             </span>
           )}
         </div>

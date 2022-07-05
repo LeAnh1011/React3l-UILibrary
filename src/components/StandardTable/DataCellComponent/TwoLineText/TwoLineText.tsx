@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React from "react";
 import "./TwoLineText.scss";
 import { Tooltip } from "antd";
+import { CommonService } from "services/common-service";
 
 export interface TwoLineTextProps {
   className?: string;
@@ -13,6 +14,8 @@ export interface TwoLineTextProps {
   classNameFirstLine?: string;
   classNameSecondLine?: string;
   link?: string;
+  countCharacters1?: number;
+  countCharacters2?: number;
 }
 
 function TwoLineText(props: TwoLineTextProps) {
@@ -26,6 +29,8 @@ function TwoLineText(props: TwoLineTextProps) {
     classNameFirstLine,
     classNameSecondLine,
     link,
+    countCharacters1,
+    countCharacters2,
   } = props;
 
   const getFrameStyle = React.useMemo(() => {
@@ -63,6 +68,7 @@ function TwoLineText(props: TwoLineTextProps) {
                 className={classNames(icon, `icon-two-line-text m-r--xxs`)}
               ></i>
             )}
+            {countCharacters1 && countCharacters1 > 0 ? <Tooltip title={valueLine1}>{CommonService.limitWord(valueLine1, countCharacters1) }</Tooltip> : <>{valueLine1}</>}
             <Tooltip title={valueLine1}>{valueLine1}</Tooltip>
           </div>
           <div
@@ -79,10 +85,24 @@ function TwoLineText(props: TwoLineTextProps) {
                 rel="noopener noreferrer"
                 className="link-text"
               >
-                <Tooltip title={valueLine2}>{valueLine2}</Tooltip>
+                {countCharacters2 && countCharacters2 > 0 ? (
+                  <Tooltip title={valueLine2}>
+                    {CommonService.limitWord(valueLine2, countCharacters2)}
+                  </Tooltip>
+                ) : (
+                  <>{valueLine2}</>
+                )}
               </a>
             ) : (
-              <Tooltip title={valueLine2}>{valueLine2}</Tooltip>
+              <>
+                {countCharacters2 && countCharacters2 > 0 ? (
+                  <Tooltip title={valueLine2}>
+                    {CommonService.limitWord(valueLine2, countCharacters2)}
+                  </Tooltip>
+                ) : (
+                  <>{valueLine2}</>
+                )}
+              </>
             )}
           </div>
         </div>

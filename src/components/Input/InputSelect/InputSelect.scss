@@ -81,7 +81,7 @@
     }
 
     &.input-select--float {
-      &:hover:not(.input-select--disabled) {
+      &:hover:not(.input-select--disabled):not(:focus-within) {
         outline-color: var(--palette-gray-100);
         .input-select__icon {
           color: var(--palette-gray-60);

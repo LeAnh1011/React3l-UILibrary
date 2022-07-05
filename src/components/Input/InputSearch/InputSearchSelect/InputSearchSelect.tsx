@@ -2,22 +2,25 @@ import React, { ReactSVGElement, RefObject } from "react";
 import { CloseFilled16 } from "@carbon/icons-react";
 import "./InputSearchSelect.scss";
 import classNames from "classnames";
+import { Model } from "react3l-common";
 
 export interface InputSelectProps {
   expanded?: boolean;
   placeHolder?: string;
   onSearch?: (T: string) => void;
   onKeyDown?: (event: any) => void;
+  value?: Model | string | undefined | null;
 }
 
 function InputSearchSelect(props: InputSelectProps) {
-  const { expanded, placeHolder, onSearch, onKeyDown } = props;
+  const { expanded, placeHolder, onSearch, onKeyDown, value } = props;
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
     null
   );
 
-  const [internalValue, setInternalValue] = React.useState("");
+
+  const [internalValue, setInternalValue] = React.useState(value);
 
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,6 +58,7 @@ function InputSearchSelect(props: InputSelectProps) {
       inputRef.current.focus();
     }
   }, [expanded]);
+ 
 
   return (
     <>
@@ -62,7 +66,8 @@ function InputSearchSelect(props: InputSelectProps) {
         <div className={classNames("component__input-search-box")}>
           <input
             type="text"
-            value={internalValue}
+            defaultValue={internalValue as string}
+            value={internalValue as string}
             onChange={handleChange}
             placeholder={placeHolder}
             ref={inputRef}

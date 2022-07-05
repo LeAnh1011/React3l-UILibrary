@@ -127,7 +127,7 @@
     }
 
     &.date-picker--float {
-      &:hover:not(.date-picker--disabled) {
+      &:hover:not(.date-picker--disabled):not(:focus-within) {
         outline-color: var(--palette-gray-100);
         & + .component__title {
           color: var(--palette-gray-100);

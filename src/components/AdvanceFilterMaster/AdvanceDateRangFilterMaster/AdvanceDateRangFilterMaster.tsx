@@ -154,13 +154,13 @@ function AdvanceDateRangeFilterMaster(
   const internalValue: [Moment, Moment] = React.useMemo(() => {
     return value && value.length > 0
       ? [
-          typeof value[0] === "string"
-            ? CommonService.toMomentDate(value[0])
-            : value[0],
-          typeof value[1] === "string"
-            ? CommonService.toMomentDate(value[1])
-            : value[1],
-        ]
+        typeof value[0] === "string"
+          ? CommonService.toMomentDate(value[0])
+          : value[0],
+        typeof value[1] === "string"
+          ? CommonService.toMomentDate(value[1])
+          : value[1],
+      ]
       : [null, null];
   }, [value]);
 

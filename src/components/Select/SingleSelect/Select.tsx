@@ -15,7 +15,7 @@ import IconLoading from "components/IconLoading/IconLoading";
 export interface SelectProps<
   T extends Model,
   TModelFilter extends ModelFilter
-> {
+  > {
   value?: Model;
 
   valueFilter?: TModelFilter;
@@ -126,7 +126,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
       subscription.add(getList);
       const filter = valueFilter ? valueFilter : new ClassFilter();
       handleGetList(filter)
-    } catch (error) {}
+    } catch (error) { }
   }, [subscription, getList, valueFilter, ClassFilter, handleGetList]);
 
   const { run } = useDebounceFn(
@@ -255,7 +255,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
             : 180;
           setAppendToBodyStyle({
             position: "fixed",
-            top: currentPosition.top - (listHeight + 30),
+            top: currentPosition.top - (listHeight - 15),
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
           });

@@ -33,8 +33,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "bundle-style": "sass ./src/styles/index.scss ./build/react3l.min.css --style compressed", 
     "prebuild": "rimraf build",
-    "build": "rollup -c",
+    "build": "rollup -c && yarn bundle-style",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",

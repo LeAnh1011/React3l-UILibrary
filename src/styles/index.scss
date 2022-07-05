@@ -1,10 +1,5 @@
-@import "color";
-@import "typography";
-@import "spacing";
-@import "button";
-@import "box-shadow";
-@import "antd/dist/antd.css";
-@import "custom-antd";
+@import "./common/box-shadow";
+@import "./common/custom-antd";
 
 html {
   box-sizing: border-box;
@@ -21,21 +16,26 @@ body {
   font-family: var(--font-primary);
   color: var(--color-text);
 }
+
 .text-center {
   text-align: center !important;
 }
+
 .text-right {
   text-align: right !important;
 }
+
 .text-left {
   text-align: left !important;
 }
+
 .text-in-table-cell {
   white-space: nowrap;
   line-height: 16px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .link-text {
   color: #000000d9;
   text-decoration: underline;
@@ -48,6 +48,7 @@ body {
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
+  
 }
 
 ::-webkit-scrollbar-thumb {

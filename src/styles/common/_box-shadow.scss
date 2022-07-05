@@ -1,0 +1,24 @@
+.box-shadow--button {
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+}
+
+.box-shadow--card {
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.25), 0px 2px 1px rgba(0, 0, 0, 0.05);
+}
+
+.box-shadow--popover {
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2), 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.box-shadow--mobile-nav {
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1), 0px 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.box-shadow--modal {
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1), 0px 8px 40px rgba(0, 0, 0, 0.2);
+}
+
+.box-shadow--focus {
+  box-shadow: 0px 0px 8px var(--color-primary);
+}
+

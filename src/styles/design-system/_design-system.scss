@@ -1,0 +1,11 @@
+@import "color";
+@import "typography";
+@import "spacing";
+@import "button";
+
+body {
+  font-size: var(--text-base-size) !important;
+  font-family: var(--font-primary) !important;
+  color: var(--color-text) !important;
+  background-color: #f4f4f4 !important;
+}

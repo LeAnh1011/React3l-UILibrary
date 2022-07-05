@@ -91,15 +91,5 @@ export default {
       extract: false
     }),
     terser(),
-  ],
-  external: [
-    "antd",
-    "react",
-    "react-dom",
-    "react3l-advanced-filters",
-    "react3l-axios-observable",
-    "react3l-common",
-    "react3l-decorators",
-    "react3l-localization",
-  ],
+  ]
 };

@@ -14,7 +14,7 @@ import IconLoading from "components/IconLoading/IconLoading";
 export interface InputSearchProps<
   T extends Model,
   TModelFilter extends ModelFilter
-> {
+  > {
   value?: T | string | undefined | null;
   valueFilter?: TModelFilter;
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
@@ -24,7 +24,7 @@ export interface InputSearchProps<
   searchProperty?: string;
   className?: string;
   onChangeSearchField?: (id: number, T?: T) => void;
-  onChange?:(value: string) => void;
+  onChange?: (value: string) => void;
   placeHolder?: string;
   animationInput?: boolean;
 }
@@ -140,7 +140,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           setLoading(false);
         },
       });
-    } catch (error) {}
+    } catch (error) { }
   }, [getList, valueFilter, ClassFilter, subscription]);
 
   const handleClickItem = React.useCallback(
@@ -305,7 +305,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           ) : (
             <InputSearchSelect
               placeHolder={placeHolder}
-              expanded={false}
+              expanded={isExpand}
               onSearch={onChange}
               value={internalValue}
             />
@@ -321,7 +321,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
                   list.map((item, index) => (
                     <div
                       className={classNames("select__item p-l--xs p-y--xs", {
-                        "select__item--selected": item.id === internalValue?.id ,
+                        "select__item--selected": item.id === internalValue?.id,
                       })}
                       tabIndex={-1}
                       key={index}

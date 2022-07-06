@@ -1,2 +1,1 @@
-import ProgressIndicator from "./ProgressIndicator";
-export default ProgressIndicator;
+export { default } from "./ProgressIndicator";

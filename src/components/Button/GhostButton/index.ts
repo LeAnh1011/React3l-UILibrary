@@ -1,2 +1,1 @@
-import GhostButton from "./GhostButton";
-export default GhostButton;
+export { default } from "./GhostButton";

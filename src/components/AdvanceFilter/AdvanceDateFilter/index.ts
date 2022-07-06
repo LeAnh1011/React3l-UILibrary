@@ -1,2 +1,1 @@
-import AdvanceDateFilter from "./AdvanceDateFilter";
-export default AdvanceDateFilter;
+export { default } from "./AdvanceDateFilter";

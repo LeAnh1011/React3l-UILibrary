@@ -1,2 +1,1 @@
-import TwoLineText from "./TwoLineText";
-export default TwoLineText;
+export { default } from "./TwoLineText";

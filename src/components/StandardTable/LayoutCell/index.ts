@@ -1,2 +1,1 @@
-import LayoutCell from "./LayoutCell";
-export default LayoutCell;
+export { default } from "./LayoutCell";

@@ -1,2 +1,1 @@
-import InputTag from "./InputTag";
-export default InputTag;
+export { default } from "./InputTag";

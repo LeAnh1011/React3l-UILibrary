@@ -1,2 +1,1 @@
-import BadgeText from "./BadgeText";
-export default BadgeText;
+export { default } from "./BadgeText";

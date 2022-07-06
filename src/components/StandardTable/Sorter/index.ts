@@ -1,2 +1,1 @@
-import Sorter from "./Sorter";
-export default Sorter;
+export { default } from "./Sorter";

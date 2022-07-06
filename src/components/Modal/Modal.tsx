@@ -3,7 +3,7 @@ import "./Modal.scss";
 import { Modal as AntModal, ModalProps as AntModalProps } from "antd";
 import classNames from "classnames";
 import Button from "components/Button";
-import { Close20 } from "@carbon/icons-react";
+import Close20 from "@carbon/icons-react/es/close/20";
 
 export interface ModalCustomProps extends AntModalProps {
   children?: ReactNode;

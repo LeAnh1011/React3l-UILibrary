@@ -1,2 +1,1 @@
-import FormItem from "./FormItem";
-export default FormItem;
+export { default } from "./FormItem";

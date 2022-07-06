@@ -1,12 +1,13 @@
 {
   "homepage": "http://leanh1011.github.io/React3l-UILibrary",
-  "name": "react3l-ui-library",
-  "version": "0.1.64",
-  "main": "build/index.js",
+  "name": "react3l-ui-library-test",
+  "version": "0.1.2",
+  "main": "./build/index.js",
   "files": [
     "build"
   ],
-  "types": "build/index.d.ts",
+  "types": "./build/index.d.ts",
+  "typings": "./build/index.d.ts",
   "dependencies": {
     "@carbon/icons-react": "^10.44.0",
     "@testing-library/jest-dom": "^5.11.4",

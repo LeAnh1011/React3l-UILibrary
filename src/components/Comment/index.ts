@@ -1,2 +1,1 @@
-import Comment from "./Comment";
-export default Comment;
+export { default } from "./Comment";

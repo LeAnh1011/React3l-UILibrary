@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { Empty } from "antd";
 import Search16 from "@carbon/icons-react/es/search/16";
 import { CommonService } from "services/common-service";
-import { ErrorObserver, Observable } from "rxjs";
+import type { ErrorObserver, Observable } from "rxjs";
 import { useDebounceFn } from "ahooks";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import InputSearchSelect from "./InputSearchSelect/InputSearchSelect";

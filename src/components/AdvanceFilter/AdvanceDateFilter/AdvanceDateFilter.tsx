@@ -1,5 +1,4 @@
-import { DatePicker as DatePickerAntd } from "antd";
-import { DatePickerProps as AntdDatePickerProps } from "antd/lib/date-picker";
+import { DatePicker as DatePickerAntd, DatePickerProps as AntdDatePickerProps } from "antd";
 import classNames from "classnames";
 import { DEFAULT_DATETIME_VALUE } from "config/consts";
 import { BORDER_TYPE } from "config/enum";

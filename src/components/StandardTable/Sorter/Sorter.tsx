@@ -1,7 +1,6 @@
 import ArrowUp16 from "@carbon/icons-react/es/arrow--up/16";
 import ArrowDown16 from "@carbon/icons-react/es/arrow--down/16";
 import classNames from "classnames";
-import React from "react";
 import "./Sorter.scss";
 
 export interface SorterProps {

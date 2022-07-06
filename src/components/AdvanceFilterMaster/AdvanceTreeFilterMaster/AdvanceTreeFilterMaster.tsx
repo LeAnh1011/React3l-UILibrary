@@ -5,7 +5,7 @@ import { Model, ModelFilter } from "react3l-common";
 import Tree from "../../Tree";
 import { useDebounceFn } from "ahooks";
 import { DEBOUNCE_TIME_300 } from "config/consts";
-import { Observable } from "rxjs";
+import type { Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import InputText from "components/Input/InputText";
 import classNames from "classnames";

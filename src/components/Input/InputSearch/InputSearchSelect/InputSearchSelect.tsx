@@ -19,7 +19,6 @@ function InputSearchSelect(props: InputSelectProps) {
     null
   );
 
-
   const [internalValue, setInternalValue] = React.useState(value);
 
   const handleChange = React.useCallback(
@@ -37,7 +36,7 @@ function InputSearchSelect(props: InputSelectProps) {
       setInternalValue("");
       inputRef.current.focus();
       if (typeof onSearch === "function") {
-        onSearch('');
+        onSearch("");
       }
     },
     [onSearch]
@@ -58,7 +57,6 @@ function InputSearchSelect(props: InputSelectProps) {
       inputRef.current.focus();
     }
   }, [expanded]);
- 
 
   return (
     <>

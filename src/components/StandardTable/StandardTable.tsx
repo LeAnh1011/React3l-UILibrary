@@ -3,7 +3,7 @@ import "./StandardTable.scss";
 import "antd/dist/antd.css";
 import { Table } from "antd";
 import classNames from "classnames";
-import { TableProps } from "antd/lib/table";
+import type { TableProps } from "antd/lib/table";
 export interface StandardTableCustomProps extends TableProps<any> {
   isDragable?: boolean;
   className?: string;

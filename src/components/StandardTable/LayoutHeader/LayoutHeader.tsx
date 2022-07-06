@@ -1,8 +1,5 @@
 import { Tooltip } from "antd";
 import classNames from "classnames";
-import React, {
-  useCallback, useState
-} from "react";
 import { CommonService } from "services/common-service";
 import Sorter from "../Sorter/Sorter";
 import "./LayoutHeader.scss";
@@ -26,7 +23,6 @@ function LayoutHeader(props: LayoutHeaderProps) {
     sortedColumn,
   } = props;
 
-
   return (
     <button
       className={classNames(
@@ -41,7 +37,7 @@ function LayoutHeader(props: LayoutHeaderProps) {
       ) : (
         title
       )}
-      {isSorter && <Sorter sortedColumn={sortedColumn} ></Sorter>}
+      {isSorter && <Sorter sortedColumn={sortedColumn}></Sorter>}
     </button>
   );
 }

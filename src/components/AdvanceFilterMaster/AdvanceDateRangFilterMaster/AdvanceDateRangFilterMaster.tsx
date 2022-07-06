@@ -1,6 +1,6 @@
 import Calendar16 from "@carbon/icons-react/es/calendar/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
-import { RangePickerProps } from "antd/lib/date-picker";
+import type { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import DateRange from "components/Calendar/DateRange";
 import InputSelect from "components/Input/InputSelect";

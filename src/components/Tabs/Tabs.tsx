@@ -1,5 +1,5 @@
 import { Tabs as TabsAntd } from "antd";
-import { TabsType } from "antd/lib/tabs";
+import type { TabsType } from "antd/lib/tabs";
 import classNames from "classnames";
 import "./Tabs.scss";
 

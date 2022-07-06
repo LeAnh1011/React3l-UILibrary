@@ -3,13 +3,13 @@ import Add16 from "@carbon/icons-react/es/add/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { Empty, Tree as TreeAntd } from "antd";
-import {
+import type {
   DataNode,
   EventDataNode,
   TreeProps as AntdTreeProps,
 } from "antd/lib/tree";
 import React, { ReactNode, RefObject } from "react";
-import { Observable } from "rxjs";
+import type { Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import "./Tree.scss";
 import { TreeNode as CustomTreeNode } from "./TreeNode";

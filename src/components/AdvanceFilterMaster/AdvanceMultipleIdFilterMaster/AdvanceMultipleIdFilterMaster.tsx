@@ -8,7 +8,7 @@ import InputText from "components/Input/InputText";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import React, { RefObject } from "react";
 import { Model, ModelFilter } from "react3l-common";
-import { ErrorObserver, Observable } from "rxjs";
+import type { ErrorObserver, Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import "./AdvanceMultipleIdFilterMaster.scss";
 

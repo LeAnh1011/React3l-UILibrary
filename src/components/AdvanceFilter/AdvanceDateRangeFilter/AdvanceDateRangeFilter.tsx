@@ -1,5 +1,5 @@
 import { DatePicker } from "antd";
-import { RangePickerProps } from "antd/lib/date-picker";
+import type { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import { BORDER_TYPE } from "config/enum";
 import { Moment } from "moment";

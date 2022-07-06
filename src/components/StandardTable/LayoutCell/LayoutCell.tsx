@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { ReactNode } from "react";
+import type { ReactNode } from "react";
 import "./LayoutCell.scss";
 
 export interface LayoutCellProps {

@@ -5,7 +5,7 @@ import WarningFilled16 from "@carbon/icons-react/es/warning--filled/16";
 import { notification, Popconfirm } from "antd";
 import Button from "components/Button";
 import React, { RefObject } from "react";
-import { Observable } from "rxjs";
+import type { Observable } from "rxjs";
 import "./UploadFile.scss";
 import IconLoading from "components/IconLoading";
 

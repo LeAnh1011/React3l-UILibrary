@@ -3,7 +3,6 @@ import React, { PropsWithChildren } from "react";
 import "./InlineLoading.scss";
 import CheckmarkFilled16 from "@carbon/icons-react/es/checkmark--filled/16";
 import ErrorFilled16 from "@carbon/icons-react/es/error--filled/16";
-
 import IconLoading from "components/IconLoading";
 
 export interface InlineLoadingProps {

@@ -1,12 +1,12 @@
 import { DatePicker } from "antd";
-import { RangePickerProps } from "antd/lib/date-picker";
+import type { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import { BORDER_TYPE } from "config/enum";
 import { Moment } from "moment";
 import React, { ReactSVGElement, RefObject } from "react";
 import { CommonService } from "services/common-service";
-import CloseFilled16  from "@carbon/icons-react/es/close--filled/16";
-import Calendar16  from "@carbon/icons-react/es/calendar/16";
+import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
+import Calendar16 from "@carbon/icons-react/es/calendar/16";
 
 import "./DateRange.scss";
 
@@ -86,9 +86,11 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
     >
       <div className="date-picker__label m-b--xxxs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
-          <label className={classNames("component__title", {
-            "component__title--disabled": disabled,
-          })}>
+          <label
+            className={classNames("component__title", {
+              "component__title--disabled": disabled,
+            })}
+          >
             {label}
             {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>

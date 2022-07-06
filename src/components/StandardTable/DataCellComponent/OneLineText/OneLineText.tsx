@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import React from "react";
 import "./OneLineText.scss";
 import { Tooltip } from "antd";
 import { CommonService } from "services/common-service";

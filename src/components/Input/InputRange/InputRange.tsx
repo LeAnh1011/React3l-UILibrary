@@ -3,7 +3,7 @@ import React from "react";
 import InputNumber, { InputNumberProps } from "../InputNumber/InputNumber";
 import "./InputRange.scss";
 
-export interface InputRangeProps extends InputNumberProps{
+export interface InputRangeProps extends InputNumberProps {
   valueRange: [number, number] | [];
   placeHolderRange?: [string, string];
   type?: BORDER_TYPE;
@@ -12,12 +12,12 @@ export interface InputRangeProps extends InputNumberProps{
 }
 
 function InputRange(props: InputRangeProps) {
-  const { 
+  const {
     valueRange,
-    type = 0, 
-    placeHolderRange = [null, null], 
+    type = 0,
+    placeHolderRange = [null, null],
     onChangeRange,
-    isSmall
+    isSmall,
   } = props;
 
   const validateRange = React.useCallback((fromValue, toValue) => {
@@ -34,7 +34,7 @@ function InputRange(props: InputRangeProps) {
         onChangeRange([null, null]);
       }
     },
-    [onChangeRange, valueRange, validateRange],
+    [onChangeRange, valueRange, validateRange]
   );
 
   const handleBlurTo = React.useCallback(
@@ -45,13 +45,13 @@ function InputRange(props: InputRangeProps) {
         onChangeRange([null, null]);
       }
     },
-    [onChangeRange, valueRange, validateRange],
+    [onChangeRange, valueRange, validateRange]
   );
 
   return (
     <>
-      <div className='input-range__container'>
-        <div className='input-range__input-number m-r--xxs'>
+      <div className="input-range__container">
+        <div className="input-range__input-number m-r--xxs">
           <InputNumber
             {...props}
             value={valueRange[0]}
@@ -59,14 +59,13 @@ function InputRange(props: InputRangeProps) {
             type={type}
             placeHolder={placeHolderRange[0]}
             isSmall={isSmall}
-            
           />
         </div>
-      
-        <div className='input-range__input-number-to'>
+
+        <div className="input-range__input-number-to">
           <InputNumber
             {...props}
-            label={''}
+            label={""}
             value={valueRange[1]}
             onBlur={handleBlurTo}
             type={type}
@@ -79,8 +78,7 @@ function InputRange(props: InputRangeProps) {
   );
 }
 
-InputRange
-.defaultProps = {
+InputRange.defaultProps = {
   label: "",
   isSmall: false,
   type: BORDER_TYPE.BORDERED,

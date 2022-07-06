@@ -1,9 +1,10 @@
 import React, { ReactNode } from "react";
 import "./Modal.scss";
-import AntModal, { ModalProps as AntModalProps } from "antd/lib/modal";
+import { Modal as AntModal, ModalProps as AntModalProps } from "antd";
 import classNames from "classnames";
 import Button from "components/Button";
-import Close20 from "@carbon/icons-react/es/close/20";
+import { Close20 } from "@carbon/icons-react";
+
 export interface ModalCustomProps extends AntModalProps {
   children?: ReactNode;
   visibleFooter?: boolean;
@@ -15,6 +16,7 @@ export interface ModalCustomProps extends AntModalProps {
   handleSave?: (event: any) => void;
   handleApplyNext?: (event: any) => void;
 }
+
 function Modal(props: ModalCustomProps) {
   const {
     visibleFooter,

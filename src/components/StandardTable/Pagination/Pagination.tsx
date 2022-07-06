@@ -1,6 +1,5 @@
-import { Menu, Dropdown } from "antd";
+import { Menu, Dropdown, PaginationProps as AntdPaginationProps } from "antd";
 import React from "react";
-import { PaginationProps as AntdPaginationProps } from "antd/lib/pagination/Pagination";
 import "./Pagination.scss";
 import CaretRight16 from "@carbon/icons-react/es/caret--right/16";
 import CaretLeft16 from "@carbon/icons-react/es/caret--left/16";

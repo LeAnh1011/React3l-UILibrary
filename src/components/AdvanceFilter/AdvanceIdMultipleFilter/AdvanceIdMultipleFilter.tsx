@@ -6,7 +6,7 @@ import classNames from "classnames";
 import InputTag from "components/Input/InputTag/InputTag";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import React, { RefObject } from "react";
-import { ErrorObserver, Observable } from "rxjs";
+import type { ErrorObserver, Observable } from "rxjs";
 import { BORDER_TYPE } from "config/enum";
 import "./AdvanceIdMultipleFilter.scss";
 import { Checkbox, Empty } from "antd";

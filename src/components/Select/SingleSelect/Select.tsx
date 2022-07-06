@@ -6,7 +6,7 @@ import { useDebounceFn } from "ahooks";
 import { Empty } from "antd";
 import classNames from "classnames";
 import React, { RefObject } from "react";
-import { ErrorObserver, Observable } from "rxjs";
+import type { ErrorObserver, Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import InputSelect from "components/Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "config/enum";

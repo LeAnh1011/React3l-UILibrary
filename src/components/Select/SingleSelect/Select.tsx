@@ -1,5 +1,6 @@
 import { DEBOUNCE_TIME_300 } from "config/consts";
-import { Add16, Checkmark16 } from "@carbon/icons-react";
+import Add16 from "@carbon/icons-react/es/add/16";
+import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { Model, ModelFilter } from "react3l-common";
 import { useDebounceFn } from "ahooks";
 import { Empty } from "antd";
@@ -105,27 +106,30 @@ function Select(props: SelectProps<Model, ModelFilter>) {
 
   const [subscription] = CommonService.useSubscription();
 
-  const handleGetList = React.useCallback((valueFilter: ModelFilter) => {
-    setLoading(true);
-    subscription.add(getList);
-    getList(valueFilter).subscribe({
-      next: (res: Model[]) => {
-        setList(res);
-        setLoading(false);
-      },
-      error: (err: ErrorObserver<Error>) => {
-        setList([]);
-        setLoading(false);
-      },
-    });
-  }, [getList, subscription])
+  const handleGetList = React.useCallback(
+    (valueFilter: ModelFilter) => {
+      setLoading(true);
+      subscription.add(getList);
+      getList(valueFilter).subscribe({
+        next: (res: Model[]) => {
+          setList(res);
+          setLoading(false);
+        },
+        error: (err: ErrorObserver<Error>) => {
+          setList([]);
+          setLoading(false);
+        },
+      });
+    },
+    [getList, subscription]
+  );
 
   const handleLoadList = React.useCallback(() => {
     try {
       setLoading(true);
       subscription.add(getList);
       const filter = valueFilter ? valueFilter : new ClassFilter();
-      handleGetList(filter)
+      handleGetList(filter);
     } catch (error) {}
   }, [subscription, getList, valueFilter, ClassFilter, handleGetList]);
 
@@ -153,7 +157,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (!disabled) {
-        console.log(selectListRef)
+        console.log(selectListRef);
         setExpand(true);
         if (isEnumerable) {
           if (list.length === 0) {

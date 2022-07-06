@@ -1,6 +1,7 @@
 import React from "react";
 import { FileModel } from "../UploadImage";
-import { Edit24, TrashCan24 } from "@carbon/icons-react";
+import Edit24 from "@carbon/icons-react/es/edit/24";
+import TrashCan24 from "@carbon/icons-react/es/trash-can/24";
 
 interface ImageItemProps extends FileModel {}
 

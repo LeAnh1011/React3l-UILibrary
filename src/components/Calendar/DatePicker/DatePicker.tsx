@@ -6,7 +6,7 @@ import { BORDER_TYPE } from "config/enum";
 import { Moment } from "moment";
 import React, { ReactSVGElement, RefObject } from "react";
 import { CommonService } from "services/common-service";
-import { CloseFilled16 } from "@carbon/icons-react";
+import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import "./DatePicker.scss";
 
 interface DatePickerAction {

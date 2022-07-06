@@ -9,7 +9,8 @@ import { Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import InputText from "components/Input/InputText";
 import classNames from "classnames";
-import { ChevronDown16, Search16 } from "@carbon/icons-react";
+import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
+import Search16  from "@carbon/icons-react/es/search/16";
 import { IdFilter } from "react3l-advanced-filters";
 
 export interface AdvanceTreeFilterMasterProps<

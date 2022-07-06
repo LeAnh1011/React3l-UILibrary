@@ -1,5 +1,5 @@
 import { Model, ModelFilter } from "react3l-common";
-import { Add16 } from "@carbon/icons-react";
+import Add16 from "@carbon/icons-react/es/add/16";
 import { useDebounceFn } from "ahooks";
 import { CommonService } from "services/common-service";
 import classNames from "classnames";

@@ -1,4 +1,4 @@
-import { Close20 } from "@carbon/icons-react";
+import Close20 from "@carbon/icons-react/es/close/20";
 import { Spin } from "antd";
 import classNames from "classnames";
 import Button from "components/Button";

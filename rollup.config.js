@@ -4,7 +4,7 @@ import typescript from "rollup-plugin-typescript2";
 // import sass from "rollup-plugin-sass";
 import postcss from "rollup-plugin-postcss";
 // import image from '@rollup/plugin-image';
-import { terser } from "rollup-plugin-terser";
+//import { terser } from "rollup-plugin-terser";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -90,6 +90,6 @@ export default {
       sourceMap: true,
       extract: false
     }),
-    terser(),
+    //terser(),
   ]
 };

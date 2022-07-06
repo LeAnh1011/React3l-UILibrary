@@ -3,7 +3,10 @@ import { storiesOf } from "@storybook/react";
 import nameof from "ts-nameof.macro";
 import Button from "./Button";
 import { Tabs } from "antd";
-import { ChevronDown16, TrashCan16, Add16 } from "@carbon/icons-react";
+import Add16 from "@carbon/icons-react/es/add/16";
+import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
+import TrashCan16 from "@carbon/icons-react/es/trash-can/16";
+
 const { TabPane } = Tabs;
 function NormalButtonView() {
   const [loading, setLoading] = React.useState<boolean>(false);

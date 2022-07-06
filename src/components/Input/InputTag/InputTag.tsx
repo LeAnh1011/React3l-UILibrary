@@ -1,5 +1,7 @@
 import React, { ReactSVGElement, RefObject } from "react";
-import { CloseFilled16, ChevronDown16, Close16 } from "@carbon/icons-react";
+import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
+import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
+import Close16 from "@carbon/icons-react/es/close/16";
 import "./InputTag.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
@@ -118,21 +120,18 @@ function InputTag(props: InputTagProps<Model>) {
           )}
         </div>
         <div
-          className={classNames(
-            "component__input input-tag__container",
-            {
-              "input-tag__container--sm": isSmall,
-              "p-y--xxs": isSmall,
-              "p-x--xs": isSmall,
-              "p--xs": !isSmall,
-              "input-tag__container--material": type === BORDER_TYPE.MATERIAL,
-              "input-tag__container--bordered": type === BORDER_TYPE.BORDERED,
-              "input-tag--disabled ": disabled,
-              "input-tag__container--float": type === BORDER_TYPE.FLOAT_LABEL,
-              "input-tag--filter-have-item":
-                isFilter && internalListValue && internalListValue.length > 0,
-            }
-          )}
+          className={classNames("component__input input-tag__container", {
+            "input-tag__container--sm": isSmall,
+            "p-y--xxs": isSmall,
+            "p-x--xs": isSmall,
+            "p--xs": !isSmall,
+            "input-tag__container--material": type === BORDER_TYPE.MATERIAL,
+            "input-tag__container--bordered": type === BORDER_TYPE.BORDERED,
+            "input-tag--disabled ": disabled,
+            "input-tag__container--float": type === BORDER_TYPE.FLOAT_LABEL,
+            "input-tag--filter-have-item":
+              isFilter && internalListValue && internalListValue.length > 0,
+          })}
           onClick={() =>
             isUsingSearch
               ? inputRef.current.focus()

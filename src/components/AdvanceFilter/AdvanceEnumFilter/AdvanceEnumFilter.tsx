@@ -1,4 +1,5 @@
-import { Add16, Checkmark16 } from "@carbon/icons-react";
+import Add16 from "@carbon/icons-react/es/add/16";
+import Checkmark16  from "@carbon/icons-react/es/checkmark/16";
 import { Checkbox, Empty } from "antd";
 import classNames from "classnames";
 import InputSelect from "components/Input/InputSelect/InputSelect";

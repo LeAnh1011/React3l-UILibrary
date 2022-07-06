@@ -3,7 +3,7 @@ import "./Modal.scss";
 import AntModal, { ModalProps as AntModalProps } from "antd/lib/modal";
 import classNames from "classnames";
 import Button from "components/Button";
-import { Close20 } from "@carbon/icons-react";
+import Close20 from "@carbon/icons-react/es/close/20";
 export interface ModalCustomProps extends AntModalProps {
   children?: ReactNode;
   visibleFooter?: boolean;
@@ -56,8 +56,7 @@ function Modal(props: ModalCustomProps) {
               </span>
             </Button>
           )}
-          {
-            handleSave &&
+          {handleSave && (
             <Button
               type="bleed-primary"
               className={classNames(
@@ -67,8 +66,7 @@ function Modal(props: ModalCustomProps) {
             >
               <span>{titleButtonApply ? titleButtonApply : "Apply"}</span>
             </Button>
-          }
-
+          )}
         </div>
       </div>
     ),

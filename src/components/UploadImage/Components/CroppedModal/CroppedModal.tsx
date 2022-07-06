@@ -7,13 +7,11 @@ import "./CroppedModal.scss";
 import classNames from "classnames";
 import { formatFileSize } from "helpers/file";
 import { ModalCustomProps } from "components/Modal/Modal";
-import {
-  Close16,
-  CloudUpload24,
-  Crop20,
-  TrashCan32,
-  Upload16,
-} from "@carbon/icons-react";
+import Close16 from "@carbon/icons-react/es/close/16";
+import CloudUpload24 from "@carbon/icons-react/es/cloud--upload/24";
+import Crop20 from "@carbon/icons-react/es/crop/20";
+import TrashCan32 from "@carbon/icons-react/es/trash-can/32";
+import Upload16 from "@carbon/icons-react/es/upload/16";
 
 const { Option } = Select;
 

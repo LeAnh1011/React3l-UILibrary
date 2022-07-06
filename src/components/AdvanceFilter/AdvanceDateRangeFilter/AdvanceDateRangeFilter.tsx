@@ -5,7 +5,8 @@ import { BORDER_TYPE } from "config/enum";
 import { Moment } from "moment";
 import React, { ReactSVGElement, RefObject } from "react";
 import { CommonService } from "services/common-service";
-import { Calendar16, CloseFilled16 } from "@carbon/icons-react";
+import CloseFilled16  from "@carbon/icons-react/es/close--filled/16";
+import Calendar16 from "@carbon/icons-react/es/calendar/16";
 import "./AdvanceDateRangeFilter.scss";
 
 const { RangePicker } = DatePicker;

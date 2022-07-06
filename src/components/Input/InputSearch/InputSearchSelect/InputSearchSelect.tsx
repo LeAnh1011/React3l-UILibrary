@@ -1,5 +1,5 @@
 import React, { ReactSVGElement, RefObject } from "react";
-import { CloseFilled16 } from "@carbon/icons-react";
+import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import "./InputSearchSelect.scss";
 import classNames from "classnames";
 import { Model } from "react3l-common";

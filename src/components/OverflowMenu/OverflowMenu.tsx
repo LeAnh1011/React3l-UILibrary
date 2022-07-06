@@ -1,4 +1,4 @@
-import { OverflowMenuVertical16 } from "@carbon/icons-react";
+import OverflowMenuVertical16 from "@carbon/icons-react/es/overflow-menu--vertical/16";
 import classNames from "classnames";
 import React, { RefObject } from "react";
 import { CommonService } from "services/common-service";

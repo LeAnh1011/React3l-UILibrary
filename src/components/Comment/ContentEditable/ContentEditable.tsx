@@ -5,7 +5,7 @@ import React, { ForwardedRef, forwardRef, MutableRefObject, RefObject } from "re
 import { Observable } from "rxjs";
 import "./ContentEditable.scss";
 import classNames from "classnames";
-import { Attachment16 } from "@carbon/icons-react";
+import Attachment16 from "@carbon/icons-react/es/attachment/16";
 
 export interface contentAction {
   action: string;

@@ -3,7 +3,7 @@ import "./InputSearch.scss";
 import { Model, ModelFilter } from "react3l-common";
 import classNames from "classnames";
 import { Empty } from "antd";
-import { Search16 } from "@carbon/icons-react";
+import Search16 from "@carbon/icons-react/es/search/16";
 import { CommonService } from "services/common-service";
 import { ErrorObserver, Observable } from "rxjs";
 import { useDebounceFn } from "ahooks";
@@ -24,7 +24,7 @@ export interface InputSearchProps<
   searchProperty?: string;
   className?: string;
   onChangeSearchField?: (id: number, T?: T) => void;
-  onChange?:(value: string) => void;
+  onChange?: (value: string) => void;
   placeHolder?: string;
   animationInput?: boolean;
 }
@@ -159,7 +159,6 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     [run]
   );
 
-
   const handleKeyPress = React.useCallback(
     (event: any) => {
       switch (event.keyCode) {
@@ -269,7 +268,6 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     [handleClickSearchIcon, handleToggle]
   );
 
-
   return (
     <div
       className={classNames("component__input-search-container", className)}
@@ -321,7 +319,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
                   list.map((item, index) => (
                     <div
                       className={classNames("select__item p-l--xs p-y--xs", {
-                        "select__item--selected": item.id === internalValue?.id ,
+                        "select__item--selected": item.id === internalValue?.id,
                       })}
                       tabIndex={-1}
                       key={index}

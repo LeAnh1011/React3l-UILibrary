@@ -67,7 +67,7 @@ function AdvanceDateRangeFilterMaster(
   const {
     value,
     onChange,
-    title,
+    label,
     className,
     disabled,
     appendToBody,
@@ -294,7 +294,7 @@ function AdvanceDateRangeFilterMaster(
             })}
           >
             <div className="advance-date-range-filter-master__title">
-              <span className="filter-title"> {title}</span>
+              <span className="filter-title"> {label}</span>
               <ChevronDown16 />
             </div>
           </div>
@@ -308,7 +308,7 @@ function AdvanceDateRangeFilterMaster(
             disabled={disabled}
             onClear={handleClearItem}
             type={inputType}
-            label={title}
+            label={label}
             isSmall={isSmall}
             onKeyDown={handleKeyDown}
           />

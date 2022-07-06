@@ -54,11 +54,10 @@ function InputSearchSelect(props: InputSelectProps) {
 
   React.useEffect(() => {
     if (expanded) {
-      setInternalValue("");
       inputRef.current.focus();
     }
   }, [expanded]);
- 
+
 
   return (
     <>

@@ -30,7 +30,7 @@ interface AdvanceDateFilterProps {
 }
 
 function AdvanceDateFilter(
-  props: AdvanceDateFilterProps & AntdDatePickerProps
+  props: AdvanceDateFilterProps
 ) {
   const {
     value,

@@ -29,7 +29,7 @@ interface DatePickerProps {
   placeHolder?: string;
 }
 
-function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
+function DatePicker(props: DatePickerProps) {
   const {
     value,
     dateFormat,

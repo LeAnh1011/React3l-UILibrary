@@ -309,7 +309,7 @@ function EnumSelect(props: SelectProps<Model>) {
             : 180;
           setAppendToBodyStyle({
             position: "fixed",
-            top: currentPosition.top - (listHeight + 30),
+            top: currentPosition.top - (listHeight - 15),
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
           });

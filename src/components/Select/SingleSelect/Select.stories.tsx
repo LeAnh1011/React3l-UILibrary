@@ -150,6 +150,7 @@ export function SingleSelectStories() {
             disabled={isDisabled}
             isSmall={isSmall}
             preferOptions={isSelectWithPreferOption ? list : undefined}
+            appendToBody={true}
           />
         </FormItem>
       </div>

@@ -15,7 +15,7 @@ import IconLoading from "components/IconLoading/IconLoading";
 export interface AdvanceIdFilterProps<
   T extends Model,
   TModelFilter extends ModelFilter
-> {
+  > {
   value?: Model;
 
   valueFilter?: TModelFilter;
@@ -143,7 +143,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
         ? JSON.parse(JSON.stringify(valueFilter))
         : new ClassFilter();
       handleGetList(filter);
-    } catch (error) {}
+    } catch (error) { }
   }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(
@@ -254,7 +254,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
             : 180;
           setAppendToBodyStyle({
             position: "fixed",
-            top: currentPosition.top - (listHeight + 30),
+            top: currentPosition.top - (listHeight - 15),
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
           });

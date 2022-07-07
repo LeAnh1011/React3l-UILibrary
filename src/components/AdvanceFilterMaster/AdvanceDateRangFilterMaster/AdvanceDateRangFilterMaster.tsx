@@ -68,7 +68,7 @@ function AdvanceDateRangeFilterMaster(
   const {
     value,
     onChange,
-    title,
+    label,
     className,
     disabled,
     appendToBody,
@@ -155,13 +155,13 @@ function AdvanceDateRangeFilterMaster(
   const internalValue: [Moment, Moment] = React.useMemo(() => {
     return value && value.length > 0
       ? [
-          typeof value[0] === "string"
-            ? CommonService.toMomentDate(value[0])
-            : value[0],
-          typeof value[1] === "string"
-            ? CommonService.toMomentDate(value[1])
-            : value[1],
-        ]
+        typeof value[0] === "string"
+          ? CommonService.toMomentDate(value[0])
+          : value[0],
+        typeof value[1] === "string"
+          ? CommonService.toMomentDate(value[1])
+          : value[1],
+      ]
       : [null, null];
   }, [value]);
 
@@ -295,7 +295,7 @@ function AdvanceDateRangeFilterMaster(
             })}
           >
             <div className="advance-date-range-filter-master__title">
-              <span className="filter-title"> {title}</span>
+              <span className="filter-title"> {label}</span>
               <ChevronDown16 />
             </div>
           </div>
@@ -309,7 +309,7 @@ function AdvanceDateRangeFilterMaster(
             disabled={disabled}
             onClear={handleClearItem}
             type={inputType}
-            label={title}
+            label={label}
             isSmall={isSmall}
             onKeyDown={handleKeyDown}
           />
@@ -367,7 +367,7 @@ function AdvanceDateRangeFilterMaster(
                     ? () => document.getElementById("list-container")
                     : null
                 }
-                placeHolder={placeholder}
+                placeholder={placeholder}
                 dropdownClassName="date-range-master"
                 onOpenChange={handleOpenChange}
               />

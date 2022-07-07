@@ -37,10 +37,13 @@ interface DateRangeProps {
   isRequired?: boolean;
   className?: string;
   action?: DateRangeAction;
-  placeHolder?: [string, string];
+  placeholder?: [string, string];
+  getPopupContainer?: () => HTMLElement;
+  dropdownClassName?: any;
+  onOpenChange: any;
 }
 
-function DateRange(props: DateRangeProps & RangePickerProps) {
+function DateRange(props: DateRangeProps) {
   const {
     value,
     dateFormat,
@@ -51,8 +54,11 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
     action,
     isSmall,
     disabled,
-    placeHolder,
+    placeholder,
     className,
+    getPopupContainer,
+    dropdownClassName,
+    onOpenChange,
   } = props;
 
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
@@ -113,7 +119,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
           style={{ width: "100%" }}
           allowClear={false}
           format={dateFormat}
-          placeholder={placeHolder}
+          placeholder={placeholder}
           suffixIcon={<SuffixDateIcon />}
           className={classNames({
             "date-picker__wrapper--sm": isSmall,
@@ -124,7 +130,10 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
             "date-picker--disabled ": disabled,
             "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,
           })}
+          getPopupContainer={getPopupContainer}
           ref={dateRef}
+          dropdownClassName={dropdownClassName}
+          onOpenChange={onOpenChange}
         />
         {type === BORDER_TYPE.FLOAT_LABEL && label && (
           <label

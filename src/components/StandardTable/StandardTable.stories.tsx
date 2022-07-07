@@ -142,7 +142,7 @@ function Default() {
         render(...[status]) {
           return (
             <LayoutCell orderType={orderType} tableSize={size}>
-              <StatusLine value={status} active={true} />
+              <StatusLine value={status} color="red" />
             </LayoutCell>
           );
         },
@@ -396,7 +396,7 @@ function Default() {
         render(...[status]) {
           return (
             <LayoutCell orderType={orderType} tableSize={size}>
-              <StatusLine value={status} active={true} />
+              <StatusLine value={status} color="red" />
             </LayoutCell>
           );
         },
@@ -583,7 +583,7 @@ function Default() {
         render(...[status]) {
           return (
             <LayoutCell orderType={orderType} tableSize="lg">
-              <StatusLine value={status} active={true} />
+              <StatusLine value={status} color="red" />
             </LayoutCell>
           );
         },

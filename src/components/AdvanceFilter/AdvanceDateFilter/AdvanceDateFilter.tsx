@@ -25,11 +25,11 @@ interface AdvanceDateFilterProps {
   isRequired?: boolean;
   className?: string;
   action?: AdvanceDateFilterAction;
-  placeHolder?: string;
+  placeholder?: string;
 }
 
 function AdvanceDateFilter(
-  props: AdvanceDateFilterProps & AntdDatePickerProps
+  props: AdvanceDateFilterProps
 ) {
   const {
     value,
@@ -42,7 +42,7 @@ function AdvanceDateFilter(
     action,
     isSmall,
     disabled,
-    placeHolder,
+    placeholder,
   } = props;
 
   const dateRef = React.useRef<any>();
@@ -107,7 +107,7 @@ function AdvanceDateFilter(
             "advance-date-filter--disabled ": disabled,
             "advance-date-filter--float": type === BORDER_TYPE.FLOAT_LABEL,
           })}
-          placeholder={placeHolder}
+          placeholder={placeholder}
         />
         {type === BORDER_TYPE.FLOAT_LABEL && label && (
           <label

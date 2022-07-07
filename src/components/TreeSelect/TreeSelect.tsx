@@ -15,7 +15,7 @@ import { IdFilter } from "react3l-advanced-filters";
 export interface TreeSelectProps<
   T extends Model,
   TModelFilter extends ModelFilter
-> {
+  > {
   title?: string;
   listItem?: Model[];
   item?: Model;
@@ -115,12 +115,12 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
       const cloneFilter = { ...filter };
 
       cloneFilter[searchProperty][searchType] = searchTerm;
-      if (listIds.length > 1) {
+      if (listIds?.length > 1) {
         cloneFilter["activeNodeIds"] = { ...new IdFilter(), in: [...listIds] };
       } else {
         cloneFilter["activeNodeId"] = {
           ...new IdFilter(),
-          equal: listIds.length > 0 ? listIds[0] : undefined,
+          equal: listIds?.length > 0 ? listIds[0] : undefined,
         };
       }
       dispatch({ type: "UPDATE", data: cloneFilter });

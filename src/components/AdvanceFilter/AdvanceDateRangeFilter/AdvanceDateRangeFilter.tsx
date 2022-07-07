@@ -1,5 +1,4 @@
 import { DatePicker } from "antd";
-import type { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import { BORDER_TYPE } from "config/enum";
 import { Moment } from "moment";
@@ -36,11 +35,11 @@ interface AdvanceDateRangeFilterProps {
   isRequired?: boolean;
   className?: string;
   action?: AdvanceDateRangeFilterAction;
-  placeHolder?: [string, string];
+  placeholder?: [string, string];
 }
 
 function AdvanceDateRangeFilter(
-  props: AdvanceDateRangeFilterProps & RangePickerProps
+  props: AdvanceDateRangeFilterProps
 ) {
   const {
     value,
@@ -52,7 +51,7 @@ function AdvanceDateRangeFilter(
     action,
     isSmall,
     disabled,
-    placeHolder,
+    placeholder,
     className,
   } = props;
 
@@ -114,7 +113,7 @@ function AdvanceDateRangeFilter(
           style={{ width: "100%" }}
           allowClear={false}
           format={dateFormat}
-          placeholder={placeHolder}
+          placeholder={placeholder}
           suffixIcon={<SuffixDateIcon />}
           className={classNames({
             "date-picker__wrapper--sm": isSmall,

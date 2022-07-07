@@ -16,7 +16,7 @@ interface DatePickerAction {
   action?: any;
 }
 interface DatePickerProps {
-  value?: Moment;
+  value?: Moment | any;
   label?: string;
   isMaterial?: boolean;
   dateFormat?: string[];
@@ -28,7 +28,7 @@ interface DatePickerProps {
   isRequired?: boolean;
   className?: string;
   action?: DatePickerAction;
-  placeHolder?: string;
+  placeholder?: string;
 }
 
 function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
@@ -43,7 +43,6 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
     action,
     isSmall,
     disabled,
-    placeHolder,
   } = props;
 
   const dateRef = React.useRef<any>();
@@ -108,7 +107,6 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
             "date-picker--disabled ": disabled,
             "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,
           })}
-          placeholder={placeHolder}
         />
         {type === BORDER_TYPE.FLOAT_LABEL && label && (
           <label

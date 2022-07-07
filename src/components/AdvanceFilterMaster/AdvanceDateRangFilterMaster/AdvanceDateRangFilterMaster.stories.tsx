@@ -27,7 +27,7 @@ export function AdvanceDateRangeFilterMasterStories() {
 
   return <div style={{ margin: '10px', width: '300px' }}>
     <AdvanceDateRangFilterMaster
-      title={"Ngày giao hàng"}
+      label={"Ngày giao hàng"}
       onChange={handleChange}
       activeItem={item}
       type={type}

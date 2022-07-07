@@ -1,4 +1,5 @@
-import { Checkmark16, ChevronDown16 } from "@carbon/icons-react";
+import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
+import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { Checkbox, Empty } from "antd";
 import classNames from "classnames";
 import { BORDER_TYPE } from "config/enum";

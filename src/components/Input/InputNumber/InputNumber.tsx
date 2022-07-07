@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { ReactSVGElement, RefObject } from "react";
-import { CloseFilled16 } from "@carbon/icons-react";
+import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import "./InputNumber.scss";
 import { ReactNode } from "react";
 import { BORDER_TYPE } from "config/enum";

@@ -1,2 +1,1 @@
-import UploadImage from './UploadImage';
-export default UploadImage;
+export { default } from "./UploadImage";

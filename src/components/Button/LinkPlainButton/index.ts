@@ -1,2 +1,1 @@
-import LinkPlainButton from "./LinkPlainButton";
-export default LinkPlainButton;
+export { default } from "./LinkPlainButton";

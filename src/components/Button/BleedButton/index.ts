@@ -1,2 +1,1 @@
-import BleedButton from "./BleedButton";
-export default BleedButton;
+export { default } from "./BleedButton";

@@ -1,11 +1,16 @@
 import { StringFilter } from "react3l-advanced-filters";
 import { ModelFilter, Model } from "react3l-common";
 import { ASSETS_IMAGE } from "config/consts";
-import React, { ForwardedRef, forwardRef, MutableRefObject, RefObject } from "react";
-import { Observable } from "rxjs";
+import React, {
+  ForwardedRef,
+  forwardRef,
+  MutableRefObject,
+  RefObject,
+} from "react";
+import type { Observable } from "rxjs";
 import "./ContentEditable.scss";
 import classNames from "classnames";
-import { Attachment16 } from "@carbon/icons-react";
+import Attachment16 from "@carbon/icons-react/es/attachment/16";
 
 export interface contentAction {
   action: string;
@@ -66,7 +71,8 @@ const ContentEditable = forwardRef<
         range = document.createRange();
         range.setStart(
           (contentEditableRef as MutableRefObject<HTMLDivElement>).current,
-          (contentEditableRef as MutableRefObject<HTMLDivElement>).current.childNodes.length
+          (contentEditableRef as MutableRefObject<HTMLDivElement>).current
+            .childNodes.length
         );
         range.collapse(true);
         selection = window.getSelection();
@@ -96,8 +102,11 @@ const ContentEditable = forwardRef<
               '<span class="mention-tag">@</span>'
             )
           ) {
-            var lastChild = (contentEditableRef as MutableRefObject<HTMLDivElement>).current.lastElementChild;
-            (contentEditableRef as MutableRefObject<HTMLDivElement>).current.removeChild(lastChild);
+            var lastChild = (contentEditableRef as MutableRefObject<HTMLDivElement>)
+              .current.lastElementChild;
+            (contentEditableRef as MutableRefObject<HTMLDivElement>).current.removeChild(
+              lastChild
+            );
             setShowSuggestList(false);
             setEndContentEditable();
           }
@@ -117,9 +126,12 @@ const ContentEditable = forwardRef<
         }
 
         if (event.key === " " && showSuggestList) {
-          var lastElementChild = (contentEditableRef as MutableRefObject<HTMLDivElement>).current.lastElementChild;
+          var lastElementChild = (contentEditableRef as MutableRefObject<HTMLDivElement>)
+            .current.lastElementChild;
           var contentText = lastElementChild.textContent;
-          (contentEditableRef as MutableRefObject<HTMLDivElement>).current.removeChild(lastElementChild);
+          (contentEditableRef as MutableRefObject<HTMLDivElement>).current.removeChild(
+            lastElementChild
+          );
           (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerHTML += contentText;
           setEndContentEditable();
           setShowSuggestList(false);
@@ -146,14 +158,18 @@ const ContentEditable = forwardRef<
       (event: React.KeyboardEvent<HTMLDivElement>) => {
         if (event.key === "Enter" && event.shiftKey) {
           if (showSuggestList) {
-            var lastElementChild = (contentEditableRef as MutableRefObject<HTMLDivElement>).current.lastElementChild;
+            var lastElementChild = (contentEditableRef as MutableRefObject<HTMLDivElement>)
+              .current.lastElementChild;
             var contentText = lastElementChild.textContent;
-            (contentEditableRef as MutableRefObject<HTMLDivElement>).current.removeChild(lastElementChild);
+            (contentEditableRef as MutableRefObject<HTMLDivElement>).current.removeChild(
+              lastElementChild
+            );
             (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerHTML += contentText;
             setShowSuggestList(false);
           }
           (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerHTML =
-          (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerHTML.trim() + "<br><br>";
+            (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerHTML.trim() +
+            "<br><br>";
           setEndContentEditable();
           return;
         }
@@ -173,7 +189,9 @@ const ContentEditable = forwardRef<
     const handleInput = React.useCallback(
       (event: React.FormEvent<HTMLDivElement>): void => {
         if (
-          (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerText.includes("@") &&
+          (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerText.includes(
+            "@"
+          ) &&
           showSuggestList
         ) {
           const stringValue = (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerText.split(
@@ -186,8 +204,10 @@ const ContentEditable = forwardRef<
           return;
         }
         if (
-          !(contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerText ||
-          (contentEditableRef as MutableRefObject<HTMLDivElement>).current.innerHTML
+          !(contentEditableRef as MutableRefObject<HTMLDivElement>).current
+            .innerText ||
+          (contentEditableRef as MutableRefObject<HTMLDivElement>).current
+            .innerHTML
         ) {
           setShowSuggestList(false);
         }
@@ -260,10 +280,11 @@ const ContentEditable = forwardRef<
                 style={{ display: "none" }}
                 onChange={(e) => handleAttachFile(e.target.files)}
               />
-              <Attachment16 onClick={() => {
+              <Attachment16
+                onClick={() => {
                   inputFileRef.current.click();
-                }}/>
-              
+                }}
+              />
             </div>
           </div>
 

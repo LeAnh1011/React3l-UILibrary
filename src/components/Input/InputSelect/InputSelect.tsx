@@ -1,5 +1,6 @@
 import React, { ReactSVGElement, RefObject } from "react";
-import { CloseFilled16, ChevronDown16 } from "@carbon/icons-react";
+import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
+import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import "./InputSelect.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
@@ -68,7 +69,7 @@ function InputSelect(props: InputSelectProps<Model>) {
       setInternalValue("");
       inputRef.current.focus();
       event.stopPropagation();
-      if(typeof handleClearInput !== undefined) {
+      if (typeof handleClearInput !== undefined) {
         onClearInput();
       }
     },
@@ -151,8 +152,8 @@ function InputSelect(props: InputSelectProps<Model>) {
                   value
                     ? (render(value) as string)
                     : type === BORDER_TYPE.FLOAT_LABEL && label
-                      ? " "
-                      : placeHolder
+                    ? " "
+                    : placeHolder
                 }
                 ref={inputRef}
                 disabled={disabled}

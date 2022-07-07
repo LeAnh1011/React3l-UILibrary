@@ -3,11 +3,10 @@ import { notification } from "antd";
 import classNames from "classnames";
 import React, { Reducer, RefObject } from "react";
 import { useDropzone } from "react-dropzone";
-
 import { UploadImageProps } from "../UploadImage";
 import CroppedModal, { ImageResult } from "./CroppedModal/CroppedModal";
 import "./ComponentUploadImage.scss";
-import { CloudUpload24 } from "@carbon/icons-react";
+import CloudUpload24 from "@carbon/icons-react/es/cloud--upload/24";
 
 export interface ImageFile {
   fileId: string | number;

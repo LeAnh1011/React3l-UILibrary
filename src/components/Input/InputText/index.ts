@@ -1,2 +1,1 @@
-import InputText from "./InputText";
-export default InputText;
+export { default } from "./InputText";

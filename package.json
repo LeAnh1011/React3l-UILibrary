@@ -1,12 +1,13 @@
 {
   "homepage": "http://leanh1011.github.io/React3l-UILibrary",
   "name": "react3l-ui-library",
-  "version": "0.1.66",
+  "version": "0.1.68",
   "main": "build/index.js",
   "files": [
     "build"
   ],
-  "types": "build/index.d.ts",
+  "types": "./build/index.d.ts",
+  "typings": "./build/index.d.ts",
   "dependencies": {
     "@carbon/icons-react": "^10.44.0",
     "@testing-library/jest-dom": "^5.11.4",
@@ -33,8 +34,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "bundle-style": "sass ./src/styles/index.scss ./build/react3l.min.css --style compressed", 
     "prebuild": "rimraf build",
-    "build": "rollup -c",
+    "build": "rollup -c && yarn bundle-style",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",

@@ -1,2 +1,1 @@
-import AdvanceStringFilter from "./AdvanceStringFilter";
-export default AdvanceStringFilter;
+export { default } from "./AdvanceStringFilter";

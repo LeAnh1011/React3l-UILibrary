@@ -1,2 +1,1 @@
-import InputSelect from "./InputSelect";
-export default InputSelect;
+export { default } from "./InputSelect";

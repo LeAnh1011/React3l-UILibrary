@@ -1,11 +1,12 @@
 import { DEBOUNCE_TIME_300 } from "config/consts";
-import { Add16, Checkmark16 } from "@carbon/icons-react";
+import Add16 from "@carbon/icons-react/es/add/16";
+import Checkmark16  from "@carbon/icons-react/es/checkmark/16";
 import { Model, ModelFilter } from "react3l-common";
 import { useDebounceFn } from "ahooks";
 import { Empty } from "antd";
 import classNames from "classnames";
 import React, { RefObject } from "react";
-import { ErrorObserver, Observable } from "rxjs";
+import type { ErrorObserver, Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import InputSelect from "components/Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "config/enum";

@@ -1,5 +1,5 @@
 import React, { ReactSVGElement, RefObject } from "react";
-import { CloseFilled16 } from "@carbon/icons-react";
+import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import "./InputSearchSelect.scss";
 import classNames from "classnames";
 import { Model } from "react3l-common";
@@ -19,7 +19,6 @@ function InputSearchSelect(props: InputSelectProps) {
     null
   );
 
-
   const [internalValue, setInternalValue] = React.useState(value);
 
   const handleChange = React.useCallback(
@@ -37,7 +36,7 @@ function InputSearchSelect(props: InputSelectProps) {
       setInternalValue("");
       inputRef.current.focus();
       if (typeof onSearch === "function") {
-        onSearch('');
+        onSearch("");
       }
     },
     [onSearch]
@@ -57,7 +56,6 @@ function InputSearchSelect(props: InputSelectProps) {
       inputRef.current.focus();
     }
   }, [expanded]);
-
 
   return (
     <>

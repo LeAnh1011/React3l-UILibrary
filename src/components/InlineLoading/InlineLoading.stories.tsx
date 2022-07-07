@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import nameof from "ts-nameof.macro";
 import Button from "../Button";
 import { Tabs } from "antd";
-import { Add16 } from "@carbon/icons-react";
+import Add16 from "@carbon/icons-react/es/add/16";
 import InlineLoading from "./InlineLoading";
 export type LoadingType = "default" | "submitting" | "submitted" | "error";
 const { TabPane } = Tabs;

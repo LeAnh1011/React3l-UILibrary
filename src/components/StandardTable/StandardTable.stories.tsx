@@ -1,11 +1,12 @@
-import { Add16, ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
+import Add16 from "@carbon/icons-react/es/add/16";
+import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
+import ChevronUp16 from "@carbon/icons-react/es/chevron--up/16";
 import { storiesOf } from "@storybook/react";
 import { Tabs } from "antd";
 import Radio, { RadioChangeEvent } from "antd/lib/radio";
 import { ColumnProps } from "antd/lib/table";
 // import { Model } from "react3l-common";
 import { Key, RowSelectionType } from "antd/lib/table/interface";
-import classNames from "classnames";
 import React, { useMemo } from "react";
 import { StringFilter } from "react3l-advanced-filters";
 import { ModelFilter } from "react3l-common";
@@ -148,7 +149,7 @@ function Default() {
       },
     ];
 
-    const data = [];
+    const data: any = [];
     for (let i = 0; i < 9; ++i) {
       data.push({
         key: i,
@@ -212,7 +213,7 @@ function Default() {
     console.log("handleDelete");
   }, []);
 
-  const list: any = React.useMemo(()=> {
+  const list: any = React.useMemo(() => {
     return [
       {
         name: "Thêm",
@@ -227,7 +228,7 @@ function Default() {
         action: handleDelete,
       },
     ];
-  },[handleAdd, handleDelete, handleEdit]);
+  }, [handleAdd, handleDelete, handleEdit]);
 
   const columns: ColumnProps<any>[] = useMemo(
     () => [
@@ -591,7 +592,7 @@ function Default() {
     [avatarType, orderType]
   );
 
-  const data = [];
+  const data: any = [];
   for (let i = 0; i < 8; ++i) {
     data.push({
       key: i,

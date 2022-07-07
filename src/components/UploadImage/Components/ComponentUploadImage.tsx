@@ -7,7 +7,8 @@ import "./ComponentUploadImage.scss";
 import { Menu } from "./ComponentMenuImage";
 import classNames from "classnames";
 import { notification } from "antd";
-import { CloudUpload24, Edit24 } from "@carbon/icons-react";
+import CloudUpload24 from "@carbon/icons-react/es/cloud--upload/24";
+import Edit24 from "@carbon/icons-react/es/edit/24";
 
 export interface ImageFile {
   fileId: string | number;

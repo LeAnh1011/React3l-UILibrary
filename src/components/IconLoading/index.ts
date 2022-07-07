@@ -1,2 +1,1 @@
-import IconLoading from "./IconLoading";
-export default IconLoading;
+export { default } from "./IconLoading";

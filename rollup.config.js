@@ -1,10 +1,9 @@
 import commonjs from "@rollup/plugin-commonjs";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import typescript from "rollup-plugin-typescript2";
-// import sass from "rollup-plugin-sass";
 import postcss from "rollup-plugin-postcss";
-// import image from '@rollup/plugin-image';
 import { terser } from "rollup-plugin-terser";
+// import image from '@rollup/plugin-image';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -91,15 +90,5 @@ export default {
       extract: false
     }),
     terser(),
-  ],
-  external: [
-    "antd",
-    "react",
-    "react-dom",
-    "react3l-advanced-filters",
-    "react3l-axios-observable",
-    "react3l-common",
-    "react3l-decorators",
-    "react3l-localization",
-  ],
+  ]
 };

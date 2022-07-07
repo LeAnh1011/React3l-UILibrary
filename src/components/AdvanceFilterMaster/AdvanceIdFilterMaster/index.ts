@@ -1,2 +1,1 @@
-import AdvanceIdFilterMaster from "./AdvanceIdFilterMaster";
-export default AdvanceIdFilterMaster;
+export { default } from "./AdvanceIdFilterMaster";

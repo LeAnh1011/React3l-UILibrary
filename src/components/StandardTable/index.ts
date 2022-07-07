@@ -1,2 +1,1 @@
-import StandardTable from "./StandardTable";
-export default StandardTable;
+export { default } from "./StandardTable";

@@ -35,7 +35,7 @@ interface DateRangeProps {
   isRequired?: boolean;
   className?: string;
   action?: DateRangeAction;
-  placeHolder?: [string, string];
+  placeholder?: [string, string];
   getPopupContainer?: () => HTMLElement;
   dropdownClassName?: any;
   onOpenChange: any;
@@ -52,7 +52,7 @@ function DateRange(props: DateRangeProps) {
     action,
     isSmall,
     disabled,
-    placeHolder,
+    placeholder,
     className,
     getPopupContainer,
     dropdownClassName,
@@ -115,7 +115,7 @@ function DateRange(props: DateRangeProps) {
           style={{ width: "100%" }}
           allowClear={false}
           format={dateFormat}
-          placeholder={placeHolder}
+          placeholder={placeholder}
           suffixIcon={<SuffixDateIcon />}
           className={classNames({
             "date-picker__wrapper--sm": isSmall,

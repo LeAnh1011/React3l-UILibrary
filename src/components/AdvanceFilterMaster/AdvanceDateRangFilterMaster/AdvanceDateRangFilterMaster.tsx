@@ -366,7 +366,7 @@ function AdvanceDateRangeFilterMaster(
                     ? () => document.getElementById("list-container")
                     : null
                 }
-                placeHolder={placeholder}
+                placeholder={placeholder}
                 dropdownClassName="date-range-master"
                 onOpenChange={handleOpenChange}
               />

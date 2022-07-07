@@ -34,7 +34,7 @@ interface AdvanceDateRangeFilterProps {
   isRequired?: boolean;
   className?: string;
   action?: AdvanceDateRangeFilterAction;
-  placeHolder?: [string, string];
+  placeholder?: [string, string];
 }
 
 function AdvanceDateRangeFilter(
@@ -50,7 +50,7 @@ function AdvanceDateRangeFilter(
     action,
     isSmall,
     disabled,
-    placeHolder,
+    placeholder,
     className,
   } = props;
 
@@ -112,7 +112,7 @@ function AdvanceDateRangeFilter(
           style={{ width: "100%" }}
           allowClear={false}
           format={dateFormat}
-          placeholder={placeHolder}
+          placeholder={placeholder}
           suffixIcon={<SuffixDateIcon />}
           className={classNames({
             "date-picker__wrapper--sm": isSmall,

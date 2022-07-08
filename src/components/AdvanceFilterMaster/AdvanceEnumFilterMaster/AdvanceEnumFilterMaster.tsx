@@ -1,14 +1,15 @@
-import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
+import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import { Checkbox, Empty } from "antd";
 import classNames from "classnames";
 import { BORDER_TYPE } from "config/enum";
 import React, { RefObject } from "react";
-import { Model } from "react3l-common";
+import { Model, ModelFilter } from "react3l-common";
+import { ErrorObserver, Observable, Subscription } from "rxjs";
 import { CommonService } from "services/common-service";
 import "./AdvanceEnumFilterMaster.scss";
 
-export interface AdvanceEnumMasterProps<T extends Model> {
+export interface AdvanceEnumMasterProps<T extends Model, TModelFilter extends ModelFilter> {
   value?: number | string;
 
   title: string;
@@ -39,7 +40,7 @@ export interface AdvanceEnumMasterProps<T extends Model> {
 
   isMultiple?: boolean;
 
-  listItem?: Model[];
+  getList?: () => Observable<T[]>;
 
   className?: string;
 }
@@ -70,7 +71,7 @@ function multipleSelectReducer(
   return;
 }
 
-function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
+function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model, ModelFilter>) {
   const {
     value,
     disabled,
@@ -80,7 +81,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
     isMultiple,
     listValue,
     onChangeMultiple,
-    listItem,
+    getList,
     title,
     className,
   } = props;
@@ -94,6 +95,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
   }, [value]);
 
   const [list, setList] = React.useState<Model[]>([]);
+
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
@@ -110,6 +112,28 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
   const [selectedList, dispatch] = React.useReducer(multipleSelectReducer, []);
 
   const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
+
+
+
+  React.useEffect(()=>{
+    const subscription = new Subscription();
+    if(firstLoad) {
+      subscription.add(getList);
+      getList().subscribe({
+        next: (res: Model[]) => {
+          setList(res);
+        },
+        error: (err: ErrorObserver<Error>) => {
+          setList([]);
+        },
+      });
+    }
+
+    return function cleanup() {
+      subscription.unsubscribe();
+    };
+  },[firstLoad, getList, list])
+
 
   // use this for multiple type
   const internalList = React.useMemo(() => {
@@ -153,10 +177,9 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (!disabled) {
         setExpand(true);
-        setList(listItem);
       }
     },
-    [disabled, listItem]
+    [disabled]
   );
 
   const handleCloseSelect = React.useCallback(() => {

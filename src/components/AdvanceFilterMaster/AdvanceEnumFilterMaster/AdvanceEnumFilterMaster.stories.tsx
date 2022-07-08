@@ -3,10 +3,11 @@ import { RadioChangeEvent } from "antd/lib/radio";
 import React, { Reducer } from "react";
 import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
+import { Observable } from "rxjs";
 import {
   AdvanceFilterAction,
   advanceFilterReducer,
-  advanceFilterService,
+  advanceFilterService
 } from "../../../services/advance-filter-service";
 import AdvanceEnumFilterMaster from "./AdvanceEnumFilterMaster";
 export class DemoFilter extends ModelFilter {
@@ -15,17 +16,29 @@ export class DemoFilter extends ModelFilter {
   code: StringFilter = new StringFilter();
 }
 
-const demoListEnum = [
-  {
-    id: 1,
-    name: "Option 2 very long one very long one ",
-    code: "E1",
-  },
-  { id: 2, name: "Enum 2", code: "E2" },
-  { id: 3, name: "Enum 3", code: "E3" },
-  { id: 4, name: "Enum 4", code: "E4" },
-  { id: 5, name: "Enum 5", code: "E5" },
-];
+const demoObservable = new Observable<Model[]>((observer) => {
+  setTimeout(() => {
+    observer.next([
+      { id: 4, name: "Ban hành chính", code: "FAD" },
+      {
+        id: 1,
+        name:
+          "Ban công nghệ thông tin Ban công nghệ thông tin Ban công nghệ thông tin Ban công nghệ thông tin",
+        code: "FIM",
+      },
+      { id: 2, name: "Ban nhân sự", code: "FHR" },
+      { id: 3, name: "Ban tài chính", code: "FAF" },
+      { id: 5, name: "Ban đời sống", code: "DSS" },
+      { id: 6, name: "Ban nội vụ", code: "DUH" },
+      { id: 7, name: "Ban lao động", code: "FJIP" },
+      { id: 8, name: "Ban thể thao", code: "FJUI" },
+    ]);
+  }, 1000);
+});
+
+const demoSearchFunc = () => {
+  return demoObservable;
+};
 
 const filterValue = new DemoFilter();
 export function AdvanceEnumFilterMasterStories() {
@@ -75,7 +88,7 @@ export function AdvanceEnumFilterMasterStories() {
           listValue={multifilter.id.in}
           render={handleRenderModel}
           onChange={setValue}
-          listItem={demoListEnum}
+          getList={demoSearchFunc}
           label={"Label"}
           isMultiple={isMultiple}
           onChangeMultiple={handleChangeFilter} // if type is multiple pass this props

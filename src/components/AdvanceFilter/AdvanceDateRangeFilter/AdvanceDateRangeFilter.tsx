@@ -1,4 +1,5 @@
 import { DatePicker } from "antd";
+import { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import { BORDER_TYPE } from "config/enum";
 import { Moment } from "moment";
@@ -39,7 +40,7 @@ interface AdvanceDateRangeFilterProps {
 }
 
 function AdvanceDateRangeFilter(
-  props: AdvanceDateRangeFilterProps
+  props: AdvanceDateRangeFilterProps & RangePickerProps
 ) {
   const {
     value,

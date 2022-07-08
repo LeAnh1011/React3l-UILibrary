@@ -99,7 +99,7 @@ function Modal(props: ModalCustomProps) {
     <>
       <AntModal
         {...props}
-        style={{ top: 20 }}
+        style={{ top: 72 }}
         destroyOnClose={destroyOnClose}
         className={classNames("modal__container", `size-${size}`)}
         closeIcon={CloseButton}

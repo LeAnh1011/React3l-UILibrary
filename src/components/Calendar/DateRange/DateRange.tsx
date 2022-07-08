@@ -43,7 +43,7 @@ interface DateRangeProps {
   onOpenChange: any;
 }
 
-function DateRange(props: DateRangeProps) {
+function DateRange(props: DateRangeProps & RangePickerProps) {
   const {
     value,
     dateFormat,

@@ -309,7 +309,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
               </div>
             </div>
           ) : (
-            <div className={classNames({ "filter-active": value })}>
+            <div className={classNames({ "filter-active": typeof value === 'number' || typeof value === 'string'  })}>
               <div className="advance-enum-filter-master__title">
                 <span className="filter-title"> {title}</span>
                 <ChevronDown16 />

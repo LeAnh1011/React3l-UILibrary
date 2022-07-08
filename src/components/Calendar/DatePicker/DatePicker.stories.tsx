@@ -53,7 +53,7 @@ export function DatePickerStories() {
           type={type}
           isSmall={isSmall}
           label="Ngày nhập hàng"
-          placeHolder={"Enter text..."}
+          placeholder={"Enter text..."}
           onChange={handleChange}
           disabled={isDisabled}
           value={value}

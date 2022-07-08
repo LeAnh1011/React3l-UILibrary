@@ -1,12 +1,12 @@
 import { Model, ModelFilter } from "react3l-common";
-import { Add16 } from "@carbon/icons-react";
+import Add16 from "@carbon/icons-react/es/add/16";
 import { useDebounceFn } from "ahooks";
 import { CommonService } from "services/common-service";
 import classNames from "classnames";
 import InputTag from "components/Input/InputTag/InputTag";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import React, { RefObject } from "react";
-import { ErrorObserver, Observable } from "rxjs";
+import type { ErrorObserver, Observable } from "rxjs";
 import { BORDER_TYPE } from "config/enum";
 import "./AdvanceIdMultipleFilter.scss";
 import { Checkbox, Empty } from "antd";

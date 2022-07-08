@@ -1,6 +1,6 @@
 import { Model, ModelFilter } from "react3l-common";
 import React, { ReactNode } from "react";
-import { Observable } from "rxjs";
+import type { Observable } from "rxjs";
 import { ComponentUploadAvatar } from "./Components/ComponentUploadAvatar";
 import { ComponentUploadImage } from "./Components/ComponentUploadImage";
 import "./UploadImage.scss";

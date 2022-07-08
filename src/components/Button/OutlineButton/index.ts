@@ -1,2 +1,1 @@
-import OutlineButton from "./OutlineButton";
-export default OutlineButton;
+export { default } from "./OutlineButton";

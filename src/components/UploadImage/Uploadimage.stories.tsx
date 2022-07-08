@@ -1,4 +1,4 @@
-import { Camera32 } from "@carbon/icons-react";
+import Camera32 from "@carbon/icons-react/es/camera/32";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { Observable } from "rxjs";
@@ -38,7 +38,7 @@ const menu = [
 ];
 
 function Default() {
-  const [avatar, setAvatar] = React.useState<File>(null);
+  const [avatar, setAvatar] = React.useState<File>();
   const [listImage, setlistImage] = React.useState<File[]>([]);
 
   const demoObservableAvatar = new Observable<FileModel>((observer) => {

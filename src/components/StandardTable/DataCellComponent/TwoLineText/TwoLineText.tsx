@@ -68,7 +68,13 @@ function TwoLineText(props: TwoLineTextProps) {
                 className={classNames(icon, `icon-two-line-text m-r--xxs`)}
               ></i>
             )}
-            {countCharacters1 && countCharacters1 > 0 ? <Tooltip title={valueLine1}>{CommonService.limitWord(valueLine1, countCharacters1) }</Tooltip> : <>{valueLine1}</>}
+            {countCharacters1 && countCharacters1 > 0 ? (
+              <Tooltip title={valueLine1}>
+                {CommonService.limitWord(valueLine1, countCharacters1)}
+              </Tooltip>
+            ) : (
+              <>{valueLine1}</>
+            )}
             <Tooltip title={valueLine1}>{valueLine1}</Tooltip>
           </div>
           <div

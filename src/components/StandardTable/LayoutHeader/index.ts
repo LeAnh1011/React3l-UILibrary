@@ -1,2 +1,1 @@
-import LayoutHeader from "./LayoutHeader";
-export default LayoutHeader;
+export { default } from "./LayoutHeader";

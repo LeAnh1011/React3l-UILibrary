@@ -1,2 +1,1 @@
-import EnumSelect from "./EnumSelect";
-export default EnumSelect;
+export { default } from "./EnumSelect";

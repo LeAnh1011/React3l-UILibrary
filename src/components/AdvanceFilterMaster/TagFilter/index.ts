@@ -1,2 +1,1 @@
-import TagFilter from "./TagFilter";
-export default TagFilter;
+export { default } from "./TagFilter";

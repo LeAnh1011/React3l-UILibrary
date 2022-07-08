@@ -1,2 +1,1 @@
-import InputSearch from "./InputSearch";
-export default InputSearch;
+export { default } from "./InputSearch";

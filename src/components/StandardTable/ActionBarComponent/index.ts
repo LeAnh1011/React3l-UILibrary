@@ -1,2 +1,1 @@
-import ActionBarComponent from "./ActionBarComponent";
-export default ActionBarComponent;
+export { default } from "./ActionBarComponent";

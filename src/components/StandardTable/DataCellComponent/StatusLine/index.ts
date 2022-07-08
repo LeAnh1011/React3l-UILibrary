@@ -1,2 +1,1 @@
-import StatusLine from "./StatusLine";
-export default StatusLine;
+export { default } from "./StatusLine";

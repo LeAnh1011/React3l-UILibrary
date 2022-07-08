@@ -1,4 +1,4 @@
-import { Close16 } from "@carbon/icons-react";
+import Close16 from "@carbon/icons-react/es/close/16";
 import { Tooltip } from "antd";
 import classNames from "classnames";
 import { formatDate } from "helpers/date-time";

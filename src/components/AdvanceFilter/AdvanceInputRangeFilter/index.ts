@@ -1,2 +1,1 @@
-import AdvanceInputRangeFilter from "./AdvanceInputRangeFilter";
-export default AdvanceInputRangeFilter;
+export { default } from "./AdvanceInputRangeFilter";

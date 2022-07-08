@@ -1,2 +1,1 @@
-import AdvanceTreeFilter from "./AdvanceTreeFilter";
-export default AdvanceTreeFilter;
+export { default } from "./AdvanceTreeFilter";

@@ -5,7 +5,7 @@ import { RadioChangeEvent } from "antd/lib/radio";
 import FormItem from "../../FormItem/FormItem";
 import { ValidateStatus } from "./../../../config/enum";
 import { BORDER_TYPE } from "./../../../config/enum";
-import { Apple16 } from "@carbon/icons-react";
+import Apple16 from "@carbon/icons-react/es/apple/16";
 
 export function InputNumberStories() {
   const [numberType, setNumberType] = React.useState<string>(LONG);

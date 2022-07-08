@@ -1,11 +1,12 @@
-import { Add16, Checkmark16 } from "@carbon/icons-react";
+import React, { RefObject } from "react";
+import { Model } from "react3l-common";
+import Add16 from "@carbon/icons-react/es/add/16";
+import Checkmark16  from "@carbon/icons-react/es/checkmark/16";
 import { Checkbox, Empty } from "antd";
 import classNames from "classnames";
 import InputSelect from "components/Input/InputSelect/InputSelect";
 import InputTag from "components/Input/InputTag";
 import { BORDER_TYPE } from "config/enum";
-import React, { RefObject } from "react";
-import { Model } from "react3l-common";
 import { CommonService } from "services/common-service";
 
 export interface AdvanceEnumProps<T extends Model> {

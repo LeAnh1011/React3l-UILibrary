@@ -1,4 +1,6 @@
-import { Checkmark16, ChevronDown16, Search16 } from "@carbon/icons-react";
+import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
+import Checkmark16  from "@carbon/icons-react/es/checkmark/16";
+import Search16  from "@carbon/icons-react/es/search/16";
 import { useDebounceFn } from "ahooks";
 import { Empty, Tooltip } from "antd";
 import classNames from "classnames";

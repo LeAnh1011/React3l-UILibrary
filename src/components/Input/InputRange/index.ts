@@ -1,2 +1,1 @@
-import InputRange from "./InputRange";
-export default InputRange;
+export { default } from "./InputRange";

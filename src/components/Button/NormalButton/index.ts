@@ -1,2 +1,1 @@
-import NormalButton from "./NormalButton";
-export default NormalButton;
+export { default } from "./NormalButton";

@@ -1,2 +1,1 @@
-import MultipleSelect from "./MultipleSelect";
-export default MultipleSelect;
+export { default } from "./MultipleSelect";

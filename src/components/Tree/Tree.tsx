@@ -1,13 +1,15 @@
 import { Model, ModelFilter } from "react3l-common";
-import { Add16, ChevronDown16, Checkmark16 } from "@carbon/icons-react";
+import Add16 from "@carbon/icons-react/es/add/16";
+import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
+import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { Empty, Tree as TreeAntd } from "antd";
-import {
+import type {
   DataNode,
   EventDataNode,
   TreeProps as AntdTreeProps,
 } from "antd/lib/tree";
 import React, { ReactNode, RefObject } from "react";
-import { Observable } from "rxjs";
+import type { Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import "./Tree.scss";
 import { TreeNode as CustomTreeNode } from "./TreeNode";
@@ -248,7 +250,14 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       });
     }
     return () => {};
-  }, [getTreeData, selectedKey, ClassFilter, subscription, onlySelectLeaf, valueFilter]);
+  }, [
+    getTreeData,
+    selectedKey,
+    ClassFilter,
+    subscription,
+    onlySelectLeaf,
+    valueFilter,
+  ]);
 
   React.useEffect(() => {
     if (valueFilter && valueFilter[searchProperty][searchType]) {

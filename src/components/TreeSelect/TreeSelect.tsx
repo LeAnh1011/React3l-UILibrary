@@ -5,7 +5,7 @@ import { Model, ModelFilter } from "react3l-common";
 import Tree from "../Tree/Tree";
 import { useDebounceFn } from "ahooks";
 import { DEBOUNCE_TIME_300 } from "config/consts";
-import { Observable } from "rxjs";
+import type { Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import InputTag from "../Input/InputTag/InputTag";
 import InputSelect from "../Input/InputSelect/InputSelect";
@@ -129,7 +129,6 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
       wait: DEBOUNCE_TIME_300,
     }
   );
-
 
   const handleClearItem = React.useCallback(
     (item: Model) => {

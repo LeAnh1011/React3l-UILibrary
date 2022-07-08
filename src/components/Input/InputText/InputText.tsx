@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { BORDER_TYPE } from "config/enum";
 import React, { ReactSVGElement, RefObject } from "react";
-import { CloseFilled16 } from "@carbon/icons-react";
+import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import "./InputText.scss";
 
 interface InputTextAction {
@@ -155,18 +155,15 @@ const InputText = React.forwardRef(
           )}
         </div>
         <div
-          className={classNames(
-            "component__input input-text__container",
-            {
-              "input-text__container--sm": isSmall,
-              "p-y--xxs": isSmall,
-              "p-x--xs": isSmall,
-              "p--xs": !isSmall,
-              "input-text--material": type === BORDER_TYPE.MATERIAL,
-              "input-text--disabled ": disabled,
-              "input-text--float": type === BORDER_TYPE.FLOAT_LABEL,
-            }
-          )}
+          className={classNames("component__input input-text__container", {
+            "input-text__container--sm": isSmall,
+            "p-y--xxs": isSmall,
+            "p-x--xs": isSmall,
+            "p--xs": !isSmall,
+            "input-text--material": type === BORDER_TYPE.MATERIAL,
+            "input-text--disabled ": disabled,
+            "input-text--float": type === BORDER_TYPE.FLOAT_LABEL,
+          })}
           ref={ref}
           onClick={() => {
             inputRef.current.focus();

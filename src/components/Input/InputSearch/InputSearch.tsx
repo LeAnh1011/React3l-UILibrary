@@ -3,9 +3,9 @@ import "./InputSearch.scss";
 import { Model, ModelFilter } from "react3l-common";
 import classNames from "classnames";
 import { Empty } from "antd";
-import { Search16 } from "@carbon/icons-react";
+import Search16 from "@carbon/icons-react/es/search/16";
 import { CommonService } from "services/common-service";
-import { ErrorObserver, Observable } from "rxjs";
+import type { ErrorObserver, Observable } from "rxjs";
 import { useDebounceFn } from "ahooks";
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import InputSearchSelect from "./InputSearchSelect/InputSearchSelect";
@@ -159,7 +159,6 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     [run]
   );
 
-
   const handleKeyPress = React.useCallback(
     (event: any) => {
       switch (event.keyCode) {
@@ -268,7 +267,6 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     },
     [handleClickSearchIcon, handleToggle]
   );
-
 
   return (
     <div

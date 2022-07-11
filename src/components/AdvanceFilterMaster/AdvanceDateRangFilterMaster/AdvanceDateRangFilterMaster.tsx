@@ -340,7 +340,7 @@ function AdvanceDateRangeFilterMaster(
                   onKeyDown={handleMove(item)}
                 >
                   <span className="advance-date-range-filter__text">
-                    {translate(item?.name)}
+                    {translate ? translate(item?.name) : item?.name}
                   </span>
                 </div>
               ))}
@@ -352,7 +352,7 @@ function AdvanceDateRangeFilterMaster(
             onClick={handleClickCustomDate}
           >
             <Calendar16 />
-            <span>{translate("general.filter.customDate")}</span>
+            <span>{ translate? translate("general.filter.customDate") : "Custom Date"}</span>
           </div>
           {isExpandDate && (
             <>

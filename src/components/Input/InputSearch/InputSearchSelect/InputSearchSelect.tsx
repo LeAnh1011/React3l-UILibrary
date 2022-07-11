@@ -8,10 +8,11 @@ export interface InputSelectProps {
   placeHolder?: string;
   onSearch?: (T: string) => void;
   onKeyDown?: (event: any) => void;
+  value?: string | null;
 }
 
 function InputSearchSelect(props: InputSelectProps) {
-  const { expanded, placeHolder, onSearch, onKeyDown } = props;
+  const { expanded, placeHolder, onSearch, onKeyDown, value } = props;
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
     null
@@ -28,8 +29,8 @@ function InputSearchSelect(props: InputSelectProps) {
 
   const handleClearInput = React.useCallback(
     (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
-      inputRef.current.value = "";
       inputRef.current.focus();
+      inputRef.current.value = "";
       if (typeof onSearch === "function") {
         onSearch("");
       }
@@ -51,6 +52,12 @@ function InputSearchSelect(props: InputSelectProps) {
       inputRef.current.focus();
     }
   }, [expanded]);
+
+  React.useEffect(() => {
+    if (value) {
+      inputRef.current.value = value;
+    }
+  }, [value]);
 
   return (
     <>

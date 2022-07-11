@@ -14,7 +14,7 @@ import IconLoading from "components/IconLoading/IconLoading";
 export interface InputSearchProps<
   T extends Model,
   TModelFilter extends ModelFilter
-  > {
+> {
   value?: T | string | undefined | null;
   valueFilter?: TModelFilter;
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
@@ -140,7 +140,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           setLoading(false);
         },
       });
-    } catch (error) { }
+    } catch (error) {}
   }, [getList, valueFilter, ClassFilter, subscription]);
 
   const handleClickItem = React.useCallback(
@@ -298,7 +298,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
               expanded={isExpand}
               onSearch={handleSearchChange}
               onKeyDown={handleKeyPress}
-              value={internalValue}
+              value={internalValue?.name}
             />
           ) : (
             <InputSearchSelect

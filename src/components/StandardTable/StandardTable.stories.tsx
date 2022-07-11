@@ -23,6 +23,7 @@ import Pagination from "./Pagination/Pagination";
 import StandardTable from "./StandardTable";
 import OverflowMenu from "../OverflowMenu/OverflowMenu";
 import "./StandardTable.scss";
+import InputSearch from "../Input/InputSearch/InputSearch";
 
 const KateBishop =
   "https://cdn.searchenginejournal.com/wp-content/uploads/2019/07/the-essential-guide-to-using-images-legally-online-1520x800.png";
@@ -623,6 +624,13 @@ function Default() {
     <div>
       <Tabs defaultActiveKey="1">
         <TabPane tab="Table not have TwoLineText" key="1">
+        <InputSearch
+          value={'hello'}
+          searchProperty={"name"}
+          classFilter={DemoFilter}
+          placeHolder="Search..."
+          animationInput={false}
+        />
           <ActionBarComponent
             selectedRowKeys={selectedRowKeys}
             setSelectedRowKeys={setSelectedRowKeys}

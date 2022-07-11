@@ -340,7 +340,7 @@ function AdvanceDateRangeFilterMaster(
                   onKeyDown={handleMove(item)}
                 >
                   <span className="advance-date-range-filter__text">
-                    {translate ? translate(item?.name) : item?.name}
+                    {translate ? translate(item?.name) : item?.code}
                   </span>
                 </div>
               ))}

@@ -27,8 +27,12 @@
 .action-bar-active{
     height: 40px;
     transition: height 0.1s;
+    display: flex;
 }
 .action-bar-inactive{
     height: 0px;
+    .item-selected-counter {
+        display: none;
+    }
     transition: height 0.1s;
 }

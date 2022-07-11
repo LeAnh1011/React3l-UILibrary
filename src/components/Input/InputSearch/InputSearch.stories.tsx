@@ -31,8 +31,8 @@ const demoListEnum = (TModelFilter?: ModelFilter): Observable<Demo[]> => {
 
 export function InputSearchStories() {
   const [selectModelFilter] = React.useState<DemoFilter>(new DemoFilter());
-  const [selectModel, setSelectModel] = React.useState<Model>({});
-  const [value, setValue] = React.useState<String>("hello");
+  const [, setSelectModel] = React.useState<Model>({});
+  const [, setValue] = React.useState<String>("hello");
 
   const handleSetModel = React.useCallback((...[, item]) => {
     setSelectModel(item);

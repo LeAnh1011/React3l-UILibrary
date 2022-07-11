@@ -63,7 +63,6 @@ function InputSearchSelect(props: InputSelectProps) {
         <div className={classNames("component__input-search-box")}>
           <input
             type="text"
-            defaultValue={internalValue as string}
             value={internalValue as string}
             onChange={handleChange}
             placeholder={placeHolder}

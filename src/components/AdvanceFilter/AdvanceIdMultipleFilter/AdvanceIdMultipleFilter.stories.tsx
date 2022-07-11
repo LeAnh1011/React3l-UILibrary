@@ -29,7 +29,7 @@ const demoObservable = new Observable<Model[]>((observer) => {
   }, 1000);
 });
 
-const demoSearchFunc = (TModelFilter: ModelFilter) => {
+const demoSearchFunc = (TModelFilter?: ModelFilter) => {
   return demoObservable;
 };
 
@@ -49,7 +49,7 @@ export function AdvanceIdMultipleFilterStories() {
 
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
   const [filter, setFilter] = React.useState(new DemoFilter());
-  const [models, setModels] = React.useState([]);
+  const [models, setModels] = React.useState<any[]>([]);
   const [
     isSelectWithPreferOption,
     setIsSelectWithPreferOption,

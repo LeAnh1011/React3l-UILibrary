@@ -74,7 +74,7 @@ export function AdvanceEnumFilterMasterStories() {
   const handleChangeMultipe = React.useCallback(
     (event: RadioChangeEvent) => {
       setIsMultiple(event.target.value);
-      setValue(undefined);
+      setValue(0);
     },
     [setValue]
   );

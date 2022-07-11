@@ -2,14 +2,20 @@ import React from "react";
 import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
 import InputSearch from "./InputSearch";
-import { of } from "rxjs";
+import { Observable, of } from "rxjs";
+
+export class Demo extends Model {
+  id: number;
+  name: string;
+  code: string;
+}
 
 export class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
   name: StringFilter = new StringFilter();
   code: StringFilter = new StringFilter();
 }
-const demoListEnum = (TModelFilter: ModelFilter) => {
+const demoListEnum = (TModelFilter?: ModelFilter): Observable<Demo[]> => {
   return of([
     {
       id: 1,

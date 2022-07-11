@@ -29,7 +29,7 @@ const demoObservable = new Observable<Model[]>((observer) => {
   }, 1000);
 });
 
-const demoSearchFunc = (TModelFilter: ModelFilter) => {
+const demoSearchFunc = (TModelFilter?: ModelFilter) => {
   return demoObservable;
 };
 
@@ -40,7 +40,7 @@ class DemoFilter extends ModelFilter {
 }
 
 export function MultipleSelectStories() {
-  const [models, setModels] = React.useState([]);
+  const [models, setModels] = React.useState<any[]>([]);
 
   const [selectModelFilter] = React.useState<DemoFilter>(new DemoFilter());
 

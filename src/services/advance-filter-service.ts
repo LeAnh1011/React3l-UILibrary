@@ -42,7 +42,7 @@ export interface AdvanceFilterAction<
 export function advanceFilterReducer<T1 extends ModelFilter>(
   state: T1,
   action: AdvanceFilterAction<T1>
-) {
+): T1 {
   switch (action.type) {
     case ActionFilterEnum.ChangeOneField:
       return {

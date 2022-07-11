@@ -132,15 +132,15 @@ const countObservable = new Observable<number>((observer) => {
   }, 1000);
 });
 
-const demoSearchFunc = (TModelFilter: ModelFilter) => {
+const demoSearchFunc = (TModelFilter?: ModelFilter) => {
   return demoObservable;
 };
 
-const demoUpdateMessageFunc = (TModelFilter: ModelFilter) => {
+const demoUpdateMessageFunc = (TModelFilter?: ModelFilter) => {
   return demoObservableUpdate;
 };
 
-const demoCountFunc = (TModelFilter: ModelFilter) => {
+const demoCountFunc = (TModelFilter?: ModelFilter) => {
   return countObservable;
 };
 

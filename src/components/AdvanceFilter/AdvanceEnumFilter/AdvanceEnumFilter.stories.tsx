@@ -33,7 +33,7 @@ export function AdvanceEnumFilterStories() {
     code: "FAD",
   });
 
-  const [models, setModels] = React.useState([]);
+  const [models, setModels] = React.useState<any>([]);
 
   const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
 

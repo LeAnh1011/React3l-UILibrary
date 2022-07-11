@@ -1,6 +1,5 @@
 import { Radio } from 'antd';
 import { RadioChangeEvent } from 'antd/lib/radio';
-import { Moment } from 'moment';
 import React from 'react';
 import { BORDER_TYPE, ValidateStatus } from '../../../config/enum';
 import FormItem from '../../FormItem/FormItem';
@@ -8,7 +7,7 @@ import DateRange from './DateRange';
 
 export function DateRangeStories() {
 
-  const [value, setValue] = React.useState<[Moment, Moment]>([null, null]);
+  const [value, setValue] = React.useState<[any, any]>([null, null]);
 
   const [isValidated, setValidated] = React.useState(false);
 
@@ -51,7 +50,7 @@ export function DateRangeStories() {
         <DateRange type={type}
           isSmall={isSmall}
           label="Ngày nhập hàng"
-          placeHolder={["Chọn ngày ...", "Chọn ngày ..."]}
+          placeholder={["Chọn ngày ...", "Chọn ngày ..."]}
           onChange={handleChange}
           value={value}
           disabled={isDisabled}

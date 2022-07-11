@@ -2,29 +2,23 @@ import React, { ReactSVGElement, RefObject } from "react";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import "./InputSearchSelect.scss";
 import classNames from "classnames";
-import { Model, ModelFilter } from "react3l-common";
-import { Observable } from "rxjs";
 
 export interface InputSelectProps {
   expanded?: boolean;
   placeHolder?: string;
   onSearch?: (T: string) => void;
   onKeyDown?: (event: any) => void;
-  value?: string | null;
 }
 
 function InputSearchSelect(props: InputSelectProps) {
-  const { expanded, placeHolder, onSearch, onKeyDown, value } = props;
+  const { expanded, placeHolder, onSearch, onKeyDown } = props;
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
     null
   );
 
-  const [internalValue, setInternalValue] = React.useState(value);
-
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setInternalValue(event.target.value);
       if (typeof onSearch === "function") {
         onSearch(event.target.value);
       }
@@ -34,7 +28,7 @@ function InputSearchSelect(props: InputSelectProps) {
 
   const handleClearInput = React.useCallback(
     (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
-      setInternalValue("");
+      inputRef.current.value = "";
       inputRef.current.focus();
       if (typeof onSearch === "function") {
         onSearch("");
@@ -64,7 +58,6 @@ function InputSearchSelect(props: InputSelectProps) {
         <div className={classNames("component__input-search-box")}>
           <input
             type="text"
-            value={internalValue}
             onChange={handleChange}
             placeholder={placeHolder}
             ref={inputRef}
@@ -72,7 +65,7 @@ function InputSearchSelect(props: InputSelectProps) {
             className={classNames("component__input-search")}
           />
 
-          {internalValue && (
+          {inputRef.current?.value && inputRef.current.value.length > 0 && (
             <div
               style={{ width: "16px", height: "20px", paddingTop: 2 }}
               className="m-r--xxs"

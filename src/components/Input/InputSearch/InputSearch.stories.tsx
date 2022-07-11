@@ -32,7 +32,7 @@ const demoListEnum = (TModelFilter?: ModelFilter): Observable<Demo[]> => {
 export function InputSearchStories() {
   const [selectModelFilter] = React.useState<DemoFilter>(new DemoFilter());
   const [selectModel, setSelectModel] = React.useState<Model>({});
-  const [value, setValue] = React.useState<String>('hello');
+  const [value, setValue] = React.useState<String>("hello");
 
   const handleSetModel = React.useCallback((...[, item]) => {
     setSelectModel(item);
@@ -52,7 +52,6 @@ export function InputSearchStories() {
         }}
       >
         <InputSearch
-          value={value}
           classFilter={DemoFilter}
           placeHolder="Search..."
           onChange={handleSearchChange}
@@ -60,7 +59,6 @@ export function InputSearchStories() {
         />
 
         <InputSearch
-          value={selectModel}
           valueFilter={selectModelFilter}
           searchProperty={"name"}
           classFilter={DemoFilter}
@@ -71,7 +69,6 @@ export function InputSearchStories() {
         />
 
         <InputSearch
-          value={selectModel}
           valueFilter={selectModelFilter}
           searchProperty={"name"}
           classFilter={DemoFilter}

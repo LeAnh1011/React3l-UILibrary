@@ -1,13 +1,5 @@
 .modal__container {
-  &.size-lg {
-    width: 720px !important;
-  }
-  &.size-md {
-    width: 520px !important;
-  }
-  &.size-sm {
-    width: 320px !important;
-  }
+  
   .ant-modal-header {
     border-bottom: none !important;
     height: 48px;
@@ -39,17 +31,16 @@
         width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: flex-end;
         .button-50 {
-          width: 49.9%;
+          width: 50%;
         }
         .button-33 {
-          width: 33.15%;
+          width: 171.33px;
         }
+       
       }
-      .width-75 {
-        width: 75%;
-      }
+      
     }
   }
   .ant-modal-close {

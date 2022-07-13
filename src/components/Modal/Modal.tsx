@@ -5,10 +5,20 @@ import classNames from "classnames";
 import Button from "components/Button";
 import Close20 from "@carbon/icons-react/es/close/20";
 
+
+export enum MODAL_SIZE {
+  '320px' = 320,
+  '520px' = 520,
+  '720px' = 720,
+  '1024px' = 1024,
+  '1200px' = 1200
+}
+
+
 export interface ModalCustomProps extends AntModalProps {
   children?: ReactNode;
   visibleFooter?: boolean;
-  size?: "lg" | "md" | "sm";
+  size?: MODAL_SIZE;
   titleButtonApply?: string;
   titleButtonApplyNext?: string;
   titleButtonCancel?: string;
@@ -33,21 +43,19 @@ function Modal(props: ModalCustomProps) {
     () => (
       <div className="footer-modal">
         <div
-          className={classNames("button-bleed-footer", {
-            "width-75": handleApplyNext && size === "lg",
-          })}
+          className={classNames("button-bleed-footer", )}
         >
           <Button
             type="bleed-secondary"
             className={classNames(
-              handleApplyNext && size === "lg" ? "button-33" : "button-50"
+              handleApplyNext && size !== MODAL_SIZE["320px"] && size !== MODAL_SIZE["520px"] ? "button-33" : "button-50"
             )}
             onClick={handleCancel}
           >
             <span>{titleButtonCancel ? titleButtonCancel : "Cancel"}</span>
           </Button>
 
-          {handleApplyNext && size === "lg" && (
+          {handleApplyNext && size !== MODAL_SIZE["320px"] && size !== MODAL_SIZE["520px"] && (
             <Button
               type="bleed-secondary"
               className="button-33"
@@ -62,7 +70,7 @@ function Modal(props: ModalCustomProps) {
             <Button
               type="bleed-primary"
               className={classNames(
-                handleApplyNext && size === "lg" ? "button-33" : "button-50"
+                handleApplyNext && size !== MODAL_SIZE["320px"] && size !== MODAL_SIZE["520px"] ? "button-33" : "button-50"
               )}
               onClick={handleSave}
             >
@@ -99,12 +107,13 @@ function Modal(props: ModalCustomProps) {
     <>
       <AntModal
         {...props}
-        style={{ top: 72 }}
+        style={{ top: 72, width: 1500 }}
         destroyOnClose={destroyOnClose}
-        className={classNames("modal__container", `size-${size}`)}
+        className={classNames("modal__container")}
         closeIcon={CloseButton}
         footer={visibleFooter ? renderModalFooter : null}
         onCancel={handleCancel}
+        width={size}
       >
         <div className="modal_content">{props.children}</div>
       </AntModal>
@@ -112,7 +121,7 @@ function Modal(props: ModalCustomProps) {
   );
 }
 Modal.defaultProps = {
-  size: "lg",
+  size: MODAL_SIZE["1024px"],
   destroyOnClose: true,
 };
 export default Modal;

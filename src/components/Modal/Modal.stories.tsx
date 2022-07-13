@@ -1,17 +1,13 @@
 import { storiesOf } from "@storybook/react";
 import Radio, { RadioChangeEvent } from "antd/lib/radio";
 import FormItem from "../FormItem";
-import Modal from "./Modal";
+import Modal, { MODAL_SIZE } from "./Modal";
 import InputText from "../Input/InputText/InputText";
 import { BORDER_TYPE, ValidateStatus } from "./../../config/enum";
 import React from "react";
-export enum SIZE_TYPE {
-  LARGE = "lg",
-  MEDIUM = "md",
-  SMALL = "sm",
-}
+
 function Default() {
-  const [size, setSize] = React.useState<SIZE_TYPE>(SIZE_TYPE.SMALL);
+  const [size, setSize] = React.useState<MODAL_SIZE>(MODAL_SIZE["1024px"]);
   const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
     setSize(event.target.value);
   }, []);
@@ -19,7 +15,7 @@ function Default() {
   function handleSave() {
     setVisible(false);
   }
-  function handleCreate() {
+  function handleApplyNext() {
     setVisible(false);
   }
   function handleCancel() {
@@ -31,9 +27,11 @@ function Default() {
       <div>
         <div style={{ margin: "10px", width: "500px" }}>
           <Radio.Group onChange={handleChangeSize} value={size}>
-            <Radio value={SIZE_TYPE.LARGE}>lg</Radio>
-            <Radio value={SIZE_TYPE.MEDIUM}>md</Radio>
-            <Radio value={SIZE_TYPE.SMALL}>sm</Radio>
+            <Radio value={MODAL_SIZE["320px"]}>320px</Radio>
+            <Radio value={MODAL_SIZE["520px"]}>520px</Radio>
+            <Radio value={MODAL_SIZE["720px"]}>720px</Radio>
+            <Radio value={MODAL_SIZE["1024px"]}>1024px</Radio>
+            <Radio value={MODAL_SIZE["1200px"]}>1200px</Radio>
           </Radio.Group>
         </div>
       </div>
@@ -44,13 +42,12 @@ function Default() {
       >
         show modal
       </button>
-      {size === "lg" && (
         <Modal
           visible={visible}
           handleSave={handleSave}
           handleCancel={handleCancel}
           visibleFooter={true}
-          size="lg"
+          size={size}
           title="Modal Title"
         >
           <div
@@ -86,108 +83,6 @@ function Default() {
             </FormItem>
           </div>
         </Modal>
-      )}
-      {size === "md" && (
-        <Modal
-          visible={visible}
-          handleSave={handleSave}
-          handleCancel={handleCancel}
-          visibleFooter={true}
-          size="md"
-          title="Modal Title"
-        >
-          <div style={{ marginBottom: "16px", marginTop: 16 }}>
-            <FormItem
-              validateStatus={ValidateStatus.warning}
-              message={"Field required!"}
-            >
-              <InputText placeHolder={"Enter text..."} />
-            </FormItem>
-          </div>
-          <div
-            style={{
-              marginBottom: "16px",
-              display: "flex",
-            }}
-          >
-            <div style={{ paddingRight: 8, width: "50%" }}>
-              <FormItem
-                validateStatus={ValidateStatus.error}
-                message={"Field required!"}
-              >
-                <InputText placeHolder={"Enter text..."} />
-              </FormItem>
-            </div>
-
-            <div style={{ paddingLeft: 8, width: "50%" }}>
-              <FormItem
-                validateStatus={ValidateStatus.error}
-                message={"Field required!"}
-              >
-                <InputText placeHolder={"Enter text..."} />
-              </FormItem>
-            </div>
-          </div>
-          <div style={{ marginBottom: "16px" }}>
-            <FormItem
-              validateStatus={ValidateStatus.warning}
-              message={"Field required!"}
-            >
-              <InputText placeHolder={"Enter text..."} />
-            </FormItem>
-          </div>
-          <div>
-            <FormItem
-              validateStatus={ValidateStatus.success}
-              message={"Field required!"}
-            >
-              <InputText
-                placeHolder={"Enter text..."}
-                type={BORDER_TYPE.MATERIAL}
-              />
-            </FormItem>
-          </div>
-        </Modal>
-      )}
-      {size === "sm" && (
-        <Modal
-          visible={visible}
-          handleCancel={handleCancel}
-          visibleFooter={true}
-          handleApplyNext={handleCreate}
-          size="sm"
-          title="Modal Title"
-        >
-          <FormItem
-            validateStatus={ValidateStatus.error}
-            message={"Field required!"}
-          >
-            <InputText placeHolder={"Enter text..."} />
-          </FormItem>
-          <FormItem
-            validateStatus={ValidateStatus.warning}
-            message={"Field required!"}
-          >
-            <InputText placeHolder={"Enter text..."} />
-          </FormItem>
-          <FormItem
-            validateStatus={ValidateStatus.warning}
-            message={"Field required!"}
-          >
-            <InputText placeHolder={"Enter text..."} />
-          </FormItem>
-
-          <FormItem
-            validateStatus={ValidateStatus.success}
-            message={"Field required!"}
-          >
-            <InputText
-              placeHolder={"Enter text..."}
-              type={BORDER_TYPE.MATERIAL}
-            />
-          </FormItem>
-        </Modal>
-      )}
     </div>
   );
 }

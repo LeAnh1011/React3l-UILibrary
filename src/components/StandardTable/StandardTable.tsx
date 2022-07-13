@@ -1,9 +1,11 @@
 import React from "react";
 import "./StandardTable.scss";
 import "antd/dist/antd.css";
-import { Table } from "antd";
+import { Spin, Table } from "antd";
 import classNames from "classnames";
 import type { TableProps } from "antd/lib/table";
+import IconLoading from "components/IconLoading";
+import LoadingOutlined from "@ant-design/icons/LoadingOutlined";
 export interface StandardTableCustomProps extends TableProps<any> {
   isDragable?: boolean;
   className?: string;
@@ -66,15 +68,28 @@ function StandardTable(props: StandardTableCustomProps) {
   return (
     <>
       <div className={classNames("page-table")}>
-        <Table
-          className={classNames(
-            className,
-            `table-size-${tableSize}`,
-            "custom-scrollbar",
-            { "big-checkbox-col": !expandable }
-          )}
-          {...props}
-        />
+          <Table
+            loading={{
+              indicator: (
+                <LoadingOutlined
+                  style={{
+                    fontSize: 32,
+                    color: "#0F62FE",
+                  }}
+                  spin
+                />
+              ),
+              spinning: true
+            }}
+            
+            className={classNames(
+              className,
+              `table-size-${tableSize}`,
+              "custom-scrollbar",
+              { "big-checkbox-col": !expandable }
+            )}
+            {...props}
+          />
       </div>
     </>
   );

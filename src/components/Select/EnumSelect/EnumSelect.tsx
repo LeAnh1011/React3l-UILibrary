@@ -8,6 +8,7 @@ import { BORDER_TYPE } from "config/enum";
 import InputTag from "components/Input/InputTag";
 import Add16 from "@carbon/icons-react/es/add/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
+import { ErrorObserver, Observable, Subscription } from "rxjs";
 
 export interface SelectProps<T extends Model> {
   value?: Model;
@@ -40,7 +41,7 @@ export interface SelectProps<T extends Model> {
 
   isMultiple?: boolean;
 
-  listItem?: Model[];
+  getList?: () => Observable<T[]>;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -86,7 +87,7 @@ function EnumSelect(props: SelectProps<Model>) {
     isMultiple,
     listValue,
     onChangeMultiple,
-    listItem,
+    getList,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -110,6 +111,25 @@ function EnumSelect(props: SelectProps<Model>) {
   const [selectedList, dispatch] = React.useReducer(multipleSelectReducer, []);
 
   const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
+
+  React.useEffect(() => {
+    const subscription = new Subscription();
+    if (firstLoad) {
+      subscription.add(getList);
+      getList().subscribe({
+        next: (res: Model[]) => {
+          setList(res);
+        },
+        error: (err: ErrorObserver<Error>) => {
+          setList([]);
+        },
+      });
+    }
+
+    return function cleanup() {
+      subscription.unsubscribe();
+    };
+  }, [firstLoad, getList, list])
 
   // use this for multiple type
   const internalList = React.useMemo(() => {
@@ -148,14 +168,14 @@ function EnumSelect(props: SelectProps<Model>) {
       }
     }
   }, [firstLoad, internalList]);
+
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (!disabled) {
         setExpand(true);
-        setList(listItem);
       }
     },
-    [disabled, listItem]
+    [disabled]
   );
 
   const handleCloseSelect = React.useCallback(() => {
@@ -372,102 +392,102 @@ function EnumSelect(props: SelectProps<Model>) {
         </div>
         {isMultiple
           ? isExpand && (
-              <div className="select__list-container">
-                {
-                  <>
-                    <div
-                      className="select__list multiple-select__list"
-                      ref={selectListRef}
-                    >
-                      {internalList.length > 0 ? (
-                        internalList.map((item, index) => (
-                          <div
-                            className={classNames(
-                              "select__item p-l--xs p-y--xs p-r--xxs",
-                              {
-                                "select__item--selected": item.isSelected,
-                              }
-                            )}
-                            key={index}
-                            onKeyDown={handleMove(item)}
-                            tabIndex={-1}
-                            onClick={handleClickMultiParentItem}
+            <div className="select__list-container">
+              {
+                <>
+                  <div
+                    className="select__list multiple-select__list"
+                    ref={selectListRef}
+                  >
+                    {internalList.length > 0 ? (
+                      internalList.map((item, index) => (
+                        <div
+                          className={classNames(
+                            "select__item p-l--xs p-y--xs p-r--xxs",
+                            {
+                              "select__item--selected": item.isSelected,
+                            }
+                          )}
+                          key={index}
+                          onKeyDown={handleMove(item)}
+                          tabIndex={-1}
+                          onClick={handleClickMultiParentItem}
+                        >
+                          <Checkbox
+                            checked={item.isSelected}
+                            onChange={handleClickMultiItem(item)}
                           >
-                            <Checkbox
-                              checked={item.isSelected}
-                              onChange={handleClickMultiItem(item)}
-                            >
-                              <span className="select__text">
-                                {render(item)}
-                              </span>
-                            </Checkbox>
-                          </div>
-                        ))
-                      ) : (
-                        <Empty />
-                      )}
-                    </div>
-                  </>
-                }
+                            <span className="select__text">
+                              {render(item)}
+                            </span>
+                          </Checkbox>
+                        </div>
+                      ))
+                    ) : (
+                      <Empty />
+                    )}
+                  </div>
+                </>
+              }
 
-                {selectWithAdd && (
-                  <div
-                    className={classNames(
-                      "select__bottom-button select__add-button p-y--xs"
-                    )}
-                  >
-                    <Add16 className="m-l--xs" />
-                    <span className="m-l--xs">Add new</span>
-                  </div>
-                )}
-              </div>
-            )
+              {selectWithAdd && (
+                <div
+                  className={classNames(
+                    "select__bottom-button select__add-button p-y--xs"
+                  )}
+                >
+                  <Add16 className="m-l--xs" />
+                  <span className="m-l--xs">Add new</span>
+                </div>
+              )}
+            </div>
+          )
           : isExpand && (
-              <div className="select__list-container" style={appendToBodyStyle}>
-                {
-                  <>
-                    <div className="select__list" ref={selectListRef}>
-                      {list.length > 0 ? (
-                        list.map((item, index) => (
-                          <div
-                            className={classNames(
-                              "select__item p-l--xs p-y--xs",
-                              {
-                                "select__item--selected":
-                                  item.id === internalValue?.id,
-                              }
-                            )}
-                            tabIndex={-1}
-                            key={index}
-                            onKeyDown={handleMove(item)}
-                            onClick={handleClickItem(item)}
-                          >
-                            <span className="select__text">{render(item)}</span>
-                            {item.id === internalValue?.id && (
-                              <div style={{ height: "16px" }}>
-                                <Checkmark16 />
-                              </div>
-                            )}
-                          </div>
-                        ))
-                      ) : (
-                        <Empty />
-                      )}
-                    </div>
-                  </>
-                }
-                {selectWithAdd && (
-                  <div
-                    className={classNames(
-                      "select__bottom-button select__add-button p-y--xs"
+            <div className="select__list-container" style={appendToBodyStyle}>
+              {
+                <>
+                  <div className="select__list" ref={selectListRef}>
+                    {list.length > 0 ? (
+                      list.map((item, index) => (
+                        <div
+                          className={classNames(
+                            "select__item p-l--xs p-y--xs",
+                            {
+                              "select__item--selected":
+                                item.id === internalValue?.id,
+                            }
+                          )}
+                          tabIndex={-1}
+                          key={index}
+                          onKeyDown={handleMove(item)}
+                          onClick={handleClickItem(item)}
+                        >
+                          <span className="select__text">{render(item)}</span>
+                          {item.id === internalValue?.id && (
+                            <div style={{ height: "16px" }}>
+                              <Checkmark16 />
+                            </div>
+                          )}
+                        </div>
+                      ))
+                    ) : (
+                      <Empty />
                     )}
-                  >
-                    <Add16 className="m-l--xxs" />
-                    <span>Add new</span>
                   </div>
-                )}
-              </div>
-            )}
+                </>
+              }
+              {selectWithAdd && (
+                <div
+                  className={classNames(
+                    "select__bottom-button select__add-button p-y--xs"
+                  )}
+                >
+                  <Add16 className="m-l--xxs" />
+                  <span>Add new</span>
+                </div>
+              )}
+            </div>
+          )}
       </div>
     </>
   );

@@ -8,6 +8,7 @@ import FormItem from "../../FormItem/FormItem";
 import EnumSelect from "./EnumSelect";
 import { ValidateStatus } from "./../../../config/enum";
 import { BORDER_TYPE } from "./../../../config/enum";
+import { Observable } from "rxjs";
 
 export class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
@@ -15,23 +16,27 @@ export class DemoFilter extends ModelFilter {
   code: StringFilter = new StringFilter();
 }
 
-const demoListEnum = [
-  {
-    id: 1,
-    name:
-      "Option 2 very long one very long one Option 2 very long one very long one",
-    code: "E1",
-  },
-  { id: 2, name: "Enum 2", code: "E2" },
-  { id: 3, name: "Enum 3", code: "E3" },
-  { id: 4, name: "Enum 4", code: "E4" },
-  { id: 5, name: "Enum 5", code: "E5" },
-];
-// interface changeAction {
-//   type: string;
-//   data: Model;
-// }
+const demoListEnum = new Observable<Model[]>((observer) => {
+  setTimeout(() => {
+    observer.next([
+      {
+        id: 1,
+        name:
+          "Option 2 very long one very long one Option 2 very long one very long one",
+        code: "E1",
+      },
+      { id: 2, name: "Enum 2", code: "E2" },
+      { id: 3, name: "Enum 3", code: "E3" },
+      { id: 4, name: "Enum 4", code: "E4" },
+      { id: 5, name: "Enum 5", code: "E5" },
+    ]
+    )
+  }, 300);
+});
 
+const demoSearchFunc = () => {
+  return demoListEnum;
+};
 export function EnumSelectStories() {
   const [selectModel, setSelectModel] = React.useState<Model>({
     id: 0,
@@ -93,7 +98,7 @@ export function EnumSelectStories() {
   }, []);
 
   const handleChangeModels = React.useCallback((listItem, ids) => {
-    setModels([...listItem]);
+    setModels(listItem);
   }, []);
 
   return (
@@ -108,7 +113,7 @@ export function EnumSelectStories() {
             value={selectModel}
             render={handleRenderModel}
             onChange={handleSetModel}
-            listItem={demoListEnum}
+            getList={demoSearchFunc}
             type={type}
             label={"Label"}
             selectWithAdd={isSelectWithAdd}

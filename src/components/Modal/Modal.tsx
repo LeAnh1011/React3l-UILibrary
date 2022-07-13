@@ -5,15 +5,13 @@ import classNames from "classnames";
 import Button from "components/Button";
 import Close20 from "@carbon/icons-react/es/close/20";
 
-
 export enum MODAL_SIZE {
-  '320px' = 320,
-  '520px' = 520,
-  '720px' = 720,
-  '1024px' = 1024,
-  '1200px' = 1200
+  SIZE_320 = 320,
+  SIZE_520 = 520,
+  SIZE_720 = 720,
+  SIZE_1024 = 1024,
+  SIZE_1200 = 1200,
 }
-
 
 export interface ModalCustomProps extends AntModalProps {
   children?: ReactNode;
@@ -42,35 +40,43 @@ function Modal(props: ModalCustomProps) {
   const renderModalFooter = React.useMemo(
     () => (
       <div className="footer-modal">
-        <div
-          className={classNames("button-bleed-footer", )}
-        >
+        <div className={classNames("button-bleed-footer")}>
           <Button
             type="bleed-secondary"
             className={classNames(
-              handleApplyNext && size !== MODAL_SIZE["320px"] && size !== MODAL_SIZE["520px"] ? "button-33" : "button-50"
+              handleApplyNext &&
+                size !== MODAL_SIZE.SIZE_320 &&
+                size !== MODAL_SIZE.SIZE_520
+                ? "button-33"
+                : "button-50"
             )}
             onClick={handleCancel}
           >
             <span>{titleButtonCancel ? titleButtonCancel : "Cancel"}</span>
           </Button>
 
-          {handleApplyNext && size !== MODAL_SIZE["320px"] && size !== MODAL_SIZE["520px"] && (
-            <Button
-              type="bleed-secondary"
-              className="button-33"
-              onClick={handleApplyNext}
-            >
-              <span>
-                {titleButtonApplyNext ? titleButtonApplyNext : "Apply Next"}
-              </span>
-            </Button>
-          )}
+          {handleApplyNext &&
+            size !== MODAL_SIZE.SIZE_320 &&
+            size !== MODAL_SIZE.SIZE_520 && (
+              <Button
+                type="bleed-secondary"
+                className="button-33"
+                onClick={handleApplyNext}
+              >
+                <span>
+                  {titleButtonApplyNext ? titleButtonApplyNext : "Apply Next"}
+                </span>
+              </Button>
+            )}
           {handleSave && (
             <Button
               type="bleed-primary"
               className={classNames(
-                handleApplyNext && size !== MODAL_SIZE["320px"] && size !== MODAL_SIZE["520px"] ? "button-33" : "button-50"
+                handleApplyNext &&
+                  size !== MODAL_SIZE.SIZE_320 &&
+                  size !== MODAL_SIZE.SIZE_520
+                  ? "button-33"
+                  : "button-50"
               )}
               onClick={handleSave}
             >
@@ -121,7 +127,7 @@ function Modal(props: ModalCustomProps) {
   );
 }
 Modal.defaultProps = {
-  size: MODAL_SIZE["1024px"],
+  size: MODAL_SIZE.SIZE_1024,
   destroyOnClose: true,
 };
 export default Modal;

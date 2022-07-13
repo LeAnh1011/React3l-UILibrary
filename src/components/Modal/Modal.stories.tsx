@@ -12,12 +12,11 @@ function Default() {
     setSize(event.target.value);
   }, []);
   const [visible, setVisible] = React.useState<boolean>(true);
+
   function handleSave() {
     setVisible(false);
   }
-  function handleApplyNext() {
-    setVisible(false);
-  }
+
   function handleCancel() {
     setVisible(false);
   }
@@ -27,11 +26,11 @@ function Default() {
       <div>
         <div style={{ margin: "10px", width: "500px" }}>
           <Radio.Group onChange={handleChangeSize} value={size}>
-            <Radio value={MODAL_SIZE["320px"]}>320px</Radio>
-            <Radio value={MODAL_SIZE["520px"]}>520px</Radio>
-            <Radio value={MODAL_SIZE["720px"]}>720px</Radio>
-            <Radio value={MODAL_SIZE["1024px"]}>1024px</Radio>
-            <Radio value={MODAL_SIZE["1200px"]}>1200px</Radio>
+            <Radio value={MODAL_SIZE.SIZE_320}>320px</Radio>
+            <Radio value={MODAL_SIZE.SIZE_520}>520px</Radio>
+            <Radio value={MODAL_SIZE.SIZE_720}>720px</Radio>
+            <Radio value={MODAL_SIZE.SIZE_1024}>1024px</Radio>
+            <Radio value={MODAL_SIZE.SIZE_1200}>1200px</Radio>
           </Radio.Group>
         </div>
       </div>
@@ -42,47 +41,47 @@ function Default() {
       >
         show modal
       </button>
-        <Modal
-          visible={visible}
-          handleSave={handleSave}
-          handleCancel={handleCancel}
-          visibleFooter={true}
-          size={size}
-          title="Modal Title"
+      <Modal
+        visible={visible}
+        handleSave={handleSave}
+        handleCancel={handleCancel}
+        visibleFooter={true}
+        size={size}
+        title="Modal Title"
+      >
+        <div
+          style={{
+            marginBottom: "16px",
+            marginTop: 16,
+          }}
         >
-          <div
-            style={{
-              marginBottom: "16px",
-              marginTop: 16,
-            }}
+          <FormItem
+            validateStatus={ValidateStatus.error}
+            message={"Field required!"}
           >
-            <FormItem
-              validateStatus={ValidateStatus.error}
-              message={"Field required!"}
-            >
-              <InputText placeHolder={"Enter text..."} />
-            </FormItem>
-          </div>
-          <div style={{ marginBottom: "16px" }}>
-            <FormItem
-              validateStatus={ValidateStatus.warning}
-              message={"Field required!"}
-            >
-              <InputText placeHolder={"Enter text..."} />
-            </FormItem>
-          </div>
-          <div>
-            <FormItem
-              validateStatus={ValidateStatus.success}
-              message={"Field required!"}
-            >
-              <InputText
-                placeHolder={"Enter text..."}
-                type={BORDER_TYPE.MATERIAL}
-              />
-            </FormItem>
-          </div>
-        </Modal>
+            <InputText placeHolder={"Enter text..."} />
+          </FormItem>
+        </div>
+        <div style={{ marginBottom: "16px" }}>
+          <FormItem
+            validateStatus={ValidateStatus.warning}
+            message={"Field required!"}
+          >
+            <InputText placeHolder={"Enter text..."} />
+          </FormItem>
+        </div>
+        <div>
+          <FormItem
+            validateStatus={ValidateStatus.success}
+            message={"Field required!"}
+          >
+            <InputText
+              placeHolder={"Enter text..."}
+              type={BORDER_TYPE.MATERIAL}
+            />
+          </FormItem>
+        </div>
+      </Modal>
     </div>
   );
 }

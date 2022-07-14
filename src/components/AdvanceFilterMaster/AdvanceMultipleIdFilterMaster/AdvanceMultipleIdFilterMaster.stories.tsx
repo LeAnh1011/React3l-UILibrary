@@ -35,7 +35,7 @@ export class DemoFilter extends ModelFilter {
 const filterValue = new DemoFilter();
 filterValue.id.in = [10, 9, 4, 6];
 
-const demoSearchFunc = (TModelFilter: ModelFilter) => {
+const demoSearchFunc = (TModelFilter?: ModelFilter) => {
   return demoObservable;
 };
 

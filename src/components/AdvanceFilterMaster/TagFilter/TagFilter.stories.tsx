@@ -50,11 +50,11 @@ const appUserObservable = new Observable<Model[]>((observer) => {
   }, 1000);
 });
 
-const orgSearchFunc = (TModelFilter: ModelFilter) => {
+const orgSearchFunc = (TModelFilter?: ModelFilter) => {
   return orgObservable;
 };
 
-const appUserSearchFunc = (TModelFilter: ModelFilter) => {
+const appUserSearchFunc = (TModelFilter?: ModelFilter) => {
   return appUserObservable;
 };
 
@@ -66,7 +66,7 @@ export function TagFilterStories() {
 
   const [filter, setFilter] = React.useState<DemoFilter>(filterValue);
   const [item, setItem] = React.useState<any>(null);
-  const [value, setValue] = React.useState<[Moment, Moment]>([null, null]);
+  const [value, setValue] = React.useState<[any, any]>([null, null]);
 
   const handleChangeOrganization = React.useCallback(
     (id, item) => {

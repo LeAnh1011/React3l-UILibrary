@@ -19,7 +19,7 @@ const demoObservable = new Observable<Model[]>((observer) => {
   }, 2000);
 });
 
-const demoSearchFunc = (TModelFilter: ModelFilter) => {
+const demoSearchFunc = (TModelFilter?: ModelFilter) => {
   return demoObservable;
 };
 

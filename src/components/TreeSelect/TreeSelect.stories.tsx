@@ -28,7 +28,7 @@ function reducerFunc(state: Model, action: changeAction<Model>): Model[] {
     case "UPDATE_MODEL":
       return action.data;
   }
-  return;
+  return [...action.data];
 }
 
 const demoList = [
@@ -63,7 +63,7 @@ const demoObservable = new Observable<Model[]>((observer) => {
   }, 500);
 });
 
-const demoSearchFunc = (TModelFilter: ModelFilter) => {
+const demoSearchFunc = (TModelFilter?: ModelFilter) => {
   return demoObservable;
 };
 
@@ -99,8 +99,8 @@ function Default() {
   }, []);
 
   const handleChangeRadio = React.useCallback((event: RadioChangeEvent) => {
-    if (event.target.value) setItem(undefined);
-    else dispatch({ type: "UPDATE_MODEL", data: undefined });
+    if (event.target.value) setItem(new Model());
+    else dispatch({ type: "UPDATE_MODEL", data: [] });
     setMultiple(event.target.value);
   }, []);
 

@@ -35,7 +35,7 @@ export function AdvanceDateFilterStories() {
         onChange={handleChange}
         isSmall={isSmall}
         label="Ngày nhập hàng"
-        placeHolder={"Chọn ngày"}
+        placeholder={"Chọn ngày"}
         disabled={isDisabled}
         action={{
           name: "Help",

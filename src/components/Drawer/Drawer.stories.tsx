@@ -14,6 +14,7 @@ import AdvanceIdFilter from "../AdvanceFilter/AdvanceIdFilter/AdvanceIdFilter";
 import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { ModelFilter } from "react3l-common";
 import { of } from "rxjs";
+import moment from "moment";
 
 export class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
@@ -21,7 +22,7 @@ export class DemoFilter extends ModelFilter {
   code: StringFilter = new StringFilter();
 }
 
-const demoListEnum = (TModelFilter: ModelFilter) => {
+const demoListEnum = (TModelFilter?: ModelFilter) => {
   return of([
     {
       id: 1,
@@ -320,7 +321,6 @@ function Default() {
         >
           <AdvanceIdFilter
             placeHolder={"Select Organization"}
-            model={null}
             searchProperty={"name"}
             onChange={() => {}}
             getList={demoListEnum}
@@ -337,8 +337,8 @@ function Default() {
           <AdvanceDateFilter
             onChange={() => {}}
             label="Ngày nhập hàng"
-            placeHolder={"Chọn ngày"}
-            value={null}
+            placeholder={"Chọn ngày"}
+            value={moment()}
           />
         </div>
       </Drawer>

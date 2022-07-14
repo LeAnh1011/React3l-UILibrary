@@ -6,7 +6,7 @@ import { BORDER_TYPE, ValidateStatus } from "../../../config/enum";
 import FormItem from "../../FormItem/FormItem";
 
 export function AdvanceDateRangeFilterStories() {
-  const [value, setValue] = React.useState<[Moment, Moment]>([null, null]);
+  const [value, setValue] = React.useState<[any, any]>([null, null]);
 
   const [isValidated, setValidated] = React.useState(false);
 
@@ -47,7 +47,7 @@ export function AdvanceDateRangeFilterStories() {
             type={type}
             isSmall={isSmall}
             label="Ngày nhập hàng"
-            placeHolder={["Chọn ngày ...", "Chọn ngày ..."]}
+            placeholder={["Chọn ngày ...", "Chọn ngày ..."]}
             onChange={handleChange}
             value={value}
             disabled={isDisabled}

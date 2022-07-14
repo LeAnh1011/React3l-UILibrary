@@ -16,7 +16,7 @@ export class DemoFilter extends ModelFilter {
   code: StringFilter = new StringFilter();
 }
 
-const demoListEnum = (TModelFilter: ModelFilter) => {
+const demoListEnum = (TModelFilter?: ModelFilter) => {
   return of([
     {
       id: 1,

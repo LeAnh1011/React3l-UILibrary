@@ -18,11 +18,8 @@ function InputSearchSelect(props: InputSelectProps) {
     null
   );
 
-  const [internalValue, setInternalValue] = React.useState(value);
-
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setInternalValue(event.target.value);
       if (typeof onSearch === "function") {
         onSearch(event.target.value);
       }
@@ -32,8 +29,8 @@ function InputSearchSelect(props: InputSelectProps) {
 
   const handleClearInput = React.useCallback(
     (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
-      setInternalValue("");
       inputRef.current.focus();
+      inputRef.current.value = "";
       if (typeof onSearch === "function") {
         onSearch("");
       }
@@ -56,13 +53,18 @@ function InputSearchSelect(props: InputSelectProps) {
     }
   }, [expanded]);
 
+  React.useEffect(() => {
+    if (value) {
+      inputRef.current.value = value;
+    }
+  }, [value]);
+
   return (
     <>
       <div className={classNames("input-search-select__wrapper")}>
         <div className={classNames("component__input-search-box")}>
           <input
             type="text"
-            value={internalValue}
             onChange={handleChange}
             placeholder={placeHolder}
             ref={inputRef}
@@ -70,7 +72,7 @@ function InputSearchSelect(props: InputSelectProps) {
             className={classNames("component__input-search")}
           />
 
-          {internalValue && (
+          {inputRef.current?.value && inputRef.current.value.length > 0 && (
             <div
               style={{ width: "16px", height: "20px", paddingTop: 2 }}
               className="m-r--xxs"

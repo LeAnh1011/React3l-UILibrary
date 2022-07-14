@@ -15,7 +15,7 @@ export interface InputSearchProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
-  value?: T | string | undefined | null;
+  value?: string | null;
   valueFilter?: TModelFilter;
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
   classFilter: new () => TModelFilter;
@@ -59,10 +59,6 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
 
   const [showInput, setShowInput] = React.useState<boolean>(!animationInput);
 
-  const internalValue = React.useMemo((): any => {
-    return value || null;
-  }, [value]);
-
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
@@ -79,14 +75,12 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     setExpand(false);
     setShowListItem(false);
     setActiveBackground(false);
-
     if (animationInput) {
       setTimeout(() => {
         setFullWidth(false);
       }, 300);
       setShowInput(false);
     }
-    // chờ 0,3s cho transition của Input co hẹp đóng lại rồi làm nhỏ width
   }, [animationInput]);
 
   const [subscription] = CommonService.useSubscription();
@@ -102,18 +96,18 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
         } else cloneValueFilter[searchProperty] = searchTerm;
         setLoading(true);
         subscription.add(getList);
-        getList(cloneValueFilter).subscribe(
-          (res: Model[]) => {
+        getList(cloneValueFilter).subscribe({
+          next: (res: Model[]) => {
             setList(res);
             setLoading(false);
             setShowListItem(true);
           },
-          (err: ErrorObserver<Error>) => {
+          error: (err: ErrorObserver<Error>) => {
             setList([]);
             setLoading(false);
             setShowListItem(true);
-          }
-        );
+          },
+        });
       } else {
         setShowListItem(false);
       }
@@ -124,24 +118,6 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
   );
 
   CommonService.useClickOutside(wrapperRef, handleCloseSelect);
-
-  const handleLoadList = React.useCallback(() => {
-    try {
-      setLoading(true);
-      subscription.add(getList);
-      const filter = valueFilter ? valueFilter : new ClassFilter();
-      getList(filter).subscribe({
-        next: (res: Model[]) => {
-          setList(res);
-          setLoading(false);
-        },
-        error: (err: ErrorObserver<Error>) => {
-          setList([]);
-          setLoading(false);
-        },
-      });
-    } catch (error) {}
-  }, [getList, valueFilter, ClassFilter, subscription]);
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -252,9 +228,8 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       setExpand(true);
       handleClickSearchIcon();
-      await handleLoadList();
     },
-    [handleClickSearchIcon, handleLoadList]
+    [handleClickSearchIcon]
   );
 
   const handleTabEnter = React.useCallback(
@@ -298,14 +273,14 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
               expanded={isExpand}
               onSearch={handleSearchChange}
               onKeyDown={handleKeyPress}
-              value={internalValue?.name}
+              value={value}
             />
           ) : (
             <InputSearchSelect
               placeHolder={placeHolder}
               expanded={isExpand}
               onSearch={onChange}
-              value={internalValue}
+              value={value}
             />
           )}
         </div>
@@ -318,9 +293,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
                 {list.length > 0 ? (
                   list.map((item, index) => (
                     <div
-                      className={classNames("select__item p-l--xs p-y--xs", {
-                        "select__item--selected": item.id === internalValue?.id,
-                      })}
+                      className={classNames("select__item p-l--xs p-y--xs")}
                       tabIndex={-1}
                       key={index}
                       onKeyDown={handleMove(item)}

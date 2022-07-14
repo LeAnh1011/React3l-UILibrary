@@ -1,9 +1,7 @@
-import React, { ReactSVGElement, RefObject } from "react";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
-import "./InputSearchSelect.scss";
 import classNames from "classnames";
-import { Model, ModelFilter } from "react3l-common";
-import { Observable } from "rxjs";
+import React, { ReactSVGElement, RefObject } from "react";
+import "./InputSearchSelect.scss";
 
 export interface InputSelectProps {
   expanded?: boolean;

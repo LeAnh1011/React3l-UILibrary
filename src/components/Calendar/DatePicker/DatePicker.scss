@@ -201,4 +201,7 @@
   .date-picker--material:hover + .date-picker__icon-wrapper {
     background-color: var(--palette-grayHover-10) !important;
   }
+  .ant-picker.date-picker--material {
+    border-bottom: none;
+  }
 }

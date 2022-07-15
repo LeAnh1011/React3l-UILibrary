@@ -1,5 +1,5 @@
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
-import Search16  from "@carbon/icons-react/es/search/16";
+import Search16 from "@carbon/icons-react/es/search/16";
 import { useDebounceFn } from "ahooks";
 import { Checkbox, Empty, Tooltip } from "antd";
 import classNames from "classnames";
@@ -384,13 +384,13 @@ function AdvanceMultipleIdFilterMaster(
                         checked={item.isSelected}
                         onChange={handleClickItem(item)}
                       >
-                         {maxLengthItem && item?.name?.length > maxLengthItem ? (
-                        <Tooltip title={item?.name}>
-                          {CommonService.limitWord(item?.name, maxLengthItem)}
-                        </Tooltip>
-                      ) : (
-                        item?.name
-                      )}
+                        {maxLengthItem && item?.name?.length > maxLengthItem ? (
+                          <Tooltip title={item?.name}>
+                            {CommonService.limitWord(item?.name, maxLengthItem)}
+                          </Tooltip>
+                        ) : (
+                          item?.name
+                        )}
                       </Checkbox>
                     </div>
                   ))

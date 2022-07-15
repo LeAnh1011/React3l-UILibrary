@@ -56,7 +56,7 @@ $backgound-color: #f4f4f4;
       background-color: $backgound-color;
       width: 100%;
       overflow-y: auto;
-      max-height: 160px;
+      height: 86px;
     }
     .advance-enum-filter__loading {
       width: 100%;
@@ -74,7 +74,7 @@ $backgound-color: #f4f4f4;
       &:focus-visible {
         outline: none;
       }
-      &.select__item--selected {
+      &.advance-enum-filter__item--selected {
         background-color: var(--palette-grayHover-10);
         display: flex;
         justify-content: space-between;
@@ -86,10 +86,6 @@ $backgound-color: #f4f4f4;
       font-size: 14px;
       line-height: 16px;
       cursor: pointer;
-    }
-    .advance-enum-master__list-prefer {
-      box-shadow: inset 0px 1px 0px #e1e3e5;
-      background: $backgound-color;
     }
     .advance-enum-master__text {
       white-space: nowrap;

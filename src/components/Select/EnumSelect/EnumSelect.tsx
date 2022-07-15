@@ -42,6 +42,8 @@ export interface SelectProps<T extends Model> {
   isMultiple?: boolean;
 
   getList?: () => Observable<T[]>;
+
+  height?: number;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -88,6 +90,7 @@ function EnumSelect(props: SelectProps<Model>) {
     listValue,
     onChangeMultiple,
     getList,
+    height
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -398,6 +401,7 @@ function EnumSelect(props: SelectProps<Model>) {
                   <div
                     className="select__list multiple-select__list"
                     ref={selectListRef}
+                    style={{'maxHeight': `${height}px`}}
                   >
                     {internalList.length > 0 ? (
                       internalList.map((item, index) => (
@@ -446,7 +450,7 @@ function EnumSelect(props: SelectProps<Model>) {
             <div className="select__list-container" style={appendToBodyStyle}>
               {
                 <>
-                  <div className="select__list" ref={selectListRef}>
+                  <div className="select__list" ref={selectListRef} style={{'maxHeight': `${height}px`}}>
                     {list.length > 0 ? (
                       list.map((item, index) => (
                         <div

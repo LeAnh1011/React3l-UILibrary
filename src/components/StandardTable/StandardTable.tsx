@@ -9,7 +9,7 @@ export interface StandardTableCustomProps extends TableProps<any> {
   isDragable?: boolean;
   className?: string;
   tableSize?: "lg" | "md" | "sm";
-  spinning: boolean;
+  spinning?: boolean;
 }
 function StandardTable(props: StandardTableCustomProps) {
   const { className, tableSize, isDragable, expandable, spinning } = props;
@@ -95,6 +95,7 @@ function StandardTable(props: StandardTableCustomProps) {
   );
 }
 StandardTable.defaultProps = {
+  spinning: false,
   isExpandable: false,
   tableSize: "lg",
   isLevel2: false,

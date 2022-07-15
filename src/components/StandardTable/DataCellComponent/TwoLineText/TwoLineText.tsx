@@ -87,7 +87,6 @@ function TwoLineText(props: TwoLineTextProps) {
             {link ? (
               <a
                 href={link}
-                target="_blank"
                 rel="noopener noreferrer"
                 className="link-text"
               >

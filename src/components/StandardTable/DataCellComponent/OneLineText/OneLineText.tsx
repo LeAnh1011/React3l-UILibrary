@@ -42,7 +42,6 @@ function OneLineText(props: OneLineTextProps) {
           {link ? (
             <a
               href={link}
-              target="_blank"
               rel="noopener noreferrer"
               className="link-text"
             >
@@ -73,7 +72,6 @@ function OneLineText(props: OneLineTextProps) {
           {link ? (
             <a
               href={link}
-              target="_blank"
               rel="noopener noreferrer"
               className="link-text"
             >

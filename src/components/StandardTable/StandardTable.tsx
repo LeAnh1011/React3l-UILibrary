@@ -1,18 +1,18 @@
+import LoadingOutlined from "@ant-design/icons/LoadingOutlined";
+import { Table } from "antd";
+import "antd/dist/antd.css";
+import type { TableProps } from "antd/lib/table";
+import classNames from "classnames";
 import React from "react";
 import "./StandardTable.scss";
-import "antd/dist/antd.css";
-import { Spin, Table } from "antd";
-import classNames from "classnames";
-import type { TableProps } from "antd/lib/table";
-import IconLoading from "components/IconLoading";
-import LoadingOutlined from "@ant-design/icons/LoadingOutlined";
 export interface StandardTableCustomProps extends TableProps<any> {
   isDragable?: boolean;
   className?: string;
   tableSize?: "lg" | "md" | "sm";
+  spinning: boolean;
 }
 function StandardTable(props: StandardTableCustomProps) {
-  const { className, tableSize, isDragable, expandable } = props;
+  const { className, tableSize, isDragable, expandable, spinning } = props;
 
   React.useEffect(() => {
     const antTable = document.getElementsByClassName(
@@ -79,7 +79,7 @@ function StandardTable(props: StandardTableCustomProps) {
                   spin
                 />
               ),
-              spinning: true
+              spinning: spinning
             }}
             
             className={classNames(

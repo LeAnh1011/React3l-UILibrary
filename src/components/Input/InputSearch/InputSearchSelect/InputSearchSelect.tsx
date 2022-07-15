@@ -1,7 +1,7 @@
-import React, { ReactSVGElement, RefObject } from "react";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
-import "./InputSearchSelect.scss";
 import classNames from "classnames";
+import React, { ReactSVGElement, RefObject } from "react";
+import "./InputSearchSelect.scss";
 
 export interface InputSelectProps {
   expanded?: boolean;

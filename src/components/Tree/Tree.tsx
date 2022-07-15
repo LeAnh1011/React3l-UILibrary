@@ -198,8 +198,15 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
         nativeEvent: MouseEvent;
       }
     ) => {
-      setInternalSelectedKeys(selectedKeys);
-      if (typeof onChange === "function") {
+      const filterList = internalSelectedKeys.filter((id) => id === info.node?.item?.id);
+      
+      if(filterList && filterList?.length > 0) {
+        setInternalSelectedKeys([...internalSelectedKeys]);
+      }else {
+        setInternalSelectedKeys([...internalSelectedKeys, info?.node?.item?.id]);
+      }
+
+      if (typeof onChange === "function" && filterList?.length === 0) {
         const checkedNodes = searchTree(
           [...internalTreeData, ...internalPreferOptionsTreeData],
           selectedKeys
@@ -210,7 +217,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
         onChange([...checkedItems]);
       }
     },
-    [internalPreferOptionsTreeData, internalTreeData, onChange, searchTree]
+    [internalPreferOptionsTreeData, internalSelectedKeys, internalTreeData, onChange, searchTree]
   );
 
   React.useEffect(() => {

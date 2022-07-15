@@ -4,12 +4,12 @@ import { Checkbox, Empty } from "antd";
 import classNames from "classnames";
 import { BORDER_TYPE } from "config/enum";
 import React, { RefObject } from "react";
-import { Model, ModelFilter } from "react3l-common";
+import { Model } from "react3l-common";
 import { ErrorObserver, Observable, Subscription } from "rxjs";
 import { CommonService } from "services/common-service";
 import "./AdvanceEnumFilterMaster.scss";
 
-export interface AdvanceEnumMasterProps<T extends Model, TModelFilter extends ModelFilter> {
+export interface AdvanceEnumMasterProps<T extends Model> {
   value?: number | string;
 
   title: string;
@@ -71,7 +71,7 @@ function multipleSelectReducer(
   return;
 }
 
-function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model, ModelFilter>) {
+function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
   const {
     value,
     disabled,

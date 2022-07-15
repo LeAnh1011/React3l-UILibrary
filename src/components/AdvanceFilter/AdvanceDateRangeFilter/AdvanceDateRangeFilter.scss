@@ -142,7 +142,6 @@
         background-color: var(--palette-grayHover-10);
       }
       &.date-picker--disabled {
-        border-bottom: none;
         background-color: var(--palette-gray-10);
       }
       &.ant-picker-focused {
@@ -182,5 +181,9 @@
   }
   .date-picker--material:hover + .advance-date-range-filter__icon-wrapper {
     background-color: var(--palette-grayHover-10) !important;
+  }
+  .ant-picker.date-picker--material {
+    border-bottom: none;
+    outline: 1px solid var(--color-critical) !important;
   }
 }

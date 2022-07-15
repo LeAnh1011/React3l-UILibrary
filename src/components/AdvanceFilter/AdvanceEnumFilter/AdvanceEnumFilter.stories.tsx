@@ -3,6 +3,7 @@ import { RadioChangeEvent } from "antd/lib/radio";
 import React from "react";
 import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
+import { Observable } from "rxjs";
 import FormItem from "../../FormItem/FormItem";
 import { BORDER_TYPE, ValidateStatus } from "./../../../config/enum";
 import AdvanceEnumFilter from "./AdvanceEnumFilter";
@@ -13,18 +14,29 @@ export class DemoFilter extends ModelFilter {
   code: StringFilter = new StringFilter();
 }
 
-const demoListEnum = [
-  {
-    id: 1,
-    name:
-      "Option 2 very long one very long one Option 2 very long one very long one",
-    code: "E1",
-  },
-  { id: 2, name: "Enum 2", code: "E2" },
-  { id: 3, name: "Enum 3", code: "E3" },
-  { id: 4, name: "Enum 4", code: "E4" },
-  { id: 5, name: "Enum 5", code: "E5" },
-];
+const demoObservable = new Observable<Model[]>((observer) => {
+  setTimeout(() => {
+    observer.next([
+      { id: 4, name: "Ban hành chính", code: "FAD" },
+      {
+        id: 1,
+        name:
+          "Ban công nghệ thông tin Ban công nghệ thông tin Ban công nghệ thông tin Ban công nghệ thông tin",
+        code: "FIM",
+      },
+      { id: 2, name: "Ban nhân sự", code: "FHR" },
+      { id: 3, name: "Ban tài chính", code: "FAF" },
+      { id: 5, name: "Ban đời sống", code: "DSS" },
+      { id: 6, name: "Ban nội vụ", code: "DUH" },
+      { id: 7, name: "Ban lao động", code: "FJIP" },
+      { id: 8, name: "Ban thể thao", code: "FJUI" },
+    ]);
+  }, 1000);
+});
+
+const demoSearchFunc = () => {
+  return demoObservable;
+};
 
 export function AdvanceEnumFilterStories() {
   const [selectModel, setSelectModel] = React.useState<Model>({
@@ -33,7 +45,6 @@ export function AdvanceEnumFilterStories() {
     code: "FAD",
   });
 
-  const [models, setModels] = React.useState<any>([]);
 
   const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
 
@@ -46,6 +57,10 @@ export function AdvanceEnumFilterStories() {
   const [isSmall, setIsSmall] = React.useState<boolean>(false);
 
   const [isMultiple, setIsMultiple] = React.useState<boolean>(false);
+
+  const [multifilter, setFilter] = React.useState(new DemoFilter());
+
+  const [list, setList] = React.useState<[]>([]);
 
   const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
     setType(event.target.value);
@@ -86,9 +101,13 @@ export function AdvanceEnumFilterStories() {
     setIsMultiple(event.target.value);
   }, []);
 
-  const handleChangeModels = React.useCallback((listItem, ids) => {
-    setModels([...listItem]);
-  }, []);
+  const handleChangeFilter = React.useCallback(
+    (list, ids) => {
+      setFilter({ ...multifilter, id: { in: ids } });
+      setList(list);
+    },
+    [multifilter]
+  );
 
   return (
     <div style={{ margin: "10px", width: "300px" }}>
@@ -102,15 +121,15 @@ export function AdvanceEnumFilterStories() {
             value={selectModel}
             render={handleRenderModel}
             onChange={handleSetModel}
-            listItem={demoListEnum}
+            getList={demoSearchFunc}
             type={type}
             label={"Label"}
             selectWithAdd={isSelectWithAdd}
             disabled={isDisabled}
             isSmall={isSmall}
             isMultiple={isMultiple}
-            onChangeMultiple={handleChangeModels} // if type is multiple pass this props
-            listValue={models} // if type is multiple pass this prop
+            onChangeMultiple={handleChangeFilter} // if type is multiple pass this props
+            listValue={list} // if type is multiple pass this prop
           />
         </FormItem>
       </div>

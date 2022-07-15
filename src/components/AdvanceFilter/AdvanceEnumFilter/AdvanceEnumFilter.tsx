@@ -8,6 +8,7 @@ import InputSelect from "components/Input/InputSelect/InputSelect";
 import InputTag from "components/Input/InputTag";
 import { BORDER_TYPE } from "config/enum";
 import { CommonService } from "services/common-service";
+import { ErrorObserver, Observable, Subscription } from "rxjs";
 
 export interface AdvanceEnumProps<T extends Model> {
   value?: Model;
@@ -38,7 +39,7 @@ export interface AdvanceEnumProps<T extends Model> {
 
   isMultiple?: boolean;
 
-  listItem?: Model[];
+  getList?: () => Observable<T[]>;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -82,7 +83,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
     isMultiple,
     listValue,
     onChangeMultiple,
-    listItem,
+    getList,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -106,6 +107,25 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
   const [selectedList, dispatch] = React.useReducer(multipleSelectReducer, []);
 
   const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
+
+  React.useEffect(()=>{
+    const subscription = new Subscription();
+    if(firstLoad) {
+      subscription.add(getList);
+      getList().subscribe({
+        next: (res: Model[]) => {
+          setList(res);
+        },
+        error: (err: ErrorObserver<Error>) => {
+          setList([]);
+        },
+      });
+    }
+
+    return function cleanup() {
+      subscription.unsubscribe();
+    };
+  },[firstLoad, getList, list])
 
   // use this for multiple type
   const internalList = React.useMemo(() => {
@@ -149,10 +169,9 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (!disabled) {
         setExpand(true);
-        setList(listItem);
       }
     },
-    [disabled, listItem]
+    [disabled]
   );
 
   const handleCloseSelect = React.useCallback(() => {

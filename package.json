@@ -1,6 +1,7 @@
 {
   "homepage": "http://leanh1011.github.io/React3l-UILibrary",
   "name": "react3l-ui-library",
+  "sideEffects": false,
   "version": "0.1.75",
   "main": "build/index.js",
   "files": [

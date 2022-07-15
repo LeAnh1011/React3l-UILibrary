@@ -1,6 +1,6 @@
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
-import { Checkbox, Empty } from "antd";
+import { Checkbox, Empty, Tooltip } from "antd";
 import classNames from "classnames";
 import { BORDER_TYPE } from "config/enum";
 import React, { RefObject } from "react";
@@ -43,6 +43,10 @@ export interface AdvanceEnumMasterProps<T extends Model> {
   getList?: () => Observable<T[]>;
 
   className?: string;
+
+  maxLengthItem?: number;
+
+  height?: number;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -84,6 +88,8 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
     getList,
     title,
     className,
+    maxLengthItem = 30,
+    height,
   } = props;
 
   const internalValue = React.useMemo<Model>(() => {
@@ -95,7 +101,6 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
   }, [value]);
 
   const [list, setList] = React.useState<Model[]>([]);
-
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
@@ -113,11 +118,9 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
 
   const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
 
-
-
-  React.useEffect(()=>{
+  React.useEffect(() => {
     const subscription = new Subscription();
-    if(firstLoad) {
+    if (firstLoad) {
       subscription.add(getList);
       getList().subscribe({
         next: (res: Model[]) => {
@@ -132,8 +135,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
     return function cleanup() {
       subscription.unsubscribe();
     };
-  },[firstLoad, getList, list])
-
+  }, [firstLoad, getList, list]);
 
   // use this for multiple type
   const internalList = React.useMemo(() => {
@@ -332,7 +334,12 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
               </div>
             </div>
           ) : (
-            <div className={classNames({ "filter-active": typeof value === 'number' || typeof value === 'string'  })}>
+            <div
+              className={classNames({
+                "filter-active":
+                  typeof value === "number" || typeof value === "string",
+              })}
+            >
               <div className="advance-enum-filter-master__title">
                 <span className="filter-title"> {title}</span>
                 <ChevronDown16 />
@@ -342,27 +349,29 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
         </div>
         {isExpand && (
           <div
-            className={classNames("select__container", {
+            className={classNames("advance-enum-filter-master__container", {
               "multiple-select__container": isMultiple,
             })}
             ref={wrapperRef}
           >
             {isMultiple
               ? isExpand && (
-                  <div className="select__list-container">
+                  <div className="advance-enum-filter-master__list-container m-t--xxxs" >
                     {
                       <>
                         <div
-                          className="select__list multiple-select__list"
+                          className="advance-enum-master__list multiple-select__list"
                           ref={selectListRef}
+                          style={{'height': `${height}px`}}
                         >
                           {internalList.length > 0 ? (
                             internalList.map((item, index) => (
                               <div
                                 className={classNames(
-                                  "select__item p-l--xs p-y--xs p-r--xxs",
+                                  "advance-enum-filter__item p-l--xs p-y--xs p-r--xxs",
                                   {
-                                    "select__item--selected": item.isSelected,
+                                    "advance-enum-filter__item--selected":
+                                      item.isSelected,
                                   }
                                 )}
                                 key={index}
@@ -374,9 +383,17 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
                                   checked={item.isSelected}
                                   onChange={handleClickMultiItem(item)}
                                 >
-                                  <span className="select__text">
-                                    {render(item)}
-                                  </span>
+                                  {maxLengthItem &&
+                                  item?.name?.length > maxLengthItem ? (
+                                    <Tooltip title={item?.name}>
+                                      {CommonService.limitWord(
+                                        item?.name,
+                                        maxLengthItem
+                                      )}
+                                    </Tooltip>
+                                  ) : (
+                                    item?.name
+                                  )}
                                 </Checkbox>
                               </div>
                             ))
@@ -390,19 +407,23 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
                 )
               : isExpand && (
                   <div
-                    className="select__list-container"
+                    className="advance-enum-filter-master__list-container m-t--xxxs"
                     style={appendToBodyStyle}
                   >
                     {
                       <>
-                        <div className="select__list" ref={selectListRef}>
+                        <div
+                          className="advance-enum-master__list"
+                          style={{'height': `${height}px`}}
+                          ref={selectListRef}
+                        >
                           {list.length > 0 ? (
                             list.map((item, index) => (
                               <div
                                 className={classNames(
-                                  "select__item p-l--xs p-y--xs",
+                                  "advance-enum-filter__item p-l--xs p-y--xs",
                                   {
-                                    "select__item--selected":
+                                    "advance-enum-filter__item--selected":
                                       item.id === internalValue?.id,
                                   }
                                 )}
@@ -411,7 +432,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
                                 onKeyDown={handleMove(item)}
                                 onClick={handleClickItem(item)}
                               >
-                                <span className="select__text">
+                                <span className="advance-enum-master__text">
                                   {render(item)}
                                 </span>
                                 {item.id === internalValue?.id && (

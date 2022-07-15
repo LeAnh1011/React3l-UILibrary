@@ -130,6 +130,7 @@ export function AdvanceEnumFilterStories() {
             isMultiple={isMultiple}
             onChangeMultiple={handleChangeFilter} // if type is multiple pass this props
             listValue={list} // if type is multiple pass this prop
+            height={500}
           />
         </FormItem>
       </div>

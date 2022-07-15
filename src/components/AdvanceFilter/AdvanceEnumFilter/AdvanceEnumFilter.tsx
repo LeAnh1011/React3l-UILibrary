@@ -40,6 +40,8 @@ export interface AdvanceEnumProps<T extends Model> {
   isMultiple?: boolean;
 
   getList?: () => Observable<T[]>;
+
+  height?: number;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -84,6 +86,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
     listValue,
     onChangeMultiple,
     getList,
+    height,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -393,6 +396,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                   <>
                     <div
                       className="select__list multiple-select__list"
+                      style={{'maxHeight': `${height}px`}}
                       ref={selectListRef}
                     >
                       {internalList.length > 0 ? (
@@ -442,7 +446,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
               <div className="select__list-container" style={appendToBodyStyle}>
                 {
                   <>
-                    <div className="select__list" ref={selectListRef}>
+                    <div className="select__list" ref={selectListRef} style={{'maxHeight': `${height}px`}}>
                       {list.length > 0 ? (
                         list.map((item, index) => (
                           <div

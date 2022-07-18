@@ -186,7 +186,12 @@ function InputNumber(props: InputNumberProps) {
       if (!isOutOfRange) {
         setInternalValue(stringValue);
         if (typeof onChange === "function") {
-          onChange(numberValue);
+          if (typeof numberValue === 'number') {
+            onChange(numberValue);
+          }
+          else {
+            onChange(undefined);
+          }
         }
       }
     },
@@ -198,15 +203,15 @@ function InputNumber(props: InputNumberProps) {
       setInternalValue("");
       inputRef.current.focus();
       if (typeof onChange === "function") {
-        onChange(null);
+        onChange(undefined);
         return;
       }
       if (typeof onBlur === "function") {
-        onBlur(null);
+        onBlur(undefined);
         return;
       }
       if (typeof onEnter === "function") {
-        onEnter(null);
+        onEnter(undefined);
         return;
       }
     },

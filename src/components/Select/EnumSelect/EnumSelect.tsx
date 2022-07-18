@@ -251,7 +251,7 @@ function EnumSelect(props: SelectProps<Model>) {
   );
 
   const handleClearItem = React.useCallback(() => {
-    onChange(null);
+    onChange(undefined);
   }, [onChange]);
 
   // use this for type multiple
@@ -401,7 +401,7 @@ function EnumSelect(props: SelectProps<Model>) {
                   <div
                     className="select__list multiple-select__list"
                     ref={selectListRef}
-                    style={{'maxHeight': `${height}px`}}
+                    style={{ 'maxHeight': `${height}px` }}
                   >
                     {internalList.length > 0 ? (
                       internalList.map((item, index) => (
@@ -450,7 +450,7 @@ function EnumSelect(props: SelectProps<Model>) {
             <div className="select__list-container" style={appendToBodyStyle}>
               {
                 <>
-                  <div className="select__list" ref={selectListRef} style={{'maxHeight': `${height}px`}}>
+                  <div className="select__list" ref={selectListRef} style={{ 'maxHeight': `${height}px` }}>
                     {list.length > 0 ? (
                       list.map((item, index) => (
                         <div

@@ -387,7 +387,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                       className={`tree-node-${node.key}`}
                     >
                       <div>
-                        {maxLengthItem && node?.item?.length > maxLengthItem ? (
+                        {maxLengthItem && node?.title?.length > maxLengthItem ? (
                           <Tooltip title={node?.title}>
                             {CommonService.limitWord(
                               node?.title,
@@ -433,7 +433,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                             >
                               <div>
                                 {maxLengthItem &&
-                                node?.item?.length > maxLengthItem ? (
+                                node?.title?.length > maxLengthItem ? (
                                   <Tooltip title={node?.title}>
                                     {CommonService.limitWord(
                                       node?.title,

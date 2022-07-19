@@ -30,7 +30,7 @@ function reducerFunc(state: Model, action: changeAction<Model>): Model[] {
 
 const demoList = [
   { id: 1, name: "Ban hành chính", code: "FAD", parentId: null },
-  { id: 2, name: "Ban công nghệ thông tin", code: "FIM", parentId: 1 },
+  { id: 2, name: "Ban công nghệ thông tinBan công nghệ thông tin", code: "FIM", parentId: 1 },
   { id: 3, name: "Ban nhân sự", code: "FHR", parentId: null },
   { id: 4, name: "Ban truyền thông", code: "FCC", parentId: 2 },
   { id: 5, name: "Ban công nghệ", code: "FTI", parentId: 4 },
@@ -109,6 +109,7 @@ export function AdvanceTreeFilterMasterStories() {
           disabled={false}
           selectWithPreferOption={isSelectWithPreferOption}
           preferOptions={isSelectWithPreferOption ? list : undefined}
+          maxLengthItem={10}
         />
       </div>
 

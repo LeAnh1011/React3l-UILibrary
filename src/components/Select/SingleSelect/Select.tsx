@@ -191,7 +191,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
   );
 
   const handleClearItem = React.useCallback(() => {
-    onChange(null);
+    onChange(undefined);
   }, [onChange]);
 
   const handleKeyPress = React.useCallback(

@@ -1,6 +1,6 @@
 import { DEBOUNCE_TIME_300 } from "config/consts";
 import Add16 from "@carbon/icons-react/es/add/16";
-import Checkmark16  from "@carbon/icons-react/es/checkmark/16";
+import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { Model, ModelFilter } from "react3l-common";
 import { useDebounceFn } from "ahooks";
 import { Empty } from "antd";
@@ -183,7 +183,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
   );
 
   const handleClearItem = React.useCallback(() => {
-    onChange(null);
+    onChange(undefined);
   }, [onChange]);
 
   const handleClearInput = React.useCallback(() => {

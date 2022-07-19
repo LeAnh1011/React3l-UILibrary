@@ -2,7 +2,7 @@ import { Model, ModelFilter } from "react3l-common";
 import Add16 from "@carbon/icons-react/es/add/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
-import { Empty, Tree as TreeAntd } from "antd";
+import { Empty, Tooltip, Tree as TreeAntd } from "antd";
 import type {
   DataNode,
   EventDataNode,
@@ -46,6 +46,7 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   preferOptions?: T[];
   selectListRef?: RefObject<any>;
   isExpand?: boolean;
+  maxLengthItem?: number;
 }
 function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const {
@@ -61,9 +62,9 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     classFilter: ClassFilter,
     getTreeData,
     onChange,
-    titleRender,
     selectWithAdd,
     preferOptions,
+    maxLengthItem = 30,
   } = props;
 
   const [internalTreeData, setInternalTreeData] = React.useState<
@@ -350,73 +351,6 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     [checkable, handleCheck, handleSelect, internalCheckedKeys]
   );
 
-  // dont need to use this function
-  const loop = React.useCallback(
-    (data) =>
-      data.map((item: DataNode) => {
-        if (item.children && item.children.length) {
-          return (
-            <TreeNode
-              key={item.key}
-              checkable={checkable}
-              title={
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                  tabIndex={-1}
-                  onKeyDown={handleMove(item)}
-                  className={`tree-node-${item.key}`}
-                >
-                  <div>{titleRender(item)}</div>
-                  {!checkable &&
-                    internalSelectedKeys &&
-                    internalSelectedKeys.includes(item.key.toString()) && (
-                      <div>
-                        <Checkmark16 />
-                      </div>
-                    )}
-                </div>
-              }
-            >
-              {loop(item.children)}
-            </TreeNode>
-          );
-        }
-
-        return (
-          <TreeNode
-            key={item.key}
-            checkable={checkable}
-            title={
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-                tabIndex={-1}
-                onKeyDown={handleMove(item)}
-                className={`tree-node-${item.key}`}
-              >
-                <div>{titleRender(item)}</div>
-                {!checkable &&
-                  internalSelectedKeys &&
-                  internalSelectedKeys.includes(item.key.toString()) && (
-                    <div>
-                      <Checkmark16 />
-                    </div>
-                  )}
-              </div>
-            }
-          />
-        );
-      }),
-    [checkable, handleMove, internalSelectedKeys, titleRender]
-  );
-
   return (
     <>
       <div className="tree-container">
@@ -441,7 +375,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                   onCheck={handleCheck}
                   onSelect={handleSelect}
                   treeData={internalTreeData}
-                  titleRender={(node: DataNode) => (
+                  titleRender={(node: any) => (
                     <div
                       style={{
                         display: "flex",
@@ -452,7 +386,18 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                       onKeyDown={handleMove(node)}
                       className={`tree-node-${node.key}`}
                     >
-                      <div>{titleRender(node)}</div>
+                      <div>
+                        {maxLengthItem && node?.item?.length > maxLengthItem ? (
+                          <Tooltip title={node?.title}>
+                            {CommonService.limitWord(
+                              node?.title,
+                              maxLengthItem
+                            )}
+                          </Tooltip>
+                        ) : (
+                          node?.title
+                        )}
+                      </div>
                       {!checkable &&
                         internalSelectedKeys &&
                         internalSelectedKeys.includes(node.key) && (
@@ -478,7 +423,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                           onSelect={handleSelect}
                           checkedKeys={internalCheckedKeys}
                           selectedKeys={internalSelectedKeys}
-                          titleRender={(node: DataNode) => (
+                          titleRender={(node: any) => (
                             <div
                               style={{
                                 display: "flex",
@@ -486,7 +431,19 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                                 justifyContent: "space-between",
                               }}
                             >
-                              <div>{titleRender(node)}</div>
+                              <div>
+                                {maxLengthItem &&
+                                node?.item?.length > maxLengthItem ? (
+                                  <Tooltip title={node?.title}>
+                                    {CommonService.limitWord(
+                                      node?.title,
+                                      maxLengthItem
+                                    )}
+                                  </Tooltip>
+                                ) : (
+                                  node?.title
+                                )}
+                              </div>
                               {!checkable &&
                                 internalSelectedKeys &&
                                 internalSelectedKeys.includes(node.key) && (

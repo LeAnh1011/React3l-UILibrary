@@ -38,6 +38,7 @@ export interface AdvanceTreeFilterMasterProps<
   selectWithPreferOption?: boolean;
   preferOptions?: T[];
   maxLength?: number;
+  maxLengthItem?: number;
 }
 export interface filterAction {
   type: string;
@@ -77,6 +78,7 @@ function AdvanceTreeFilterMaster(
     preferOptions,
     title,
     maxLength,
+    maxLengthItem,
   } = props;
   const inputRef: any = React.useRef<any>(null);
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -231,6 +233,7 @@ function AdvanceTreeFilterMaster(
                 selectWithPreferOption={selectWithPreferOption}
                 preferOptions={preferOptions}
                 isExpand={expanded}
+                maxLengthItem={maxLengthItem}
               />
             </div>
           </div>

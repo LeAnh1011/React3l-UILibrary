@@ -43,6 +43,7 @@ export interface AdvanceTreeFilterProps<
   selectWithAdd?: boolean;
   selectWithPreferOption?: boolean;
   preferOptions?: T[];
+  maxLengthItem?: number;
 }
 export interface filterAction {
   type: string;
@@ -84,6 +85,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
     selectWithAdd,
     selectWithPreferOption,
     preferOptions,
+    maxLengthItem ,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -102,7 +104,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
 
   const [filter, dispatch] = React.useReducer<
     Reducer<ModelFilter, filterAction>
-  >(filterReducer, {...new ClassFilter(), valueFilter});
+  >(filterReducer, { ...new ClassFilter(), valueFilter });
 
   const { run } = useDebounceFn(
     (searchTerm: string) => {
@@ -269,6 +271,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               selectWithPreferOption={selectWithPreferOption}
               preferOptions={preferOptions}
               isExpand={expanded}
+              maxLengthItem={maxLengthItem}
             />
           </div>
         )}

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import CloseFilled16  from "@carbon/icons-react/es/close--filled/16";
+import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import React, { ReactSVGElement, RefObject } from "react";
 import "./AdvanceNumberFilter.scss";
 import { ReactNode } from "react";
@@ -186,7 +186,12 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
       if (!isOutOfRange) {
         setInternalValue(stringValue);
         if (typeof onChange === "function") {
-          onChange(numberValue);
+          if (typeof numberValue === 'number') {
+            onChange(numberValue);
+          }
+          else {
+            onChange(undefined);
+          }
         }
       }
     },
@@ -198,15 +203,15 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
       setInternalValue("");
       inputRef.current.focus();
       if (typeof onChange === "function") {
-        onChange(null);
+        onChange(undefined);
         return;
       }
       if (typeof onBlur === "function") {
-        onBlur(null);
+        onBlur(undefined);
         return;
       }
       if (typeof onEnter === "function") {
-        onEnter(null);
+        onEnter(undefined);
         return;
       }
     },

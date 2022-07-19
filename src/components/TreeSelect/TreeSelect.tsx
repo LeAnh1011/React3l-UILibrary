@@ -45,6 +45,7 @@ export interface TreeSelectProps<
   selectWithAdd?: boolean;
   selectWithPreferOption?: boolean;
   preferOptions?: T[];
+  maxLengthItem?: number;
 }
 export interface filterAction {
   type: string;
@@ -88,6 +89,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     selectWithAdd,
     selectWithPreferOption,
     preferOptions,
+    maxLengthItem,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -318,6 +320,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               selectWithPreferOption={selectWithPreferOption}
               preferOptions={preferOptions}
               isExpand={expanded}
+              maxLengthItem={maxLengthItem}
             />
           </div>
         )}

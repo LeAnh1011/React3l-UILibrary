@@ -122,6 +122,8 @@ export function MultipleSelectStories() {
             selectWithAdd={isSelectWithAdd}
             isUsingSearch={withSearch}
             preferOptions={isSelectWithPreferOption ? list : undefined}
+            maxLengthItem={10}
+            render={(item) => item?.code}
           ></MultipleSelect>
         </FormItem>
       </div>

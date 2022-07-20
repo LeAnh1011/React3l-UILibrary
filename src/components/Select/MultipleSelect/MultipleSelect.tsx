@@ -179,7 +179,9 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     try {
       const filter = valueFilter ? valueFilter : new ClassFilter();
       handleGetList(filter);
-    } catch (error) {}
+    } catch (error) {
+      return;
+    }
   }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(

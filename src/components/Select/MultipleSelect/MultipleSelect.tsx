@@ -15,7 +15,7 @@ import IconLoading from "components/IconLoading/IconLoading";
 export interface MultipleSelectProps<
   T extends Model,
   TFilter extends ModelFilter
-  > {
+> {
   values?: Model[];
 
   valueFilter?: TFilter;
@@ -55,6 +55,10 @@ export interface MultipleSelectProps<
   isUsingSearch?: boolean;
 
   preferOptions?: T[];
+
+  maxLengthItem?: number;
+
+  bindId?: string;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -82,6 +86,8 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     selectWithAdd,
     isUsingSearch,
     preferOptions,
+    maxLengthItem,
+    bindId 
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -139,7 +145,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
         let filteredItem =
           values &&
           values.length > 0 &&
-          values?.filter((item) => item.id === current.id)[0];
+          values?.filter((item) => item[bindId] === current[bindId])[0];
         if (filteredItem) {
           current.isSelected = true;
         } else {
@@ -149,7 +155,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
       return [...list];
     }
     return [];
-  }, [list, values]);
+  }, [bindId, list, values]);
 
   const internalPreferOptions = React.useMemo(() => {
     if (preferOptions && preferOptions.length > 0) {
@@ -157,7 +163,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
         let filteredItem =
           values &&
           values?.length > 0 &&
-          values.filter((item) => item.id === current.id)[0];
+          values.filter((item) => item[bindId] === current[bindId])[0];
         if (filteredItem) {
           current.isSelected = true;
         } else {
@@ -167,13 +173,13 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
       return [...preferOptions];
     }
     return [];
-  }, [preferOptions, values]);
+  }, [bindId, preferOptions, values]);
 
   const handleLoadList = React.useCallback(() => {
     try {
       const filter = valueFilter ? valueFilter : new ClassFilter();
       handleGetList(filter);
-    } catch (error) { }
+    } catch (error) {}
   }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(
@@ -192,20 +198,21 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: any) => {
-      let filteredItem = values?.filter((current) => current.id === item.id)[0];
+      let filteredItem = values?.filter((current) => current[bindId] === item[bindId])[0];
+      
       if (filteredItem) {
         const tmp = [...values];
-        const ids = values?.map((item) => item?.id);
+        const ids = values?.map((item) => item[bindId]);
         const index = tmp.indexOf(filteredItem);
         tmp.splice(index, 1);
         ids.splice(index, 1);
         onChange([...tmp], ids as any);
       } else {
-        const ids = values?.map((item) => item?.id);
-        onChange([...values, item], [...ids, item?.id] as any);
+        const ids = values?.map((item) => item[bindId]);
+        onChange([...values, item], [...ids, item[bindId]] as any);
       }
     },
-    [values, onChange]
+    [values, bindId, onChange]
   );
 
   const handleClickParentItem = React.useCallback(
@@ -229,10 +236,10 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
 
   const handleClearAll = React.useCallback(() => {
     const cloneValueFilter = new ClassFilter();
-    cloneValueFilter["id"]["notIn"] = [];
+    cloneValueFilter[`${bindId}`]["notIn"] = [];
     handleGetList(cloneValueFilter);
     onChange([], []);
-  }, [ClassFilter, handleGetList, onChange]);
+  }, [ClassFilter, bindId, handleGetList, onChange]);
 
   const handleKeyPress = React.useCallback(
     (event: any) => {
@@ -332,7 +339,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                   {values?.map((itemValue: any, index: number) => (
                     <span key={index}>
                       <>
-                        <span>{itemValue?.name}</span>
+                        <span>{render(itemValue)}</span>
                         {index < values?.length - 1 && (
                           <span className="m-r--xxxs">&#44;</span>
                         )}
@@ -409,7 +416,19 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                           checked={item.isSelected}
                           onChange={handleClickItem(item)}
                         >
-                          <span className="select__text">{render(item)}</span>
+                          <span className="select__text">
+                            {maxLengthItem &&
+                            render(item)?.length > maxLengthItem ? (
+                              <Tooltip title={render(item)}>
+                                {CommonService.limitWord(
+                                  render(item),
+                                  maxLengthItem
+                                )}
+                              </Tooltip>
+                            ) : (
+                              render(item)
+                            )}
+                          </span>
                         </Checkbox>
                       </div>
                     ))
@@ -440,7 +459,19 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                         onChange={handleClickItem(item)}
                         checked={item.isSelected}
                       >
-                        <span className="select__text">{render(item)}</span>
+                        <span className="select__text">
+                          {maxLengthItem &&
+                          render(item)?.length > maxLengthItem ? (
+                            <Tooltip title={render(item)}>
+                              {CommonService.limitWord(
+                                render(item),
+                                maxLengthItem
+                              )}
+                            </Tooltip>
+                          ) : (
+                            render(item)
+                          )}
+                        </span>
                       </Checkbox>
                     </div>
                   ))}
@@ -470,6 +501,8 @@ MultipleSelect.defaultProps = {
   render: defaultRenderObject,
   isMaterial: false,
   disabled: false,
+  maxLengthItem: 30,
+  bindId: 'id'
 };
 
 export default MultipleSelect;

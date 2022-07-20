@@ -1,23 +1,22 @@
-import { Model, ModelFilter } from "react3l-common";
 import Add16 from "@carbon/icons-react/es/add/16";
-import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
+import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import { Empty, Tooltip, Tree as TreeAntd } from "antd";
+import { Key } from "antd/lib/table/interface";
 import type {
   DataNode,
   EventDataNode,
-  TreeProps as AntdTreeProps,
+  TreeProps as AntdTreeProps
 } from "antd/lib/tree";
+import classNames from "classnames";
+import IconLoading from "components/IconLoading/IconLoading";
 import React, { ReactNode, RefObject } from "react";
+import { Model, ModelFilter } from "react3l-common";
 import type { Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import "./Tree.scss";
 import { TreeNode as CustomTreeNode } from "./TreeNode";
-import { Key } from "antd/lib/table/interface";
-import classNames from "classnames";
-import IconLoading from "components/IconLoading/IconLoading";
 
-const { TreeNode } = TreeAntd;
 
 function SwitcherIcon() {
   return (

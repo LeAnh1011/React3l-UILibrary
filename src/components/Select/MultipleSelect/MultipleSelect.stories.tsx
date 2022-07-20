@@ -9,18 +9,18 @@ import { ValidateStatus } from "./../../../config/enum";
 import { BORDER_TYPE } from "./../../../config/enum";
 
 const demoList = [
-  { bindId: 1, name: "Ban hành chính", code: "FAD" },
-  { bindId: 2, name: "Ban công nghệ thông tin", code: "FIM" },
-  { bindId: 3, name: "Ban nhân sự", code: "FHR" },
-  { bindId: 4, name: "Ban truyền thông Ban truyền thông Ban truyền thông Ban truyền thông", code: "FCC" },
-  { bindId: 5, name: "Ban công nghệ", code: "FTI" },
-  { bindId: 6, name: "Ban giám đốc", code: "BOD" },
-  { bindId: 7, name: "Ban quản trị", code: "BOM" },
+  { id: 1, name: "Ban hành chính", code: "FAD" },
+  { id: 2, name: "Ban công nghệ thông tin", code: "FIM" },
+  { id: 3, name: "Ban nhân sự", code: "FHR" },
+  { id: 4, name: "Ban truyền thông", code: "FCC" },
+  { id: 5, name: "Ban công nghệ", code: "FTI" },
+  { id: 6, name: "Ban giám đốc", code: "BOD" },
+  { id: 7, name: "Ban quản trị", code: "BOM" },
 ];
 
 const list = [
-  { bindId: 9, name: "Phòng Muti Media", code: "MEDIA" },
-  { bindId: 10, name: "Phòng truyền thông", code: "PTT" },
+  { id: 9, name: "Phòng Muti Media", code: "MEDIA" },
+  { id: 10, name: "Phòng truyền thông", code: "PTT" },
 ];
 
 const demoObservable = new Observable<Model[]>((observer) => {
@@ -122,7 +122,6 @@ export function MultipleSelectStories() {
             selectWithAdd={isSelectWithAdd}
             isUsingSearch={withSearch}
             preferOptions={isSelectWithPreferOption ? list : undefined}
-            bindId={'bindId'}
           ></MultipleSelect>
         </FormItem>
       </div>

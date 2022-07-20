@@ -238,10 +238,10 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
 
   const handleClearAll = React.useCallback(() => {
     const cloneValueFilter = new ClassFilter();
-    cloneValueFilter[`${bindId}`]["notIn"] = [];
+    cloneValueFilter['id']["notIn"] = [];
     handleGetList(cloneValueFilter);
     onChange([], []);
-  }, [ClassFilter, bindId, handleGetList, onChange]);
+  }, [ClassFilter, handleGetList, onChange]);
 
   const handleKeyPress = React.useCallback(
     (event: any) => {

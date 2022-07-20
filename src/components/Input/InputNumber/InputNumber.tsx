@@ -164,19 +164,27 @@ function InputNumber(props: InputNumberProps) {
         }
         switch (numberType) {
           case DECIMAL:
-            isOutOfRange = stringValue.length > 21 ? true : false;
             number = parseFloat(stringValue);
+            isOutOfRange =
+              (typeof max === "number" && number > max) ||
+              (typeof min === "number" && number < min)
+                ? true
+                : false;
             return [number, isOutOfRange];
           default:
-            isOutOfRange = stringValue.length > 17 ? true : false;
             number = parseInt(stringValue);
+            isOutOfRange =
+              (typeof max === "number" && number > max) ||
+              (typeof min === "number" && number < min)
+                ? true
+                : false;
             return [number, isOutOfRange];
         }
       } else {
         return [null, false];
       }
     },
-    [numberType, isReverseSymb]
+    [numberType, isReverseSymb, min, max]
   );
 
   const handleChange = React.useCallback(
@@ -184,14 +192,17 @@ function InputNumber(props: InputNumberProps) {
       const stringValue = formatString(event.target.value);
       const [numberValue, isOutOfRange] = parseNumber(stringValue);
       if (!isOutOfRange) {
-        setInternalValue(stringValue);
         if (typeof onChange === "function") {
-          if (typeof numberValue === 'number') {
+          const isSpecialLetter = /[-_!@#$%^&*(),.?":{}|<>]/g.test(
+            Array.from(stringValue)[0]
+          );
+          if (typeof numberValue === "number" && !isSpecialLetter) {
             onChange(numberValue);
+          } else {
+            setInternalValue(stringValue);
           }
-          else {
-            onChange(undefined);
-          }
+        } else {
+          setInternalValue(stringValue);
         }
       }
     },
@@ -314,8 +325,6 @@ function InputNumber(props: InputNumberProps) {
           className={classNames("component__input", {
             "disabled-field": disabled,
           })}
-          min={min}
-          max={max}
         />
         {type === BORDER_TYPE.FLOAT_LABEL && label && (
           <label

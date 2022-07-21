@@ -204,12 +204,10 @@ function InputTag(props: InputTagProps<Model>) {
           )}
 
           {!disabled && searchTerm && (
-            <div style={{ width: "16px", height: "20px" }} className="m-x--xxs">
-              <CloseFilled16
-                className="input-icon input-icon__clear"
-                onClick={handleClearInput}
-              ></CloseFilled16>
-            </div>
+            <CloseFilled16
+              className="input-icon input-icon__clear m-x--xxs"
+              onClick={handleClearInput}
+            ></CloseFilled16>
           )}
 
           <ChevronDown16

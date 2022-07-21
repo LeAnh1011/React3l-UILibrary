@@ -175,10 +175,7 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
           handleCancel={handleClosePreview}
           handleSave={handleSaveCropped}
           listImage={[image]}
-          isMultiple={true}
-          // chỗ isMultiple này để true để không làm ảnh hưởng đến
-          // những component khác cùng sử dụng CroppedModal
-          // Đã xử lý nó trong handleSaveCropped
+          isMultiple={false}
         />
       )}
     </>

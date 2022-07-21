@@ -15,7 +15,7 @@ import IconLoading from "components/IconLoading/IconLoading";
 export interface MultipleSelectProps<
   T extends Model,
   TFilter extends ModelFilter
-  > {
+> {
   values?: Model[];
 
   valueFilter?: TFilter;
@@ -55,6 +55,8 @@ export interface MultipleSelectProps<
   isUsingSearch?: boolean;
 
   preferOptions?: T[];
+
+  maxLengthItem?: number;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -82,6 +84,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     selectWithAdd,
     isUsingSearch,
     preferOptions,
+    maxLengthItem,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -173,7 +176,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     try {
       const filter = valueFilter ? valueFilter : new ClassFilter();
       handleGetList(filter);
-    } catch (error) { }
+    } catch (error) {}
   }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(
@@ -332,7 +335,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                   {values?.map((itemValue: any, index: number) => (
                     <span key={index}>
                       <>
-                        <span>{itemValue?.name}</span>
+                        <span>{render(itemValue)}</span>
                         {index < values?.length - 1 && (
                           <span className="m-r--xxxs">&#44;</span>
                         )}
@@ -409,7 +412,19 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                           checked={item.isSelected}
                           onChange={handleClickItem(item)}
                         >
-                          <span className="select__text">{render(item)}</span>
+                          <span className="select__text">
+                            {maxLengthItem &&
+                            render(item)?.length > maxLengthItem ? (
+                              <Tooltip title={item?.name}>
+                                {CommonService.limitWord(
+                                  render(item),
+                                  maxLengthItem
+                                )}
+                              </Tooltip>
+                            ) : (
+                              render(item)
+                            )}
+                          </span>
                         </Checkbox>
                       </div>
                     ))
@@ -440,7 +455,19 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                         onChange={handleClickItem(item)}
                         checked={item.isSelected}
                       >
-                        <span className="select__text">{render(item)}</span>
+                        <span className="select__text">
+                          {maxLengthItem &&
+                          render(item)?.length > maxLengthItem ? (
+                            <Tooltip title={item?.name}>
+                              {CommonService.limitWord(
+                                render(item),
+                                maxLengthItem
+                              )}
+                            </Tooltip>
+                          ) : (
+                            render(item)
+                          )}
+                        </span>
                       </Checkbox>
                     </div>
                   ))}
@@ -470,6 +497,7 @@ MultipleSelect.defaultProps = {
   render: defaultRenderObject,
   isMaterial: false,
   disabled: false,
+  maxLengthItem: 30,
 };
 
 export default MultipleSelect;

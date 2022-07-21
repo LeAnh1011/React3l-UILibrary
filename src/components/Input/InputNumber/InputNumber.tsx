@@ -193,17 +193,12 @@ function InputNumber(props: InputNumberProps) {
       const [numberValue, isOutOfRange] = parseNumber(stringValue);
       if (!isOutOfRange) {
         if (typeof onChange === "function") {
-          const isSpecialLetter = /[-_!@#$%^&*(),.?":{}|<>]/g.test(
-            Array.from(stringValue)[0]
-          );
+          const isSpecialLetter = /[-,.]/g.test(Array.from(stringValue)[0]);
           if (typeof numberValue === "number" && !isSpecialLetter) {
             onChange(numberValue);
-          } else {
-            setInternalValue(stringValue);
           }
-        } else {
-          setInternalValue(stringValue);
         }
+        setInternalValue(stringValue);
       }
     },
     [formatString, parseNumber, onChange]
@@ -339,12 +334,10 @@ function InputNumber(props: InputNumberProps) {
           </label>
         )}
         {internalValue && !disabled && (
-          <div style={{ width: "16px", height: "20px" }} className="m-l--xxs">
-            <CloseFilled16
-              className={classNames("input-icon__clear")}
-              onClick={handleClearInput}
-            ></CloseFilled16>
-          </div>
+          <CloseFilled16
+            className={classNames("input-icon__clear", "m-l--xxs")}
+            onClick={handleClearInput}
+          ></CloseFilled16>
         )}
         {suffix && (
           <>

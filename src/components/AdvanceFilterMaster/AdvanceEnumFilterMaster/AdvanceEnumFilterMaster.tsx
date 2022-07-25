@@ -120,6 +120,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
 
   React.useEffect(() => {
     const subscription = new Subscription();
+    if (firstLoad) {
       subscription.add(getList);
       getList().subscribe({
         next: (res: Model[]) => {
@@ -129,12 +130,12 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
           setList([]);
         },
       });
+    }
 
     return function cleanup() {
       subscription.unsubscribe();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [firstLoad, getList]);
 
   // use this for multiple type
   const internalList = React.useMemo(() => {

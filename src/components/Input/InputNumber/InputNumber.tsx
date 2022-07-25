@@ -4,6 +4,7 @@ import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import "./InputNumber.scss";
 import { ReactNode } from "react";
 import { BORDER_TYPE } from "config/enum";
+import { BigNumber } from "bignumber.js";
 
 export const DECIMAL: string = "DECIMAL";
 export const LONG: string = "LONG";
@@ -68,6 +69,8 @@ function InputNumber(props: InputNumberProps) {
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
     null
   );
+
+  const cursorPosition = React.useRef({ selectionStart: 0, selectionEnd: 0 });
 
   const buildRegex = React.useCallback(() => {
     var regExDecimal = "";
@@ -162,6 +165,7 @@ function InputNumber(props: InputNumberProps) {
         } else {
           stringValue = value.replace(/,/g, "");
         }
+        number = new BigNumber(stringValue).toNumber();
         switch (numberType) {
           case DECIMAL:
             number = parseFloat(stringValue);
@@ -189,8 +193,11 @@ function InputNumber(props: InputNumberProps) {
 
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { selectionEnd, selectionStart } = event.target;
       const stringValue = formatString(event.target.value);
       const [numberValue, isOutOfRange] = parseNumber(stringValue);
+      console.log("Value: ", stringValue);
+      console.log("Number: ", numberValue);
       if (!isOutOfRange) {
         if (typeof onChange === "function") {
           const isSpecialLetter = /[-,.]/g.test(Array.from(stringValue)[0]);
@@ -199,6 +206,13 @@ function InputNumber(props: InputNumberProps) {
           }
         }
         setInternalValue(stringValue);
+      }
+      if (event.target.value.length < stringValue.length) {
+        cursorPosition.current.selectionStart = selectionStart + 1;
+        cursorPosition.current.selectionEnd = selectionEnd + 1;
+      } else {
+        cursorPosition.current.selectionStart = selectionStart;
+        cursorPosition.current.selectionEnd = selectionEnd;
       }
     },
     [formatString, parseNumber, onChange]
@@ -254,6 +268,8 @@ function InputNumber(props: InputNumberProps) {
     } else {
       setInternalValue("");
     }
+    inputRef.current.selectionStart = cursorPosition.current.selectionStart;
+    inputRef.current.selectionEnd = cursorPosition.current.selectionEnd;
   }, [value, formatString, isReverseSymb]);
 
   return (

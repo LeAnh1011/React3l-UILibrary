@@ -135,7 +135,7 @@ function EnumSelect(props: SelectProps<Model>) {
     return function cleanup() {
       subscription.unsubscribe();
     };
-  }, [firstLoad, getList, list]);
+  }, [firstLoad, getList]);
 
   // use this for multiple type
   const internalList = React.useMemo(() => {

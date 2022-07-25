@@ -57,6 +57,9 @@ $backgound-color: #f4f4f4;
       width: 100%;
       overflow-y: auto;
       height: 86px;
+      .ant-empty-image {
+        height: 55px;
+      }
     }
     .advance-enum-filter__loading {
       width: 100%;

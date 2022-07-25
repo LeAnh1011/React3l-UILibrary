@@ -182,10 +182,8 @@
     }
 
     svg.input-icon__clear {
-      opacity: 0.8;
       color: var(--palette-coolGray-50);
       &:hover {
-        opacity: 1;
         cursor: pointer;
         color: var(--palette-coolGrayHover-50);
       }

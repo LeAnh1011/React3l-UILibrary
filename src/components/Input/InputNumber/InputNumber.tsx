@@ -164,19 +164,27 @@ function InputNumber(props: InputNumberProps) {
         }
         switch (numberType) {
           case DECIMAL:
-            isOutOfRange = stringValue.length > 21 ? true : false;
             number = parseFloat(stringValue);
+            isOutOfRange =
+              (typeof max === "number" && number > max) ||
+              (typeof min === "number" && number < min)
+                ? true
+                : false;
             return [number, isOutOfRange];
           default:
-            isOutOfRange = stringValue.length > 17 ? true : false;
             number = parseInt(stringValue);
+            isOutOfRange =
+              (typeof max === "number" && number > max) ||
+              (typeof min === "number" && number < min)
+                ? true
+                : false;
             return [number, isOutOfRange];
         }
       } else {
         return [null, false];
       }
     },
-    [numberType, isReverseSymb]
+    [numberType, isReverseSymb, min, max]
   );
 
   const handleChange = React.useCallback(
@@ -184,15 +192,13 @@ function InputNumber(props: InputNumberProps) {
       const stringValue = formatString(event.target.value);
       const [numberValue, isOutOfRange] = parseNumber(stringValue);
       if (!isOutOfRange) {
-        setInternalValue(stringValue);
         if (typeof onChange === "function") {
-          if (typeof numberValue === 'number') {
+          const isSpecialLetter = /[-,.]/g.test(Array.from(stringValue)[0]);
+          if (typeof numberValue === "number" && !isSpecialLetter) {
             onChange(numberValue);
           }
-          else {
-            onChange(undefined);
-          }
         }
+        setInternalValue(stringValue);
       }
     },
     [formatString, parseNumber, onChange]
@@ -314,8 +320,6 @@ function InputNumber(props: InputNumberProps) {
           className={classNames("component__input", {
             "disabled-field": disabled,
           })}
-          min={min}
-          max={max}
         />
         {type === BORDER_TYPE.FLOAT_LABEL && label && (
           <label
@@ -330,12 +334,10 @@ function InputNumber(props: InputNumberProps) {
           </label>
         )}
         {internalValue && !disabled && (
-          <div style={{ width: "16px", height: "20px" }} className="m-l--xxs">
-            <CloseFilled16
-              className={classNames("input-icon__clear")}
-              onClick={handleClearInput}
-            ></CloseFilled16>
-          </div>
+          <CloseFilled16
+            className={classNames("input-icon__clear", "m-l--xxs")}
+            onClick={handleClearInput}
+          ></CloseFilled16>
         )}
         {suffix && (
           <>

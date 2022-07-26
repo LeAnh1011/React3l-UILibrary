@@ -4,7 +4,6 @@ import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import "./InputNumber.scss";
 import { ReactNode } from "react";
 import { BORDER_TYPE } from "config/enum";
-import { BigNumber } from "bignumber.js";
 
 export const DECIMAL: string = "DECIMAL";
 export const LONG: string = "LONG";
@@ -165,7 +164,6 @@ function InputNumber(props: InputNumberProps) {
         } else {
           stringValue = value.replace(/,/g, "");
         }
-        number = new BigNumber(stringValue).toNumber();
         switch (numberType) {
           case DECIMAL:
             number = parseFloat(stringValue);

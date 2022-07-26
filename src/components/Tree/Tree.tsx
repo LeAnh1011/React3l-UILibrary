@@ -6,7 +6,7 @@ import { Key } from "antd/lib/table/interface";
 import type {
   DataNode,
   EventDataNode,
-  TreeProps as AntdTreeProps
+  TreeProps as AntdTreeProps,
 } from "antd/lib/tree";
 import classNames from "classnames";
 import IconLoading from "components/IconLoading/IconLoading";
@@ -16,7 +16,6 @@ import type { Observable } from "rxjs";
 import { CommonService } from "services/common-service";
 import "./Tree.scss";
 import { TreeNode as CustomTreeNode } from "./TreeNode";
-
 
 function SwitcherIcon() {
   return (
@@ -56,8 +55,8 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     checkable,
     selectedKey,
     onlySelectLeaf,
-    searchProperty,
-    searchType,
+    // searchProperty,
+    // searchType,
     classFilter: ClassFilter,
     getTreeData,
     onChange,
@@ -70,9 +69,9 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     CustomTreeNode<Model>[]
   >(treeData);
 
-  const [staticTreeData, setStaticTreeData] = React.useState<
-    CustomTreeNode<Model>[]
-  >();
+  // const [staticTreeData, setStaticTreeData] = React.useState<
+  //   CustomTreeNode<Model>[]
+  // >();
 
   const [autoExpandParent, setAutoExpandParent] = React.useState<boolean>(true);
 
@@ -193,7 +192,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       info?: {
         event: "select";
         selected: boolean;
-        node: EventDataNode | any;
+        node: EventDataNode<any> | any;
         selectedNodes: DataNode[] | any;
         nativeEvent: MouseEvent;
       }
@@ -240,7 +239,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
               CommonService.setOnlySelectLeaf(treeData);
             }
             setInternalTreeData(treeData);
-            setStaticTreeData(treeData);
+            // setStaticTreeData(treeData);
             setInternalExpandedKeys(internalExpandedKeys);
           } else setInternalTreeData([]);
           setLoading(false);
@@ -260,38 +259,39 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     valueFilter,
   ]);
 
-  React.useEffect(() => {
-    if (valueFilter && valueFilter[searchProperty][searchType]) {
-      const searchValue = valueFilter[searchProperty][searchType];
-      if (searchValue && searchValue.length > 0) {
-        var currentTreeData: CustomTreeNode<Model>[] = JSON.parse(
-          JSON.stringify(staticTreeData)
-        );
-        if (currentTreeData && currentTreeData.length > 0) {
-          const foundNodes: CustomTreeNode<Model>[] = [];
-          currentTreeData.forEach((element: CustomTreeNode<Model>) => {
-            const node = searchTreeNodeByString(
-              element,
-              searchValue,
-              searchProperty
-            );
-            if (node as CustomTreeNode<Model>) {
-              foundNodes.push(node);
-            }
-          });
-          setInternalTreeData(foundNodes);
-          return;
-        }
-      }
-    }
-    setInternalTreeData(staticTreeData);
-  }, [
-    valueFilter,
-    searchProperty,
-    searchType,
-    staticTreeData,
-    searchTreeNodeByString,
-  ]);
+  // local filter tree base on model filter commented because now using servcer filter data
+  // React.useEffect(() => {
+  //   if (valueFilter && valueFilter[searchProperty][searchType]) {
+  //     const searchValue = valueFilter[searchProperty][searchType];
+  //     if (searchValue && searchValue.length > 0) {
+  //       var currentTreeData: CustomTreeNode<Model>[] = JSON.parse(
+  //         JSON.stringify(staticTreeData)
+  //       );
+  //       if (currentTreeData && currentTreeData.length > 0) {
+  //         const foundNodes: CustomTreeNode<Model>[] = [];
+  //         currentTreeData.forEach((element: CustomTreeNode<Model>) => {
+  //           const node = searchTreeNodeByString(
+  //             element,
+  //             searchValue,
+  //             searchProperty
+  //           );
+  //           if (node as CustomTreeNode<Model>) {
+  //             foundNodes.push(node);
+  //           }
+  //         });
+  //         setInternalTreeData(foundNodes);
+  //         return;
+  //       }
+  //     }
+  //   }
+  //   setInternalTreeData(staticTreeData);
+  // }, [
+  //   valueFilter,
+  //   searchProperty,
+  //   searchType,
+  //   staticTreeData,
+  //   searchTreeNodeByString,
+  // ]);
 
   const handleMove = React.useCallback(
     (item) => (event: any) => {
@@ -386,7 +386,8 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                       className={`tree-node-${node.key}`}
                     >
                       <div>
-                        {maxLengthItem && node?.title?.length > maxLengthItem ? (
+                        {maxLengthItem &&
+                        node?.title?.length > maxLengthItem ? (
                           <Tooltip title={node?.title}>
                             {CommonService.limitWord(
                               node?.title,

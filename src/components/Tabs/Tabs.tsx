@@ -1,33 +1,37 @@
 import { Tabs as TabsAntd } from "antd";
-import type { TabsType } from "antd/lib/tabs";
+import type { TabsProps as TabsPropsAnt, TabsType } from "antd/lib/tabs";
 import classNames from "classnames";
+import React from "react";
+import { ReactNode } from "react";
 import "./Tabs.scss";
 
-const { TabPane } = TabsAntd;
+export interface Errors {
+  key: string;
+}
 
-export interface TabsProps {
+export interface TabsProps extends TabsPropsAnt{
   mode?: TabsType;
+  children?: ReactNode;
+  errors?: Errors[];
 }
 
 function Tabs(props: TabsProps) {
-  const { mode } = props;
-
-  const onChange = (key: any) => {
-    console.log(key);
-  };
+  const { mode, children, errors } = props;
+  React.useEffect(()=>{
+    if(errors && errors?.length > 0) {
+      errors.forEach(error => {
+        setTimeout(()=>{
+          const les = document.querySelector(`[id*="${error?.key}"]`).id;
+          document.getElementById(`${les}`).style.color = "#da1e28";
+         },1000);
+      });
+    }
+  },[errors])
   return (
     <>
       <div className={classNames("tabs__container")}>
-        <TabsAntd onChange={onChange} type={mode}>
-          <TabPane tab="Tab 1" key="1">
-            Content of Tab Pane 1
-          </TabPane>
-          <TabPane tab="Tab 2" key="2">
-            Content of Tab Pane 2
-          </TabPane>
-          <TabPane tab="Tab 3" key="3" className="ant-tabs-tab__child">
-            Content of Tab Pane 3
-          </TabPane>
+        <TabsAntd {...props} type={mode} >
+         {children}
         </TabsAntd>
       </div>
     </>
@@ -35,7 +39,7 @@ function Tabs(props: TabsProps) {
 }
 
 Tabs.defaultProps = {
-  placeRight: false,
+  mode: 'line',
 };
 
 export default Tabs;

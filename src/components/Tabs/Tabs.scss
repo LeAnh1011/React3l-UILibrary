@@ -1,5 +1,8 @@
 /* Style for Tabs.tsx */
 .tabs__container {
+  .tabs__error {
+      color: var(--color-critical) !important ;
+  }
   .ant-tabs {
     .ant-tabs-tab {
       padding: 0;

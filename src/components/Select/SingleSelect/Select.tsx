@@ -16,7 +16,7 @@ import IconLoading from "components/IconLoading/IconLoading";
 export interface SelectProps<
   T extends Model,
   TModelFilter extends ModelFilter
-  > {
+> {
   value?: Model;
 
   valueFilter?: TModelFilter;
@@ -129,8 +129,8 @@ function Select(props: SelectProps<Model, ModelFilter>) {
       setLoading(true);
       subscription.add(getList);
       const filter = valueFilter ? valueFilter : new ClassFilter();
-      handleGetList(filter)
-    } catch (error) { }
+      handleGetList(filter);
+    } catch (error) {}
   }, [subscription, getList, valueFilter, ClassFilter, handleGetList]);
 
   const { run } = useDebounceFn(
@@ -157,7 +157,6 @@ function Select(props: SelectProps<Model, ModelFilter>) {
   const handleToggle = React.useCallback(
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (!disabled) {
-        console.log(selectListRef);
         setExpand(true);
         if (isEnumerable) {
           if (list.length === 0) {

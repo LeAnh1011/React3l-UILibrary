@@ -12,9 +12,8 @@ export interface TabsProps {
 function Tabs(props: TabsProps) {
   const { mode } = props;
 
-  const onChange = (key: any) => {
-    console.log(key);
-  };
+  const onChange = (key: any) => {};
+
   return (
     <>
       <div className={classNames("tabs__container")}>

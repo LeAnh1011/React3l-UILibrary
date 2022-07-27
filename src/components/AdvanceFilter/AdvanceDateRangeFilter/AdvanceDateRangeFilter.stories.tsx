@@ -53,7 +53,7 @@ export function AdvanceDateRangeFilterStories() {
             disabled={isDisabled}
             action={{
               name: "Help",
-              action: () => console.log("Help incoming..."),
+              action: () => {},
             }}
           />
         </FormItem>

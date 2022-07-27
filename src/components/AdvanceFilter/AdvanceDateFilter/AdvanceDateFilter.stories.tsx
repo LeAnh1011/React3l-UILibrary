@@ -39,7 +39,7 @@ export function AdvanceDateFilterStories() {
         disabled={isDisabled}
         action={{
           name: "Help",
-          action: () => console.log("Help incoming..."),
+          action: () => {},
         }}
         value={value}
       />

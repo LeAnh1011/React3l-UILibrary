@@ -64,7 +64,7 @@ export function AdvanceStringFilterStories() {
             disabled={isDisabled}
             action={{
               name: "Help",
-              action: () => console.log("Help incoming..."),
+              action: () => {},
             }}
           />
         </FormItem>

@@ -192,27 +192,15 @@ function Default() {
   React.useEffect(() => {
     let test = document.getElementsByClassName("ant-table-cell")[0];
     if (test) {
-      test.addEventListener(
-        "mouseover",
-        function (event) {
-          console.log(event);
-        },
-        false
-      );
+      test.addEventListener("mouseover", function (event) {}, false);
     }
   }, []);
 
-  const handleAdd = React.useCallback(() => {
-    console.log("handleAdd");
-  }, []);
+  const handleAdd = React.useCallback(() => {}, []);
 
-  const handleEdit = React.useCallback(() => {
-    console.log("handleEdit");
-  }, []);
+  const handleEdit = React.useCallback(() => {}, []);
 
-  const handleDelete = React.useCallback(() => {
-    console.log("handleDelete");
-  }, []);
+  const handleDelete = React.useCallback(() => {}, []);
 
   const list: any = React.useMemo(() => {
     return [
@@ -624,13 +612,13 @@ function Default() {
     <div>
       <Tabs defaultActiveKey="1">
         <TabPane tab="Table not have TwoLineText" key="1">
-        <InputSearch
-          value={'hello'}
-          searchProperty={"name"}
-          classFilter={DemoFilter}
-          placeHolder="Search..."
-          animationInput={false}
-        />
+          <InputSearch
+            value={"hello"}
+            searchProperty={"name"}
+            classFilter={DemoFilter}
+            placeHolder="Search..."
+            animationInput={false}
+          />
           <ActionBarComponent
             selectedRowKeys={selectedRowKeys}
             setSelectedRowKeys={setSelectedRowKeys}

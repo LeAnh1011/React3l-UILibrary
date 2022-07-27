@@ -20,7 +20,6 @@ export function AdvanceInputRangeFilterStories() {
   }, []);
 
   const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
-    console.log(event.target.value)
     setIsSmall(event.target.value);
   }, []);
 

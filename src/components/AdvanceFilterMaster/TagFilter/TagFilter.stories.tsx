@@ -1,5 +1,6 @@
 import { Moment } from "moment";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   DateFilter,
   IdFilter,
@@ -12,6 +13,7 @@ import AdvanceDateRangFilterMaster from "../AdvanceDateRangFilterMaster/AdvanceD
 import AdvanceIdFilterMaster from "../AdvanceIdFilterMaster/AdvanceIdFilterMaster";
 import AdvanceMultipleIdFilterMaster from "../AdvanceMultipleIdFilterMaster/AdvanceMultipleIdFilterMaster";
 import TagFilter from "./TagFilter";
+import { CommonService } from "services/common-service";
 
 export class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
@@ -42,10 +44,10 @@ const orgObservable = new Observable<Model[]>((observer) => {
 const appUserObservable = new Observable<Model[]>((observer) => {
   setTimeout(() => {
     observer.next([
-      { id: 4, name: "Lê Đại M", code: "FAD" },
-      { id: 0, name: "Nguyễn Văn A", code: "FIM" },
-      { id: 2, name: "Bùi Văn V", code: "FHR" },
-      { id: 3, name: "Phạm Thị H", code: "FAF" },
+      { id: 4, displayName: "Lê Đại M", code: "FAD" },
+      { id: 0, displayName: "Nguyễn Văn A", code: "FIM" },
+      { id: 2, displayName: "Bùi Văn V", code: "FHR" },
+      { id: 3, displayName: "Phạm Thị H", code: "FAF" },
     ]);
   }, 1000);
 });
@@ -63,6 +65,8 @@ export function TagFilterStories() {
     const filterValue = new DemoFilter();
     return filterValue;
   }, []);
+
+  const [translate] = useTranslation();
 
   const [filter, setFilter] = React.useState<DemoFilter>(filterValue);
   const [item, setItem] = React.useState<any>(null);
@@ -122,6 +126,7 @@ export function TagFilterStories() {
           onChange={handleChangeOrganization}
           getList={appUserSearchFunc}
           title={"Người vận chuyển"}
+          render={(t) => CommonService.limitWord(t?.displayName, 25)}
         />
 
         <AdvanceMultipleIdFilterMaster
@@ -139,11 +144,12 @@ export function TagFilterStories() {
           onChange={handleChange}
           activeItem={item}
           value={value}
+          translate={translate}
         />
       </div>
       <TagFilter
         value={filter}
-        mappingField={{appUserId: 'code'}}
+        mappingField={{appUserId: 'displayName'}}
         keyTranslate={"demo"}
         onClear={handleClear}
         handleChangeFilter={handleChangeAllFilter}

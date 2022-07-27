@@ -1,6 +1,6 @@
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
-import Checkmark16  from "@carbon/icons-react/es/checkmark/16";
-import Search16  from "@carbon/icons-react/es/search/16";
+import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
+import Search16 from "@carbon/icons-react/es/search/16";
 import { useDebounceFn } from "ahooks";
 import { Empty, Tooltip } from "antd";
 import classNames from "classnames";
@@ -82,7 +82,7 @@ function AdvanceIdFilterMaster(
     className,
     preferOptions,
     maxLength,
-    maxLengthItem = 30
+    maxLengthItem = 30,
   } = props;
 
   const [internalValue, setInternalValue] = React.useState<Model>();
@@ -276,7 +276,12 @@ function AdvanceIdFilterMaster(
           )}
           onClick={handleToggle}
         >
-          <div className={classNames({ "filter-active": typeof value === 'number' || typeof value === 'string' })}>
+          <div
+            className={classNames({
+              "filter-active":
+                typeof value === "number" || typeof value === "string",
+            })}
+          >
             <div className="advance-id-filter-master__title">
               <span className="filter-title"> {title}</span>
               <ChevronDown16 />
@@ -308,12 +313,12 @@ function AdvanceIdFilterMaster(
                       onKeyDown={handleMove(item)}
                       onClick={handleClickItem(item)}
                     >
-                      {maxLengthItem && item?.name?.length > maxLengthItem ? (
-                        <Tooltip title={item?.name}>
-                          {CommonService.limitWord(item?.name, maxLengthItem)}
+                      {maxLengthItem && render(item)?.length > maxLengthItem ? (
+                        <Tooltip title={render(item)}>
+                          {CommonService.limitWord(render(item), maxLengthItem)}
                         </Tooltip>
                       ) : (
-                        item?.name
+                        render(item)
                       )}
                       {item.id === internalValue?.id && <Checkmark16 />}
                     </div>
@@ -341,7 +346,17 @@ function AdvanceIdFilterMaster(
                       onClick={handleClickItem(item)}
                     >
                       <span className="advance-id-master__text">
-                        {render(item)}
+                        {maxLengthItem &&
+                        render(item)?.length > maxLengthItem ? (
+                          <Tooltip title={render(item)}>
+                            {CommonService.limitWord(
+                              render(item),
+                              maxLengthItem
+                            )}
+                          </Tooltip>
+                        ) : (
+                          render(item)
+                        )}
                       </span>
                       {item.id === internalValue?.id && <Checkmark16 />}
                     </div>

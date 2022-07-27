@@ -62,10 +62,6 @@ function Default() {
     [model]
   );
 
-  // React.useEffect(() => {
-  //   console.log("list: ", model);
-  // }, [model]);
-
   const demoObservable = new Observable<FileModel[]>((observer) => {
     setTimeout(() => {
       observer.next(demoList);

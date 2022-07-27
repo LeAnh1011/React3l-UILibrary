@@ -14,23 +14,27 @@ export function InputRangeStories() {
   const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
   const [isSmall, setIsSmall] = React.useState(false);
 
-
   const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
     setType(event.target.value);
   }, []);
 
   const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
-    console.log(event.target.value)
     setIsSmall(event.target.value);
   }, []);
 
   const [filter, dispatch] = React.useState<DemoFilter>(new DemoFilter());
   const [numberRange, setNumberRange] = React.useState<[]>([]);
 
-  const handleChangeFilter = React.useCallback((value) => {
-    setNumberRange({ ...value });
-    dispatch({...filter, number: {lessEqual: value[0], greaterEqual: value[1]}})
-  }, [filter]);
+  const handleChangeFilter = React.useCallback(
+    (value) => {
+      setNumberRange({ ...value });
+      dispatch({
+        ...filter,
+        number: { lessEqual: value[0], greaterEqual: value[1] },
+      });
+    },
+    [filter]
+  );
 
   return (
     <div style={{ width: "250px", margin: "10px" }}>

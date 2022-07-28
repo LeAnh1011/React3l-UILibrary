@@ -38,7 +38,7 @@ const menu = [
 ];
 
 function Default() {
-  const [avatar, setAvatar] = React.useState<File>();
+  const [avatar, setAvatar] = React.useState<string>();
   const [listImage, setlistImage] = React.useState<File[]>([]);
 
   const demoObservableAvatar = new Observable<FileModel>((observer) => {
@@ -61,7 +61,8 @@ function Default() {
   };
 
   const handleChangeAvatar = React.useCallback((value) => {
-    setAvatar(value);
+    console.log(value)
+    setAvatar(value?.url);
   }, []);
   const handleChangeListImage = React.useCallback(
     (values) => {

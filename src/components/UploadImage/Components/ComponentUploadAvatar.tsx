@@ -134,7 +134,7 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
     return (
       <div>
         <img
-          src={currentAvatar?.url}
+          src={currentAvatar}
           className={classNames(className, "image-in-content")}
           alt="avatar"
         />

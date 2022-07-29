@@ -1,8 +1,7 @@
 import { Tabs as TabsAntd } from "antd";
 import type { TabsProps as TabsPropsAnt, TabsType } from "antd/lib/tabs";
 import classNames from "classnames";
-import React from "react";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import "./Tabs.scss";
 
 export interface Errors {

@@ -61,7 +61,6 @@ function Default() {
   };
 
   const handleChangeAvatar = React.useCallback((value) => {
-    console.log(value)
     setAvatar(value?.url);
   }, []);
   const handleChangeListImage = React.useCallback(

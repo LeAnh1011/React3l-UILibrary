@@ -384,12 +384,16 @@ function AdvanceMultipleIdFilterMaster(
                         checked={item.isSelected}
                         onChange={handleClickItem(item)}
                       >
-                        {maxLengthItem && item?.name?.length > maxLengthItem ? (
-                          <Tooltip title={item?.name}>
-                            {CommonService.limitWord(item?.name, maxLengthItem)}
+                        {maxLengthItem &&
+                        render(item)?.length > maxLengthItem ? (
+                          <Tooltip title={render(item)}>
+                            {CommonService.limitWord(
+                              render(item),
+                              maxLengthItem
+                            )}
                           </Tooltip>
                         ) : (
-                          item?.name
+                          render(item)
                         )}
                       </Checkbox>
                     </div>
@@ -421,7 +425,17 @@ function AdvanceMultipleIdFilterMaster(
                         checked={item.isSelected}
                       >
                         <span className="advance-id-master__text">
-                          {render(item)}
+                          {maxLengthItem &&
+                          render(item)?.length > maxLengthItem ? (
+                            <Tooltip title={render(item)}>
+                              {CommonService.limitWord(
+                                render(item),
+                                maxLengthItem
+                              )}
+                            </Tooltip>
+                          ) : (
+                            render(item)
+                          )}
                         </span>
                       </Checkbox>
                     </div>

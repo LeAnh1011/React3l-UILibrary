@@ -36,7 +36,7 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   searchType?: string;
   getTreeData?: (TModelFilter?: TModelFilter) => Observable<T[]>;
   onChange?: (treeNode: CustomTreeNode<T>[]) => void;
-  titleRender?: (treeNode: CustomTreeNode<T>) => string | ReactNode;
+  render?: (treeNode: T) => string;
   classFilter?: new () => TModelFilter;
   isMultiple?: boolean;
   selectWithAdd?: boolean;
@@ -63,6 +63,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     selectWithAdd,
     preferOptions,
     maxLengthItem = 30,
+    render,
   } = props;
 
   const [internalTreeData, setInternalTreeData] = React.useState<
@@ -386,16 +387,34 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                       className={`tree-node-${node.key}`}
                     >
                       <div>
-                        {maxLengthItem &&
-                        node?.title?.length > maxLengthItem ? (
-                          <Tooltip title={node?.title}>
-                            {CommonService.limitWord(
-                              node?.title,
-                              maxLengthItem
+                        {render && typeof render === "function" ? (
+                          <>
+                            {maxLengthItem &&
+                            render(node?.item)?.length > maxLengthItem ? (
+                              <Tooltip title={render(node?.item)}>
+                                {CommonService.limitWord(
+                                  render(node?.item),
+                                  maxLengthItem
+                                )}
+                              </Tooltip>
+                            ) : (
+                              render(node?.item)
                             )}
-                          </Tooltip>
+                          </>
                         ) : (
-                          node?.title
+                          <>
+                            {maxLengthItem &&
+                            node?.title?.length > maxLengthItem ? (
+                              <Tooltip title={node?.title}>
+                                {CommonService.limitWord(
+                                  node?.title,
+                                  maxLengthItem
+                                )}
+                              </Tooltip>
+                            ) : (
+                              node?.title
+                            )}
+                          </>
                         )}
                       </div>
                       {!checkable &&

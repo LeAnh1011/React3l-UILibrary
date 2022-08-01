@@ -384,15 +384,15 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
                                   onChange={handleClickMultiItem(item)}
                                 >
                                   {maxLengthItem &&
-                                  item?.name?.length > maxLengthItem ? (
-                                    <Tooltip title={item?.name}>
+                                  render(item)?.length > maxLengthItem ? (
+                                    <Tooltip title={render(item)}>
                                       {CommonService.limitWord(
-                                        item?.name,
+                                        render(item),
                                         maxLengthItem
                                       )}
                                     </Tooltip>
                                   ) : (
-                                    item?.name
+                                    render(item)
                                   )}
                                 </Checkbox>
                               </div>
@@ -433,7 +433,17 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
                                 onClick={handleClickItem(item)}
                               >
                                 <span className="advance-enum-master__text">
-                                  {render(item)}
+                                {maxLengthItem &&
+                                  render(item)?.length > maxLengthItem ? (
+                                    <Tooltip title={render(item)}>
+                                      {CommonService.limitWord(
+                                        render(item),
+                                        maxLengthItem
+                                      )}
+                                    </Tooltip>
+                                  ) : (
+                                    render(item)
+                                  )}
                                 </span>
                                 {item.id === internalValue?.id && (
                                   <div style={{ height: "16px" }}>

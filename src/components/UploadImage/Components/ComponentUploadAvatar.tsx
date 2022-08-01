@@ -134,7 +134,7 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
     return (
       <div>
         <img
-          src={currentAvatar?.url}
+          src={currentAvatar}
           className={classNames(className, "image-in-content")}
           alt="avatar"
         />
@@ -169,13 +169,14 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
           />
         </div>
       </div>
-      {image && (
+      {image && isPreview && (
         <CroppedModal
           visible={isPreview}
           handleCancel={handleClosePreview}
           handleSave={handleSaveCropped}
           listImage={[image]}
           isMultiple={false}
+          defaultAspect={1 / 1}
         />
       )}
     </>

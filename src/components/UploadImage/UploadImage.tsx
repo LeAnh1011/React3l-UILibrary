@@ -52,7 +52,7 @@ export interface UploadImageProps<
   getListFile?: (TModelFilter?: TModelFilter) => Observable<T[]>;
   uploadFile?: (files: File[] | Blob[]) => Observable<FileModel[]>;
   icon?: ReactNode;
-  currentAvatar?: File;
+  currentAvatar?: string;
   uploadAvatar?: (file: File | Blob) => Observable<FileModel>;
   updateAvatar?: (files: FileModel) => void;
   removeFile?: (fileId?: string | number) => Observable<boolean>;

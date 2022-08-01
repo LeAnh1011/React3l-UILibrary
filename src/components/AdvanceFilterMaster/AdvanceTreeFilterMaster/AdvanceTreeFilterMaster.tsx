@@ -34,7 +34,7 @@ export interface AdvanceTreeFilterMasterProps<
   getTreeData?: (TModelFilter?: TModelFilter) => Observable<T[]>;
   onChange?: (T: Model[], TT: boolean) => void;
   classFilter?: new () => TModelFilter;
-  treeTitleRender?: (T: T) => string;
+  render?: (T: T) => string;
   selectWithPreferOption?: boolean;
   preferOptions?: T[];
   maxLength?: number;
@@ -73,7 +73,7 @@ function AdvanceTreeFilterMaster(
     onlySelectLeaf,
     getTreeData,
     onChange,
-    treeTitleRender,
+    render,
     selectWithPreferOption,
     preferOptions,
     title,
@@ -228,7 +228,7 @@ function AdvanceTreeFilterMaster(
                 onChange={handleOnchange}
                 selectable={selectable}
                 checkable={checkable}
-                titleRender={treeTitleRender}
+                render={render}
                 selectWithAdd={false}
                 selectWithPreferOption={selectWithPreferOption}
                 preferOptions={preferOptions}

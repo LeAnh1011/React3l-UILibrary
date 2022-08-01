@@ -110,6 +110,7 @@ export function AdvanceTreeFilterMasterStories() {
           selectWithPreferOption={isSelectWithPreferOption}
           preferOptions={isSelectWithPreferOption ? list : undefined}
           maxLengthItem={10}
+          render={(t)=> t?.code}
         />
       </div>
 

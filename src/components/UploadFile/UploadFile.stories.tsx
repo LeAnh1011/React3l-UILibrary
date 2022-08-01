@@ -7,14 +7,14 @@ import UploadFile, { FileModel } from "./UploadFile";
 
 const demoList = [
   {
-    path:
-      "https://media.discordapp.net/attachments/663753852184428596/847406738138595348/7ab2cd69-80fe-4106-ba8d-218d78b131d4.png",
+    url:
+      "https://cdn.searchenginejournal.com/wp-content/uploads/2022/04/reverse-image-search-627b7e49986b0-sej-760x400.png",
     isDelete: true,
     name: "demoImage1.png",
     id: 1,
   },
   {
-    path:
+    url:
       "https://media.discordapp.net/attachments/663753852184428596/847406738138595348/7ab2cd69-80fe-4106-ba8d-218d78b131d4.png",
     isDelete: true,
     name: "demoImage2.png",
@@ -24,7 +24,7 @@ const demoList = [
     },
   },
   {
-    path:
+    url:
       "https://media.discordapp.net/attachments/663753852184428596/847406738138595348/7ab2cd69-80fe-4106-ba8d-218d78b131d4.png",
     isDelete: true,
     name: "demoImage3.png",

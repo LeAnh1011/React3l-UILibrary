@@ -115,7 +115,9 @@ export function UploadFile(props: UploadFileProps) {
         <div className="file-error" key={index}>
           <div className="file-container">
             <div className="w-file-name">
-              <span>{file.name}</span>
+              <a href={file?.url} download>
+                {file?.name}
+              </a>
             </div>
             <div>
               <WarningFilled16 color="red" className="m-r--xxxs" />
@@ -138,7 +140,9 @@ export function UploadFile(props: UploadFileProps) {
       ) : (
         <div className="file-container" key={index}>
           <div className="w-file-name">
-            <span>{file.name}</span>
+            <a href={file?.url} download>
+              {file?.name}
+            </a>
           </div>
           <div>
             <Popconfirm
@@ -164,7 +168,9 @@ export function UploadFile(props: UploadFileProps) {
         <div className="file-error" key={index}>
           <div className="file-container">
             <div>
-              <span>{file.name}</span>
+              <a href={file?.url} download>
+                {file?.name}
+              </a>
             </div>
             <div>
               <WarningFilled16 color="red" className="m-r--xxxs" />
@@ -180,7 +186,9 @@ export function UploadFile(props: UploadFileProps) {
         </div>
       ) : (
         <div className="file-container" key={index}>
-          <span>{file.name}</span>
+          <a href={file?.url} download>
+            {file?.name}
+          </a>
           <CheckmarkFilled16 color="#0F62FE" />
         </div>
       );
@@ -221,7 +229,9 @@ export function UploadFile(props: UploadFileProps) {
           listFileLoading.map((file, index) =>
             isLoading ? (
               <div className="file-container" key={index}>
-                <span>{file.name}</span>
+                <a href={file?.url} download>
+                  {file?.name}
+                </a>
                 <IconLoading color="#0F62FE" />
               </div>
             ) : (

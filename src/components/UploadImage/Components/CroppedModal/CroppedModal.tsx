@@ -91,6 +91,7 @@ function resultReducer(
 export interface CroppedModalProps extends ModalCustomProps {
   listImage: ImageFile[];
   isMultiple: boolean;
+  defaultAspect?: any;
 }
 
 function useStateCallback(initialState: any) {
@@ -113,7 +114,7 @@ function useStateCallback(initialState: any) {
 }
 
 export default function CroppedModal(props: CroppedModalProps) {
-  const { isMultiple, listImage, visible, handleCancel, handleSave } = props;
+  const { isMultiple, listImage, visible, handleCancel, handleSave, defaultAspect } = props;
 
   const [images, dispatchImages] = React.useReducer<
     Reducer<ImageFile[], ImageAction>
@@ -556,7 +557,7 @@ export default function CroppedModal(props: CroppedModalProps) {
                 <div className="cropped-modal__navi">
                   <div className="cropped-modal__ratio">
                     <Select
-                      defaultValue={0}
+                      defaultValue={defaultAspect ? defaultAspect : 0 }
                       style={{ width: 104, height: 32 }}
                       onChange={handleChangeAspect}
                     >

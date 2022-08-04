@@ -193,7 +193,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       info?: {
         event: "select";
         selected: boolean;
-        node: EventDataNode | any;
+        node: EventDataNode<any> | any;
         selectedNodes: DataNode[] | any;
         nativeEvent: MouseEvent;
       }

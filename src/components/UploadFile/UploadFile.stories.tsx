@@ -7,14 +7,14 @@ import UploadFile, { FileModel } from "./UploadFile";
 
 const demoList = [
   {
-    url:
+    path:
       "https://cdn.searchenginejournal.com/wp-content/uploads/2022/04/reverse-image-search-627b7e49986b0-sej-760x400.png",
     isDelete: true,
     name: "demoImage1.png",
     id: 1,
   },
   {
-    url:
+    path:
       "https://media.discordapp.net/attachments/663753852184428596/847406738138595348/7ab2cd69-80fe-4106-ba8d-218d78b131d4.png",
     isDelete: true,
     name: "demoImage2.png",
@@ -24,7 +24,7 @@ const demoList = [
     },
   },
   {
-    url:
+    path:
       "https://media.discordapp.net/attachments/663753852184428596/847406738138595348/7ab2cd69-80fe-4106-ba8d-218d78b131d4.png",
     isDelete: true,
     name: "demoImage3.png",
@@ -38,7 +38,17 @@ class ModelOBJ extends Model {
   public files?: FileModel[];
 }
 
-function Default() {
+export default {
+  /* 👇 The title prop is optional.
+  * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
+  * to learn how to generate automatic titles
+  */
+  title: 'UploadFile',
+  component: UploadFile,
+  
+};
+
+export const Default = () => {
   const [model, setModel] = React.useState<ModelOBJ>({ ...new ModelOBJ() });
 
   const handleUpdateList = React.useCallback(
@@ -81,7 +91,8 @@ function Default() {
       isMultiple={false}
       type="link"
     ></UploadFile>
+    
   );
 }
 
-storiesOf("UploadFile", module).add(nameof(Default), Default);
+

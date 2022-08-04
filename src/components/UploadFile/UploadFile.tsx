@@ -27,16 +27,25 @@ export interface FileModel {
   handleInput?: (e: any) => void;
 }
 export interface UploadFileProps {
+  /** List file in model */
   files?: FileModel[];
+  /** Type upload*/
   isMultiple?: boolean;
+  /**Label upload*/
   uploadContent?: string;
+  /**func handleUpdateList*/
   updateList?: (files: FileModel[]) => void;
+  /**file repository*/
   uploadFile?: (files: File[] | Blob[]) => Observable<FileModel[]>;
+  /**func handleRemoveFile*/
   removeFile?: (fileId: string | number) => void;
+  /**Type button outline*/
   isBtnOutLine?: boolean;
   maximumSize?: number;
+  /**Type button*/
   type?: "link" | "button";
 }
+/**Component upload file*/
 export function UploadFile(props: UploadFileProps) {
   const {
     files: oldFiles,

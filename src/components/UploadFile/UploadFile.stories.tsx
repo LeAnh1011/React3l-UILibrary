@@ -48,7 +48,7 @@ export default {
   
 };
 
-export const Default = () => {
+const Template: Story<Props> = (args) => {
   const [model, setModel] = React.useState<ModelOBJ>({ ...new ModelOBJ() });
 
   const handleUpdateList = React.useCallback(
@@ -84,15 +84,14 @@ export const Default = () => {
 
   return (
     <UploadFile
+    {...args}
       files={model?.files || []}
       uploadFile={demoUploadFile}
       updateList={handleUpdateList}
       removeFile={handleRemoveFile}
-      isMultiple={false}
-      type="link"
     ></UploadFile>
     
   );
 }
 
-
+export const Default = Template.bind({});

@@ -4,7 +4,7 @@ import Upload16 from "@carbon/icons-react/es/upload/16";
 import WarningFilled16 from "@carbon/icons-react/es/warning--filled/16";
 import { notification, Popconfirm } from "antd";
 import Button from "components/Button";
-import React, { RefObject } from "react";
+import React, { ReactNode, RefObject } from "react";
 import type { Observable } from "rxjs";
 import "./UploadFile.scss";
 import IconLoading from "components/IconLoading";
@@ -44,6 +44,8 @@ export interface UploadFileProps {
   maximumSize?: number;
   /**Type button*/
   type?: "link" | "button";
+  /**Type button*/
+  icon?: ReactNode;
 }
 /**Component upload file*/
 export function UploadFile(props: UploadFileProps) {
@@ -56,7 +58,8 @@ export function UploadFile(props: UploadFileProps) {
     removeFile,
     isBtnOutLine,
     maximumSize,
-    type = "button",
+    type,
+    icon,
   } = props;
   const [listFileLoading, setListFileLoading] = React.useState<FileModel[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -210,7 +213,7 @@ export function UploadFile(props: UploadFileProps) {
       <div>
         {type === "link" ? (
           <div className="upload-link" onClick={handleClickButton}>
-            <Upload16 />
+            {icon ? icon : <Upload16 />}
             <span className="upload-content m-l--xxs">{uploadContent}</span>
           </div>
         ) : (
@@ -259,5 +262,6 @@ UploadFile.defaultProps = {
   files: [],
   isBtnOutLine: false,
   maximumSize: 5000000,
+  type: "button"
 };
 export default UploadFile;

@@ -19,7 +19,7 @@ export interface AdvanceIdFilterMasterProps<
 > {
   value?: number | string;
 
-  title: string;
+  label: string;
 
   valueFilter?: TModelFilter;
 
@@ -65,7 +65,7 @@ function AdvanceIdFilterMaster(
 ) {
   const {
     valueFilter,
-    title,
+    label,
     value,
     searchProperty,
     searchType,
@@ -283,7 +283,7 @@ function AdvanceIdFilterMaster(
             })}
           >
             <div className="advance-id-filter-master__title">
-              <span className="filter-title"> {title}</span>
+              <span className="filter-title"> {label}</span>
               <ChevronDown16 />
             </div>
           </div>

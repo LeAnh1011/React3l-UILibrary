@@ -183,7 +183,7 @@ function InputNumber(props: InputNumberProps) {
             return [number, isOutOfRange];
         }
       } else {
-        return [null, false];
+        return [undefined, false];
       }
     },
     [numberType, isReverseSymb, min, max]
@@ -197,7 +197,7 @@ function InputNumber(props: InputNumberProps) {
       if (!isOutOfRange) {
         if (typeof onChange === "function") {
           const isSpecialLetter = /[-,.]/g.test(Array.from(stringValue)[0]);
-          if (typeof numberValue === "number" && !isSpecialLetter) {
+          if (!isSpecialLetter) {
             onChange(numberValue);
           }
         }

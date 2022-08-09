@@ -18,7 +18,7 @@ export interface AdvanceMultipleIdFilterMasterProps<
 > {
   values?: any[];
 
-  title: string;
+  label: string;
 
   valueFilter?: TModelFilter;
 
@@ -83,7 +83,7 @@ function AdvanceMultipleIdFilterMaster(
 ) {
   const {
     valueFilter,
-    title,
+    label,
     values,
     searchProperty,
     searchType,
@@ -345,7 +345,7 @@ function AdvanceMultipleIdFilterMaster(
               {values?.length > 0 && <>({values?.length})</>}
             </span>
             <div className="advance-id-filter-master__title">
-              <span className="filter-title"> {title}</span>
+              <span className="filter-title"> {label}</span>
               <ChevronDown16 />
             </div>
           </label>

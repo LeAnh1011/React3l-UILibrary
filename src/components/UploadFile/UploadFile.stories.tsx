@@ -1,8 +1,8 @@
-import { storiesOf } from "@storybook/react";
+import { User20 } from "@carbon/icons-react";
+import { Story } from "@storybook/react";
 import React from "react";
 import { Model } from "react3l-common";
 import { Observable } from "rxjs";
-import nameof from "ts-nameof.macro";
 import UploadFile, { FileModel } from "./UploadFile";
 
 const demoList = [
@@ -45,10 +45,13 @@ export default {
   */
   title: 'UploadFile',
   component: UploadFile,
+  parameters: {
+    controls: { expanded: true },
+  }
   
 };
 
-const Template: Story<Props> = (args) => {
+const Template: Story = (args) => {
   const [model, setModel] = React.useState<ModelOBJ>({ ...new ModelOBJ() });
 
   const handleUpdateList = React.useCallback(
@@ -89,9 +92,14 @@ const Template: Story<Props> = (args) => {
       uploadFile={demoUploadFile}
       updateList={handleUpdateList}
       removeFile={handleRemoveFile}
+      icon={<User20/>}
     ></UploadFile>
     
   );
 }
 
 export const Default = Template.bind({});
+
+Default.agrs = {
+  type: "button"
+}

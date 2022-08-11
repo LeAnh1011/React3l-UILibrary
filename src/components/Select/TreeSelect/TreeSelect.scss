@@ -1,0 +1,31 @@
+/* Style for TreeSelect.tsx */
+.tree-select__container {
+  width: 100%;
+
+  position: relative;
+
+  .ant-checkbox-checked {
+    .ant-checkbox-inner {
+      background-color: var(--color-text);
+      border-color: var(--color-text);
+    }
+  }
+
+  .ant-checkbox:hover,
+  .ant-checkbox-checked:hover {
+    .ant-checkbox-inner {
+      border-color: var(--color-text);
+    }
+  }
+
+  .tree-select__input {
+    width: 100%;
+  }
+
+  .tree-select__list {
+    width: 100%;
+    margin-top: 5px;
+    position: absolute;
+    z-index: 999;
+  }
+}

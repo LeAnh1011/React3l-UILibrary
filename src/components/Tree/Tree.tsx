@@ -10,7 +10,7 @@ import type {
 } from "antd/lib/tree";
 import classNames from "classnames";
 import IconLoading from "components/IconLoading/IconLoading";
-import React, { ReactNode, RefObject } from "react";
+import React, { RefObject } from "react";
 import { Model, ModelFilter } from "react3l-common";
 import type { Observable } from "rxjs";
 import { CommonService } from "services/common-service";

@@ -496,11 +496,7 @@ function EnumSelect(props: SelectProps<Model>) {
                                 render(item)
                               )}
                             </span>
-                            {item.id === internalValue?.id && (
-                              <div style={{ height: "16px" }}>
-                                <Checkmark16 />
-                              </div>
-                            )}
+                            {item.id === internalValue?.id && <Checkmark16 />}
                           </div>
                         ))
                       ) : (

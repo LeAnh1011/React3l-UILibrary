@@ -127,13 +127,13 @@ function AdvanceDateRangeFilterMaster(
           ]; //lastmonth
 
         case 7:
-          const sdjustment = (moment().month() % 3) + 1;
-          const lastQuarterEndDate2 = moment()
-            .subtract({ months: sdjustment })
-            .endOf("month");
-
-          var quarterEndDate = moment().endOf("month");
-          var quarterStartDate = lastQuarterEndDate2.clone().startOf("month");
+          const quarterNumber = moment().quarter();
+          const quarterEndDate = moment()
+            .quarter(quarterNumber)
+            .endOf("quarter");
+          const quarterStartDate = moment()
+            .quarter(quarterNumber)
+            .startOf("quarter");
           return [quarterStartDate, quarterEndDate]; //thisquarter
 
         case 8:
@@ -155,13 +155,13 @@ function AdvanceDateRangeFilterMaster(
   const internalValue: [Moment, Moment] = React.useMemo(() => {
     return value && value.length > 0
       ? [
-        typeof value[0] === "string"
-          ? CommonService.toMomentDate(value[0])
-          : value[0],
-        typeof value[1] === "string"
-          ? CommonService.toMomentDate(value[1])
-          : value[1],
-      ]
+          typeof value[0] === "string"
+            ? CommonService.toMomentDate(value[0])
+            : value[0],
+          typeof value[1] === "string"
+            ? CommonService.toMomentDate(value[1])
+            : value[1],
+        ]
       : [null, null];
   }, [value]);
 
@@ -352,7 +352,11 @@ function AdvanceDateRangeFilterMaster(
             onClick={handleClickCustomDate}
           >
             <Calendar16 />
-            <span>{ translate? translate("general.filter.customDate") : "Custom Date"}</span>
+            <span>
+              {translate
+                ? translate("general.filter.customDate")
+                : "Custom Date"}
+            </span>
           </div>
           {isExpandDate && (
             <>

@@ -9,7 +9,6 @@ import { BORDER_TYPE } from "config/enum";
 
 export interface InputTagProps<T extends Model> {
   listValue?: T[];
-  title?: string;
   placeHolder?: string;
   disabled?: boolean;
   isMaterial?: boolean;
@@ -227,7 +226,7 @@ function defaultRenderObject<T extends Model>(t: T) {
 
 InputTag.defaultProps = {
   type: BORDER_TYPE.BORDERED,
-  title: null,
+  label: null,
   render: defaultRenderObject,
   isMaterial: false,
 };

@@ -69,6 +69,8 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
     null
   );
 
+  const cursorPosition = React.useRef({ selectionStart: 0, selectionEnd: 0 });
+
   const buildRegex = React.useCallback(() => {
     var regExDecimal = "";
     var regExString = "";
@@ -164,34 +166,49 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
         }
         switch (numberType) {
           case DECIMAL:
-            isOutOfRange = stringValue.length > 21 ? true : false;
             number = parseFloat(stringValue);
+            isOutOfRange =
+              (typeof max === "number" && number > max) ||
+              (typeof min === "number" && number < min)
+                ? true
+                : false;
             return [number, isOutOfRange];
           default:
-            isOutOfRange = stringValue.length > 17 ? true : false;
             number = parseInt(stringValue);
+            isOutOfRange =
+              (typeof max === "number" && number > max) ||
+              (typeof min === "number" && number < min)
+                ? true
+                : false;
             return [number, isOutOfRange];
         }
       } else {
-        return [null, false];
+        return [undefined, false];
       }
     },
-    [numberType, isReverseSymb]
+    [numberType, isReverseSymb, min, max]
   );
 
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { selectionEnd, selectionStart } = event.target;
       const stringValue = formatString(event.target.value);
       const [numberValue, isOutOfRange] = parseNumber(stringValue);
       if (!isOutOfRange) {
-        setInternalValue(stringValue);
         if (typeof onChange === "function") {
-          if (typeof numberValue === "number") {
+          const isSpecialLetter = /[-,.]/g.test(Array.from(stringValue)[0]);
+          if (!isSpecialLetter) {
             onChange(numberValue);
-          } else {
-            onChange(undefined);
           }
         }
+        setInternalValue(stringValue);
+      }
+      if (event.target.value.length < stringValue.length) {
+        cursorPosition.current.selectionStart = selectionStart + 1;
+        cursorPosition.current.selectionEnd = selectionEnd + 1;
+      } else {
+        cursorPosition.current.selectionStart = selectionStart;
+        cursorPosition.current.selectionEnd = selectionEnd;
       }
     },
     [formatString, parseNumber, onChange]

@@ -313,11 +313,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                         onClick={handleClickItem(item)}
                       >
                         <span className="select__text">{render(item)}</span>
-                        {item.id === internalValue?.id && (
-                          <div style={{ height: "16px" }}>
-                            <Checkmark16 />
-                          </div>
-                        )}
+                        {item.id === internalValue?.id && <Checkmark16 />}
                       </div>
                     ))
                   ) : (
@@ -348,11 +344,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                       onClick={handleClickItem(item)}
                     >
                       <span className="select__text">{render(item)}</span>
-                      {item.id === internalValue?.id && (
-                        <div style={{ height: "16px" }}>
-                          <Checkmark16 />
-                        </div>
-                      )}
+                      {item.id === internalValue?.id && <Checkmark16 />}
                     </div>
                   ))}
               </div>

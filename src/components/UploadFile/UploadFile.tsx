@@ -44,10 +44,7 @@ export interface UploadFileProps {
   maximumSize?: number;
   /**Type button*/
   type?: "link" | "button";
-<<<<<<< HEAD
   /**Type button*/
-=======
->>>>>>> ac5568325d073e91f17083aa06f9f0883de2065f
   icon?: ReactNode;
 }
 /**Component upload file*/
@@ -61,11 +58,7 @@ export function UploadFile(props: UploadFileProps) {
     removeFile,
     isBtnOutLine,
     maximumSize,
-<<<<<<< HEAD
     type,
-=======
-    type = "button",
->>>>>>> ac5568325d073e91f17083aa06f9f0883de2065f
     icon,
   } = props;
   const [listFileLoading, setListFileLoading] = React.useState<FileModel[]>([]);

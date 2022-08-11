@@ -2,7 +2,6 @@ import { Button, Input, Select, Slider, Modal } from "antd";
 import React, { Reducer } from "react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
-import { ImageFile } from "../ComponentUploadImage";
 import "./CroppedModal.scss";
 import classNames from "classnames";
 import { formatFileSize } from "helpers/file";
@@ -12,6 +11,7 @@ import CloudUpload24 from "@carbon/icons-react/es/cloud--upload/24";
 import Crop20 from "@carbon/icons-react/es/crop/20";
 import TrashCan32 from "@carbon/icons-react/es/trash-can/32";
 import Upload16 from "@carbon/icons-react/es/upload/16";
+import { ImageFile } from "../UploadAvatar/UploadAvatar";
 
 const { Option } = Select;
 
@@ -89,8 +89,8 @@ function resultReducer(
 }
 
 export interface CroppedModalProps extends ModalCustomProps {
-  listImage: ImageFile[];
-  isMultiple: boolean;
+  listImage?: ImageFile[];
+  isMultiple?: boolean;
   defaultAspect?: any;
 }
 

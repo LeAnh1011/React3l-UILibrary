@@ -1,14 +1,32 @@
-import { Model, ModelFilter } from "react3l-common";
-import React, { Reducer, RefObject } from "react";
-import { useDropzone } from "react-dropzone";
-import { UploadImageProps } from "../UploadImage";
-import CroppedModal, { ImageResult } from "./CroppedModal/CroppedModal";
-import "./ComponentUploadImage.scss";
-import { Menu } from "./ComponentMenuImage";
-import classNames from "classnames";
-import { notification } from "antd";
 import CloudUpload24 from "@carbon/icons-react/es/cloud--upload/24";
 import Edit24 from "@carbon/icons-react/es/edit/24";
+import { notification } from "antd";
+import classNames from "classnames";
+import React, { Reducer, RefObject } from "react";
+import { useDropzone } from "react-dropzone";
+import { Model, ModelFilter } from "react3l-common";
+import { Observable } from "rxjs";
+import CroppedModal, { ImageResult } from "../CroppedModal/CroppedModal";
+import { Menu } from "./MenuImage";
+import "./UploadImage.scss";
+
+export class FileModel extends Model {
+  public id?: number;
+
+  public name?: string;
+
+  public url?: string;
+
+  public appUserId?: number;
+
+  public extension?: string;
+
+  public size?: number;
+
+  public rowId?: string;
+
+  public error?: string;
+}
 
 export interface ImageFile {
   fileId: string | number;
@@ -54,10 +72,24 @@ const fileReducer = (
   }
 };
 
-export interface ComponentUploadImageProps
-  extends UploadImageProps<Model, ModelFilter> {}
 
-export function ComponentUploadImage(props: ComponentUploadImageProps) {
+export interface UploadImageProps<
+  T extends Model,
+  TModelFilter extends ModelFilter
+> {
+  isMultiple?: boolean;
+  isMinimized?: boolean;
+  files?: FileModel[];
+  updateList?: (files: FileModel[]) => void;
+  getListFile?: (TModelFilter?: TModelFilter) => Observable<T[]>;
+  uploadFile?: (files: File[] | Blob[]) => Observable<FileModel[]>;
+  removeFile?: (fileId?: string | number) => Observable<boolean>;
+  size?: "lg" | "md" | "sm" | "xs";
+  className?: string;
+  maximumSize?: number;
+}
+
+function UploadImage(props: UploadImageProps<Model, ModelFilter>) {
   const {
     size,
     isMultiple,
@@ -68,6 +100,7 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
     removeFile,
     updateList,
     maximumSize,
+    className,
   } = props;
 
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
@@ -205,7 +238,7 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
   return (
     <>
       <div
-        className={classNames(`upload-image__container upload-image--${size}`, {
+        className={classNames(className, `upload-image__container upload-image--${size}`, {
           multiple: isMultiple && !isMinimized,
           minimized: isMultiple && isMinimized,
         })}
@@ -286,3 +319,13 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
     </>
   );
 }
+
+export default UploadImage;
+
+
+UploadImage.defaultProps = {
+  isMultiple: true,
+  isMinimized: false,
+  size: "lg",
+  maximumSize: 5000000,
+};

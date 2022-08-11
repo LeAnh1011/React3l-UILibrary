@@ -1,9 +1,26 @@
 import React from "react";
-import { FileModel } from "../UploadImage";
 import Edit24 from "@carbon/icons-react/es/edit/24";
 import TrashCan24 from "@carbon/icons-react/es/trash-can/24";
 
-interface ImageItemProps extends FileModel {}
+export interface FileModel {
+  id?: number;
+  name?: string;
+  url?: string;
+  size?: number;
+  content?: string;
+  mimeType?: string;
+  isFile?: boolean;
+  key?: any;
+  path?: string;
+  level?: number;
+  isDelete?: boolean;
+  
+}
+
+interface ImageItemProps extends FileModel {
+  clearAction?: (fileId: string | number) => void;
+  handleInput?: (e: any) => void;
+}
 
 const ImageItem = (props: ImageItemProps) => {
   const { id, clearAction, handleInput } = props;

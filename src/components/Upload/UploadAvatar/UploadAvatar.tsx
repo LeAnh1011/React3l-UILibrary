@@ -1,12 +1,29 @@
-import { Model, ModelFilter } from "react3l-common";
+import CloudUpload24 from "@carbon/icons-react/es/cloud--upload/24";
 import { notification } from "antd";
 import classNames from "classnames";
-import React, { Reducer, RefObject } from "react";
+import React, { ReactNode, Reducer, RefObject } from "react";
 import { useDropzone } from "react-dropzone";
-import { UploadImageProps } from "../UploadImage";
-import CroppedModal, { ImageResult } from "./CroppedModal/CroppedModal";
-import "./ComponentUploadImage.scss";
-import CloudUpload24 from "@carbon/icons-react/es/cloud--upload/24";
+import { Model } from "react3l-common";
+import { Observable } from "rxjs";
+import CroppedModal, { ImageResult } from "../CroppedModal/CroppedModal";
+import "./UploadAvatar.scss";
+
+
+export class FileModel extends Model {
+  public id?: number;
+
+  public name?: string;
+
+  public url?: string;
+
+  public extension?: string;
+
+  public size?: number;
+
+  public rowId?: string;
+
+  public error?: string;
+}
 
 export interface ImageFile {
   fileId: string | number;
@@ -30,10 +47,16 @@ const imageReducer = (state: ImageFile, action: ImageAction): ImageFile => {
   }
 };
 
-export interface ComponentUploadAvatarProps
-  extends UploadImageProps<Model, ModelFilter> {}
+export interface UploadAvatarProps {
+  icon?: ReactNode;
+  currentAvatar?: string;
+  uploadAvatar?: (file: File | Blob) => Observable<FileModel>;
+  updateAvatar?: (files: FileModel) => void;
+  className?: string;
+  maximumSize?: number;
+  }
 
-export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
+ function UploadAvatar(props: UploadAvatarProps) {
   const {
     currentAvatar,
     uploadAvatar,
@@ -149,9 +172,9 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
 
   return (
     <>
-      <div className={classNames(`upload-image__container`)}>
+      <div className={classNames(`upload-avatar__container`)}>
         <div
-          className={classNames("upload-image__drop-zone", className)}
+          className={classNames("upload-avatar__drop-zone", className)}
           {...getRootProps()}
         >
           {!currentAvatar ? (
@@ -182,3 +205,9 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
     </>
   );
 }
+
+export default UploadAvatar;
+
+UploadAvatar.defaultProps = {
+  maximumSize: 5000000,
+};

@@ -1,0 +1,38 @@
+$size: 144px;
+$icon-size: 56px;
+$icon-padding: 10.89px;
+
+.upload-avatar__container {
+  display: flex;
+  height: inherit;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 7px;
+
+
+  .upload-avatar__drop-zone {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fafafc;
+    border-radius: 8px;
+    border: 1px dashed #052F5F;
+
+    &:hover {
+      background: #e2e2ea;
+    }
+
+    p {
+      color: #000000;
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 16px;
+      margin-bottom: 0;
+    }
+  }
+
+  
+}

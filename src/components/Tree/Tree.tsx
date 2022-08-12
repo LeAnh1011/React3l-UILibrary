@@ -25,9 +25,11 @@ function SwitcherIcon() {
   );
 }
 export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
+  /** Loại chú thích này dành cho các prop mình tự tạo ra */
   treeData?: CustomTreeNode<T>[];
   valueFilter?: TModelFilter;
   expandedKeys?: number[];
+  /** Đây là prop của Antd */
   checkedKeys?: number[];
   checkable?: boolean;
   selectedKey?: number;
@@ -38,7 +40,6 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   onChange?: (treeNode: CustomTreeNode<T>[]) => void;
   render?: (treeNode: T) => string;
   classFilter?: new () => TModelFilter;
-  isMultiple?: boolean;
   selectWithAdd?: boolean;
   selectWithPreferOption?: boolean;
   preferOptions?: T[];
@@ -55,8 +56,6 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     checkable,
     selectedKey,
     onlySelectLeaf,
-    // searchProperty,
-    // searchType,
     classFilter: ClassFilter,
     getTreeData,
     onChange,
@@ -69,10 +68,6 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const [internalTreeData, setInternalTreeData] = React.useState<
     CustomTreeNode<Model>[]
   >(treeData);
-
-  // const [staticTreeData, setStaticTreeData] = React.useState<
-  //   CustomTreeNode<Model>[]
-  // >();
 
   const [autoExpandParent, setAutoExpandParent] = React.useState<boolean>(true);
 

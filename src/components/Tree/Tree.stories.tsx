@@ -1,9 +1,8 @@
+import { Story } from "@storybook/react";
 import React from "react";
-import { storiesOf } from "@storybook/react";
-import Tree from "./Tree";
-import { Observable } from "rxjs";
 import { Model, ModelFilter } from "react3l-common";
-import Radio, { RadioChangeEvent } from "antd/lib/radio";
+import { Observable } from "rxjs";
+import Tree from "./Tree";
 
 const demoObservable = new Observable<Model[]>((observer) => {
   setTimeout(() => {
@@ -23,13 +22,22 @@ const demoSearchFunc = (TModelFilter?: ModelFilter) => {
   return demoObservable;
 };
 
-function Default() {
-  const [checkedKeys, setCheckedKeys] = React.useState<any[]>([]);
-  const [isMultiple, setMultiple] = React.useState(false);
+export default {
+  title: 'Tree',
+  component: Tree,
+  parameters: {
+    controls: { expanded: true },
+  },
+  argTypes: { 
+    checkedKeys: { description: 'Phần chỉnh sửa này dành cho các prop của Antd' },
+    expandedKeys: { description: 'Phần chỉnh sửa này dành cho các prop của Antd' },
+    checkable: { description: 'Phần chỉnh sửa này dành cho các prop của Antd' },
+  }
+  
+};
 
-  const handleChangeRadio = React.useCallback((event: RadioChangeEvent) => {
-    setMultiple(event.target.value);
-  }, []);
+const Template: Story = (args) => {
+  const [checkedKeys, setCheckedKeys] = React.useState<any[]>([]);
 
   const onChange = React.useCallback((items: Model[]) => {
     setCheckedKeys(items.map((currentItem) => currentItem?.id));
@@ -38,23 +46,17 @@ function Default() {
   return (
     <div style={{ margin: "10px", width: "300px" }}>
       <Tree
+        {...args}
         getTreeData={demoSearchFunc}
-        height={300}
-        selectable={!isMultiple}
-        checkable={isMultiple}
-        virtual
+        
         onChange={onChange}
         checkedKeys={checkedKeys}
-        checkStrictly={true}
       />
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeRadio} value={isMultiple}>
-          <Radio value={false}>Single</Radio>
-          <Radio value={true}>Multiple</Radio>
-        </Radio.Group>
-      </div>
     </div>
   );
 }
 
-storiesOf("Tree", module).add("Default", Default);
+export const Default = Template.bind({});
+Default.agrs = {
+  type: "button"
+}

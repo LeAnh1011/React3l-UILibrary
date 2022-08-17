@@ -222,11 +222,8 @@ export function AdvanceIdMultipleFilter(
   );
 
   const handleClearAll = React.useCallback(() => {
-    const cloneValueFilter = new ClassFilter();
-    cloneValueFilter["id"]["notIn"] = [];
-    handleGetList(cloneValueFilter);
     onChange([], []);
-  }, [ClassFilter, handleGetList, onChange]);
+  }, [onChange]);
 
   const handleKeyPress = React.useCallback(
     (event: any) => {

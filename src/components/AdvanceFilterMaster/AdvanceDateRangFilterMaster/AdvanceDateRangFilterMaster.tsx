@@ -137,14 +137,24 @@ function AdvanceDateRangeFilterMaster(
           return [quarterStartDate, quarterEndDate]; //thisquarter
 
         case 8:
-          const quarterAdjustment = (moment().month() % 3) + 1;
-          const lastQuarterEndDate = moment()
-            .subtract({ months: quarterAdjustment })
-            .endOf("month");
-          const lastQuarterStartDate = lastQuarterEndDate
-            .clone()
-            .subtract({ months: 3 })
-            .startOf("month");
+          const thisQuarter = moment().quarter();
+          const lastQuarter = thisQuarter - 1;
+          var lastQuarterStartDate, lastQuarterEndDate;
+          if (lastQuarter) {
+            lastQuarterStartDate = moment()
+              .quarter(lastQuarter)
+              .startOf("quarter");
+            lastQuarterEndDate = moment().quarter(lastQuarter).endOf("quarter");
+          } else {
+            lastQuarterStartDate = moment()
+              .subtract(1, "years")
+              .quarter(4)
+              .startOf("quarter");
+            lastQuarterEndDate = moment()
+              .subtract(1, "years")
+              .quarter(4)
+              .endOf("quarter");
+          }
           return [lastQuarterStartDate, lastQuarterEndDate]; //lastquarter
         default:
           return [null, null];

@@ -4,34 +4,29 @@ import classNames from "classnames";
 import React, { ReactNode } from "react";
 import "./Tabs.scss";
 
-export interface Errors {
-  key: string;
-}
-
 export interface TabsProps extends TabsPropsAnt {
   mode?: TabsType;
   children?: ReactNode;
-  errors?: Errors[];
+  tabErrorKeys?: string[];
 }
 
 const { TabPane } = TabsAntd;
 
 function Tabs(props: TabsProps) {
-  const { mode, children, errors } = props;
+  const { mode, children, tabErrorKeys } = props;
   const tabRef: React.LegacyRef<HTMLDivElement> = React.useRef();
-
 
   React.useEffect(() => {
     const tabElement = tabRef.current;
-    if (errors && errors?.length > 0) {
+    if (tabErrorKeys && tabErrorKeys?.length > 0) {
       setTimeout(() => {
         const tabList = tabElement.querySelectorAll("div.ant-tabs-tab-btn");
         if (tabList && tabList.length > 0) {
           tabList.forEach((tab: Element) => {
             const htmlTab = tab as HTMLElement;
             const tabId = htmlTab.id;
-            const filterValue = errors.filter((error) =>
-              tabId.endsWith(`${error.key}`)
+            const filterValue = tabErrorKeys.filter((tabError) =>
+              tabId.endsWith(`${tabError}`)
             )[0];
             if (filterValue) {
               htmlTab.classList.add("color-palette-red-60-important");
@@ -52,7 +47,8 @@ function Tabs(props: TabsProps) {
         });
       }
     }
-  }, [errors]);
+  }, [tabErrorKeys]);
+
   return (
     <>
       <div className={classNames("tabs__container")} ref={tabRef}>

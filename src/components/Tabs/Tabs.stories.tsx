@@ -8,15 +8,15 @@ const { TabPane } = Tabs;
 
 function Default() {
   const [type, setType] = React.useState<TabsType>("line");
-  const [errors, setErrors] = React.useState([{ key: "tabso1" }]);
+  const [errors, setErrors] = React.useState<string[]>([]);
   const handleChangeMode = React.useCallback((event: any) => {
     setType(event?.target?.value);
   }, []);
 
   const handleChangeErrorTab = React.useCallback((event: any) => {
-    const value = event?.target?.value;
+    const value: string = event?.target?.value;
     if (value) {
-      setErrors([{ key: value }]);
+      setErrors([value]);
     } else {
       setErrors([]);
     }
@@ -25,7 +25,7 @@ function Default() {
   return (
     <>
       <div style={{ margin: "10px", width: "550px" }}>
-        <Tabs mode={type} errors={errors}>
+        <Tabs mode={type} tabErrorKeys={errors}>
           <TabPane tab="Tab 1" key="tabso1">
             Content of Tab Pane 1
           </TabPane>
@@ -55,7 +55,7 @@ function Default() {
           <Radio value={"card"}>Contained</Radio>
           <Radio value={"line"}>Line</Radio>
         </Radio.Group>
-        <Radio.Group onChange={handleChangeErrorTab} value={errors[0]?.key}>
+        <Radio.Group onChange={handleChangeErrorTab} value={errors[0]}>
           <Radio value={"tabso1"}>Tab 1</Radio>
           <Radio value={"tabso2"}>Tab 2</Radio>
           <Radio value={"tabso3"}>Tab 3</Radio>

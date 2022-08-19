@@ -12,21 +12,26 @@ export interface TextAreaProps {
   label?: string;
   type?: BORDER_TYPE;
   isRequired?: boolean;
-  floatLabel?: boolean;
-  isMaterial?: boolean;
   value?: string;
   disabled?: boolean;
   placeHolder?: string;
   className?: string;
   showCount?: boolean;
   maxLength?: number;
+  /**
+   * export interface TextAreaAction {
+      name?: string;
+        action?: any;
+      }
+   * 
+  */
   action?: TextAreaAction;
   onChange?: (T: string | null) => void;
   onEnter?: (T: string | null) => void;
   onBlur?: (T: string | null) => void;
 }
 
-function TextArea(props: TextAreaProps) {
+export function TextArea(props: TextAreaProps) {
   const {
     action,
     label,
@@ -155,12 +160,9 @@ function TextArea(props: TextAreaProps) {
 }
 
 TextArea.defaultProps = {
-  label: "",
   type: BORDER_TYPE.BORDERED,
   isRequired: false,
-  prefix: "",
   disabled: false,
-  className: "",
   countWord: false,
   maxLength: 2000,
 };

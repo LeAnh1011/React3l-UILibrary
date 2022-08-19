@@ -492,10 +492,12 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   );
 }
 
+export default Tree;
+
 Tree.defaultProps = {
   classFilter: ModelFilter,
   searchProperty: "name",
   searchType: "contain",
 };
 
-export default Tree;
+

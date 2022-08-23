@@ -10,7 +10,6 @@ export interface InputSelectProps<T extends Model> {
   value?: T;
   disabled?: boolean;
   expanded?: boolean;
-  isMaterial?: boolean;
   placeHolder?: string;
   render?: (t: T) => string;
   onClear?: (T: T) => void;
@@ -244,7 +243,6 @@ function defaultRenderObject<T extends Model>(t: T) {
 
 InputSelect.defaultProps = {
   render: defaultRenderObject,
-  isMaterial: false,
   expanded: false,
   disabled: false,
 };

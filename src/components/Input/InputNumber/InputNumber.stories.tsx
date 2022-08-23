@@ -2,19 +2,28 @@ import { ComponentMeta, Story } from "@storybook/react";
 import React from "react";
 import FormItem from "../../FormItem/FormItem";
 import { BORDER_TYPE } from "./../../../config/enum";
-import InputNumber, { LONG } from "./InputNumber";
+import InputNumber from "./InputNumber";
 
 export default {
   title: "Input/InputNumber",
   component: InputNumber,
+  subcomponents: { FormItem },
   parameters: {
     controls: { expanded: true },
   },
   argTypes: {
+    label: {
+      control: 'text',
+      defaultValue: 'First Name'
+    },
+    placeHolder: {
+      control: 'text',
+      defaultValue: 'Enter number'
+    },
     type: {
-      control: 'select',
-      defaultValue:  BORDER_TYPE.MATERIAL
-    }
+      control: { type: 'radio', options: [BORDER_TYPE.MATERIAL, BORDER_TYPE.FLOAT_LABEL, BORDER_TYPE.BORDERED] },
+      defaultValue: 0
+    },
   }
 } as ComponentMeta<typeof InputNumber>;
 

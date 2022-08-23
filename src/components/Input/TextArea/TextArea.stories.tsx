@@ -8,18 +8,18 @@ import TextArea, { TextAreaProps } from "./TextArea";
 export default {
   title: 'Input/TextArea',
   component: TextArea,
+  subcomponents: { FormItem },
   parameters: {
     controls: { expanded: true },
   },
   argTypes: {
-    // button can be passed a label or an image, not both
     label: {
       control: 'text',
       defaultValue: 'First Name'
     },
     placeHolder: {
       control: 'text',
-      defaultValue: 'Enter text...'
+      defaultValue: 'Enter text'
     },
     type: {
       control: { type: 'radio', options: [BORDER_TYPE.MATERIAL, BORDER_TYPE.FLOAT_LABEL, BORDER_TYPE.BORDERED] },

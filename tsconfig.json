@@ -3,7 +3,7 @@
     "baseUrl": "src",
     "declaration": true,
     "declarationDir": "build",
-    "target": "es5",
+    "target": "es6",
     "lib": [
       "dom",
       "dom.iterable",

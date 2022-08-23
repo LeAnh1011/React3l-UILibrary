@@ -288,7 +288,10 @@ function AdvanceDateRangeFilterMaster(
 
   const renderItem = React.useCallback(
     (currentItem: ListDate) => {
-      return translate(currentItem.name) as string;
+      if (currentItem) {
+        return translate(currentItem?.name);
+      }
+      return null;
     },
     [translate]
   );

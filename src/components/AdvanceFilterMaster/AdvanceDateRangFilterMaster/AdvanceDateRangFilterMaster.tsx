@@ -17,6 +17,12 @@ export enum ADVANCE_DATE_RANGE_TYPE {
   INPUT,
 }
 
+class ListDate extends Model {
+  id?: number;
+  name?: string;
+  code?: string;
+}
+
 interface AdvanceDateRangeFilterMasterProps {
   value?: [Moment, Moment];
 
@@ -51,7 +57,7 @@ interface AdvanceDateRangeFilterMasterProps {
   translate?: TFunction;
 }
 
-const list = [
+const list: ListDate[] = [
   { id: 1, name: "general.filter.today", code: "today" },
   { id: 2, name: "general.filter.yesterday", code: "yesterday" },
   { id: 3, name: "general.filter.thisWeek", code: "thisweek" },
@@ -280,6 +286,13 @@ function AdvanceDateRangeFilterMaster(
     onChange(null, [null, null]);
   }, [onChange]);
 
+  const renderItem = React.useCallback(
+    (currentItem: ListDate) => {
+      return translate(currentItem.name) as string;
+    },
+    [translate]
+  );
+
   return (
     <div
       className={classNames(
@@ -322,6 +335,7 @@ function AdvanceDateRangeFilterMaster(
             label={label}
             isSmall={isSmall}
             onKeyDown={handleKeyDown}
+            render={renderItem}
           />
         </div>
       )}

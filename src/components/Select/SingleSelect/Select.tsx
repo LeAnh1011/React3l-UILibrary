@@ -249,6 +249,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
 
   React.useEffect(() => {
     if (isExpand && appendToBody) {
+      debugger;
       const currentPosition = wrapperRef.current.getBoundingClientRect();
       const spaceBelow = window.innerHeight - currentPosition.bottom;
       if (spaceBelow <= 200) {
@@ -258,7 +259,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
             : 180;
           setAppendToBodyStyle({
             position: "fixed",
-            top: currentPosition.top - (listHeight - 15),
+            top: currentPosition.top - (listHeight + 3),
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
           });

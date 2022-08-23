@@ -37,6 +37,7 @@ export interface UploadFileProps {
   maximumSize?: number;
   type?: "link" | "button";
   icon?: ReactNode;
+  isViewMode?: boolean;
 }
 export function UploadFile(props: UploadFileProps) {
   const {

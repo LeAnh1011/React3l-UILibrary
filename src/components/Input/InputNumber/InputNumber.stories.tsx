@@ -2,7 +2,7 @@ import { ComponentMeta, Story } from "@storybook/react";
 import React from "react";
 import FormItem from "../../FormItem/FormItem";
 import { BORDER_TYPE } from "./../../../config/enum";
-import InputNumber from "./InputNumber";
+import InputNumber, { DECIMAL, LONG } from "./InputNumber";
 
 export default {
   title: "Input/InputNumber",
@@ -23,6 +23,10 @@ export default {
     type: {
       control: { type: 'radio', options: [BORDER_TYPE.MATERIAL, BORDER_TYPE.FLOAT_LABEL, BORDER_TYPE.BORDERED] },
       defaultValue: 0
+    },
+    numberType: {
+      control: { type: 'radio', options: [LONG, DECIMAL] },
+      defaultValue: LONG
     },
   }
 } as ComponentMeta<typeof InputNumber>;

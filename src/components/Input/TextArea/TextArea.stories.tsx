@@ -31,7 +31,6 @@ export default {
 
 
 const Template: Story = (args: TextAreaProps) => {
-  console.log(args)
   const [inputValue, setInputVal] = React.useState();
 
   const handleChangeValue = React.useCallback((value) => {

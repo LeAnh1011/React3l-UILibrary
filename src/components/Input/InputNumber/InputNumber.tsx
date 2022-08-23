@@ -17,13 +17,10 @@ export interface InputNumberProps {
   label?: string;
   isRequired?: boolean;
   type?: BORDER_TYPE;
-  floatLabel?: boolean;
-  isMaterial?: boolean;
   value?: number;
   prefix?: string | ReactNode;
   suffix?: string | ReactNode;
   allowPositive?: boolean;
-  error?: string;
   numberType?: string;
   isReverseSymb?: boolean;
   decimalDigit?: number;

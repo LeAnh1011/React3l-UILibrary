@@ -13,8 +13,6 @@ export interface InputTextProps {
   label?: string;
   type?: BORDER_TYPE;
   isRequired?: boolean;
-  floatLabel?: boolean;
-  isMaterial?: boolean;
   prefix?: string | JSX.Element;
   suffix?: string | JSX.Element;
   value?: string;

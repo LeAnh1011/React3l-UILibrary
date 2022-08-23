@@ -312,7 +312,7 @@ $palettes: (
 
   /* main colors */
   /* used for the links, the button background color,... */
-  --color-primary: #0F62FE;
+  --color-primary: #0f62fe;
   --color-primary-hover: #0050e6;
   --color-primary-active: #002d9c;
   --color-primary-blur: #d0e2ff;
@@ -325,10 +325,10 @@ $palettes: (
   --color-accent: #eb6200;
   --color-accent-hover: #cc5500;
   --color-accent-active: #753300;
-  --color-accent-blur: #ffd9Be;
+  --color-accent-blur: #ffd9be;
 
   /* support color */
-  --color-link: #0043CE;
+  --color-link: #0043ce;
   --color-harmony-black: #000000;
   --color-text: #161616;
   --color-black-hover: #212121;
@@ -339,7 +339,7 @@ $palettes: (
   --color-critical: #da1e28;
   --color-critical-hover: #b81922;
   --color-critical-active: #750e13;
-  --color-critical-blur: #fff1f1; 
+  --color-critical-blur: #fff1f1;
 }
 
 /* class bg and color for color $palletes with syntax .palette-$colorname-$number-$type */
@@ -352,6 +352,12 @@ $palettes: (
     }
     .color-palette-#{"" + $colorname}-#{$key} {
       color: var(#{$keyname});
+    }
+    .bg-palette-#{"" + $colorname}-#{$key}-important {
+      background-color: var(#{$keyname}) !important;
+    }
+    .color-palette-#{"" + $colorname}-#{$key}-important {
+      color: var(#{$keyname}) !important;
     }
   }
 }

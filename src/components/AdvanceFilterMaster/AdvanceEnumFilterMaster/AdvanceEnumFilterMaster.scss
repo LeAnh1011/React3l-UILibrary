@@ -55,6 +55,7 @@ $backgound-color: #f4f4f4;
     .advance-enum-master__list {
       background-color: $backgound-color;
       width: 100%;
+      overflow-y: auto;
       .ant-empty-image {
         height: 55px;
       }

@@ -65,7 +65,6 @@ function InputRange(props: InputRangeProps) {
         <div className="input-range__input-number-to">
           <InputNumber
             {...props}
-            label={""}
             value={valueRange[1]}
             onBlur={handleBlurTo}
             type={type}

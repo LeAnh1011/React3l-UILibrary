@@ -1,4 +1,4 @@
-import Radio, { RadioChangeEvent } from "antd/lib/radio";
+import { Story } from "@storybook/react";
 import React from "react";
 import { NumberFilter } from "react3l-advanced-filters";
 import { ModelFilter } from "react3l-common";
@@ -10,18 +10,31 @@ class DemoFilter extends ModelFilter {
   number: NumberFilter = new NumberFilter();
 }
 
-export function InputRangeStories() {
-  const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
-  const [isSmall, setIsSmall] = React.useState(false);
+export default {
+  title: 'Input/InputRange',
+  component: InputRange,
+  subcomponents: { FormItem },
+  parameters: {
+    controls: { expanded: true },
+  },
+  argTypes: {
+    label: {
+      control: 'text',
+      defaultValue: 'First Name'
+    },
+    placeHolderRange: {
+      defaultValue: ['From', 'To']
+    },
+    type: {
+      control: { type: 'radio', options: [BORDER_TYPE.MATERIAL, BORDER_TYPE.FLOAT_LABEL, BORDER_TYPE.BORDERED] },
+      defaultValue: 0
+    },
+  },
+  
+};
 
-  const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
-    setType(event.target.value);
-  }, []);
 
-  const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
-    setIsSmall(event.target.value);
-  }, []);
-
+const Template: Story = (args) => {
   const [filter, dispatch] = React.useState<DemoFilter>(new DemoFilter());
   const [numberRange, setNumberRange] = React.useState<[]>([]);
 
@@ -41,28 +54,15 @@ export function InputRangeStories() {
       <div style={{ margin: "10px", width: "250px" }}>
         <FormItem message={"Field required!"}>
           <InputRange
-            type={type}
-            placeHolderRange={["From...", "To..."]}
             valueRange={numberRange}
             onChangeRange={handleChangeFilter}
-            isSmall={isSmall}
+            {...args}
           />
         </FormItem>
-      </div>
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeStyle} value={type}>
-          <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
-          <Radio value={BORDER_TYPE.FLOAT_LABEL}>Float Label</Radio>
-          <Radio value={BORDER_TYPE.BORDERED}>Bordered</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeSize} value={isSmall}>
-          <Radio value={true}>Small</Radio>
-          <Radio value={false}>Default</Radio>
-        </Radio.Group>
       </div>
     </div>
   );
 }
+
+
+export const Default = Template.bind({});

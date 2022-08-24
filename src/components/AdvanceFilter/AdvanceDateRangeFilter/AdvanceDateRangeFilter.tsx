@@ -1,12 +1,11 @@
+import Calendar16 from "@carbon/icons-react/es/calendar/16";
+import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import { DatePicker } from "antd";
-import { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import { BORDER_TYPE } from "config/enum";
 import { Moment } from "moment";
 import React, { ReactSVGElement, RefObject } from "react";
 import { CommonService } from "services/common-service";
-import CloseFilled16  from "@carbon/icons-react/es/close--filled/16";
-import Calendar16 from "@carbon/icons-react/es/calendar/16";
 import "./AdvanceDateRangeFilter.scss";
 
 const { RangePicker } = DatePicker;
@@ -27,7 +26,6 @@ interface AdvanceDateRangeFilterAction {
 interface AdvanceDateRangeFilterProps {
   label?: string;
   value: [Moment, Moment];
-  open?: boolean;
   dateFormat?: string[];
   onChange?: (value: [Moment, Moment], dateString?: [string, string]) => void;
   type?: BORDER_TYPE;
@@ -40,7 +38,7 @@ interface AdvanceDateRangeFilterProps {
 }
 
 function AdvanceDateRangeFilter(
-  props: AdvanceDateRangeFilterProps & RangePickerProps
+  props: AdvanceDateRangeFilterProps
 ) {
   const {
     value,
@@ -54,6 +52,7 @@ function AdvanceDateRangeFilter(
     disabled,
     placeholder,
     className,
+    ...rest
   } = props;
 
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
@@ -109,7 +108,7 @@ function AdvanceDateRangeFilter(
       </div>
       <div className="advance-date-range-filter__container">
         <RangePicker
-          {...props}
+          {...rest}
           value={internalValue}
           style={{ width: "100%" }}
           allowClear={false}
@@ -126,6 +125,7 @@ function AdvanceDateRangeFilter(
             "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,
           })}
           ref={dateRef}
+          disabled={disabled}
         />
         {type === BORDER_TYPE.FLOAT_LABEL && label && (
           <label

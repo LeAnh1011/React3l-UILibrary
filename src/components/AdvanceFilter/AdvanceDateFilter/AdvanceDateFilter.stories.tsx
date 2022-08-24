@@ -3,10 +3,6 @@ import { Moment } from "moment";
 import React from "react";
 import { BORDER_TYPE } from "../../../config/enum";
 import AdvanceDateFilter from "./AdvanceDateFilter";
-import {
-  ArgsTable, Description,
-  Primary, CURRENT_SELECTION, Stories, Subtitle, Title
-} from "@storybook/addon-docs";
 
 export default {
   title: "AdvanceFilter/AdvanceDateFilter",
@@ -14,30 +10,11 @@ export default {
   subcomponents: { AdvanceDateFilter },
   parameters: {
     controls: { expanded: true },
-    docs: {
-      page: () => (
-        <>
-          <Title />
-          <Subtitle />
-          <Description
-            children="Type Avatar, có nhiều kiểu, có viền có khung vuông... hiển thị trên
-                      currentAvatar, thêm css vào bằng className"
-          />
-          <Primary />
-          <Description
-            children="Sử dụng CroppedModal để crop ảnh !!!!"
-          />
-          <ArgsTable story={CURRENT_SELECTION} showComponent/>
-          <Stories/>
-          
-        </>
-      ),
-    },
   },
   argTypes: {
     label: {
       control: 'text',
-      defaultValue: 'First Name',
+      defaultValue: 'Ngày nhập kho',
       table: {
         category: 'AdvanceDateFilterProps',
       },
@@ -92,7 +69,6 @@ export default {
 
 const Template: Story = (args) => {
 
-  console.log('args', args)
   const [value, setValue] = React.useState<Moment>();
 
   const handleChange = React.useCallback((dateMoment, dateString) => {

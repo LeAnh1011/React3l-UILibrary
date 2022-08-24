@@ -1,16 +1,16 @@
-import { Model, ModelFilter } from "react3l-common";
 import Add16 from "@carbon/icons-react/es/add/16";
 import { useDebounceFn } from "ahooks";
-import { CommonService } from "services/common-service";
+import { Checkbox, Empty } from "antd";
 import classNames from "classnames";
+import IconLoading from "components/IconLoading/IconLoading";
 import InputTag from "components/Input/InputTag/InputTag";
 import { DEBOUNCE_TIME_300 } from "config/consts";
-import React, { RefObject } from "react";
-import type { ErrorObserver, Observable } from "rxjs";
 import { BORDER_TYPE } from "config/enum";
+import React, { RefObject } from "react";
+import { Model, ModelFilter } from "react3l-common";
+import type { ErrorObserver, Observable } from "rxjs";
+import { CommonService } from "services/common-service";
 import "./AdvanceIdMultipleFilter.scss";
-import { Checkbox, Empty } from "antd";
-import IconLoading from "components/IconLoading/IconLoading";
 
 export interface AdvanceIdMultipleFilterProps<
   T extends Model,
@@ -27,8 +27,6 @@ export interface AdvanceIdMultipleFilterProps<
   placeHolder?: string;
 
   disabled?: boolean;
-
-  isMaterial?: boolean;
 
   getList?: (TModelFilter?: TFilter) => Observable<T[]>;
 
@@ -67,7 +65,6 @@ export function AdvanceIdMultipleFilter(
     searchType,
     placeHolder,
     disabled,
-    isMaterial,
     getList,
     onChange,
     render,
@@ -290,7 +287,6 @@ export function AdvanceIdMultipleFilter(
         <div className="advance-id-filter__input" onClick={handleToggle}>
           <InputTag
             listValue={values}
-            isMaterial={isMaterial}
             render={render}
             placeHolder={placeHolder}
             disabled={disabled}
@@ -396,7 +392,6 @@ AdvanceIdMultipleFilter.defaultProps = {
   searchType: "startWith",
   isEnumerable: false,
   render: defaultRenderObject,
-  isMaterial: false,
   disabled: false,
 };
 

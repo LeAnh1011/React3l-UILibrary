@@ -11,7 +11,6 @@ export interface InputTagProps<T extends Model> {
   listValue?: T[];
   placeHolder?: string;
   disabled?: boolean;
-  isMaterial?: boolean;
   error?: string;
   render?: (t: T) => string;
   onClear?: (T: T) => void;
@@ -228,7 +227,6 @@ InputTag.defaultProps = {
   type: BORDER_TYPE.BORDERED,
   label: null,
   render: defaultRenderObject,
-  isMaterial: false,
 };
 
 export default InputTag;

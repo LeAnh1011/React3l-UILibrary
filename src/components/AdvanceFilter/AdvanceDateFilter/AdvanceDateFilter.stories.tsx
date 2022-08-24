@@ -1,4 +1,13 @@
 import { Story } from "@storybook/react";
+import {
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
 import { Moment } from "moment";
 import React from "react";
 import { BORDER_TYPE } from "../../../config/enum";
@@ -10,81 +19,92 @@ export default {
   subcomponents: { AdvanceDateFilter },
   parameters: {
     controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
   },
   argTypes: {
     label: {
-      control: 'text',
-      defaultValue: 'Ngày nhập kho',
+      control: "text",
+      defaultValue: "Ngày nhập kho",
       table: {
-        category: 'AdvanceDateFilterProps',
+        category: "AdvanceDateFilterProps",
       },
     },
     type: {
-      control: { type: 'radio', options: [BORDER_TYPE.MATERIAL, BORDER_TYPE.FLOAT_LABEL, BORDER_TYPE.BORDERED] },
+      control: {
+        type: "radio",
+        options: [
+          BORDER_TYPE.MATERIAL,
+          BORDER_TYPE.FLOAT_LABEL,
+          BORDER_TYPE.BORDERED,
+        ],
+      },
       defaultValue: 0,
       table: {
-        category: 'AdvanceDateFilterProps',
+        category: "AdvanceDateFilterProps",
       },
     },
-    value:  {
+    value: {
       table: {
-        category: 'AdvanceDateFilterProps',
+        category: "AdvanceDateFilterProps",
       },
     },
-    dateFormat:  {
+    dateFormat: {
       table: {
-        category: 'AdvanceDateFilterProps',
+        category: "AdvanceDateFilterProps",
       },
     },
-    className:  {
+    className: {
       table: {
-        category: 'AdvanceDateFilterProps',
+        category: "AdvanceDateFilterProps",
       },
     },
-    isRequired:  {
+    isRequired: {
       table: {
-        category: 'AdvanceDateFilterProps',
+        category: "AdvanceDateFilterProps",
       },
     },
-    isSmall:  {
+    isSmall: {
       table: {
-        category: 'AdvanceDateFilterProps',
+        category: "AdvanceDateFilterProps",
       },
     },
-    disabled:  {
+    disabled: {
       table: {
-        category: 'AdvanceDateFilterProps',
+        category: "AdvanceDateFilterProps",
       },
     },
-    placeholder:  {
+    placeholder: {
       table: {
-        category: 'AdvanceDateFilterProps',
+        category: "AdvanceDateFilterProps",
       },
     },
-    
   },
- 
-  
-} 
+};
 
 const Template: Story = (args) => {
-
   const [value, setValue] = React.useState<Moment>();
 
   const handleChange = React.useCallback((dateMoment, dateString) => {
     setValue(dateMoment);
   }, []);
 
-
   return (
     <div style={{ margin: "10px", width: "300px" }}>
-      <AdvanceDateFilter
-      {...args}
-        onChange={handleChange}
-        value={value}
-      />
+      <AdvanceDateFilter {...args} onChange={handleChange} value={value} />
     </div>
   );
-}
+};
 
 export const Default = Template.bind({});

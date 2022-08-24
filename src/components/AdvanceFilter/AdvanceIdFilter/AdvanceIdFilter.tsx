@@ -49,8 +49,6 @@ export interface AdvanceIdFilterProps<
 
   selectWithAdd?: boolean;
 
-  selectWithPreferOption?: boolean;
-
   isSmall?: boolean;
 
   preferOptions?: T[];

@@ -1,6 +1,11 @@
 import {
-  ArgsTable, Description,
-  Primary, PRIMARY_STORY, Stories, Subtitle, Title
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title,
 } from "@storybook/addon-docs";
 import { Story } from "@storybook/react";
 import React from "react";
@@ -33,26 +38,21 @@ export default {
                       currentAvatar, thêm css vào bằng className"
           />
           <Primary />
-          <Description
-            children="Sử dụng CroppedModal để crop ảnh !!!!"
-          />
+          <Description children="Sử dụng CroppedModal để crop ảnh !!!!" />
           <ArgsTable story={PRIMARY_STORY} />
-          <Stories/>
-          
+          <Stories />
         </>
       ),
     },
   },
   decorators: [
     (Story) => (
-      <div style={{ margin: '3em' }}>
+      <div style={{ margin: "3em" }}>
         <Story />
       </div>
     ),
-  ]
+  ],
 };
-
-
 
 const Template: Story = (args) => {
   const [avatar, setAvatar] = React.useState<string>();

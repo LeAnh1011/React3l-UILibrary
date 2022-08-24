@@ -1,12 +1,19 @@
 import { Story } from "@storybook/react";
-import { Radio } from "antd";
-import { RadioChangeEvent } from "antd/lib/radio";
+import {
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
 import React from "react";
 import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
 import { Observable } from "rxjs";
 import FormItem from "../../FormItem/FormItem";
-import { BORDER_TYPE, ValidateStatus } from "./../../../config/enum";
+import { BORDER_TYPE } from "./../../../config/enum";
 import AdvanceEnumFilter from "./AdvanceEnumFilter";
 
 class DemoFilter extends ModelFilter {
@@ -40,26 +47,45 @@ const demoSearchFunc = () => {
 };
 
 export default {
-  title: 'AdvanceFilter/AdvanceEnumFilter',
+  title: "AdvanceFilter/AdvanceEnumFilter",
   component: AdvanceEnumFilter,
   subcomponents: { FormItem },
   parameters: {
     controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
   },
   argTypes: {
     label: {
-      control: 'text',
-      defaultValue: 'Đơn vị tổ chức'
+      control: "text",
+      defaultValue: "Đơn vị tổ chức",
     },
-    placeHolderRange: {
-      defaultValue: ['From', 'To']
+    placeHolder: {
+      defaultValue: "Chọn đơn vị",
     },
     type: {
-      control: { type: 'radio', options: [BORDER_TYPE.MATERIAL, BORDER_TYPE.FLOAT_LABEL, BORDER_TYPE.BORDERED] },
-      defaultValue: 0
+      control: {
+        type: "radio",
+        options: [
+          BORDER_TYPE.MATERIAL,
+          BORDER_TYPE.FLOAT_LABEL,
+          BORDER_TYPE.BORDERED,
+        ],
+      },
+      defaultValue: 0,
     },
   },
-  
 };
 
 const Template: Story = (args) => {
@@ -69,12 +95,10 @@ const Template: Story = (args) => {
     code: "FAD",
   });
 
-
   const [multifilter, setFilter] = React.useState(new DemoFilter());
 
   const [list, setList] = React.useState<[]>([]);
 
-  
   const handleSetModel = React.useCallback((...[, item]) => {
     setSelectModel(item);
   }, []);
@@ -87,7 +111,6 @@ const Template: Story = (args) => {
     }
   }, []);
 
-  
   const handleChangeFilter = React.useCallback(
     (list, ids) => {
       setFilter({ ...multifilter, id: { in: ids } });
@@ -99,11 +122,9 @@ const Template: Story = (args) => {
   return (
     <div style={{ margin: "10px", width: "300px" }}>
       <div style={{ margin: "10px", width: "300px" }}>
-        <FormItem
-          message={"Error label"}
-        >
+        <FormItem message={"Error label"}>
           <AdvanceEnumFilter
-          {...args}
+            {...args}
             value={selectModel}
             render={handleRenderModel}
             onChange={handleSetModel}
@@ -115,7 +136,6 @@ const Template: Story = (args) => {
       </div>
     </div>
   );
-}
-
+};
 
 export const Default = Template.bind({});

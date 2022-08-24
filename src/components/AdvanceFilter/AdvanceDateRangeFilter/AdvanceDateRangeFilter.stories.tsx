@@ -1,4 +1,13 @@
 import { Story } from "@storybook/react";
+import {
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
 import React from "react";
 import { BORDER_TYPE } from "../../../config/enum";
 import FormItem from "../../FormItem/FormItem";
@@ -10,6 +19,19 @@ export default {
   subcomponents: { AdvanceDateRangeFilter },
   parameters: {
     controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
   },
   argTypes: {
     label: {

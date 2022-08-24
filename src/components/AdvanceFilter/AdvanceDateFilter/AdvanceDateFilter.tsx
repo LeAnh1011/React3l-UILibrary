@@ -15,9 +15,7 @@ interface AdvanceDateFilterAction {
 interface AdvanceDateFilterProps {
   value?: Moment;
   label?: string;
-  isMaterial?: boolean;
   dateFormat?: string[];
-  error?: string;
   onChange?: (value: Moment | null, dateString?: string) => void;
   type?: BORDER_TYPE;
   isSmall?: boolean;
@@ -29,7 +27,7 @@ interface AdvanceDateFilterProps {
 }
 
 function AdvanceDateFilter(
-  props: AdvanceDateFilterProps & AntdDatePickerProps
+  props: AdvanceDateFilterProps 
 ) {
   const {
     value,
@@ -43,6 +41,7 @@ function AdvanceDateFilter(
     isSmall,
     disabled,
     placeholder,
+    ...rest
   } = props;
 
   const dateRef = React.useRef<any>();
@@ -92,7 +91,7 @@ function AdvanceDateFilter(
       </div>
       <div className="advance-date-filter__container">
         <DatePickerAntd
-          {...props}
+          {...rest}
           value={internalValue}
           style={{ width: "100%" }}
           ref={dateRef}
@@ -108,6 +107,7 @@ function AdvanceDateFilter(
             "advance-date-filter--float": type === BORDER_TYPE.FLOAT_LABEL,
           })}
           placeholder={placeholder}
+          disabled={disabled}
         />
         {type === BORDER_TYPE.FLOAT_LABEL && label && (
           <label
@@ -151,9 +151,7 @@ function AdvanceDateFilter(
 }
 
 AdvanceDateFilter.defaultProps = {
-  isMaterial: false,
   dateFormat: ["DD/MM/YYYY", "YYYY/MM/DD"],
-  label: "",
   isSmall: false,
   type: BORDER_TYPE.BORDERED,
   isRequired: false,

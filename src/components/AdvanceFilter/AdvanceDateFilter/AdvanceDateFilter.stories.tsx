@@ -1,70 +1,114 @@
-import AdvanceDateFilter from "./AdvanceDateFilter";
-import React from "react";
+import { Story } from "@storybook/react";
 import { Moment } from "moment";
-import { Radio, RadioChangeEvent } from "antd";
+import React from "react";
 import { BORDER_TYPE } from "../../../config/enum";
+import AdvanceDateFilter from "./AdvanceDateFilter";
+import {
+  ArgsTable, Description,
+  Primary, CURRENT_SELECTION, Stories, Subtitle, Title
+} from "@storybook/addon-docs";
 
-export function AdvanceDateFilterStories() {
+export default {
+  title: "AdvanceFilter/AdvanceDateFilter",
+  component: AdvanceDateFilter,
+  subcomponents: { AdvanceDateFilter },
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description
+            children="Type Avatar, có nhiều kiểu, có viền có khung vuông... hiển thị trên
+                      currentAvatar, thêm css vào bằng className"
+          />
+          <Primary />
+          <Description
+            children="Sử dụng CroppedModal để crop ảnh !!!!"
+          />
+          <ArgsTable story={CURRENT_SELECTION} showComponent/>
+          <Stories/>
+          
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    label: {
+      control: 'text',
+      defaultValue: 'First Name',
+      table: {
+        category: 'AdvanceDateFilterProps',
+      },
+    },
+    type: {
+      control: { type: 'radio', options: [BORDER_TYPE.MATERIAL, BORDER_TYPE.FLOAT_LABEL, BORDER_TYPE.BORDERED] },
+      defaultValue: 0,
+      table: {
+        category: 'AdvanceDateFilterProps',
+      },
+    },
+    value:  {
+      table: {
+        category: 'AdvanceDateFilterProps',
+      },
+    },
+    dateFormat:  {
+      table: {
+        category: 'AdvanceDateFilterProps',
+      },
+    },
+    className:  {
+      table: {
+        category: 'AdvanceDateFilterProps',
+      },
+    },
+    isRequired:  {
+      table: {
+        category: 'AdvanceDateFilterProps',
+      },
+    },
+    isSmall:  {
+      table: {
+        category: 'AdvanceDateFilterProps',
+      },
+    },
+    disabled:  {
+      table: {
+        category: 'AdvanceDateFilterProps',
+      },
+    },
+    placeholder:  {
+      table: {
+        category: 'AdvanceDateFilterProps',
+      },
+    },
+    
+  },
+ 
+  
+} 
+
+const Template: Story = (args) => {
+
+  console.log('args', args)
   const [value, setValue] = React.useState<Moment>();
 
-  const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.FLOAT_LABEL);
-
-  const [isDisabled, setIsDisabled] = React.useState(false);
-
-  const [isSmall, setIsSmall] = React.useState(false);
   const handleChange = React.useCallback((dateMoment, dateString) => {
     setValue(dateMoment);
   }, []);
 
-  const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
-    setType(event.target.value);
-  }, []);
-
-  const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
-    setIsSmall(event.target.value);
-  }, []);
-
-  const handleChangeDisabled = React.useCallback((event: RadioChangeEvent) => {
-    setIsDisabled(event.target.value);
-  }, []);
 
   return (
     <div style={{ margin: "10px", width: "300px" }}>
       <AdvanceDateFilter
-        type={type}
+      {...args}
         onChange={handleChange}
-        isSmall={isSmall}
-        label="Ngày nhập hàng"
-        placeholder={"Chọn ngày"}
-        disabled={isDisabled}
-        action={{
-          name: "Help",
-          action: () => {},
-        }}
         value={value}
       />
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeStyle} value={type}>
-          <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
-          <Radio value={BORDER_TYPE.FLOAT_LABEL}>Float Label</Radio>
-          <Radio value={BORDER_TYPE.BORDERED}>Bordered</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeSize} value={isSmall}>
-          <Radio value={true}>Small</Radio>
-          <Radio value={false}>Default</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeDisabled} value={isDisabled}>
-          <Radio value={true}>Disabled</Radio>
-          <Radio value={false}>Not Disabled</Radio>
-        </Radio.Group>
-      </div>
     </div>
   );
 }
+
+export const Default = Template.bind({});

@@ -13,7 +13,7 @@ export interface TabsProps extends TabsPropsAnt {
 const { TabPane } = TabsAntd;
 
 function Tabs(props: TabsProps) {
-  const { mode, children, tabErrorKeys } = props;
+  const { mode, children, tabErrorKeys, ...rest } = props;
   const tabRef: React.LegacyRef<HTMLDivElement> = React.useRef();
 
   React.useEffect(() => {
@@ -52,7 +52,7 @@ function Tabs(props: TabsProps) {
   return (
     <>
       <div className={classNames("tabs__container")} ref={tabRef}>
-        <TabsAntd {...props} type={mode}>
+        <TabsAntd {...rest} type={mode}>
           {children}
         </TabsAntd>
       </div>

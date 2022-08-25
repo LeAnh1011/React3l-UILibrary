@@ -1,3 +1,13 @@
+import {
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import React from "react";
 import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
@@ -26,7 +36,7 @@ const list = [
   { id: 10, name: "Phòng truyền thông", code: "PTT" },
 ];
 
-export class DemoFilter extends ModelFilter {
+class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
   name: StringFilter = new StringFilter();
   code: StringFilter = new StringFilter();
@@ -39,7 +49,38 @@ const demoSearchFunc = (TModelFilter?: ModelFilter) => {
   return demoObservable;
 };
 
-export function AdvanceMultipleIdFilterMasterStories() {
+export default {
+  title: "AdvanceFilterMaster/AdvanceMultipleIdFilterMaster",
+  component: AdvanceMultipleIdFilterMaster,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    label: {
+      control: "text",
+      defaultValue: "Đơn vị tổ chức",
+    },
+    placeHolder: {
+      defaultValue: "Chọn đơn vị",
+    },
+  },
+};
+
+
+const Template: Story = (args) => {
 
   const [filter, setFilter] = React.useState(new DemoFilter());
 
@@ -64,15 +105,17 @@ export function AdvanceMultipleIdFilterMasterStories() {
   return (
     <div style={{ margin: "10px", width: "250px" }}>
       <AdvanceMultipleIdFilterMaster
-        values={filter.id.in}
-        placeHolder={"Tìm kiếm..."}
+      {...args}
+        values={filter?.id?.in}
         classFilter={DemoFilter}
         searchProperty={nameof(DemoFilter.name)}
         onChange={handleChangeFilter}
         getList={demoSearchFunc}
-        title={'Đơn vị'}
         preferOptions={list}
       />
     </div>
   );
 }
+
+
+export const Default = Template.bind({});

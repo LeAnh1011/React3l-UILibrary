@@ -1,3 +1,13 @@
+import { Story } from "@storybook/react";
+import {
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title
+} from "@storybook/addon-docs";
 import React, { Reducer } from "react";
 import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
@@ -9,6 +19,7 @@ import {
   advanceFilterService,
 } from "../../../services/advance-filter-service";
 import AdvanceIdFilterMaster from "./AdvanceIdFilterMaster";
+import { BORDER_TYPE } from "../../../config/enum";
 
 const demoObservable = new Observable<Model[]>((observer) => {
   setTimeout(() => {
@@ -35,7 +46,7 @@ const list = [
   { id: 10, name: "Phòng truyền thông", code: "PTT" },
 ];
 
-export class DemoFilter extends ModelFilter {
+class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
   name: StringFilter = new StringFilter();
   code: StringFilter = new StringFilter();
@@ -48,7 +59,37 @@ const demoSearchFunc = (TModelFilter: ModelFilter) => {
   return demoObservable;
 };
 
-export function AdvanceIdFilterMasterStories() {
+export default {
+  title: "AdvanceFilterMaster/AdvanceIdFilterMaster",
+  component: AdvanceIdFilterMaster,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    label: {
+      control: "text",
+      defaultValue: "Đơn vị tổ chức",
+    },
+    placeHolder: {
+      defaultValue: "Chọn đơn vị",
+    },
+  },
+};
+
+const Template: Story = (args) => {
   const [filter, dispatch] = React.useReducer<
     Reducer<DemoFilter, AdvanceFilterAction<DemoFilter>>
   >(advanceFilterReducer, filterValue);
@@ -64,16 +105,16 @@ export function AdvanceIdFilterMasterStories() {
     <div style={{ margin: "10px", width: "400px" }}>
       <AdvanceIdFilterMaster
         value={id}
-        placeHolder={"Tìm kiếm..."}
         classFilter={DemoFilter}
         valueFilter={filter}
         searchProperty={nameof(DemoFilter.name)}
         onChange={setValue}
         getList={demoSearchFunc}
-        title={"Đơn vị"}
         preferOptions={list}
-        maxLengthItem={40}
+        {...args}
       />
     </div>
   );
 }
+
+export const Default = Template.bind({});

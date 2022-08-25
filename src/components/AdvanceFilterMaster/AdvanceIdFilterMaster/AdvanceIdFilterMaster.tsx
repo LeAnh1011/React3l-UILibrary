@@ -31,8 +31,6 @@ export interface AdvanceIdFilterMasterProps<
 
   disabled?: boolean;
 
-  isMaterial?: boolean;
-
   isEnumList?: boolean;
 
   isIdValue?: boolean;
@@ -71,7 +69,6 @@ function AdvanceIdFilterMaster(
     searchType,
     placeHolder,
     disabled,
-    isMaterial,
     isEnumList,
     isIdValue,
     typeRender,
@@ -297,7 +294,6 @@ function AdvanceIdFilterMaster(
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
                 suffix={<Search16 />}
-                isMaterial={isMaterial}
                 ref={inputRef}
                 onKeyDown={handleKeyDown}
               />
@@ -375,7 +371,6 @@ AdvanceIdFilterMaster.defaultProps = {
   searchType: "contain",
   isEnumList: false,
   render: defaultRenderObject,
-  isMaterial: false,
   disabled: false,
   typeRender: "name",
   isIdValue: true,

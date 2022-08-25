@@ -17,7 +17,7 @@ export interface AdvanceTreeFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
-  title?: string;
+  label?: string;
   listItem?: Model[];
   item?: Model;
   isMaterial?: boolean;
@@ -76,7 +76,7 @@ function AdvanceTreeFilterMaster(
     render,
     selectWithPreferOption,
     preferOptions,
-    title,
+    label,
     maxLength,
     maxLengthItem,
   } = props;
@@ -197,7 +197,7 @@ function AdvanceTreeFilterMaster(
               {checkable &&
                 listItem?.length > 0 &&
                 "(" + listItem?.length + ") "}
-              {title}
+              {label}
             </span>
             <ChevronDown16 />
           </div>
@@ -211,7 +211,6 @@ function AdvanceTreeFilterMaster(
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
                 suffix={<Search16 />}
-                isMaterial={isMaterial}
                 ref={inputRef}
                 onKeyDown={handleKeyPress}
               />
@@ -249,7 +248,6 @@ AdvanceTreeFilterMaster.defaultProps = {
   searchType: "contain",
   classFilter: ModelFilter,
   onlySelectLeaf: false,
-  isMaterial: false,
   checkable: false,
   disabled: false,
   selectable: true,

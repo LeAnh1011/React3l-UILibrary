@@ -18,7 +18,7 @@ export interface AdvanceMultipleIdFilterMasterProps<
 > {
   values?: any[];
 
-  label: string;
+  label?: string;
 
   valueFilter?: TModelFilter;
 
@@ -29,8 +29,6 @@ export interface AdvanceMultipleIdFilterMasterProps<
   placeHolder?: string;
 
   disabled?: boolean;
-
-  isMaterial?: boolean;
 
   isEnumList?: boolean;
 
@@ -89,7 +87,6 @@ function AdvanceMultipleIdFilterMaster(
     searchType,
     placeHolder,
     disabled,
-    isMaterial,
     isEnumList,
     getList,
     onChange,
@@ -359,7 +356,6 @@ function AdvanceMultipleIdFilterMaster(
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
                 suffix={<Search16 />}
-                isMaterial={isMaterial}
                 ref={inputRef}
                 onKeyDown={handleKeyDown}
               />
@@ -454,7 +450,6 @@ AdvanceMultipleIdFilterMaster.defaultProps = {
   searchType: "contain",
   isEnumList: false,
   render: defaultRenderObject,
-  isMaterial: false,
   disabled: false,
   typeRender: "name",
   isIdValue: true,

@@ -251,7 +251,6 @@ function Select(props: SelectProps<Model, ModelFilter>) {
     if (isExpand && appendToBody) {
       const currentPosition = wrapperRef.current.getBoundingClientRect();
       const spaceBelow = window.innerHeight - currentPosition.bottom;
-      debugger
       if (spaceBelow <= 200) {
         setTimeout(() => {
           setAppendToBodyStyle({

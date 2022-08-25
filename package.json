@@ -2,7 +2,7 @@
   "homepage": "http://leanh1011.github.io/React3l-UILibrary",
   "name": "react3l-ui-library",
   "sideEffects": false,
-  "version": "0.1.89",
+  "version": "0.1.90",
   "main": "build/index.js",
   "files": [
     "build"
@@ -42,12 +42,11 @@
     "predeploy": "npm run build-storybook",
     "deploy": "gh-pages -d storybook-static",
     "publish-package": "npm version patch && npm publish",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx",
-    "testEcho": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn testEcho"
+      "pre-commit": "yarn lint-staged"
     }
   },
   "lint-staged": {

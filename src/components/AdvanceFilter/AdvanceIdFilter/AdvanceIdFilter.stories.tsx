@@ -12,7 +12,6 @@ import React from "react";
 import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
 import { of } from "rxjs";
-import FormItem from "../../FormItem/FormItem";
 import { BORDER_TYPE } from "./../../../config/enum";
 import AdvanceIdFilter from "./AdvanceIdFilter";
 
@@ -45,7 +44,6 @@ const list = [
 export default {
   title: "AdvanceFilter/AdvanceIdFilter",
   component: AdvanceIdFilter,
-  subcomponents: { FormItem },
   parameters: {
     controls: { expanded: true },
     docs: {
@@ -110,9 +108,6 @@ const Template: Story = (args) => {
   return (
     <div style={{ margin: "10px", width: "300px" }}>
       <div style={{ margin: "10px", width: "300px" }}>
-        <FormItem
-          message={"Error label"}
-        >
           <AdvanceIdFilter
           {...args}
             value={selectModel}
@@ -125,7 +120,6 @@ const Template: Story = (args) => {
             preferOptions={ list }
             appendToBody={true}
           />
-        </FormItem>
       </div>
     </div>
   );

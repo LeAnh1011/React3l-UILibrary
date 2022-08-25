@@ -22,8 +22,6 @@ interface AdvanceDateRangeFilterMasterProps {
 
   dateFormat?: string[];
 
-  isMaterial?: boolean;
-
   onChange?: (item?: any, value?: [Moment, Moment]) => void;
 
   title?: string;
@@ -49,6 +47,8 @@ interface AdvanceDateRangeFilterMasterProps {
   appendToBody?: boolean;
 
   translate?: TFunction;
+
+  placeholder?: [string, string];
 }
 
 const list = [
@@ -63,7 +63,7 @@ const list = [
 ];
 
 function AdvanceDateRangeFilterMaster(
-  props: AdvanceDateRangeFilterMasterProps & RangePickerProps
+  props: AdvanceDateRangeFilterMasterProps
 ) {
   const {
     value,
@@ -80,6 +80,7 @@ function AdvanceDateRangeFilterMaster(
     inputType,
     placeHolderSelect,
     translate,
+    ...rest
   } = props;
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
@@ -371,7 +372,7 @@ function AdvanceDateRangeFilterMaster(
           {isExpandDate && (
             <>
               <DateRange
-                {...props}
+                {...rest}
                 type={typeCustomDate}
                 isSmall={isSmall}
                 onChange={handleChange}
@@ -382,6 +383,7 @@ function AdvanceDateRangeFilterMaster(
                     : null
                 }
                 placeholder={placeholder}
+                disabled={disabled}
                 dropdownClassName="date-range-master"
                 onOpenChange={handleOpenChange}
               />
@@ -394,7 +396,6 @@ function AdvanceDateRangeFilterMaster(
 }
 
 AdvanceDateRangeFilterMaster.defaultProps = {
-  isMaterial: false,
   dateFormat: ["DD/MM/YYYY", "YYYY/MM/DD"],
   placeholder: ["Từ ngày", "Đến ngày"],
   type: ADVANCE_DATE_RANGE_TYPE.SHORT,

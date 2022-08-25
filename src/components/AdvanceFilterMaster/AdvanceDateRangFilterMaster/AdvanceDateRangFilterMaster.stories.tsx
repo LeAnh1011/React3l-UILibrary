@@ -1,10 +1,62 @@
 import React from "react";
+import {
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title
+} from "@storybook/addon-docs";
 import AdvanceDateRangFilterMaster, {
   ADVANCE_DATE_RANGE_TYPE,
 } from "./AdvanceDateRangFilterMaster";
 import { Radio, RadioChangeEvent } from "antd";
 import { BORDER_TYPE } from "../../../config/enum";
 import { useTranslation } from "react-i18next";
+
+
+export default {
+  title: "AdvanceFilterMaster/AdvanceDateRangFilterMaster",
+  component: AdvanceDateRangFilterMaster,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    label: {
+      control: "text",
+      defaultValue: "Đơn vị tổ chức",
+    },
+    placeHolder: {
+      defaultValue: "Chọn đơn vị",
+    },
+    type: {
+      control: {
+        type: "radio",
+        options: [
+          BORDER_TYPE.MATERIAL,
+          BORDER_TYPE.FLOAT_LABEL,
+          BORDER_TYPE.BORDERED,
+        ],
+      },
+      defaultValue: 0,
+    },
+  },
+};
+
 
 export function AdvanceDateRangeFilterMasterStories() {
   const [translate] = useTranslation();

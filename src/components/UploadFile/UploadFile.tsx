@@ -46,6 +46,7 @@ export interface UploadFileProps {
   type?: "link" | "button";
   /**Type button*/
   icon?: ReactNode;
+  isViewMode?: boolean;
 }
 /**Component upload file*/
 export function UploadFile(props: UploadFileProps) {
@@ -58,8 +59,9 @@ export function UploadFile(props: UploadFileProps) {
     removeFile,
     isBtnOutLine,
     maximumSize,
-    type,
+    type = "button",
     icon,
+    isViewMode,
   } = props;
   const [listFileLoading, setListFileLoading] = React.useState<FileModel[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -156,22 +158,24 @@ export function UploadFile(props: UploadFileProps) {
               {file?.name}
             </a>
           </div>
-          <div>
-            <Popconfirm
-              placement="leftTop"
-              title={"Bạn có chắc chắn muốn xóa?"}
-              onConfirm={() => removeFile(file.id)}
-              okText="Xóa"
-              cancelText="Hủy"
-              okType="danger"
-            >
-              <CloseFilled16 className="remove-file" />
-            </Popconfirm>
-          </div>
+          {!isViewMode && (
+            <div>
+              <Popconfirm
+                placement="leftTop"
+                title={"Bạn có chắc chắn muốn xóa?"}
+                onConfirm={() => removeFile(file.id)}
+                okText="Xóa"
+                cancelText="Hủy"
+                okType="danger"
+              >
+                <CloseFilled16 className="remove-file" />
+              </Popconfirm>
+            </div>
+          )}
         </div>
       );
     },
-    [removeFile]
+    [removeFile, isViewMode]
   );
 
   const renderLoadingFile = React.useCallback(
@@ -210,34 +214,37 @@ export function UploadFile(props: UploadFileProps) {
 
   return (
     <div className="upload-button__container">
-      <div>
-        {type === "link" ? (
-          <div className="upload-link" onClick={handleClickButton}>
-            {icon ? icon : <Upload16 />}
-            <span className="upload-content m-l--xxs">{uploadContent}</span>
-          </div>
-        ) : (
-          <Button
-            type={isBtnOutLine ? "outline-primary" : "primary"}
-            className="btn--lg"
-            onClick={handleClickButton}
-          >
-            {uploadContent}
-          </Button>
-        )}
+      {!isViewMode && (
+        <div>
+          {type === "link" ? (
+            <div className="upload-link" onClick={handleClickButton}>
+              {icon ? icon : <Upload16 />}
+              <span className="upload-content m-l--xxs">{uploadContent}</span>
+            </div>
+          ) : (
+            <Button
+              type={isBtnOutLine ? "outline-primary" : "primary"}
+              className="btn--lg"
+              onClick={handleClickButton}
+            >
+              {uploadContent}
+            </Button>
+          )}
 
-        <input
-          type="file"
-          style={{ display: "none" }}
-          multiple={isMultiple}
-          ref={fileRef}
-          onChange={handleChangeFile}
-        />
-      </div>
+          <input
+            type="file"
+            style={{ display: "none" }}
+            multiple={isMultiple}
+            ref={fileRef}
+            onChange={handleChangeFile}
+          />
+        </div>
+      )}
       <div className="upload-button__list-file m-t--xxs">
         {oldFiles?.length > 0 &&
           oldFiles.map((file, index) => renderOldFile(file, index))}
         {listFileLoading?.length > 0 &&
+          !isViewMode &&
           listFileLoading.map((file, index) =>
             isLoading ? (
               <div className="file-container" key={index}>

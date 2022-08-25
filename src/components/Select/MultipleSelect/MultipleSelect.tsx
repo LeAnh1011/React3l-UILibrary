@@ -128,7 +128,11 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
       const cloneValueFilter = valueFilter
         ? JSON.parse(JSON.stringify(valueFilter))
         : new ClassFilter();
-      cloneValueFilter[searchProperty][searchType] = searchTerm;
+      if (searchType) {
+        cloneValueFilter[searchProperty][searchType] = searchTerm;
+      } else {
+        cloneValueFilter[searchProperty] = searchTerm
+      }
       handleGetList(cloneValueFilter);
     },
     {

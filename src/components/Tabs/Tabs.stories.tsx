@@ -26,13 +26,13 @@ function Default() {
     <>
       <div style={{ margin: "10px", width: "550px" }}>
         <Tabs mode={type} tabErrorKeys={errors}>
-          <TabPane tab="Tab 1" key="tabso1">
+          <TabPane tab="Tab 1" key={"tabso1"}>
             Content of Tab Pane 1
           </TabPane>
-          <TabPane tab="Tab 2" key="tabso2">
+          <TabPane tab="Tab 2" key={"tabso2"}>
             Content of Tab Pane 2
           </TabPane>
-          <TabPane tab="Tab 3" key="tabso3" className="ant-tabs-tab__child">
+          <TabPane tab="Tab 3" key={"tabso3"} className="ant-tabs-tab__child">
             Content of Tab Pane 3
           </TabPane>
         </Tabs>

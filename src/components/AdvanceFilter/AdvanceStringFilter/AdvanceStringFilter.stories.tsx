@@ -1,4 +1,3 @@
-import { Story } from "@storybook/react";
 import {
   ArgsTable,
   Description,
@@ -6,17 +5,16 @@ import {
   PRIMARY_STORY,
   Stories,
   Subtitle,
-  Title,
+  Title
 } from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import React from "react";
-import FormItem from "../../FormItem/FormItem";
 import { BORDER_TYPE } from "./../../../config/enum";
 import AdvanceStringFilter from "./AdvanceStringFilter";
 
 export default {
   title: "AdvanceFilter/AdvanceStringFilter",
   component: AdvanceStringFilter,
-  subcomponents: { FormItem },
   parameters: {
     controls: { expanded: true },
     docs: {
@@ -74,13 +72,11 @@ const Template: Story = (args) => {
   return (
     <div style={{ width: "300px", padding: "10px" }}>
       <div style={{ margin: "15px 0" }}>
-        <FormItem message={"Helper text"}>
           <AdvanceStringFilter
             {...args}
             value={inputValue}
             onChange={handleChangeValue}
           />
-        </FormItem>
       </div>
     </div>
   );

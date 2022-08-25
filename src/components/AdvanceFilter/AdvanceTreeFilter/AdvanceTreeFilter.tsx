@@ -19,7 +19,6 @@ export interface AdvanceTreeFilterProps<
   title?: string;
   listItem?: Model[];
   item?: Model;
-  isMaterial?: boolean;
   searchProperty?: string;
   searchType?: string;
   checkable?: boolean;
@@ -62,7 +61,6 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
   const {
     listItem,
     item,
-    isMaterial,
     checkStrictly,
     searchProperty,
     searchType,
@@ -217,7 +215,6 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
           {checkable ? (
             <InputTag
               listValue={listItem}
-              isMaterial={isMaterial}
               render={render}
               placeHolder={placeHolder}
               disabled={disabled}
@@ -236,7 +233,6 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
             <InputSelect
               value={item}
               render={render}
-              isMaterial={isMaterial}
               placeHolder={placeHolder}
               expanded={expanded}
               disabled={disabled}
@@ -286,7 +282,6 @@ AdvanceTreeFilter.defaultProps = {
   searchType: "contain",
   classFilter: ModelFilter,
   onlySelectLeaf: false,
-  isMaterial: false,
   checkable: false,
   disabled: false,
   selectable: true,

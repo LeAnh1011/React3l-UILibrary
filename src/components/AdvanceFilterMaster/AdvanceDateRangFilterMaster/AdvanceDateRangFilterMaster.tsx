@@ -1,13 +1,12 @@
 import Calendar16 from "@carbon/icons-react/es/calendar/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
-import type { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import DateRange from "components/Calendar/DateRange";
 import InputSelect from "components/Input/InputSelect";
 import { BORDER_TYPE } from "config/enum";
+import { TFunction } from "i18next";
 import moment, { Moment } from "moment";
 import React, { RefObject } from "react";
-import { TFunction } from "i18next";
 import { Model } from "react3l-common";
 import { CommonService } from "services/common-service";
 import "./AdvanceDateRangFilterMaster.scss";
@@ -29,8 +28,6 @@ interface AdvanceDateRangeFilterMasterProps {
   dateFormat?: string[];
 
   onChange?: (item?: any, value?: [Moment, Moment]) => void;
-
-  title?: string;
 
   className?: string;
 

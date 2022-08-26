@@ -59,18 +59,13 @@
       "react-app",
       "react-app/jest"
     ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off",
-          "no-console": "warn",
-          "no-debugger": "error"
-        }
-      }
-    ],
+    "rules": {
+      "no-unused-vars": "off",
+      "import/no-anonymous-default-export": "off",
+      "@typescript-eslint/no-unused-vars": "error",
+      "no-console": "warn",
+      "no-debugger": "error"
+    },
     "ignorePatterns": [
       "build/**/*",
       "src/**/*.test.{ts,tsx}"

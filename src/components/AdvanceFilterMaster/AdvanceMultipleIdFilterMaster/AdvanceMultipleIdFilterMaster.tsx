@@ -18,7 +18,7 @@ export interface AdvanceMultipleIdFilterMasterProps<
 > {
   values?: any[];
 
-  label: string;
+  label?: string;
 
   valueFilter?: TModelFilter;
 

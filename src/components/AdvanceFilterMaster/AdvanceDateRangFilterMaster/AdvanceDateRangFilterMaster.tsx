@@ -32,8 +32,6 @@ interface AdvanceDateRangeFilterMasterProps {
 
   onChange?: (item?: any, value?: [Moment, Moment]) => void;
 
-  title?: string;
-
   className?: string;
 
   disabled?: boolean;
@@ -389,6 +387,7 @@ function AdvanceDateRangeFilterMaster(
             <>
               <DateRange
                 {...props}
+                label={""}
                 type={typeCustomDate}
                 isSmall={isSmall}
                 onChange={handleChange}

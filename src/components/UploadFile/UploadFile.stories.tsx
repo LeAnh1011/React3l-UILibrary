@@ -38,16 +38,6 @@ class ModelOBJ extends Model {
   public files?: FileModel[];
 }
 
-export default {
-  /* 👇 The title prop is optional.
-  * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
-  * to learn how to generate automatic titles
-  */
-  title: 'UploadFile',
-  component: UploadFile,
-  
-};
-
 export const Default = () => {
   const [model, setModel] = React.useState<ModelOBJ>({ ...new ModelOBJ() });
 
@@ -91,8 +81,7 @@ export const Default = () => {
       isMultiple={false}
       type="link"
     ></UploadFile>
-    
   );
-}
+};
 
-
+storiesOf("UploadFile", module).add(nameof(Default), Default);

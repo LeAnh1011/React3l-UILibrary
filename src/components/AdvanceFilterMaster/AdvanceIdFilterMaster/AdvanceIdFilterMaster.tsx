@@ -19,7 +19,7 @@ export interface AdvanceIdFilterMasterProps<
 > {
   value?: number | string;
 
-  label: string;
+  label?: string;
 
   valueFilter?: TModelFilter;
 

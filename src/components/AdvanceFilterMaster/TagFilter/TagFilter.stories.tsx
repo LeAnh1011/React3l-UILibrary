@@ -1,4 +1,3 @@
-import { Moment } from "moment";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -13,7 +12,7 @@ import AdvanceDateRangFilterMaster from "../AdvanceDateRangFilterMaster/AdvanceD
 import AdvanceIdFilterMaster from "../AdvanceIdFilterMaster/AdvanceIdFilterMaster";
 import AdvanceMultipleIdFilterMaster from "../AdvanceMultipleIdFilterMaster/AdvanceMultipleIdFilterMaster";
 import TagFilter from "./TagFilter";
-import { CommonService } from "services/common-service";
+import { CommonService } from "./../../../services/common-service";
 
 export class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
@@ -125,7 +124,6 @@ export function TagFilterStories() {
           searchProperty={"name"}
           onChange={handleChangeOrganization}
           getList={appUserSearchFunc}
-          title={"Người vận chuyển"}
           render={(t) => CommonService.limitWord(t?.displayName, 25)}
         />
 
@@ -136,11 +134,9 @@ export function TagFilterStories() {
           searchProperty={"name"}
           onChange={handleChangeFilter}
           getList={orgSearchFunc}
-          title={"Đơn vị"}
         />
 
         <AdvanceDateRangFilterMaster
-          title={"Ngày giao hàng"}
           onChange={handleChange}
           activeItem={item}
           value={value}
@@ -149,11 +145,11 @@ export function TagFilterStories() {
       </div>
       <TagFilter
         value={filter}
-        mappingField={{appUserId: 'displayName'}}
+        mappingField={{ appUserId: "displayName" }}
         keyTranslate={"demo"}
         onClear={handleClear}
         handleChangeFilter={handleChangeAllFilter}
-        exceptField={['appUserId']}
+        exceptField={["appUserId"]}
       />
     </div>
   );

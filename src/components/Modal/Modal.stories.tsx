@@ -1,16 +1,67 @@
-import { storiesOf } from "@storybook/react";
-import Radio, { RadioChangeEvent } from "antd/lib/radio";
+import {
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
+import React from "react";
+import Button from "../Button";
 import FormItem from "../FormItem";
-import Modal, { MODAL_SIZE } from "./Modal";
 import InputText from "../Input/InputText/InputText";
 import { BORDER_TYPE, ValidateStatus } from "./../../config/enum";
-import React from "react";
+import Modal, { MODAL_SIZE } from "./Modal";
 
-function Default() {
-  const [size, setSize] = React.useState<MODAL_SIZE>(MODAL_SIZE["1024px"]);
-  const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
-    setSize(event.target.value);
-  }, []);
+export default {
+  title: "Modal",
+  component: Modal,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    title: {
+      control: "text",
+      defaultValue: "Thông tin chi tiết",
+    },
+   
+    size: {
+      control: {
+        type: "radio",
+        options: [
+          MODAL_SIZE.SIZE_320,
+          MODAL_SIZE.SIZE_520,
+          MODAL_SIZE.SIZE_720,
+          MODAL_SIZE.SIZE_1200,
+          MODAL_SIZE.SIZE_1024,
+        ],
+      },
+      defaultValue: MODAL_SIZE.SIZE_720,
+    },
+    visibleFooter: {
+      defaultValue: true
+    }
+   
+  },
+};
+
+
+const Template: Story = (args) => {
   const [visible, setVisible] = React.useState<boolean>(true);
 
   function handleSave() {
@@ -23,31 +74,20 @@ function Default() {
 
   return (
     <div>
-      <div>
-        <div style={{ margin: "10px", width: "500px" }}>
-          <Radio.Group onChange={handleChangeSize} value={size}>
-            <Radio value={MODAL_SIZE.SIZE_320}>320px</Radio>
-            <Radio value={MODAL_SIZE.SIZE_520}>520px</Radio>
-            <Radio value={MODAL_SIZE.SIZE_720}>720px</Radio>
-            <Radio value={MODAL_SIZE.SIZE_1024}>1024px</Radio>
-            <Radio value={MODAL_SIZE.SIZE_1200}>1200px</Radio>
-          </Radio.Group>
-        </div>
-      </div>
-      <button
+      <Button
+      type="primary"
         onClick={() => {
           setVisible(true);
         }}
       >
         show modal
-      </button>
+      </Button>
       <Modal
+      {...args}
         visible={visible}
         handleSave={handleSave}
         handleCancel={handleCancel}
-        visibleFooter={true}
-        size={size}
-        title="Modal Title"
+        handleApplyNext={handleSave}
       >
         <div
           style={{
@@ -86,4 +126,4 @@ function Default() {
   );
 }
 
-storiesOf("Modal", module).add("Default", Default);
+export const Default = Template.bind({});

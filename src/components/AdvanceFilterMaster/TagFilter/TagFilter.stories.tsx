@@ -1,11 +1,19 @@
-import { Moment } from "moment";
 import React from "react";
+import {
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title
+} from "@storybook/addon-docs";
 import { useTranslation } from "react-i18next";
 import {
   DateFilter,
   IdFilter,
   NumberFilter,
-  StringFilter,
+  StringFilter
 } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
 import { Observable } from "rxjs";
@@ -13,9 +21,9 @@ import AdvanceDateRangFilterMaster from "../AdvanceDateRangFilterMaster/AdvanceD
 import AdvanceIdFilterMaster from "../AdvanceIdFilterMaster/AdvanceIdFilterMaster";
 import AdvanceMultipleIdFilterMaster from "../AdvanceMultipleIdFilterMaster/AdvanceMultipleIdFilterMaster";
 import TagFilter from "./TagFilter";
-import { CommonService } from "services/common-service";
+import { Story } from "@storybook/react";
 
-export class DemoFilter extends ModelFilter {
+class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
   name: StringFilter = new StringFilter();
   code: StringFilter = new StringFilter();
@@ -60,7 +68,28 @@ const appUserSearchFunc = (TModelFilter?: ModelFilter) => {
   return appUserObservable;
 };
 
-export function TagFilterStories() {
+export default {
+  title: "AdvanceFilterMaster/TagFilter",
+  component: TagFilter,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+};
+
+const Template: Story = (args) => {
   const filterValue = React.useMemo(() => {
     const filterValue = new DemoFilter();
     return filterValue;
@@ -125,9 +154,8 @@ export function TagFilterStories() {
           searchProperty={"name"}
           onChange={handleChangeOrganization}
           getList={appUserSearchFunc}
-          title={"Người vận chuyển"}
-          render={(t) => CommonService.limitWord(t?.displayName, 25)}
-        />
+          label={"Người vận chuyển"}
+          render={(t) => t?.displayName}        />
 
         <AdvanceMultipleIdFilterMaster
           values={filter?.organizationId?.in}
@@ -136,11 +164,11 @@ export function TagFilterStories() {
           searchProperty={"name"}
           onChange={handleChangeFilter}
           getList={orgSearchFunc}
-          title={"Đơn vị"}
+          label={"Đơn vị"}
         />
 
         <AdvanceDateRangFilterMaster
-          title={"Ngày giao hàng"}
+          label={"Ngày giao hàng"}
           onChange={handleChange}
           activeItem={item}
           value={value}
@@ -148,6 +176,7 @@ export function TagFilterStories() {
         />
       </div>
       <TagFilter
+      {...args}
         value={filter}
         mappingField={{appUserId: 'displayName'}}
         keyTranslate={"demo"}
@@ -158,3 +187,5 @@ export function TagFilterStories() {
     </div>
   );
 }
+
+export const Default = Template.bind({});

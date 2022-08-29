@@ -1,6 +1,14 @@
-import { storiesOf } from "@storybook/react";
+import {
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import React from "react";
-import nameof from "ts-nameof.macro";
 import ProgressIndicator from "./ProgressIndicator";
 
 const listEnum = [
@@ -29,12 +37,34 @@ const listEnum = [
     sessionName: "KhangMeow",
   },
 ];
-function Default() {
+
+
+export default {
+  title: "ProgressIndicator",
+  component: ProgressIndicator,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+}
+const Template: Story = (args) => {
   // const [currentId,setCurrentId] = React.useState<number>(1);
   return (
     <div style={{ display: "flex" }}>
       <div style={{ width: 200 }}>
-        <ProgressIndicator list={listEnum} />
+        <ProgressIndicator {...args} list={listEnum} />
       </div>
       <div style={{ width: 900 }}>
         <div
@@ -83,4 +113,4 @@ function Default() {
   );
 }
 
-storiesOf("ProgressIndicator", module).add(nameof(Default), Default);
+export const Default = Template.bind({});

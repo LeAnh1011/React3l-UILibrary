@@ -59,7 +59,6 @@ function AdvanceTreeFilterMaster(
   const {
     listItem,
     item,
-    isMaterial,
     checkStrictly,
     searchProperty,
     searchType,

@@ -67,7 +67,7 @@ const demoSearchFunc = (TModelFilter?: ModelFilter) => {
 };
 
 export default {
-  title: "AdvanceFilter/AdvanceTreeFilterMaster",
+  title: "AdvanceFilterMaster/AdvanceTreeFilterMaster",
   component: AdvanceTreeFilterMaster,
   parameters: {
     controls: { expanded: true },

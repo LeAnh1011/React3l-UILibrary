@@ -16,6 +16,8 @@ export function AdvanceDateRangeFilterMasterStories() {
   const [typeInput, setTypeInput] = React.useState<BORDER_TYPE>(
     BORDER_TYPE.BORDERED
   );
+  const [label, setLabel] = React.useState("Ngày giao hàng");
+
   const handleChange = React.useCallback((item, dateMoment) => {
     setValue(dateMoment);
     setItem(item);
@@ -29,10 +31,14 @@ export function AdvanceDateRangeFilterMasterStories() {
     setTypeInput(event.target.value);
   }, []);
 
+  const handleChangeLabel = React.useCallback((event: RadioChangeEvent) => {
+    setLabel(event.target.value);
+  }, []);
+
   return (
     <div style={{ margin: "10px", width: "300px" }}>
       <AdvanceDateRangFilterMaster
-        label={"Ngày giao hàng"}
+        label={label}
         onChange={handleChange}
         activeItem={item}
         type={type}
@@ -46,6 +52,10 @@ export function AdvanceDateRangeFilterMasterStories() {
         <Radio.Group onChange={handleChangeTyle} value={type}>
           <Radio value={ADVANCE_DATE_RANGE_TYPE.SHORT}>SHORT</Radio>
           <Radio value={ADVANCE_DATE_RANGE_TYPE.INPUT}>Input</Radio>
+        </Radio.Group>
+        <Radio.Group onChange={handleChangeLabel} value={label}>
+          <Radio value={"Ngày giao hàng"}>Ngày giao hàng</Radio>
+          <Radio value={"Ngày giao hàng đã đổi"}>Ngày giao hàng đã đổi</Radio>
         </Radio.Group>
       </div>
       {type === ADVANCE_DATE_RANGE_TYPE.INPUT && (

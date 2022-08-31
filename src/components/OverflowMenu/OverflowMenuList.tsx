@@ -5,7 +5,7 @@ import "./OverflowMenu.scss";
 
 export interface CustomProps {
   setExpand?: Dispatch<SetStateAction<boolean>>;
-  children?: any;
+  list?: any;
   appendToBody?: boolean;
   selectListRef?: RefObject<HTMLDivElement>;
   appendToBodyStyle?: React.CSSProperties;
@@ -13,7 +13,7 @@ export interface CustomProps {
 }
 
 function OverflowMenuList(props: CustomProps) {
-  const { setExpand, children, selectListRef, appendToBodyStyle, size } = props;
+  const { setExpand, list, selectListRef, appendToBodyStyle, size } = props;
 
   const handleMove = React.useCallback(
     (action) => (event: any) => {
@@ -62,9 +62,9 @@ function OverflowMenuList(props: CustomProps) {
           onClick={() => setExpand(false)}
           ref={selectListRef}
         >
-          {children &&
-            children?.length > 0 &&
-            children.map((item: any, index: number) => (
+          {list &&
+            list?.length > 0 &&
+            list.map((item: any, index: number) => (
               <button
                 className={classNames("select__item ", {
                   "btn--md p-l--sm p-y--xxs": size === "md",

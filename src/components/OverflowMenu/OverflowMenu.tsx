@@ -5,12 +5,12 @@ import { CommonService } from "services/common-service";
 import "./OverflowMenu.scss";
 import OverflowMenuList from "./OverflowMenuList";
 export interface CustomProps {
-  children?: any;
+  list?: any[];
   size?: "md" | "xl";
   appendToBody?: boolean;
 }
 function OverflowMenu(props: CustomProps) {
-  const { size, children, appendToBody } = props;
+  const { size, list, appendToBody } = props;
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
@@ -104,7 +104,7 @@ function OverflowMenu(props: CustomProps) {
       {isExpand && (
         <OverflowMenuList
           setExpand={setExpand}
-          children={children}
+          list={list}
           selectListRef={selectListRef}
           appendToBodyStyle={appendToBodyStyle}
           size={size}

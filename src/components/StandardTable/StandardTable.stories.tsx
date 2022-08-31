@@ -1,18 +1,30 @@
 import Add16 from "@carbon/icons-react/es/add/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import ChevronUp16 from "@carbon/icons-react/es/chevron--up/16";
-import { storiesOf } from "@storybook/react";
-import { Tabs } from "antd";
-import Radio, { RadioChangeEvent } from "antd/lib/radio";
+import {
+  ArgsTable,
+  Description,
+  Heading,
+  Primary,
+  PRIMARY_STORY,
+  Source,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import { ColumnProps } from "antd/lib/table";
 // import { Model } from "react3l-common";
 import { Key, RowSelectionType } from "antd/lib/table/interface";
 import React, { useMemo } from "react";
 import { StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
-import nameof from "ts-nameof.macro";
+import { of } from "rxjs";
+import dedent from "ts-dedent";
 import Button from "../Button/Button";
+import Select from "../Select/SingleSelect/Select";
 import ActionBarComponent from "./ActionBarComponent/ActionBarComponent";
+import { dataSource } from "./Data";
 import BadgeText from "./DataCellComponent/BadgeText/BadgeText";
 import OneLineText from "./DataCellComponent/OneLineText/OneLineText";
 import StatusLine from "./DataCellComponent/StatusLine/StatusLine";
@@ -21,34 +33,387 @@ import LayoutCell from "./LayoutCell/LayoutCell";
 import LayoutHeader from "./LayoutHeader/LayoutHeader";
 import Pagination from "./Pagination/Pagination";
 import StandardTable from "./StandardTable";
-import OverflowMenu from "../OverflowMenu/OverflowMenu";
 import "./StandardTable.scss";
-import InputSearch from "../Input/InputSearch/InputSearch";
-import Select from "../Select/SingleSelect/Select";
-import { of } from "rxjs";
+import { StandardTableDefault } from "./StandardTableStories";
 
 const KateBishop =
   "https://cdn.searchenginejournal.com/wp-content/uploads/2019/07/the-essential-guide-to-using-images-legally-online-1520x800.png";
-const { TabPane } = Tabs;
-export class DemoFilter extends ModelFilter {
+
+class DemoFilter extends ModelFilter {
   name: StringFilter = new StringFilter();
   code: StringFilter = new StringFilter();
 }
-export enum AVATAR_TYPE {
+enum AVATAR_TYPE {
   CIRCLE = "circle",
   SQUARE = "square",
 }
-export enum SIZE_TYPE {
+enum SIZE_TYPE {
   LARGE = "lg",
   MEDIUM = "md",
   SMALL = "sm",
 }
-export enum ORDER_TYPE {
+enum ORDER_TYPE {
   LEFT = "left",
   CENTER = "center",
   RIGHT = "right",
 }
-function Default() {
+
+export default {
+  title: "Table/StandardTable",
+  component: StandardTable,
+  subcomponents: { LayoutHeader, LayoutCell, OneLineText, TwoLineText },
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description children="_A table displays rows of data._" />
+          <Primary />
+          <Heading children={"DataSource"} />
+          <Source
+            language="js"
+            code={dedent`
+          const dataSource = [
+            {
+              id: 100,
+              key: 1,
+              code: "/landing-page",
+              name: "Cổng thông tin doanh nghiệp",
+              description: "mô tả hihi",
+              lightIcon:
+                "/rpc/utils/public-file/download/site/20220715/6e511d35-411a-4580-b189-02f9106e82ff.png",
+              lightLogo:
+                "/rpc/utils/public-file/download/site/20220715/572c85b8-4dd5-4832-9bfc-8cb9e7a5b072.png",
+              darkIcon:
+                "/rpc/utils/public-file/download/site/20220715/507d2788-76f8-4470-aceb-5a961778e3c3.png",
+              darkLogo:
+                "/rpc/utils/public-file/download/site/20220715/a8dfc993-18e0-48e6-a600-e3ce03d61448.png",
+              colorCode: null,
+              isDisplay: true,
+              themeId: null,
+              siteTypeId: 3,
+              siteType: {
+                id: 3,
+                code: "Setting",
+                name: "Cài đặt",
+              },
+            },
+            {
+              id: 18,
+              key: 2,
+              code: "/construction/",
+              name: "CONSTRUCTION",
+              description: null,
+              lightIcon: null,
+              lightLogo: null,
+              darkIcon: null,
+              darkLogo: null,
+              colorCode: null,
+              isDisplay: false,
+              themeId: null,
+              siteTypeId: 3,
+              siteType: {
+                id: 3,
+                code: "Setting",
+                name: "Cài đặt",
+              },
+            },
+          ]
+        `}
+          />
+          <Heading children={"Columns"} />
+          <Source
+            language="ts"
+            code={dedent`
+        const columns: ColumnProps<any>[] = useMemo(
+          () => [
+            {
+              title: ({ sortColumns }) => {
+                const sortedColumn = sortColumns?.find(
+                  ({ column }) => column.key === "code"
+                );
+                return (
+                  <div>
+                    <LayoutHeader
+                      orderType={ORDER_TYPE.LEFT}
+                      title="Code"
+                      sortedColumn={sortedColumn}
+                      isSorter
+                    />
+                  </div>
+                );
+              },
+              dataIndex: "code",
+              key: "code",
+              sorter: true,
+              width: 135,
+              fixed: "left",
+              ellipsis: true,
+              render(...[code]) {
+                return (
+                  <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={SIZE_TYPE.LARGE}>
+                    <OneLineText value={code} countCharacters={5} />
+                  </LayoutCell>
+                );
+              },
+            },
+            {
+              title: ({ sortColumns }) => {
+                const sortedColumn = sortColumns?.find(
+                  ({ column }) => column.key === "name"
+                );
+                return (
+                  <div>
+                    <LayoutHeader
+                      orderType={ORDER_TYPE.LEFT}
+                      title="Name"
+                      sortedColumn={sortedColumn}
+                      isSorter
+                    />
+                  </div>
+                );
+              },
+              dataIndex: "name",
+              key: "name",
+              sorter: true,
+      
+              ellipsis: true,
+              render(...[name]) {
+                return (
+                  <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={SIZE_TYPE.LARGE}>
+                    <OneLineText
+                      avatar={KateBishop}
+                      avatarType={avatarType}
+                      value={name}
+                      link="https://www.youtube.com/"
+                      avatarSize={SIZE_TYPE.LARGE}
+                    />
+                  </LayoutCell>
+                );
+              },
+            },
+      
+            {
+              title: ({ sortColumns }) => {
+                const sortedColumn = sortColumns?.find(
+                  ({ column }) => column.key === "taxCode"
+                );
+                return (
+                  <div>
+                    <LayoutHeader
+                      orderType={ORDER_TYPE.LEFT}
+                      title="TaxCode"
+                      sortedColumn={sortedColumn}
+                      isSorter
+                    />
+                  </div>
+                );
+              },
+              dataIndex: "taxCode",
+              key: "taxCode",
+              sorter: true,
+              ellipsis: true,
+              render(...[taxCode]) {
+                return (
+                  <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={SIZE_TYPE.LARGE}>
+                    <OneLineText value={taxCode} link="/ksjhdfkshj" />
+                  </LayoutCell>
+                );
+              },
+            },
+            {
+              title: ({ sortColumns }) => {
+                const sortedColumn = sortColumns?.find(
+                  ({ column }) => column.key === "appUserId"
+                );
+                return (
+                  <div>
+                    <LayoutHeader
+                      orderType={ORDER_TYPE.LEFT}
+                      title="AppUser"
+                      sortedColumn={sortedColumn}
+                      isSorter
+                    />
+                  </div>
+                );
+              },
+              dataIndex: "appUserId",
+              key: "appUser",
+              sorter: true,
+              ellipsis: true,
+              render(...[appUser]) {
+                return (
+                  <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={SIZE_TYPE.LARGE}>
+                    <OneLineText icon="tio-calendar_month" value={appUser?.displayName} />
+                  </LayoutCell>
+                );
+              },
+            },
+            
+            {
+              title: <LayoutHeader orderType={ORDER_TYPE.LEFT} title="Action" />,
+              key: "status",
+      
+              ellipsis: true,
+              dataIndex: "status",
+              render(...[status]) {
+                return (
+                  <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={SIZE_TYPE.LARGE}>
+                    <StatusLine value={status} color="red" />
+                  </LayoutCell>
+                );
+              },
+            },
+            {
+              key: "id",
+              width: 80,
+              fixed: "right",
+              ellipsis: true,
+              dataIndex: "id",
+              render() {
+                return (
+                  <div className="d-flex align-items-center justify-content-center">
+                    <OverflowMenu size="md" list={list}></OverflowMenu>
+                  </div>
+                );
+              },
+            },
+           
+          ],
+          [avatarType, list, orderType, size]
+        );
+        `}
+          />
+          <Heading children={"LayoutHeader"} />
+          <Description children="LayoutHeader Description ...." />
+          <Source
+            language="ts"
+            code={dedent`
+            <LayoutHeader
+              orderType={ORDER_TYPE.LEFT}
+              title="Site Type"
+              sortedColumn={sortedColumn}
+              isSorter
+            />
+            `}
+          />
+          <Heading children={"LayoutCell"} />
+          <Description children="LayoutCell Description ...." />
+          <Source
+            language="js"
+            code={dedent`
+            <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={SIZE_TYPE.LARGE}>
+              ...
+            </LayoutCell>
+            `}
+          />
+          <Heading children={"OneLineText"} />
+          <Description children="OneLineText Description ...." />
+          <Source
+            language="js"
+            code={dedent`
+            <OneLineText value={'Value'} countCharacters={20} />`}
+          />
+
+          <Heading children={"TwoLineText"} />
+          <Description children="TwoLineText Description ...." />
+          <Source
+            language="js"
+            code={dedent`
+            <TwoLineText
+                avatar={KateBishop}
+                avatarType={avatarType}
+                valueLine1={version}
+                valueLine2={"facebook"}
+                link="/ksdjflsf"
+              />`}
+          />
+          <Heading children={"StatusLine"} />
+          <Description children="StatusLine Description ...." />
+          <Source
+            language="js"
+            code={dedent`
+            <StatusLine value={status} color="red" />`}
+          />
+          <Heading children={"Sorting"} />
+          <Description
+            markdown={dedent`
+            Insert description here.
+          `}
+          />
+          <Source
+            language="js"
+            code={dedent`
+              title: ({ sortColumns }) => {
+                const sortedColumn = sortColumns?.find(
+                  ({ column }) => column.key === "appUserId"
+                );
+                return (
+                  <div>
+                    <LayoutHeader
+                      orderType={ORDER_TYPE.LEFT}
+                      title="AppUser"
+                      sortedColumn={sortedColumn}
+                      isSorter
+                    />
+                  </div>
+                );
+              },
+        `}
+          />
+          <Heading children={"RowSelection"} />
+          <Description
+            markdown={dedent`
+            Insert description here.
+          `}
+          />
+          <Source
+            language="js"
+            code={dedent`
+            const typeRowSelection: RowSelectionType = "checkbox";
+            const [selectedRowKeys, setSelectedRowKeys] = React.useState<Key[]>([10]);
+          
+            const rowSelection = {
+              onChange(selectedKeys: Key[]) {
+                setSelectedRowKeys(selectedKeys);
+              },
+              selectedRowKeys,
+              type: typeRowSelection,
+              getCheckboxProps: (record) => {
+                return {
+                  disabled: record.id === 10 || record.id === 100,
+                };
+              },
+            };
+        `}
+          />
+         
+          <Stories title=""/>
+          <Source
+            language="js"
+            code={dedent`
+            const expandable = {
+              expandedRowRender: expandedRowRender, // collums setup
+              expandIcon: ({ expanded, onExpand, record }) =>
+                expanded ? (
+                  <ChevronUp16 onClick={(e) => onExpand(record, e)} />
+                ) : (
+                  <ChevronDown16 onClick={(e) => onExpand(record, e)} />
+                ),
+            };
+        `}
+          />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+        </>
+      ),
+    },
+  },
+};
+
+const Template: Story = (args) => {
   const [filter, setFilter] = React.useState<DemoFilter>(new DemoFilter());
   const [loading, setLoading] = React.useState<boolean>(false);
   const [selectModel, setSelectModel] = React.useState<Model>({
@@ -97,35 +462,18 @@ function Default() {
     },
     [filter, setFilter]
   );
-  const [avatarType, setAvatarType] = React.useState<AVATAR_TYPE>(
-    AVATAR_TYPE.CIRCLE
-  );
-  const [size, setSize] = React.useState<SIZE_TYPE>(SIZE_TYPE.LARGE);
-  const [orderType, setOrderType] = React.useState<ORDER_TYPE>(ORDER_TYPE.LEFT);
-  const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
-    setOrderType(event.target.value);
-  }, []);
-  const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
-    setSize(event.target.value);
-  }, []);
-  const handleChangeAvatarType = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setAvatarType(event.target.value);
-    },
-    []
-  );
 
   const expandedRowRender = () => {
     const columns: ColumnProps<any>[] = [
       {
-        title: <LayoutHeader orderType={orderType} title="Title" />,
+        title: <LayoutHeader orderType={ORDER_TYPE.LEFT} title="Title" />,
         dataIndex: "type",
         key: "type",
         width: 135,
         ellipsis: true,
         render(...[type]) {
           return (
-            <LayoutCell orderType={orderType} tableSize={size}>
+            <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={SIZE_TYPE.LARGE}>
               <Select
                 placeHolder={"Select Organization"}
                 value={selectModel}
@@ -143,21 +491,21 @@ function Default() {
       },
 
       {
-        title: <LayoutHeader orderType={orderType} title="Version" />,
+        title: <LayoutHeader orderType={ORDER_TYPE.LEFT} title="Version" />,
         dataIndex: "version",
         key: "version",
         width: 135,
         ellipsis: true,
         render(...[version]) {
           return (
-            <LayoutCell orderType={orderType} tableSize={size}>
+            <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={SIZE_TYPE.LARGE}>
               <OneLineText value={`version`} />
             </LayoutCell>
           );
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} title="Creator" />,
+        title: <LayoutHeader orderType={ORDER_TYPE.LEFT} title="Creator" />,
         dataIndex: "creator",
         key: "creator",
         width: 135,
@@ -165,7 +513,7 @@ function Default() {
         align: "center",
         render(...[creator]) {
           return (
-            <LayoutCell orderType={orderType} tableSize={size}>
+            <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={SIZE_TYPE.LARGE}>
               <BadgeText
                 value={creator}
                 backgroundColor="#FFECB3"
@@ -176,28 +524,28 @@ function Default() {
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} title="Action" />,
+        title: <LayoutHeader orderType={ORDER_TYPE.LEFT} title="Action" />,
         key: "status",
         width: 150,
         ellipsis: true,
         dataIndex: "status",
         render(...[status]) {
           return (
-            <LayoutCell orderType={orderType} tableSize={size}>
+            <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={SIZE_TYPE.LARGE}>
               <StatusLine value={status} color="red" />
             </LayoutCell>
           );
         },
       },
       {
-        title: <LayoutHeader orderType={orderType} title="Version" />,
+        title: <LayoutHeader orderType={ORDER_TYPE.LEFT} title="Version" />,
         dataIndex: "version",
         key: "version",
         width: 135,
         ellipsis: true,
         render(...[version]) {
           return (
-            <LayoutCell orderType={orderType} tableSize={size}>
+            <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={SIZE_TYPE.LARGE}>
               <OneLineText value={`version`} countCharacters={20} />
             </LayoutCell>
           );
@@ -205,37 +553,20 @@ function Default() {
       },
     ];
 
-    const data: any = [];
-    for (let i = 0; i < 9; ++i) {
-      data.push({
-        key: i,
-        name: "Screem",
-        type: "Diamond",
-        location: "Hill",
-        weight: "50kg",
-        platform: "iOS",
-        version:
-          "Sau khi bị nhiều cư dân mạng lên tiếng cho rằng giám thị coi thi đã thiếu trách nhiệm trong việc nhắc nhở nam sinh bị 0 điểm môn Tiếng Anh vì ngủ quên. Được biết 2 cán bộ coi thi tại phòng thi môn Tiếng Anh của thí sinh H.N.T khẳng định đã ngồi đúng vị trí quy định, không đi lại trong phòng thi (do quy chế quy định trong quá trình làm bài không được đứng gần thí sinh...) mà bao quát toàn bộ thí sinh từ xa. Trong quá trình quan sát cán bộ coi thi thấy tất cả thí sinh đều tập trung làm bài, trong đó có em H.N.T. Khi thời gian coi thi trôi dần về cuối, có vài em úp mặt xuống bàn. Lúc này, cán bộ coi thi cứ ngỡ là các em đã làm bài xong, chờ hết giờ để nộp bài thi. Một lãnh đạo Sở GD&ĐT Cà Mau khẳng định Sau khi xác minh sự việc không khỏi tiếc nuối vì học sinh rất đáng thương nhưng giám thị đã làm đúng nhiệm vụ của mình",
-        upgradeNum: 500,
-        creator: "Jack Gealish",
-        status: "hoạt động",
-        createdAt: "2014-12-24 23:12:00",
-      });
-    }
     return (
       <div className="expand-table-box">
         <StandardTable
           columns={columns}
-          dataSource={data}
+          dataSource={dataSource}
           isDragable={true}
-          tableSize={size}
+          tableSize={SIZE_TYPE.LARGE}
           isLevel2={true}
         />
       </div>
     );
   };
   const typeRowSelection: RowSelectionType = "checkbox";
-  const [selectedRowKeys, setSelectedRowKeys] = React.useState<Key[]>([1]);
+  const [selectedRowKeys, setSelectedRowKeys] = React.useState<Key[]>([10]);
 
   const rowSelection = {
     onChange(selectedKeys: Key[]) {
@@ -245,69 +576,39 @@ function Default() {
     type: typeRowSelection,
     getCheckboxProps: (record) => {
       return {
-        disabled: record.key === 1 || record.key === 0,
+        disabled: record.id === 10 || record.id === 100,
       };
     },
   };
-
-  React.useEffect(() => {
-    let test = document.getElementsByClassName("ant-table-cell")[0];
-    if (test) {
-      test.addEventListener("mouseover", function (event) {}, false);
-    }
-  }, []);
-
-  const handleAdd = React.useCallback(() => {}, []);
-
-  const handleEdit = React.useCallback(() => {}, []);
-
-  const handleDelete = React.useCallback(() => {}, []);
-
-  const list: any = React.useMemo(() => {
-    return [
-      {
-        name: "Thêm",
-        action: handleAdd,
-      },
-      {
-        name: "Sửa",
-        action: handleEdit,
-      },
-      {
-        name: "Xóa",
-        action: handleDelete,
-      },
-    ];
-  }, [handleAdd, handleDelete, handleEdit]);
 
   const columns: ColumnProps<any>[] = useMemo(
     () => [
       {
         title: ({ sortColumns }) => {
           const sortedColumn = sortColumns?.find(
-            ({ column }) => column.key === "type"
+            ({ column }) => column.key === "code"
           );
           return (
             <div>
               <LayoutHeader
-                orderType={orderType}
-                title="Title"
+                orderType={ORDER_TYPE.LEFT}
+                title="Code"
                 sortedColumn={sortedColumn}
                 isSorter
               />
             </div>
           );
         },
-        dataIndex: "type",
-        key: "type",
+        dataIndex: "code",
+        key: "code",
         sorter: true,
         width: 135,
         fixed: "left",
         ellipsis: true,
-        render(...[type]) {
+        render(...[code]) {
           return (
-            <LayoutCell orderType={orderType} tableSize={size}>
-              <OneLineText value={type} countCharacters={5} />
+            <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={args?.tableSize}>
+              <OneLineText value={code} countCharacters={5} />
             </LayoutCell>
           );
         },
@@ -320,7 +621,7 @@ function Default() {
           return (
             <div>
               <LayoutHeader
-                orderType={orderType}
+                orderType={ORDER_TYPE.LEFT}
                 title="Name"
                 sortedColumn={sortedColumn}
                 isSorter
@@ -335,43 +636,14 @@ function Default() {
         ellipsis: true,
         render(...[name]) {
           return (
-            <LayoutCell orderType={orderType} tableSize={size}>
+            <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={args?.tableSize}>
               <OneLineText
                 avatar={KateBishop}
-                avatarType={avatarType}
+                avatarType={AVATAR_TYPE.CIRCLE}
                 value={name}
                 link="https://www.youtube.com/"
-                avatarSize={size}
+                avatarSize={SIZE_TYPE.LARGE}
               />
-            </LayoutCell>
-          );
-        },
-      },
-
-      {
-        title: ({ sortColumns }) => {
-          const sortedColumn = sortColumns?.find(
-            ({ column }) => column.key === "location"
-          );
-          return (
-            <div>
-              <LayoutHeader
-                orderType={orderType}
-                title="Location"
-                sortedColumn={sortedColumn}
-                isSorter
-              />
-            </div>
-          );
-        },
-        dataIndex: "location",
-        key: "location",
-        sorter: true,
-        ellipsis: true,
-        render(...[location]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize={size}>
-              <OneLineText value={location} link="/ksjhdfkshj" />
             </LayoutCell>
           );
         },
@@ -379,313 +651,35 @@ function Default() {
       {
         title: ({ sortColumns }) => {
           const sortedColumn = sortColumns?.find(
-            ({ column }) => column.key === "platform"
+            ({ column }) => column.key === "siteType"
           );
           return (
             <div>
               <LayoutHeader
-                orderType={orderType}
-                title="Platform"
+                orderType={ORDER_TYPE.LEFT}
+                title="Site Type"
                 sortedColumn={sortedColumn}
                 isSorter
               />
             </div>
           );
         },
-        dataIndex: "platform",
-        key: "platform",
+        dataIndex: "siteType",
+        key: "siteType",
         sorter: true,
-        ellipsis: true,
-        render(...[platform]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize={size}>
-              <OneLineText icon="tio-calendar_month" value={platform} />
-            </LayoutCell>
-          );
-        },
-      },
-      {
-        title: ({ sortColumns }) => {
-          const sortedColumn = sortColumns?.find(
-            ({ column }) => column.key === "creator"
-          );
-          return (
-            <div>
-              <LayoutHeader
-                orderType={orderType}
-                title="Creator"
-                sortedColumn={sortedColumn}
-                isSorter
-              />
-            </div>
-          );
-        },
-        dataIndex: "creator",
-        key: "creator",
-        sorter: true,
-        ellipsis: true,
-        align: "center",
-        render(...[creator]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize={size}>
-              <BadgeText
-                value={creator}
-                backgroundColor="#FFECB3"
-                color="#ED6700"
-              />
-            </LayoutCell>
-          );
-        },
-      },
-      {
-        title: <LayoutHeader orderType={orderType} title="Action" />,
-        key: "status",
 
         ellipsis: true,
-        dataIndex: "status",
-        render(...[status]) {
+        render(...[siteType]) {
           return (
-            <LayoutCell orderType={orderType} tableSize={size}>
-              <StatusLine value={status} color="red" />
-            </LayoutCell>
-          );
-        },
-      },
-      {
-        key: "id",
-        width: 80,
-        fixed: "right",
-        ellipsis: true,
-        dataIndex: "id",
-        render() {
-          return (
-            <div className="d-flex align-items-center justify-content-center">
-              <OverflowMenu size="md" children={list}></OverflowMenu>
-            </div>
-          );
-        },
-      },
-      {
-        title: ({ sortColumns }) => {
-          const sortedColumn = sortColumns?.find(
-            ({ column }) => column.key === "version"
-          );
-          return (
-            <div>
-              <LayoutHeader
-                orderType={orderType}
-                title="version"
-                sortedColumn={sortedColumn}
-                isSorter
-              />
-            </div>
-          );
-        },
-        dataIndex: "version",
-        key: "version",
-        sorter: true,
-        ellipsis: true,
-        render(...[version]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize={size}>
-              <OneLineText value={version} countCharacters={20}/>
+            <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={args?.tableSize}>
+              <OneLineText value={siteType?.name} />
             </LayoutCell>
           );
         },
       },
     ],
-    [avatarType, list, orderType, size]
+    [args?.tableSize]
   );
-
-  const columns2: ColumnProps<any>[] = useMemo(
-    () => [
-      {
-        title: <LayoutHeader orderType={orderType} title="Title" />,
-        dataIndex: "type",
-        key: "type",
-        sorter: true,
-        fixed: "left",
-        width: 135,
-        ellipsis: true,
-        render(...[type]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize="lg">
-              <OneLineText value={type} />
-            </LayoutCell>
-          );
-        },
-      },
-
-      {
-        title: <LayoutHeader orderType={orderType} title="Version" />,
-        dataIndex: "version",
-        key: "version",
-        sorter: true,
-        width: 150,
-        ellipsis: true,
-        render(...[version]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize="lg">
-              <TwoLineText valueLine1={version} valueLine2={"facebook"} />
-            </LayoutCell>
-          );
-        },
-      },
-      {
-        title: <LayoutHeader orderType={orderType} title="Version" />,
-        dataIndex: "version",
-        key: "version",
-        sorter: true,
-        width: 150,
-        ellipsis: true,
-        render(...[version]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize="lg">
-              <TwoLineText
-                avatar={KateBishop}
-                avatarType={avatarType}
-                valueLine1={version}
-                valueLine2={"facebook"}
-              />
-            </LayoutCell>
-          );
-        },
-      },
-      {
-        title: <LayoutHeader orderType={orderType} title="Version" />,
-        dataIndex: "version",
-        key: "version",
-        sorter: true,
-        width: 150,
-        ellipsis: true,
-        render(...[version]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize="lg">
-              <TwoLineText
-                avatar={KateBishop}
-                avatarType={avatarType}
-                valueLine1={version}
-                valueLine2={"facebook"}
-                link="/ksdjflsf"
-              />
-            </LayoutCell>
-          );
-        },
-      },
-      {
-        title: <LayoutHeader orderType={orderType} title="Version" />,
-        dataIndex: "version",
-        key: "version",
-        sorter: true,
-        width: 150,
-        ellipsis: true,
-        render(...[version]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize="lg">
-              <TwoLineText
-                avatar={KateBishop}
-                avatarType={avatarType}
-                valueLine1={version}
-                valueLine2={"facebook"}
-              />
-            </LayoutCell>
-          );
-        },
-      },
-      {
-        title: <LayoutHeader orderType={orderType} title="Upgrade" />,
-        dataIndex: "upgradeNum",
-        key: "upgradeNum",
-        sorter: true,
-        width: 150,
-        ellipsis: true,
-        render(...[upgradeNum]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize="lg">
-              <TwoLineText
-                icon="tio-calendar_month"
-                valueLine1={upgradeNum + " alod dlkjwer"}
-                valueLine2={"hihii"}
-              />
-            </LayoutCell>
-          );
-        },
-      },
-      {
-        title: <LayoutHeader orderType={orderType} title="Upgrade" />,
-        dataIndex: "upgradeNum",
-        key: "upgradeNum",
-        sorter: true,
-        width: 150,
-        ellipsis: true,
-        render(...[upgradeNum]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize="lg">
-              <TwoLineText
-                icon="tio-calendar_month"
-                valueLine1={upgradeNum + " alod dlkjwer"}
-                valueLine2={"hihii"}
-                link="/hsfdsdhio"
-              />
-            </LayoutCell>
-          );
-        },
-      },
-      {
-        title: <LayoutHeader orderType={orderType} title="Creator" />,
-        dataIndex: "creator",
-        key: "creator",
-        sorter: true,
-        width: 135,
-        ellipsis: true,
-        align: "center",
-        render(...[creator]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize="lg">
-              <BadgeText
-                value={creator}
-                backgroundColor="#FFECB3"
-                color="#ED6700"
-              />
-            </LayoutCell>
-          );
-        },
-      },
-      {
-        title: <LayoutHeader orderType={orderType} title="Action" />,
-        key: "status",
-        width: 150,
-        fixed: "right",
-        ellipsis: true,
-        dataIndex: "status",
-        render(...[status]) {
-          return (
-            <LayoutCell orderType={orderType} tableSize="lg">
-              <StatusLine value={status} color="red" />
-            </LayoutCell>
-          );
-        },
-      },
-    ],
-    [avatarType, orderType]
-  );
-
-  const data: any = [];
-  for (let i = 0; i < 8; ++i) {
-    data.push({
-      key: i,
-      name: "Screem iOS iOS iOS iOS iOS iOS iOS",
-      type: "Diamond iOS iOS iOS iOS iOS iOS iOS",
-      location: "Hill iOS iOS iOS iOS iOS iOS iOS",
-      weight: "50kg",
-      platform: "iOS iOS iOS iOS iOS iOS iOS iOS iOS iOS",
-      version: "Sau khi bị nhiều cư dân mạng lên tiếng cho rằng giám thị coi thi đã thiếu trách nhiệm trong việc nhắc nhở nam sinh bị 0 điểm môn Tiếng Anh vì ngủ quên. Được biết 2 cán bộ coi thi tại phòng thi môn Tiếng Anh của thí sinh H.N.T khẳng định đã ngồi đúng vị trí quy định, không đi lại trong phòng thi (do quy chế quy định trong quá trình làm bài không được đứng gần thí sinh...) mà bao quát toàn bộ thí sinh từ xa. Trong quá trình quan sát cán bộ coi thi thấy tất cả thí sinh đều tập trung làm bài, trong đó có em H.N.T. Khi thời gian coi thi trôi dần về cuối, có vài em úp mặt xuống bàn. Lúc này, cán bộ coi thi cứ ngỡ là các em đã làm bài xong, chờ hết giờ để nộp bài thi. Một lãnh đạo Sở GD&ĐT Cà Mau khẳng định Sau khi xác minh sự việc không khỏi tiếc nuối vì học sinh rất đáng thương nhưng giám thị đã làm đúng nhiệm vụ của mình",
-      upgradeNum: 500,
-      creator: "Jack Gealish ",
-      status: "hoạt động",
-      createdAt: "2014-12-24 23:12:00",
-    });
-  }
 
   const expandable = {
     expandedRowRender: expandedRowRender,
@@ -699,116 +693,47 @@ function Default() {
 
   return (
     <div>
-      <Tabs defaultActiveKey="1">
-        <TabPane tab="Table not have TwoLineText" key="1">
-          <InputSearch
-            value={"hello"}
-            searchProperty={"name"}
-            classFilter={DemoFilter}
-            placeHolder="Search..."
-            animationInput={false}
-          />
-          <ActionBarComponent
-            selectedRowKeys={selectedRowKeys}
-            setSelectedRowKeys={setSelectedRowKeys}
-          >
-            <Button type="ghost-primary" className="btn--lg" icon={<Add16 />}>
-              {"Button"}
-            </Button>
-            <Button
-              type="ghost-primary"
-              className="btn--lg"
-              icon={<ChevronDown16 />}
-            >
-              {"Button"}
-            </Button>
-          </ActionBarComponent>
-          <StandardTable
-            columns={columns}
-            dataSource={data}
-            isDragable={true}
-            isExpandable={true}
-            tableSize={size}
-            rowSelection={rowSelection}
-            expandable={expandable}
-            loading={loading}
-            scroll={{x: 1900}}
-          />
-          <div>
-            <Pagination
-              skip={filter.skip}
-              take={filter.take}
-              total={100}
-              onChange={handlePagination}
-            />
-          </div>
-        </TabPane>
-        <TabPane tab="Table only size lg" key="2">
-          <ActionBarComponent
-            selectedRowKeys={selectedRowKeys}
-            setSelectedRowKeys={setSelectedRowKeys}
-          >
-            <Button type="ghost-primary" className="btn--lg" icon={<Add16 />}>
-              {"Button"}
-            </Button>
-            <Button
-              type="ghost-primary"
-              className="btn--lg"
-              icon={<ChevronDown16 />}
-            >
-              {"Button"}
-            </Button>
-          </ActionBarComponent>
-          <StandardTable
-            columns={columns2}
-            dataSource={data}
-            isDragable={true}
-            isExpandable={true}
-            tableSize="lg"
-            rowSelection={rowSelection}
-           
-          />
-          <div>
-            <Pagination
-              skip={filter.skip}
-              take={filter.take}
-              total={100}
-              onChange={handlePagination}
-              canChangePageSize={false}
-            />
-          </div>
-        </TabPane>
-      </Tabs>
-
+      <ActionBarComponent
+        selectedRowKeys={selectedRowKeys}
+        setSelectedRowKeys={setSelectedRowKeys}
+      >
+        <Button type="ghost-primary" className="btn--lg" icon={<Add16 />}>
+          {"Button"}
+        </Button>
+        <Button
+          type="ghost-primary"
+          className="btn--lg"
+          icon={<ChevronDown16 />}
+        >
+          {"Button"}
+        </Button>
+      </ActionBarComponent>
+      <StandardTable
+        {...args}
+        columns={columns}
+        dataSource={dataSource}
+        rowSelection={rowSelection}
+        loading={loading}
+        // scroll={{ x: 1900 }}
+      />
+      <div>
+        <Pagination
+          skip={filter.skip}
+          take={filter.take}
+          total={100}
+          onChange={handlePagination}
+        />
+      </div>
       <div>
         <div>
           <Button type="primary" className="btn--lg" onClick={handleLoading}>
             {"Button"}
           </Button>
         </div>
-        <div style={{ margin: "10px", width: "500px" }}>
-          <Radio.Group onChange={handleChangeAvatarType} value={avatarType}>
-            <Radio value={AVATAR_TYPE.CIRCLE}>circle</Radio>
-            <Radio value={AVATAR_TYPE.SQUARE}>squale</Radio>
-          </Radio.Group>
-        </div>
-        <div style={{ margin: "10px", width: "500px" }}>
-          <Radio.Group onChange={handleChangeSize} value={size}>
-            <Radio value={SIZE_TYPE.LARGE}>lg</Radio>
-            <Radio value={SIZE_TYPE.MEDIUM}>md</Radio>
-            <Radio value={SIZE_TYPE.SMALL}>sm</Radio>
-          </Radio.Group>
-        </div>
-        <div style={{ margin: "10px", width: "500px" }}>
-          <Radio.Group onChange={handleChangeStyle} value={orderType}>
-            <Radio value={ORDER_TYPE.LEFT}>order-left</Radio>
-            <Radio value={ORDER_TYPE.CENTER}>order-center</Radio>
-            <Radio value={ORDER_TYPE.RIGHT}>order-right</Radio>
-          </Radio.Group>
-        </div>
       </div>
     </div>
   );
-}
+};
 
-storiesOf("StandardTable", module).add(nameof(Default), Default);
+export const Default = Template.bind({});
+export const Expanded = StandardTableDefault.bind({});

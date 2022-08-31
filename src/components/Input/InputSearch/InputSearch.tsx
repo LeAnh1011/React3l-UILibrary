@@ -5,9 +5,16 @@ import classNames from "classnames";
 import { Empty } from "antd";
 import Search16 from "@carbon/icons-react/es/search/16";
 import { CommonService } from "services/common-service";
-import type { ErrorObserver, Observable } from "rxjs";
-import { useDebounceFn } from "ahooks";
-import { DEBOUNCE_TIME_300 } from "config/consts";
+import {
+  debounceTime,
+  distinctUntilChanged,
+  ErrorObserver,
+  Observable,
+  Subject,
+  switchMap,
+} from "rxjs";
+// import { useDebounceFn } from "ahooks";
+// import { DEBOUNCE_TIME_300 } from "config/consts";
 import InputSearchSelect from "./InputSearchSelect/InputSearchSelect";
 import IconLoading from "components/IconLoading/IconLoading";
 
@@ -71,6 +78,8 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
 
   const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
 
+  const searchTermRef = React.useRef(new Subject<string>());
+
   const handleCloseSelect = React.useCallback(() => {
     setExpand(false);
     setShowListItem(false);
@@ -83,39 +92,53 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     }
   }, [animationInput]);
 
-  const [subscription] = CommonService.useSubscription();
+  // const [subscription] = CommonService.useSubscription();
 
-  const { run } = useDebounceFn(
-    (searchTerm: string) => {
-      if (searchTerm !== "" && searchTerm) {
-        const cloneValueFilter = valueFilter
-          ? { ...valueFilter }
-          : new ClassFilter();
-        if (searchType) {
-          cloneValueFilter[searchProperty][searchType] = searchTerm;
-        } else cloneValueFilter[searchProperty] = searchTerm;
-        setLoading(true);
-        subscription.add(getList);
-        getList(cloneValueFilter).subscribe({
-          next: (res: Model[]) => {
-            setList(res);
-            setLoading(false);
-            setShowListItem(true);
-          },
-          error: (err: ErrorObserver<Error>) => {
-            setList([]);
-            setLoading(false);
-            setShowListItem(true);
-          },
-        });
-      } else {
-        setShowListItem(false);
-      }
+  const searchObservable = React.useCallback(
+    (searchTerm) => {
+      const cloneValueFilter = valueFilter
+        ? { ...valueFilter }
+        : new ClassFilter();
+      if (searchType) {
+        cloneValueFilter[searchProperty][searchType] = searchTerm;
+      } else cloneValueFilter[searchProperty] = searchTerm;
+      setLoading(true);
+      return getList(cloneValueFilter);
     },
-    {
-      wait: DEBOUNCE_TIME_300,
-    }
+    [ClassFilter, getList, searchProperty, searchType, valueFilter]
   );
+
+  // const { run } = useDebounceFn(
+  //   (searchTerm: string) => {
+  //     if (searchTerm !== "" && searchTerm) {
+  //       const cloneValueFilter = valueFilter
+  //         ? { ...valueFilter }
+  //         : new ClassFilter();
+  //       if (searchType) {
+  //         cloneValueFilter[searchProperty][searchType] = searchTerm;
+  //       } else cloneValueFilter[searchProperty] = searchTerm;
+  //       setLoading(true);
+  //       subscription.add(getList);
+  //       getList(cloneValueFilter).subscribe({
+  //         next: (res: Model[]) => {
+  //           setList(res);
+  //           setLoading(false);
+  //           setShowListItem(true);
+  //         },
+  //         error: (err: ErrorObserver<Error>) => {
+  //           setList([]);
+  //           setLoading(false);
+  //           setShowListItem(true);
+  //         },
+  //       });
+  //     } else {
+  //       setShowListItem(false);
+  //     }
+  //   },
+  //   {
+  //     wait: DEBOUNCE_TIME_300,
+  //   }
+  // );
 
   CommonService.useClickOutside(wrapperRef, handleCloseSelect);
 
@@ -130,9 +153,12 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
 
   const handleSearchChange = React.useCallback(
     (searchTerm: string) => {
-      run(searchTerm);
+      // run(searchTerm);
+      searchTermRef.current.next(searchTerm);
     },
-    [run]
+    [
+      // run
+    ]
   );
 
   const handleKeyPress = React.useCallback(
@@ -242,6 +268,31 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     },
     [handleClickSearchIcon, handleToggle]
   );
+
+  React.useEffect(() => {
+    searchTermRef.current
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged(),
+        switchMap((searchValue) => searchObservable(searchValue))
+      )
+      .subscribe({
+        next: (res: Model[]) => {
+          setList(res);
+          setLoading(false);
+          setShowListItem(true);
+        },
+        error: (err: ErrorObserver<Error>) => {
+          setList([]);
+          setLoading(false);
+          setShowListItem(true);
+        },
+      });
+    return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      searchTermRef.current.unsubscribe();
+    };
+  }, [searchObservable]);
 
   return (
     <div

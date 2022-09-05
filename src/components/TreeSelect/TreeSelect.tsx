@@ -15,7 +15,7 @@ import { IdFilter } from "react3l-advanced-filters";
 export interface TreeSelectProps<
   T extends Model,
   TModelFilter extends ModelFilter
-  > {
+> {
   title?: string;
   listItem?: Model[];
   item?: Model;
@@ -232,11 +232,9 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
       const spaceBelow = window.innerHeight - currentPosition.bottom;
       if (spaceBelow <= 200) {
         setTimeout(() => {
-          const treeListRef = document.getElementById(componentId);
-          const listHeight = treeListRef ? treeListRef.clientHeight : 180;
           setAppendToBodyStyle({
             position: "fixed",
-            top: currentPosition.top - (listHeight + 30),
+            bottom: spaceBelow + wrapperRef.current.clientHeight,
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
           });

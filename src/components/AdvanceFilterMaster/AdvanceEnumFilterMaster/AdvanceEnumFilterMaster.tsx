@@ -282,12 +282,9 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
       const spaceBelow = window.innerHeight - currentPosition.bottom;
       if (spaceBelow <= 200) {
         setTimeout(() => {
-          const listHeight = selectListRef.current
-            ? selectListRef.current.clientHeight
-            : 180;
           setAppendToBodyStyle({
             position: "fixed",
-            top: currentPosition.top - (listHeight + 30),
+            bottom: spaceBelow + wrapperRef.current.clientHeight,
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
           });

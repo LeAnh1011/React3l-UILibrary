@@ -108,6 +108,7 @@ function AdvanceDateFilter(
           })}
           placeholder={placeholder}
           disabled={disabled}
+          onChange={onChange}
         />
         {type === BORDER_TYPE.FLOAT_LABEL && label && (
           <label

@@ -40,9 +40,10 @@ interface DateRangeProps {
   placeholder?: [string, string];
   getPopupContainer?: () => HTMLElement;
   dropdownClassName?: any;
+  onOpenChange?: (open: boolean) => void;
 }
 
-function DateRange(props: DateRangeProps & RangePickerProps) {
+function DateRange(props: DateRangeProps) {
   const {
     value,
     dateFormat,
@@ -57,6 +58,8 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
     className,
     getPopupContainer,
     dropdownClassName,
+    onOpenChange,
+    ...rest
   } = props;
 
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
@@ -112,7 +115,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
       </div>
       <div className="date-range__container">
         <RangePicker
-          {...props}
+          {...rest}
           value={internalValue}
           style={{ width: "100%" }}
           allowClear={false}
@@ -131,6 +134,9 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
           getPopupContainer={getPopupContainer}
           ref={dateRef}
           dropdownClassName={dropdownClassName}
+          disabled={disabled}
+          onChange={onChange}
+          onOpenChange={onOpenChange}
         />
         {type === BORDER_TYPE.FLOAT_LABEL && label && (
           <label

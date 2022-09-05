@@ -18,7 +18,6 @@ interface DatePickerAction {
 interface DatePickerProps {
   value?: Moment | any;
   label?: string;
-  isMaterial?: boolean;
   dateFormat?: string[];
   error?: string;
   onChange?: (value: Moment | null, dateString?: string) => void;
@@ -31,7 +30,7 @@ interface DatePickerProps {
   placeholder?: string;
 }
 
-function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
+function DatePicker(props: DatePickerProps ) {
   const {
     value,
     dateFormat,
@@ -43,6 +42,8 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
     action,
     isSmall,
     disabled,
+    placeholder,
+    ...rest
   } = props;
 
   const dateRef = React.useRef<any>();
@@ -92,7 +93,7 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
       </div>
       <div className="date-picker__container">
         <DatePickerAntd
-          {...props}
+          {...rest}
           value={internalValue}
           style={{ width: "100%" }}
           ref={dateRef}
@@ -107,6 +108,9 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
             "date-picker--disabled ": disabled,
             "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,
           })}
+          placeholder={placeholder}
+          disabled={disabled}
+          onChange={onChange}
         />
         {type === BORDER_TYPE.FLOAT_LABEL && label && (
           <label
@@ -144,7 +148,6 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
   );
 }
 DatePicker.defaultProps = {
-  isMaterial: false,
   dateFormat: ["DD/MM/YYYY", "YYYY/MM/DD"],
   label: "",
   isSmall: false,

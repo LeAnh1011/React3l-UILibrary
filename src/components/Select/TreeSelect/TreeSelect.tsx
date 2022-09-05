@@ -19,7 +19,6 @@ export interface TreeSelectProps<
   title?: string;
   listItem?: Model[];
   item?: Model;
-  isMaterial?: boolean;
   searchProperty?: string;
   searchType?: string;
   checkable?: boolean;
@@ -64,7 +63,6 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
   const {
     listItem,
     item,
-    isMaterial,
     checkStrictly,
     searchProperty,
     searchType,
@@ -259,7 +257,6 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
           {checkable ? (
             <InputTag
               listValue={listItem}
-              isMaterial={isMaterial}
               render={render}
               placeHolder={placeHolder}
               disabled={disabled}
@@ -279,7 +276,6 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
             <InputSelect
               value={item}
               render={render}
-              isMaterial={isMaterial}
               placeHolder={placeHolder}
               expanded={expanded}
               disabled={disabled}
@@ -335,7 +331,6 @@ TreeSelect.defaultProps = {
   searchType: "contain",
   classFilter: ModelFilter,
   onlySelectLeaf: false,
-  isMaterial: false,
   checkable: false,
   disabled: false,
   selectable: true,

@@ -28,8 +28,6 @@ export interface MultipleSelectProps<
 
   disabled?: boolean;
 
-  isMaterial?: boolean;
-
   isRequired?: boolean;
 
   appendToBody?: boolean;
@@ -50,8 +48,6 @@ export interface MultipleSelectProps<
 
   selectWithAdd?: boolean;
 
-  selectWithPreferOption?: boolean;
-
   isUsingSearch?: boolean;
 
   preferOptions?: T[];
@@ -71,7 +67,6 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     searchType,
     placeHolder,
     disabled,
-    isMaterial,
     isRequired,
     appendToBody,
     getList,
@@ -349,7 +344,6 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
               <div>
                 <InputTag
                   listValue={values}
-                  isMaterial={isMaterial}
                   render={render}
                   placeHolder={placeHolder}
                   disabled={disabled}
@@ -369,7 +363,6 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
           ) : (
             <InputTag
               listValue={values}
-              isMaterial={isMaterial}
               render={render}
               placeHolder={placeHolder}
               disabled={disabled}
@@ -496,7 +489,6 @@ MultipleSelect.defaultProps = {
   searchType: "contain",
   isEnumerable: false,
   render: defaultRenderObject,
-  isMaterial: false,
   disabled: false,
   maxLengthItem: 30,
 };

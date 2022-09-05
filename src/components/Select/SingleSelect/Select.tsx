@@ -29,8 +29,6 @@ export interface SelectProps<
 
   disabled?: boolean;
 
-  isMaterial?: boolean;
-
   isEnumerable?: boolean;
 
   appendToBody?: boolean;
@@ -50,8 +48,6 @@ export interface SelectProps<
   label?: string;
 
   selectWithAdd?: boolean;
-
-  selectWithPreferOption?: boolean;
 
   isSmall?: boolean;
 
@@ -372,7 +368,6 @@ Select.defaultProps = {
   isEnumerable: false,
   appendToBody: false,
   render: defaultRenderObject,
-  isMaterial: false,
   disabled: false,
 };
 

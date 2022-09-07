@@ -1,13 +1,17 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
-import nameof from "ts-nameof.macro";
-import Button from "../Button";
-import { Tabs } from "antd";
 import Add16 from "@carbon/icons-react/es/add/16";
+import { Story } from "@storybook/react";
+import { Tabs } from "antd";
+import React from "react";
+import Button from "../Button";
 import InlineLoading from "./InlineLoading";
 export type LoadingType = "default" | "submitting" | "submitted" | "error";
 const { TabPane } = Tabs;
-function InlineLoadingView() {
+
+export default {
+  title: 'InlineLoading',
+  component: InlineLoading,
+}
+const Template: Story = (args) => {
   const [loadingType, setLoadingType] = React.useState<LoadingType>("default");
   let i = 0;
   const handleOnClick = React.useCallback(() => {
@@ -40,6 +44,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-normal-no-icon btn--sm"
                 />
@@ -57,6 +62,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                {...args}
                   status={loadingType}
                   className="il-normal-no-icon btn--sm"
                 />
@@ -74,6 +80,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                {...args}
                   status={loadingType}
                   className="il-normal-no-icon btn--lg"
                 />
@@ -91,6 +98,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                {...args}
                   status={loadingType}
                   className="il-normal-no-icon btn--xl"
                 />
@@ -118,6 +126,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                {...args}
                   status={loadingType}
                   className="il-normal-no-icon btn--sm"
                 />
@@ -136,6 +145,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                {...args}
                   status={loadingType}
                   className="il-normal-no-icon btn--sm"
                 />
@@ -154,6 +164,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                {...args}
                   status={loadingType}
                   className="il-normal-no-icon btn--lg"
                 />
@@ -172,6 +183,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                {...args}
                   status={loadingType}
                   className="il-normal-no-icon btn--xl"
                 />
@@ -202,6 +214,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                {...args}
                   status={loadingType}
                   className="il-outline-no-icon btn--sm"
                 />
@@ -219,6 +232,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                {...args}
                   status={loadingType}
                   className="il-outline-no-icon btn--sm"
                 />
@@ -236,6 +250,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                {...args}
                   status={loadingType}
                   className="il-outline-no-icon btn--lg"
                 />
@@ -253,6 +268,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                {...args}
                   status={loadingType}
                   className="il-outline-no-icon btn--xl"
                 />
@@ -280,6 +296,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                {...args}
                   status={loadingType}
                   className="il-outline-no-icon btn--sm"
                 />
@@ -298,6 +315,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                {...args}
                   status={loadingType}
                   className="il-outline-no-icon btn--sm"
                 />
@@ -316,6 +334,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                {...args}
                   status={loadingType}
                   className="il-outline-no-icon btn--lg"
                 />
@@ -334,6 +353,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                {...args}
                   status={loadingType}
                   className="il-outline-no-icon btn--xl"
                 />
@@ -363,6 +383,7 @@ function InlineLoadingView() {
           >
             {loadingType !== "default" && (
               <InlineLoading
+              {...args}
                 status={loadingType}
                 className="il-bleed-no-icon btn--xl"
               />
@@ -374,6 +395,7 @@ function InlineLoadingView() {
             )}
             {loadingType !== "default" && (
               <InlineLoading
+              {...args}
                 status={loadingType}
                 className="il-bleed-no-icon btn--xl"
               />
@@ -394,7 +416,4 @@ function InlineLoadingView() {
   );
 }
 
-storiesOf("InlineLoading", module).add(
-  nameof(InlineLoadingView),
-  InlineLoadingView
-);
+export const Default = Template.bind({});

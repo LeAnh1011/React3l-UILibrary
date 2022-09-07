@@ -92,8 +92,6 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     }
   }, [animationInput]);
 
-  // const [subscription] = CommonService.useSubscription();
-
   const searchObservable = React.useCallback(
     (searchTerm) => {
       const cloneValueFilter = valueFilter
@@ -108,38 +106,6 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     [ClassFilter, getList, searchProperty, searchType, valueFilter]
   );
 
-  // const { run } = useDebounceFn(
-  //   (searchTerm: string) => {
-  //     if (searchTerm !== "" && searchTerm) {
-  //       const cloneValueFilter = valueFilter
-  //         ? { ...valueFilter }
-  //         : new ClassFilter();
-  //       if (searchType) {
-  //         cloneValueFilter[searchProperty][searchType] = searchTerm;
-  //       } else cloneValueFilter[searchProperty] = searchTerm;
-  //       setLoading(true);
-  //       subscription.add(getList);
-  //       getList(cloneValueFilter).subscribe({
-  //         next: (res: Model[]) => {
-  //           setList(res);
-  //           setLoading(false);
-  //           setShowListItem(true);
-  //         },
-  //         error: (err: ErrorObserver<Error>) => {
-  //           setList([]);
-  //           setLoading(false);
-  //           setShowListItem(true);
-  //         },
-  //       });
-  //     } else {
-  //       setShowListItem(false);
-  //     }
-  //   },
-  //   {
-  //     wait: DEBOUNCE_TIME_300,
-  //   }
-  // );
-
   CommonService.useClickOutside(wrapperRef, handleCloseSelect);
 
   const handleClickItem = React.useCallback(
@@ -153,12 +119,9 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
 
   const handleSearchChange = React.useCallback(
     (searchTerm: string) => {
-      // run(searchTerm);
       searchTermRef.current.next(searchTerm);
     },
-    [
-      // run
-    ]
+    []
   );
 
   const handleKeyPress = React.useCallback(

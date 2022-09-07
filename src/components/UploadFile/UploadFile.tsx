@@ -95,12 +95,9 @@ export function UploadFile(props: UploadFileProps) {
         uploadFile(files).subscribe({
           next: (res: FileModel[]) => {
             if (res && res.length > 0) {
-              setListFileLoading([...res]);
               setIsLoading(false);
-              setTimeout(() => {
-                setListFileLoading([]);
-                updateList([...res]);
-              }, 1000);
+              updateList([...res]);
+              setListFileLoading([]);
             }
           },
           error: () => {

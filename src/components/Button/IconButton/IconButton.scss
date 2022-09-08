@@ -2,32 +2,39 @@
     .content-icon {
         font-size: 16px;
     }
-    &.btn--sm {
+    &.btn--sx {
         height: 24px;
         width: 24px;
         padding: 4px;
     }
 
-    &.btn--md {
+    &.btn--sm {
         height: 32px;
         width: 32px;
         padding: 8px;
     }
 
-    &.btn--lg {
+    &.btn--md {
         height: 36px;
         width: 36px;
         padding: 10px;
     }
 
-    &.btn--xl {
+    &.btn--lg {
         height: 40px;
         width: 40px;
         padding: 12px;
     }
-    &.btn--xxl {
+    &.btn--xl {
         height: 48px;
         width: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &.btn--xxl {
+        height: 56px;
+        width: 56px;
         display: flex;
         align-items: center;
         justify-content: center;

@@ -35,7 +35,7 @@ export default {
     className: {
       control: {
         type: "radio",
-        options: ["btn--sm", "btn--md", "btn--lg", "btn--xl"],
+        options: ["btn--sx","btn--sm", "btn--md", "btn--lg", "btn--xl", "btn--xxl"],
       },
       defaultValue: "btn--sm",
     },

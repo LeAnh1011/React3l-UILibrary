@@ -117,12 +117,9 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     [onChangeSearchField]
   );
 
-  const handleSearchChange = React.useCallback(
-    (searchTerm: string) => {
-      searchTermRef.current.next(searchTerm);
-    },
-    []
-  );
+  const handleSearchChange = React.useCallback((searchTerm: string) => {
+    searchTermRef.current.next(searchTerm);
+  }, []);
 
   const handleKeyPress = React.useCallback(
     (event: any) => {
@@ -230,7 +227,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
   );
 
   React.useEffect(() => {
-    searchTermRef.current
+    const subscription = searchTermRef.current
       .pipe(
         debounceTime(400),
         distinctUntilChanged(),
@@ -245,12 +242,10 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
         error: (err: ErrorObserver<Error>) => {
           setList([]);
           setLoading(false);
-          setShowListItem(true);
         },
       });
     return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      searchTermRef.current.unsubscribe();
+      subscription.unsubscribe();
     };
   }, [searchObservable]);
 

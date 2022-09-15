@@ -17,6 +17,12 @@ export enum ADVANCE_DATE_RANGE_TYPE {
   INPUT,
 }
 
+class ListDate extends Model {
+  id?: number;
+  name?: string;
+  code?: string;
+}
+
 interface AdvanceDateRangeFilterMasterProps {
   value?: [Moment, Moment];
 
@@ -25,8 +31,6 @@ interface AdvanceDateRangeFilterMasterProps {
   isMaterial?: boolean;
 
   onChange?: (item?: any, value?: [Moment, Moment]) => void;
-
-  title?: string;
 
   className?: string;
 
@@ -51,7 +55,7 @@ interface AdvanceDateRangeFilterMasterProps {
   translate?: TFunction;
 }
 
-const list = [
+const list: ListDate[] = [
   { id: 1, name: "general.filter.today", code: "today" },
   { id: 2, name: "general.filter.yesterday", code: "yesterday" },
   { id: 3, name: "general.filter.thisWeek", code: "thisweek" },
@@ -127,24 +131,34 @@ function AdvanceDateRangeFilterMaster(
           ]; //lastmonth
 
         case 7:
-          const sdjustment = (moment().month() % 3) + 1;
-          const lastQuarterEndDate2 = moment()
-            .subtract({ months: sdjustment })
-            .endOf("month");
-
-          var quarterEndDate = moment().endOf("month");
-          var quarterStartDate = lastQuarterEndDate2.clone().startOf("month");
+          const quarterNumber = moment().quarter();
+          const quarterEndDate = moment()
+            .quarter(quarterNumber)
+            .endOf("quarter");
+          const quarterStartDate = moment()
+            .quarter(quarterNumber)
+            .startOf("quarter");
           return [quarterStartDate, quarterEndDate]; //thisquarter
 
         case 8:
-          const quarterAdjustment = (moment().month() % 3) + 1;
-          const lastQuarterEndDate = moment()
-            .subtract({ months: quarterAdjustment })
-            .endOf("month");
-          const lastQuarterStartDate = lastQuarterEndDate
-            .clone()
-            .subtract({ months: 3 })
-            .startOf("month");
+          const thisQuarter = moment().quarter();
+          const lastQuarter = thisQuarter - 1;
+          var lastQuarterStartDate, lastQuarterEndDate;
+          if (lastQuarter) {
+            lastQuarterStartDate = moment()
+              .quarter(lastQuarter)
+              .startOf("quarter");
+            lastQuarterEndDate = moment().quarter(lastQuarter).endOf("quarter");
+          } else {
+            lastQuarterStartDate = moment()
+              .subtract(1, "years")
+              .quarter(4)
+              .startOf("quarter");
+            lastQuarterEndDate = moment()
+              .subtract(1, "years")
+              .quarter(4)
+              .endOf("quarter");
+          }
           return [lastQuarterStartDate, lastQuarterEndDate]; //lastquarter
         default:
           return [null, null];
@@ -155,13 +169,13 @@ function AdvanceDateRangeFilterMaster(
   const internalValue: [Moment, Moment] = React.useMemo(() => {
     return value && value.length > 0
       ? [
-        typeof value[0] === "string"
-          ? CommonService.toMomentDate(value[0])
-          : value[0],
-        typeof value[1] === "string"
-          ? CommonService.toMomentDate(value[1])
-          : value[1],
-      ]
+          typeof value[0] === "string"
+            ? CommonService.toMomentDate(value[0])
+            : value[0],
+          typeof value[1] === "string"
+            ? CommonService.toMomentDate(value[1])
+            : value[1],
+        ]
       : [null, null];
   }, [value]);
 
@@ -270,6 +284,16 @@ function AdvanceDateRangeFilterMaster(
     onChange(null, [null, null]);
   }, [onChange]);
 
+  const renderItem = React.useCallback(
+    (currentItem: ListDate) => {
+      if (currentItem) {
+        return translate(currentItem?.name);
+      }
+      return null;
+    },
+    [translate]
+  );
+
   return (
     <div
       className={classNames(
@@ -312,6 +336,7 @@ function AdvanceDateRangeFilterMaster(
             label={label}
             isSmall={isSmall}
             onKeyDown={handleKeyDown}
+            render={renderItem}
           />
         </div>
       )}
@@ -352,12 +377,17 @@ function AdvanceDateRangeFilterMaster(
             onClick={handleClickCustomDate}
           >
             <Calendar16 />
-            <span>{ translate? translate("general.filter.customDate") : "Custom Date"}</span>
+            <span>
+              {translate
+                ? translate("general.filter.customDate")
+                : "Custom Date"}
+            </span>
           </div>
           {isExpandDate && (
             <>
               <DateRange
                 {...props}
+                label={""}
                 type={typeCustomDate}
                 isSmall={isSmall}
                 onChange={handleChange}

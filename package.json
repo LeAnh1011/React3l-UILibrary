@@ -2,7 +2,7 @@
   "homepage": "http://leanh1011.github.io/React3l-UILibrary",
   "name": "react3l-ui-library",
   "sideEffects": false,
-  "version": "0.1.82",
+  "version": "0.1.94",
   "main": "build/index.js",
   "files": [
     "build"
@@ -59,16 +59,13 @@
       "react-app",
       "react-app/jest"
     ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ],
+    "rules": {
+      "no-unused-vars": "off",
+      "import/no-anonymous-default-export": "off",
+      "@typescript-eslint/no-unused-vars": "error",
+      "no-console": "warn",
+      "no-debugger": "error"
+    },
     "ignorePatterns": [
       "build/**/*",
       "src/**/*.test.{ts,tsx}"
@@ -98,6 +95,8 @@
     "@storybook/react": "^6.3.6",
     "antd": "^4.21.4",
     "axios": "^0.21.1",
+    "eslint-config-standard-react": "^11.0.1",
+    "eslint-plugin-react": "^7.31.0",
     "gh-pages": "^3.2.3",
     "husky": "^8.0.1",
     "i18next": "^20.3.5",

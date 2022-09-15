@@ -128,7 +128,11 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
       const cloneValueFilter = valueFilter
         ? JSON.parse(JSON.stringify(valueFilter))
         : new ClassFilter();
-      cloneValueFilter[searchProperty][searchType] = searchTerm;
+      if (searchType) {
+        cloneValueFilter[searchProperty][searchType] = searchTerm;
+      } else {
+        cloneValueFilter[searchProperty] = searchTerm;
+      }
       handleGetList(cloneValueFilter);
     },
     {
@@ -231,11 +235,8 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
   );
 
   const handleClearAll = React.useCallback(() => {
-    const cloneValueFilter = new ClassFilter();
-    cloneValueFilter["id"]["notIn"] = [];
-    handleGetList(cloneValueFilter);
     onChange([], []);
-  }, [ClassFilter, handleGetList, onChange]);
+  }, [onChange]);
 
   const handleKeyPress = React.useCallback(
     (event: any) => {
@@ -297,12 +298,9 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
       const spaceBelow = window.innerHeight - currentPosition.bottom;
       if (spaceBelow <= 200) {
         setTimeout(() => {
-          const listHeight = selectListRef.current
-            ? selectListRef.current.clientHeight
-            : 180;
           setAppendToBodyStyle({
             position: "fixed",
-            top: currentPosition.top - (listHeight - 15),
+            bottom: spaceBelow + wrapperRef.current.clientHeight,
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
           });

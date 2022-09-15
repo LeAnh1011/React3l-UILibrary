@@ -9,7 +9,7 @@ import { ColumnProps } from "antd/lib/table";
 import { Key, RowSelectionType } from "antd/lib/table/interface";
 import React, { useMemo } from "react";
 import { StringFilter } from "react3l-advanced-filters";
-import { ModelFilter } from "react3l-common";
+import { Model, ModelFilter } from "react3l-common";
 import nameof from "ts-nameof.macro";
 import Button from "../Button/Button";
 import ActionBarComponent from "./ActionBarComponent/ActionBarComponent";
@@ -24,6 +24,8 @@ import StandardTable from "./StandardTable";
 import OverflowMenu from "../OverflowMenu/OverflowMenu";
 import "./StandardTable.scss";
 import InputSearch from "../Input/InputSearch/InputSearch";
+import Select from "../Select/SingleSelect/Select";
+import { of } from "rxjs";
 
 const KateBishop =
   "https://cdn.searchenginejournal.com/wp-content/uploads/2019/07/the-essential-guide-to-using-images-legally-online-1520x800.png";
@@ -49,6 +51,35 @@ export enum ORDER_TYPE {
 function Default() {
   const [filter, setFilter] = React.useState<DemoFilter>(new DemoFilter());
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [selectModel, setSelectModel] = React.useState<Model>({
+    id: 0,
+    name: "Option 2",
+    code: "FAD",
+  });
+  const handleRenderModel = React.useCallback((item: Model) => {
+    if (item) {
+      return item.name;
+    } else {
+      return "";
+    }
+  }, []);
+  const handleSetModel = React.useCallback((...[, item]) => {
+    setSelectModel(item);
+  }, []);
+  const demoListEnum = (TModelFilter?: ModelFilter) => {
+    return of([
+      {
+        id: 1,
+        name:
+          "Option 2 very long one very long one Option 2 very long one very long one",
+        code: "E1",
+      },
+      { id: 2, name: "Enum 2", code: "E2" },
+      { id: 3, name: "Enum 3", code: "E3" },
+      { id: 4, name: "Enum 4", code: "E4" },
+      { id: 5, name: "Enum 5", code: "E5" },
+    ]);
+  };
 
   const handleLoading = React.useCallback(() => {
     setLoading(true);
@@ -95,7 +126,17 @@ function Default() {
         render(...[type]) {
           return (
             <LayoutCell orderType={orderType} tableSize={size}>
-              <OneLineText value={type} />
+              <Select
+                placeHolder={"Select Organization"}
+                value={selectModel}
+                searchProperty={"name"}
+                render={handleRenderModel}
+                onChange={handleSetModel}
+                getList={demoListEnum}
+                classFilter={DemoFilter}
+                type={type}
+                appendToBody={true}
+              />
             </LayoutCell>
           );
         },
@@ -194,7 +235,7 @@ function Default() {
     );
   };
   const typeRowSelection: RowSelectionType = "checkbox";
-  const [selectedRowKeys, setSelectedRowKeys] = React.useState<Key[]>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = React.useState<Key[]>([1]);
 
   const rowSelection = {
     onChange(selectedKeys: Key[]) {
@@ -202,6 +243,11 @@ function Default() {
     },
     selectedRowKeys,
     type: typeRowSelection,
+    getCheckboxProps: (record) => {
+      return {
+        disabled: record.key === 1 || record.key === 0,
+      };
+    },
   };
 
   React.useEffect(() => {

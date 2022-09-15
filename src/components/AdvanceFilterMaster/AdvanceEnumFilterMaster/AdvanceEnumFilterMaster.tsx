@@ -12,8 +12,6 @@ import "./AdvanceEnumFilterMaster.scss";
 export interface AdvanceEnumMasterProps<T extends Model> {
   value?: number | string;
 
-  title: string;
-
   listValue?: number[];
 
   placeHolder?: string;
@@ -86,7 +84,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
     listValue,
     onChangeMultiple,
     getList,
-    title,
+    label,
     className,
     maxLengthItem = 30,
     height,
@@ -284,12 +282,9 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
       const spaceBelow = window.innerHeight - currentPosition.bottom;
       if (spaceBelow <= 200) {
         setTimeout(() => {
-          const listHeight = selectListRef.current
-            ? selectListRef.current.clientHeight
-            : 180;
           setAppendToBodyStyle({
             position: "fixed",
-            top: currentPosition.top - (listHeight + 30),
+            bottom: spaceBelow + wrapperRef.current.clientHeight,
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
           });
@@ -327,7 +322,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
             >
               <div className="advance-enum-filter-master__title">
                 <span className="filter-title">
-                  {title}
+                  {label}
                   {listValue?.length > 0 && <>({listValue?.length})</>}
                 </span>
                 <ChevronDown16 />
@@ -341,7 +336,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
               })}
             >
               <div className="advance-enum-filter-master__title">
-                <span className="filter-title"> {title}</span>
+                <span className="filter-title"> {label}</span>
                 <ChevronDown16 />
               </div>
             </div>
@@ -356,13 +351,13 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
           >
             {isMultiple
               ? isExpand && (
-                  <div className="advance-enum-filter-master__list-container m-t--xxxs" >
+                  <div className="advance-enum-filter-master__list-container m-t--xxxs">
                     {
                       <>
                         <div
                           className="advance-enum-master__list multiple-select__list"
                           ref={selectListRef}
-                          style={{'height': `${height}px`}}
+                          style={{ height: `${height}px` }}
                         >
                           {internalList.length > 0 ? (
                             internalList.map((item, index) => (
@@ -414,7 +409,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
                       <>
                         <div
                           className="advance-enum-master__list"
-                          style={{'height': `${height}px`}}
+                          style={{ height: `${height}px` }}
                           ref={selectListRef}
                         >
                           {list.length > 0 ? (
@@ -433,7 +428,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
                                 onClick={handleClickItem(item)}
                               >
                                 <span className="advance-enum-master__text">
-                                {maxLengthItem &&
+                                  {maxLengthItem &&
                                   render(item)?.length > maxLengthItem ? (
                                     <Tooltip title={render(item)}>
                                       {CommonService.limitWord(
@@ -446,9 +441,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
                                   )}
                                 </span>
                                 {item.id === internalValue?.id && (
-                                  <div style={{ height: "16px" }}>
-                                    <Checkmark16 />
-                                  </div>
+                                  <Checkmark16 />
                                 )}
                               </div>
                             ))

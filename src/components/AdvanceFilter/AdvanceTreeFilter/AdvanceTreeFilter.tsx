@@ -16,7 +16,6 @@ export interface AdvanceTreeFilterProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
-  title?: string;
   listItem?: Model[];
   item?: Model;
   isMaterial?: boolean;

@@ -1,13 +1,4 @@
 .page-table {
-  .ant-checkbox-indeterminate .ant-checkbox-inner {
-    background-color: #161616;
-  }
-
-  .ant-checkbox-indeterminate .ant-checkbox-inner::after {
-    width: 8px;
-    height: 2px;
-    background-color: white;
-  }
   .ant-table-thead > tr > th {
     font-size: 12px;
     font-weight: bold;
@@ -20,19 +11,24 @@
     th.ant-table-column-has-sorters.ant-table-cell-fix-right:hover {
     background: var(--palette-grayHover-20);
   }
+
   .ant-table-tbody > tr.ant-table-row:hover > td,
   .ant-table-tbody > tr > td.ant-table-cell-row-hover {
     background-color: #e5e5e5;
   }
+
   .ant-table-tbody > tr.ant-table-row-selected > td {
     background-color: var(--palette-gray-10);
   }
+
   .ant-table-thead > tr > th {
     padding: 0px 0px;
   }
+
   .ant-table-thead th.ant-table-cell:hover {
     background-color: var(--palette-grayHover-20);
   }
+
   .ant-table-tbody > tr > td {
     padding: 0px 0px;
   }
@@ -42,6 +38,7 @@
       width: 40px;
     }
   }
+
   .ant-table-tbody > tr > td > .ant-table-wrapper:only-child .ant-table,
   .ant-table-tbody
     > tr
@@ -53,47 +50,81 @@
     margin-bottom: 0px;
     margin-right: 0px;
   }
+
   .table-size-lg {
     th.ant-table-cell {
       height: 56px !important;
     }
   }
+
   .table-size-md {
     th.ant-table-cell {
       height: 40px !important;
     }
   }
+
   .table-size-sm {
     th.ant-table-cell {
       height: 32px !important;
     }
   }
+
   .ant-table-thead
     > tr
     > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan]):before {
     background-color: unset;
   }
-  .ant-checkbox:hover .ant-checkbox-inner {
-    border-color: black !important;
-  }
-  .ant-checkbox-checked .ant-checkbox-inner {
-    background-color: black;
-    border-color: black;
-  }
-  .ant-checkbox-input:focus + .ant-checkbox-inner {
-    border-color: black;
-  }
 
-  .ant-checkbox-checked::after {
-    border: 1px solid black;
-  }
-  .ant-table-cell  {
+  .ant-table-cell {
     .ant-table-cell-content {
       .overflow-menu__container {
         display: flex;
         align-items: center;
         justify-content: center;
         margin: 1px;
+      }
+    }
+  }
+
+  //customize checkbox in selection row
+  .ant-checkbox {
+    .ant-checkbox-inner {
+      border: 1px solid #161616;
+      background-color: #ffffff;
+      border-radius: 0px;
+    }
+    &.ant-checkbox-checked {
+      .ant-checkbox-inner {
+        background-color: #161616;
+      }
+      &::after {
+        border-color: #161616;
+      }
+    }
+  }
+
+  .ant-checkbox-disabled {
+    .ant-checkbox-inner {
+      background-color: #c6c6c6;
+    }
+
+    &.ant-checkbox-checked {
+      .ant-checkbox-inner {
+        background-color: #c6c6c6;
+        &::after {
+          border-color: #ffffff;
+        }
+      }
+    }
+  }
+
+  .ant-checkbox-indeterminate {
+    .ant-checkbox-inner {
+      background-color: #161616;
+      &::after {
+        width: 8px;
+        height: 2px;
+        background-color: white;
       }
     }
   }

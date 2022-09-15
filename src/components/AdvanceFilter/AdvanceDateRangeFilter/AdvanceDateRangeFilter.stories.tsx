@@ -1,6 +1,5 @@
 import React from "react";
 import AdvanceDateRangeFilter from "./AdvanceDateRangeFilter";
-import { Moment } from "moment";
 import { Radio, RadioChangeEvent } from "antd";
 import { BORDER_TYPE, ValidateStatus } from "../../../config/enum";
 import FormItem from "../../FormItem/FormItem";

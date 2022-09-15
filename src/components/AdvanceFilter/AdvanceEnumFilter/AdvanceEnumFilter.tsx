@@ -1,7 +1,7 @@
 import React, { RefObject } from "react";
 import { Model } from "react3l-common";
 import Add16 from "@carbon/icons-react/es/add/16";
-import Checkmark16  from "@carbon/icons-react/es/checkmark/16";
+import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { Checkbox, Empty } from "antd";
 import classNames from "classnames";
 import InputSelect from "components/Input/InputSelect/InputSelect";
@@ -111,9 +111,9 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
 
   const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     const subscription = new Subscription();
-    if(firstLoad) {
+    if (firstLoad) {
       subscription.add(getList);
       getList().subscribe({
         next: (res: Model[]) => {
@@ -128,7 +128,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
     return function cleanup() {
       subscription.unsubscribe();
     };
-  },[firstLoad, getList])
+  }, [firstLoad, getList]);
 
   // use this for multiple type
   const internalList = React.useMemo(() => {
@@ -324,12 +324,9 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
       const spaceBelow = window.innerHeight - currentPosition.bottom;
       if (spaceBelow <= 200) {
         setTimeout(() => {
-          const listHeight = selectListRef.current
-            ? selectListRef.current.clientHeight
-            : 180;
           setAppendToBodyStyle({
             position: "fixed",
-            top: currentPosition.top - (listHeight + 30),
+            bottom: spaceBelow + wrapperRef.current.clientHeight,
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
           });
@@ -396,7 +393,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                   <>
                     <div
                       className="select__list multiple-select__list"
-                      style={{'maxHeight': `${height}px`}}
+                      style={{ maxHeight: `${height}px` }}
                       ref={selectListRef}
                     >
                       {internalList.length > 0 ? (
@@ -446,7 +443,11 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
               <div className="select__list-container" style={appendToBodyStyle}>
                 {
                   <>
-                    <div className="select__list" ref={selectListRef} style={{'maxHeight': `${height}px`}}>
+                    <div
+                      className="select__list"
+                      ref={selectListRef}
+                      style={{ maxHeight: `${height}px` }}
+                    >
                       {list.length > 0 ? (
                         list.map((item, index) => (
                           <div
@@ -463,11 +464,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                             onClick={handleClickItem(item)}
                           >
                             <span className="select__text">{render(item)}</span>
-                            {item.id === internalValue?.id && (
-                              <div style={{ height: "16px" }}>
-                                <Checkmark16 />
-                              </div>
-                            )}
+                            {item.id === internalValue?.id && <Checkmark16 />}
                           </div>
                         ))
                       ) : (

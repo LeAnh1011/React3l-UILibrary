@@ -10,14 +10,14 @@ import { CommonService } from "services/common-service";
 import InputText from "components/Input/InputText";
 import classNames from "classnames";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
-import Search16  from "@carbon/icons-react/es/search/16";
+import Search16 from "@carbon/icons-react/es/search/16";
 import { IdFilter } from "react3l-advanced-filters";
 
 export interface AdvanceTreeFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
-  title?: string;
+  label?: string;
   listItem?: Model[];
   item?: Model;
   isMaterial?: boolean;
@@ -76,7 +76,7 @@ function AdvanceTreeFilterMaster(
     render,
     selectWithPreferOption,
     preferOptions,
-    title,
+    label,
     maxLength,
     maxLengthItem,
   } = props;
@@ -97,11 +97,11 @@ function AdvanceTreeFilterMaster(
 
   const [filter, dispatch] = React.useReducer<
     Reducer<ModelFilter, filterAction>
-  >(filterReducer, {...new ClassFilter(), valueFilter});
+  >(filterReducer, { ...new ClassFilter(), valueFilter });
 
   const { run } = useDebounceFn(
     (searchTerm: string) => {
-      const cloneFilter =  { ...filter };
+      const cloneFilter = { ...filter };
       cloneFilter[searchProperty][searchType] = searchTerm;
       cloneFilter["isFilterTree"] = true;
       if (listIds.length > 1) {
@@ -197,7 +197,7 @@ function AdvanceTreeFilterMaster(
               {checkable &&
                 listItem?.length > 0 &&
                 "(" + listItem?.length + ") "}
-              {title}
+              {label}
             </span>
             <ChevronDown16 />
           </div>

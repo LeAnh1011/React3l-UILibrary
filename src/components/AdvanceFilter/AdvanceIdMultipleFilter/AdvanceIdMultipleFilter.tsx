@@ -119,7 +119,11 @@ export function AdvanceIdMultipleFilter(
       const cloneValueFilter = valueFilter
         ? JSON.parse(JSON.stringify(valueFilter))
         : new ClassFilter();
-      cloneValueFilter[searchProperty][searchType] = searchTerm;
+      if (searchType) {
+        cloneValueFilter[searchProperty][searchType] = searchTerm;
+      } else {
+        cloneValueFilter[searchProperty] = searchTerm;
+      }
       handleGetList(cloneValueFilter);
     },
     {
@@ -222,11 +226,8 @@ export function AdvanceIdMultipleFilter(
   );
 
   const handleClearAll = React.useCallback(() => {
-    const cloneValueFilter = new ClassFilter();
-    cloneValueFilter["id"]["notIn"] = [];
-    handleGetList(cloneValueFilter);
     onChange([], []);
-  }, [ClassFilter, handleGetList, onChange]);
+  }, [onChange]);
 
   const handleKeyPress = React.useCallback(
     (event: any) => {

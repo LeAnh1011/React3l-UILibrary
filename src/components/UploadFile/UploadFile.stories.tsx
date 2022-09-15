@@ -45,13 +45,10 @@ export default {
   */
   title: 'UploadFile',
   component: UploadFile,
-  parameters: {
-    controls: { expanded: true },
-  }
   
 };
 
-const Template: Story = (args) => {
+export const Default = () => {
   const [model, setModel] = React.useState<ModelOBJ>({ ...new ModelOBJ() });
 
   const handleUpdateList = React.useCallback(
@@ -94,12 +91,7 @@ const Template: Story = (args) => {
       removeFile={handleRemoveFile}
       icon={<User20/>}
     ></UploadFile>
-    
   );
 }
 
-export const Default = Template.bind({});
 
-Default.agrs = {
-  type: "button"
-}

@@ -117,37 +117,136 @@ function TagFilter(props: TagFilterProps) {
                     filterKey,
                   });
                 case "less":
-                  return list.push({
-                    key,
-                    value: filterValue,
-                    type: "number",
-                    filterKey,
-                    classFilter: NumberFilter,
-                  });
+                  const lessFiltered = list.filter(
+                    (t: any) => t["key"] === key
+                  );
+                  if (!lessFiltered || lessFiltered?.length === 0) {
+                    return list.push({
+                      key,
+                      value: [filterValue],
+                      type: "number",
+                      filterKey: [filterKey],
+                      classFilter: NumberFilter,
+                    });
+                  } else {
+                    if (lessFiltered?.length === 2) {
+                      list = list.map((t: any) => {
+                        if (t["key"] === key) {
+                          t["value"][0] = filterValue;
+                        }
+                        return t;
+                      });
+                    } else {
+                      list = list.map((t: any) => {
+                        if (t["key"] === key) {
+                          t["value"]?.push(filterValue);
+                          t["filterKey"]?.push(filterKey);
+                        }
+                        return t;
+                      });
+                    }
+                  }
+
+                  break;
                 case "greater":
-                  return list.push({
-                    key,
-                    value: filterValue,
-                    type: "number",
-                    filterKey,
-                    classFilter: NumberFilter,
-                  });
+                  const greaterFiltered = list.filter(
+                    (t: any) => t["key"] === key
+                  );
+                  if (!greaterFiltered || greaterFiltered?.length === 0) {
+                    return list.push({
+                      key,
+                      value: [filterValue],
+                      type: "number",
+                      filterKey: [filterKey],
+                      classFilter: NumberFilter,
+                    });
+                  } else {
+                    if (greaterFiltered?.length === 2) {
+                      list = list.map((t: any) => {
+                        if (t["key"] === key) {
+                          t["value"][1] = filterValue;
+                        }
+                        return t;
+                      });
+                    } else {
+                      list = list.map((t: any) => {
+                        if (t["key"] === key) {
+                          t["value"]?.push(filterValue);
+                          t["filterKey"]?.push(filterKey);
+                        }
+                        return t;
+                      });
+                    }
+                  }
+                  break;
                 case "lessEqual":
-                  return list.push({
-                    key,
-                    value: filterValue,
-                    type: "number",
-                    filterKey,
-                    classFilter: NumberFilter,
-                  });
+                  const lessEqualFiltered = list.filter(
+                    (t: any) => t["key"] === key
+                  );
+                  console.log('lessEqualFiltered', lessEqualFiltered)
+                  if (!lessEqualFiltered || lessEqualFiltered?.length === 0) {
+                    return list.push({
+                      key,
+                      value: [filterValue],
+                      type: "number",
+                      filterKey: [filterKey],
+                      classFilter: NumberFilter,
+                    });
+                  } else {
+                    if (lessEqualFiltered?.length === 2) {
+                      list = list.map((t: any) => {
+                        if (t["key"] === key) {
+                          t["value"][0] = filterValue;
+                        }
+                        return t;
+                      });
+                    } else {
+                      list = list.map((t: any) => {
+                        if (t["key"] === key) {
+                          t["value"]?.push(filterValue);
+                          t["filterKey"]?.push(filterKey);
+                        }
+                        return t;
+                      });
+                    }
+                  }
+
+                  break;
                 case "greaterEqual":
-                  return list.push({
-                    key,
-                    value: filterValue,
-                    type: "number",
-                    filterKey,
-                    classFilter: NumberFilter,
-                  });
+                  const greaterEqualFiltered = list.filter(
+                    (t: any) => t["key"] === key
+                  );
+                  if (
+                    !greaterEqualFiltered ||
+                    greaterEqualFiltered?.length === 0
+                  ) {
+                    return list.push({
+                      key,
+                      value: [filterValue],
+                      type: "number",
+                      filterKey: [filterKey],
+                      classFilter: NumberFilter,
+                    });
+                  } else {
+                    if (greaterEqualFiltered?.length === 2) {
+                      list = list.map((t: any) => {
+                        if (t["key"] === key) {
+                          t["value"][1] = filterValue;
+                        }
+                        return t;
+                      });
+                    } else {
+                      list = list.map((t: any) => {
+                        if (t["key"] === key) {
+                          t["value"]?.push(filterValue);
+                          t["filterKey"]?.push(filterKey);
+                        }
+                        return t;
+                      });
+                    }
+                  }
+                  break;
+                  // Do nothing
                 default:
                   // Do nothing
                   break;
@@ -398,6 +497,10 @@ function TagFilter(props: TagFilterProps) {
     [handleChangeFilter, value, onClear]
   );
 
+  React.useEffect(() => {
+    console.log("value", value);
+    console.log("list", list);
+  }, [list, value]);
   return (
     <div className={classNames("tag-filte__container", className)}>
       {list &&
@@ -412,7 +515,13 @@ function TagFilter(props: TagFilterProps) {
                 :{" "}
               </div>
               {itemTag?.type === "string" && itemTag?.value}
-              {itemTag?.type === "number" && formatNumber(itemTag?.value)}
+              {itemTag?.type === "number" && !itemTag?.value?.length && formatNumber(itemTag?.value)}
+              {itemTag?.type === "number" && itemTag?.value?.length > 0 && (
+                <>
+                  {(itemTag.value[0] as Number)}&minus;
+                  {(itemTag?.value[1])}
+                </>
+              )}
               {itemTag?.type === "date" && itemTag?.value?.length > 0 && (
                 <>
                   {formatDate(itemTag.value[0] as Moment)}&minus;

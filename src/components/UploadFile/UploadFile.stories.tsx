@@ -45,10 +45,13 @@ export default {
   */
   title: 'UploadFile',
   component: UploadFile,
+  parameters: {
+    controls: { expanded: true },
+  }
   
 };
 
-export const Default = () => {
+const Template: Story = (args) => {
   const [model, setModel] = React.useState<ModelOBJ>({ ...new ModelOBJ() });
 
   const handleUpdateList = React.useCallback(
@@ -94,4 +97,4 @@ export const Default = () => {
   );
 }
 
-
+export const Default = Template.bind({});

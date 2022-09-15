@@ -44,6 +44,10 @@ export interface UploadFileProps {
   maximumSize?: number;
   /**Type button*/
   type?: "link" | "button";
+  /**Type button*/
+  icon?: ReactNode;
+
+  isViewMode?: boolean;
 }
 /**Component upload file*/
 export function UploadFile(props: UploadFileProps) {
@@ -56,7 +60,9 @@ export function UploadFile(props: UploadFileProps) {
     removeFile,
     isBtnOutLine,
     maximumSize,
+    isViewMode,
     type = "button",
+    icon,
   } = props;
   const [listFileLoading, setListFileLoading] = React.useState<FileModel[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -206,22 +212,23 @@ export function UploadFile(props: UploadFileProps) {
 
   return (
     <div className="upload-button__container">
-      <div>
-        {type === "link" ? (
-          <div className="upload-link" onClick={handleClickButton}>
-            <Upload16 />
-            <span className="upload-content m-l--xxs">{uploadContent}</span>
-          </div>
-        ) : (
-          <Button
-            type={isBtnOutLine ? "outline-primary" : "primary"}
-            className="btn--lg"
-            onClick={handleClickButton}
-          >
-            {uploadContent}
-          </Button>
-        )}
 
+      {!isViewMode && (
+        <div>
+          {type === "link" ? (
+            <div className="upload-link" onClick={handleClickButton}>
+              {icon ? icon : <Upload16 />}
+              <span className="upload-content m-l--xxs">{uploadContent}</span>
+            </div>
+          ) : (
+            <Button
+              type={isBtnOutLine ? "outline-primary" : "primary"}
+              className="btn--lg"
+              onClick={handleClickButton}
+            >
+              {uploadContent}
+            </Button>
+          )}
           <input
             type="file"
             style={{ display: "none" }}

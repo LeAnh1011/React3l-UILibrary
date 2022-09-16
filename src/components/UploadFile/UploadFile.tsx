@@ -27,29 +27,18 @@ export interface FileModel {
   handleInput?: (e: any) => void;
 }
 export interface UploadFileProps {
-  /** List file in model */
   files?: FileModel[];
-  /** Type upload*/
   isMultiple?: boolean;
-  /**Label upload*/
   uploadContent?: string;
-  /**func handleUpdateList*/
   updateList?: (files: FileModel[]) => void;
-  /**file repository*/
   uploadFile?: (files: File[] | Blob[]) => Observable<FileModel[]>;
-  /**func handleRemoveFile*/
   removeFile?: (fileId: string | number) => void;
-  /**Type button outline*/
   isBtnOutLine?: boolean;
   maximumSize?: number;
-  /**Type button*/
   type?: "link" | "button";
-  /**Type button*/
   icon?: ReactNode;
-
   isViewMode?: boolean;
 }
-/**Component upload file*/
 export function UploadFile(props: UploadFileProps) {
   const {
     files: oldFiles,
@@ -212,7 +201,6 @@ export function UploadFile(props: UploadFileProps) {
 
   return (
     <div className="upload-button__container">
-
       {!isViewMode && (
         <div>
           {type === "link" ? (
@@ -229,6 +217,7 @@ export function UploadFile(props: UploadFileProps) {
               {uploadContent}
             </Button>
           )}
+
           <input
             type="file"
             style={{ display: "none" }}
@@ -267,6 +256,5 @@ UploadFile.defaultProps = {
   files: [],
   isBtnOutLine: false,
   maximumSize: 5000000,
-  type: "button"
 };
 export default UploadFile;

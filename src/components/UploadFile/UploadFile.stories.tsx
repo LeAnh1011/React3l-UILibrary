@@ -1,8 +1,8 @@
-import { User20 } from "@carbon/icons-react";
-import { Story } from "@storybook/react";
+import { storiesOf } from "@storybook/react";
 import React from "react";
 import { Model } from "react3l-common";
 import { Observable } from "rxjs";
+import nameof from "ts-nameof.macro";
 import UploadFile, { FileModel } from "./UploadFile";
 
 const demoList = [
@@ -38,20 +38,7 @@ class ModelOBJ extends Model {
   public files?: FileModel[];
 }
 
-export default {
-  /* 👇 The title prop is optional.
-  * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
-  * to learn how to generate automatic titles
-  */
-  title: 'UploadFile',
-  component: UploadFile,
-  parameters: {
-    controls: { expanded: true },
-  }
-  
-};
-
-const Template: Story = (args) => {
+export const Default = () => {
   const [model, setModel] = React.useState<ModelOBJ>({ ...new ModelOBJ() });
 
   const handleUpdateList = React.useCallback(
@@ -87,14 +74,14 @@ const Template: Story = (args) => {
 
   return (
     <UploadFile
-    {...args}
       files={model?.files || []}
       uploadFile={demoUploadFile}
       updateList={handleUpdateList}
       removeFile={handleRemoveFile}
-      icon={<User20/>}
+      isMultiple={false}
+      type="link"
     ></UploadFile>
   );
-}
+};
 
-export const Default = Template.bind({});
+storiesOf("UploadFile", module).add(nameof(Default), Default);

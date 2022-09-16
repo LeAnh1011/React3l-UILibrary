@@ -518,8 +518,8 @@ function TagFilter(props: TagFilterProps) {
               {itemTag?.type === "number" && !itemTag?.value?.length && formatNumber(itemTag?.value)}
               {itemTag?.type === "number" && itemTag?.value?.length > 0 && (
                 <>
-                  {(itemTag.value[0] as Number)}&minus;
-                  {(itemTag?.value[1])}
+                  {formatNumber(itemTag.value[0])}&minus;
+                  {formatNumber(itemTag?.value[1])}
                 </>
               )}
               {itemTag?.type === "date" && itemTag?.value?.length > 0 && (

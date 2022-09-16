@@ -20,21 +20,34 @@ function AdvanceInputRangeFilter(props: InputRangeProps) {
     isSmall
   } = props;
 
+  const validateRange = React.useCallback((fromValue, toValue) => {
+    if (typeof fromValue === 'undefined' || typeof toValue === 'undefined') return true;
+    if (fromValue > toValue) return false;
+    return true;
+  }, []);
 
   const handleBlurFrom = React.useCallback(
     (number: number) => {
+      if (validateRange(number, valueRange[1])) {
         onChangeRange([number, valueRange[1]]);
+      } else {
+        onChangeRange([undefined, undefined]);
+      }
     
     },
-    [onChangeRange, valueRange],
+    [onChangeRange, validateRange, valueRange],
   );
   
 
   const handleBlurTo = React.useCallback(
     (number: number) => {
+      if (validateRange(valueRange[0], number)) {
         onChangeRange([valueRange[0], number]);
+      } else {
+        onChangeRange([undefined, undefined]);
+      }
     },
-    [onChangeRange, valueRange],
+    [onChangeRange, validateRange, valueRange],
   );
 
   return (

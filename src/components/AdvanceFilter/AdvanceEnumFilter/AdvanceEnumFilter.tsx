@@ -118,6 +118,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
       getList().subscribe({
         next: (res: Model[]) => {
           setList(res);
+          setFirstLoad(false);
         },
         error: (err: ErrorObserver<Error>) => {
           setList([]);
@@ -125,9 +126,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
       });
     }
 
-    return function cleanup() {
-      subscription.unsubscribe();
-    };
+   
   }, [firstLoad, getList]);
 
   // use this for multiple type

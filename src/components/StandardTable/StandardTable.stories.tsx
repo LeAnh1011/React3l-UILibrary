@@ -189,6 +189,20 @@ function Default() {
           );
         },
       },
+      {
+        title: <LayoutHeader orderType={orderType} title="Version" />,
+        dataIndex: "version",
+        key: "version",
+        width: 135,
+        ellipsis: true,
+        render(...[version]) {
+          return (
+            <LayoutCell orderType={orderType} tableSize={size}>
+              <OneLineText value={`version`} countCharacters={20} />
+            </LayoutCell>
+          );
+        },
+      },
     ];
 
     const data: any = [];
@@ -200,7 +214,8 @@ function Default() {
         location: "Hill",
         weight: "50kg",
         platform: "iOS",
-        version: "10.3.4.5654",
+        version:
+          "Sau khi bị nhiều cư dân mạng lên tiếng cho rằng giám thị coi thi đã thiếu trách nhiệm trong việc nhắc nhở nam sinh bị 0 điểm môn Tiếng Anh vì ngủ quên. Được biết 2 cán bộ coi thi tại phòng thi môn Tiếng Anh của thí sinh H.N.T khẳng định đã ngồi đúng vị trí quy định, không đi lại trong phòng thi (do quy chế quy định trong quá trình làm bài không được đứng gần thí sinh...) mà bao quát toàn bộ thí sinh từ xa. Trong quá trình quan sát cán bộ coi thi thấy tất cả thí sinh đều tập trung làm bài, trong đó có em H.N.T. Khi thời gian coi thi trôi dần về cuối, có vài em úp mặt xuống bàn. Lúc này, cán bộ coi thi cứ ngỡ là các em đã làm bài xong, chờ hết giờ để nộp bài thi. Một lãnh đạo Sở GD&ĐT Cà Mau khẳng định Sau khi xác minh sự việc không khỏi tiếc nuối vì học sinh rất đáng thương nhưng giám thị đã làm đúng nhiệm vụ của mình",
         upgradeNum: 500,
         creator: "Jack Gealish",
         status: "hoạt động",
@@ -450,6 +465,34 @@ function Default() {
           );
         },
       },
+      {
+        title: ({ sortColumns }) => {
+          const sortedColumn = sortColumns?.find(
+            ({ column }) => column.key === "version"
+          );
+          return (
+            <div>
+              <LayoutHeader
+                orderType={orderType}
+                title="version"
+                sortedColumn={sortedColumn}
+                isSorter
+              />
+            </div>
+          );
+        },
+        dataIndex: "version",
+        key: "version",
+        sorter: true,
+        ellipsis: true,
+        render(...[version]) {
+          return (
+            <LayoutCell orderType={orderType} tableSize={size}>
+              <OneLineText value={version} countCharacters={20}/>
+            </LayoutCell>
+          );
+        },
+      },
     ],
     [avatarType, list, orderType, size]
   );
@@ -636,7 +679,7 @@ function Default() {
       location: "Hill iOS iOS iOS iOS iOS iOS iOS",
       weight: "50kg",
       platform: "iOS iOS iOS iOS iOS iOS iOS iOS iOS iOS",
-      version: "10.3.4.5654 OS iOS iOS iOS iOS iOS iOS",
+      version: "Sau khi bị nhiều cư dân mạng lên tiếng cho rằng giám thị coi thi đã thiếu trách nhiệm trong việc nhắc nhở nam sinh bị 0 điểm môn Tiếng Anh vì ngủ quên. Được biết 2 cán bộ coi thi tại phòng thi môn Tiếng Anh của thí sinh H.N.T khẳng định đã ngồi đúng vị trí quy định, không đi lại trong phòng thi (do quy chế quy định trong quá trình làm bài không được đứng gần thí sinh...) mà bao quát toàn bộ thí sinh từ xa. Trong quá trình quan sát cán bộ coi thi thấy tất cả thí sinh đều tập trung làm bài, trong đó có em H.N.T. Khi thời gian coi thi trôi dần về cuối, có vài em úp mặt xuống bàn. Lúc này, cán bộ coi thi cứ ngỡ là các em đã làm bài xong, chờ hết giờ để nộp bài thi. Một lãnh đạo Sở GD&ĐT Cà Mau khẳng định Sau khi xác minh sự việc không khỏi tiếc nuối vì học sinh rất đáng thương nhưng giám thị đã làm đúng nhiệm vụ của mình",
       upgradeNum: 500,
       creator: "Jack Gealish ",
       status: "hoạt động",
@@ -689,6 +732,7 @@ function Default() {
             rowSelection={rowSelection}
             expandable={expandable}
             loading={loading}
+            scroll={{x: 1900}}
           />
           <div>
             <Pagination
@@ -722,6 +766,7 @@ function Default() {
             isExpandable={true}
             tableSize="lg"
             rowSelection={rowSelection}
+           
           />
           <div>
             <Pagination

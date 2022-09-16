@@ -13,6 +13,7 @@ import AdvanceIdFilterMaster from "../AdvanceIdFilterMaster/AdvanceIdFilterMaste
 import AdvanceMultipleIdFilterMaster from "../AdvanceMultipleIdFilterMaster/AdvanceMultipleIdFilterMaster";
 import TagFilter from "./TagFilter";
 import { CommonService } from "./../../../services/common-service";
+import AdvanceInputRangeFilter from "../../AdvanceFilter/AdvanceInputRangeFilter/AdvanceInputRangeFilter";
 
 export class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
@@ -70,6 +71,7 @@ export function TagFilterStories() {
   const [filter, setFilter] = React.useState<DemoFilter>(filterValue);
   const [item, setItem] = React.useState<any>(null);
   const [value, setValue] = React.useState<[any, any]>([null, null]);
+  
 
   const handleChangeOrganization = React.useCallback(
     (id, item) => {
@@ -85,6 +87,15 @@ export function TagFilterStories() {
       filter.organizationId.in = listItem.map((currentItem) => currentItem.id);
       filter["organizationValue"] = listItem;
       setFilter({ ...filter });
+    },
+    [filter]
+  );
+
+  const handleChangeFilterTotal = React.useCallback(
+    (value) => {
+      filter.total.greaterEqual = value[0];
+      filter.total.lessEqual = value[1]
+      setFilter({ ...filter});
     },
     [filter]
   );
@@ -125,6 +136,7 @@ export function TagFilterStories() {
           onChange={handleChangeOrganization}
           getList={appUserSearchFunc}
           render={(t) => CommonService.limitWord(t?.displayName, 25)}
+          label={"Đơn vị tổ chức"}
         />
 
         <AdvanceMultipleIdFilterMaster
@@ -134,6 +146,7 @@ export function TagFilterStories() {
           searchProperty={"name"}
           onChange={handleChangeFilter}
           getList={orgSearchFunc}
+          label={"Đơn vị tổ chức"}
         />
 
         <AdvanceDateRangFilterMaster
@@ -141,6 +154,13 @@ export function TagFilterStories() {
           activeItem={item}
           value={value}
           translate={translate}
+          label={"Ngày giao hàng"}
+        />
+        <AdvanceInputRangeFilter
+          placeHolderRange={["From...", "To..."]}
+          valueRange={[filter?.total?.greaterEqual as number, filter?.total?.lessEqual as number]}
+          onChangeRange={handleChangeFilterTotal}
+          label={"Tổng hàng xuất kho"}
         />
       </div>
       <TagFilter

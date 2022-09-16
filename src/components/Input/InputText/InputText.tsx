@@ -3,6 +3,7 @@ import { BORDER_TYPE } from "config/enum";
 import React, { ReactSVGElement, RefObject } from "react";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import "./InputText.scss";
+import { Tooltip } from "antd";
 
 interface InputTextAction {
   name?: string;
@@ -55,7 +56,13 @@ const InputText = React.forwardRef(
 
     const [internalValue, setInternalValue] = React.useState<string>("");
 
+    const [isShowToolTip, setIsShowToolTip] = React.useState(false);
+
     const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
+      null
+    );
+
+    const divRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
       null
     );
 
@@ -119,11 +126,20 @@ const InputText = React.forwardRef(
 
     React.useEffect(() => {
       if (value) {
+        const inputElm = inputRef.current;
+        const divElm = divRef.current;
+        if (divElm.clientWidth >= inputElm.clientWidth) {
+          setIsShowToolTip(true);
+        } else {
+          setIsShowToolTip(false);
+        }
         setInternalValue(value);
       } else {
         setInternalValue("");
       }
     }, [value]);
+
+    React.useEffect(() => {});
 
     return (
       <div className={classNames("input-text__wrapper", className)}>
@@ -178,22 +194,24 @@ const InputText = React.forwardRef(
               )}
             </>
           )}
-          <input
-            type="text"
-            value={internalValue}
-            onChange={handleChange}
-            onKeyPress={handleKeyPress}
-            onKeyDown={handleKeyDown}
-            onBlur={handleBlur}
-            placeholder={
-              type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
-            }
-            ref={inputRef}
-            disabled={disabled}
-            className={classNames("component__input", {
-              "disabled-field": disabled,
-            })}
-          />
+          <Tooltip title={isShowToolTip ? internalValue : undefined}>
+            <input
+              type="text"
+              value={internalValue}
+              onChange={handleChange}
+              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyDown}
+              onBlur={handleBlur}
+              placeholder={
+                type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
+              }
+              ref={inputRef}
+              disabled={disabled}
+              className={classNames("component__input", {
+                "disabled-field": disabled,
+              })}
+            />
+          </Tooltip>
           {type === BORDER_TYPE.FLOAT_LABEL && label && (
             <label
               className={classNames("component__title", {
@@ -221,6 +239,9 @@ const InputText = React.forwardRef(
               )}
             </>
           )}
+        </div>
+        <div className="input-text__hidden" ref={divRef}>
+          {internalValue}
         </div>
       </div>
     );

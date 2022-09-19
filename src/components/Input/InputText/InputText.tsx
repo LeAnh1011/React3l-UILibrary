@@ -126,6 +126,14 @@ const InputText = React.forwardRef(
 
     React.useEffect(() => {
       if (value) {
+        setInternalValue(value);
+      } else {
+        setInternalValue("");
+      }
+    }, [value]);
+
+    React.useEffect(() => {
+      if (internalValue) {
         const inputElm = inputRef.current;
         const divElm = divRef.current;
         if (divElm.clientWidth >= inputElm.clientWidth) {
@@ -133,13 +141,8 @@ const InputText = React.forwardRef(
         } else {
           setIsShowToolTip(false);
         }
-        setInternalValue(value);
-      } else {
-        setInternalValue("");
       }
-    }, [value]);
-
-    React.useEffect(() => {});
+    }, [internalValue]);
 
     return (
       <div className={classNames("input-text__wrapper", className)}>

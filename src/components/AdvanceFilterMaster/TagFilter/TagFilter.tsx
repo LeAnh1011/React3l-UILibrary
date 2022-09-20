@@ -183,7 +183,6 @@ function TagFilter(props: TagFilterProps) {
                   const lessEqualFiltered = list.filter(
                     (t: any) => t["key"] === key
                   );
-                  console.log('lessEqualFiltered', lessEqualFiltered)
                   if (!lessEqualFiltered || lessEqualFiltered?.length === 0) {
                     return list.push({
                       key,
@@ -497,10 +496,6 @@ function TagFilter(props: TagFilterProps) {
     [handleChangeFilter, value, onClear]
   );
 
-  React.useEffect(() => {
-    console.log("value", value);
-    console.log("list", list);
-  }, [list, value]);
   return (
     <div className={classNames("tag-filte__container", className)}>
       {list &&

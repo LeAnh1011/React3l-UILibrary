@@ -198,22 +198,24 @@ const InputText = React.forwardRef(
             </>
           )}
           <Tooltip title={isShowToolTip ? internalValue : undefined}>
-            <input
-              type="text"
-              value={internalValue}
-              onChange={handleChange}
-              onKeyPress={handleKeyPress}
-              onKeyDown={handleKeyDown}
-              onBlur={handleBlur}
-              placeholder={
-                type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
-              }
-              ref={inputRef}
-              disabled={disabled}
-              className={classNames("component__input", {
-                "disabled-field": disabled,
-              })}
-            />
+            <div style={{ width: "100%" }}>
+              <input
+                type="text"
+                value={internalValue}
+                onChange={handleChange}
+                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyDown}
+                onBlur={handleBlur}
+                placeholder={
+                  type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
+                }
+                ref={inputRef}
+                disabled={disabled}
+                className={classNames("component__input", {
+                  "disabled-field": disabled,
+                })}
+              />
+            </div>
           </Tooltip>
           {type === BORDER_TYPE.FLOAT_LABEL && label && (
             <label

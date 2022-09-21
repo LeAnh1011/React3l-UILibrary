@@ -44,7 +44,7 @@ export class DemoFilter extends ModelFilter {
 const filterValue = new DemoFilter();
 // filterValue.id.equal = 10;
 
-const demoSearchFunc = (TModelFilter: ModelFilter) => {
+const demoSearchFunc = (TModelFilter?: ModelFilter) => {
   return demoObservable;
 };
 
@@ -70,7 +70,7 @@ export function AdvanceIdFilterMasterStories() {
         searchProperty={nameof(DemoFilter.name)}
         onChange={setValue}
         getList={demoSearchFunc}
-        title={"Đơn vị"}
+        label={"Đơn vị"}
         preferOptions={list}
         maxLengthItem={40}
       />

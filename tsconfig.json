@@ -1,6 +1,12 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
+    "paths": {
+      "@Components/*": ["components/*"],
+      "@Config/*": ["config/*"],
+      "@Helper/*": ["helpers/*"],
+      "@Service/*": ["services/*"]
+    },
     "declaration": true,
     "declarationDir": "build",
     "target": "es5",
@@ -29,5 +35,6 @@
     "node_modules",
     "build",
     "storybook-static",
+    "src/**/*.stories.tsx",
     "src/**/*.test.tsx"]
 }

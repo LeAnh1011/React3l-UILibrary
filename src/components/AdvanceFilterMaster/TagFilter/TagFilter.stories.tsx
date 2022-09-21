@@ -93,8 +93,9 @@ export function TagFilterStories() {
 
   const handleChangeFilterTotal = React.useCallback(
     (value) => {
-      filter.total.greaterEqual = value[0];
       filter.total.lessEqual = value[1]
+      filter.total.greaterEqual = value[0];
+    
       setFilter({ ...filter});
     },
     [filter]
@@ -103,8 +104,8 @@ export function TagFilterStories() {
   const handleChange = React.useCallback(
     (item, dateMoment) => {
       if (dateMoment && dateMoment.length > 0) {
-        filter.createdAt["greaterEqual"] = dateMoment[0];
         filter.createdAt["lessEqual"] = dateMoment[1];
+        filter.createdAt["greaterEqual"] = dateMoment[0];
       }
       setItem(item);
       setFilter({ ...filter });

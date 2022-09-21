@@ -5,6 +5,7 @@ export { default as InputSelect } from "./components/Input/InputSelect";
 export { default as InputTag } from "./components/Input/InputTag";
 export { default as ImportSearch } from "./components/Input/InputSearch";
 export { default as TextArea } from "./components/TextArea";
+export { default as InputRange } from "./components/Input/InputRange";
 
 export { default as Select } from "./components/Select/SingleSelect/";
 export { default as MultipleSelect } from "./components/Select/MultipleSelect";

@@ -16,6 +16,7 @@ export default {
     "src/components/Input/InputSelect/index.ts",
     "src/components/Input/InputTag/index.ts",
     "src/components/Input/InputSearch/index.ts",
+    "src/components/Input/InputRange/index.ts",
     "src/components/TextArea/index.ts",
     // Dropdown list components
     "src/components/Select/SingleSelect/index.ts",
@@ -39,6 +40,7 @@ export default {
     "src/components/AdvanceFilter/AdvanceTreeFilter/index.ts",
     "src/components/AdvanceFilter/AdvanceDateFilter/index.ts",
     "src/components/AdvanceFilter/AdvanceDateRangeFilter/index.ts",
+    "src/components/AdvanceFilter/AdvanceInputRangeFilter/index.ts",
     // Button
     "src/components/Button/index.ts",
     // Calendar

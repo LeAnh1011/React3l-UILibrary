@@ -14,7 +14,9 @@ export class DemoFilter extends ModelFilter {
 }
 
 export function InputTextStories() {
-  const [inputValue, setInputVal] = React.useState();
+  const [inputValue, setInputVal] = React.useState(
+    "asfdsadasdfv asfdsadasdfv asfdsadasdfv asfdsadasdfv asfdsadasdfvasfdsadasdfv asfdsadasdfv asfdsadasdfv"
+  );
 
   const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
 

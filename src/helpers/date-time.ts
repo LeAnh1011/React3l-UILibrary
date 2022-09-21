@@ -8,7 +8,7 @@ import {
   STANDARD_DATE_TIME_REGEX_WITHOUT_TIMEZONE,
   STANDARD_TIME_FORMAT,
   STANDARD_TIME_REGEX,
-} from "config/consts";
+} from "@Configs/consts";
 import moment, { Moment } from "moment";
 
 export function formatDate(

@@ -5,7 +5,7 @@ import CaretRight16 from "@carbon/icons-react/es/caret--right/16";
 import CaretLeft16 from "@carbon/icons-react/es/caret--left/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import classNames from "classnames";
-import Button from "components/Button";
+import Button from "@Components/Button";
 
 export interface PaginationProps extends AntdPaginationProps {
   skip?: number;

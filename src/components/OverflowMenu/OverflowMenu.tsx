@@ -1,7 +1,7 @@
 import OverflowMenuVertical16 from "@carbon/icons-react/es/overflow-menu--vertical/16";
 import classNames from "classnames";
 import React, { RefObject } from "react";
-import { CommonService } from "services/common-service";
+import { CommonService } from "@Services/common-service";
 import "./OverflowMenu.scss";
 import OverflowMenuList from "./OverflowMenuList";
 export interface CustomProps {

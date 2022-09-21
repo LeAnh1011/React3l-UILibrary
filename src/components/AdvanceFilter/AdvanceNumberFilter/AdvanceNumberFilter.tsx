@@ -3,7 +3,7 @@ import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import React, { ReactSVGElement, RefObject } from "react";
 import "./AdvanceNumberFilter.scss";
 import { ReactNode } from "react";
-import { BORDER_TYPE } from "config/enum";
+import { BORDER_TYPE } from "@Configs/enum";
 
 export const DECIMAL: string = "DECIMAL";
 export const LONG: string = "LONG";

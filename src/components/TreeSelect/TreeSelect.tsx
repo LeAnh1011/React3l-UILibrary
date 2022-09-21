@@ -4,12 +4,12 @@ import "./TreeSelect.scss";
 import { Model, ModelFilter } from "react3l-common";
 import Tree from "../Tree/Tree";
 import { useDebounceFn } from "ahooks";
-import { DEBOUNCE_TIME_300 } from "config/consts";
+import { DEBOUNCE_TIME_300 } from "@Configs/consts";
 import type { Observable } from "rxjs";
-import { CommonService } from "services/common-service";
+import { CommonService } from "@Services/common-service";
 import InputTag from "../Input/InputTag/InputTag";
 import InputSelect from "../Input/InputSelect/InputSelect";
-import { BORDER_TYPE } from "config/enum";
+import { BORDER_TYPE } from "@Configs/enum";
 import { IdFilter } from "react3l-advanced-filters";
 
 export interface TreeSelectProps<

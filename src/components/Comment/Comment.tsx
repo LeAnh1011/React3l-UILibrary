@@ -1,16 +1,16 @@
 import { Model, ModelFilter, OrderType } from "react3l-common";
-import { CommonService } from "services/common-service";
+import { CommonService } from "@Services/common-service";
 import classNames from "classnames";
 import moment, { Moment } from "moment";
 import React, { RefObject } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ErrorObserver, forkJoin, Observable, finalize } from "rxjs";
 import Modal from "../Modal/Modal";
-import Button from "components/Button";
+import Button from "@Components/Button";
 import { Creator, FileModel, Message } from "./Comment.model";
 import "./Comment.scss";
 import ContentEditable from "./ContentEditable/ContentEditable";
-import IconLoading from "components/IconLoading";
+import IconLoading from "@Components/IconLoading";
 import { Popconfirm } from "antd";
 
 export interface CommentProps<TFilter extends ModelFilter> {

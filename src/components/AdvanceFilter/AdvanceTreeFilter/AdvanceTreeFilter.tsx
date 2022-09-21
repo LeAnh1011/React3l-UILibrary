@@ -4,12 +4,12 @@ import "./AdvanceTreeFilter.scss";
 import { Model, ModelFilter } from "react3l-common";
 import Tree from "../../Tree";
 import { useDebounceFn } from "ahooks";
-import { DEBOUNCE_TIME_300 } from "config/consts";
+import { DEBOUNCE_TIME_300 } from "@Configs/consts";
 import type { Observable } from "rxjs";
-import { CommonService } from "services/common-service";
-import InputTag from "components/Input/InputTag";
+import { CommonService } from "@Services/common-service";
+import InputTag from "@Components/Input/InputTag";
 import InputSelect from "../../Input/InputSelect";
-import { BORDER_TYPE } from "config/enum";
+import { BORDER_TYPE } from "@Configs/enum";
 import { IdFilter } from "react3l-advanced-filters";
 
 export interface AdvanceTreeFilterProps<
@@ -84,7 +84,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
     selectWithAdd,
     selectWithPreferOption,
     preferOptions,
-    maxLengthItem ,
+    maxLengthItem,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);

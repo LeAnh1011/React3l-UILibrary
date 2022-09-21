@@ -2,11 +2,11 @@ import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import { Checkbox, Empty, Tooltip } from "antd";
 import classNames from "classnames";
-import { BORDER_TYPE } from "config/enum";
+import { BORDER_TYPE } from "@Configs/enum";
 import React, { RefObject } from "react";
 import { Model } from "react3l-common";
 import { ErrorObserver, Observable, Subscription } from "rxjs";
-import { CommonService } from "services/common-service";
+import { CommonService } from "@Services/common-service";
 import "./AdvanceEnumFilterMaster.scss";
 
 export interface AdvanceEnumMasterProps<T extends Model> {

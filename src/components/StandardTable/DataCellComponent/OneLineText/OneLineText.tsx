@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import "./OneLineText.scss";
 import { Tooltip } from "antd";
-import { CommonService } from "services/common-service";
+import { CommonService } from "@Services/common-service";
 
 export interface OneLineTextProps {
   className?: string;

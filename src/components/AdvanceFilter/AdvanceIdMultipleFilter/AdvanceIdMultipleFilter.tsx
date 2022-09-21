@@ -1,16 +1,16 @@
 import { Model, ModelFilter } from "react3l-common";
 import Add16 from "@carbon/icons-react/es/add/16";
 import { useDebounceFn } from "ahooks";
-import { CommonService } from "services/common-service";
+import { CommonService } from "@Services/common-service";
 import classNames from "classnames";
-import InputTag from "components/Input/InputTag/InputTag";
-import { DEBOUNCE_TIME_300 } from "config/consts";
+import InputTag from "@Components/Input/InputTag/InputTag";
+import { DEBOUNCE_TIME_300 } from "@Configs/consts";
 import React, { RefObject } from "react";
 import type { ErrorObserver, Observable } from "rxjs";
-import { BORDER_TYPE } from "config/enum";
+import { BORDER_TYPE } from "@Configs/enum";
 import "./AdvanceIdMultipleFilter.scss";
 import { Checkbox, Empty } from "antd";
-import IconLoading from "components/IconLoading/IconLoading";
+import IconLoading from "@Components/IconLoading/IconLoading";
 
 export interface AdvanceIdMultipleFilterProps<
   T extends Model,

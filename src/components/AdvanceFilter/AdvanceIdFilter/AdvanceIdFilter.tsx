@@ -1,4 +1,4 @@
-import { DEBOUNCE_TIME_300 } from "config/consts";
+import { DEBOUNCE_TIME_300 } from "@Configs/consts";
 import Add16 from "@carbon/icons-react/es/add/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { Model, ModelFilter } from "react3l-common";
@@ -7,11 +7,11 @@ import { Empty } from "antd";
 import classNames from "classnames";
 import React, { RefObject } from "react";
 import type { ErrorObserver, Observable } from "rxjs";
-import { CommonService } from "services/common-service";
-import InputSelect from "components/Input/InputSelect/InputSelect";
-import { BORDER_TYPE } from "config/enum";
+import { CommonService } from "@Services/common-service";
+import InputSelect from "@Components/Input/InputSelect/InputSelect";
+import { BORDER_TYPE } from "@Configs/enum";
 import "./AdvanceIdFilter.scss";
-import IconLoading from "components/IconLoading/IconLoading";
+import IconLoading from "@Components/IconLoading/IconLoading";
 
 export interface AdvanceIdFilterProps<
   T extends Model,

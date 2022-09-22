@@ -125,6 +125,10 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
         },
       });
     }
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [firstLoad, getList]);
 
   // use this for multiple type

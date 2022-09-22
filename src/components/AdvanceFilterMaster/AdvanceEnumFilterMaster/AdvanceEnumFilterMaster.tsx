@@ -130,8 +130,9 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
         },
       });
     }
-
-   
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [firstLoad, getList]);
 
   // use this for multiple type

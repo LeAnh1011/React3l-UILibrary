@@ -75,7 +75,6 @@ function TwoLineText(props: TwoLineTextProps) {
             ) : (
               <>{valueLine1}</>
             )}
-            <Tooltip title={valueLine1}>{valueLine1}</Tooltip>
           </div>
           <div
             className={classNames(

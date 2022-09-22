@@ -335,7 +335,7 @@ function Default() {
         ellipsis: true,
         render(...[name]) {
           return (
-            <LayoutCell orderType={orderType} tableSize={size}>
+            <LayoutCell orderType={orderType} tableSize={size} position={"right"}>
               <OneLineText
                 avatar={KateBishop}
                 avatarType={avatarType}
@@ -674,7 +674,7 @@ function Default() {
   for (let i = 0; i < 8; ++i) {
     data.push({
       key: i,
-      name: "Screem iOS iOS iOS iOS iOS iOS iOS",
+      name: "Screem",
       type: "Diamond iOS iOS iOS iOS iOS iOS iOS",
       location: "Hill iOS iOS iOS iOS iOS iOS iOS",
       weight: "50kg",

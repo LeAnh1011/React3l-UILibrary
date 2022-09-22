@@ -191,14 +191,14 @@ const InputText = React.forwardRef(
           {prefix && (
             <>
               {typeof prefix === "string" ? (
-                <span className="p-r--xxs">{prefix}</span>
+                <span className="p-r--xxs input-text__string">{prefix}</span>
               ) : (
                 <div className="m-r--xs input-text__icon">{prefix}</div>
               )}
             </>
           )}
           <Tooltip title={isShowToolTip ? internalValue : undefined}>
-            <div style={{ width: "100%" }}>
+            <div style={{ flexGrow: 1 }}>
               <input
                 type="text"
                 value={internalValue}
@@ -238,7 +238,7 @@ const InputText = React.forwardRef(
           {suffix && (
             <>
               {typeof suffix === "string" ? (
-                <span className="body-text--md m-l--xxs">{suffix}</span>
+                <span className="m-l--xxs input-text__string">{suffix}</span>
               ) : (
                 <div className="m-l--xxs input-text__icon">{suffix}</div>
               )}

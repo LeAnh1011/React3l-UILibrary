@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
+    "paths": {
+      "@Components/*": ["components/*"],
+      "@Configs/*": ["config/*"],
+      "@Helpers/*": ["helpers/*"],
+      "@Services/*": ["services/*"]
+    },
     "declaration": true,
     "declarationDir": "build",
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "strictNullChecks": false,
     "allowJs": true,
     "skipLibCheck": true,
@@ -25,9 +27,11 @@
     "jsx": "react-jsx"
   },
   "include": ["src/**/*"],
-  "exclude": [    
+  "exclude": [
     "node_modules",
     "build",
     "storybook-static",
-    "src/**/*.test.tsx"]
+    "src/**/*.stories.tsx",
+    "src/**/*.test.tsx"
+  ]
 }

@@ -1,7 +1,7 @@
 import InputNumber, {
   InputNumberProps,
-} from "components/Input/InputNumber/InputNumber";
-import { BORDER_TYPE } from "config/enum";
+} from "@Components/Input/InputNumber/InputNumber";
+import { BORDER_TYPE } from "@Configs/enum";
 import React from "react";
 import "./AdvanceInputRangeFilter.scss";
 

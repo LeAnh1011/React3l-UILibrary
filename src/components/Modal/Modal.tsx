@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import "./Modal.scss";
 import { Modal as AntModal, ModalProps as AntModalProps } from "antd";
 import classNames from "classnames";
-import Button from "components/Button";
+import Button from "@Components/Button";
 import Close20 from "@carbon/icons-react/es/close/20";
 
 export enum MODAL_SIZE {

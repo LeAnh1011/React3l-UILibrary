@@ -4,10 +4,10 @@ import Add16 from "@carbon/icons-react/es/add/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { Checkbox, Empty } from "antd";
 import classNames from "classnames";
-import InputSelect from "components/Input/InputSelect/InputSelect";
-import InputTag from "components/Input/InputTag";
-import { BORDER_TYPE } from "config/enum";
-import { CommonService } from "services/common-service";
+import InputSelect from "@Components/Input/InputSelect/InputSelect";
+import InputTag from "@Components/Input/InputTag";
+import { BORDER_TYPE } from "@Configs/enum";
+import { CommonService } from "@Services/common-service";
 import { ErrorObserver, Observable, Subscription } from "rxjs";
 
 export interface AdvanceEnumProps<T extends Model> {
@@ -126,7 +126,9 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
       });
     }
 
-   
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [firstLoad, getList]);
 
   // use this for multiple type

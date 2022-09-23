@@ -1,8 +1,8 @@
 import Close16 from "@carbon/icons-react/es/close/16";
 import { Tooltip } from "antd";
 import classNames from "classnames";
-import { formatDate } from "helpers/date-time";
-import { formatNumber } from "helpers/number";
+import { formatDate } from "@Helpers/date-time";
+import { formatNumber } from "@Helpers/number";
 import { TFunction } from "i18next";
 import React, { Fragment } from "react";
 import {

@@ -3,13 +3,13 @@ import Search16 from "@carbon/icons-react/es/search/16";
 import { useDebounceFn } from "ahooks";
 import { Checkbox, Empty, Tooltip } from "antd";
 import classNames from "classnames";
-import IconLoading from "components/IconLoading/IconLoading";
-import InputText from "components/Input/InputText";
-import { DEBOUNCE_TIME_300 } from "config/consts";
+import IconLoading from "@Components/IconLoading/IconLoading";
+import InputText from "@Components/Input/InputText";
+import { DEBOUNCE_TIME_300 } from "@Configs/consts";
 import React, { RefObject } from "react";
 import { Model, ModelFilter } from "react3l-common";
 import type { ErrorObserver, Observable } from "rxjs";
-import { CommonService } from "services/common-service";
+import { CommonService } from "@Services/common-service";
 import "./AdvanceMultipleIdFilterMaster.scss";
 
 export interface AdvanceMultipleIdFilterMasterProps<

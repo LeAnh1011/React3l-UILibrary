@@ -1,8 +1,8 @@
 import Close20 from "@carbon/icons-react/es/close/20";
 import { Spin } from "antd";
 import classNames from "classnames";
-import Button from "components/Button";
-import { NUMBER_BUTTON } from "config/enum";
+import Button from "@Components/Button";
+import { NUMBER_BUTTON } from "@Configs/enum";
 import React, { ReactNode, RefObject } from "react";
 import "./Drawer.scss";
 

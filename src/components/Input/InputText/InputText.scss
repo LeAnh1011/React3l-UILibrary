@@ -145,6 +145,10 @@
       color: var(--palette-gray-60);
     }
 
+    .input-text__string {
+      white-space: nowrap;
+    }
+
     span {
       font-size: 14px;
       line-height: 1rem;

@@ -1,4 +1,4 @@
-import { BORDER_TYPE } from "config/enum";
+import { BORDER_TYPE } from "@Configs/enum";
 import React from "react";
 import InputNumber, { InputNumberProps } from "../InputNumber/InputNumber";
 import "./InputRange.scss";

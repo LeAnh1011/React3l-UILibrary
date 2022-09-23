@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
-import { BORDER_TYPE } from "config/enum";
+import { BORDER_TYPE } from "@Configs/enum";
 import React, { ReactSVGElement, RefObject } from "react";
 import "./AdvanceStringFilter.scss";
 

@@ -3,11 +3,11 @@ import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import Upload16 from "@carbon/icons-react/es/upload/16";
 import WarningFilled16 from "@carbon/icons-react/es/warning--filled/16";
 import { notification, Popconfirm } from "antd";
-import Button from "components/Button";
+import Button from "@Components/Button";
 import React, { ReactNode, RefObject } from "react";
 import type { Observable } from "rxjs";
 import "./UploadFile.scss";
-import IconLoading from "components/IconLoading";
+import IconLoading from "@Components/IconLoading";
 
 export interface FileModel {
   id?: number;

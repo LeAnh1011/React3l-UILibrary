@@ -1,4 +1,3 @@
-import { Story } from "@storybook/react";
 import {
   ArgsTable,
   Description,
@@ -8,6 +7,7 @@ import {
   Subtitle,
   Title
 } from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import React, { Reducer } from "react";
 import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
@@ -16,10 +16,9 @@ import nameof from "ts-nameof.macro";
 import {
   AdvanceFilterAction,
   advanceFilterReducer,
-  advanceFilterService,
+  advanceFilterService
 } from "../../../services/advance-filter-service";
 import AdvanceIdFilterMaster from "./AdvanceIdFilterMaster";
-import { BORDER_TYPE } from "../../../config/enum";
 
 const demoObservable = new Observable<Model[]>((observer) => {
   setTimeout(() => {
@@ -55,7 +54,7 @@ class DemoFilter extends ModelFilter {
 const filterValue = new DemoFilter();
 // filterValue.id.equal = 10;
 
-const demoSearchFunc = (TModelFilter: ModelFilter) => {
+const demoSearchFunc = (TModelFilter?: ModelFilter) => {
   return demoObservable;
 };
 

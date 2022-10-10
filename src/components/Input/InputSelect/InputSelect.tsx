@@ -4,7 +4,7 @@ import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import "./InputSelect.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
-import { BORDER_TYPE } from "config/enum";
+import { BORDER_TYPE } from "@Configs/enum";
 
 export interface InputSelectProps<T extends Model> {
   value?: T;

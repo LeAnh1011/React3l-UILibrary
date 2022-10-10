@@ -2,7 +2,7 @@ import React, { RefObject } from "react";
 import { Subscription } from "rxjs";
 import moment, { Moment } from "moment";
 import { Model } from "react3l-common";
-import { TreeNode } from "components/Tree/TreeNode";
+import { TreeNode } from "@Components/Tree/TreeNode";
 export const CommonService = {
   useSubscription() {
     const subscription = React.useRef(new Subscription()).current;

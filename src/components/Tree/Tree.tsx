@@ -9,11 +9,11 @@ import type {
   TreeProps as AntdTreeProps,
 } from "antd/lib/tree";
 import classNames from "classnames";
-import IconLoading from "components/IconLoading/IconLoading";
+import IconLoading from "@Components/IconLoading/IconLoading";
 import React, { RefObject } from "react";
 import { Model, ModelFilter } from "react3l-common";
 import type { Observable } from "rxjs";
-import { CommonService } from "services/common-service";
+import { CommonService } from "@Services/common-service";
 import "./Tree.scss";
 import { TreeNode as CustomTreeNode } from "./TreeNode";
 

@@ -4,8 +4,8 @@ import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import "./CroppedModal.scss";
 import classNames from "classnames";
-import { formatFileSize } from "helpers/file";
-import { ModalCustomProps } from "components/Modal/Modal";
+import { formatFileSize } from "@Helpers/file";
+import { ModalCustomProps } from "@Components/Modal/Modal";
 import Close16 from "@carbon/icons-react/es/close/16";
 import CloudUpload24 from "@carbon/icons-react/es/cloud--upload/24";
 import Crop20 from "@carbon/icons-react/es/crop/20";
@@ -114,7 +114,14 @@ function useStateCallback(initialState: any) {
 }
 
 export default function CroppedModal(props: CroppedModalProps) {
-  const { isMultiple, listImage, visible, handleCancel, handleSave, defaultAspect } = props;
+  const {
+    isMultiple,
+    listImage,
+    visible,
+    handleCancel,
+    handleSave,
+    defaultAspect,
+  } = props;
 
   const [images, dispatchImages] = React.useReducer<
     Reducer<ImageFile[], ImageAction>
@@ -557,7 +564,7 @@ export default function CroppedModal(props: CroppedModalProps) {
                 <div className="cropped-modal__navi">
                   <div className="cropped-modal__ratio">
                     <Select
-                      defaultValue={defaultAspect ? defaultAspect : 0 }
+                      defaultValue={defaultAspect ? defaultAspect : 0}
                       style={{ width: 104, height: 32 }}
                       onChange={handleChangeAspect}
                     >

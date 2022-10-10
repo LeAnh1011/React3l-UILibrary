@@ -1,8 +1,8 @@
 import Calendar16 from "@carbon/icons-react/es/calendar/16";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
+import { BORDER_TYPE } from "@Configs/enum";
 import { DatePicker } from "antd";
 import classNames from "classnames";
-import { BORDER_TYPE } from "config/enum";
 import { Moment } from "moment";
 import React, { ReactSVGElement, RefObject } from "react";
 import { CommonService } from "services/common-service";

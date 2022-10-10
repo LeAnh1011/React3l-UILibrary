@@ -2,11 +2,11 @@ import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import { Checkbox, Empty, Tooltip } from "antd";
 import classNames from "classnames";
-import { BORDER_TYPE } from "config/enum";
+import { BORDER_TYPE } from "@Configs/enum";
 import React, { RefObject } from "react";
 import { Model } from "react3l-common";
 import { ErrorObserver, Observable, Subscription } from "rxjs";
-import { CommonService } from "services/common-service";
+import { CommonService } from "@Services/common-service";
 import "./AdvanceEnumFilterMaster.scss";
 
 export interface AdvanceEnumMasterProps<T extends Model> {
@@ -123,14 +123,14 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
       getList().subscribe({
         next: (res: Model[]) => {
           setList(res);
+          setFirstLoad(false);
         },
         error: (err: ErrorObserver<Error>) => {
           setList([]);
         },
       });
     }
-
-    return function cleanup() {
+    return () => {
       subscription.unsubscribe();
     };
   }, [firstLoad, getList]);
@@ -282,12 +282,9 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
       const spaceBelow = window.innerHeight - currentPosition.bottom;
       if (spaceBelow <= 200) {
         setTimeout(() => {
-          const listHeight = selectListRef.current
-            ? selectListRef.current.clientHeight
-            : 180;
           setAppendToBodyStyle({
             position: "fixed",
-            top: currentPosition.top - (listHeight + 30),
+            bottom: spaceBelow + wrapperRef.current.clientHeight,
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
           });

@@ -1,19 +1,18 @@
 import Close16 from "@carbon/icons-react/es/close/16";
 import { Tooltip } from "antd";
 import classNames from "classnames";
-import { formatDate } from "helpers/date-time";
-import { formatNumber } from "helpers/number";
-import { Moment } from "moment";
-import React from "react";
+import { formatDate } from "@Helpers/date-time";
+import { formatNumber } from "@Helpers/number";
+import { TFunction } from "i18next";
+import React, { Fragment } from "react";
 import {
   DateFilter,
   GuidFilter,
   IdFilter,
   NumberFilter,
-  StringFilter,
+  StringFilter
 } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
-import { TFunction } from "i18next";
 import "./TagFilter.scss";
 
 export interface TagFilterProps {
@@ -31,7 +30,7 @@ interface Tag {
   key?: string;
   value?: String | Number | Array<Model> | any;
   type?: string;
-  filterKey: string | string[];
+  filterType: string | string[];
   classFilter?: new () => ModelFilter;
 }
 
@@ -61,16 +60,16 @@ function TagFilter(props: TagFilterProps) {
         StringFilter | DateFilter | NumberFilter | IdFilter | GuidFilter
       >(search as ModelFilter).forEach(([key, value]) => {
         if (value instanceof StringFilter) {
-          Object.entries(value).forEach(([filterKey, filterValue]) => {
+          Object.entries(value).forEach(([filterType, filterValue]) => {
             // filter by StringFilter
             if (typeof filterValue === "string" && filterValue !== "") {
-              switch (filterKey) {
+              switch (filterType) {
                 case "startWith":
                   return list.push({
                     key,
                     value: filterValue,
                     type: "string",
-                    filterKey,
+                    filterType,
                     classFilter: StringFilter,
                   });
                 case "endWith":
@@ -78,7 +77,7 @@ function TagFilter(props: TagFilterProps) {
                     key,
                     value: filterValue,
                     type: "string",
-                    filterKey,
+                    filterType,
                     classFilter: StringFilter,
                   });
                 case "contain":
@@ -86,7 +85,7 @@ function TagFilter(props: TagFilterProps) {
                     key,
                     value: filterValue,
                     type: "string",
-                    filterKey,
+                    filterType,
                     classFilter: StringFilter,
                   });
                 default:
@@ -98,15 +97,15 @@ function TagFilter(props: TagFilterProps) {
         }
         // filter by NumberFilter
         if (value instanceof NumberFilter) {
-          Object.entries(value).forEach(([filterKey, filterValue]) => {
+          Object.entries(value).forEach(([filterType, filterValue]) => {
             if (typeof filterValue === "number" && !Number.isNaN(filterValue)) {
-              switch (filterKey) {
+              switch (filterType) {
                 case "equal":
                   return list.push({
                     key,
                     value: filterValue,
                     type: "number",
-                    filterKey,
+                    filterType,
                     classFilter: NumberFilter,
                   });
                 case "notEqual":
@@ -114,40 +113,134 @@ function TagFilter(props: TagFilterProps) {
                     key,
                     value: filterValue,
                     type: "number",
-                    filterKey,
+                    filterType,
                   });
                 case "less":
-                  return list.push({
-                    key,
-                    value: filterValue,
-                    type: "number",
-                    filterKey,
-                    classFilter: NumberFilter,
-                  });
+                  const lessFiltered = list.filter(
+                    (t: any) => t["key"] === key
+                  );
+                  if (!lessFiltered || lessFiltered?.length === 0) {
+                    return list.push({
+                      key,
+                      value: [{ filterValue, filterType }],
+                      type: "number",
+                      filterType: [filterType],
+                      classFilter: NumberFilter,
+                    });
+                  } else {
+                    if (lessFiltered?.length === 2) {
+                      list = list.map((t: any) => {
+                        if (t["key"] === key) {
+                          t["value"][0]["filterValue"] = filterValue;
+                        }
+                        return t;
+                      });
+                    } else {
+                      list = list.map((t: any) => {
+                        if (t["key"] === key) {
+                          t["value"]?.push({ filterValue, filterType });
+                        }
+                        return t;
+                      });
+                    }
+                  }
+
+                  break;
                 case "greater":
-                  return list.push({
-                    key,
-                    value: filterValue,
-                    type: "number",
-                    filterKey,
-                    classFilter: NumberFilter,
-                  });
+                  const greaterFiltered = list.filter(
+                    (t: any) => t["key"] === key
+                  );
+                  if (!greaterFiltered || greaterFiltered?.length === 0) {
+                    return list.push({
+                      key,
+                      value: [{ filterValue, filterType }],
+                      type: "number",
+                      filterType: [filterType],
+                      classFilter: NumberFilter,
+                    });
+                  } else {
+                    if (greaterFiltered?.length === 2) {
+                      list = list.map((t: any) => {
+                        if (t["key"] === key) {
+                          t["value"][1]["filterValue"] = filterValue;
+                        }
+                        return t;
+                      });
+                    } else {
+                      list = list.map((t: any) => {
+                        if (t["key"] === key) {
+                          t["value"]?.push({ filterValue, filterType });
+                        }
+                        return t;
+                      });
+                    }
+                  }
+                  break;
                 case "lessEqual":
-                  return list.push({
-                    key,
-                    value: filterValue,
-                    type: "number",
-                    filterKey,
-                    classFilter: NumberFilter,
-                  });
+                  const lessEqualFiltered = list.filter(
+                    (t: any) => t["key"] === key
+                  );
+                  if (!lessEqualFiltered || lessEqualFiltered?.length === 0) {
+                    return list.push({
+                      key,
+                      value: [{ filterValue, filterType }],
+                      type: "number",
+                      filterType: [filterType],
+                      classFilter: NumberFilter,
+                    });
+                  } else {
+                    if (lessEqualFiltered?.length === 2) {
+                      list = list.map((t: any) => {
+                        if (t["key"] === key) {
+                          t["value"][0]["filterValue"] = filterValue;
+                        }
+                        return t;
+                      });
+                    } else {
+                      list = list.map((t: any) => {
+                        if (t["key"] === key) {
+                          t["value"]?.push({ filterValue, filterType });
+                        }
+                        return t;
+                      });
+                    }
+                  }
+
+                  break;
                 case "greaterEqual":
-                  return list.push({
-                    key,
-                    value: filterValue,
-                    type: "number",
-                    filterKey,
-                    classFilter: NumberFilter,
-                  });
+                  const greaterEqualFiltered = list.filter(
+                    (t: any) => t["key"] === key
+                  );
+                  if (
+                    !greaterEqualFiltered ||
+                    greaterEqualFiltered?.length === 0
+                  ) {
+                    return list.push({
+                      key,
+                      value: [{ filterValue, filterType }],
+                      type: "number",
+                      filterType: [filterType],
+                      classFilter: NumberFilter,
+                    });
+                  } else {
+                    if (greaterEqualFiltered?.length === 2) {
+                      list = list.map((t: any) => {
+                        if (t["key"] === key) {
+                          t["value"][1]["filterValue"] = filterValue;
+                        }
+                        return t;
+                      });
+                    } else {
+                      list = list.map((t: any) => {
+                        if (t["key"] === key) {
+                          t["value"]?.push({ filterValue, filterType });
+                        }
+                        return t;
+                      });
+                    }
+                  }
+                  break;
+                // Do nothing
                 default:
                   // Do nothing
                   break;
@@ -157,14 +250,14 @@ function TagFilter(props: TagFilterProps) {
         }
         // filter by DateFilter
         if (value instanceof DateFilter) {
-          Object.entries(value).forEach(([filterKey, filterValue]) => {
-            switch (filterKey) {
+          Object.entries(value).forEach(([filterType, filterValue]) => {
+            switch (filterType) {
               case "equal":
                 return list.push({
                   key,
                   value: filterValue,
                   type: "date",
-                  filterKey,
+                  filterType,
                   classFilter: DateFilter,
                 });
               case "notEqual":
@@ -172,7 +265,7 @@ function TagFilter(props: TagFilterProps) {
                   key,
                   value: filterValue,
                   type: "date",
-                  filterKey,
+                  filterType,
                   classFilter: DateFilter,
                 });
               case "less":
@@ -180,24 +273,23 @@ function TagFilter(props: TagFilterProps) {
                 if (!lessFiltered || lessFiltered?.length === 0) {
                   return list.push({
                     key,
-                    value: [filterValue],
+                    value: [{ filterValue, filterType }],
                     type: "date",
-                    filterKey: [filterKey],
+                    filterType: [filterType],
                     classFilter: DateFilter,
                   });
                 } else {
                   if (lessFiltered?.length === 2) {
                     list = list.map((t: any) => {
                       if (t["key"] === key) {
-                        t["value"][0] = filterValue;
+                        t["value"][0]["filterValue"]  = filterValue;
                       }
                       return t;
                     });
                   } else {
                     list = list.map((t: any) => {
                       if (t["key"] === key) {
-                        t["value"]?.push(filterValue);
-                        t["filterKey"]?.push(filterKey);
+                        t["value"]?.push({ filterValue, filterType });
                       }
                       return t;
                     });
@@ -212,24 +304,23 @@ function TagFilter(props: TagFilterProps) {
                 if (!greaterFiltered || greaterFiltered?.length === 0) {
                   return list.push({
                     key,
-                    value: [filterValue],
+                    value: [{ filterValue, filterType }],
                     type: "date",
-                    filterKey: [filterKey],
+                    filterType: [filterType],
                     classFilter: DateFilter,
                   });
                 } else {
                   if (greaterFiltered?.length === 2) {
                     list = list.map((t: any) => {
                       if (t["key"] === key) {
-                        t["value"][1] = filterValue;
+                        t["value"][1]["filterValue"] = filterValue;
                       }
                       return t;
                     });
                   } else {
                     list = list.map((t: any) => {
                       if (t["key"] === key) {
-                        t["value"]?.push(filterValue);
-                        t["filterKey"]?.push(filterKey);
+                        t["value"]?.push({ filterValue, filterType });
                       }
                       return t;
                     });
@@ -243,24 +334,23 @@ function TagFilter(props: TagFilterProps) {
                 if (!lessEqualFiltered || lessEqualFiltered?.length === 0) {
                   return list.push({
                     key,
-                    value: [filterValue],
+                    value: [{ filterValue, filterType }],
                     type: "date",
-                    filterKey: [filterKey],
+                    filterType: [filterType],
                     classFilter: DateFilter,
                   });
                 } else {
                   if (lessEqualFiltered?.length === 2) {
                     list = list.map((t: any) => {
                       if (t["key"] === key) {
-                        t["value"][0] = filterValue;
+                        t["value"][0]["filterValue"] = filterValue;
                       }
                       return t;
                     });
                   } else {
                     list = list.map((t: any) => {
                       if (t["key"] === key) {
-                        t["value"]?.push(filterValue);
-                        t["filterKey"]?.push(filterKey);
+                        t["value"]?.push({ filterValue, filterType });
                       }
                       return t;
                     });
@@ -278,24 +368,23 @@ function TagFilter(props: TagFilterProps) {
                 ) {
                   return list.push({
                     key,
-                    value: [filterValue],
+                    value: [{ filterValue, filterType }],
                     type: "date",
-                    filterKey: [filterKey],
+                    filterType: [filterType],
                     classFilter: DateFilter,
                   });
                 } else {
                   if (greaterEqualFiltered?.length === 2) {
                     list = list.map((t: any) => {
                       if (t["key"] === key) {
-                        t["value"][1] = filterValue;
+                        t["value"][1]["filterValue"] = filterValue;
                       }
                       return t;
                     });
                   } else {
                     list = list.map((t: any) => {
                       if (t["key"] === key) {
-                        t["value"]?.push(filterValue);
-                        t["filterKey"]?.push(filterKey);
+                        t["value"]?.push({ filterValue, filterType });
                       }
                       return t;
                     });
@@ -311,19 +400,19 @@ function TagFilter(props: TagFilterProps) {
         // filter by IdFilter
         if (value instanceof IdFilter || value instanceof GuidFilter) {
           const objectKey = key.replace("Id", "");
-          Object.entries(value).forEach(([filterKey, filterValue]) => {
+          Object.entries(value).forEach(([filterType, filterValue]) => {
             if (
               (typeof filterValue === "string" && filterValue !== "") ||
               (typeof filterValue === "number" && !Number.isNaN(filterValue)) ||
               Array.isArray(filterValue)
             ) {
-              switch (filterKey) {
+              switch (filterType) {
                 case "equal":
                   return list.push({
                     key,
                     value: [search[`${objectKey}Value`]],
                     type: "id",
-                    filterKey,
+                    filterType,
                     classFilter: IdFilter,
                   });
                 case "notEqual":
@@ -331,7 +420,7 @@ function TagFilter(props: TagFilterProps) {
                     key,
                     value: [search[`${objectKey}Value`]],
                     type: "id",
-                    filterKey,
+                    filterType,
                     classFilter: IdFilter,
                   });
 
@@ -340,7 +429,7 @@ function TagFilter(props: TagFilterProps) {
                     key,
                     value: search[`${objectKey}Value`],
                     type: "id",
-                    filterKey,
+                    filterType,
                     classFilter: IdFilter,
                   });
                   break;
@@ -350,7 +439,7 @@ function TagFilter(props: TagFilterProps) {
                     key,
                     value: search[`${objectKey}Value`],
                     type: "id",
-                    filterKey,
+                    filterType,
                     classFilter: IdFilter,
                   });
                   break;
@@ -398,6 +487,7 @@ function TagFilter(props: TagFilterProps) {
     [handleChangeFilter, value, onClear]
   );
 
+
   return (
     <div className={classNames("tag-filte__container", className)}>
       {list &&
@@ -412,13 +502,51 @@ function TagFilter(props: TagFilterProps) {
                 :{" "}
               </div>
               {itemTag?.type === "string" && itemTag?.value}
-              {itemTag?.type === "number" && formatNumber(itemTag?.value)}
-              {itemTag?.type === "date" && itemTag?.value?.length > 0 && (
-                <>
-                  {formatDate(itemTag.value[0] as Moment)}&minus;
-                  {formatDate(itemTag?.value[1])}
-                </>
-              )}
+              {itemTag?.type === "number" &&
+                !itemTag?.value?.length &&
+                formatNumber(itemTag?.value)}
+              {itemTag?.type === "number" &&
+                itemTag?.value?.length > 0 &&
+                itemTag?.value?.map((item: any, index: number) => (
+                  <Fragment key={index}>
+                    {(item?.filterType === "greaterEqual" ||
+                      item?.filterType === "greater") && (
+                      <>{formatNumber(item.filterValue)}&minus;</>
+                    )}
+                    
+                  </Fragment>
+                ))}
+                {itemTag?.type === "number" &&
+                itemTag?.value?.length > 0 &&
+                itemTag?.value?.map((item: any, index: number) => (
+                  <Fragment key={index}>
+                   
+                    {(item?.filterType === "lessEqual" ||
+                      item?.filterType === "less") &&
+                      formatNumber(item.filterValue)}
+                  </Fragment>
+                ))}
+             
+             
+              {itemTag?.type === "date" &&
+                itemTag?.value?.length > 0 &&
+                itemTag?.value?.map((item: any, index: number) => (
+                  <Fragment key={index}>
+                    {(item?.filterType === "greaterEqual" ||
+                      item?.filterType === "greater") && (
+                      <>{formatDate(item.filterValue)}&minus;</>
+                    )}
+                  </Fragment>
+                ))}
+                {itemTag?.type === "date" &&
+                itemTag?.value?.length > 0 &&
+                itemTag?.value?.map((item: any, index: number) => (
+                  <Fragment key={index}>
+                    {(item?.filterType === "lessEqual" ||
+                      item?.filterType === "less") &&
+                      formatDate(item.filterValue)}
+                  </Fragment>
+                ))}
               {itemTag?.type === "date" && !itemTag?.value?.length && (
                 <>{formatDate(itemTag?.value)}</>
               )}

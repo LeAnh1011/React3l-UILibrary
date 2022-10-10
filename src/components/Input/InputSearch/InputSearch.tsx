@@ -4,12 +4,17 @@ import { Model, ModelFilter } from "react3l-common";
 import classNames from "classnames";
 import { Empty } from "antd";
 import Search16 from "@carbon/icons-react/es/search/16";
-import { CommonService } from "services/common-service";
-import type { ErrorObserver, Observable } from "rxjs";
-import { useDebounceFn } from "ahooks";
-import { DEBOUNCE_TIME_300 } from "config/consts";
+import { CommonService } from "@Services/common-service";
+import {
+  debounceTime,
+  distinctUntilChanged,
+  ErrorObserver,
+  Observable,
+  Subject,
+  switchMap,
+} from "rxjs";
 import InputSearchSelect from "./InputSearchSelect/InputSearchSelect";
-import IconLoading from "components/IconLoading/IconLoading";
+import IconLoading from "@Components/IconLoading/IconLoading";
 
 export interface InputSearchProps<
   T extends Model,
@@ -71,6 +76,8 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
 
   const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
 
+  const searchTermRef = React.useRef(new Subject<string>());
+
   const handleCloseSelect = React.useCallback(() => {
     setExpand(false);
     setShowListItem(false);
@@ -83,38 +90,18 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     }
   }, [animationInput]);
 
-  const [subscription] = CommonService.useSubscription();
-
-  const { run } = useDebounceFn(
-    (searchTerm: string) => {
-      if (searchTerm !== "" && searchTerm) {
-        const cloneValueFilter = valueFilter
-          ? { ...valueFilter }
-          : new ClassFilter();
-        if (searchType) {
-          cloneValueFilter[searchProperty][searchType] = searchTerm;
-        } else cloneValueFilter[searchProperty] = searchTerm;
-        setLoading(true);
-        subscription.add(getList);
-        getList(cloneValueFilter).subscribe({
-          next: (res: Model[]) => {
-            setList(res);
-            setLoading(false);
-            setShowListItem(true);
-          },
-          error: (err: ErrorObserver<Error>) => {
-            setList([]);
-            setLoading(false);
-            setShowListItem(true);
-          },
-        });
-      } else {
-        setShowListItem(false);
-      }
+  const searchObservable = React.useCallback(
+    (searchTerm) => {
+      const cloneValueFilter = valueFilter
+        ? { ...valueFilter }
+        : new ClassFilter();
+      if (searchType) {
+        cloneValueFilter[searchProperty][searchType] = searchTerm;
+      } else cloneValueFilter[searchProperty] = searchTerm;
+      setLoading(true);
+      return getList(cloneValueFilter);
     },
-    {
-      wait: DEBOUNCE_TIME_300,
-    }
+    [ClassFilter, getList, searchProperty, searchType, valueFilter]
   );
 
   CommonService.useClickOutside(wrapperRef, handleCloseSelect);
@@ -128,12 +115,9 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     [onChangeSearchField]
   );
 
-  const handleSearchChange = React.useCallback(
-    (searchTerm: string) => {
-      run(searchTerm);
-    },
-    [run]
-  );
+  const handleSearchChange = React.useCallback((searchTerm: string) => {
+    searchTermRef.current.next(searchTerm);
+  }, []);
 
   const handleKeyPress = React.useCallback(
     (event: any) => {
@@ -187,12 +171,9 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
       const spaceBelow = window.innerHeight - currentPosition.bottom;
       if (spaceBelow <= 200) {
         setTimeout(() => {
-          const listHeight = selectListRef.current
-            ? selectListRef.current.clientHeight
-            : 180;
           setAppendToBodyStyle({
             position: "fixed",
-            top: currentPosition.top - (listHeight + 30),
+            bottom: spaceBelow + wrapperRef.current.clientHeight,
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
           });
@@ -242,6 +223,29 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     },
     [handleClickSearchIcon, handleToggle]
   );
+
+  React.useEffect(() => {
+    const subscription = searchTermRef.current
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged(),
+        switchMap((searchValue) => searchObservable(searchValue))
+      )
+      .subscribe({
+        next: (res: Model[]) => {
+          setList(res);
+          setLoading(false);
+          setShowListItem(true);
+        },
+        error: (err: ErrorObserver<Error>) => {
+          setList([]);
+          setLoading(false);
+        },
+      });
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [searchObservable]);
 
   return (
     <div

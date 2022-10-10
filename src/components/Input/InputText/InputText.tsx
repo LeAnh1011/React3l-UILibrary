@@ -1,8 +1,9 @@
 import classNames from "classnames";
-import { BORDER_TYPE } from "config/enum";
+import { BORDER_TYPE } from "@Configs/enum";
 import React, { ReactSVGElement, RefObject } from "react";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import "./InputText.scss";
+import { Tooltip } from "antd";
 
 interface InputTextAction {
   name?: string;
@@ -53,7 +54,13 @@ const InputText = React.forwardRef(
 
     const [internalValue, setInternalValue] = React.useState<string>("");
 
+    const [isShowToolTip, setIsShowToolTip] = React.useState(false);
+
     const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
+      null
+    );
+
+    const divRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
       null
     );
 
@@ -123,6 +130,18 @@ const InputText = React.forwardRef(
       }
     }, [value]);
 
+    React.useEffect(() => {
+      if (internalValue) {
+        const inputElm = inputRef.current;
+        const divElm = divRef.current;
+        if (divElm.clientWidth >= inputElm.clientWidth) {
+          setIsShowToolTip(true);
+        } else {
+          setIsShowToolTip(false);
+        }
+      }
+    }, [internalValue]);
+
     return (
       <div className={classNames("input-text__wrapper", className)}>
         <div className="input-text__label m-b--xxxs">
@@ -170,28 +189,32 @@ const InputText = React.forwardRef(
           {prefix && (
             <>
               {typeof prefix === "string" ? (
-                <span className="p-r--xxs">{prefix}</span>
+                <span className="p-r--xxs input-text__string">{prefix}</span>
               ) : (
                 <div className="m-r--xs input-text__icon">{prefix}</div>
               )}
             </>
           )}
-          <input
-            type="text"
-            value={internalValue}
-            onChange={handleChange}
-            onKeyPress={handleKeyPress}
-            onKeyDown={handleKeyDown}
-            onBlur={handleBlur}
-            placeholder={
-              type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
-            }
-            ref={inputRef}
-            disabled={disabled}
-            className={classNames("component__input", {
-              "disabled-field": disabled,
-            })}
-          />
+          <Tooltip title={isShowToolTip ? internalValue : undefined}>
+            <div style={{ flexGrow: 1 }}>
+              <input
+                type="text"
+                value={internalValue}
+                onChange={handleChange}
+                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyDown}
+                onBlur={handleBlur}
+                placeholder={
+                  type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
+                }
+                ref={inputRef}
+                disabled={disabled}
+                className={classNames("component__input", {
+                  "disabled-field": disabled,
+                })}
+              />
+            </div>
+          </Tooltip>
           {type === BORDER_TYPE.FLOAT_LABEL && label && (
             <label
               className={classNames("component__title", {
@@ -213,12 +236,15 @@ const InputText = React.forwardRef(
           {suffix && (
             <>
               {typeof suffix === "string" ? (
-                <span className="body-text--md m-l--xxs">{suffix}</span>
+                <span className="m-l--xxs input-text__string">{suffix}</span>
               ) : (
                 <div className="m-l--xxs input-text__icon">{suffix}</div>
               )}
             </>
           )}
+        </div>
+        <div className="input-text__hidden" ref={divRef}>
+          {internalValue}
         </div>
       </div>
     );

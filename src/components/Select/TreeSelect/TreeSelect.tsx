@@ -1,21 +1,21 @@
-import React, { RefObject, Reducer } from "react";
-import { v4 as uuidv4 } from "uuid";
-import "./TreeSelect.scss";
-import { Model, ModelFilter } from "react3l-common";
+import { DEBOUNCE_TIME_300 } from "@Configs/consts";
 import { useDebounceFn } from "ahooks";
-import { DEBOUNCE_TIME_300 } from "config/consts";
+import InputSelect from "components/Input/InputSelect";
+import InputTag from "components/Input/InputTag";
+import Tree from "components/Tree";
+import { BORDER_TYPE } from "config/enum";
+import React, { Reducer, RefObject } from "react";
+import { IdFilter } from "react3l-advanced-filters";
+import { Model, ModelFilter } from "react3l-common";
 import type { Observable } from "rxjs";
 import { CommonService } from "services/common-service";
-import { BORDER_TYPE } from "config/enum";
-import { IdFilter } from "react3l-advanced-filters";
-import InputTag from "components/Input/InputTag";
-import InputSelect from "components/Input/InputSelect";
-import Tree from "components/Tree";
+import { v4 as uuidv4 } from "uuid";
+import "./TreeSelect.scss";
 
 export interface TreeSelectProps<
   T extends Model,
   TModelFilter extends ModelFilter
-  > {
+> {
   title?: string;
   listItem?: Model[];
   item?: Model;
@@ -230,11 +230,9 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
       const spaceBelow = window.innerHeight - currentPosition.bottom;
       if (spaceBelow <= 200) {
         setTimeout(() => {
-          const treeListRef = document.getElementById(componentId);
-          const listHeight = treeListRef ? treeListRef.clientHeight : 180;
           setAppendToBodyStyle({
             position: "fixed",
-            top: currentPosition.top - (listHeight + 30),
+            bottom: spaceBelow + wrapperRef.current.clientHeight,
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
           });

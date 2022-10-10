@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import IconLoading from "components/IconLoading";
+import IconLoading from "@Components/IconLoading";
 import React, { PropsWithChildren } from "react";
 import { ButtonProps } from "../Button";
 import "./BleedButton.scss";

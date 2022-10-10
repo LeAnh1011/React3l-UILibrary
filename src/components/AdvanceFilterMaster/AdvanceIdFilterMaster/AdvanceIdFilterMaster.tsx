@@ -4,13 +4,13 @@ import Search16 from "@carbon/icons-react/es/search/16";
 import { useDebounceFn } from "ahooks";
 import { Empty, Tooltip } from "antd";
 import classNames from "classnames";
-import IconLoading from "components/IconLoading/IconLoading";
-import InputText from "components/Input/InputText";
-import { DEBOUNCE_TIME_300 } from "config/consts";
+import IconLoading from "@Components/IconLoading/IconLoading";
+import InputText from "@Components/Input/InputText";
+import { DEBOUNCE_TIME_300 } from "@Configs/consts";
 import React, { RefObject } from "react";
 import { Model, ModelFilter } from "react3l-common";
 import { ErrorObserver, Observable, Subscription } from "rxjs";
-import { CommonService } from "services/common-service";
+import { CommonService } from "@Services/common-service";
 import "./AdvanceIdFilterMaster.scss";
 
 export interface AdvanceIdFilterMasterProps<
@@ -19,7 +19,7 @@ export interface AdvanceIdFilterMasterProps<
 > {
   value?: number | string;
 
-  label: string;
+  label?: string;
 
   valueFilter?: TModelFilter;
 

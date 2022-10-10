@@ -4,10 +4,10 @@ import Add16 from "@carbon/icons-react/es/add/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { Checkbox, Empty } from "antd";
 import classNames from "classnames";
-import InputSelect from "components/Input/InputSelect/InputSelect";
-import InputTag from "components/Input/InputTag";
-import { BORDER_TYPE } from "config/enum";
-import { CommonService } from "services/common-service";
+import InputSelect from "@Components/Input/InputSelect/InputSelect";
+import InputTag from "@Components/Input/InputTag";
+import { BORDER_TYPE } from "@Configs/enum";
+import { CommonService } from "@Services/common-service";
 import { ErrorObserver, Observable, Subscription } from "rxjs";
 
 export interface AdvanceEnumProps<T extends Model> {
@@ -118,6 +118,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
       getList().subscribe({
         next: (res: Model[]) => {
           setList(res);
+          setFirstLoad(false);
         },
         error: (err: ErrorObserver<Error>) => {
           setList([]);
@@ -125,7 +126,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
       });
     }
 
-    return function cleanup() {
+    return () => {
       subscription.unsubscribe();
     };
   }, [firstLoad, getList]);
@@ -324,12 +325,9 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
       const spaceBelow = window.innerHeight - currentPosition.bottom;
       if (spaceBelow <= 200) {
         setTimeout(() => {
-          const listHeight = selectListRef.current
-            ? selectListRef.current.clientHeight
-            : 180;
           setAppendToBodyStyle({
             position: "fixed",
-            top: currentPosition.top - (listHeight + 30),
+            bottom: spaceBelow + wrapperRef.current.clientHeight,
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
           });

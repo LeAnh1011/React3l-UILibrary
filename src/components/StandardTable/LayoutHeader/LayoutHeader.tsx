@@ -1,6 +1,6 @@
 import { Tooltip } from "antd";
 import classNames from "classnames";
-import { CommonService } from "services/common-service";
+import { CommonService } from "@Services/common-service";
 import Sorter from "../Sorter/Sorter";
 import "./LayoutHeader.scss";
 

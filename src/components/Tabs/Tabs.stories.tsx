@@ -61,12 +61,7 @@ const Template: Story = (args) => {
           <TabPane tab="Tab 1" key="tabso1">
             Content of Tab Pane 1
           </TabPane>
-          <TabPane tab="Tab 2" key="tabso2">
-            Content of Tab Pane 2
-          </TabPane>
-          <TabPane tab="Tab 3" key="tabso3" className="ant-tabs-tab__child">
-            Content of Tab Pane 3
-          </TabPane>
+         
         </Tabs>
       </div>
 

@@ -1,7 +1,7 @@
 import DotMark16 from "@carbon/icons-react/es/dot-mark/16";
 import { Tooltip } from "antd";
 import classNames from "classnames";
-import { CommonService } from "services/common-service";
+import { CommonService } from "@Services/common-service";
 import "./StatusLine.scss";
 
 export interface StatusLineProps {

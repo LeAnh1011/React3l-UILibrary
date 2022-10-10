@@ -1,4 +1,3 @@
-import { Story } from "@storybook/react";
 import {
   ArgsTable,
   Description,
@@ -6,8 +5,9 @@ import {
   PRIMARY_STORY,
   Stories,
   Subtitle,
-  Title,
+  Title
 } from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import React from "react";
 import { BORDER_TYPE } from "../../../config/enum";
 import FormItem from "../../FormItem/FormItem";

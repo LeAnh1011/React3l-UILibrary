@@ -1,6 +1,12 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
+    "paths": {
+      "@Components/*": ["components/*"],
+      "@Configs/*": ["config/*"],
+      "@Helpers/*": ["helpers/*"],
+      "@Services/*": ["services/*"]
+    },
     "declaration": true,
     "declarationDir": "build",
     "target": "es6",
@@ -25,10 +31,11 @@
     "jsx": "react-jsx"
   },
   "include": ["src/**/*"],
-  "exclude": [    
+  "exclude": [
     "node_modules",
     "build",
     "storybook-static",
     "src/**/*.stories.tsx",
-    "src/**/*.test.tsx"]
+    "src/**/*.test.tsx"
+  ]
 }

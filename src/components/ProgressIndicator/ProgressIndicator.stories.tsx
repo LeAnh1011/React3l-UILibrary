@@ -13,28 +13,32 @@ import ProgressIndicator from "./ProgressIndicator";
 
 const listEnum = [
   {
-    sessionId: 1,
-    sessionName: "Thông tin chung",
+    sectionId: 1,
+    sectionName: "Thông tin chung",
   },
   {
-    sessionId: 2,
-    sessionName: "Khách hàng",
+    sectionId: 2,
+    sectionName: "Khách hàng",
   },
   {
-    sessionId: 3,
-    sessionName: "Chiết khấu, quà tặng",
+    sectionId: 3,
+    sectionName: "Chiết khấu, quà tặng",
   },
   {
-    sessionId: 4,
-    sessionName: "Vay",
+    sectionId: 4,
+    sectionName: "Vay",
   },
   {
-    sessionId: 5,
-    sessionName: "Thanh toán",
+    sectionId: 5,
+    sectionName: "Thanh toán",
   },
   {
-    sessionId: 6,
-    sessionName: "KhangMeow",
+    sectionId: 6,
+    sectionName: "KhangMeow",
+  },
+  {
+    sectionId: 7,
+    sectionName: "TestFrame",
   },
 ];
 
@@ -64,49 +68,32 @@ const Template: Story = (args) => {
   return (
     <div style={{ display: "flex" }}>
       <div style={{ width: 200 }}>
-        <ProgressIndicator {...args} list={listEnum} />
+        <ProgressIndicator list={listEnum} idContainer={"container-frame"}/>
       </div>
-      <div style={{ width: 900 }}>
-        <div
-          id="frame-1"
-          style={{ height: 400, backgroundColor: "red" }}
-        >
-          {listEnum[0].sessionName}
+      <div
+        style={{ width: 900, height: 700, overflow: "auto" }}
+        id="container-frame"
+      >
+        <div id="frame-1" style={{ height: 400, backgroundColor: "red" }}>
+          {listEnum[0].sectionName}
         </div>
-        <div
-          id="frame-2"
-          style={{ height: 400, backgroundColor: "yellow" }}
-        >
-          {listEnum[1].sessionName}
+        <div id="frame-2" style={{ height: 400, backgroundColor: "yellow" }}>
+          {listEnum[1].sectionName}
         </div>
-        <div
-          id="frame-3"
-          style={{ height: 400, backgroundColor: "blue" }}
-        >
-          {listEnum[2].sessionName}
+        <div id="frame-3" style={{ height: 400, backgroundColor: "blue" }}>
+          {listEnum[2].sectionName}
         </div>
-        <div
-          id="frame-4"
-          style={{ height: 400, backgroundColor: "green" }}
-        >
-          {listEnum[3].sessionName}
+        <div id="frame-4" style={{ height: 400, backgroundColor: "green" }}>
+          {listEnum[3].sectionName}
         </div>
-        <div
-          id="frame-5"
-          style={{ height: 400, backgroundColor: "gray" }}
-        >
-          {listEnum[4].sessionName}
+        <div id="frame-5" style={{ height: 400, backgroundColor: "gray" }}>
+          {listEnum[4].sectionName}
         </div>
-        <div
-          id="frame-6"
-          style={{ height: 400, backgroundColor: "pink" }}
-        >
-          {listEnum[5].sessionName}
+        <div id="frame-6" style={{ height: 400, backgroundColor: "pink" }}>
+          {listEnum[5].sectionName}
         </div>
-        <div
-          style={{ height: 200, backgroundColor: "black" }}
-        >
-          {'Footer'}
+        <div id="frame-7" style={{ height: 200, backgroundColor: "black" }}>
+          {listEnum[6].sectionName}
         </div>
       </div>
     </div>

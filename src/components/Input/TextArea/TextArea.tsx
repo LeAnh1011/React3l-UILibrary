@@ -1,7 +1,7 @@
 import React, { RefObject } from "react";
 import "./TextArea.scss";
 import classNames from "classnames";
-import { BORDER_TYPE } from "config/enum";
+import { BORDER_TYPE } from "@Configs/enum";
 
 export interface TextAreaAction {
   name?: string;

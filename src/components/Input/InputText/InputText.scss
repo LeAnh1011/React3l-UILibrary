@@ -7,7 +7,7 @@
   .input-text__label {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 
     .component__title--disabled {
       color: var(--palette-gray-40);
@@ -22,6 +22,16 @@
     span.input-text__count {
       color: var(--palette-gray-60);
     }
+  }
+
+  .input-text__hidden {
+    width: auto;
+    display: inline-block;
+    visibility: hidden;
+    position: fixed;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 14px;
   }
 
   .input-text__container {
@@ -133,6 +143,10 @@
       display: flex;
       align-items: center;
       color: var(--palette-gray-60);
+    }
+
+    .input-text__string {
+      white-space: nowrap;
     }
 
     span {

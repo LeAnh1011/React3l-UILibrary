@@ -1,6 +1,5 @@
 import Add16 from "@carbon/icons-react/es/add/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
-import ChevronUp16 from "@carbon/icons-react/es/chevron--up/16";
 import {
   ArgsTable,
   Description,
@@ -10,7 +9,7 @@ import {
   Source,
   Stories,
   Subtitle,
-  Title,
+  Title
 } from "@storybook/addon-docs";
 import { Story } from "@storybook/react";
 import { ColumnProps } from "antd/lib/table";
@@ -18,16 +17,12 @@ import { ColumnProps } from "antd/lib/table";
 import { Key, RowSelectionType } from "antd/lib/table/interface";
 import React, { useMemo } from "react";
 import { StringFilter } from "react3l-advanced-filters";
-import { Model, ModelFilter } from "react3l-common";
-import { of } from "rxjs";
+import { ModelFilter } from "react3l-common";
 import dedent from "ts-dedent";
 import Button from "../Button/Button";
-import Select from "../Select/SingleSelect/Select";
 import ActionBarComponent from "./ActionBarComponent/ActionBarComponent";
 import { dataSource } from "./Data";
-import BadgeText from "./DataCellComponent/BadgeText/BadgeText";
 import OneLineText from "./DataCellComponent/OneLineText/OneLineText";
-import StatusLine from "./DataCellComponent/StatusLine/StatusLine";
 import TwoLineText from "./DataCellComponent/TwoLineText/TwoLineText";
 import LayoutCell from "./LayoutCell/LayoutCell";
 import LayoutHeader from "./LayoutHeader/LayoutHeader";
@@ -417,35 +412,7 @@ export default {
 const Template: Story = (args) => {
   const [filter, setFilter] = React.useState<DemoFilter>(new DemoFilter());
   const [loading, setLoading] = React.useState<boolean>(false);
-  const [selectModel, setSelectModel] = React.useState<Model>({
-    id: 0,
-    name: "Option 2",
-    code: "FAD",
-  });
-  const handleRenderModel = React.useCallback((item: Model) => {
-    if (item) {
-      return item.name;
-    } else {
-      return "";
-    }
-  }, []);
-  const handleSetModel = React.useCallback((...[, item]) => {
-    setSelectModel(item);
-  }, []);
-  const demoListEnum = (TModelFilter?: ModelFilter) => {
-    return of([
-      {
-        id: 1,
-        name:
-          "Option 2 very long one very long one Option 2 very long one very long one",
-        code: "E1",
-      },
-      { id: 2, name: "Enum 2", code: "E2" },
-      { id: 3, name: "Enum 3", code: "E3" },
-      { id: 4, name: "Enum 4", code: "E4" },
-      { id: 5, name: "Enum 5", code: "E5" },
-    ]);
-  };
+  
 
   const handleLoading = React.useCallback(() => {
     setLoading(true);
@@ -464,108 +431,7 @@ const Template: Story = (args) => {
     [filter, setFilter]
   );
 
-  const expandedRowRender = () => {
-    const columns: ColumnProps<any>[] = [
-      {
-        title: <LayoutHeader orderType={ORDER_TYPE.LEFT} title="Title" />,
-        dataIndex: "type",
-        key: "type",
-        width: 135,
-        ellipsis: true,
-        render(...[type]) {
-          return (
-            <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={SIZE_TYPE.LARGE}>
-              <Select
-                placeHolder={"Select Organization"}
-                value={selectModel}
-                searchProperty={"name"}
-                render={handleRenderModel}
-                onChange={handleSetModel}
-                getList={demoListEnum}
-                classFilter={DemoFilter}
-                type={type}
-                appendToBody={true}
-              />
-            </LayoutCell>
-          );
-        },
-      },
 
-      {
-        title: <LayoutHeader orderType={ORDER_TYPE.LEFT} title="Version" />,
-        dataIndex: "version",
-        key: "version",
-        width: 135,
-        ellipsis: true,
-        render(...[version]) {
-          return (
-            <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={SIZE_TYPE.LARGE}>
-              <OneLineText value={`version`} />
-            </LayoutCell>
-          );
-        },
-      },
-      {
-        title: <LayoutHeader orderType={ORDER_TYPE.LEFT} title="Creator" />,
-        dataIndex: "creator",
-        key: "creator",
-        width: 135,
-        ellipsis: true,
-        align: "center",
-        render(...[creator]) {
-          return (
-            <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={SIZE_TYPE.LARGE}>
-              <BadgeText
-                value={creator}
-                backgroundColor="#FFECB3"
-                color="#ED6700"
-              />
-            </LayoutCell>
-          );
-        },
-      },
-      {
-        title: <LayoutHeader orderType={ORDER_TYPE.LEFT} title="Action" />,
-        key: "status",
-        width: 150,
-        ellipsis: true,
-        dataIndex: "status",
-        render(...[status]) {
-          return (
-            <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={SIZE_TYPE.LARGE}>
-              <StatusLine value={status} color="red" />
-            </LayoutCell>
-          );
-        },
-      },
-      {
-        title: <LayoutHeader orderType={ORDER_TYPE.LEFT} title="Version" />,
-        dataIndex: "version",
-        key: "version",
-        width: 135,
-        ellipsis: true,
-        render(...[version]) {
-          return (
-            <LayoutCell orderType={ORDER_TYPE.LEFT} tableSize={SIZE_TYPE.LARGE}>
-              <OneLineText value={`version`} countCharacters={20} />
-            </LayoutCell>
-          );
-        },
-      },
-    ];
-
-    return (
-      <div className="expand-table-box">
-        <StandardTable
-          columns={columns}
-          dataSource={dataSource}
-          isDragable={true}
-          tableSize={SIZE_TYPE.LARGE}
-          isLevel2={true}
-        />
-      </div>
-    );
-  };
   const typeRowSelection: RowSelectionType = "checkbox";
   const [selectedRowKeys, setSelectedRowKeys] = React.useState<Key[]>([10]);
 
@@ -682,15 +548,7 @@ const Template: Story = (args) => {
     [args?.tableSize]
   );
 
-  const expandable = {
-    expandedRowRender: expandedRowRender,
-    expandIcon: ({ expanded, onExpand, record }) =>
-      expanded ? (
-        <ChevronUp16 onClick={(e) => onExpand(record, e)} />
-      ) : (
-        <ChevronDown16 onClick={(e) => onExpand(record, e)} />
-      ),
-  };
+
 
   return (
     <div>

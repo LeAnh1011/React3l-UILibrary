@@ -2,7 +2,7 @@ import classNames from "classnames";
 import React from "react";
 import "./TwoLineText.scss";
 import { Tooltip } from "antd";
-import { CommonService } from "services/common-service";
+import { CommonService } from "@Services/common-service";
 
 export interface TwoLineTextProps {
   className?: string;
@@ -75,7 +75,6 @@ function TwoLineText(props: TwoLineTextProps) {
             ) : (
               <>{valueLine1}</>
             )}
-            <Tooltip title={valueLine1}>{valueLine1}</Tooltip>
           </div>
           <div
             className={classNames(

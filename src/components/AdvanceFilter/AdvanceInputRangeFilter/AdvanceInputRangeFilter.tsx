@@ -1,9 +1,11 @@
-import InputNumber, { InputNumberProps } from "components/Input/InputNumber/InputNumber";
-import { BORDER_TYPE } from "config/enum";
+import InputNumber, {
+  InputNumberProps,
+} from "@Components/Input/InputNumber/InputNumber";
+import { BORDER_TYPE } from "@Configs/enum";
 import React from "react";
 import "./AdvanceInputRangeFilter.scss";
 
-export interface InputRangeProps extends InputNumberProps{
+export interface AdvanceInputRangeFilterProps extends InputNumberProps {
   valueRange: [number, number] | [];
   placeHolderRange?: [string, string];
   type?: BORDER_TYPE;
@@ -11,36 +13,48 @@ export interface InputRangeProps extends InputNumberProps{
   isSmall?: boolean;
 }
 
-function AdvanceInputRangeFilter(props: InputRangeProps) {
-  const { 
+function AdvanceInputRangeFilter(props: AdvanceInputRangeFilterProps) {
+  const {
     valueRange,
-    type = 0, 
-    placeHolderRange = [null, null], 
+    type = 0,
+    placeHolderRange = [null, null],
     onChangeRange,
-    isSmall
+    isSmall,
   } = props;
 
+  const validateRange = React.useCallback((fromValue, toValue) => {
+    if (typeof fromValue === "undefined" || typeof toValue === "undefined")
+      return true;
+    if (fromValue > toValue) return false;
+    return true;
+  }, []);
 
   const handleBlurFrom = React.useCallback(
     (number: number) => {
+      if (validateRange(number, valueRange[1])) {
         onChangeRange([number, valueRange[1]]);
-    
+      } else {
+        onChangeRange([undefined, undefined]);
+      }
     },
-    [onChangeRange, valueRange],
+    [onChangeRange, validateRange, valueRange]
   );
-  
 
   const handleBlurTo = React.useCallback(
     (number: number) => {
+      if (validateRange(valueRange[0], number)) {
         onChangeRange([valueRange[0], number]);
+      } else {
+        onChangeRange([undefined, undefined]);
+      }
     },
-    [onChangeRange, valueRange],
+    [onChangeRange, validateRange, valueRange]
   );
 
   return (
     <>
-      <div className='input-range__container'>
-        <div className='input-range__input-number m-r--xxs'>
+      <div className="input-range__container">
+        <div className="input-range__input-number m-r--xxs">
           <InputNumber
             {...props}
             value={valueRange[0]}
@@ -50,8 +64,8 @@ function AdvanceInputRangeFilter(props: InputRangeProps) {
             isSmall={isSmall}
           />
         </div>
-      
-        <div className='input-range__input-number-to'>
+
+        <div className="input-range__input-number-to">
           <InputNumber
             {...props}
             value={valueRange[1]}
@@ -66,8 +80,7 @@ function AdvanceInputRangeFilter(props: InputRangeProps) {
   );
 }
 
-AdvanceInputRangeFilter
-.defaultProps = {
+AdvanceInputRangeFilter.defaultProps = {
   label: "",
   isSmall: false,
   type: BORDER_TYPE.BORDERED,

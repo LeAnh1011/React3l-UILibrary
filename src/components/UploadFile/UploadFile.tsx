@@ -2,12 +2,12 @@ import CheckmarkFilled16 from "@carbon/icons-react/es/checkmark--filled/16";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import Upload16 from "@carbon/icons-react/es/upload/16";
 import WarningFilled16 from "@carbon/icons-react/es/warning--filled/16";
+import Button from "@Components/Button";
+import IconLoading from "@Components/IconLoading";
 import { notification, Popconfirm } from "antd";
-import Button from "components/Button";
 import React, { ReactNode, RefObject } from "react";
 import type { Observable } from "rxjs";
 import "./UploadFile.scss";
-import IconLoading from "components/IconLoading";
 
 export interface FileModel {
   id?: number;
@@ -27,28 +27,19 @@ export interface FileModel {
   handleInput?: (e: any) => void;
 }
 export interface UploadFileProps {
-  /** List file in model */
   files?: FileModel[];
-  /** Type upload*/
   isMultiple?: boolean;
-  /**Label upload*/
   uploadContent?: string;
-  /**func handleUpdateList*/
   updateList?: (files: FileModel[]) => void;
-  /**file repository*/
   uploadFile?: (files: File[] | Blob[]) => Observable<FileModel[]>;
-  /**func handleRemoveFile*/
   removeFile?: (fileId: string | number) => void;
-  /**Type button outline*/
   isBtnOutLine?: boolean;
   maximumSize?: number;
-  /**Type button*/
   type?: "link" | "button";
   /**Type button*/
   icon?: ReactNode;
   isViewMode?: boolean;
 }
-/**Component upload file*/
 export function UploadFile(props: UploadFileProps) {
   const {
     files: oldFiles,
@@ -105,12 +96,9 @@ export function UploadFile(props: UploadFileProps) {
         uploadFile(files).subscribe({
           next: (res: FileModel[]) => {
             if (res && res.length > 0) {
-              setListFileLoading([...res]);
               setIsLoading(false);
-              setTimeout(() => {
-                setListFileLoading([]);
-                updateList([...res]);
-              }, 1000);
+              updateList([...res]);
+              setListFileLoading([]);
             }
           },
           error: () => {
@@ -269,6 +257,5 @@ UploadFile.defaultProps = {
   files: [],
   isBtnOutLine: false,
   maximumSize: 5000000,
-  type: "button"
 };
 export default UploadFile;

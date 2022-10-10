@@ -2,14 +2,22 @@ import React from "react";
 import "./ProgressIndicator.scss";
 import { Radio } from "antd";
 import classNames from "classnames";
+import _throttle from "lodash/throttle";
 
 export interface ProgressIndicatorModel {
-  sessionName?: string;
-  sessionId?: string | number;
+  sectionName?: string;
+  sectionId?: number;
 }
 
 export interface ProgressIndicatorProps {
   list?: ProgressIndicatorModel[];
+  idContainer?: string;
+}
+
+interface ModifiedChild {
+  id?: string;
+  offsetTopMin?: number;
+  offsetTopMax?: number;
 }
 
 function disabledWheel(event: any) {
@@ -17,88 +25,108 @@ function disabledWheel(event: any) {
   return false;
 }
 
-function elementInViewport(el: any) {
-  if (el) {
-    var top = el.offsetTop;
-    var left = el.offsetLeft;
-    var width = el.offsetWidth;
-    var height = el.offsetHeight;
-
-    while (el.offsetParent) {
-      el = el.offsetParent;
-      top += el.offsetTop;
-      left += el.offsetLeft;
-    }
-  }
-
-  return (
-    top >= window.pageYOffset &&
-    left >= window.pageXOffset &&
-    top + height <= window.pageYOffset + window.innerHeight &&
-    left + width <= window.pageXOffset + window.innerWidth
-  );
-}
-
 function ProgressIndicator(props: ProgressIndicatorProps) {
-  const { list } = props;
-  const [currentSessionId, setCurrentSessionId] = React.useState<number>(
-    Number(list[0]?.sessionId) || 1
+  const { list, idContainer } = props;
+  const [currentSectionId, setCurrentSectionId] = React.useState<number>(
+    Number(list[0]?.sectionId) || 1
   );
   const handleChange = React.useCallback((e: any) => {
-    document.querySelector(`#frame-${e.target.value}`).scrollIntoView({
+    const currentSectionIdValue = e.target.value;
+    document.querySelector(`#frame-${currentSectionIdValue}`).scrollIntoView({
       behavior: "smooth",
     });
+    setCurrentSectionId(currentSectionIdValue);
   }, []);
 
   const handleOnWheel = React.useCallback(
     (event) => {
+      var currentSectionIdValue;
       if (event.deltaY < 0) {
-        if (currentSessionId === 1) return null;
+        if (currentSectionId === 1) return null;
         else {
+          currentSectionIdValue = currentSectionId - 1;
           document
-            .querySelector(`#frame-${currentSessionId - 1}`)
+            .querySelector(`#frame-${currentSectionIdValue}`)
             .scrollIntoView({
               behavior: "smooth",
             });
         }
       } else if (event.deltaY > 0) {
-        if (currentSessionId === list.length) return null;
+        if (currentSectionId === list.length) return null;
         else {
+          currentSectionIdValue = currentSectionId + 1;
           document
-            .querySelector(`#frame-${currentSessionId + 1}`)
+            .querySelector(`#frame-${currentSectionIdValue}`)
             .scrollIntoView({
               behavior: "smooth",
             });
         }
       }
+      setCurrentSectionId(currentSectionIdValue);
     },
-    [currentSessionId, list.length]
+    [currentSectionId, list.length]
   );
 
   const handleMouseEnter = React.useCallback(() => {
     document.addEventListener("wheel", disabledWheel, {
       passive: false,
     });
-  }, []);
+    document.getElementById(idContainer).setAttribute("data", "frozen");
+  }, [idContainer]);
 
   const handleMouseLeave = React.useCallback(() => {
     document.removeEventListener("wheel", disabledWheel);
-  }, []);
+    document.getElementById(idContainer).removeAttribute("data");
+  }, [idContainer]);
 
   React.useEffect(() => {
-    if (list) {
-      document.onscroll = () => {
-        const sessionOnView = list.filter((current) => {
-          return elementInViewport(
-            document.getElementById(`frame-${current.sessionId}`)
-          );
-        })[0];
-        if (sessionOnView && sessionOnView.sessionId) {
-          setCurrentSessionId(sessionOnView.sessionId as number);
-        }
+    setTimeout(() => {
+      const elm = document.getElementById(idContainer);
+      elm.style.position = "relative";
+      elm.addEventListener(
+        "scroll",
+        _throttle((event: any) => {
+          const targetElm = event.target as HTMLElement;
+          const isFrozen = targetElm.getAttribute("data");
+          if (!isFrozen) {
+            const childElm = targetElm.children as HTMLCollectionOf<HTMLElement>;
+            const scrollTop = targetElm.scrollTop;
+            if (childElm && childElm.length > 0) {
+              const modifiedChild: ModifiedChild[] = [];
+              for (let i = 0; i < childElm.length; i++) {
+                let child = {
+                  id: childElm[i].id,
+                  offsetTopMin: childElm[i].offsetTop,
+                  offsetTopMax:
+                    i === childElm.length - 1
+                      ? childElm[i].offsetTop + 10
+                      : childElm[i + 1].offsetTop,
+                };
+                modifiedChild.push(child);
+              }
+              const currentSection = modifiedChild.filter(
+                (currentChild: ModifiedChild) => {
+                  return (
+                    currentChild.offsetTopMin <= scrollTop &&
+                    currentChild.offsetTopMax > scrollTop
+                  );
+                }
+              )[0];
+              if (currentSection) {
+                const currentSectionId = currentSection.id.split("-")[1];
+                setCurrentSectionId(Number(currentSectionId));
+              }
+            }
+          }
+        }, 100),
+        false
+      );
+      return () => {
+        var newElement = elm.cloneNode(true);
+        elm.parentNode.replaceChild(newElement, elm);
       };
-    }
-  }, [list]);
+    }, 100);
+  }, [idContainer]);
 
   return (
     <div
@@ -107,23 +135,23 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <Radio.Group onChange={handleChange} value={currentSessionId}>
+      <Radio.Group onChange={handleChange} value={currentSectionId}>
         {list?.length > 0 &&
           list.map((item) => {
             return (
               <div
                 className={classNames("nav-content", {
                   "nav-content-active":
-                    Number(item.sessionId) === currentSessionId,
+                    Number(item.sectionId) === currentSectionId,
                 })}
-                key={item.sessionId}
+                key={item.sectionId}
               >
                 <div style={{ height: 16 }}>
                   <Radio
-                    value={item.sessionId}
+                    value={item.sectionId}
                     className="table-of-contents-radio"
                   >
-                    <div className="nav-content-title">{item.sessionName}</div>
+                    <div className="nav-content-title">{item.sectionName}</div>
                   </Radio>
                 </div>
               </div>

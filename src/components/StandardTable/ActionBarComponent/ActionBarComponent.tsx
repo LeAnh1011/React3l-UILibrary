@@ -2,7 +2,7 @@ import React, { ReactNode, Dispatch, SetStateAction } from "react";
 import "./ActionBarComponent.scss";
 import classNames from "classnames";
 import { Key } from "antd/lib/table/interface";
-import Button from "components/Button";
+import Button from "@Components/Button";
 
 export interface ActionBarComponentProps {
   name?: string;

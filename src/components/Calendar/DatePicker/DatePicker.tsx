@@ -3,11 +3,11 @@ import {
   DatePickerProps as AntdDatePickerProps,
 } from "antd";
 import classNames from "classnames";
-import { DEFAULT_DATETIME_VALUE } from "config/consts";
-import { BORDER_TYPE } from "config/enum";
+import { DEFAULT_DATETIME_VALUE } from "@Configs/consts";
+import { BORDER_TYPE } from "@Configs/enum";
 import { Moment } from "moment";
 import React, { ReactSVGElement, RefObject } from "react";
-import { CommonService } from "services/common-service";
+import { CommonService } from "@Services/common-service";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import "./DatePicker.scss";
 

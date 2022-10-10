@@ -5,7 +5,7 @@ import CaretRight16 from "@carbon/icons-react/es/caret--right/16";
 import CaretLeft16 from "@carbon/icons-react/es/caret--left/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import classNames from "classnames";
-import Button from "components/Button";
+import Button from "@Components/Button";
 
 export interface PaginationProps extends AntdPaginationProps {
   skip?: number;
@@ -126,7 +126,7 @@ function Pagination(props: PaginationProps) {
       <div className="number-per-page-box">
         {canChangePageSize === true && (
           <div className="number-per-page-box-1">
-            <div className="m-r--xxxs">Items per pages : </div>
+            <div className="m-r--xxxs">Số bản ghi mỗi trang : </div>
             <div>
               <Dropdown
                 className="dropdown-pagination-per-page"
@@ -146,7 +146,7 @@ function Pagination(props: PaginationProps) {
         )}
 
         <div className="number-per-page-box-2">
-          {skip + 1}-{skip + take} of {total} items
+          {skip + 1}-{skip + take} của {total} bản ghi
         </div>
       </div>
       <div className="change-page-box">
@@ -161,7 +161,7 @@ function Pagination(props: PaginationProps) {
             </Button>
           </Dropdown>
         </div>
-        <div>of {pageArray.length} pages</div>
+        <div>của {pageArray.length} trang</div>
         <div className="box-change-page-button">
           {prevIcon}
           {nextIcon}

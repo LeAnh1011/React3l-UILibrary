@@ -1,4 +1,4 @@
-import { BORDER_TYPE } from "config/enum";
+import { BORDER_TYPE } from "@Configs/enum";
 import React from "react";
 import InputNumber, { InputNumberProps } from "../InputNumber/InputNumber";
 import "./InputRange.scss";
@@ -21,7 +21,7 @@ function InputRange(props: InputRangeProps) {
   } = props;
 
   const validateRange = React.useCallback((fromValue, toValue) => {
-    if (fromValue === null || toValue === null) return true;
+    if (typeof fromValue === 'undefined' || typeof toValue === 'undefined') return true;
     if (fromValue > toValue) return false;
     return true;
   }, []);
@@ -31,7 +31,7 @@ function InputRange(props: InputRangeProps) {
       if (validateRange(number, valueRange[1])) {
         onChangeRange([number, valueRange[1]]);
       } else {
-        onChangeRange([null, null]);
+        onChangeRange([undefined, undefined]);
       }
     },
     [onChangeRange, valueRange, validateRange]
@@ -42,7 +42,7 @@ function InputRange(props: InputRangeProps) {
       if (validateRange(valueRange[0], number)) {
         onChangeRange([valueRange[0], number]);
       } else {
-        onChangeRange([null, null]);
+        onChangeRange([undefined, undefined]);
       }
     },
     [onChangeRange, valueRange, validateRange]

@@ -9,7 +9,7 @@ export interface CustomProps {
   appendToBody?: boolean;
   selectListRef?: RefObject<HTMLDivElement>;
   appendToBodyStyle?: React.CSSProperties;
-  size?: "md" | "xl";
+  size?: "sm"| "md" |"lg"| "xl" | "2xl";
 }
 
 function OverflowMenuList(props: CustomProps) {
@@ -54,10 +54,7 @@ function OverflowMenuList(props: CustomProps) {
         style={appendToBodyStyle}
       >
         <div
-          className={classNames("select__list", {
-            "select__list--md": size === "md",
-            "select__list--xl": size === "xl",
-          })}
+          className={classNames(`select__list select__list--${size}`)}
           data-floating-menu-direction="bottom"
           onClick={() => setExpand(false)}
           ref={selectListRef}
@@ -67,8 +64,11 @@ function OverflowMenuList(props: CustomProps) {
             list.map((item: any, index: number) => (
               <button
                 className={classNames("select__item ", {
-                  "btn--md p-l--sm p-y--xxs": size === "md",
-                  "btn--xl p-l--sm p-y--xs": size === "xl",
+                  "btn--sm p-l--sm p-y--xxs": size === "sm",
+                  "btn--md p-l--sm p-y--xs": size === "md",
+                  "btn--lg p-l--sm p-y--sm": size === "lg",
+                  "btn--xl p-l--sm p-y--md": size === "xl",
+                  "btn--2xl p-l--sm p-y--lg": size === "2xl",
                 })}
                 key={index}
                 onKeyDown={handleMove(item?.action)}

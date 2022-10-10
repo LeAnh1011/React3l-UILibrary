@@ -1,12 +1,11 @@
-import { DatePicker } from "antd";
-import type { RangePickerProps } from "antd/lib/date-picker";
-import classNames from "classnames";
+import Calendar16 from "@carbon/icons-react/es/calendar/16";
+import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import { BORDER_TYPE } from "@Configs/enum";
+import { CommonService } from "@Services/common-service";
+import { DatePicker } from "antd";
+import classNames from "classnames";
 import { Moment } from "moment";
 import React, { ReactSVGElement, RefObject } from "react";
-import { CommonService } from "@Services/common-service";
-import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
-import Calendar16 from "@carbon/icons-react/es/calendar/16";
 
 import "./DateRange.scss";
 

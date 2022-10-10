@@ -6,7 +6,7 @@ import "./OverflowMenu.scss";
 import OverflowMenuList from "./OverflowMenuList";
 export interface CustomProps {
   list?: any[];
-  size?: "md" | "xl";
+  size?: "sm"| "md" |"lg"| "xl" | "2xl";
   appendToBody?: boolean;
 }
 function OverflowMenu(props: CustomProps) {
@@ -52,18 +52,43 @@ function OverflowMenu(props: CustomProps) {
   React.useEffect(() => {
     if (isExpand && check) {
       const currentPosition = buttonRef.current.getBoundingClientRect();
-      if (size === "md") {
+      if (size === "sm") {
         setAppendToBodyStyle({
           position: "absolute",
           top: currentPosition.top + 32,
           left: currentPosition.left - (160 - 32),
         });
         setCheck(false);
-      } else {
+      } 
+      if(size === "md") {
+        setAppendToBodyStyle({
+          position: "absolute",
+          top: currentPosition.top + 36,
+          left: currentPosition.left - (160 - 36),
+        });
+        setCheck(false);
+      }
+      if(size === "lg") {
         setAppendToBodyStyle({
           position: "absolute",
           top: currentPosition.top + 40,
           left: currentPosition.left - (160 - 40),
+        });
+        setCheck(false);
+      }
+      if(size === "xl") {
+        setAppendToBodyStyle({
+          position: "absolute",
+          top: currentPosition.top + 48,
+          left: currentPosition.left - (160 - 48),
+        });
+        setCheck(false);
+      }
+      if(size === "2xl") {
+        setAppendToBodyStyle({
+          position: "absolute",
+          top: currentPosition.top + 56,
+          left: currentPosition.left - (160 - 56),
         });
         setCheck(false);
       }
@@ -80,18 +105,13 @@ function OverflowMenu(props: CustomProps) {
   return (
     <div className="overflow-menu__container" ref={wrapperRef}>
       <div
-        className={classNames("overflow-menu__button", {
-          "overflow-menu__button--md": size === "md",
-          "overflow-menu__button--xl": size === "xl",
-        })}
+        className={classNames("overflow-menu__button")}
         ref={buttonRef}
       >
         <button
           className={classNames(
-            "btn-component btn-only-icon btn--icon-only-ghost",
+            `btn-component btn-only-icon btn--icon-only-ghost btn--${size}`,
             {
-              "btn--md": size === "md",
-              "btn--xl": size === "xl",
               "btn--shadow": isExpand,
             }
           )}
@@ -114,7 +134,7 @@ function OverflowMenu(props: CustomProps) {
   );
 }
 OverflowMenu.defaultProps = {
-  size: "md",
+  size: "sm",
   destroyOnClose: true,
 };
 export default OverflowMenu;

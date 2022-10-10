@@ -1,8 +1,3 @@
-import { storiesOf, Story } from "@storybook/react";
-import { Radio } from "antd";
-import { TabsType } from "antd/lib/tabs";
-import React from "react";
-import Tabs from "./Tabs";
 import {
   ArgsTable,
   Description,
@@ -12,6 +7,9 @@ import {
   Subtitle,
   Title
 } from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
+import React from "react";
+import Tabs from "./Tabs";
 
 const { TabPane } = Tabs;
 

@@ -46,7 +46,7 @@ enum ORDER_TYPE {
 
 export const StandardTableDefault: Story = (args) => {
   const [filter, setFilter] = React.useState<DemoFilter>(new DemoFilter());
-  const [loading, setLoading] = React.useState<boolean>(false);
+  // const [loading, setLoading] = React.useState<boolean>(false);
   const [selectModel, setSelectModel] = React.useState<Model>({
     id: 0,
     name: "Option 2",
@@ -77,12 +77,6 @@ export const StandardTableDefault: Story = (args) => {
     ]);
   };
 
-  const handleLoading = React.useCallback(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 4000);
-  }, []);
 
   const handlePagination = React.useCallback(
     (skip: number, take: number) => {
@@ -205,7 +199,7 @@ export const StandardTableDefault: Story = (args) => {
     },
     selectedRowKeys,
     type: typeRowSelection,
-    getCheckboxProps: (record) => {
+    getCheckboxProps: (record: any) => {
       return {
         disabled: record.id === 10 || record.id === 100,
       };
@@ -346,7 +340,7 @@ export const StandardTableDefault: Story = (args) => {
         isExpandable={true}
         rowSelection={rowSelection}
         expandable={expandable}
-        loading={loading}
+        // loading={loading}
       />
       <div>
         <Pagination

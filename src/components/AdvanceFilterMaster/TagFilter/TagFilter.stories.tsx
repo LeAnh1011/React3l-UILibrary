@@ -21,6 +21,7 @@ import { Observable } from "rxjs";
 import AdvanceDateRangeFilterMaster from "../AdvanceDateRangFilterMaster/AdvanceDateRangFilterMaster";
 import AdvanceIdFilterMaster from "../AdvanceIdFilterMaster/AdvanceIdFilterMaster";
 import AdvanceMultipleIdFilterMaster from "../AdvanceMultipleIdFilterMaster/AdvanceMultipleIdFilterMaster";
+import AdvanceInputRangeFilter from "../../AdvanceFilter/AdvanceInputRangeFilter";
 import TagFilter from "./TagFilter";
 
 class DemoFilter extends ModelFilter {
@@ -120,15 +121,15 @@ const Template: Story = (args) => {
     [filter]
   );
 
-  // const handleChangeFilterTotal = React.useCallback(
-  //   (value) => {
-  //     filter.total.lessEqual = value[1]
-  //     filter.total.greaterEqual = value[0];
+  const handleChangeFilterTotal = React.useCallback(
+    (value) => {
+      filter.total.lessEqual = value[1]
+      filter.total.greaterEqual = value[0];
     
-  //     setFilter({ ...filter});
-  //   },
-  //   [filter]
-  // );
+      setFilter({ ...filter});
+    },
+    [filter]
+  );
 
   const handleChange = React.useCallback(
     (item, dateMoment) => {
@@ -186,12 +187,12 @@ const Template: Story = (args) => {
           translate={translate}
           // label={"Ngày giao hàng"}
         />
-        {/* <AdvanceInputRangeFilter
+        <AdvanceInputRangeFilter
           placeHolderRange={["From...", "To..."]}
           valueRange={[filter?.total?.greaterEqual as number, filter?.total?.lessEqual as number]}
           onChangeRange={handleChangeFilterTotal}
           label={"Tổng hàng xuất kho"}
-        /> */}
+        />
       </div>
       <TagFilter
       {...args}

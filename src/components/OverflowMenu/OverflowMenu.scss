@@ -24,11 +24,20 @@
     position: absolute;
     right: 0;
     z-index: 1000;
-    .select__list--md[data-floating-menu-direction="bottom"]::after {
+    .select__list--sm[data-floating-menu-direction="bottom"]::after {
       width: 32px !important;
     }
-    .select__list--xl[data-floating-menu-direction="bottom"]::after {
+    .select__list--md[data-floating-menu-direction="bottom"]::after {
+      width: 36px !important;
+    }
+    .select__list--lg[data-floating-menu-direction="bottom"]::after {
       width: 40px !important;
+    }
+    .select__list--xl[data-floating-menu-direction="bottom"]::after {
+      width: 48px !important;
+    }
+    .select__list--2xl[data-floating-menu-direction="bottom"]::after {
+      width: 56px !important;
     }
     .select__list {
       width: 100%;

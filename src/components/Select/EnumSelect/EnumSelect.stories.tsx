@@ -9,18 +9,13 @@ import {
 } from "@storybook/addon-docs";
 import { Story } from "@storybook/react";
 import React from "react";
-import { IdFilter, StringFilter } from "react3l-advanced-filters";
-import { Model, ModelFilter } from "react3l-common";
+import { Model } from "react3l-common";
 import { Observable } from "rxjs";
 import FormItem from "../../FormItem/FormItem";
 import { BORDER_TYPE } from "./../../../config/enum";
 import EnumSelect from "./EnumSelect";
 
-class DemoFilter extends ModelFilter {
-  id: IdFilter = new IdFilter();
-  name: StringFilter = new StringFilter();
-  code: StringFilter = new StringFilter();
-}
+
 
 const demoListEnum = new Observable<Model[]>((observer) => {
   setTimeout(() => {

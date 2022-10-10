@@ -1,10 +1,3 @@
-import { ModelFilter } from "react3l-common";
-import { storiesOf, Story } from "@storybook/react";
-import moment from "moment";
-import React from "react";
-import { Observable, of } from "rxjs";
-import nameof from "ts-nameof.macro";
-import Comment from "./Comment";
 import {
   ArgsTable,
   Description,
@@ -14,6 +7,12 @@ import {
   Subtitle,
   Title
 } from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
+import moment from "moment";
+import React from "react";
+import { ModelFilter } from "react3l-common";
+import { Observable, of } from "rxjs";
+import Comment from "./Comment";
 import { FileModel, Message } from "./Comment.model";
 
 const demoMessageUpdate = {

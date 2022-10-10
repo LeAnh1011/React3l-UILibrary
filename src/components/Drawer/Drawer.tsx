@@ -120,7 +120,7 @@ function Drawer(props: DrawerProps) {
                 <Button
                   type="icon-only-ghost"
                   icon={<Close20 />}
-                  className="btn--xxl"
+                  className="btn--xl"
                   onClick={handleClose}
                 />
               )}

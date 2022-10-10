@@ -1,8 +1,3 @@
-import React from "react";
-import { storiesOf, Story } from "@storybook/react";
-import FormItem from "./FormItem";
-import InputText from "../Input/InputText/InputText";
-import { ValidateStatus } from "./../../config/enum";
 import {
   ArgsTable,
   Description,
@@ -12,6 +7,10 @@ import {
   Subtitle,
   Title
 } from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
+import React from "react";
+import InputText from "../Input/InputText/InputText";
+import FormItem from "./FormItem";
 
 export default {
   title: "FormItem",

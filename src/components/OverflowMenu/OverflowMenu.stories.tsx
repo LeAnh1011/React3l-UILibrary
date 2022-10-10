@@ -12,8 +12,11 @@ import React from "react";
 import OverflowMenu from "./OverflowMenu";
 import OverflowMenuList from "./OverflowMenuList";
 enum SIZE_TYPE {
-  LARGE = "xl",
-  MEDIUM = "md",
+  SM="sm",
+  MD="md",
+  LG="lg",
+  XL = "xl",
+  XXL = "2xl",
 }
 
 export default {
@@ -41,11 +44,14 @@ export default {
       control: {
         type: "radio",
         options: [
-          SIZE_TYPE.LARGE,
-          SIZE_TYPE.MEDIUM,
+          SIZE_TYPE.SM,
+          SIZE_TYPE.MD,
+          SIZE_TYPE.LG,
+          SIZE_TYPE.XL,
+          SIZE_TYPE.XXL,
         ],
       },
-      defaultValue: SIZE_TYPE.LARGE,
+      defaultValue: SIZE_TYPE.SM,
     },
    
   },

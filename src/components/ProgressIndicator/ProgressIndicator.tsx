@@ -2,7 +2,7 @@ import React from "react";
 import "./ProgressIndicator.scss";
 import { Radio } from "antd";
 import classNames from "classnames";
-import _ from "lodash";
+import _throttle from "lodash/throttle";
 
 export interface ProgressIndicatorModel {
   sectionName?: string;
@@ -85,7 +85,7 @@ function ProgressIndicator(props: ProgressIndicatorProps) {
       elm.style.position = "relative";
       elm.addEventListener(
         "scroll",
-        _.throttle((event) => {
+        _throttle((event: any) => {
           const targetElm = event.target as HTMLElement;
           const isFrozen = targetElm.getAttribute("data");
           if (!isFrozen) {

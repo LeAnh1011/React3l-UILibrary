@@ -255,7 +255,7 @@ function InputNumber(props: InputNumberProps) {
   );
 
   React.useEffect(() => {
-    if (value) {
+    if (value != null) {
       var stringValue = "" + value;
       if (isReverseSymb) {
         stringValue = stringValue.replace(/\./g, ",");

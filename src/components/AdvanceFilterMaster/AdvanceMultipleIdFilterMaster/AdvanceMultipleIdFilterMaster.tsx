@@ -226,6 +226,7 @@ function AdvanceMultipleIdFilterMaster(
       } else {
         cloneValueFilter["id"]["notIn"].push(item?.id);
       }
+
       if (filteredItem) {
         const tmp = [...selectedList];
         const ids = selectedList?.map((item) => item?.id);
@@ -313,6 +314,33 @@ function AdvanceMultipleIdFilterMaster(
     wrapperRef,
     handleCloseAdvanceMultipleIdFilterMaster
   );
+
+  React.useEffect(() => {
+    const selected: any = [];
+    if (values?.length > 0 && selectedList?.length === 0) {
+      if(list && list?.length > 0) {
+        const listTmp: any = [...list, ...preferOptions];
+        if (listTmp && listTmp.length > 0) {
+          listTmp.forEach((current: any) => {
+            let filteredItem =
+              values &&
+              values?.length > 0 &&
+              values.filter((item) => item === current.id)[0];
+            if (filteredItem) {
+              selected.push(current);
+            }
+          });
+        }
+        selected.map((current: any) => dispatch({
+          type: "UPDATE",
+          data: current,
+        }));
+      }
+      }
+      
+     
+  }, [list, preferOptions, selectedList, values]);
+
 
   return (
     <>

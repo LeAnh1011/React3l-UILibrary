@@ -321,7 +321,7 @@ function AdvanceMultipleIdFilterMaster(
     const selected: any = [];
     if (values?.length > 0 && selectedList?.length === 0) {
       if(list && list?.length > 0) {
-        const listTmp: any = [...list, ...preferOptions];
+        const listTmp: any = preferOptions ? [...list, ...preferOptions] : [...list];
         if (listTmp && listTmp.length > 0) {
           listTmp.forEach((current: any) => {
             let filteredItem =

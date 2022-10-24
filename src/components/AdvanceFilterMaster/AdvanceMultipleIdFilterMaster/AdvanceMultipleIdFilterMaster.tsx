@@ -320,8 +320,10 @@ function AdvanceMultipleIdFilterMaster(
   React.useEffect(() => {
     const selected: any = [];
     if (values?.length > 0 && selectedList?.length === 0) {
-      if(list && list?.length > 0) {
-        const listTmp: any = preferOptions ? [...list, ...preferOptions] : [...list];
+      if (list && list?.length > 0) {
+        const listTmp: any = preferOptions
+          ? [...list, ...preferOptions]
+          : [...list];
         if (listTmp && listTmp.length > 0) {
           listTmp.forEach((current: any) => {
             let filteredItem =
@@ -333,14 +335,14 @@ function AdvanceMultipleIdFilterMaster(
             }
           });
         }
-        selected.map((current: any) => dispatch({
-          type: "UPDATE",
-          data: current,
-        }));
+        selected.map((current: any) =>
+          dispatch({
+            type: "UPDATE",
+            data: current,
+          })
+        );
       }
-      }
-      
-     
+    }
   }, [list, preferOptions, selectedList, values]);
 
   return (

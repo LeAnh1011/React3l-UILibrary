@@ -8,7 +8,7 @@ import InputText from "@Components/Input/InputText";
 import { DEBOUNCE_TIME_300 } from "@Configs/consts";
 import React, { RefObject } from "react";
 import { Model, ModelFilter } from "react3l-common";
-import type { ErrorObserver, Observable } from "rxjs";
+import { ErrorObserver, Observable, Subscription } from "rxjs";
 import { CommonService } from "@Services/common-service";
 import "./AdvanceMultipleIdFilterMaster.scss";
 
@@ -319,6 +319,7 @@ function AdvanceMultipleIdFilterMaster(
 
   React.useEffect(() => {
     const selected: any = [];
+    const subscription = new Subscription();
     if (values?.length > 0 && selectedList?.length === 0) {
       if (list && list?.length > 0) {
         const listTmp: any = preferOptions
@@ -342,6 +343,9 @@ function AdvanceMultipleIdFilterMaster(
           })
         );
       }
+      return () => {
+        subscription.unsubscribe();
+      };
     }
   }, [list, preferOptions, selectedList, values]);
 

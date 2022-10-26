@@ -310,6 +310,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               searchProperty={searchProperty}
               searchType={searchType}
               height={300}
+              render={render}
               onChange={handleOnchange}
               selectable={selectable}
               checkable={checkable}

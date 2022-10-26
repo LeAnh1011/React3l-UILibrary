@@ -195,7 +195,9 @@ function InputNumber(props: InputNumberProps) {
       const [numberValue, isOutOfRange] = parseNumber(stringValue);
       if (!isOutOfRange) {
         if (typeof onChange === "function") {
-          const isSpecialLetter = /[-,.]/g.test(Array.from(stringValue)[0]);
+          const isSpecialLetter =
+            /[-,.]/g.test(Array.from(stringValue)[0]) &&
+            stringValue.length === 1;
           if (!isSpecialLetter) {
             onChange(numberValue);
           }

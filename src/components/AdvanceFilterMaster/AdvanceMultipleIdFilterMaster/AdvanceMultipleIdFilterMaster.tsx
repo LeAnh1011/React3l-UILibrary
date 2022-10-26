@@ -8,7 +8,7 @@ import InputText from "@Components/Input/InputText";
 import { DEBOUNCE_TIME_300 } from "@Configs/consts";
 import React, { RefObject } from "react";
 import { Model, ModelFilter } from "react3l-common";
-import type { ErrorObserver, Observable } from "rxjs";
+import { ErrorObserver, Observable, Subscription } from "rxjs";
 import { CommonService } from "@Services/common-service";
 import "./AdvanceMultipleIdFilterMaster.scss";
 
@@ -316,6 +316,38 @@ function AdvanceMultipleIdFilterMaster(
     wrapperRef,
     handleCloseAdvanceMultipleIdFilterMaster
   );
+
+  React.useEffect(() => {
+    const selected: any = [];
+    const subscription = new Subscription();
+    if (values?.length > 0 && selectedList?.length === 0) {
+      if (list && list?.length > 0) {
+        const listTmp: any = preferOptions
+          ? [...list, ...preferOptions]
+          : [...list];
+        if (listTmp && listTmp.length > 0) {
+          listTmp.forEach((current: any) => {
+            let filteredItem =
+              values &&
+              values?.length > 0 &&
+              values.filter((item) => item === current.id)[0];
+            if (filteredItem) {
+              selected.push(current);
+            }
+          });
+        }
+        selected.map((current: any) =>
+          dispatch({
+            type: "UPDATE",
+            data: current,
+          })
+        );
+      }
+      return () => {
+        subscription.unsubscribe();
+      };
+    }
+  }, [list, preferOptions, selectedList, values]);
 
   return (
     <>

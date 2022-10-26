@@ -18,7 +18,6 @@ export interface InputNumberProps {
   isRequired?: boolean;
   type?: BORDER_TYPE;
   floatLabel?: boolean;
-  isMaterial?: boolean;
   value?: number;
   prefix?: string | ReactNode;
   suffix?: string | ReactNode;

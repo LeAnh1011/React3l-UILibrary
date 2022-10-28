@@ -125,6 +125,7 @@ export function SingleSelectStories() {
             disabled={isDisabled}
             isSmall={isSmall}
             preferOptions={isSelectWithPreferOption ? list : undefined}
+            maxLengthItem={50}
           />
         </FormItem>
       </div>
@@ -151,6 +152,7 @@ export function SingleSelectStories() {
             isSmall={isSmall}
             preferOptions={isSelectWithPreferOption ? list : undefined}
             appendToBody={true}
+            maxLengthItem={50}
           />
         </FormItem>
       </div>

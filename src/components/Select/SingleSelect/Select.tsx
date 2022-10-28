@@ -3,7 +3,7 @@ import Add16 from "@carbon/icons-react/es/add/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { Model, ModelFilter } from "react3l-common";
 import { useDebounceFn } from "ahooks";
-import { Empty } from "antd";
+import { Empty, Tooltip } from "antd";
 import classNames from "classnames";
 import React, { RefObject } from "react";
 import type { ErrorObserver, Observable } from "rxjs";
@@ -56,6 +56,8 @@ export interface SelectProps<
   isSmall?: boolean;
 
   preferOptions?: T[];
+
+  maxLengthItem?: number;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -82,6 +84,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
     selectWithAdd,
     isSmall,
     preferOptions,
+    maxLengthItem,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -309,7 +312,19 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                         onKeyDown={handleMove(item)}
                         onClick={handleClickItem(item)}
                       >
-                        <span className="select__text">{render(item)}</span>
+                        {maxLengthItem &&
+                        render(item)?.length > maxLengthItem ? (
+                          <Tooltip title={render(item)}>
+                            <span className="select__text">
+                              {CommonService.limitWord(
+                                render(item),
+                                maxLengthItem
+                              )}
+                            </span>
+                          </Tooltip>
+                        ) : (
+                          <span className="select__text">{render(item)}</span>
+                        )}
                         {item.id === internalValue?.id && <Checkmark16 />}
                       </div>
                     ))
@@ -340,7 +355,18 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                       onKeyDown={handleMove(item)}
                       onClick={handleClickItem(item)}
                     >
-                      <span className="select__text">{render(item)}</span>
+                      {maxLengthItem && render(item)?.length > maxLengthItem ? (
+                        <Tooltip title={render(item)}>
+                          <span className="select__text">
+                            {CommonService.limitWord(
+                              render(item),
+                              maxLengthItem
+                            )}
+                          </span>
+                        </Tooltip>
+                      ) : (
+                        <span className="select__text">{render(item)}</span>
+                      )}
                       {item.id === internalValue?.id && <Checkmark16 />}
                     </div>
                   ))}
@@ -371,6 +397,7 @@ Select.defaultProps = {
   render: defaultRenderObject,
   isMaterial: false,
   disabled: false,
+  maxLengthItem: 30,
 };
 
 export default Select;

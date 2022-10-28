@@ -116,7 +116,12 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     (searchTerm: string) => {
       const cloneFilter = { ...filter };
 
-      cloneFilter[searchProperty][searchType] = searchTerm;
+      if (searchType) {
+        cloneFilter[searchProperty][searchType] = searchTerm;
+      } else {
+        cloneFilter[searchProperty] = searchTerm;
+      }
+
       if (listIds?.length > 1) {
         cloneFilter["activeNodeIds"] = { ...new IdFilter(), in: [...listIds] };
       } else {
@@ -220,7 +225,11 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
 
   const handleClearInput = React.useCallback(() => {
     const cloneFilter = { ...filter };
-    cloneFilter[searchProperty][searchType] = null;
+    if (searchType) {
+      cloneFilter[searchProperty][searchType] = null;
+    } else {
+      cloneFilter[searchProperty] = null;
+    }
     dispatch({ type: "UPDATE", data: cloneFilter });
   }, [filter, searchProperty, searchType]);
 
@@ -307,8 +316,6 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               valueFilter={filter}
               classFilter={ClassFilter}
               checkStrictly={checkStrictly}
-              searchProperty={searchProperty}
-              searchType={searchType}
               height={300}
               render={render}
               onChange={handleOnchange}

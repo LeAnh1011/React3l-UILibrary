@@ -82,7 +82,7 @@ function AdvanceIdFilterMaster(
     className,
     preferOptions,
     maxLength,
-    maxLengthItem = 30,
+    maxLengthItem,
   } = props;
 
   const [internalValue, setInternalValue] = React.useState<Model>();
@@ -380,6 +380,7 @@ AdvanceIdFilterMaster.defaultProps = {
   typeRender: "name",
   isIdValue: true,
   maxLength: 200,
+  maxLengthItem: 30,
 };
 
 export default AdvanceIdFilterMaster;

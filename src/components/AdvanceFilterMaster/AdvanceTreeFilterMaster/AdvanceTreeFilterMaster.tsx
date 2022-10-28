@@ -102,7 +102,11 @@ function AdvanceTreeFilterMaster(
   const { run } = useDebounceFn(
     (searchTerm: string) => {
       const cloneFilter = { ...filter };
-      cloneFilter[searchProperty][searchType] = searchTerm;
+      if (searchType) {
+        cloneFilter[searchProperty][searchType] = searchTerm;
+      } else {
+        cloneFilter[searchProperty] = searchTerm;
+      }
       cloneFilter["isFilterTree"] = true;
       if (listIds.length > 1) {
         cloneFilter["activeNodeIds"] = { ...new IdFilter(), in: [...listIds] };

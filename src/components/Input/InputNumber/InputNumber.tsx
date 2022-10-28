@@ -211,7 +211,8 @@ function InputNumber(props: InputNumberProps) {
         if (typeof onChange === "function") {
           const isSpecialLetter =
             (/[-,.]/g.test(Array.from(stringValue)[0]) &&
-            stringValue.length === 1) || (/^(-0.?)/g.test(stringValue));
+              stringValue.length === 1) ||
+            /^(-0.?)/g.test(stringValue);
           if (!isSpecialLetter) {
             onChange(numberValue);
           }
@@ -270,8 +271,6 @@ function InputNumber(props: InputNumberProps) {
   );
 
   React.useEffect(() => {
-    // eslint-disable-next-line no-debugger
-    debugger;
     if (value != null) {
       var stringValue = "" + value;
       if (isReverseSymb) {

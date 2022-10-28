@@ -260,7 +260,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     valueFilter,
   ]);
 
-  // local filter tree base on model filter commented because now using servcer filter data
+  // local filter tree base on model filter commented because now using server filter data
   // React.useEffect(() => {
   //   if (valueFilter && valueFilter[searchProperty][searchType]) {
   //     const searchValue = valueFilter[searchProperty][searchType];

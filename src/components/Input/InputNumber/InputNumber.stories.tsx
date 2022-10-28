@@ -14,7 +14,7 @@ export function InputNumberStories() {
 
   const [isReverse, setIsReverse] = React.useState(false);
 
-  const [isPositive, setIsPositive] = React.useState(false);
+  const [isNegative, setIsNegative] = React.useState(false);
 
   const [isSmall, setIsSmall] = React.useState(false);
 
@@ -60,7 +60,7 @@ export function InputNumberStories() {
 
   const handleChangePositive = React.useCallback(
     (event: RadioChangeEvent) => {
-      setIsPositive(event.target.value);
+      setIsNegative(event.target.value);
       setValue(undefined);
     },
     [setValue]
@@ -87,7 +87,7 @@ export function InputNumberStories() {
             onChange={handleChangeValue}
             numberType={numberType}
             isReverseSymb={isReverse}
-            allowPositive={isPositive}
+            allowNegative={isNegative}
             isSmall={isSmall}
             disabled={isDisabled}
             action={{
@@ -113,7 +113,7 @@ export function InputNumberStories() {
             onChange={handleChangeValue}
             numberType={numberType}
             isReverseSymb={isReverse}
-            allowPositive={isPositive}
+            allowNegative={isNegative}
             isSmall={isSmall}
             disabled={isDisabled}
             action={{
@@ -143,7 +143,7 @@ export function InputNumberStories() {
         </Radio.Group>
       </div>
       <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangePositive} value={isPositive}>
+        <Radio.Group onChange={handleChangePositive} value={isNegative}>
           <Radio value={true}>Allow Positive</Radio>
           <Radio value={false}>Not Allow Positive</Radio>
         </Radio.Group>

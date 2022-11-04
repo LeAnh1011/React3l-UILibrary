@@ -188,10 +188,15 @@
     }
 
     .input-icon__clear {
-      color: var(--palette-coolGray-50);
-      &:hover {
-        cursor: pointer;
-        color: var(--palette-coolGrayHover-50);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        color: var(--palette-coolGray-50);
+        &:hover {
+          cursor: pointer;
+          color: var(--palette-coolGrayHover-50);
+        }
       }
     }
   }

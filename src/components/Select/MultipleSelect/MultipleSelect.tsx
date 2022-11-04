@@ -331,14 +331,10 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
               title={
                 <>
                   {values?.map((itemValue: any, index: number) => (
-                    <span key={index}>
-                      <>
-                        <span>{render(itemValue)}</span>
-                        {index < values?.length - 1 && (
-                          <span className="m-r--xxxs">&#44;</span>
-                        )}
-                      </>
-                    </span>
+                    <>
+                      <span key={index}>{"- " + render(itemValue)}</span>
+                      <br />
+                    </>
                   ))}
                 </>
               }

@@ -346,10 +346,9 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
           </label>
         )}
         {internalValue && !disabled && (
-          <CloseFilled16
-            className={classNames("input-icon__clear", "m-l--xxs")}
-            onClick={handleClearInput}
-          ></CloseFilled16>
+          <div className={classNames("input-icon__clear", "m-l--xxs")}>
+            <CloseFilled16 onClick={handleClearInput}></CloseFilled16>
+          </div>
         )}
         {suffix && (
           <>

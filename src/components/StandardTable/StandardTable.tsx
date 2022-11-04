@@ -6,23 +6,38 @@ import classNames from "classnames";
 import React from "react";
 import "./StandardTable.scss";
 export interface StandardTableCustomProps extends TableProps<any> {
+  idContainer?: string;
   isDragable?: boolean;
   className?: string;
   tableSize?: "lg" | "md" | "sm";
   spinning?: boolean;
 }
 function StandardTable(props: StandardTableCustomProps) {
-  const { className, tableSize, isDragable, expandable, spinning } = props;
+  const {
+    className,
+    tableSize,
+    isDragable,
+    expandable,
+    spinning,
+    idContainer,
+  } = props;
 
   React.useEffect(() => {
-    const antTable = document.getElementsByClassName(
-      "page-table"
+    var antTable: any;
+    if (idContainer) {
+      const containerDOM = document.getElementById(idContainer);
+      antTable = containerDOM.getElementsByClassName(
+        "ant-table-content"
+      )[0] as HTMLElement;
+    }
+    antTable = document.getElementsByClassName(
+      "ant-table-content"
     )[0] as HTMLElement;
     let isDown = false;
     let startX = 0;
     let scrollLeft = 0;
 
-    if (isDragable) {
+    if (isDragable && antTable) {
       const handleMouseDown = (e: any) => {
         isDown = true;
         antTable.classList.add("active-draggable");
@@ -63,33 +78,32 @@ function StandardTable(props: StandardTableCustomProps) {
         antTable.removeEventListener("mousemove", handleMouseMove);
       };
     }
-  }, [isDragable]);
+  }, [idContainer, isDragable]);
 
   return (
     <>
-      <div className={classNames("page-table")}>
-          <Table
-            loading={{
-              indicator: (
-                <LoadingOutlined
-                  style={{
-                    fontSize: 32,
-                    color: "#0F62FE",
-                  }}
-                  spin
-                />
-              ),
-              spinning: spinning
-            }}
-            
-            className={classNames(
-              className,
-              `table-size-${tableSize}`,
-              "custom-scrollbar",
-              { "big-checkbox-col": !expandable }
-            )}
-            {...props}
-          />
+      <div className={classNames("page-table")} id={idContainer}>
+        <Table
+          loading={{
+            indicator: (
+              <LoadingOutlined
+                style={{
+                  fontSize: 32,
+                  color: "#0F62FE",
+                }}
+                spin
+              />
+            ),
+            spinning: spinning,
+          }}
+          className={classNames(
+            className,
+            `table-size-${tableSize}`,
+            "custom-scrollbar",
+            { "big-checkbox-col": !expandable }
+          )}
+          {...props}
+        />
       </div>
     </>
   );

@@ -16,7 +16,7 @@ import "./AdvanceIdFilterMaster.scss";
 export interface AdvanceIdFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
-> {
+  > {
   value?: number | string;
 
   label?: string;
@@ -57,7 +57,7 @@ export interface AdvanceIdFilterMasterProps<
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
-  return CommonService.limitWord(t?.name, 25);
+  return t?.name;
 }
 
 function AdvanceIdFilterMaster(
@@ -143,7 +143,7 @@ function AdvanceIdFilterMaster(
     try {
       const filter = valueFilter ? { ...valueFilter } : new ClassFilter();
       handleGetList(filter);
-    } catch (error) {}
+    } catch (error) { }
   }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(
@@ -347,7 +347,7 @@ function AdvanceIdFilterMaster(
                     >
                       <span className="advance-id-master__text">
                         {maxLengthItem &&
-                        render(item)?.length > maxLengthItem ? (
+                          render(item)?.length > maxLengthItem ? (
                           <Tooltip title={render(item)}>
                             {CommonService.limitWord(
                               render(item),

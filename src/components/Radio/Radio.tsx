@@ -1,5 +1,5 @@
-import React from 'react';
 import { Radio as RadioAntd, RadioGroupProps, RadioProps } from 'antd';
+import React from 'react';
 import './Radio.scss';
 
 export interface RadioComponentProps {

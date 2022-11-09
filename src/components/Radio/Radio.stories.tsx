@@ -34,7 +34,6 @@ const Template: Story = (args) => {
             <Radio {...args} value={3} >Value 3</Radio>
             <Radio {...args} value={4} >Value 4</Radio>
           </RadioGroup>
-          {/* <Radio {...args} checked={checked || args.checked} onChange={handleChangeChecked} /> */}
         </div>
       </div>
 

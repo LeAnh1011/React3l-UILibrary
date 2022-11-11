@@ -69,6 +69,9 @@ export default {
     "src/components/StandardTable/DataCellComponent/OneLineText/index.ts",
     "src/components/StandardTable/DataCellComponent/TwoLineText/index.ts",
     "src/components/StandardTable/DataCellComponent/StatusLine/index.ts",
+    // Boolean component
+    "src/components/CheckBox/index.ts",
+    "src/components/Radio/index.ts"
   ],
   output: [
     {

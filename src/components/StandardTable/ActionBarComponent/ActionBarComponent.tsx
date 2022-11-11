@@ -9,6 +9,7 @@ export interface ActionBarComponentProps {
   children?: ReactNode;
   selectedRowKeys?: Key[];
   setSelectedRowKeys?: Dispatch<SetStateAction<Key[]>>;
+  handleCancelAction?: () => void;
   rowSelections?: any;
   translateSelected?: string;
   translateLine?: string;
@@ -19,6 +20,7 @@ function ActionBarComponent(props: ActionBarComponentProps) {
   const {
     children,
     selectedRowKeys,
+    handleCancelAction,
     setSelectedRowKeys,
     translateSelected,
     translateLine,
@@ -26,8 +28,12 @@ function ActionBarComponent(props: ActionBarComponentProps) {
   } = props;
 
   const handleCancel = React.useCallback(() => {
-    setSelectedRowKeys([]);
-  }, [setSelectedRowKeys]);
+    if (typeof handleCancelAction !== "undefined") {
+      handleCancelAction();
+    } else {
+      setSelectedRowKeys([]);
+    }
+  }, [setSelectedRowKeys, handleCancelAction]);
 
   return (
     <div

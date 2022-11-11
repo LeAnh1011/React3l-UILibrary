@@ -331,10 +331,10 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
               title={
                 <>
                   {values?.map((itemValue: any, index: number) => (
-                    <>
-                      <span key={index}>{"- " + render(itemValue)}</span>
+                    <React.Fragment key={itemValue?.id ? itemValue?.id : index}>
+                      <span>{"- " + render(itemValue)}</span>
                       <br />
-                    </>
+                    </React.Fragment>
                   ))}
                 </>
               }

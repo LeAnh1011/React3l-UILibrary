@@ -4,10 +4,10 @@ import "./InlineLoading.scss";
 import CheckmarkFilled16 from "@carbon/icons-react/es/checkmark--filled/16";
 import ErrorFilled16 from "@carbon/icons-react/es/error--filled/16";
 import IconLoading from "@Components/IconLoading";
-
+export type StatusLoading = "default" | "submitting" | "submitted" | "error";
 export interface InlineLoadingProps {
   className?: string;
-  status?: "default" | "submitting" | "submitted" | "error";
+  status?: StatusLoading;
   titleLoading?: string;
   titleSubmitted?: string;
   titleError?: string;

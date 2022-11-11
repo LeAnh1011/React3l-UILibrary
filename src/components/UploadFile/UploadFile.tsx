@@ -2,7 +2,7 @@ import CheckmarkFilled16 from "@carbon/icons-react/es/checkmark--filled/16";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import Upload16 from "@carbon/icons-react/es/upload/16";
 import WarningFilled16 from "@carbon/icons-react/es/warning--filled/16";
-import { notification, Popconfirm } from "antd";
+import { notification, Popconfirm, Tooltip } from "antd";
 import Button from "@Components/Button";
 import React, { ReactNode, RefObject } from "react";
 import type { Observable } from "rxjs";
@@ -116,9 +116,11 @@ export function UploadFile(props: UploadFileProps) {
         <div className="file-error" key={index}>
           <div className="file-container">
             <div className="w-file-name">
-              <a href={file?.path} download>
-                {file?.name}
-              </a>
+              <Tooltip title={file?.name}>
+                <a href={file?.path} download>
+                  {file?.name}
+                </a>
+              </Tooltip>
             </div>
             <div>
               <WarningFilled16 color="red" className="m-r--xxxs" />

@@ -60,3 +60,5 @@ export { default as OneLineText } from "./components/StandardTable/DataCellCompo
 export { default as TwoLineText } from "./components/StandardTable/DataCellComponent/TwoLineText";
 export { default as StatusLine } from "./components/StandardTable/DataCellComponent/StatusLine";
 export { default as OverflowMenu } from "./components/OverflowMenu";
+export { default as Checkbox } from "./components/Checkbox";
+export { default as Radio } from "./components/Radio";

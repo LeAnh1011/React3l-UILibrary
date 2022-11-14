@@ -325,41 +325,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
         ref={wrapperRef}
       >
         <div className="select__input" onClick={handleToggle}>
-          {values && values?.length > 0 ? (
-            <Tooltip
-              placement="topLeft"
-              title={
-                <>
-                  {values?.map((itemValue: any, index: number) => (
-                    <React.Fragment key={itemValue?.id ? itemValue?.id : index}>
-                      <span>{"- " + render(itemValue)}</span>
-                      <br />
-                    </React.Fragment>
-                  ))}
-                </>
-              }
-            >
-              <div>
-                <InputTag
-                  listValue={values}
-                  isMaterial={isMaterial}
-                  render={render}
-                  placeHolder={placeHolder}
-                  disabled={disabled}
-                  onSearch={handleSearchChange}
-                  label={label}
-                  onClearMulti={handleClearAll}
-                  type={type}
-                  isSmall={isSmall}
-                  isUsingSearch={isUsingSearch}
-                  onKeyDown={handleKeyPress}
-                  onKeyEnter={handleKeyEnter}
-                  isNotExpand={!isExpand}
-                  isRequired={isRequired}
-                />
-              </div>
-            </Tooltip>
-          ) : (
+          <div>
             <InputTag
               listValue={values}
               isMaterial={isMaterial}
@@ -376,8 +342,9 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
               onKeyEnter={handleKeyEnter}
               isNotExpand={!isExpand}
               isRequired={isRequired}
+              isShowTooltip
             />
-          )}
+          </div>
         </div>
 
         {isExpand && (

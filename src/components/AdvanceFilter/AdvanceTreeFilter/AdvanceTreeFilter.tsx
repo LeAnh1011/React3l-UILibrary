@@ -238,6 +238,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               onKeyDown={handleKeyPress}
               isFilter={true}
               isNotExpand={!expanded}
+              isShowTooltip
             />
           ) : (
             <InputSelect

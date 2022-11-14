@@ -281,6 +281,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               isNotExpand={!expanded}
               onKeyEnter={handleKeyEnter}
               isRequired={isRequired}
+              isShowTooltip
             />
           ) : (
             <InputSelect

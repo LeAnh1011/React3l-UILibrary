@@ -374,6 +374,7 @@ function EnumSelect(props: SelectProps<Model>) {
               onClearMulti={handleClearAll}
               isNotExpand={!isExpand}
               isRequired={isRequired}
+              isShowTooltip
             />
           ) : (
             <InputSelect

@@ -6,6 +6,7 @@ import "./InputTag.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
 import { BORDER_TYPE } from "@Configs/enum";
+import { Tooltip } from "antd";
 
 export interface InputTagProps<T extends Model> {
   listValue?: T[];
@@ -26,7 +27,9 @@ export interface InputTagProps<T extends Model> {
   onKeyEnter?: (event: any) => void;
   isFilter?: boolean;
   isNotExpand?: boolean;
+  isShowTooltip?: boolean;
 }
+
 function InputTag(props: InputTagProps<Model>) {
   const {
     listValue,
@@ -43,6 +46,8 @@ function InputTag(props: InputTagProps<Model>) {
     isFilter,
     onKeyEnter,
     isNotExpand,
+    isShowTooltip = false,
+    render,
   } = props;
 
   const internalListValue = React.useMemo<Model[]>(() => {
@@ -138,30 +143,85 @@ function InputTag(props: InputTagProps<Model>) {
           }
           ref={inputContainerRef}
         >
-          {internalListValue && internalListValue.length > 0 && (
-            <span
-              className={classNames(
-                "input-tag-item__label m-r--xxxs m-b--xxxs",
-                {
-                  "input-tag-item__label--small":
-                    type === BORDER_TYPE.FLOAT_LABEL && isSmall,
-                  "p-l--xxxs": type === BORDER_TYPE.FLOAT_LABEL && isSmall,
-                  "p-l--xxs": !(type === BORDER_TYPE.FLOAT_LABEL && isSmall),
-                }
+          {isShowTooltip ? (
+            <>
+              {internalListValue && internalListValue.length > 0 && (
+                <Tooltip
+                  placement="topLeft"
+                  title={
+                    <>
+                      {internalListValue?.map(
+                        (itemValue: any, index: number) => (
+                          <React.Fragment
+                            key={itemValue?.id ? itemValue?.id : index}
+                          >
+                            <span>{"- " + render(itemValue)}</span>
+                            <br />
+                          </React.Fragment>
+                        )
+                      )}
+                    </>
+                  }
+                >
+                  <span
+                    className={classNames(
+                      "input-tag-item__label m-r--xxxs m-b--xxxs",
+                      {
+                        "input-tag-item__label--small":
+                          type === BORDER_TYPE.FLOAT_LABEL && isSmall,
+                        "p-l--xxxs":
+                          type === BORDER_TYPE.FLOAT_LABEL && isSmall,
+                        "p-l--xxs": !(
+                          type === BORDER_TYPE.FLOAT_LABEL && isSmall
+                        ),
+                      }
+                    )}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <span className="input-tag-item__text">
+                      {internalListValue?.length}
+                    </span>
+                    {
+                      <Close16
+                        className="input-tag-item__icon"
+                        onClick={handleClearMultiItem}
+                      ></Close16>
+                    }
+                  </span>
+                </Tooltip>
               )}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <span className="input-tag-item__text">
-                {internalListValue?.length}
-              </span>
-              {
-                <Close16
-                  className="input-tag-item__icon"
-                  onClick={handleClearMultiItem}
-                ></Close16>
-              }
-            </span>
+            </>
+          ) : (
+            <>
+              {internalListValue && internalListValue.length > 0 && (
+                <span
+                  className={classNames(
+                    "input-tag-item__label m-r--xxxs m-b--xxxs",
+                    {
+                      "input-tag-item__label--small":
+                        type === BORDER_TYPE.FLOAT_LABEL && isSmall,
+                      "p-l--xxxs": type === BORDER_TYPE.FLOAT_LABEL && isSmall,
+                      "p-l--xxs": !(
+                        type === BORDER_TYPE.FLOAT_LABEL && isSmall
+                      ),
+                    }
+                  )}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <span className="input-tag-item__text">
+                    {internalListValue?.length}
+                  </span>
+                  {
+                    <Close16
+                      className="input-tag-item__icon"
+                      onClick={handleClearMultiItem}
+                    ></Close16>
+                  }
+                </span>
+              )}
+            </>
           )}
+
           {isUsingSearch ? (
             <input
               type="text"

@@ -368,6 +368,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
               onClearMulti={handleClearAll}
               isFilter={true}
               isNotExpand={!isExpand}
+              isShowTooltip
             />
           ) : (
             <InputSelect

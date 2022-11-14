@@ -308,6 +308,7 @@ export function AdvanceIdMultipleFilter(
             onKeyEnter={handleKeyEnter}
             isFilter={true}
             isNotExpand={!isExpand}
+            isShowTooltip
           />
         </div>
         {isExpand && (

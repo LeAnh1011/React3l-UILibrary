@@ -5,6 +5,7 @@ import Modal, { MODAL_SIZE } from "./Modal";
 import InputText from "../Input/InputText/InputText";
 import { BORDER_TYPE, ValidateStatus } from "./../../config/enum";
 import React from "react";
+export type LoadingType = "default" | "submitting" | "submitted" | "error";
 
 function Default() {
   const [size, setSize] = React.useState<MODAL_SIZE>(MODAL_SIZE["1024px"]);
@@ -12,10 +13,25 @@ function Default() {
     setSize(event.target.value);
   }, []);
   const [visible, setVisible] = React.useState<boolean>(true);
-
-  function handleSave() {
-    setVisible(false);
-  }
+  const [loadingType, setLoadingType] = React.useState<LoadingType>("default");
+  let i = 0;
+  const handleOnClick = React.useCallback(() => {
+    setLoadingType("submitting");
+    setTimeout(() => {
+      if (i % 2 === 0) {
+        setLoadingType("submitted");
+      } else {
+        setLoadingType("error");
+      }
+      i++;
+      setTimeout(() => {
+        setLoadingType("default");
+      }, 1000);
+    }, 2000);
+  }, [i]);
+  // function handleSave() {
+  //   setVisible(false);
+  // }
 
   function handleCancel() {
     setVisible(false);
@@ -43,11 +59,12 @@ function Default() {
       </button>
       <Modal
         visible={visible}
-        handleSave={handleSave}
+        handleSave={handleOnClick}
         handleCancel={handleCancel}
         visibleFooter={true}
         size={size}
         title="Modal Title"
+        loadingType={loadingType}
       >
         <div
           style={{

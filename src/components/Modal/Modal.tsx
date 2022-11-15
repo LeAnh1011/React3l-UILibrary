@@ -73,26 +73,27 @@ function Modal(props: ModalCustomProps) {
             )}
           {handleSave && (
             <>
-              {loadingType && loadingType !== "default" ? (
-                <InlineLoading
-                  status={loadingType}
-                  className="il-normal-no-icon btn--sm"
-                />
-              ) : (
-                <Button
-                  type="bleed-primary"
-                  className={classNames(
-                    handleApplyNext &&
-                      size !== MODAL_SIZE.SIZE_320 &&
-                      size !== MODAL_SIZE.SIZE_520
-                      ? "button-33"
-                      : "button-50"
-                  )}
-                  onClick={handleSave}
-                >
+              <Button
+                type="bleed-primary"
+                className={classNames(
+                  handleApplyNext &&
+                    size !== MODAL_SIZE.SIZE_320 &&
+                    size !== MODAL_SIZE.SIZE_520
+                    ? "button-33"
+                    : "button-50"
+                )}
+                disabled={loadingType !== "default"}
+                onClick={handleSave}
+              >
+                {loadingType !== "default" ? (
+                  <InlineLoading
+                    status={loadingType}
+                    className="il-normal-no-icon btn--sm"
+                  />
+                ) : (
                   <span>{titleButtonApply ? titleButtonApply : "Apply"}</span>
-                </Button>
-              )}
+                )}
+              </Button>
             </>
           )}
         </div>
@@ -142,5 +143,6 @@ function Modal(props: ModalCustomProps) {
 Modal.defaultProps = {
   size: MODAL_SIZE.SIZE_1024,
   destroyOnClose: true,
+  loadingType: "default",
 };
 export default Modal;

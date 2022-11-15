@@ -7,13 +7,12 @@ import "./Checkbox.scss";
 
 export interface CheckboxProps {
   onChange?: (value: boolean) => void;
-
   checked?: boolean;
   disabled?: boolean;
   label?: string;
 }
 
-function Checkbox(props: CheckboxProps & CheckboxPropsAntd) {
+function CheckboxWraper(props: CheckboxProps & CheckboxPropsAntd) {
   const { onChange, checked, disabled, label } = props;
   const handleChange = React.useCallback(
     (value) => {
@@ -38,4 +37,4 @@ function Checkbox(props: CheckboxProps & CheckboxPropsAntd) {
   );
 }
 
-export default Checkbox;
+export default CheckboxWraper;

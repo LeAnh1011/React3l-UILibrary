@@ -1,6 +1,6 @@
 import { Story } from "@storybook/react";
 import React from "react";
-import Checkbox from './Checkbox';
+import Checkbox from "./Checkbox";
 
 export default {
   title: "Checkbox",
@@ -10,29 +10,33 @@ export default {
   },
   argTypes: {
     checked: {
-      defaultValue: false
+      defaultValue: false,
     },
   },
 };
 
 const Template: Story = (args) => {
-
   const [checked, setChecked] = React.useState<boolean>(false);
 
   const handleChangeChecked = React.useCallback((value) => {
     setChecked(value);
-  }, [])
+  }, []);
 
   return (
     <div>
       <div>
         <div style={{ margin: "10px", width: "500px" }}>
-          <Checkbox {...args} checked={checked || args.checked} onChange={handleChangeChecked} />
+          <Checkbox
+            {...args}
+            checked={checked || args.checked}
+            onChange={handleChangeChecked}
+          >
+            {args.children}
+          </Checkbox>
         </div>
       </div>
-
     </div>
   );
-}
+};
 
 export const Default = Template.bind({});

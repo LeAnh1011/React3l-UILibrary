@@ -23,59 +23,61 @@ function StandardTable(props: StandardTableCustomProps) {
   } = props;
 
   React.useEffect(() => {
-    var antTable: any;
+    var antTableDOM: any;
     if (idContainer) {
       const containerDOM = document.getElementById(idContainer);
-      antTable = containerDOM.getElementsByClassName(
-        "ant-table-content"
-      )[0] as HTMLElement;
+      antTableDOM =
+        containerDOM.getElementsByClassName("ant-table-content") ||
+        containerDOM.getElementsByClassName("ant-table-body");
+    } else {
+      antTableDOM =
+        document.getElementsByClassName("ant-table-content") ||
+        document.getElementsByClassName("ant-table-body");
     }
-    antTable = document.getElementsByClassName(
-      "ant-table-content"
-    )[0] as HTMLElement;
+    const tableDOM = antTableDOM[0];
     let isDown = false;
     let startX = 0;
     let scrollLeft = 0;
 
-    if (isDragable && antTable) {
+    if (isDragable && tableDOM) {
       const handleMouseDown = (e: any) => {
         isDown = true;
-        antTable.classList.add("active-draggable");
-        startX = e.pageX - antTable.offsetLeft;
-        scrollLeft = antTable.scrollLeft;
+        tableDOM.classList.add("active-draggable");
+        startX = e.pageX - tableDOM.offsetLeft;
+        scrollLeft = tableDOM.scrollLeft;
       };
 
       const handleMouseLeave = () => {
         isDown = false;
-        antTable.classList.remove("active-draggable");
+        tableDOM.classList.remove("active-draggable");
       };
 
       const handleMouseUp = () => {
         isDown = false;
-        antTable.classList.remove("active-draggable");
+        tableDOM.classList.remove("active-draggable");
       };
 
       const handleMouseMove = (e: any) => {
         if (!isDown) return;
         e.preventDefault();
-        const x = e.pageX - antTable.offsetLeft;
+        const x = e.pageX - tableDOM.offsetLeft;
         const walk = (x - startX) * 3;
-        antTable.scrollLeft = scrollLeft - walk;
+        tableDOM.scrollLeft = scrollLeft - walk;
       };
 
-      antTable.addEventListener("mousedown", handleMouseDown);
+      tableDOM.addEventListener("mousedown", handleMouseDown);
 
-      antTable.addEventListener("mouseleave", handleMouseLeave);
+      tableDOM.addEventListener("mouseleave", handleMouseLeave);
 
-      antTable.addEventListener("mouseup", handleMouseUp);
+      tableDOM.addEventListener("mouseup", handleMouseUp);
 
-      antTable.addEventListener("mousemove", handleMouseMove);
+      tableDOM.addEventListener("mousemove", handleMouseMove);
 
       return () => {
-        antTable.removeEventListener("mousedown", handleMouseDown);
-        antTable.removeEventListener("mouseleave", handleMouseLeave);
-        antTable.removeEventListener("mouseup", handleMouseUp);
-        antTable.removeEventListener("mousemove", handleMouseMove);
+        tableDOM.removeEventListener("mousedown", handleMouseDown);
+        tableDOM.removeEventListener("mouseleave", handleMouseLeave);
+        tableDOM.removeEventListener("mouseup", handleMouseUp);
+        tableDOM.removeEventListener("mousemove", handleMouseMove);
       };
     }
   }, [idContainer, isDragable]);

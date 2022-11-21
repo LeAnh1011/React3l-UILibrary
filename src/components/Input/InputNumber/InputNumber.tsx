@@ -212,7 +212,7 @@ function InputNumber(props: InputNumberProps) {
           const isSpecialLetter =
             (/[-,.]/g.test(Array.from(stringValue)[0]) &&
               stringValue.length === 1) ||
-            /^(-0.?)/g.test(stringValue);
+            (/^(-0.?)/g.test(stringValue) && stringValue.length <= 3);
           if (!isSpecialLetter) {
             onChange(numberValue);
           }

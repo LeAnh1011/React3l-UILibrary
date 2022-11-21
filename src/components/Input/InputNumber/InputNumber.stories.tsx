@@ -39,6 +39,7 @@ export function InputNumberStories() {
   }, []);
 
   const handleChangeValue = React.useCallback((value) => {
+    console.log(value);
     setValue(value);
   }, []);
 
@@ -144,8 +145,8 @@ export function InputNumberStories() {
       </div>
       <div style={{ margin: "10px", width: "300px" }}>
         <Radio.Group onChange={handleChangePositive} value={isNegative}>
-          <Radio value={true}>Allow Positive</Radio>
-          <Radio value={false}>Not Allow Positive</Radio>
+          <Radio value={true}>Allow Nagative</Radio>
+          <Radio value={false}>Not Allow Nagative</Radio>
         </Radio.Group>
       </div>
       <div style={{ margin: "10px", width: "300px" }}>

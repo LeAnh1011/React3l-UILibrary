@@ -5,7 +5,7 @@ import { BORDER_TYPE } from "@Configs/enum";
 import { Moment } from "moment";
 import React, { ReactSVGElement, RefObject } from "react";
 import { CommonService } from "@Services/common-service";
-import CloseFilled16  from "@carbon/icons-react/es/close--filled/16";
+import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import Calendar16 from "@carbon/icons-react/es/calendar/16";
 import "./AdvanceDateRangeFilter.scss";
 
@@ -75,7 +75,7 @@ function AdvanceDateRangeFilter(
   const handleClearDate = React.useCallback(
     (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
       event.stopPropagation();
-      onChange([null, null]);
+      onChange([undefined, undefined]);
     },
     [onChange]
   );

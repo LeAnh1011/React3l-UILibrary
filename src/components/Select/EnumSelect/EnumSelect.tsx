@@ -33,7 +33,7 @@ export interface SelectProps<T extends Model> {
 
   label?: string;
 
-  selectWithAdd?: boolean;
+  selectWithAdd?: () => void;
 
   isSmall?: boolean;
 
@@ -445,11 +445,12 @@ function EnumSelect(props: SelectProps<Model>) {
                   </>
                 }
 
-                {selectWithAdd && (
+                {typeof selectWithAdd !== "undefined" && (
                   <div
                     className={classNames(
                       "select__bottom-button select__add-button p-y--xs"
                     )}
+                    onClick={selectWithAdd}
                   >
                     <Add16 className="m-l--xs" />
                     <span className="m-l--xs">Add new</span>
@@ -503,11 +504,12 @@ function EnumSelect(props: SelectProps<Model>) {
                     </div>
                   </>
                 }
-                {selectWithAdd && (
+                {typeof selectWithAdd !== "undefined" && (
                   <div
                     className={classNames(
                       "select__bottom-button select__add-button p-y--xs"
                     )}
+                    onClick={selectWithAdd}
                   >
                     <Add16 className="m-l--xxs" />
                     <span>Add new</span>

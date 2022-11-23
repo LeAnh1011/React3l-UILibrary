@@ -233,7 +233,7 @@ function AdvanceTreeFilterMaster(
                 selectable={selectable}
                 checkable={checkable}
                 render={render}
-                selectWithAdd={false}
+                selectWithAdd={undefined}
                 selectWithPreferOption={selectWithPreferOption}
                 preferOptions={preferOptions}
                 isExpand={expanded}

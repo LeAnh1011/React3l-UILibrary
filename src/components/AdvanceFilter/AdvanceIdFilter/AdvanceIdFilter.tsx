@@ -47,7 +47,7 @@ export interface AdvanceIdFilterProps<
 
   label?: string;
 
-  selectWithAdd?: boolean;
+  selectWithAdd?: () => void;
 
   selectWithPreferOption?: boolean;
 
@@ -374,11 +374,12 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                   ))}
               </div>
             )}
-            {selectWithAdd && (
+            {typeof selectWithAdd !== "undefined" && (
               <div
                 className={classNames(
                   "advance-id-filter__bottom-button advance-id-filter__add-button p-y--xs"
                 )}
+                onClick={selectWithAdd}
               >
                 <Add16 className="m-l--xxs" />
                 <span>Add new</span>

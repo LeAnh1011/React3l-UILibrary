@@ -31,7 +31,7 @@ function reducerFunc(state: Model, action: changeAction<Model>): Model[] {
   return [...action.data];
 }
 
-const demoList = [
+const demoList: any = [
   {
     id: 274,
     masterEntityId: 2,
@@ -533,7 +533,6 @@ function Default() {
             label={"Label"}
             disabled={isDisabled}
             isSmall={isSmall}
-            selectWithAdd={isSelectWithAdd}
             selectWithPreferOption={isSelectWithPreferOption}
             preferOptions={isSelectWithPreferOption ? list : undefined}
             valueFilter={{ ...filter, id: { equal: 1 } }}
@@ -561,7 +560,6 @@ function Default() {
             label={"Label"}
             disabled={isDisabled}
             isSmall={isSmall}
-            selectWithAdd={isSelectWithAdd}
             selectWithPreferOption={isSelectWithPreferOption}
             preferOptions={isSelectWithPreferOption ? list : undefined}
           />

@@ -49,7 +49,9 @@ export interface SelectProps<
 
   label?: string;
 
-  selectWithAdd?: boolean;
+  selectWithAdd?: () => void;
+
+  selectWithAddTitle?: string;
 
   selectWithPreferOption?: boolean;
 
@@ -82,6 +84,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
     type,
     label,
     selectWithAdd,
+    selectWithAddTitle,
     isSmall,
     preferOptions,
     maxLengthItem,
@@ -372,14 +375,17 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                   ))}
               </div>
             )}
-            {selectWithAdd && (
+            {typeof selectWithAdd !== "undefined" && (
               <div
                 className={classNames(
                   "select__bottom-button select__add-button p-y--xs"
                 )}
+                onClick={selectWithAdd}
               >
                 <Add16 className="m-l--xxs" />
-                <span>Add new</span>
+                <span>
+                  {selectWithAddTitle ? selectWithAddTitle : "Add new"}
+                </span>
               </div>
             )}
           </div>

@@ -31,7 +31,7 @@ export interface AdvanceEnumProps<T extends Model> {
 
   label?: string;
 
-  selectWithAdd?: boolean;
+  selectWithAdd?: () => void;
 
   isSmall?: boolean;
 
@@ -429,11 +429,12 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                   </>
                 }
 
-                {selectWithAdd && (
+                {typeof selectWithAdd !== "undefined" && (
                   <div
                     className={classNames(
                       "select__bottom-button select__add-button p-y--xs"
                     )}
+                    onClick={selectWithAdd}
                   >
                     <Add16 className="m-l--xs" />
                     <span className="m-l--xs">Add new</span>

@@ -29,8 +29,7 @@ const demoListEnum = new Observable<Model[]>((observer) => {
       { id: 3, name: "Enum 3", code: "E3" },
       { id: 4, name: "Enum 4", code: "E4" },
       { id: 5, name: "Enum 5", code: "E5" },
-    ]
-    )
+    ]);
   }, 300);
 });
 
@@ -49,8 +48,6 @@ export function EnumSelectStories() {
   const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
 
   const [isValidated, setValidated] = React.useState(false);
-
-  const [isSelectWithAdd, setIsSelectWithAdd] = React.useState<boolean>(false);
 
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
 
@@ -77,13 +74,6 @@ export function EnumSelectStories() {
   const handleChangeValidated = React.useCallback((event: RadioChangeEvent) => {
     setValidated(event.target.value);
   }, []);
-
-  const handleChangeSelectWithAdd = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setIsSelectWithAdd(event.target.value);
-    },
-    []
-  );
 
   const handleChangeDisabled = React.useCallback((event: RadioChangeEvent) => {
     setIsDisabled(event.target.value);
@@ -116,7 +106,6 @@ export function EnumSelectStories() {
             getList={demoSearchFunc}
             type={type}
             label={"Label"}
-            selectWithAdd={isSelectWithAdd}
             disabled={isDisabled}
             isSmall={isSmall}
             isMultiple={isMultiple}
@@ -145,16 +134,6 @@ export function EnumSelectStories() {
         <Radio.Group onChange={handleChangeDisabled} value={isDisabled}>
           <Radio value={true}>Disabled</Radio>
           <Radio value={false}>Not Disabled</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "400px" }}>
-        <Radio.Group
-          onChange={handleChangeSelectWithAdd}
-          value={isSelectWithAdd}
-        >
-          <Radio value={true}>Select with add</Radio>
-          <Radio value={false}>Not select with add</Radio>
         </Radio.Group>
       </div>
 

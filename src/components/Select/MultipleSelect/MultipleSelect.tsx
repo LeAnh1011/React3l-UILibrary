@@ -48,7 +48,7 @@ export interface MultipleSelectProps<
 
   isSmall?: boolean;
 
-  selectWithAdd?: boolean;
+  selectWithAdd?: () => void;
 
   selectWithPreferOption?: boolean;
 
@@ -434,11 +434,12 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                   ))}
               </div>
             )}
-            {selectWithAdd && (
+            {typeof selectWithAdd !== "undefined" && (
               <div
                 className={classNames(
                   "select__bottom-button select__add-button p-y--xs"
                 )}
+                onClick={selectWithAdd}
               >
                 <Add16 className="m-l--xs" />
                 <span className="m-l--xs">Add new</span>

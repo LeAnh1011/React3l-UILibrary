@@ -30,8 +30,6 @@ export interface AdvanceEnumMasterProps<T extends Model> {
 
   label?: string;
 
-  selectWithAdd?: boolean;
-
   isSmall?: boolean;
 
   preferOptions?: T[];

@@ -39,7 +39,7 @@ export interface AdvanceTreeFilterProps<
   isSmall?: boolean;
   isUsingSearch?: boolean;
   treeTitleRender?: (T: T) => string;
-  selectWithAdd?: boolean;
+  selectWithAdd?: () => void;
   selectWithPreferOption?: boolean;
   preferOptions?: T[];
   maxLengthItem?: number;

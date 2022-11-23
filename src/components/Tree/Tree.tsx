@@ -39,7 +39,7 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   render?: (treeNode: T) => string;
   classFilter?: new () => TModelFilter;
   isMultiple?: boolean;
-  selectWithAdd?: boolean;
+  selectWithAdd?: () => void;
   selectWithPreferOption?: boolean;
   preferOptions?: T[];
   selectListRef?: RefObject<any>;
@@ -476,11 +476,12 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                       )}
                   </div>
                 )}
-                {selectWithAdd && (
+                {typeof selectWithAdd !== "undefined" && (
                   <div
                     className={classNames(
                       "select__bottom-button select__add-button p-y--xs"
                     )}
+                    onClick={selectWithAdd}
                   >
                     <Add16 className="m-l--xs" />
                     <span>Add new</span>

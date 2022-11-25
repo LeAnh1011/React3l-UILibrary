@@ -57,6 +57,8 @@ export interface MultipleSelectProps<
   preferOptions?: T[];
 
   maxLengthItem?: number;
+
+  isShowTooltip?: boolean;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -85,6 +87,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     isUsingSearch,
     preferOptions,
     maxLengthItem,
+    isShowTooltip,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -342,7 +345,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
               onKeyEnter={handleKeyEnter}
               isNotExpand={!isExpand}
               isRequired={isRequired}
-              isShowTooltip
+              isShowTooltip={isShowTooltip}
             />
           </div>
         </div>
@@ -460,6 +463,7 @@ MultipleSelect.defaultProps = {
   isMaterial: false,
   disabled: false,
   maxLengthItem: 30,
+  isShowTooltip: true,
 };
 
 export default MultipleSelect;

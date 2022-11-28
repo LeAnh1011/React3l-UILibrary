@@ -39,7 +39,6 @@ export function InputNumberStories() {
   }, []);
 
   const handleChangeValue = React.useCallback((value) => {
-    console.log(value);
     setValue(value);
   }, []);
 

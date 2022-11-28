@@ -122,7 +122,6 @@ export function TagFilterStories() {
 
   const handleChangeAllFilter = React.useCallback(
     (data: any) => {
-      console.log(data)
       setFilter({ ...data });
     },
     [setFilter]

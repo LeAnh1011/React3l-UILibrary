@@ -69,8 +69,8 @@ export function TagFilterStories() {
   const [translate] = useTranslation();
 
   const [filter, setFilter] = React.useState<DemoFilter>(filterValue);
-  const [item, setItem] = React.useState<any>(null);
-  const [value, setValue] = React.useState<[any, any]>([null, null]);
+  const [item, setItem] = React.useState<any>(undefined);
+  const [value, setValue] = React.useState<[any, any]>([undefined, undefined]);
   
 
   const handleChangeOrganization = React.useCallback(
@@ -116,13 +116,12 @@ export function TagFilterStories() {
   );
 
   const handleClear = React.useCallback(() => {
-    setItem(null);
-    setValue([null, null]);
+    setItem(undefined);
+    setValue([undefined, undefined]);
   }, []);
 
   const handleChangeAllFilter = React.useCallback(
     (data: any) => {
-      console.log(data)
       setFilter({ ...data });
     },
     [setFilter]

@@ -1,16 +1,16 @@
-import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
+import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import Search16 from "@carbon/icons-react/es/search/16";
-import { useDebounceFn } from "ahooks";
-import { Empty, Tooltip } from "antd";
-import classNames from "classnames";
 import IconLoading from "@Components/IconLoading/IconLoading";
 import InputText from "@Components/Input/InputText";
 import { DEBOUNCE_TIME_300 } from "@Configs/consts";
+import { CommonService } from "@Services/common-service";
+import { useDebounceFn } from "ahooks";
+import { Empty, Tooltip } from "antd";
+import classNames from "classnames";
 import React, { RefObject } from "react";
 import { Model, ModelFilter } from "react3l-common";
-import { ErrorObserver, Observable, Subscription } from "rxjs";
-import { CommonService } from "@Services/common-service";
+import { ErrorObserver, Observable } from "rxjs";
 import "./AdvanceIdFilterMaster.scss";
 
 export interface AdvanceIdFilterMasterProps<
@@ -73,8 +73,6 @@ function AdvanceIdFilterMaster(
     disabled,
     isMaterial,
     isEnumList,
-    isIdValue,
-    typeRender,
     getList,
     onChange,
     render,
@@ -85,7 +83,6 @@ function AdvanceIdFilterMaster(
     maxLengthItem,
   } = props;
 
-  const [internalValue, setInternalValue] = React.useState<Model>();
 
   const [loading, setLoading] = React.useState<boolean>(false);
 
@@ -165,11 +162,10 @@ function AdvanceIdFilterMaster(
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      setInternalValue(item);
       onChange(item.id, item);
       handleCloseAdvanceIdFilterMaster();
     },
-    [handleCloseAdvanceIdFilterMaster, setInternalValue, onChange]
+    [handleCloseAdvanceIdFilterMaster, onChange]
   );
 
   const handleSearchChange = React.useCallback(
@@ -203,42 +199,6 @@ function AdvanceIdFilterMaster(
     [handleClickItem]
   );
 
-  React.useEffect(() => {
-    const subscription = new Subscription();
-    if (value !== null && value !== undefined) {
-      const filterValue = new ClassFilter();
-      if (isIdValue) {
-        const listFilterPreferOptions = preferOptions?.filter(
-          (current) => current.id === Number(value)
-        );
-        if (listFilterPreferOptions && listFilterPreferOptions?.length > 0) {
-          setInternalValue(listFilterPreferOptions[0]);
-        } else {
-          filterValue["id"]["equal"] = Number(value);
-          subscription.add(getList);
-          getList(filterValue).subscribe((res: Model[]) => {
-            if (res) {
-              const filterList = res.filter(
-                (current) => current.id === Number(value)
-              );
-              if (filterList && filterList?.length > 0) {
-                setInternalValue(filterList[0]);
-              }
-            }
-          });
-        }
-      } else {
-        setInternalValue({
-          [typeRender]: value,
-        });
-      }
-    } else {
-      setInternalValue(null);
-    }
-    return function cleanup() {
-      subscription.unsubscribe();
-    };
-  }, [value, getList, ClassFilter, isIdValue, typeRender, preferOptions]);
 
   const handleKeyDown = React.useCallback(
     (event) => {
@@ -320,7 +280,7 @@ function AdvanceIdFilterMaster(
                       ) : (
                         render(item)
                       )}
-                      {item.id === internalValue?.id && <Checkmark16 />}
+                      {item.id === Number(value) && <Checkmark16 />}
                     </div>
                   ))
                 ) : (
@@ -358,7 +318,7 @@ function AdvanceIdFilterMaster(
                           render(item)
                         )}
                       </span>
-                      {item.id === internalValue?.id && <Checkmark16 />}
+                      {item.id === Number(value) && <Checkmark16 />}
                     </div>
                   ))}
               </div>
@@ -377,8 +337,6 @@ AdvanceIdFilterMaster.defaultProps = {
   render: defaultRenderObject,
   isMaterial: false,
   disabled: false,
-  typeRender: "name",
-  isIdValue: true,
   maxLength: 200,
   maxLengthItem: 30,
 };

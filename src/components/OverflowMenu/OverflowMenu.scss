@@ -13,12 +13,12 @@
       }
     }
   }
-  
 }
 
 .overflow__list {
   &.select__list-container {
-    width: 160px;
+    min-width: 100px;
+    max-width: 250px;
     height: auto;
     @include box-shadow--popover();
     position: absolute;

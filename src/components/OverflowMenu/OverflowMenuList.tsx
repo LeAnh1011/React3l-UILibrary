@@ -2,10 +2,14 @@ import classNames from "classnames";
 import React, { Dispatch, RefObject, SetStateAction } from "react";
 import ReactDOM from "react-dom";
 import "./OverflowMenu.scss";
-
+export interface ListOverflowMenu {
+  title: string;
+  action: (params?: any) => void;
+  isShow: boolean;
+}
 export interface CustomProps {
   setExpand?: Dispatch<SetStateAction<boolean>>;
-  children?: any;
+  list?: ListOverflowMenu[];
   appendToBody?: boolean;
   selectListRef?: RefObject<HTMLDivElement>;
   appendToBodyStyle?: React.CSSProperties;
@@ -13,7 +17,7 @@ export interface CustomProps {
 }
 
 function OverflowMenuList(props: CustomProps) {
-  const { setExpand, children, selectListRef, appendToBodyStyle, size } = props;
+  const { setExpand, list, selectListRef, appendToBodyStyle, size } = props;
 
   const handleMove = React.useCallback(
     (action) => (event: any) => {
@@ -40,15 +44,16 @@ function OverflowMenuList(props: CustomProps) {
     []
   );
 
-  const handleClickAction = React.useCallback(
-    (action) => () => {
-      action();
-    },
-    []
-  );
-
   return ReactDOM.createPortal(
-    <div style={{ position: "absolute", top: 0, left: 0, width: "100%" }}>
+    <div
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        zIndex: 1100,
+      }}
+    >
       <div
         className="overflow__list select__list-container"
         style={appendToBodyStyle}
@@ -62,22 +67,25 @@ function OverflowMenuList(props: CustomProps) {
           onClick={() => setExpand(false)}
           ref={selectListRef}
         >
-          {children &&
-            children?.length > 0 &&
-            children.map((item: any, index: number) => (
-              <button
-                className={classNames("select__item ", {
-                  "btn--md p-l--sm p-y--xxs": size === "md",
-                  "btn--xl p-l--sm p-y--xs": size === "xl",
-                })}
-                key={index}
-                onKeyDown={handleMove(item?.action)}
-                tabIndex={index}
-                onClick={handleClickAction(item?.action)}
-              >
-                <span className="select__text">{item?.name}</span>
-              </button>
-            ))}
+          {list &&
+            list?.length > 0 &&
+            list.map(
+              (item: ListOverflowMenu, index: number) =>
+                item.isShow && (
+                  <button
+                    className={classNames("select__item ", {
+                      "btn--md p-l--sm p-y--xxs": size === "md",
+                      "btn--xl p-l--sm p-y--xs": size === "xl",
+                    })}
+                    key={index}
+                    onKeyDown={handleMove(item?.action)}
+                    tabIndex={index}
+                    onClick={item?.action}
+                  >
+                    <span className="select__text">{item?.title}</span>
+                  </button>
+                )
+            )}
         </div>
       </div>
     </div>,

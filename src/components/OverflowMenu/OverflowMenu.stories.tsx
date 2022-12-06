@@ -17,16 +17,19 @@ function Default() {
 
   const list: any = [
     {
-      name: "Thêm",
+      title: "Thêm",
       action: handleAdd,
+      isShow: true,
     },
     {
-      name: "Sửa",
+      title: "Sửa",
       action: handleEdit,
+      isShow: true,
     },
     {
-      name: "Xóa",
+      title: "Xóa",
       action: handleDelete,
+      isShow: false,
     },
   ];
 
@@ -36,7 +39,7 @@ function Default() {
 
   return (
     <div style={{ width: "600px" }}>
-      <OverflowMenu size={size} children={list}></OverflowMenu>
+      <OverflowMenu size={size} list={list}></OverflowMenu>
 
       <Radio.Group onChange={handleChangeSize} value={size}>
         <Radio value={"md"}>md</Radio>

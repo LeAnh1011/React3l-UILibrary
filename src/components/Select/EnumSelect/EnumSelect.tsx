@@ -9,6 +9,7 @@ import InputTag from "@Components/Input/InputTag";
 import Add16 from "@carbon/icons-react/es/add/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { ErrorObserver, Observable, Subscription } from "rxjs";
+import { InputAction } from "@Components/Input/InputText/InputText";
 
 export interface SelectProps<T extends Model> {
   value?: Model;
@@ -42,6 +43,8 @@ export interface SelectProps<T extends Model> {
   isMultiple?: boolean;
 
   getList?: () => Observable<T[]>;
+
+  action?: InputAction;
 
   height?: number;
 
@@ -94,6 +97,7 @@ function EnumSelect(props: SelectProps<Model>) {
     getList,
     height,
     maxLengthItem,
+    action,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -391,6 +395,7 @@ function EnumSelect(props: SelectProps<Model>) {
               isSmall={isSmall}
               isEnumerable={true}
               isRequired={isRequired}
+              action={action}
             />
           )}
         </div>

@@ -11,6 +11,7 @@ import { BORDER_TYPE } from "@Configs/enum";
 import "./MultipleSelect.scss";
 import { Checkbox, Empty, Tooltip } from "antd";
 import IconLoading from "@Components/IconLoading/IconLoading";
+import { InputAction } from "@Components/Input/InputText/InputText";
 
 export interface MultipleSelectProps<
   T extends Model,
@@ -59,6 +60,8 @@ export interface MultipleSelectProps<
   maxLengthItem?: number;
 
   isShowTooltip?: boolean;
+
+  action?: InputAction;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -88,6 +91,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     preferOptions,
     maxLengthItem,
     isShowTooltip,
+    action,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -346,6 +350,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
               isNotExpand={!isExpand}
               isRequired={isRequired}
               isShowTooltip={isShowTooltip}
+              action={action}
             />
           </div>
         </div>

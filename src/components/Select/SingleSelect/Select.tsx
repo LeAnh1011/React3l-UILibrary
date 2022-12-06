@@ -12,6 +12,7 @@ import InputSelect from "@Components/Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "@Configs/enum";
 import "./Select.scss";
 import IconLoading from "@Components/IconLoading/IconLoading";
+import { InputAction } from "@Components/Input/InputText/InputText";
 
 export interface SelectProps<
   T extends Model,
@@ -60,6 +61,8 @@ export interface SelectProps<
   preferOptions?: T[];
 
   maxLengthItem?: number;
+
+  action?: InputAction;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -88,6 +91,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
     isSmall,
     preferOptions,
     maxLengthItem,
+    action,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -296,6 +300,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
             type={type}
             label={label}
             isSmall={isSmall}
+            action={action}
           />
         </div>
         {isExpand && (

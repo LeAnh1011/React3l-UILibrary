@@ -7,6 +7,7 @@ import { Model } from "react3l-common";
 import classNames from "classnames";
 import { BORDER_TYPE } from "@Configs/enum";
 import { Tooltip } from "antd";
+import { InputAction } from "../InputText/InputText";
 
 export interface InputTagProps<T extends Model> {
   listValue?: T[];
@@ -28,6 +29,7 @@ export interface InputTagProps<T extends Model> {
   isFilter?: boolean;
   isNotExpand?: boolean;
   isShowTooltip?: boolean;
+  action?: InputAction;
 }
 
 function InputTag(props: InputTagProps<Model>) {
@@ -48,6 +50,7 @@ function InputTag(props: InputTagProps<Model>) {
     isNotExpand,
     isShowTooltip = false,
     render,
+    action,
   } = props;
 
   const internalListValue = React.useMemo<Model[]>(() => {
@@ -121,6 +124,16 @@ function InputTag(props: InputTagProps<Model>) {
               {label}
               {isRequired && <span className="text-danger">&nbsp;*</span>}
             </label>
+          )}
+          <span style={{ width: "100%" }}></span>
+          {action && (
+            <span
+              className="m-l--xxxs body-text--md color-link"
+              style={{ cursor: "pointer" }}
+              onClick={action.action}
+            >
+              {action.name}
+            </span>
           )}
         </div>
         <div

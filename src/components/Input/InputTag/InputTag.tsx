@@ -114,7 +114,12 @@ function InputTag(props: InputTagProps<Model>) {
   return (
     <>
       <div className="input-tag__wrapper">
-        <div className="input-tag__label m-b--xxxs">
+        <div
+          className="input-tag__label m-b--xxxs"
+          onClick={(event) => {
+            event.stopPropagation();
+          }}
+        >
           {type !== BORDER_TYPE.FLOAT_LABEL && label && (
             <label
               className={classNames("component__title", {

@@ -117,7 +117,12 @@ function InputSelect(props: InputSelectProps<Model>) {
   return (
     <>
       <div className={classNames("input-select__wrapper", className)}>
-        <div className="input-select__label m-b--xxxs">
+        <div
+          className="input-select__label m-b--xxxs"
+          onClick={(event) => {
+            event.stopPropagation();
+          }}
+        >
           {type !== BORDER_TYPE.FLOAT_LABEL && label && (
             <label
               className={classNames("component__title", {

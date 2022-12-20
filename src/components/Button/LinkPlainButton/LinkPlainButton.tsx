@@ -5,27 +5,33 @@ import "./LinkPlainButton.scss";
 
 export interface LinkPlainButtonProps extends ButtonProps {}
 
-const LinkPlainButton = React.forwardRef(
-  (props: PropsWithChildren<LinkPlainButtonProps>, ref: React.Ref<any>) => {
-    const { type, htmlType, onClick, className, disabled, children } = props;
+const LinkPlainButton = (props: PropsWithChildren<LinkPlainButtonProps>) => {
+  const {
+    type,
+    htmlType,
+    onClick,
+    className,
+    disabled,
+    children,
+    ...rest
+  } = props;
 
-    return (
-      <button
-        type={htmlType}
-        onClick={onClick}
-        ref={ref}
-        disabled={disabled}
-        className={classNames(
-          "btn-component btn-link-plain",
-          `btn--${type}`,
-          disabled ? "disabled" : "",
-          className
-        )}
-      >
-        <div>{children}</div>
-      </button>
-    );
-  }
-);
+  return (
+    <button
+      type={htmlType}
+      onClick={onClick}
+      disabled={disabled}
+      className={classNames(
+        "btn-component btn-link-plain",
+        `btn--${type}`,
+        disabled ? "disabled" : "",
+        className
+      )}
+      {...rest}
+    >
+      <div>{children}</div>
+    </button>
+  );
+};
 
 export default LinkPlainButton;

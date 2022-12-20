@@ -26,6 +26,7 @@ import "./StandardTable.scss";
 import InputSearch from "../Input/InputSearch/InputSearch";
 import Select from "../Select/SingleSelect/Select";
 import { of } from "rxjs";
+import { BrowserRouter, Route } from "react-router-dom";
 
 const KateBishop =
   "https://cdn.searchenginejournal.com/wp-content/uploads/2019/07/the-essential-guide-to-using-images-legally-online-1520x800.png";
@@ -464,7 +465,7 @@ function Default() {
         render() {
           return (
             <div className="d-flex align-items-center justify-content-center">
-              <OverflowMenu size="md" children={list}></OverflowMenu>
+              <OverflowMenu size="md" list={list}></OverflowMenu>
             </div>
           );
         },
@@ -703,116 +704,132 @@ function Default() {
   };
 
   return (
-    <div>
-      <Tabs defaultActiveKey="1">
-        <TabPane tab="Table not have TwoLineText" key="1">
-          <InputSearch
-            value={"hello"}
-            searchProperty={"name"}
-            classFilter={DemoFilter}
-            placeHolder="Search..."
-            animationInput={false}
-          />
-          <ActionBarComponent
-            selectedRowKeys={selectedRowKeys}
-            setSelectedRowKeys={setSelectedRowKeys}
-          >
-            <Button type="ghost-primary" className="btn--lg" icon={<Add16 />}>
-              {"Button"}
-            </Button>
-            <Button
-              type="ghost-primary"
-              className="btn--lg"
-              icon={<ChevronDown16 />}
-            >
-              {"Button"}
-            </Button>
-          </ActionBarComponent>
-          <StandardTable
-            columns={columns}
-            dataSource={data}
-            isDragable={true}
-            isExpandable={true}
-            tableSize={size}
-            rowSelection={rowSelection}
-            expandable={expandable}
-            loading={loading}
-            scroll={{ x: 1900, y: 300 }}
-          />
-          <div>
-            <Pagination
-              skip={filter.skip}
-              take={filter.take}
-              total={100}
-              onChange={handlePagination}
-            />
-          </div>
-        </TabPane>
-        <TabPane tab="Table only size lg" key="2">
-          <ActionBarComponent
-            selectedRowKeys={selectedRowKeys}
-            setSelectedRowKeys={setSelectedRowKeys}
-          >
-            <Button type="ghost-primary" className="btn--lg" icon={<Add16 />}>
-              {"Button"}
-            </Button>
-            <Button
-              type="ghost-primary"
-              className="btn--lg"
-              icon={<ChevronDown16 />}
-            >
-              {"Button"}
-            </Button>
-          </ActionBarComponent>
-          <StandardTable
-            columns={columns2}
-            dataSource={data}
-            isDragable={true}
-            isExpandable={true}
-            tableSize="lg"
-            rowSelection={rowSelection}
-            scroll={{ y: 300 }}
-          />
-          <div>
-            <Pagination
-              skip={filter.skip}
-              take={filter.take}
-              total={100}
-              onChange={handlePagination}
-              canChangePageSize={false}
-            />
-          </div>
-        </TabPane>
-      </Tabs>
-
-      <div>
+    <BrowserRouter>
+      <Route path="/">
         <div>
-          <Button type="primary" className="btn--lg" onClick={handleLoading}>
-            {"Button"}
-          </Button>
+          <Tabs defaultActiveKey="1">
+            <TabPane tab="Table not have TwoLineText" key="1">
+              <InputSearch
+                value={"hello"}
+                searchProperty={"name"}
+                classFilter={DemoFilter}
+                placeHolder="Search..."
+                animationInput={false}
+              />
+              <ActionBarComponent
+                selectedRowKeys={selectedRowKeys}
+                setSelectedRowKeys={setSelectedRowKeys}
+              >
+                <Button
+                  type="ghost-primary"
+                  className="btn--lg"
+                  icon={<Add16 />}
+                >
+                  {"Button"}
+                </Button>
+                <Button
+                  type="ghost-primary"
+                  className="btn--lg"
+                  icon={<ChevronDown16 />}
+                >
+                  {"Button"}
+                </Button>
+              </ActionBarComponent>
+              <StandardTable
+                columns={columns}
+                dataSource={data}
+                isDragable={true}
+                isExpandable={true}
+                tableSize={size}
+                rowSelection={rowSelection}
+                expandable={expandable}
+                loading={loading}
+                scroll={{ x: 1900, y: 300 }}
+              />
+              <div>
+                <Pagination
+                  skip={filter.skip}
+                  take={filter.take}
+                  total={100}
+                  onChange={handlePagination}
+                />
+              </div>
+            </TabPane>
+            <TabPane tab="Table only size lg" key="2">
+              <ActionBarComponent
+                selectedRowKeys={selectedRowKeys}
+                setSelectedRowKeys={setSelectedRowKeys}
+              >
+                <Button
+                  type="ghost-primary"
+                  className="btn--lg"
+                  icon={<Add16 />}
+                >
+                  {"Button"}
+                </Button>
+                <Button
+                  type="ghost-primary"
+                  className="btn--lg"
+                  icon={<ChevronDown16 />}
+                >
+                  {"Button"}
+                </Button>
+              </ActionBarComponent>
+              <StandardTable
+                columns={columns2}
+                dataSource={data}
+                isDragable={true}
+                isExpandable={true}
+                tableSize="lg"
+                rowSelection={rowSelection}
+                scroll={{ y: 300 }}
+              />
+              <div>
+                <Pagination
+                  skip={filter.skip}
+                  take={filter.take}
+                  total={100}
+                  onChange={handlePagination}
+                  canChangePageSize={false}
+                />
+              </div>
+            </TabPane>
+          </Tabs>
+
+          <div>
+            <div>
+              <Button
+                type="primary"
+                className="btn--lg"
+                onClick={handleLoading}
+              >
+                {"Button"}
+              </Button>
+            </div>
+            <div style={{ margin: "10px", width: "500px" }}>
+              <Radio.Group onChange={handleChangeAvatarType} value={avatarType}>
+                <Radio value={AVATAR_TYPE.CIRCLE}>circle</Radio>
+                <Radio value={AVATAR_TYPE.SQUARE}>squale</Radio>
+              </Radio.Group>
+            </div>
+            <div style={{ margin: "10px", width: "500px" }}>
+              <Radio.Group onChange={handleChangeSize} value={size}>
+                <Radio value={SIZE_TYPE.LARGE}>lg</Radio>
+                <Radio value={SIZE_TYPE.MEDIUM}>md</Radio>
+                <Radio value={SIZE_TYPE.SMALL}>sm</Radio>
+              </Radio.Group>
+            </div>
+            <div style={{ margin: "10px", width: "500px" }}>
+              <Radio.Group onChange={handleChangeStyle} value={orderType}>
+                <Radio value={ORDER_TYPE.LEFT}>order-left</Radio>
+                <Radio value={ORDER_TYPE.CENTER}>order-center</Radio>
+                <Radio value={ORDER_TYPE.RIGHT}>order-right</Radio>
+              </Radio.Group>
+            </div>
+          </div>
         </div>
-        <div style={{ margin: "10px", width: "500px" }}>
-          <Radio.Group onChange={handleChangeAvatarType} value={avatarType}>
-            <Radio value={AVATAR_TYPE.CIRCLE}>circle</Radio>
-            <Radio value={AVATAR_TYPE.SQUARE}>squale</Radio>
-          </Radio.Group>
-        </div>
-        <div style={{ margin: "10px", width: "500px" }}>
-          <Radio.Group onChange={handleChangeSize} value={size}>
-            <Radio value={SIZE_TYPE.LARGE}>lg</Radio>
-            <Radio value={SIZE_TYPE.MEDIUM}>md</Radio>
-            <Radio value={SIZE_TYPE.SMALL}>sm</Radio>
-          </Radio.Group>
-        </div>
-        <div style={{ margin: "10px", width: "500px" }}>
-          <Radio.Group onChange={handleChangeStyle} value={orderType}>
-            <Radio value={ORDER_TYPE.LEFT}>order-left</Radio>
-            <Radio value={ORDER_TYPE.CENTER}>order-center</Radio>
-            <Radio value={ORDER_TYPE.RIGHT}>order-right</Radio>
-          </Radio.Group>
-        </div>
-      </div>
-    </div>
+      </Route>
+    </BrowserRouter>
   );
 }
 

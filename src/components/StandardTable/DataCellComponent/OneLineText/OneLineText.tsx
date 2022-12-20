@@ -2,6 +2,7 @@ import classNames from "classnames";
 import "./OneLineText.scss";
 import { Tooltip } from "antd";
 import { CommonService } from "@Services/common-service";
+import { Link } from "react-router-dom";
 
 export interface OneLineTextProps {
   className?: string;
@@ -40,11 +41,7 @@ function OneLineText(props: OneLineTextProps) {
             />
           )}
           {link ? (
-            <a
-              href={link}
-              rel="noopener noreferrer"
-              className="link-text"
-            >
+            <a href={link} rel="noopener noreferrer" className="link-text">
               {countCharacters && countCharacters > 0 ? (
                 <Tooltip title={value}>
                   {CommonService.limitWord(value, countCharacters)}
@@ -70,11 +67,7 @@ function OneLineText(props: OneLineTextProps) {
         <div className={classNames(className, "text-in-table-cell")}>
           {icon && <i className={classNames(icon, `icon-one-line-text`)}></i>}
           {link ? (
-            <a
-              href={link}
-              rel="noopener noreferrer"
-              className="link-text"
-            >
+            <Link to={link} className="link-text">
               {countCharacters && countCharacters > 0 ? (
                 <Tooltip title={value}>
                   {CommonService.limitWord(value, countCharacters)}
@@ -82,7 +75,7 @@ function OneLineText(props: OneLineTextProps) {
               ) : (
                 <>{value}</>
               )}
-            </a>
+            </Link>
           ) : (
             <span>
               {countCharacters && countCharacters > 0 ? (

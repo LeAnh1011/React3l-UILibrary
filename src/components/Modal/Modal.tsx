@@ -4,6 +4,7 @@ import { Modal as AntModal, ModalProps as AntModalProps } from "antd";
 import classNames from "classnames";
 import Button from "@Components/Button";
 import Close20 from "@carbon/icons-react/es/close/20";
+import InlineLoading from "@Components/InlineLoading";
 
 export enum MODAL_SIZE {
   SIZE_320 = 320,
@@ -23,6 +24,7 @@ export interface ModalCustomProps extends AntModalProps {
   handleCancel?: (event: any) => void;
   handleSave?: (event: any) => void;
   handleApplyNext?: (event: any) => void;
+  loadingType?: "default" | "submitting" | "submitted" | "error";
 }
 
 function Modal(props: ModalCustomProps) {
@@ -33,6 +35,7 @@ function Modal(props: ModalCustomProps) {
     titleButtonApplyNext,
     titleButtonCancel,
     destroyOnClose,
+    loadingType,
     handleCancel,
     handleSave,
     handleApplyNext,
@@ -69,19 +72,29 @@ function Modal(props: ModalCustomProps) {
               </Button>
             )}
           {handleSave && (
-            <Button
-              type="bleed-primary"
-              className={classNames(
-                handleApplyNext &&
-                  size !== MODAL_SIZE.SIZE_320 &&
-                  size !== MODAL_SIZE.SIZE_520
-                  ? "button-33"
-                  : "button-50"
-              )}
-              onClick={handleSave}
-            >
-              <span>{titleButtonApply ? titleButtonApply : "Apply"}</span>
-            </Button>
+            <>
+              <Button
+                type="bleed-primary"
+                className={classNames(
+                  handleApplyNext &&
+                    size !== MODAL_SIZE.SIZE_320 &&
+                    size !== MODAL_SIZE.SIZE_520
+                    ? "button-33"
+                    : "button-50"
+                )}
+                disabled={loadingType !== "default"}
+                onClick={handleSave}
+              >
+                {loadingType !== "default" ? (
+                  <InlineLoading
+                    status={loadingType}
+                    className="il-normal-no-icon btn--sm"
+                  />
+                ) : (
+                  <span>{titleButtonApply ? titleButtonApply : "Apply"}</span>
+                )}
+              </Button>
+            </>
           )}
         </div>
       </div>
@@ -89,11 +102,12 @@ function Modal(props: ModalCustomProps) {
     [
       handleApplyNext,
       size,
-      handleSave,
-      titleButtonApply,
-      titleButtonApplyNext,
       handleCancel,
       titleButtonCancel,
+      titleButtonApplyNext,
+      handleSave,
+      loadingType,
+      titleButtonApply,
     ]
   );
 
@@ -129,5 +143,6 @@ function Modal(props: ModalCustomProps) {
 Modal.defaultProps = {
   size: MODAL_SIZE.SIZE_1024,
   destroyOnClose: true,
+  loadingType: "default",
 };
 export default Modal;

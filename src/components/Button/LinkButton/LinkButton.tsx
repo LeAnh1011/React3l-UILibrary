@@ -5,27 +5,33 @@ import "./LinkButton.scss";
 
 export interface LinkButtonProps extends ButtonProps {}
 
-const LinkButton = React.forwardRef(
-  (props: PropsWithChildren<LinkButtonProps>, ref: React.Ref<any>) => {
-    const { type, htmlType, onClick, className, disabled, children } = props;
+const LinkButton = (props: PropsWithChildren<LinkButtonProps>) => {
+  const {
+    type,
+    htmlType,
+    onClick,
+    className,
+    disabled,
+    children,
+    ...rest
+  } = props;
 
-    return (
-      <button
-        type={htmlType}
-        onClick={onClick}
-        ref={ref}
-        disabled={disabled}
-        className={classNames(
-          "btn-component btn-link",
-          `btn--${type}`,
-          disabled ? "disabled" : "",
-          className
-        )}
-      >
-        {children}
-      </button>
-    );
-  }
-);
+  return (
+    <button
+      type={htmlType}
+      onClick={onClick}
+      disabled={disabled}
+      className={classNames(
+        "btn-component",
+        `btn--${type}`,
+        disabled ? "disabled" : "",
+        className
+      )}
+      {...rest}
+    >
+      {children}
+    </button>
+  );
+};
 
 export default LinkButton;

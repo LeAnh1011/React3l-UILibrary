@@ -11,6 +11,7 @@ import { BORDER_TYPE } from "@Configs/enum";
 import "./MultipleSelect.scss";
 import { Checkbox, Empty, Tooltip } from "antd";
 import IconLoading from "@Components/IconLoading/IconLoading";
+import { InputAction } from "@Components/Input/InputText/InputText";
 
 export interface MultipleSelectProps<
   T extends Model,
@@ -48,7 +49,7 @@ export interface MultipleSelectProps<
 
   isSmall?: boolean;
 
-  selectWithAdd?: boolean;
+  selectWithAdd?: () => void;
 
   selectWithPreferOption?: boolean;
 
@@ -57,6 +58,10 @@ export interface MultipleSelectProps<
   preferOptions?: T[];
 
   maxLengthItem?: number;
+
+  isShowTooltip?: boolean;
+
+  action?: InputAction;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -85,6 +90,8 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     isUsingSearch,
     preferOptions,
     maxLengthItem,
+    isShowTooltip,
+    action,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -325,45 +332,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
         ref={wrapperRef}
       >
         <div className="select__input" onClick={handleToggle}>
-          {values && values?.length > 0 ? (
-            <Tooltip
-              placement="topLeft"
-              title={
-                <>
-                  {values?.map((itemValue: any, index: number) => (
-                    <span key={index}>
-                      <>
-                        <span>{render(itemValue)}</span>
-                        {index < values?.length - 1 && (
-                          <span className="m-r--xxxs">&#44;</span>
-                        )}
-                      </>
-                    </span>
-                  ))}
-                </>
-              }
-            >
-              <div>
-                <InputTag
-                  listValue={values}
-                  isMaterial={isMaterial}
-                  render={render}
-                  placeHolder={placeHolder}
-                  disabled={disabled}
-                  onSearch={handleSearchChange}
-                  label={label}
-                  onClearMulti={handleClearAll}
-                  type={type}
-                  isSmall={isSmall}
-                  isUsingSearch={isUsingSearch}
-                  onKeyDown={handleKeyPress}
-                  onKeyEnter={handleKeyEnter}
-                  isNotExpand={!isExpand}
-                  isRequired={isRequired}
-                />
-              </div>
-            </Tooltip>
-          ) : (
+          <div>
             <InputTag
               listValue={values}
               isMaterial={isMaterial}
@@ -380,8 +349,10 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
               onKeyEnter={handleKeyEnter}
               isNotExpand={!isExpand}
               isRequired={isRequired}
+              isShowTooltip={isShowTooltip}
+              action={action}
             />
-          )}
+          </div>
         </div>
 
         {isExpand && (
@@ -471,11 +442,12 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                   ))}
               </div>
             )}
-            {selectWithAdd && (
+            {typeof selectWithAdd !== "undefined" && (
               <div
                 className={classNames(
                   "select__bottom-button select__add-button p-y--xs"
                 )}
+                onClick={selectWithAdd}
               >
                 <Add16 className="m-l--xs" />
                 <span className="m-l--xs">Add new</span>
@@ -496,6 +468,7 @@ MultipleSelect.defaultProps = {
   isMaterial: false,
   disabled: false,
   maxLengthItem: 30,
+  isShowTooltip: true,
 };
 
 export default MultipleSelect;

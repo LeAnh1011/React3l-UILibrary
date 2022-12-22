@@ -18,11 +18,10 @@ export interface InputNumberProps {
   isRequired?: boolean;
   type?: BORDER_TYPE;
   floatLabel?: boolean;
-  isMaterial?: boolean;
   value?: number;
   prefix?: string | ReactNode;
   suffix?: string | ReactNode;
-  allowPositive?: boolean;
+  allowNegative?: boolean;
   error?: string;
   numberType?: string;
   isReverseSymb?: boolean;
@@ -48,7 +47,7 @@ function InputNumber(props: InputNumberProps) {
     prefix,
     suffix,
     value,
-    allowPositive,
+    allowNegative,
     numberType,
     decimalDigit,
     isReverseSymb,
@@ -92,8 +91,10 @@ function InputNumber(props: InputNumberProps) {
       if (isReverseSymb) {
         switch (numberType) {
           case DECIMAL:
-            if (allowPositive) {
+            if (allowNegative) {
               inputValue = inputValue
+                .replace(/^(-00)/gm, "-0")
+                .replace(/^(00)/gm, "0")
                 .replace(/[^0-9,-]/g, "")
                 .replace(",", "x")
                 .replace(/,/g, "")
@@ -101,6 +102,7 @@ function InputNumber(props: InputNumberProps) {
                 .replace(/(?!^)-/g, "");
             } else {
               inputValue = inputValue
+                .replace(/^(00)/gm, "0")
                 .replace(/[^0-9,]/g, "")
                 .replace(",", "x")
                 .replace(/,/g, "")
@@ -110,20 +112,26 @@ function InputNumber(props: InputNumberProps) {
               return s2 || s1 + ".";
             });
           default:
-            if (allowPositive) {
+            if (allowNegative) {
               inputValue = inputValue
+                .replace(/^(-00)/gm, "-0")
+                .replace(/^(00)/gm, "0")
                 .replace(/[^0-9-]/g, "")
                 .replace(/(?!^)-/g, "");
             } else {
-              inputValue = inputValue.replace(/[^0-9]/g, "");
+              inputValue = inputValue
+                .replace(/^(00)/gm, "0")
+                .replace(/[^0-9]/g, "");
             }
             return inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
       } else {
         switch (numberType) {
           case DECIMAL:
-            if (allowPositive) {
+            if (allowNegative) {
               inputValue = inputValue
+                .replace(/^(-00)/gm, "-0")
+                .replace(/^(00)/gm, "0")
                 .replace(/[^0-9.-]/g, "")
                 .replace(".", "x")
                 .replace(/\./g, "")
@@ -131,6 +139,7 @@ function InputNumber(props: InputNumberProps) {
                 .replace(/(?!^)-/g, "");
             } else {
               inputValue = inputValue
+                .replace(/^(00)/gm, "0")
                 .replace(/[^0-9.]/g, "")
                 .replace(".", "x")
                 .replace(/\./g, "")
@@ -140,18 +149,22 @@ function InputNumber(props: InputNumberProps) {
               return s2 || s1 + ",";
             });
           default:
-            if (allowPositive) {
+            if (allowNegative) {
               inputValue = inputValue
+                .replace(/^(-00)/gm, "-0")
+                .replace(/^(00)/gm, "0")
                 .replace(/[^0-9-]/g, "")
                 .replace(/(?!^)-/g, "");
             } else {
-              inputValue = inputValue.replace(/[^0-9]/g, "");
+              inputValue = inputValue
+                .replace(/^(00)/gm, "0")
+                .replace(/[^0-9]/g, "");
             }
             return inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
       }
     },
-    [isReverseSymb, numberType, buildRegex, allowPositive]
+    [isReverseSymb, numberType, buildRegex, allowNegative]
   );
 
   const parseNumber = React.useCallback(
@@ -196,7 +209,10 @@ function InputNumber(props: InputNumberProps) {
       const [numberValue, isOutOfRange] = parseNumber(stringValue);
       if (!isOutOfRange) {
         if (typeof onChange === "function") {
-          const isSpecialLetter = /[-,.]/g.test(Array.from(stringValue)[0]);
+          const isSpecialLetter =
+            (/[-,.]/g.test(Array.from(stringValue)[0]) &&
+              stringValue.length === 1) ||
+            (/^(-0.?)/g.test(stringValue) && stringValue.length <= 3);
           if (!isSpecialLetter) {
             onChange(numberValue);
           }
@@ -346,10 +362,9 @@ function InputNumber(props: InputNumberProps) {
           </label>
         )}
         {internalValue && !disabled && (
-          <CloseFilled16
-            className={classNames("input-icon__clear", "m-l--xxs")}
-            onClick={handleClearInput}
-          ></CloseFilled16>
+          <div className={classNames("input-icon__clear", "m-l--xxs")}>
+            <CloseFilled16 onClick={handleClearInput}></CloseFilled16>
+          </div>
         )}
         {suffix && (
           <>
@@ -370,7 +385,7 @@ InputNumber.defaultProps = {
   type: BORDER_TYPE.BORDERED,
   isSmall: false,
   isRequired: false,
-  allowPositive: false,
+  allowNegative: false,
   isReverseSymb: false,
   numberType: LONG,
   decimalDigit: 4,

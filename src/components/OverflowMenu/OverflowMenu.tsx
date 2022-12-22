@@ -3,14 +3,14 @@ import classNames from "classnames";
 import React, { RefObject } from "react";
 import { CommonService } from "@Services/common-service";
 import "./OverflowMenu.scss";
-import OverflowMenuList from "./OverflowMenuList";
+import OverflowMenuList, { ListOverflowMenu } from "./OverflowMenuList";
 export interface CustomProps {
-  children?: any;
+  list?: ListOverflowMenu[];
   size?: "md" | "xl";
   appendToBody?: boolean;
 }
 function OverflowMenu(props: CustomProps) {
-  const { size, children, appendToBody } = props;
+  const { size, list } = props;
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
@@ -56,19 +56,19 @@ function OverflowMenu(props: CustomProps) {
         setAppendToBodyStyle({
           position: "absolute",
           top: currentPosition.top + 32,
-          left: currentPosition.left - (160 - 32),
+          right: window.innerWidth - currentPosition.right,
         });
         setCheck(false);
       } else {
         setAppendToBodyStyle({
           position: "absolute",
           top: currentPosition.top + 40,
-          left: currentPosition.left - (160 - 40),
+          right: window.innerWidth - currentPosition.right,
         });
         setCheck(false);
       }
     }
-  }, [appendToBody, appendToBodyStyle, check, isExpand, size]);
+  }, [appendToBodyStyle, check, isExpand, size]);
 
   const handleCloseList = React.useCallback(() => {
     setExpand(false);
@@ -104,7 +104,7 @@ function OverflowMenu(props: CustomProps) {
       {isExpand && (
         <OverflowMenuList
           setExpand={setExpand}
-          children={children}
+          list={list}
           selectListRef={selectListRef}
           appendToBodyStyle={appendToBodyStyle}
           size={size}
@@ -115,6 +115,5 @@ function OverflowMenu(props: CustomProps) {
 }
 OverflowMenu.defaultProps = {
   size: "md",
-  destroyOnClose: true,
 };
 export default OverflowMenu;

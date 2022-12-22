@@ -56,8 +56,6 @@ export function MultipleSelectStories() {
     setIsSelectWithPreferOption,
   ] = React.useState<boolean>(false);
 
-  const [isSelectWithAdd, setIsSelectWithAdd] = React.useState<boolean>(false);
-
   const [withSearch, setWithSearch] = React.useState(true);
 
   const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
@@ -79,13 +77,6 @@ export function MultipleSelectStories() {
   const handleChangeDisabled = React.useCallback((event: RadioChangeEvent) => {
     setIsDisabled(event.target.value);
   }, []);
-
-  const handleChangeSelectWithAdd = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setIsSelectWithAdd(event.target.value);
-    },
-    []
-  );
 
   const handleChangeSelectWithPreferOption = React.useCallback(
     (event: RadioChangeEvent) => {
@@ -119,7 +110,6 @@ export function MultipleSelectStories() {
             type={type}
             isSmall={isSmall}
             disabled={isDisabled}
-            selectWithAdd={isSelectWithAdd}
             isUsingSearch={withSearch}
             preferOptions={isSelectWithPreferOption ? list : undefined}
             maxLengthItem={10}
@@ -153,16 +143,6 @@ export function MultipleSelectStories() {
         <Radio.Group onChange={handleChangeDisabled} value={isDisabled}>
           <Radio value={true}>Disabled</Radio>
           <Radio value={false}>Not Disabled</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "400px" }}>
-        <Radio.Group
-          onChange={handleChangeSelectWithAdd}
-          value={isSelectWithAdd}
-        >
-          <Radio value={true}>Select with add</Radio>
-          <Radio value={false}>Not select with add</Radio>
         </Radio.Group>
       </div>
 

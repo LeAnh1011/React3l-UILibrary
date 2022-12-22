@@ -6,90 +6,105 @@ import classNames from "classnames";
 import React from "react";
 import "./StandardTable.scss";
 export interface StandardTableCustomProps extends TableProps<any> {
+  idContainer?: string;
   isDragable?: boolean;
   className?: string;
   tableSize?: "lg" | "md" | "sm";
   spinning?: boolean;
 }
 function StandardTable(props: StandardTableCustomProps) {
-  const { className, tableSize, isDragable, expandable, spinning } = props;
+  const {
+    className,
+    tableSize,
+    isDragable,
+    expandable,
+    spinning,
+    idContainer,
+  } = props;
 
   React.useEffect(() => {
-    const antTable = document.getElementsByClassName(
-      "page-table"
-    )[0] as HTMLElement;
+    var antTableDOM: any;
+    if (idContainer) {
+      const containerDOM = document.getElementById(idContainer);
+      antTableDOM =
+        containerDOM.getElementsByClassName("ant-table-content")[0] ||
+        containerDOM.getElementsByClassName("ant-table-body")[0];
+    } else {
+      antTableDOM =
+        document.getElementsByClassName("ant-table-content")[0] ||
+        document.getElementsByClassName("ant-table-body")[0];
+    }
     let isDown = false;
     let startX = 0;
     let scrollLeft = 0;
 
-    if (isDragable) {
+    if (isDragable && antTableDOM) {
       const handleMouseDown = (e: any) => {
         isDown = true;
-        antTable.classList.add("active-draggable");
-        startX = e.pageX - antTable.offsetLeft;
-        scrollLeft = antTable.scrollLeft;
+        antTableDOM.classList.add("active-draggable");
+        startX = e.pageX - antTableDOM.offsetLeft;
+        scrollLeft = antTableDOM.scrollLeft;
       };
 
       const handleMouseLeave = () => {
         isDown = false;
-        antTable.classList.remove("active-draggable");
+        antTableDOM.classList.remove("active-draggable");
       };
 
       const handleMouseUp = () => {
         isDown = false;
-        antTable.classList.remove("active-draggable");
+        antTableDOM.classList.remove("active-draggable");
       };
 
       const handleMouseMove = (e: any) => {
         if (!isDown) return;
         e.preventDefault();
-        const x = e.pageX - antTable.offsetLeft;
+        const x = e.pageX - antTableDOM.offsetLeft;
         const walk = (x - startX) * 3;
-        antTable.scrollLeft = scrollLeft - walk;
+        antTableDOM.scrollLeft = scrollLeft - walk;
       };
 
-      antTable.addEventListener("mousedown", handleMouseDown);
+      antTableDOM.addEventListener("mousedown", handleMouseDown);
 
-      antTable.addEventListener("mouseleave", handleMouseLeave);
+      antTableDOM.addEventListener("mouseleave", handleMouseLeave);
 
-      antTable.addEventListener("mouseup", handleMouseUp);
+      antTableDOM.addEventListener("mouseup", handleMouseUp);
 
-      antTable.addEventListener("mousemove", handleMouseMove);
+      antTableDOM.addEventListener("mousemove", handleMouseMove);
 
       return () => {
-        antTable.removeEventListener("mousedown", handleMouseDown);
-        antTable.removeEventListener("mouseleave", handleMouseLeave);
-        antTable.removeEventListener("mouseup", handleMouseUp);
-        antTable.removeEventListener("mousemove", handleMouseMove);
+        antTableDOM.removeEventListener("mousedown", handleMouseDown);
+        antTableDOM.removeEventListener("mouseleave", handleMouseLeave);
+        antTableDOM.removeEventListener("mouseup", handleMouseUp);
+        antTableDOM.removeEventListener("mousemove", handleMouseMove);
       };
     }
-  }, [isDragable]);
+  }, [idContainer, isDragable]);
 
   return (
     <>
-      <div className={classNames("page-table")}>
-          <Table
-            loading={{
-              indicator: (
-                <LoadingOutlined
-                  style={{
-                    fontSize: 32,
-                    color: "#0F62FE",
-                  }}
-                  spin
-                />
-              ),
-              spinning: spinning
-            }}
-            
-            className={classNames(
-              className,
-              `table-size-${tableSize}`,
-              "custom-scrollbar",
-              { "big-checkbox-col": !expandable }
-            )}
-            {...props}
-          />
+      <div className={classNames("page-table")} id={idContainer}>
+        <Table
+          loading={{
+            indicator: (
+              <LoadingOutlined
+                style={{
+                  fontSize: 32,
+                  color: "#0F62FE",
+                }}
+                spin
+              />
+            ),
+            spinning: spinning,
+          }}
+          className={classNames(
+            className,
+            `table-size-${tableSize}`,
+            "custom-scrollbar",
+            { "big-checkbox-col": !expandable }
+          )}
+          {...props}
+        />
       </div>
     </>
   );

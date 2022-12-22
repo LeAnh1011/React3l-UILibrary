@@ -44,7 +44,7 @@ export interface AdvanceIdMultipleFilterProps<
 
   isSmall?: boolean;
 
-  selectWithAdd?: boolean;
+  selectWithAdd?: () => void;
 
   selectWithPreferOption?: boolean;
 
@@ -308,6 +308,7 @@ export function AdvanceIdMultipleFilter(
             onKeyEnter={handleKeyEnter}
             isFilter={true}
             isNotExpand={!isExpand}
+            isShowTooltip
           />
         </div>
         {isExpand && (
@@ -378,11 +379,12 @@ export function AdvanceIdMultipleFilter(
                   ))}
               </div>
             )}
-            {selectWithAdd && (
+            {typeof selectWithAdd !== "undefined" && (
               <div
                 className={classNames(
                   "advance-id-filter__bottom-button advance-id-filter__add-button p-y--xs"
                 )}
+                onClick={selectWithAdd}
               >
                 <Add16 className="m-l--xs" />
                 <span className="m-l--xs">Add new</span>

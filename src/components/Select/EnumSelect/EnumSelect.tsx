@@ -9,6 +9,7 @@ import InputTag from "@Components/Input/InputTag";
 import Add16 from "@carbon/icons-react/es/add/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { ErrorObserver, Observable, Subscription } from "rxjs";
+import { InputAction } from "@Components/Input/InputText/InputText";
 
 export interface SelectProps<T extends Model> {
   value?: Model;
@@ -33,7 +34,7 @@ export interface SelectProps<T extends Model> {
 
   label?: string;
 
-  selectWithAdd?: boolean;
+  selectWithAdd?: () => void;
 
   isSmall?: boolean;
 
@@ -42,6 +43,8 @@ export interface SelectProps<T extends Model> {
   isMultiple?: boolean;
 
   getList?: () => Observable<T[]>;
+
+  action?: InputAction;
 
   height?: number;
 
@@ -94,6 +97,7 @@ function EnumSelect(props: SelectProps<Model>) {
     getList,
     height,
     maxLengthItem,
+    action,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -374,6 +378,7 @@ function EnumSelect(props: SelectProps<Model>) {
               onClearMulti={handleClearAll}
               isNotExpand={!isExpand}
               isRequired={isRequired}
+              isShowTooltip
             />
           ) : (
             <InputSelect
@@ -390,6 +395,7 @@ function EnumSelect(props: SelectProps<Model>) {
               isSmall={isSmall}
               isEnumerable={true}
               isRequired={isRequired}
+              action={action}
             />
           )}
         </div>
@@ -444,11 +450,12 @@ function EnumSelect(props: SelectProps<Model>) {
                   </>
                 }
 
-                {selectWithAdd && (
+                {typeof selectWithAdd !== "undefined" && (
                   <div
                     className={classNames(
                       "select__bottom-button select__add-button p-y--xs"
                     )}
+                    onClick={selectWithAdd}
                   >
                     <Add16 className="m-l--xs" />
                     <span className="m-l--xs">Add new</span>
@@ -502,11 +509,12 @@ function EnumSelect(props: SelectProps<Model>) {
                     </div>
                   </>
                 }
-                {selectWithAdd && (
+                {typeof selectWithAdd !== "undefined" && (
                   <div
                     className={classNames(
                       "select__bottom-button select__add-button p-y--xs"
                     )}
+                    onClick={selectWithAdd}
                   >
                     <Add16 className="m-l--xxs" />
                     <span>Add new</span>

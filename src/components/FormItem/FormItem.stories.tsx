@@ -1,3 +1,4 @@
+import React from "react";
 import { storiesOf } from "@storybook/react";
 import FormItem from "./FormItem";
 import InputText from "../Input/InputText/InputText";

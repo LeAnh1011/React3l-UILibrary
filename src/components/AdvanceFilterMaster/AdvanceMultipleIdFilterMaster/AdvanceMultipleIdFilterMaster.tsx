@@ -1,15 +1,15 @@
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import Search16 from "@carbon/icons-react/es/search/16";
-import { useDebounceFn } from "ahooks";
-import { Checkbox, Empty, Tooltip } from "antd";
-import classNames from "classnames";
 import IconLoading from "@Components/IconLoading/IconLoading";
 import InputText from "@Components/Input/InputText";
 import { DEBOUNCE_TIME_300 } from "@Configs/consts";
+import { CommonService } from "@Services/common-service";
+import { useDebounceFn } from "ahooks";
+import { Checkbox, Empty, Tooltip } from "antd";
+import classNames from "classnames";
 import React, { RefObject } from "react";
 import { Model, ModelFilter } from "react3l-common";
-import type { ErrorObserver, Observable } from "rxjs";
-import { CommonService } from "@Services/common-service";
+import { ErrorObserver, Observable } from "rxjs";
 import "./AdvanceMultipleIdFilterMaster.scss";
 
 export interface AdvanceMultipleIdFilterMasterProps<
@@ -55,28 +55,6 @@ function defaultRenderObject<T extends Model>(t: T) {
   return CommonService.limitWord(t?.name, 25);
 }
 
-interface changeAction {
-  type: string;
-  data: Model;
-}
-
-function multipleFilterReducer(
-  currentState: Model[],
-  action: changeAction
-): Model[] {
-  switch (action.type) {
-    case "UPDATE":
-      return [...currentState, action.data];
-    case "REMOVE":
-      const filteredArray = currentState.filter(
-        (item) => item.id !== action.data.id
-      );
-      return [...filteredArray];
-    case "REMOVE_ALL":
-      return [];
-  }
-  return;
-}
 
 function AdvanceMultipleIdFilterMaster(
   props: AdvanceMultipleIdFilterMasterProps<Model, ModelFilter>
@@ -85,7 +63,7 @@ function AdvanceMultipleIdFilterMaster(
     valueFilter,
     label,
     values,
-    searchProperty,
+    searchProperty, 
     searchType,
     placeHolder,
     disabled,
@@ -105,7 +83,6 @@ function AdvanceMultipleIdFilterMaster(
 
   const [list, setList] = React.useState<Model[]>([]);
 
-  const [selectedList, dispatch] = React.useReducer(multipleFilterReducer, []);
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
@@ -144,7 +121,7 @@ function AdvanceMultipleIdFilterMaster(
         let filteredItem =
           values &&
           values?.length > 0 &&
-          values.filter((item) => item === current.id)[0];
+          values?.filter((item) => item === current.id)[0];
         if (filteredItem) {
           current.isSelected = true;
         } else {
@@ -155,6 +132,23 @@ function AdvanceMultipleIdFilterMaster(
     }
     return [];
   }, [list, values]);
+
+
+  const selectedList = React.useMemo(() => {
+    if (list && list.length > 0) {
+      const select = list.filter((current) => {
+        let filteredItem =
+          values &&
+          values?.length > 0 &&
+          values.filter((item) => Number(item) === Number(current.id))[0];
+       return filteredItem;
+      });
+      return [...select];
+    }
+    return [];
+  }, [list, values]);
+
+  
 
   const internalPreferOptions = React.useMemo(() => {
     if (preferOptions && preferOptions.length > 0) {
@@ -217,8 +211,8 @@ function AdvanceMultipleIdFilterMaster(
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: any) => {
-      let filteredItem = selectedList?.filter(
-        (current) => current.id === item.id
+      let filteredItem = values?.filter(
+        (id) => id === item.id
       )[0];
       const cloneValueFilter = valueFilter
         ? { ...valueFilter }
@@ -230,26 +224,20 @@ function AdvanceMultipleIdFilterMaster(
         cloneValueFilter["id"]["notIn"].push(item?.id);
       }
       if (filteredItem) {
-        const tmp = [...selectedList];
-        const ids = selectedList?.map((item) => item?.id);
+        const tmpSelect = [...selectedList];
+        const tmp = [...values];
+        const ids = values?.map((item) => item?.id);
         const index = tmp.indexOf(filteredItem);
         tmp.splice(index, 1);
         ids.splice(index, 1);
-        dispatch({
-          type: "REMOVE",
-          data: item,
-        });
-        onChange([...tmp], ids as any);
+        tmpSelect.splice(index, 1);
+        onChange([...tmpSelect], ids as any);
       } else {
         const ids = selectedList?.map((item) => item?.id);
         onChange([...selectedList, item], [...ids, item?.id] as any);
-        dispatch({
-          type: "UPDATE",
-          data: item,
-        });
       }
     },
-    [selectedList, valueFilter, ClassFilter, onChange]
+    [values, valueFilter, ClassFilter, onChange, selectedList]
   );
 
   const handleSearchChange = React.useCallback(
@@ -316,6 +304,8 @@ function AdvanceMultipleIdFilterMaster(
     wrapperRef,
     handleCloseAdvanceMultipleIdFilterMaster
   );
+
+
 
   return (
     <>

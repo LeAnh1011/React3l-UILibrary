@@ -2,6 +2,8 @@
     background-color: var(--color-white);
     color: var(--color-primary);
     text-decoration: none;
+    letter-spacing: 0.244px;
+    padding: 0px 4px !important;
 
     &:visited {
         color: var(--color-primary);
@@ -22,8 +24,4 @@
             text-decoration: none;
         }
     }
-}
-.btn-link {
-    letter-spacing: 0.244px;
-    padding: 0px 4px !important;
 }

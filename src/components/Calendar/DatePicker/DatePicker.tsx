@@ -58,7 +58,7 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
   const handleClearDate = React.useCallback(
     (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
       event.stopPropagation();
-      onChange(null);
+      onChange(undefined);
     },
     [onChange]
   );

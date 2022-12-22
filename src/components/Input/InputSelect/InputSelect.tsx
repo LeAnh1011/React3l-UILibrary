@@ -5,6 +5,7 @@ import "./InputSelect.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
 import { BORDER_TYPE } from "@Configs/enum";
+import { InputAction } from "../InputText/InputText";
 
 export interface InputSelectProps<T extends Model> {
   value?: T;
@@ -21,6 +22,7 @@ export interface InputSelectProps<T extends Model> {
   className?: string;
   type?: BORDER_TYPE;
   label?: string;
+  action?: InputAction;
   isRequired?: boolean;
   isSmall?: boolean;
   isEnumerable?: boolean;
@@ -42,6 +44,7 @@ function InputSelect(props: InputSelectProps<Model>) {
     className,
     type,
     label,
+    action,
     isRequired,
     isSmall,
     isEnumerable,
@@ -114,7 +117,12 @@ function InputSelect(props: InputSelectProps<Model>) {
   return (
     <>
       <div className={classNames("input-select__wrapper", className)}>
-        <div className="input-select__label m-b--xxxs">
+        <div
+          className="input-select__label m-b--xxxs"
+          onClick={(event) => {
+            event.stopPropagation();
+          }}
+        >
           {type !== BORDER_TYPE.FLOAT_LABEL && label && (
             <label
               className={classNames("component__title", {
@@ -126,6 +134,15 @@ function InputSelect(props: InputSelectProps<Model>) {
             </label>
           )}
           <span style={{ width: "100%" }}></span>
+          {action && (
+            <span
+              className="m-l--xxxs body-text--md color-link"
+              style={{ cursor: "pointer" }}
+              onClick={action.action}
+            >
+              {action.name}
+            </span>
+          )}
         </div>
         <div
           className={classNames(

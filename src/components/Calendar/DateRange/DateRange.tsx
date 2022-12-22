@@ -78,7 +78,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
   const handleClearDate = React.useCallback(
     (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
       event.stopPropagation();
-      onChange([null, null]);
+      onChange([undefined, undefined]);
     },
     [onChange]
   );

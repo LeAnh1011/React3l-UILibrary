@@ -3,7 +3,7 @@ import Add16 from "@carbon/icons-react/es/add/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { Model, ModelFilter } from "react3l-common";
 import { useDebounceFn } from "ahooks";
-import { Empty } from "antd";
+import { Empty, Tooltip } from "antd";
 import classNames from "classnames";
 import React, { RefObject } from "react";
 import type { ErrorObserver, Observable } from "rxjs";
@@ -47,13 +47,15 @@ export interface AdvanceIdFilterProps<
 
   label?: string;
 
-  selectWithAdd?: boolean;
+  selectWithAdd?: () => void;
 
   selectWithPreferOption?: boolean;
 
   isSmall?: boolean;
 
   preferOptions?: T[];
+
+  maxLengthItem?: number;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -79,6 +81,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
     selectWithAdd,
     isSmall,
     preferOptions,
+    maxLengthItem,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -312,9 +315,17 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                         onKeyDown={handleMove(item)}
                         onClick={handleClickItem(item)}
                       >
-                        <span className="advance-id-filter__text">
-                          {render(item)}
-                        </span>
+                        {maxLengthItem &&
+                        render(item)?.length > maxLengthItem ? (
+                          <Tooltip title={render(item)}>
+                            {CommonService.limitWord(
+                              render(item),
+                              maxLengthItem
+                            )}
+                          </Tooltip>
+                        ) : (
+                          render(item)
+                        )}
                         {item.id === internalValue?.id && <Checkmark16 />}
                       </div>
                     ))
@@ -346,18 +357,29 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                       onClick={handleClickItem(item)}
                     >
                       <span className="advance-id-filter__text">
-                        {render(item)}
+                        {maxLengthItem &&
+                        render(item)?.length > maxLengthItem ? (
+                          <Tooltip title={render(item)}>
+                            {CommonService.limitWord(
+                              render(item),
+                              maxLengthItem
+                            )}
+                          </Tooltip>
+                        ) : (
+                          render(item)
+                        )}
                       </span>
                       {item.id === internalValue?.id && <Checkmark16 />}
                     </div>
                   ))}
               </div>
             )}
-            {selectWithAdd && (
+            {typeof selectWithAdd !== "undefined" && (
               <div
                 className={classNames(
                   "advance-id-filter__bottom-button advance-id-filter__add-button p-y--xs"
                 )}
+                onClick={selectWithAdd}
               >
                 <Add16 className="m-l--xxs" />
                 <span>Add new</span>
@@ -378,6 +400,7 @@ AdvanceIdFilter.defaultProps = {
   render: defaultRenderObject,
   isMaterial: false,
   disabled: false,
+  maxLengthItem: 30,
 };
 
 export default AdvanceIdFilter;

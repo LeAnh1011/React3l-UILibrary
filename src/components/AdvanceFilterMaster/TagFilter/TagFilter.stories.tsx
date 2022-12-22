@@ -30,7 +30,7 @@ const orgObservable = new Observable<Model[]>((observer) => {
   setTimeout(() => {
     observer.next([
       { id: 4, name: "Ban hành chính", code: "FAD" },
-      { id: 0, name: "Ban công nghệ thông tin", code: "FIM" },
+      { id: 10, name: "Ban công nghệ thông tin", code: "FIM" },
       { id: 2, name: "Ban nhân sự", code: "FHR" },
       { id: 3, name: "Ban tài chính", code: "FAF" },
       { id: 5, name: "Ban đời sống", code: "DSS" },
@@ -45,7 +45,7 @@ const appUserObservable = new Observable<Model[]>((observer) => {
   setTimeout(() => {
     observer.next([
       { id: 4, displayName: "Lê Đại M", code: "FAD" },
-      { id: 0, displayName: "Nguyễn Văn A", code: "FIM" },
+      { id: 10, displayName: "Nguyễn Văn A", code: "FIM" },
       { id: 2, displayName: "Bùi Văn V", code: "FHR" },
       { id: 3, displayName: "Phạm Thị H", code: "FAF" },
     ]);
@@ -69,8 +69,8 @@ export function TagFilterStories() {
   const [translate] = useTranslation();
 
   const [filter, setFilter] = React.useState<DemoFilter>(filterValue);
-  const [item, setItem] = React.useState<any>(null);
-  const [value, setValue] = React.useState<[any, any]>([null, null]);
+  const [item, setItem] = React.useState<any>(undefined);
+  const [value, setValue] = React.useState<[any, any]>([undefined, undefined]);
   
 
   const handleChangeOrganization = React.useCallback(
@@ -84,9 +84,10 @@ export function TagFilterStories() {
 
   const handleChangeFilter = React.useCallback(
     (listItem) => {
-      filter.organizationId.in = listItem.map((currentItem) => currentItem.id);
-      filter["organizationValue"] = listItem;
-      setFilter({ ...filter });
+      const newFilter = {...filter}
+      newFilter.organizationId.in = listItem.map((currentItem) => currentItem.id);
+      newFilter["organizationValue"] = listItem;
+      setFilter({ ...newFilter });
     },
     [filter]
   );
@@ -115,8 +116,8 @@ export function TagFilterStories() {
   );
 
   const handleClear = React.useCallback(() => {
-    setItem(null);
-    setValue([null, null]);
+    setItem(undefined);
+    setValue([undefined, undefined]);
   }, []);
 
   const handleChangeAllFilter = React.useCallback(

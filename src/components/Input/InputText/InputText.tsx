@@ -1,12 +1,12 @@
 import classNames from "classnames";
 import { BORDER_TYPE } from "@Configs/enum";
-import React, { ReactSVGElement, RefObject } from "react";
+import React, { ReactNode, ReactSVGElement, RefObject } from "react";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import "./InputText.scss";
 import { Tooltip } from "antd";
 
-interface InputTextAction {
-  name?: string;
+export interface InputAction {
+  name?: ReactNode;
   action?: any;
 }
 
@@ -25,7 +25,7 @@ export interface InputTextProps {
   showCount?: boolean;
   maxLength?: number;
   isSmall?: boolean;
-  action?: InputTextAction;
+  action?: InputAction;
   onChange?: (T: string | null) => void;
   onEnter?: (T: string | null) => void;
   onBlur?: (T: string | null) => void;
@@ -230,10 +230,9 @@ const InputText = React.forwardRef(
             </label>
           )}
           {internalValue && !disabled && (
-            <CloseFilled16
-              className={classNames("input-icon__clear", "m-l--xxs")}
-              onClick={handleClearInput}
-            ></CloseFilled16>
+            <div className={classNames("input-icon__clear", "m-l--xxs")}>
+              <CloseFilled16 onClick={handleClearInput}></CloseFilled16>
+            </div>
           )}
           {suffix && (
             <>

@@ -286,7 +286,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
       <div className="select__container" ref={wrapperRef}>
         <div className="select__input" onClick={handleToggle}>
           <InputSelect
-            value={internalValue} // value of input, event should change these on update
+            value={internalValue}
             render={render}
             placeHolder={placeHolder}
             expanded={isExpand}

@@ -32,6 +32,7 @@ export interface InputSearchProps<
   onChange?: (value: string) => void;
   placeHolder?: string;
   animationInput?: boolean;
+  position?: "left" | "right";
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -52,6 +53,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     className,
     animationInput,
     onChange,
+    position,
   } = props;
   const [showListItem, setShowListItem] = React.useState<boolean>();
   const [fullWidth, setFullWidth] = React.useState<boolean>(!animationInput);
@@ -259,6 +261,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           "active-background": activeBackground && showInput,
           "visible__input-search": showInput,
           "hidden__input-search": !showInput,
+          "position-right": position === "right",
         })}
         onClick={handleToggle}
         tabIndex={0}

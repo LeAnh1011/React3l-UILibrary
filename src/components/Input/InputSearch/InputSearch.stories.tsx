@@ -56,6 +56,14 @@ export function InputSearchStories() {
           placeHolder="Search..."
           onChange={handleSearchChange}
           className="m-b--xl"
+          position="right"
+        />
+
+        <InputSearch
+          classFilter={DemoFilter}
+          placeHolder="Search..."
+          onChange={handleSearchChange}
+          className="m-b--xl"
         />
 
         <InputSearch

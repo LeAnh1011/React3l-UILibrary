@@ -30,6 +30,7 @@ export interface InputTextProps {
   onEnter?: (T: string | null) => void;
   onBlur?: (T: string | null) => void;
   onKeyDown?: (event: any) => void;
+  backgroundColor?: string;
 }
 
 const InputText = React.forwardRef(
@@ -52,6 +53,7 @@ const InputText = React.forwardRef(
       onEnter,
       onBlur,
       onKeyDown,
+      backgroundColor,
     } = props;
 
     const [internalValue, setInternalValue] = React.useState<string>("");
@@ -184,6 +186,7 @@ const InputText = React.forwardRef(
             "input-text--float": type === BORDER_TYPE.FLOAT_LABEL,
           })}
           ref={ref}
+          style={{ backgroundColor: backgroundColor }}
           onClick={() => {
             inputRef.current.focus();
           }}
@@ -261,6 +264,7 @@ InputText.defaultProps = {
   disabled: false,
   className: "",
   maxLength: 0,
+  backgroundColor: "",
 };
 
 export default InputText;

@@ -7,9 +7,11 @@
   .input-tag__label {
     width: 100%;
     display: flex;
+
     .component__title--disabled {
       color: var(--palette-gray-40);
     }
+
     label {
       font-size: 0.75em;
       white-space: nowrap;
@@ -25,7 +27,7 @@
     align-items: center;
     width: 100%;
     outline: 1px solid var(--palette-coolGray-50);
-    background-color: var(--color-white);
+    background-color: var(--palette-grayHover-10);
     height: 40px;
 
     &.input-tag--filter-have-item {
@@ -47,6 +49,7 @@
       .input-tag__icon {
         color: var(--color-primary);
       }
+
       .input-tag__icon--disabled {
         color: var(--palette-gray-40);
       }
@@ -54,6 +57,7 @@
 
     &:focus-within {
       outline: 2px solid var(--color-primary);
+
       .input-tag__icon {
         transform: rotate(180deg);
         color: var(--color-primary);
@@ -62,20 +66,25 @@
 
     &.input-tag--disabled {
       background-color: var(--palette-gray-10);
+
       span {
         color: var(--palette-gray-40);
       }
+
       input {
         color: var(--palette-gray-40) !important;
       }
+
       .input-tag-item__text,
       .input-tag-item__icon {
         color: var(--palette-white-100);
       }
+
       &:hover {
         outline-color: var(--palette-coolGray-50);
         cursor: not-allowed;
       }
+
       &.input-tag--filter-have-item {
         outline-color: var(--palette-coolGray-50);
       }
@@ -96,12 +105,15 @@
 
       &:hover {
         background-color: var(--palette-grayHover-10);
+
         .component__input {
           background-color: var(--palette-grayHover-10);
         }
+
         .component__input.disabled-field {
           background-color: var(--palette-gray-10);
         }
+
         .input-tag__icon {
           color: var(--palette-gray-60);
         }
@@ -110,6 +122,7 @@
       &:focus-within {
         outline: 2px solid var(--color-primary);
         box-shadow: none;
+
         .input-tag__icon {
           color: var(--palette-gray-60);
         }
@@ -118,6 +131,7 @@
       &.input-tag--disabled {
         box-shadow: none;
         background-color: var(--palette-gray-10);
+
         &.input-tag--filter-have-item {
           outline: none;
         }
@@ -132,6 +146,7 @@
     &.input-tag__container--float {
       &:hover:not(.input-tag--disabled):not(:focus-within) {
         outline-color: var(--palette-gray-100);
+
         .input-tag__icon {
           color: var(--palette-gray-60);
         }
@@ -140,9 +155,11 @@
       &:focus-within {
         box-shadow: none;
         outline: 2px solid var(--color-primary);
+
         .component__title {
           color: var(--color-primary);
         }
+
         .input-icon {
           color: var(--color-primary);
         }
@@ -166,6 +183,7 @@
           height: 16px;
         }
       }
+
       .component__title {
         &.component__title--top {
           line-height: 16px;
@@ -185,9 +203,11 @@
       &.component__title--normal {
         left: 8px;
       }
+
       &.component__title--sm {
         top: 5px;
       }
+
       &.component__title--prefix {
         left: 41px;
       }
@@ -229,6 +249,7 @@
         border-radius: 12px;
         width: 20px;
         height: 20px;
+
         &:hover {
           background-color: #353535;
         }
@@ -254,19 +275,20 @@
         &:hover {
           cursor: not-allowed;
         }
+
         &::placeholder {
           color: var(--palette-gray-40);
         }
       }
 
-      &:not(:placeholder-shown) + .component__title {
+      &:not(:placeholder-shown)+.component__title {
         top: 0;
         left: 8px;
         background-color: var(--color-white);
         transform: translateY(-50%) scale(0.9);
       }
 
-      &:focus + .component__title {
+      &:focus+.component__title {
         top: 0;
         left: 8px;
         background-color: var(--color-white);
@@ -286,6 +308,7 @@
       color: var(--palette-coolGray-50);
       width: 16px;
       height: 16px;
+
       &:hover {
         cursor: pointer;
         color: var(--palette-coolGrayHover-50);
@@ -301,6 +324,7 @@
         &.input-tag__container--material {
           outline: 1px solid;
           box-shadow: none !important;
+
           &:focus-within {
             outline-color: var(--color-primary) !important;
             outline-width: 2px;

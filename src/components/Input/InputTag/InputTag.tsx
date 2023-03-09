@@ -30,6 +30,7 @@ export interface InputTagProps<T extends Model> {
   isNotExpand?: boolean;
   isShowTooltip?: boolean;
   action?: InputAction;
+  backgroundColor?: string;
 }
 
 function InputTag(props: InputTagProps<Model>) {
@@ -51,6 +52,7 @@ function InputTag(props: InputTagProps<Model>) {
     isShowTooltip = false,
     render,
     action,
+    backgroundColor,
   } = props;
 
   const internalListValue = React.useMemo<Model[]>(() => {
@@ -159,6 +161,7 @@ function InputTag(props: InputTagProps<Model>) {
               ? inputRef.current.focus()
               : inputContainerRef.current.focus()
           }
+          style={{ backgroundColor: backgroundColor }}
           ref={inputContainerRef}
         >
           {isShowTooltip ? (
@@ -307,6 +310,7 @@ InputTag.defaultProps = {
   label: null,
   render: defaultRenderObject,
   isMaterial: false,
+  backgroundColor: "",
 };
 
 export default InputTag;

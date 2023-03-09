@@ -28,7 +28,7 @@
     align-items: center;
     width: 100%;
     outline: 1px solid var(--palette-coolGray-50);
-    background-color: var(--color-white);
+    background-color: var(--palette-grayHover-10);
     height: 40px;
 
     &.input-select--filter-have-item {
@@ -46,9 +46,11 @@
 
     &:hover {
       outline-color: var(--color-primary);
+
       .input-select__icon {
         color: var(--color-primary);
       }
+
       .input-select__icon--disabled {
         color: var(--palette-gray-40);
       }
@@ -56,6 +58,7 @@
 
     &:focus-within {
       outline: 2px solid var(--color-primary);
+
       .input-select__icon {
         transform: rotate(180deg);
         color: var(--color-primary);
@@ -64,16 +67,20 @@
 
     &.input-select--disabled {
       background-color: var(--palette-gray-10);
+
       span {
         color: var(--palette-gray-40);
       }
+
       input {
         color: var(--palette-gray-40) !important;
       }
+
       &:hover {
         outline-color: var(--palette-coolGray-50);
         cursor: not-allowed;
       }
+
       &.input-select--filter-have-item {
         outline-color: var(--palette-coolGray-50);
       }
@@ -82,6 +89,7 @@
     &.input-select--float {
       &:hover:not(.input-select--disabled):not(:focus-within) {
         outline-color: var(--palette-gray-100);
+
         .input-select__icon {
           color: var(--palette-gray-60);
         }
@@ -90,9 +98,11 @@
       &:focus-within {
         box-shadow: none;
         outline: 2px solid var(--color-primary);
+
         .component__title {
           color: var(--color-primary);
         }
+
         .input-select__icon {
           color: var(--color-primary);
         }
@@ -114,12 +124,15 @@
 
       &:hover {
         background-color: var(--palette-grayHover-10);
+
         .component__input {
           background-color: var(--palette-grayHover-10);
         }
+
         .component__input.disabled-field {
           background-color: var(--palette-gray-10);
         }
+
         .input-select__icon {
           color: var(--palette-gray-60);
         }
@@ -128,6 +141,7 @@
       &:focus-within {
         outline: 2px solid var(--color-primary);
         box-shadow: none;
+
         .input-select__icon {
           color: var(--palette-gray-60);
         }
@@ -136,6 +150,7 @@
       &.input-select--disabled {
         box-shadow: none;
         background-color: var(--palette-gray-10);
+
         &.input-select--filter-have-item {
           outline: none;
         }
@@ -159,12 +174,15 @@
       &.component__title--normal {
         left: 8px;
       }
+
       &.component__title--sm {
         top: 5px;
       }
+
       &.component__title--prefix {
         left: 41px;
       }
+
       &.component__title--expanded {
         top: 0;
         left: 8px;
@@ -191,19 +209,20 @@
         &::placeholder {
           color: var(--palette-gray-40);
         }
+
         &:hover {
           cursor: not-allowed;
         }
       }
 
-      &:not(:placeholder-shown) + .component__title {
+      &:not(:placeholder-shown)+.component__title {
         top: 0;
         left: 8px;
         background-color: var(--color-white);
         transform: translateY(-50%) scale(0.9);
       }
 
-      &:focus + .component__title {
+      &:focus+.component__title {
         top: 0;
         left: 8px;
         background-color: var(--color-white);
@@ -221,6 +240,7 @@
 
     .input-icon__clear {
       color: var(--palette-coolGray-50);
+
       &:hover {
         cursor: pointer;
         color: var(--palette-coolGrayHover-50);
@@ -236,6 +256,7 @@
         &.input-select--material {
           outline: 1px solid;
           box-shadow: none !important;
+
           &:focus-within {
             outline-color: var(--color-primary) !important;
             outline-width: 2px;

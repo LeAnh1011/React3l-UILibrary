@@ -27,6 +27,7 @@ export interface InputSelectProps<T extends Model> {
   isSmall?: boolean;
   isEnumerable?: boolean;
   isFilter?: boolean;
+  backgroundColor?: string;
 }
 
 function InputSelect(props: InputSelectProps<Model>) {
@@ -49,6 +50,7 @@ function InputSelect(props: InputSelectProps<Model>) {
     isSmall,
     isEnumerable,
     isFilter,
+    backgroundColor,
   } = props;
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
@@ -158,6 +160,7 @@ function InputSelect(props: InputSelectProps<Model>) {
               "input-select--filter-have-item": isFilter && value,
             }
           )}
+          style={{ backgroundColor: backgroundColor }}
         >
           {expanded ? (
             <>
@@ -264,6 +267,7 @@ InputSelect.defaultProps = {
   isMaterial: false,
   expanded: false,
   disabled: false,
+  backgroundColor: "",
 };
 
 export default InputSelect;

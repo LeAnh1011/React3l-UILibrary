@@ -36,6 +36,7 @@ export interface InputNumberProps {
   onChange?: (T: number) => void;
   onEnter?: (T: number) => void;
   onBlur?: (T: number) => void;
+  backgroundColor?: string;
 }
 
 function InputNumber(props: InputNumberProps) {
@@ -60,6 +61,7 @@ function InputNumber(props: InputNumberProps) {
     onChange,
     onEnter,
     onBlur,
+    backgroundColor,
   } = props;
 
   const [internalValue, setInternalValue] = React.useState<string>("");
@@ -321,6 +323,7 @@ function InputNumber(props: InputNumberProps) {
             "input-number--float": type === BORDER_TYPE.FLOAT_LABEL,
           }
         )}
+        style={{ backgroundColor: backgroundColor }}
         onClick={() => {
           inputRef.current.focus();
         }}
@@ -391,6 +394,7 @@ InputNumber.defaultProps = {
   decimalDigit: 4,
   disabled: false,
   prefix: "",
+  backgroundColor: "",
 };
 
 export default InputNumber;

@@ -3,6 +3,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+
+
   .input-number__label {
     width: 100%;
     display: flex;
@@ -27,8 +29,9 @@
     align-items: center;
     width: 100%;
     outline: 1px solid var(--palette-coolGray-50);
-    background-color: var(--color-white);
+    background-color: var(--palette-grayHover-10);
     height: 40px;
+
 
     &.input-number__container--sm {
       height: 32px !important;
@@ -67,6 +70,7 @@
       &:focus-within {
         box-shadow: none;
         outline: 2px solid var(--color-primary);
+
         .component__title {
           color: var(--color-primary);
         }
@@ -83,9 +87,11 @@
 
       &:hover {
         background-color: var(--palette-grayHover-10);
+
         .component__input {
           background-color: var(--palette-grayHover-10);
         }
+
         .component__input.disabled-field {
           background-color: var(--palette-gray-10);
         }
@@ -119,9 +125,11 @@
       &.component__title--normal {
         left: 8px;
       }
+
       &.component__title--sm {
         top: 5px;
       }
+
       &.component__title--prefix {
         left: 41px;
       }
@@ -157,19 +165,20 @@
         &::placeholder {
           color: var(--palette-gray-40);
         }
+
         &:hover {
           cursor: not-allowed;
         }
       }
 
-      &:not(:placeholder-shown) + .component__title {
+      &:not(:placeholder-shown)+.component__title {
         top: 0;
         left: 8px;
         background-color: var(--color-white);
         transform: translateY(-50%) scale(0.9);
       }
 
-      &:focus + .component__title {
+      &:focus+.component__title {
         top: 0;
         left: 8px;
         background-color: var(--color-white);
@@ -185,8 +194,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
       svg {
         color: var(--palette-coolGray-50);
+
         &:hover {
           cursor: pointer;
           color: var(--palette-coolGrayHover-50);
@@ -195,6 +206,7 @@
     }
   }
 }
+
 .form-item__container {
   &.form-item__container--error {
     .form-item__content {
@@ -202,6 +214,7 @@
         &.input-number--material {
           outline: 1px solid;
           box-shadow: none !important;
+
           &:focus-within {
             outline-color: var(--color-primary) !important;
             outline-width: 2px;

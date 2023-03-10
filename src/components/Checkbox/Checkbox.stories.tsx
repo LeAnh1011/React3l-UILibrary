@@ -29,10 +29,13 @@ const Template: Story = (args) => {
     setChecked(value);
   }, []);
 
-  const [values, setValues] = React.useState<number[]>([]);
-  const handleChangeCheckboxGroup = React.useCallback((values) => {
-    setValues(values);
-  }, []);
+  const [values, setValues] = React.useState<number[]>([1, 3]);
+  const handleChangeCheckboxGroup = React.useCallback(
+    (values, _selectedOptions) => {
+      setValues(values);
+    },
+    []
+  );
 
   return (
     <div>
@@ -51,7 +54,7 @@ const Template: Story = (args) => {
       <div className="m-t--xxl">
         <CheckboxGroup
           label="Trạng thái duyệt"
-          value={values}
+          values={values}
           onChange={handleChangeCheckboxGroup}
           dataOptions={listValueObject}
         />

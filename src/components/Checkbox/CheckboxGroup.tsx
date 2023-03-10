@@ -4,13 +4,13 @@ import { Model } from "react3l-common";
 import Checkbox from ".";
 import "./CheckboxGroup.scss";
 
-export interface CheckboxGroupComponentProps {
-  onChange?: (values: number[]) => void;
-  value?: number[];
+export interface CheckboxGroupComponentProps<T extends Model> {
+  onChange?: (values: number[], selectedOptions?: T[]) => void;
+  values?: number[];
   disabled?: boolean;
   label?: string;
-  dataOptions?: Model[];
-  render?: (t: Model) => string;
+  dataOptions?: T[];
+  render?: (t: T) => string;
   maxLengthItem?: number;
 }
 
@@ -18,40 +18,52 @@ function defaultRenderObject<T extends Model>(t: T) {
   return t?.name;
 }
 
-function CheckboxGroup(props: CheckboxGroupComponentProps) {
+function CheckboxGroup(props: CheckboxGroupComponentProps<Model>) {
   const {
     onChange,
     disabled,
     label,
     dataOptions,
-    value,
+    values,
     render,
     maxLengthItem,
   } = props;
   const [listCheckedKey, setListCheckedKey] = React.useState<number[]>([]);
 
   React.useEffect(() => {
-    if (value?.length > 0) {
-      setListCheckedKey([...value]);
+    if (values?.length > 0) {
+      setListCheckedKey([...values]);
     }
-  }, [value]);
+  }, [values]);
 
   const handleChange = React.useCallback(
     (check, currentId) => {
       if (onChange && typeof onChange === "function") {
         if (check) {
           listCheckedKey.push(currentId);
+          const selectedOptions: Model[] = [];
+          dataOptions?.forEach((option) => {
+            if (listCheckedKey?.includes(option?.id)) {
+              selectedOptions.push(option);
+            }
+          });
           setListCheckedKey([...listCheckedKey]);
-          return onChange(listCheckedKey);
+          return onChange(listCheckedKey, selectedOptions);
         } else {
-          const newList = listCheckedKey?.filter((id) => id !== currentId);
-          setListCheckedKey([...newList]);
-          return onChange(newList);
+          const newListKey = listCheckedKey?.filter((id) => id !== currentId);
+          const selectedOptions: Model[] = [];
+          dataOptions?.forEach((option) => {
+            if (newListKey?.includes(option?.id)) {
+              selectedOptions.push(option);
+            }
+          });
+          setListCheckedKey([...newListKey]);
+          return onChange(newListKey, selectedOptions);
         }
       }
       return;
     },
-    [listCheckedKey, onChange]
+    [dataOptions, listCheckedKey, onChange]
   );
 
   return (

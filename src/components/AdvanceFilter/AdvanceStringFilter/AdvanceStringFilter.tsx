@@ -175,9 +175,13 @@ const AdvanceStringFilter = React.forwardRef(
           {prefix && (
             <>
               {typeof prefix === "string" ? (
-                <span className="p-r--xxs">{prefix}</span>
+                <span className="p-r--xxs advance-string-filter__string">
+                  {prefix}
+                </span>
               ) : (
-                <>{prefix}</>
+                <div className="m-r--xs advance-string-filter__icon">
+                  {prefix}
+                </div>
               )}
             </>
           )}

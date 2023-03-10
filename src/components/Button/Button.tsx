@@ -98,7 +98,6 @@ Button.defaultProps = {
   type: "primary",
   htmlType: "button",
   disabled: false,
-  loading: false,
 };
 
 export default Button;

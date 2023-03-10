@@ -208,7 +208,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     (item: Model) => (event: any) => {
       let filteredItem = values?.filter((current) => current.id === item.id)[0];
       if (filteredItem) {
-        const tmp = [...values];
+        const tmp = [...(values ?? [])];
         const ids = values?.map((item) => item?.id);
         const index = tmp.indexOf(filteredItem);
         tmp.splice(index, 1);
@@ -216,7 +216,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
         onChange([...tmp], ids as any);
       } else {
         const ids = values?.map((item) => item?.id);
-        onChange([...values, item], [...ids, item?.id] as any);
+        onChange([...(values ?? []), item], [...ids, item?.id] as any);
       }
     },
     [values, onChange]

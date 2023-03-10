@@ -1,117 +1,38 @@
-.inline-loading{
-    line-height: 16px !important;
-    font-size: 12px !important;
-    padding-left: 16px !important;
-    .icon-submitted-inline-loading{
-        margin-right: 8px;
-        color: green;
-    }
-    .icon-submitted-inline-loading{
-        margin-right: 8px;
-        color: green;
-    }
-    .icon-error-inline-loading{
-        margin-right: 8px;
-        color: #DA1E28;
-    }
-    .submitting-box{
-        display: flex;
-        align-items: center;
-        margin-right: 20px;
-    }
-    .submitted-box{
-        display: flex;
-        align-items: center;
-        margin-right: 16px;
-    }
-    .error-box{
-        display: flex;
-        align-items: center;
-        margin-right: 46px;
-    }
-}
-.il-normal-no-icon{
+.inline-loading {
+  line-height: 16px !important;
+  font-size: 12px !important;
+  padding-left: 16px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 2rem;
+
+  .icon-submitted-inline-loading {
+    margin-right: 8px;
+    color: green;
+  }
+  .icon-submitted-inline-loading {
+    margin-right: 8px;
+    color: green;
+  }
+  .icon-error-inline-loading {
+    margin-right: 8px;
+    color: #da1e28;
+  }
+  .submitting-box {
     display: flex;
     align-items: center;
-    &.btn--sm {
-        height: 32px;
-    }
-
-    &.btn--md {
-        height: 36px;
-    }
-
-    &.btn--lg {
-        height: 40px;
-    }
-
-    &.btn--xl {
-        height: 56px;
-    }
-}
-.il-normal-have-icon{
+    margin-right: 20px;
+  }
+  .submitted-box {
     display: flex;
     align-items: center;
-    &.btn--sm {
-        height: 32px;
-    }
-
-    &.btn--md {
-        height: 36px;
-    }
-
-    &.btn--lg {
-        height: 40px;
-    }
-
-    &.btn--xl {
-        height: 56px;
-    }
-}
-.il-outline-no-icon{
+    margin-right: 16px;
+  }
+  .error-box {
     display: flex;
     align-items: center;
-    &.btn--sm {
-        height: 32px;
-    }
-
-    &.btn--md {
-        height: 36px;
-    }
-
-    &.btn--lg {
-        height: 40px;
-    }
-
-    &.btn--xl {
-        height: 56px;
-    }
-}
-.il-outline-have-icon{
-    display: flex;
-    align-items: center;
-    
-    &.btn--sm {
-        height: 32px;
-    }
-
-    &.btn--md {
-        height: 36px;
-    }
-
-    &.btn--lg {
-        height: 40px;
-    }
-
-    &.btn--xl {
-        height: 56px;
-    }
-}
-.il-bleed-no-icon{
-    height: 60px;
-    padding-top: 12PX;
-}
-.il-bleed-have-icon{
-    height: 60px;
-    padding-top: 12PX;
+    margin-right: 46px;
+  }
 }

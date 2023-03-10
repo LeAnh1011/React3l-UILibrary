@@ -122,7 +122,7 @@ export function AdvanceIdMultipleFilterStories() {
             type={type}
             isSmall={isSmall}
             disabled={isDisabled}
-            selectWithAdd={isSelectWithAdd}
+            selectWithAdd={() => {}}
             isUsingSearch={withSearch}
             preferOptions={isSelectWithPreferOption ? list : undefined}
           ></AdvanceIdMultipleFilter>

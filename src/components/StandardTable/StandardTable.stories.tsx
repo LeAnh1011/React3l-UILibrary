@@ -21,7 +21,6 @@ import LayoutCell from "./LayoutCell/LayoutCell";
 import LayoutHeader from "./LayoutHeader/LayoutHeader";
 import Pagination from "./Pagination/Pagination";
 import StandardTable from "./StandardTable";
-import OverflowMenu from "../OverflowMenu/OverflowMenu";
 import "./StandardTable.scss";
 import InputSearch from "../Input/InputSearch/InputSearch";
 import Select from "../Select/SingleSelect/Select";
@@ -258,50 +257,18 @@ function Default() {
     }
   }, []);
 
-  const handleAdd = React.useCallback(() => {}, []);
-
-  const handleEdit = React.useCallback(() => {}, []);
-
-  const handleDelete = React.useCallback(() => {}, []);
-
-  const list: any = React.useMemo(() => {
-    return [
-      {
-        name: "Thêm",
-        action: handleAdd,
-      },
-      {
-        name: "Sửa",
-        action: handleEdit,
-      },
-      {
-        name: "Xóa",
-        action: handleDelete,
-      },
-    ];
-  }, [handleAdd, handleDelete, handleEdit]);
-
   const columns: ColumnProps<any>[] = useMemo(
     () => [
       {
         title: ({ sortColumns }) => {
-          const sortedColumn = sortColumns?.find(
-            ({ column }) => column.key === "type"
-          );
           return (
             <div>
-              <LayoutHeader
-                orderType={orderType}
-                title="Title"
-                sortedColumn={sortedColumn}
-                isSorter
-              />
+              <LayoutHeader orderType={orderType} title="Title" />
             </div>
           );
         },
         dataIndex: "type",
         key: "type",
-        sorter: true,
         width: 135,
         fixed: "left",
         ellipsis: true,
@@ -457,20 +424,6 @@ function Default() {
         },
       },
       {
-        key: "id",
-        width: 80,
-        fixed: "right",
-        ellipsis: true,
-        dataIndex: "id",
-        render() {
-          return (
-            <div className="d-flex align-items-center justify-content-center">
-              <OverflowMenu size="md" list={list}></OverflowMenu>
-            </div>
-          );
-        },
-      },
-      {
         title: ({ sortColumns }) => {
           const sortedColumn = sortColumns?.find(
             ({ column }) => column.key === "version"
@@ -499,7 +452,7 @@ function Default() {
         },
       },
     ],
-    [avatarType, list, orderType, size]
+    [avatarType, orderType, size]
   );
 
   const columns2: ColumnProps<any>[] = useMemo(

@@ -312,7 +312,9 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
             {typeof prefix === "string" ? (
               <span className="p-r--xxs">{prefix}</span>
             ) : (
-              <>{prefix}</>
+              <div className="m-r--xs advance-number-filter__icon">
+                {prefix}
+              </div>
             )}
           </>
         )}

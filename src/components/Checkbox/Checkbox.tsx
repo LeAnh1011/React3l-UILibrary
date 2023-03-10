@@ -4,6 +4,7 @@ import {
   CheckboxProps as CheckboxPropsAntd,
 } from "antd";
 import "./Checkbox.scss";
+import CheckboxGroup from "./CheckboxGroup";
 
 export interface CheckboxProps {
   onChange?: (value: boolean) => void;
@@ -12,7 +13,7 @@ export interface CheckboxProps {
   label?: string;
 }
 
-function CheckboxWraper(props: CheckboxProps & CheckboxPropsAntd) {
+function Checkbox(props: CheckboxProps & CheckboxPropsAntd) {
   const { onChange, checked, disabled, label } = props;
   const handleChange = React.useCallback(
     (value) => {
@@ -37,4 +38,6 @@ function CheckboxWraper(props: CheckboxProps & CheckboxPropsAntd) {
   );
 }
 
-export default CheckboxWraper;
+Checkbox.Group = CheckboxGroup;
+
+export default Checkbox;

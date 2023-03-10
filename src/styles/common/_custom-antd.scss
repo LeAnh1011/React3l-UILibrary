@@ -47,27 +47,33 @@ tr
 //header table
 
 .ant-table-thead {
-  th:focus{
+  th:focus {
     border: 2px solid var(--palette-blue-60);
     outline-offset: -2px;
   }
 }
 
-.ant-table-cell {
-  .ant-table-cell-content{
+th.ant-table-cell {
+  div:first-child:not(.ant-table-selection) {
     height: 100%;
   }
+
+  .ant-table-cell-content {
+    height: 100%;
+  }
+
   .ant-table-column-sorters {
     height: 100%;
+
     .ant-table-column-title {
       height: 100%;
       div {
         height: 100%;
       }
     }
+
     .ant-table-column-sorter {
       display: none;
     }
   }
 }
-

@@ -55,7 +55,6 @@ function defaultRenderObject<T extends Model>(t: T) {
   return CommonService.limitWord(t?.name, 25);
 }
 
-
 function AdvanceMultipleIdFilterMaster(
   props: AdvanceMultipleIdFilterMasterProps<Model, ModelFilter>
 ) {
@@ -63,7 +62,7 @@ function AdvanceMultipleIdFilterMaster(
     valueFilter,
     label,
     values,
-    searchProperty, 
+    searchProperty,
     searchType,
     placeHolder,
     disabled,
@@ -82,7 +81,6 @@ function AdvanceMultipleIdFilterMaster(
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const [list, setList] = React.useState<Model[]>([]);
-
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
@@ -133,7 +131,6 @@ function AdvanceMultipleIdFilterMaster(
     return [];
   }, [list, values]);
 
-
   const selectedList = React.useMemo(() => {
     if (list && list.length > 0) {
       const select = list.filter((current) => {
@@ -141,14 +138,12 @@ function AdvanceMultipleIdFilterMaster(
           values &&
           values?.length > 0 &&
           values.filter((item) => Number(item) === Number(current.id))[0];
-       return filteredItem;
+        return filteredItem;
       });
       return [...select];
     }
     return [];
   }, [list, values]);
-
-  
 
   const internalPreferOptions = React.useMemo(() => {
     if (preferOptions && preferOptions.length > 0) {
@@ -211,9 +206,7 @@ function AdvanceMultipleIdFilterMaster(
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: any) => {
-      let filteredItem = values?.filter(
-        (id) => id === item.id
-      )[0];
+      let filteredItem = values?.filter((id) => id === item.id)[0];
       const cloneValueFilter = valueFilter
         ? { ...valueFilter }
         : new ClassFilter();
@@ -225,7 +218,7 @@ function AdvanceMultipleIdFilterMaster(
       }
       if (filteredItem) {
         const tmpSelect = [...selectedList];
-        const tmp = [...values];
+        const tmp = [...(values ?? [])];
         const ids = values?.map((item) => item?.id);
         const index = tmp.indexOf(filteredItem);
         tmp.splice(index, 1);
@@ -304,8 +297,6 @@ function AdvanceMultipleIdFilterMaster(
     wrapperRef,
     handleCloseAdvanceMultipleIdFilterMaster
   );
-
-
 
   return (
     <>

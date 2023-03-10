@@ -47,7 +47,7 @@ function CheckboxGroup(props: CheckboxGroupComponentProps<Model>) {
         },
       });
       setFirstLoad(false);
-    } else if (dataOptions?.length > 0) {
+    } else if (firstLoad && dataOptions?.length > 0) {
       setListOptions(dataOptions);
       setFirstLoad(false);
     }

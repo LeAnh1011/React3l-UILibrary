@@ -1,16 +1,20 @@
 import OverflowMenuVertical16 from "@carbon/icons-react/es/overflow-menu--vertical/16";
+import OverflowMenuHorizontal16 from "@carbon/icons-react/es/overflow-menu--horizontal/16";
 import classNames from "classnames";
 import React, { RefObject } from "react";
 import { CommonService } from "@Services/common-service";
 import "./OverflowMenu.scss";
 import OverflowMenuList, { ListOverflowMenu } from "./OverflowMenuList";
+
 export interface CustomProps {
   list?: ListOverflowMenu[];
   size?: "md" | "xl";
   appendToBody?: boolean;
+  type?: "vertical" | "horizontal";
 }
+
 function OverflowMenu(props: CustomProps) {
-  const { size, list } = props;
+  const { size, list, type } = props;
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
@@ -98,7 +102,11 @@ function OverflowMenu(props: CustomProps) {
           onClick={handleExpand}
           onKeyDown={handleKeyDown}
         >
-          <OverflowMenuVertical16 />
+          {type === "vertical" ? (
+            <OverflowMenuVertical16 />
+          ) : (
+            <OverflowMenuHorizontal16 />
+          )}
         </button>
       </div>
       {isExpand && (
@@ -115,5 +123,6 @@ function OverflowMenu(props: CustomProps) {
 }
 OverflowMenu.defaultProps = {
   size: "md",
+  type: "vertical",
 };
 export default OverflowMenu;

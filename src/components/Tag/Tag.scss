@@ -1,12 +1,16 @@
 .tag-container {
   border-radius: 13px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: space-between;
   font-size: 12px;
   line-height: 16px;
-  min-width: 63px;
-  width: max-content;
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  cursor: pointer;
+  min-width: 2rem;
+  max-width: 100%;
   .tag-wrapper {
     &.tag-wrapper__sm {
       padding: 0px 4px;

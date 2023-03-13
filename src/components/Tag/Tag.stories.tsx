@@ -11,9 +11,7 @@ function Default() {
 
   return (
     <>
-      <div style={{ margin: "10px", width: "150px" }}>
-        <Tag value="99+..." action={handleClickClear}/>
-      </div>
+        <Tag value="9dsfsdfsdf" action={handleClickClear}/>
 
     </>
   );

@@ -1,6 +1,7 @@
 import { CommonService } from "@Services/common-service";
 import React from "react";
 import { Model } from "react3l-common";
+import { ErrorObserver, Observable, Subscription } from "rxjs";
 import Checkbox from ".";
 import "./CheckboxGroup.scss";
 
@@ -12,6 +13,7 @@ export interface CheckboxGroupComponentProps<T extends Model> {
   dataOptions?: T[];
   render?: (t: T) => string;
   maxLengthItem?: number;
+  getList?: () => Observable<T[]>;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -27,8 +29,33 @@ function CheckboxGroup(props: CheckboxGroupComponentProps<Model>) {
     values,
     render,
     maxLengthItem,
+    getList,
   } = props;
   const [listCheckedKey, setListCheckedKey] = React.useState<number[]>([]);
+  const [listOptions, setListOptions] = React.useState<Model[]>([]);
+  const [firstLoad, setFirstLoad] = React.useState<boolean>(true);
+  React.useEffect(() => {
+    const subscription = new Subscription();
+    if (firstLoad && typeof getList === "function") {
+      subscription.add(getList);
+      getList().subscribe({
+        next: (res: Model[]) => {
+          setListOptions(res);
+        },
+        error: (err: ErrorObserver<Error>) => {
+          setListOptions([]);
+        },
+      });
+      setFirstLoad(false);
+    } else if (firstLoad && dataOptions?.length > 0) {
+      setListOptions(dataOptions);
+      setFirstLoad(false);
+    }
+
+    return function cleanup() {
+      subscription.unsubscribe();
+    };
+  }, [dataOptions, firstLoad, getList]);
 
   React.useEffect(() => {
     if (values?.length > 0) {
@@ -42,7 +69,7 @@ function CheckboxGroup(props: CheckboxGroupComponentProps<Model>) {
         if (check) {
           listCheckedKey.push(currentId);
           const selectedOptions: Model[] = [];
-          dataOptions?.forEach((option) => {
+          listOptions?.forEach((option) => {
             if (listCheckedKey?.includes(option?.id)) {
               selectedOptions.push(option);
             }
@@ -52,7 +79,7 @@ function CheckboxGroup(props: CheckboxGroupComponentProps<Model>) {
         } else {
           const newListKey = listCheckedKey?.filter((id) => id !== currentId);
           const selectedOptions: Model[] = [];
-          dataOptions?.forEach((option) => {
+          listOptions?.forEach((option) => {
             if (newListKey?.includes(option?.id)) {
               selectedOptions.push(option);
             }
@@ -63,15 +90,15 @@ function CheckboxGroup(props: CheckboxGroupComponentProps<Model>) {
       }
       return;
     },
-    [dataOptions, listCheckedKey, onChange]
+    [listOptions, listCheckedKey, onChange]
   );
 
   return (
     <div className="checkbox-group__container">
       <div className="checkbox-group__label">{label}</div>
       <div>
-        {dataOptions?.length > 0 &&
-          dataOptions?.map((option) => {
+        {listOptions?.length > 0 &&
+          listOptions?.map((option) => {
             return (
               <Checkbox
                 checked={listCheckedKey?.includes(option?.id)}

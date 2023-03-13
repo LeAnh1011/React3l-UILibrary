@@ -61,3 +61,5 @@ export { default as StatusLine } from "./components/StandardTable/DataCellCompon
 export { default as OverflowMenu } from "./components/OverflowMenu";
 export { default as Radio } from "./components/Radio";
 export { default as CheckboxWrapper } from "./components/Checkbox";
+
+export { default as Tag } from "./components/Tag";

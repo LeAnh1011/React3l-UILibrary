@@ -29,6 +29,7 @@ interface DatePickerProps {
   className?: string;
   action?: DatePickerAction;
   placeholder?: string;
+  bgColor?: "white" | "gray";
 }
 
 function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
@@ -43,6 +44,7 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
     action,
     isSmall,
     disabled,
+    bgColor,
   } = props;
 
   const dateRef = React.useRef<any>();
@@ -99,10 +101,11 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
           allowClear={false}
           format={dateFormat}
           className={classNames({
-            "date-picker__wrapper--sm": isSmall,
             "p-y--xxs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
+            "date-picker--sm": isSmall,
+            "date-picker--white": bgColor === "white",
             "date-picker--material": type === BORDER_TYPE.MATERIAL,
             "date-picker--disabled ": disabled,
             "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,

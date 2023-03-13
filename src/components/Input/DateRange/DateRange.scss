@@ -8,11 +8,7 @@
     width: 100%;
   }
 
-  .date-picker__wrapper--sm {
-    height: 32px !important;
-  }
-
-  .date-picker__label {
+  .date-range__label {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -72,7 +68,7 @@
     width: 100%;
     outline: 1px solid var(--palette-gray-50);
     border: none;
-    background: var(--color-white);
+    background-color: var(--palette-gray-10);
     height: 40px;
     border-radius: 0px;
     font-size: 14px;
@@ -95,14 +91,14 @@
       }
     }
 
-    &:hover:not(.date-picker--disabled) {
+    &:hover:not(.date-range--disabled) {
       outline-color: var(--color-primary);
       & + .component__title {
         color: var(--color-primary);
       }
     }
 
-    &.date-picker--disabled {
+    &.date-range--disabled {
       outline-color: var(--palette-coolGray-30);
       background-color: var(--palette-gray-10);
       & + .component__title {
@@ -119,8 +115,16 @@
       outline: 2px solid var(--color-primary);
     }
 
-    &.date-picker--float {
-      &:hover:not(.date-picker--disabled) {
+    &.date-range--sm {
+      height: 32px !important;
+    }
+
+    &.date-range--white {
+      background: var(--color-white);
+    }
+
+    &.date-range--float {
+      &:hover:not(.date-range--disabled) {
         outline-color: var(--palette-gray-100);
         & + .component__title {
           color: var(--palette-gray-100);
@@ -136,8 +140,7 @@
       }
     }
 
-    &.date-picker--material {
-      background-color: var(--palette-gray-10);
+    &.date-range--material {
       outline: none;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
@@ -149,7 +152,7 @@
       &:hover {
         background-color: var(--palette-grayHover-10);
       }
-      &.date-picker--disabled {
+      &.date-range--disabled {
         border-bottom: none;
         background-color: var(--palette-gray-10);
       }
@@ -182,16 +185,16 @@
   .date-range__icon-wrapper {
     background-color: var(--color-critical-blur);
   }
-  .date-picker--material + .date-range__icon-wrapper {
+  .date-range--material + .date-range__icon-wrapper {
     background-color: var(--color-critical-blur) !important;
     &:hover {
       background-color: var(--palette-grayHover-10) !important;
     }
   }
-  .date-picker--material:hover + .date-range__icon-wrapper {
+  .date-range--material:hover + .date-range__icon-wrapper {
     background-color: var(--palette-grayHover-10) !important;
   }
-  .ant-picker.date-picker--material {
+  .ant-picker.date-range--material {
     border-bottom: none;
   }
 }

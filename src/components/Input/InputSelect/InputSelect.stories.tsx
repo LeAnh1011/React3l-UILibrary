@@ -52,6 +52,7 @@ export function InputSelectStories() {
               placeHolder={"Select an option"}
               disabled={isDisabled}
               isSmall={isSmall}
+              bgColor={"white"}
             />
           </FormItem>
         </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import TreeSelect from "./TreeSelect";
 import { Model, ModelFilter } from "react3l-common";
 import { Observable } from "rxjs";
@@ -7,9 +6,9 @@ import { IdFilter } from "react3l-advanced-filters";
 import { StringFilter } from "react3l-advanced-filters";
 import { Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
-import FormItem from "../FormItem/FormItem";
-import { BORDER_TYPE } from "./../../config/enum";
-import { ValidateStatus } from "./../../config/enum";
+import FormItem from "./../../FormItem/FormItem";
+import { BORDER_TYPE } from "./../../../config/enum";
+import { ValidateStatus } from "./../../../config/enum";
 
 export class DistrictFilter extends ModelFilter {
   public id: IdFilter = new IdFilter();
@@ -434,7 +433,7 @@ const demoSearchFunc = (TModelFilter?: ModelFilter) => {
   return demoObservable;
 };
 
-function Default() {
+export function TreeSelectStories() {
   const [listItem, dispatch] = React.useReducer(reducerFunc, demoList);
 
   const [item, setItem] = React.useState<Model>(demoItem);
@@ -632,5 +631,3 @@ function Default() {
     </div>
   );
 }
-
-storiesOf("TreeSelect", module).add("Default", Default);

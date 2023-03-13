@@ -63,6 +63,8 @@ export interface SelectProps<
   maxLengthItem?: number;
 
   action?: InputAction;
+
+  bgColor?: "white" | "gray";
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -92,6 +94,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
     preferOptions,
     maxLengthItem,
     action,
+    bgColor,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -301,6 +304,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
             label={label}
             isSmall={isSmall}
             action={action}
+            bgColor={bgColor}
           />
         </div>
         {isExpand && (

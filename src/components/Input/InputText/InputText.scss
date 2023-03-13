@@ -42,8 +42,12 @@
     align-items: center;
     width: 100%;
     outline: 1px solid var(--palette-coolGray-50);
-    background-color: var(--color-white);
+    background-color: var(--palette-gray-10);
     height: 40px;
+
+    &.input-text__container--white {
+      background-color: var(--color-white);
+    }
 
     &.input-text__container--sm {
       height: 32px !important;
@@ -86,7 +90,6 @@
     }
 
     &.input-text--material {
-      background-color: var(--palette-gray-10);
       outline: none;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;

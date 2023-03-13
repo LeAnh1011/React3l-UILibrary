@@ -2,13 +2,13 @@ import React, { RefObject, Reducer } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./TreeSelect.scss";
 import { Model, ModelFilter } from "react3l-common";
-import Tree from "../Tree/Tree";
+import Tree from "../../Tree/Tree";
 import { useDebounceFn } from "ahooks";
 import { DEBOUNCE_TIME_300 } from "@Configs/consts";
 import type { Observable } from "rxjs";
 import { CommonService } from "@Services/common-service";
-import InputTag from "../Input/InputTag/InputTag";
-import InputSelect from "../Input/InputSelect/InputSelect";
+import InputTag from "../../Input/InputTag/InputTag";
+import InputSelect from "../../Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "@Configs/enum";
 import { IdFilter } from "react3l-advanced-filters";
 
@@ -46,6 +46,7 @@ export interface TreeSelectProps<
   selectWithPreferOption?: boolean;
   preferOptions?: T[];
   maxLengthItem?: number;
+  bgColor?: "gray" | "white";
 }
 export interface filterAction {
   type: string;
@@ -90,6 +91,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     selectWithPreferOption,
     preferOptions,
     maxLengthItem,
+    bgColor,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -282,6 +284,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               onKeyEnter={handleKeyEnter}
               isRequired={isRequired}
               isShowTooltip
+              bgColor={bgColor}
             />
           ) : (
             <InputSelect
@@ -300,6 +303,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               onKeyDown={handleKeyPress}
               onKeyEnter={handleKeyEnter}
               isRequired={isRequired}
+              bgColor={bgColor}
             />
           )}
         </div>

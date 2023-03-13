@@ -33,6 +33,7 @@ export interface InputNumberProps {
   max?: number;
   action?: InputNumberAction;
   isSmall?: boolean;
+  bgColor?: "white" | "gray";
   onChange?: (T: number) => void;
   onEnter?: (T: number) => void;
   onBlur?: (T: number) => void;
@@ -57,6 +58,7 @@ function InputNumber(props: InputNumberProps) {
     min,
     max,
     isSmall,
+    bgColor,
     onChange,
     onEnter,
     onBlur,
@@ -313,6 +315,7 @@ function InputNumber(props: InputNumberProps) {
           "component__input input-number__container p--xs",
           {
             "input-number__container--sm": isSmall,
+            "input-number__container--white": bgColor === "white",
             "py--xxs": isSmall,
             "px--xs": isSmall,
             "p--xs": !isSmall,

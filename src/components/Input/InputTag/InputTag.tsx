@@ -30,6 +30,7 @@ export interface InputTagProps<T extends Model> {
   isNotExpand?: boolean;
   isShowTooltip?: boolean;
   action?: InputAction;
+  bgColor?: "white" | "gray";
 }
 
 function InputTag(props: InputTagProps<Model>) {
@@ -51,6 +52,7 @@ function InputTag(props: InputTagProps<Model>) {
     isShowTooltip = false,
     render,
     action,
+    bgColor,
   } = props;
 
   const internalListValue = React.useMemo<Model[]>(() => {
@@ -144,6 +146,7 @@ function InputTag(props: InputTagProps<Model>) {
         <div
           className={classNames("component__input input-tag__container", {
             "input-tag__container--sm": isSmall,
+            "input-tag__container--white": bgColor === "white",
             "p-y--xxs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,

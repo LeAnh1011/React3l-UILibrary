@@ -7,9 +7,6 @@
     position: relative;
     width: 100%;
   }
-  .date-picker__wrapper--sm {
-    height: 32px !important;
-  }
 
   .date-picker__label {
     width: 100%;
@@ -48,11 +45,11 @@
       }
     }
 
-    &.date-picker__icon-wrapper--disabled{
-      background-color: var(--palette-grayHover-10) ;
+    &.date-picker__icon-wrapper--disabled {
+      background-color: var(--palette-grayHover-10);
     }
 
-    &.date-picker__icon-wrapper--sm{
+    &.date-picker__icon-wrapper--sm {
       top: 0.3rem !important;
     }
     .date-picker__icon-clear {
@@ -73,10 +70,10 @@
     width: 100%;
     outline: 1px solid var(--palette-gray-50);
     border: none;
-    background: var(--color-white);
     height: 40px;
     border-radius: 0px;
     font-size: 14px;
+    background-color: var(--palette-gray-10);
 
     .ant-picker-input {
       input {
@@ -89,7 +86,7 @@
       }
     }
 
-    .date-picker__icon-wrapper ~ .date-picker--disabled  {
+    .date-picker__icon-wrapper ~ .date-picker--disabled {
       background-color: var(--palette-grayHover-10) !important;
     }
 
@@ -113,7 +110,6 @@
       & + .component__title {
         pointer-events: none;
       }
-     
     }
 
     &.ant-picker--bordered {
@@ -142,8 +138,15 @@
       }
     }
 
+    &.date-picker--sm {
+      height: 32px !important;
+    }
+
+    &.date-picker--white {
+      background: var(--color-white);
+    }
+
     &.date-picker--material {
-      background-color: var(--palette-gray-10);
       outline: none;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
@@ -153,7 +156,7 @@
         background-color: var(--palette-gray-10);
       }
 
-      &:hover{
+      &:hover {
         background-color: var(--palette-grayHover-10);
       }
 
@@ -169,7 +172,6 @@
       }
     }
   }
-
 
   .component__title--normal {
     position: absolute;

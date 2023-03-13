@@ -21,6 +21,7 @@ export interface TextAreaProps {
   showCount?: boolean;
   maxLength?: number;
   action?: TextAreaAction;
+  bgColor?: "white" | "gray";
   onChange?: (T: string | null) => void;
   onEnter?: (T: string | null) => void;
   onBlur?: (T: string | null) => void;
@@ -38,6 +39,7 @@ function TextArea(props: TextAreaProps) {
     disabled,
     placeHolder,
     className,
+    bgColor,
     onChange,
     onEnter,
     onBlur,
@@ -119,8 +121,9 @@ function TextArea(props: TextAreaProps) {
           className={classNames(
             "component__input text-area__container p-l--xs p-r--xxs p-b--xxs p-t--xs",
             {
-              "text-area--material": type === BORDER_TYPE.MATERIAL,
+              "text-area--white": bgColor === "white",
               "text-area--disabled ": disabled,
+              "text-area--material": type === BORDER_TYPE.MATERIAL,
               "text-area--float": type === BORDER_TYPE.FLOAT_LABEL,
             }
           )}

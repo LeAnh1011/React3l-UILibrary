@@ -27,6 +27,7 @@ export interface InputSelectProps<T extends Model> {
   isSmall?: boolean;
   isEnumerable?: boolean;
   isFilter?: boolean;
+  bgColor?: "white" | "gray";
 }
 
 function InputSelect(props: InputSelectProps<Model>) {
@@ -49,6 +50,7 @@ function InputSelect(props: InputSelectProps<Model>) {
     isSmall,
     isEnumerable,
     isFilter,
+    bgColor,
   } = props;
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
@@ -149,6 +151,7 @@ function InputSelect(props: InputSelectProps<Model>) {
             "component__input input-select__container p--xs",
             {
               "input-select__container--sm": isSmall,
+              "input-select__container--white": bgColor === "white",
               "py--xxs": isSmall,
               "px--xs": isSmall,
               "p--xs": !isSmall,
@@ -216,8 +219,6 @@ function InputSelect(props: InputSelectProps<Model>) {
                 }
                 onKeyDown={handleEnter}
                 className={classNames("component__input", {
-                  "component__input--material": type === BORDER_TYPE.MATERIAL,
-                  "component__input--bordered": type === BORDER_TYPE.BORDERED,
                   "disabled-field": disabled,
                 })}
                 disabled={disabled}

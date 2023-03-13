@@ -120,7 +120,7 @@ export function SingleSelectStories() {
             classFilter={DemoFilter}
             type={type}
             label={"Label"}
-            selectWithAdd={isSelectWithAdd}
+            selectWithAdd={() => {}}
             selectWithPreferOption={isSelectWithPreferOption}
             disabled={isDisabled}
             isSmall={isSmall}
@@ -146,7 +146,7 @@ export function SingleSelectStories() {
             classFilter={DemoFilter}
             type={type}
             label={"Label"}
-            selectWithAdd={isSelectWithAdd}
+            selectWithAdd={() => {}}
             selectWithPreferOption={isSelectWithPreferOption}
             disabled={isDisabled}
             isSmall={isSmall}

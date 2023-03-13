@@ -49,6 +49,8 @@ export interface SelectProps<T extends Model> {
   height?: number;
 
   maxLengthItem?: number;
+
+  bgColor?: "white" | "gray";
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -98,6 +100,7 @@ function EnumSelect(props: SelectProps<Model>) {
     height,
     maxLengthItem,
     action,
+    bgColor,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -379,6 +382,7 @@ function EnumSelect(props: SelectProps<Model>) {
               isNotExpand={!isExpand}
               isRequired={isRequired}
               isShowTooltip
+              bgColor={bgColor}
             />
           ) : (
             <InputSelect
@@ -396,6 +400,7 @@ function EnumSelect(props: SelectProps<Model>) {
               isEnumerable={true}
               isRequired={isRequired}
               action={action}
+              bgColor={bgColor}
             />
           )}
         </div>

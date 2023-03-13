@@ -55,6 +55,7 @@ export function DateRangeStories() {
               name: "Help",
               action: () => {},
             }}
+            bgColor="white"
           />
         </FormItem>
       </div>

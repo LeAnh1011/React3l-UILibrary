@@ -26,6 +26,7 @@ export interface InputTextProps {
   maxLength?: number;
   isSmall?: boolean;
   action?: InputAction;
+  bgColor?: "white" | "gray";
   onChange?: (T: string | null) => void;
   onEnter?: (T: string | null) => void;
   onBlur?: (T: string | null) => void;
@@ -48,6 +49,7 @@ const InputText = React.forwardRef(
       placeHolder,
       className,
       isSmall,
+      bgColor,
       onChange,
       onEnter,
       onBlur,
@@ -176,6 +178,7 @@ const InputText = React.forwardRef(
         <div
           className={classNames("component__input input-text__container", {
             "input-text__container--sm": isSmall,
+            "input-text__container--white": bgColor === "white",
             "p-y--xxs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,

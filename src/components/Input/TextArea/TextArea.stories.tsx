@@ -1,20 +1,18 @@
-import { storiesOf } from "@storybook/react";
 import Radio, { RadioChangeEvent } from "antd/lib/radio";
 import React from "react";
 import { StringFilter } from "react3l-advanced-filters";
 import { ModelFilter } from "react3l-common";
-import nameof from "ts-nameof.macro";
-import FormItem from "../FormItem/FormItem";
+import FormItem from "../../FormItem/FormItem";
 import TextArea from "./TextArea";
-import { BORDER_TYPE } from "./../../config/enum";
-import { ValidateStatus } from "./../../config/enum";
+import { BORDER_TYPE } from "./../../../config/enum";
+import { ValidateStatus } from "./../../../config/enum";
 
 export class DemoFilter extends ModelFilter {
   name: StringFilter = new StringFilter();
   code: StringFilter = new StringFilter();
 }
 
-function Default() {
+export function TextAreaStories() {
   const [inputValue, setInputVal] = React.useState();
 
   const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
@@ -87,5 +85,3 @@ function Default() {
     </div>
   );
 }
-
-storiesOf("TextArea", module).add(nameof(Default), Default);

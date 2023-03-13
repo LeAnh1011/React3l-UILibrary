@@ -40,6 +40,7 @@ interface DateRangeProps {
   placeholder?: [string, string];
   getPopupContainer?: () => HTMLElement;
   dropdownClassName?: any;
+  bgColor?: "white" | "gray";
 }
 
 function DateRange(props: DateRangeProps & RangePickerProps) {
@@ -57,6 +58,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
     className,
     getPopupContainer,
     dropdownClassName,
+    bgColor,
   } = props;
 
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
@@ -88,7 +90,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
       className={classNames("date-range__wrapper", className)}
       ref={wrapperRef}
     >
-      <div className="date-picker__label m-b--xxxs">
+      <div className="date-range__label m-b--xxxs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label
             className={classNames("component__title", {
@@ -120,13 +122,14 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
           placeholder={placeholder}
           suffixIcon={<SuffixDateIcon />}
           className={classNames({
-            "date-picker__wrapper--sm": isSmall,
             "p-y--xxs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
-            "date-picker--material": type === BORDER_TYPE.MATERIAL,
-            "date-picker--disabled ": disabled,
-            "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,
+            "date-range--sm": isSmall,
+            "date-range--white": bgColor === "white",
+            "date-range--material": type === BORDER_TYPE.MATERIAL,
+            "date-range--disabled ": disabled,
+            "date-range--float": type === BORDER_TYPE.FLOAT_LABEL,
           })}
           getPopupContainer={getPopupContainer}
           ref={dateRef}

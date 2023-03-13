@@ -26,10 +26,10 @@
     align-items: center;
     width: inherit;
     outline: 1px solid var(--palette-coolGray-50);
-    background-color: var(--color-white);
+    background-color: var(--palette-gray-10);
     height: inherit;
 
-    &:hover:not(:focus-within){
+    &:hover:not(:focus-within) {
       outline-color: var(--palette-gray-100);
     }
 
@@ -56,8 +56,11 @@
       }
     }
 
+    &.text-area--white {
+      background-color: var(--color-white);
+    }
+
     &.text-area--material {
-      background-color: var(--palette-gray-10);
       outline: none;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;

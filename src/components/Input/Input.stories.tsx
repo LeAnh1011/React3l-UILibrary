@@ -5,6 +5,9 @@ import { InputSearchStories } from "./InputSearch/InputSearch.stories";
 import { InputSelectStories } from "./InputSelect/InputSelect.stories";
 import { InputTagStories } from "./InputTag/InputTag.stories";
 import { InputTextStories } from "./InputText/InputText.stories";
+import { DatePickerStories } from "./DatePicker/DatePicker.stories";
+import { DateRangeStories } from "./DateRange/DateRange.stories";
+import { TextAreaStories } from "./TextArea/TextArea.stories";
 
 storiesOf("Input", module)
   .add("InputNumberStories", InputNumberStories)
@@ -12,4 +15,7 @@ storiesOf("Input", module)
   .add("InputSelectStories", InputSelectStories)
   .add("InputTagStories", InputTagStories)
   .add("InputSearchStories", InputSearchStories)
-  .add("InputRangeStories", InputRangeStories);
+  .add("InputRangeStories", InputRangeStories)
+  .add("TextAreaStories", TextAreaStories)
+  .add("DatePickerStories", DatePickerStories)
+  .add("DateRangeStories", DateRangeStories);

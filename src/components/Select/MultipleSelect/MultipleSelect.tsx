@@ -62,6 +62,8 @@ export interface MultipleSelectProps<
   isShowTooltip?: boolean;
 
   action?: InputAction;
+
+  bgColor?: "white" | "gray";
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -92,6 +94,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     maxLengthItem,
     isShowTooltip,
     action,
+    bgColor,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -351,6 +354,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
               isRequired={isRequired}
               isShowTooltip={isShowTooltip}
               action={action}
+              bgColor={bgColor}
             />
           </div>
         </div>

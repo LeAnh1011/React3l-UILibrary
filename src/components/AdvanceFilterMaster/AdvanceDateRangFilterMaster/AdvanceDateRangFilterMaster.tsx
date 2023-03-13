@@ -102,6 +102,7 @@ function AdvanceDateRangeFilterMaster(
 
   const panelRef = React.useRef(null);
   const listRef = React.useRef(null);
+  const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
 
   const formatDateFilter = React.useCallback((item: any): [Moment, Moment] => {
     if (item) {
@@ -297,6 +298,30 @@ function AdvanceDateRangeFilterMaster(
     [translate]
   );
 
+  React.useEffect(() => {
+    if (isExpand && appendToBody) {
+      const currentPosition = wrapperRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - currentPosition.bottom;
+      if (spaceBelow <= 200) {
+        setTimeout(() => {
+          setAppendToBodyStyle({
+            position: "fixed",
+            bottom: spaceBelow + wrapperRef.current.clientHeight,
+            left: currentPosition.left,
+            maxWidth: wrapperRef.current.clientWidth,
+          });
+        }, 100);
+      } else {
+        setAppendToBodyStyle({
+          position: "fixed",
+          top: currentPosition.top + wrapperRef.current.clientHeight,
+          left: currentPosition.left,
+          maxWidth: wrapperRef.current.clientWidth,
+        });
+      }
+    }
+  }, [appendToBody, isExpand]);
+
   return (
     <div
       className={classNames(
@@ -353,6 +378,7 @@ function AdvanceDateRangeFilterMaster(
               type === ADVANCE_DATE_RANGE_TYPE.SHORT,
             "": type === ADVANCE_DATE_RANGE_TYPE.INPUT,
           })}
+          style={appendToBodyStyle}
           ref={listRef}
         >
           <div className="advance-date-range-master__list" ref={selectListRef}>

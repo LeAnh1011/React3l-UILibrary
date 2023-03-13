@@ -72,6 +72,8 @@ export default {
     // Boolean component
     "src/components/Checkbox/index.ts",
     "src/components/Radio/index.ts",
+    // Tag component
+    "src/components/Tag/index.ts",
   ],
   output: [
     {

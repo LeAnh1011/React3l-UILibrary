@@ -42,7 +42,7 @@ function Tag(props: TagProps) {
         )}
       </span>
       {typeof action === "function" && action && (
-        <div className="tag-clear">
+        <div className="tag-clear" onClick={action}>
           <Close16 />
         </div>
       )}

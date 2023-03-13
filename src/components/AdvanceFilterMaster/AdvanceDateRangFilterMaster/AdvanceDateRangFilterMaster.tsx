@@ -52,6 +52,8 @@ interface AdvanceDateRangeFilterMasterProps {
 
   appendToBody?: boolean;
 
+  bgColor?: "white" | "gray";
+
   translate?: TFunction;
 }
 
@@ -83,6 +85,7 @@ function AdvanceDateRangeFilterMaster(
     type,
     inputType,
     placeHolderSelect,
+    bgColor,
     translate,
   } = props;
 
@@ -337,6 +340,7 @@ function AdvanceDateRangeFilterMaster(
             isSmall={isSmall}
             onKeyDown={handleKeyDown}
             render={renderItem}
+            bgColor={bgColor}
           />
         </div>
       )}

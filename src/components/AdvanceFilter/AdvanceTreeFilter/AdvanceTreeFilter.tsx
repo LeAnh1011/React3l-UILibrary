@@ -42,6 +42,7 @@ export interface AdvanceTreeFilterProps<
   preferOptions?: T[];
   maxLengthItem?: number;
   bgColor?: "white" | "gray";
+  appendToBody?: boolean;
 }
 export interface filterAction {
   type: string;
@@ -83,6 +84,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
     preferOptions,
     maxLengthItem,
     bgColor,
+    appendToBody,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -98,6 +100,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
     null
   );
+  const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
 
   const [filter, dispatch] = React.useReducer<
     Reducer<ModelFilter, filterAction>
@@ -215,6 +218,30 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
 
   CommonService.useClickOutside(wrapperRef, handleCloseList);
 
+  React.useEffect(() => {
+    if (expanded && appendToBody) {
+      const currentPosition = wrapperRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - currentPosition.bottom;
+      if (spaceBelow <= 200) {
+        setTimeout(() => {
+          setAppendToBodyStyle({
+            position: "fixed",
+            bottom: spaceBelow + wrapperRef.current.clientHeight,
+            left: currentPosition.left,
+            maxWidth: wrapperRef.current.clientWidth,
+          });
+        }, 100);
+      } else {
+        setAppendToBodyStyle({
+          position: "fixed",
+          top: currentPosition.top + wrapperRef.current.clientHeight,
+          left: currentPosition.left,
+          maxWidth: wrapperRef.current.clientWidth,
+        });
+      }
+    }
+  }, [appendToBody, componentId, expanded]);
+
   return (
     <>
       <div className="advance-tree-filter__container" ref={wrapperRef}>
@@ -260,7 +287,11 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
           )}
         </div>
         {expanded && (
-          <div className="advance-tree-filter__list" id={componentId}>
+          <div
+            className="advance-tree-filter__list"
+            style={appendToBodyStyle}
+            id={componentId}
+          >
             <Tree
               getTreeData={getTreeData}
               selectedKey={selectedKey}

@@ -47,6 +47,8 @@ export interface AdvanceIdMultipleFilterProps<
 
   preferOptions?: T[];
 
+  appendToBody?: boolean;
+
   bgColor?: "white" | "gray";
 }
 
@@ -74,6 +76,7 @@ export function AdvanceIdMultipleFilter(
     isSmall,
     preferOptions,
     bgColor,
+    appendToBody,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -89,6 +92,8 @@ export function AdvanceIdMultipleFilter(
   const selectListRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
     null
   );
+
+  const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
 
   const [subscription] = CommonService.useSubscription();
 
@@ -279,6 +284,30 @@ export function AdvanceIdMultipleFilter(
     [handleToggle]
   );
 
+  React.useEffect(() => {
+    if (isExpand && appendToBody) {
+      const currentPosition = wrapperRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - currentPosition.bottom;
+      if (spaceBelow <= 200) {
+        setTimeout(() => {
+          setAppendToBodyStyle({
+            position: "fixed",
+            bottom: spaceBelow + wrapperRef.current.clientHeight,
+            left: currentPosition.left,
+            maxWidth: wrapperRef.current.clientWidth,
+          });
+        }, 100);
+      } else {
+        setAppendToBodyStyle({
+          position: "fixed",
+          top: currentPosition.top + wrapperRef.current.clientHeight,
+          left: currentPosition.left,
+          maxWidth: wrapperRef.current.clientWidth,
+        });
+      }
+    }
+  }, [appendToBody, isExpand]);
+
   CommonService.useClickOutside(wrapperRef, handleCloseSelect);
 
   return (
@@ -309,7 +338,10 @@ export function AdvanceIdMultipleFilter(
           />
         </div>
         {isExpand && (
-          <div className="advance-id-filter__list-container">
+          <div
+            className="advance-id-filter__list-container"
+            style={appendToBodyStyle}
+          >
             {!loading ? (
               <>
                 <div

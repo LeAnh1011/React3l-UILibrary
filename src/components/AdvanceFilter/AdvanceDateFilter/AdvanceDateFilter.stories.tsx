@@ -37,10 +37,6 @@ export function AdvanceDateFilterStories() {
         label="Ngày nhập hàng"
         placeholder={"Chọn ngày"}
         disabled={isDisabled}
-        action={{
-          name: "Help",
-          action: () => {},
-        }}
         value={value}
       />
 

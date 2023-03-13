@@ -6,9 +6,6 @@
     position: relative;
     width: 100%;
   }
-  .advance-date-filter__wrapper--sm {
-    height: 32px !important;
-  }
 
   .advance-date-filter__label {
     width: 100%;
@@ -66,7 +63,7 @@
     width: 100%;
     outline: 1px solid var(--palette-gray-50);
     border: none;
-    background: var(--color-white);
+    background-color: var(--palette-gray-10);
     height: 40px;
     border-radius: 0px;
     font-size: 14px;
@@ -111,6 +108,14 @@
       outline: 2px solid var(--color-primary);
     }
 
+    &.advance-date-filter--sm {
+      height: 32px !important;
+    }
+
+    &.advance-date-filter--white {
+      background-color: var(--color-white);
+    }
+
     &.advance-date-filter--float {
       &.ant-picker-focused {
         border-bottom: none !important;
@@ -123,7 +128,6 @@
     }
 
     &.advance-date-filter--material {
-      background-color: var(--palette-gray-10);
       outline: none;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;

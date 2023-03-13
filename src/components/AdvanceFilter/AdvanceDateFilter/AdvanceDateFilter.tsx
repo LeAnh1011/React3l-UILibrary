@@ -11,24 +11,18 @@ import { CommonService } from "@Services/common-service";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import "./AdvanceDateFilter.scss";
 
-interface AdvanceDateFilterAction {
-  name?: string;
-  action?: any;
-}
 interface AdvanceDateFilterProps {
   value?: Moment;
   label?: string;
   isMaterial?: boolean;
   dateFormat?: string[];
-  error?: string;
   onChange?: (value: Moment | null, dateString?: string) => void;
   type?: BORDER_TYPE;
   isSmall?: boolean;
   disabled?: boolean;
-  isRequired?: boolean;
   className?: string;
-  action?: AdvanceDateFilterAction;
   placeholder?: string;
+  bgColor?: "white" | "gray";
 }
 
 function AdvanceDateFilter(
@@ -41,11 +35,10 @@ function AdvanceDateFilter(
     className,
     type,
     label,
-    isRequired,
-    action,
     isSmall,
     disabled,
     placeholder,
+    bgColor,
   } = props;
 
   const dateRef = React.useRef<any>();
@@ -79,19 +72,9 @@ function AdvanceDateFilter(
             })}
           >
             {label}
-            {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
         <span style={{ width: "100%" }}></span>
-        {action && (
-          <span
-            className="m-l--xxxs body-text--md color-link"
-            style={{ cursor: "pointer" }}
-            onClick={action.action}
-          >
-            {action.name}
-          </span>
-        )}
       </div>
       <div className="advance-date-filter__container">
         <DatePickerAntd
@@ -102,10 +85,11 @@ function AdvanceDateFilter(
           allowClear={false}
           format={dateFormat}
           className={classNames({
-            "advance-date-filter__wrapper--sm": isSmall,
             "p-y--xxs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
+            "advance-date-filter--sm": isSmall,
+            "advance-date-filter--white": bgColor === "white",
             "advance-date-filter--material": type === BORDER_TYPE.MATERIAL,
             "advance-date-filter--disabled ": disabled,
             "advance-date-filter--float": type === BORDER_TYPE.FLOAT_LABEL,
@@ -121,7 +105,6 @@ function AdvanceDateFilter(
             })}
           >
             {label}
-            {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
         {internalValue &&

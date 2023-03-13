@@ -120,7 +120,6 @@ export function AdvanceIdFilterStories() {
             classFilter={DemoFilter}
             type={type}
             label={"Label"}
-            selectWithAdd={isSelectWithAdd}
             selectWithPreferOption={isSelectWithPreferOption}
             disabled={isDisabled}
             isSmall={isSmall}

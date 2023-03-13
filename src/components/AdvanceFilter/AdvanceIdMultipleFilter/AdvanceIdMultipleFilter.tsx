@@ -1,5 +1,4 @@
 import { Model, ModelFilter } from "react3l-common";
-import Add16 from "@carbon/icons-react/es/add/16";
 import { useDebounceFn } from "ahooks";
 import { CommonService } from "@Services/common-service";
 import classNames from "classnames";
@@ -44,13 +43,11 @@ export interface AdvanceIdMultipleFilterProps<
 
   isSmall?: boolean;
 
-  selectWithAdd?: () => void;
-
   selectWithPreferOption?: boolean;
 
-  isUsingSearch?: boolean;
-
   preferOptions?: T[];
+
+  bgColor?: "white" | "gray";
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -75,9 +72,8 @@ export function AdvanceIdMultipleFilter(
     label,
     type,
     isSmall,
-    selectWithAdd,
-    isUsingSearch,
     preferOptions,
+    bgColor,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -303,11 +299,12 @@ export function AdvanceIdMultipleFilter(
             onClearMulti={handleClearAll}
             type={type}
             isSmall={isSmall}
-            isUsingSearch={isUsingSearch}
+            isUsingSearch={true}
             onKeyDown={handleKeyPress}
             onKeyEnter={handleKeyEnter}
             isFilter={true}
             isNotExpand={!isExpand}
+            bgColor={bgColor}
             isShowTooltip
           />
         </div>
@@ -377,17 +374,6 @@ export function AdvanceIdMultipleFilter(
                       </Checkbox>
                     </div>
                   ))}
-              </div>
-            )}
-            {typeof selectWithAdd !== "undefined" && (
-              <div
-                className={classNames(
-                  "advance-id-filter__bottom-button advance-id-filter__add-button p-y--xs"
-                )}
-                onClick={selectWithAdd}
-              >
-                <Add16 className="m-l--xs" />
-                <span className="m-l--xs">Add new</span>
               </div>
             )}
           </div>

@@ -165,11 +165,9 @@ export function AdvanceTreeFilterStories() {
             listItem={isMultiple ? listItem : []}
             getTreeData={demoSearchFunc}
             type={type}
-            isUsingSearch={withSearch}
             label={"Label"}
             disabled={isDisabled}
             isSmall={isSmall}
-            selectWithAdd={isSelectWithAdd}
             selectWithPreferOption={isSelectWithPreferOption}
             preferOptions={isSelectWithPreferOption ? list : undefined}
           />

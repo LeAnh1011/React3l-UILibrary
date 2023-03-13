@@ -11,6 +11,7 @@ export interface AdvanceInputRangeFilterProps extends InputNumberProps {
   type?: BORDER_TYPE;
   onChangeRange: (T: [number, number]) => void;
   isSmall?: boolean;
+  bgColor?: "white" | "gray";
 }
 
 function AdvanceInputRangeFilter(props: AdvanceInputRangeFilterProps) {
@@ -20,6 +21,7 @@ function AdvanceInputRangeFilter(props: AdvanceInputRangeFilterProps) {
     placeHolderRange = [null, null],
     onChangeRange,
     isSmall,
+    bgColor,
   } = props;
 
   const validateRange = React.useCallback((fromValue, toValue) => {
@@ -62,6 +64,7 @@ function AdvanceInputRangeFilter(props: AdvanceInputRangeFilterProps) {
             type={type}
             placeHolder={placeHolderRange[0]}
             isSmall={isSmall}
+            bgColor={bgColor}
           />
         </div>
 
@@ -73,6 +76,7 @@ function AdvanceInputRangeFilter(props: AdvanceInputRangeFilterProps) {
             type={type}
             isSmall={isSmall}
             placeHolder={placeHolderRange[1]}
+            bgColor={bgColor}
           />
         </div>
       </div>

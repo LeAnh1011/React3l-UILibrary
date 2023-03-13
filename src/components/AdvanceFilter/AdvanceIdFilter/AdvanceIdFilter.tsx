@@ -1,5 +1,4 @@
 import { DEBOUNCE_TIME_300 } from "@Configs/consts";
-import Add16 from "@carbon/icons-react/es/add/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { Model, ModelFilter } from "react3l-common";
 import { useDebounceFn } from "ahooks";
@@ -31,8 +30,6 @@ export interface AdvanceIdFilterProps<
 
   isMaterial?: boolean;
 
-  isEnumerable?: boolean;
-
   appendToBody?: boolean;
 
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
@@ -47,8 +44,6 @@ export interface AdvanceIdFilterProps<
 
   label?: string;
 
-  selectWithAdd?: () => void;
-
   selectWithPreferOption?: boolean;
 
   isSmall?: boolean;
@@ -56,6 +51,8 @@ export interface AdvanceIdFilterProps<
   preferOptions?: T[];
 
   maxLengthItem?: number;
+
+  bgColor?: "white" | "gray";
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -70,7 +67,6 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
     searchType,
     placeHolder,
     disabled,
-    isEnumerable,
     appendToBody,
     getList,
     onChange,
@@ -78,10 +74,10 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
     classFilter: ClassFilter,
     type,
     label,
-    selectWithAdd,
     isSmall,
     preferOptions,
     maxLengthItem,
+    bgColor,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -129,11 +125,9 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
       const cloneValueFilter = valueFilter
         ? { ...valueFilter }
         : new ClassFilter();
-      if (!isEnumerable) {
-        if (searchType) {
-          cloneValueFilter[searchProperty][searchType] = searchTerm;
-        } else cloneValueFilter[searchProperty] = searchTerm;
-      }
+      if (searchType) {
+        cloneValueFilter[searchProperty][searchType] = searchTerm;
+      } else cloneValueFilter[searchProperty] = searchTerm;
       handleGetList(cloneValueFilter);
     },
     {
@@ -154,16 +148,10 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (!disabled) {
         setExpand(true);
-        if (isEnumerable) {
-          if (list.length === 0) {
-            await handleLoadList();
-          }
-        } else {
-          await handleLoadList();
-        }
+        await handleLoadList();
       }
     },
-    [handleLoadList, isEnumerable, list, disabled]
+    [handleLoadList, disabled]
   );
 
   const handleCloseSelect = React.useCallback(() => {
@@ -276,7 +264,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
       <div className="advance-id-filter__container" ref={wrapperRef}>
         <div className="select__input" onClick={handleToggle}>
           <InputSelect
-            value={internalValue} // value of input, event should change these on update
+            value={internalValue}
             render={render}
             placeHolder={placeHolder}
             expanded={isExpand}
@@ -290,6 +278,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
             label={label}
             isSmall={isSmall}
             isFilter={true}
+            bgColor={bgColor}
           />
         </div>
         {isExpand && (
@@ -374,17 +363,6 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                   ))}
               </div>
             )}
-            {typeof selectWithAdd !== "undefined" && (
-              <div
-                className={classNames(
-                  "advance-id-filter__bottom-button advance-id-filter__add-button p-y--xs"
-                )}
-                onClick={selectWithAdd}
-              >
-                <Add16 className="m-l--xxs" />
-                <span>Add new</span>
-              </div>
-            )}
           </div>
         )}
       </div>
@@ -395,7 +373,6 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
 AdvanceIdFilter.defaultProps = {
   searchProperty: "name",
   searchType: "contain",
-  isEnumerable: false,
   appendToBody: false,
   render: defaultRenderObject,
   isMaterial: false,

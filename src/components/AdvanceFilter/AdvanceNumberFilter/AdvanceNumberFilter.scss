@@ -27,11 +27,15 @@
     align-items: center;
     width: 100%;
     outline: 1px solid var(--palette-coolGray-50);
-    background-color: var(--color-white);
+    background-color: var(--palette-gray-10);
     height: 40px;
 
     &.advance-number-filter__container--sm {
       height: 32px !important;
+    }
+
+    &.advance-number-filter__container--white {
+      background-color: var(--color-white);
     }
 
     &:hover {
@@ -72,7 +76,6 @@
     }
 
     &.advance-number-filter--material {
-      background-color: var(--palette-gray-10);
       outline: none;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;

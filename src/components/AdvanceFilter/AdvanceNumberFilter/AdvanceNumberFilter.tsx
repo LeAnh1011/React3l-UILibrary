@@ -8,14 +8,8 @@ import { BORDER_TYPE } from "@Configs/enum";
 export const DECIMAL: string = "DECIMAL";
 export const LONG: string = "LONG";
 
-interface AdvanceNumberFilterAction {
-  name?: string;
-  action?: any;
-}
-
 export interface AdvanceNumberProps {
   label?: string;
-  isRequired?: boolean;
   type?: BORDER_TYPE;
   floatLabel?: boolean;
   isMaterial?: boolean;
@@ -32,8 +26,8 @@ export interface AdvanceNumberProps {
   className?: string;
   min?: number;
   max?: number;
-  action?: AdvanceNumberFilterAction;
   isSmall?: boolean;
+  bgColor?: "white" | "gary";
   onChange?: (T: number) => void;
   onEnter?: (T: number) => void;
   onBlur?: (T: number) => void;
@@ -41,9 +35,7 @@ export interface AdvanceNumberProps {
 
 function AdvanceNumberFilter(props: AdvanceNumberProps) {
   const {
-    action,
     label,
-    isRequired,
     type,
     prefix,
     suffix,
@@ -58,6 +50,7 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
     min,
     max,
     isSmall,
+    bgColor,
     onChange,
     onEnter,
     onBlur,
@@ -276,25 +269,16 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
             })}
           >
             {label}
-            {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
         <span style={{ width: "100%" }}></span>
-        {action && (
-          <span
-            className="m-l--xxxs body-text--md color-link"
-            style={{ cursor: "pointer" }}
-            onClick={action.action}
-          >
-            {action.name}
-          </span>
-        )}
       </div>
       <div
         className={classNames(
           "component__input advance-number-filter__container p--xs",
           {
             "advance-number-filter__container--sm": isSmall,
+            "advance-number-filter__container--white": bgColor === "white",
             "py--xxs": isSmall,
             "px--xs": isSmall,
             "p--xs": !isSmall,
@@ -344,7 +328,6 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
             })}
           >
             {label}
-            {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
         {internalValue && !disabled && (
@@ -370,7 +353,6 @@ AdvanceNumberFilter.defaultProps = {
   label: "",
   type: BORDER_TYPE.MATERIAL,
   isSmall: false,
-  isRequired: false,
   allowPositive: false,
   isReverseSymb: false,
   numberType: LONG,

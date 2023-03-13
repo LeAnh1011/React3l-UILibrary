@@ -50,10 +50,6 @@ export function AdvanceDateRangeFilterStories() {
             onChange={handleChange}
             value={value}
             disabled={isDisabled}
-            action={{
-              name: "Help",
-              action: () => {},
-            }}
           />
         </FormItem>
       </div>

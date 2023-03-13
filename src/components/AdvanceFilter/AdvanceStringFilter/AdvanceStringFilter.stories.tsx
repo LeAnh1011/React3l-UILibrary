@@ -56,16 +56,11 @@ export function AdvanceStringFilterStories() {
             label="First Name"
             prefix="Mr."
             suffix="Kg"
-            showCount={true}
             maxLength={100}
             value={inputValue}
             onChange={handleChangeValue}
             placeHolder={"Enter text..."}
             disabled={isDisabled}
-            action={{
-              name: "Help",
-              action: () => {},
-            }}
           />
         </FormItem>
       </div>

@@ -37,12 +37,11 @@ export interface AdvanceTreeFilterProps<
   type?: BORDER_TYPE;
   label?: string;
   isSmall?: boolean;
-  isUsingSearch?: boolean;
   treeTitleRender?: (T: T) => string;
-  selectWithAdd?: () => void;
   selectWithPreferOption?: boolean;
   preferOptions?: T[];
   maxLengthItem?: number;
+  bgColor?: "white" | "gray";
 }
 export interface filterAction {
   type: string;
@@ -79,12 +78,11 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
     type,
     label,
     isSmall,
-    isUsingSearch,
     treeTitleRender,
-    selectWithAdd,
     selectWithPreferOption,
     preferOptions,
     maxLengthItem,
+    bgColor,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -233,12 +231,13 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               type={type}
               label={label}
               isSmall={isSmall}
-              isUsingSearch={isUsingSearch}
+              isUsingSearch={true}
               onClearMulti={handleClearMultiItem}
               onKeyDown={handleKeyPress}
               isFilter={true}
               isNotExpand={!expanded}
               isShowTooltip
+              bgColor={bgColor}
             />
           ) : (
             <InputSelect
@@ -256,6 +255,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               isSmall={isSmall}
               onKeyDown={handleKeyPress}
               isFilter={true}
+              bgColor={bgColor}
             />
           )}
         </div>
@@ -275,7 +275,6 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               selectable={selectable}
               checkable={checkable}
               titleRender={treeTitleRender}
-              selectWithAdd={selectWithAdd}
               selectWithPreferOption={selectWithPreferOption}
               preferOptions={preferOptions}
               isExpand={expanded}

@@ -89,10 +89,6 @@ export function AdvanceNumberFilterStories() {
             allowPositive={isPositive}
             isSmall={isSmall}
             disabled={isDisabled}
-            action={{
-              name: "Help",
-              action: () => {},
-            }}
           />
         </FormItem>
       </div>

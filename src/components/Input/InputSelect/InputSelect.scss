@@ -35,10 +35,6 @@
       background-color: var(--color-white);
     }
 
-    &.input-select--filter-have-item {
-      outline: 1px solid var(--color-primary);
-    }
-
     .input-select__icon {
       transition: all 0.3s ease;
       color: var(--palette-gray-60);
@@ -78,9 +74,6 @@
         outline-color: var(--palette-coolGray-50);
         cursor: not-allowed;
       }
-      &.input-select--filter-have-item {
-        outline-color: var(--palette-coolGray-50);
-      }
     }
 
     &.input-select--float {
@@ -110,11 +103,6 @@
       box-shadow: inset 0px -1px 0px var(--palette-gray-50);
       margin-bottom: -1px;
 
-      &.input-select--filter-have-item {
-        outline: 1px solid var(--color-primary);
-        box-shadow: none;
-      }
-
       &:hover {
         background-color: var(--palette-grayHover-10);
         .component__input {
@@ -139,9 +127,6 @@
       &.input-select--disabled {
         box-shadow: none;
         background-color: var(--palette-gray-10);
-        &.input-select--filter-have-item {
-          outline: none;
-        }
       }
 
       &.input-select--float:focus-within {

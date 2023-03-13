@@ -1,6 +1,5 @@
 import React, { RefObject } from "react";
 import { Model } from "react3l-common";
-import Add16 from "@carbon/icons-react/es/add/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { Checkbox, Empty } from "antd";
 import classNames from "classnames";
@@ -31,8 +30,6 @@ export interface AdvanceEnumProps<T extends Model> {
 
   label?: string;
 
-  selectWithAdd?: () => void;
-
   isSmall?: boolean;
 
   preferOptions?: T[];
@@ -42,6 +39,8 @@ export interface AdvanceEnumProps<T extends Model> {
   getList?: () => Observable<T[]>;
 
   height?: number;
+
+  bgColor?: "white" | "gray";
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -80,13 +79,13 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
     render,
     type,
     label,
-    selectWithAdd,
     isSmall,
     isMultiple,
     listValue,
     onChangeMultiple,
     getList,
     height,
+    bgColor,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -131,7 +130,6 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
     };
   }, [firstLoad, getList]);
 
-  // use this for multiple type
   const internalList = React.useMemo(() => {
     if (list && list.length > 0) {
       list.forEach((current) => {
@@ -369,6 +367,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
               isFilter={true}
               isNotExpand={!isExpand}
               isShowTooltip
+              bgColor={bgColor}
             />
           ) : (
             <InputSelect
@@ -385,6 +384,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
               isSmall={isSmall}
               isEnumerable={true}
               isFilter={true}
+              bgColor={bgColor}
             />
           )}
         </div>
@@ -428,18 +428,6 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                     </div>
                   </>
                 }
-
-                {typeof selectWithAdd !== "undefined" && (
-                  <div
-                    className={classNames(
-                      "select__bottom-button select__add-button p-y--xs"
-                    )}
-                    onClick={selectWithAdd}
-                  >
-                    <Add16 className="m-l--xs" />
-                    <span className="m-l--xs">Add new</span>
-                  </div>
-                )}
               </div>
             )
           : isExpand && (
@@ -476,16 +464,6 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                     </div>
                   </>
                 }
-                {selectWithAdd && (
-                  <div
-                    className={classNames(
-                      "select__bottom-button select__add-button p-y--xs"
-                    )}
-                  >
-                    <Add16 className="m-l--xxs" />
-                    <span>Add new</span>
-                  </div>
-                )}
               </div>
             )}
       </div>

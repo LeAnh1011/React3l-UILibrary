@@ -45,7 +45,6 @@ export function AdvanceEnumFilterStories() {
     code: "FAD",
   });
 
-
   const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
 
   const [isValidated, setValidated] = React.useState(false);
@@ -124,12 +123,11 @@ export function AdvanceEnumFilterStories() {
             getList={demoSearchFunc}
             type={type}
             label={"Label"}
-            selectWithAdd={isSelectWithAdd}
             disabled={isDisabled}
             isSmall={isSmall}
             isMultiple={isMultiple}
-            onChangeMultiple={handleChangeFilter} // if type is multiple pass this props
-            listValue={list} // if type is multiple pass this prop
+            onChangeMultiple={handleChangeFilter}
+            listValue={list}
             height={500}
           />
         </FormItem>

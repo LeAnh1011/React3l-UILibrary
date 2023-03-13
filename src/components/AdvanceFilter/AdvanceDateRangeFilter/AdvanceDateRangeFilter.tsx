@@ -19,11 +19,6 @@ function SuffixDateIcon() {
   );
 }
 
-interface AdvanceDateRangeFilterAction {
-  name?: string;
-  action?: any;
-}
-
 interface AdvanceDateRangeFilterProps {
   label?: string;
   value: [Moment, Moment];
@@ -33,10 +28,9 @@ interface AdvanceDateRangeFilterProps {
   type?: BORDER_TYPE;
   isSmall?: boolean;
   disabled?: boolean;
-  isRequired?: boolean;
   className?: string;
-  action?: AdvanceDateRangeFilterAction;
   placeholder?: [string, string];
+  bgColor?: "white" | "gray";
 }
 
 function AdvanceDateRangeFilter(
@@ -48,12 +42,11 @@ function AdvanceDateRangeFilter(
     onChange,
     type,
     label,
-    isRequired,
-    action,
     isSmall,
     disabled,
     placeholder,
     className,
+    bgColor,
   } = props;
 
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
@@ -85,7 +78,7 @@ function AdvanceDateRangeFilter(
       className={classNames("advance-date-range-filter__wrapper", className)}
       ref={wrapperRef}
     >
-      <div className="date-picker__label m-b--xxxs">
+      <div className="advance-date-range-filter__label m-b--xxxs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label
             className={classNames("component__title", {
@@ -93,19 +86,9 @@ function AdvanceDateRangeFilter(
             })}
           >
             {label}
-            {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
         <span style={{ width: "100%" }}></span>
-        {action && (
-          <span
-            className="m-l--xxxs body-text--md color-link"
-            style={{ cursor: "pointer" }}
-            onClick={action.action}
-          >
-            {action.name}
-          </span>
-        )}
       </div>
       <div className="advance-date-range-filter__container">
         <RangePicker
@@ -117,13 +100,16 @@ function AdvanceDateRangeFilter(
           placeholder={placeholder}
           suffixIcon={<SuffixDateIcon />}
           className={classNames({
-            "date-picker__wrapper--sm": isSmall,
             "p-y--xxs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
-            "date-picker--material": type === BORDER_TYPE.MATERIAL,
-            "date-picker--disabled ": disabled,
-            "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,
+            "advance-date-range-filter--sm": isSmall,
+            "advance-date-range-filter--white": bgColor === "white",
+            "advance-date-range-filter--material":
+              type === BORDER_TYPE.MATERIAL,
+            "advance-date-range-filter--disabled ": disabled,
+            "advance-date-range-filter--float":
+              type === BORDER_TYPE.FLOAT_LABEL,
           })}
           ref={dateRef}
         />
@@ -137,7 +123,6 @@ function AdvanceDateRangeFilter(
             })}
           >
             {label}
-            {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
         {internalValue[0] && !disabled && (

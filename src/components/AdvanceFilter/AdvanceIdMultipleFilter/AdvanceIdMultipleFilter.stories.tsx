@@ -55,10 +55,6 @@ export function AdvanceIdMultipleFilterStories() {
     setIsSelectWithPreferOption,
   ] = React.useState<boolean>(false);
 
-  const [isSelectWithAdd, setIsSelectWithAdd] = React.useState<boolean>(false);
-
-  const [withSearch, setWithSearch] = React.useState(true);
-
   const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
     setType(event.target.value);
   }, []);
@@ -83,23 +79,9 @@ export function AdvanceIdMultipleFilterStories() {
     setIsDisabled(event.target.value);
   }, []);
 
-  const handleChangeSelectWithAdd = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setIsSelectWithAdd(event.target.value);
-    },
-    []
-  );
-
   const handleChangeSelectWithPreferOption = React.useCallback(
     (event: RadioChangeEvent) => {
       setIsSelectWithPreferOption(event.target.value);
-    },
-    []
-  );
-
-  const handleChangeWithSearch = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setWithSearch(event.target.value);
     },
     []
   );
@@ -122,8 +104,6 @@ export function AdvanceIdMultipleFilterStories() {
             type={type}
             isSmall={isSmall}
             disabled={isDisabled}
-            selectWithAdd={() => {}}
-            isUsingSearch={withSearch}
             preferOptions={isSelectWithPreferOption ? list : undefined}
           ></AdvanceIdMultipleFilter>
         </FormItem>
@@ -157,16 +137,6 @@ export function AdvanceIdMultipleFilterStories() {
         </Radio.Group>
       </div>
 
-      <div style={{ margin: "10px", width: "400px" }}>
-        <Radio.Group
-          onChange={handleChangeSelectWithAdd}
-          value={isSelectWithAdd}
-        >
-          <Radio value={true}>Select with add</Radio>
-          <Radio value={false}>Not select with add</Radio>
-        </Radio.Group>
-      </div>
-
       <div style={{ margin: "10px", width: "800px" }}>
         <Radio.Group
           onChange={handleChangeSelectWithPreferOption}
@@ -174,13 +144,6 @@ export function AdvanceIdMultipleFilterStories() {
         >
           <Radio value={true}>Select with prefer option</Radio>
           <Radio value={false}>Not select with prefer option</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeWithSearch} value={withSearch}>
-          <Radio value={true}>Using Search</Radio>
-          <Radio value={false}>Not Using Search</Radio>
         </Radio.Group>
       </div>
     </>

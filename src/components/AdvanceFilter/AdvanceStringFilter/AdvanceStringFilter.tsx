@@ -4,15 +4,9 @@ import { BORDER_TYPE } from "@Configs/enum";
 import React, { ReactSVGElement, RefObject } from "react";
 import "./AdvanceStringFilter.scss";
 
-interface AdvanceStringFilterAction {
-  name?: string;
-  action?: any;
-}
-
 export interface AdvanceStringFilterProps {
   label?: string;
   type?: BORDER_TYPE;
-  isRequired?: boolean;
   floatLabel?: boolean;
   isMaterial?: boolean;
   prefix?: string | JSX.Element;
@@ -21,10 +15,9 @@ export interface AdvanceStringFilterProps {
   disabled?: boolean;
   placeHolder?: string;
   className?: string;
-  showCount?: boolean;
   maxLength?: number;
   isSmall?: boolean;
-  action?: AdvanceStringFilterAction;
+  bgColor?: "white" | "gray";
   onChange?: (T: string | null) => void;
   onEnter?: (T: string | null) => void;
   onBlur?: (T: string | null) => void;
@@ -34,19 +27,17 @@ export interface AdvanceStringFilterProps {
 const AdvanceStringFilter = React.forwardRef(
   (props: AdvanceStringFilterProps, ref: React.Ref<any>) => {
     const {
-      action,
       label,
-      isRequired,
       type,
       prefix,
       suffix,
-      showCount,
       maxLength,
       value,
       disabled,
       placeHolder,
       className,
       isSmall,
+      bgColor,
       onChange,
       onEnter,
       onBlur,
@@ -135,30 +126,16 @@ const AdvanceStringFilter = React.forwardRef(
               })}
             >
               {label}
-              {isRequired && <span className="text-danger">&nbsp;*</span>}
             </label>
           )}
           <span style={{ width: "100%" }}></span>
-          {showCount && maxLength > 0 && (
-            <span className="input-text__count p-l--xs body-text--xs">
-              {internalValue.length}/{maxLength}
-            </span>
-          )}
-          {action && (
-            <span
-              className="m-l--xxxs body-text--md color-link"
-              style={{ cursor: "pointer" }}
-              onClick={action.action}
-            >
-              {action.name}
-            </span>
-          )}
         </div>
         <div
           className={classNames(
             "component__input advance-string-filter__container",
             {
               "advance-string-filter__container--sm": isSmall,
+              "advance-string-filter__container--white": bgColor === "white",
               "p-y--xxs": isSmall,
               "p-x--xs": isSmall,
               "p--xs": !isSmall,
@@ -210,7 +187,6 @@ const AdvanceStringFilter = React.forwardRef(
               })}
             >
               {label}
-              {isRequired && <span className="text-danger">&nbsp;*</span>}
             </label>
           )}
           {internalValue && !disabled && (
@@ -237,7 +213,6 @@ AdvanceStringFilter.defaultProps = {
   label: "",
   isSmall: false,
   type: BORDER_TYPE.BORDERED,
-  isRequired: false,
   prefix: "",
   disabled: false,
   className: "",

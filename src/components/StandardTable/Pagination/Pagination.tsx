@@ -52,7 +52,7 @@ function Pagination(props: PaginationProps) {
     [onChange, take]
   );
 
-  const menuPageSize = React.useMemo(() => {
+  const menuPageSize: any = React.useMemo(() => {
     return (
       <Menu
         className="menu-page-size"
@@ -66,7 +66,7 @@ function Pagination(props: PaginationProps) {
     );
   }, [pageSizeOptions, handleMenuTakeClick, take]);
 
-  const menuPageChange = React.useMemo(() => {
+  const menuPageChange: any = React.useMemo(() => {
     return (
       <Menu
         onClick={handleMenuPageClick}
@@ -130,7 +130,7 @@ function Pagination(props: PaginationProps) {
             <div>
               <Dropdown
                 className="dropdown-pagination-per-page"
-                overlay={menuPageSize}
+                menu={menuPageSize}
                 trigger={["click"]}
               >
                 <Button
@@ -153,7 +153,7 @@ function Pagination(props: PaginationProps) {
         <div className="change-page-box-1">
           <Dropdown
             className="dropdown-pagination-page"
-            overlay={menuPageChange}
+            menu={menuPageChange}
             trigger={["click"]}
           >
             <Button type="ghost" className="btn--lg" icon={<ChevronDown16 />}>

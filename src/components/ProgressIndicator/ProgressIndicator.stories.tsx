@@ -36,12 +36,14 @@ const listEnum = [
 function Default() {
   // const [currentId,setCurrentId] = React.useState<number>(1);
   return (
-    <div style={{ display: "flex" }}>
-      <div style={{ width: 200 }}>
-        <ProgressIndicator list={listEnum} idContainer={"container-frame"} />
-      </div>
+    <div>
+      <ProgressIndicator
+        list={listEnum}
+        idContainer={"container-frame"}
+        type={"horizontal"}
+      />
       <div
-        style={{ width: 900, height: 700, overflow: "auto" }}
+        style={{ width: 900, height: 700, overflow: "auto", marginTop: 30 }}
         id="container-frame"
       >
         <div id="frame-1" style={{ height: 400, backgroundColor: "red" }}>

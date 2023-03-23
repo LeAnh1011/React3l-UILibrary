@@ -16,7 +16,7 @@ export default function ProgressIndicatorContent(
     <div
       id={contentId}
       style={{ height: height, width: width, overflow: "auto" }}
-      className={`${className} m-t--xxxl`}
+      className={className}
     >
       {children}
     </div>

@@ -1,0 +1,41 @@
+.inpage-navigation-container {
+  display: flex;
+  flex-direction: column;
+  width: 264px;
+  cursor: pointer;
+  background-color: var(--color-white);
+  .inpage-navigation__content {
+    padding: 24px 16px 16px 32px;
+    font-weight: 400;
+    .inpage-navigation__title {
+      font-size: 18px;
+      line-height: 24px;
+    }
+    .inpage-navigation__description {
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.32px;
+      padding-top: 8px;
+    }
+  }
+
+  .inpage-navigation__wrapper {
+    .inpage-navigation__item {
+      padding: 8px 16px 8px 32px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 16px;
+      &:hover {
+        background-color: var(--palette-grayHover-10);
+      }
+      &:focus-within {
+        outline: 2px solid var(--color-primary);
+        outline-offset: -2px;
+      }
+      &.inpage-navigation__item-active:not(:focus-within) {
+        background: var(--palette-grayHover-10);
+        box-shadow: inset 4px 0px 0px var(--color-primary);
+      }
+    }
+  }
+}

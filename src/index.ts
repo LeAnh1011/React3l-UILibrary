@@ -63,3 +63,4 @@ export { default as Radio } from "./components/Radio";
 export { default as CheckboxWrapper } from "./components/Checkbox";
 
 export { default as Tag } from "./components/Tag";
+export { default as InpageNavigation } from "./components/InpageNavigation";

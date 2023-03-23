@@ -44,6 +44,9 @@
 }
 
 .component_progress-indicator_horizontal {
+    position: fixed;
+    background-color: white;
+    top: 0px;
 
     .list-nav-content {
         display: flex;

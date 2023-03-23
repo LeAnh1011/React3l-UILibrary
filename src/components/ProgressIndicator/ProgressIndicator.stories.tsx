@@ -43,7 +43,7 @@ function Default() {
         type={"horizontal"}
       />
       <div
-        style={{ width: 900, height: 700, overflow: "auto", marginTop: 30 }}
+        style={{ width: 900, height: 800, overflow: "auto", marginTop: 30 }}
         id="container-frame"
       >
         <div id="frame-1" style={{ height: 400, backgroundColor: "red" }}>

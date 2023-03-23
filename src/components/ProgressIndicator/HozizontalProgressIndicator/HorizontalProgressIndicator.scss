@@ -1,0 +1,28 @@
+.component_progress-indicator_horizontal {
+    position: fixed;
+    background-color: white;
+    top: 0px;
+
+    .list-nav-content {
+        display: flex;
+
+        .nav-content {
+            padding: 12px 64px 12px 16px;
+            box-shadow: inset 0px -1px 0px #E1E3E5;
+
+            &.nav-content-active {
+                box-shadow: inset 0px -2px 0px var(--color-primary);
+            }
+
+            .nav-content-title {
+                font-size: 14px;
+                line-height: 16px !important;
+            }
+
+            .nav-content:focus {
+                box-shadow: inset 0px -2px 0px rgba(15, 98, 254, 0.42);
+            }
+        }
+    }
+
+}

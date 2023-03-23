@@ -1,0 +1,44 @@
+.component_progress-indicator_vertical {
+    width: 200px;
+    position: fixed;
+
+    .ant-radio-group {
+        width: 200px !important;
+    }
+
+    .nav-content {
+        padding-left: 8px;
+        padding-top: 8px;
+        padding-bottom: 24px;
+        border-left: 2.5px solid var(--palette-gray-10);
+
+        &.nav-content-active {
+            border-left: 2.5px solid var(--color-primary);
+        }
+
+        .nav-content-title {
+            font-size: 14px;
+            line-height: 16px !important;
+        }
+
+        .ant-radio-checked .ant-radio-inner::after {
+            background-color: var(--color-primary) !important;
+        }
+
+        .ant-radio-checked .ant-radio-inner {
+            border-color: var(--color-primary) !important;
+        }
+
+        .ant-radio:hover .ant-radio-inner {
+            border-color: var(--color-primary) !important;
+        }
+
+        .ant-radio-input:focus+.ant-radio-inner {
+            border-color: var(--color-primary) !important;
+        }
+
+        .ant-radio-inner {
+            border-color: var(--palette-gray-100) !important;
+        }
+    }
+}

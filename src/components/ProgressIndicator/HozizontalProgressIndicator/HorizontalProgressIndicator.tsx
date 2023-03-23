@@ -34,7 +34,13 @@ function HorizontalProgressIndicator(props: HorizontalProgressIndicatorProps) {
                     "nav-content-active":
                       Number(item.sectionId) === currentSectionId,
                   })}
+                  tabIndex={0}
                   onClick={() => handleChange(item?.sectionId)}
+                  onKeyDown={(event: any) => {
+                    if (event?.keyCode === 13) {
+                      handleChange(item?.sectionId);
+                    }
+                  }}
                 >
                   {item.sectionName}
                 </div>

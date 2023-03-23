@@ -22,30 +22,32 @@ function HorizontalProgressIndicator(props: HorizontalProgressIndicatorProps) {
   }, []);
 
   return (
-    <div className={"component_progress-indicator_horizontal"}>
-      <div className="progress-indicator_horizontal">
-        <div className="list-nav-content">
-          {list?.length > 0 &&
-            list.map((item) => {
-              return (
-                <div
-                  key={item?.sectionId}
-                  className={classNames("nav-content", {
-                    "nav-content-active":
-                      Number(item.sectionId) === currentSectionId,
-                  })}
-                  tabIndex={0}
-                  onClick={() => handleChange(item?.sectionId)}
-                  onKeyDown={(event: any) => {
-                    if (event?.keyCode === 13) {
-                      handleChange(item?.sectionId);
-                    }
-                  }}
-                >
-                  {item.sectionName}
-                </div>
-              );
-            })}
+    <div className="component_progress-indicator_horizontal">
+      <div className={"component_progress-indicator_horizontal__container"}>
+        <div className="progress-indicator_horizontal">
+          <div className="list-nav-content">
+            {list?.length > 0 &&
+              list.map((item) => {
+                return (
+                  <div
+                    key={item?.sectionId}
+                    className={classNames("nav-content", {
+                      "nav-content-active":
+                        Number(item.sectionId) === currentSectionId,
+                    })}
+                    tabIndex={0}
+                    onClick={() => handleChange(item?.sectionId)}
+                    onKeyDown={(event: any) => {
+                      if (event?.keyCode === 13) {
+                        handleChange(item?.sectionId);
+                      }
+                    }}
+                  >
+                    {item.sectionName}
+                  </div>
+                );
+              })}
+          </div>
         </div>
       </div>
     </div>

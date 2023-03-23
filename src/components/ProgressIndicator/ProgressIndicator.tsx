@@ -10,6 +10,7 @@ export interface ProgressIndicatorProps {
   list?: ProgressIndicatorModel[];
   idContainer?: string;
   type?: "vertical" | "horizontal";
+  className?: string;
 }
 
 export default function ProgressIndicator(props: ProgressIndicatorProps) {

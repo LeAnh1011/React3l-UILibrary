@@ -6,7 +6,6 @@ import "./InpageNavigation.scss";
 export interface InpageNavigationProps {
   className?: string;
   list?: Model[];
-  countCharacters?: number;
   title?: string;
   description?: string;
   onChange?: (data?: any) => void;

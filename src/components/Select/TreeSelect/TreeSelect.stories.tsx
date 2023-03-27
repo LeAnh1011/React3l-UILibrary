@@ -470,6 +470,7 @@ export function TreeSelectStories() {
   }, []);
 
   const handleChangeItem = React.useCallback((items: Model[], isMultiple) => {
+    console.log(items)
     if (isMultiple) {
       dispatch({ type: "UPDATE_MODEL", data: items });
     } else {
@@ -524,7 +525,7 @@ export function TreeSelectStories() {
             classFilter={DistrictFilter}
             onChange={handleChangeItem}
             checkStrictly={true}
-            item={item}
+            // item={item}
             listItem={isMultiple ? listItem : []}
             getTreeData={demoSearchFunc}
             type={type}
@@ -532,8 +533,8 @@ export function TreeSelectStories() {
             label={"Label"}
             disabled={isDisabled}
             isSmall={isSmall}
-            selectWithPreferOption={isSelectWithPreferOption}
-            preferOptions={isSelectWithPreferOption ? list : undefined}
+            // selectWithPreferOption={isSelectWithPreferOption}
+            // preferOptions={isSelectWithPreferOption ? list : undefined}
             valueFilter={{ ...filter, id: { equal: 1 } }}
           />
         </FormItem>

@@ -10,18 +10,22 @@ export interface InpageNavigationProps {
   title?: string;
   description?: string;
   onChange?: (data?: any) => void;
+  render?: (t: Model) => string;
 }
 
+function defaultRenderObject<T extends Model>(t: T) {
+  return t?.name;
+}
 function InpageNavigation(props: InpageNavigationProps) {
-  const { className, list, title, description, onChange } = props;
+  const { className, list, title, description, onChange, render } = props;
 
   const [activeItem, setActiveItem] = React.useState<Model>(null);
 
   const handleClickItem = React.useCallback(
     (item) => () => {
       setActiveItem(item);
-      if(typeof onChange === 'function') {
-        onChange(item)
+      if (typeof onChange === "function") {
+        onChange(item);
       }
     },
     [onChange]
@@ -44,12 +48,14 @@ function InpageNavigation(props: InpageNavigationProps) {
               onClick={handleClickItem(item)}
               tabIndex={0}
             >
-              {item?.name}
+              {render(item)}
             </div>
           ))}
       </div>
     </div>
   );
 }
-InpageNavigation.defaultProps = {};
+InpageNavigation.defaultProps = {
+  render: defaultRenderObject,
+};
 export default InpageNavigation;

@@ -46,7 +46,6 @@ function Default() {
         description={
           "Hãy lựa chọn 1 trong những chức năng phía dưới để thay đổi giá trị"
         }
-        countCharacters={20}
         onChange={handleChangeNavigate}
       />
     </>

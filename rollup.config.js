@@ -49,6 +49,8 @@ export default {
     // Loading/Spinner
     "src/components/IconLoading/index.ts",
     "src/components/InlineLoading/index.ts",
+    // InpageNavigation
+    "src/components/InpageNavigation/index.ts",
     //Modal/Drawer
     "src/components/Modal/index.ts",
     "src/components/Drawer/index.ts",

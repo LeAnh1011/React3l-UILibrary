@@ -25,16 +25,30 @@
       font-weight: 400;
       font-size: 14px;
       line-height: 16px;
+      background-color: transparent;
+      border: 0;
+      border-radius: 0;
+      position: relative;
+
       &:hover {
         background-color: var(--palette-grayHover-10);
       }
-      &:focus-within {
-        outline: 2px solid var(--color-primary);
-        outline-offset: -2px;
-      }
-      &.inpage-navigation__item-active:not(:focus-within) {
+
+      &.inpage-navigation__item-active {
         background: var(--palette-grayHover-10);
-        box-shadow: inset 4px 0px 0px var(--color-primary);
+        &::before {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 0.25rem;
+          height: 100%;
+          background-color: var(--color-primary);
+          content: "";
+        }
+        &:focus {
+          outline: 2px solid var(--color-primary);
+          outline-offset: -2px;
+        }
       }
     }
   }

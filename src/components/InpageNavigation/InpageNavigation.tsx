@@ -29,6 +29,7 @@ function InpageNavigation(props: InpageNavigationProps) {
     },
     [onChange]
   );
+
   return (
     <div className={classNames(className, "inpage-navigation-container")}>
       <div className="inpage-navigation__content">
@@ -40,15 +41,15 @@ function InpageNavigation(props: InpageNavigationProps) {
         {list &&
           list?.length > 0 &&
           list.map((item) => (
-            <div
+            <button
+              type="button"
               className={classNames("inpage-navigation__item", {
                 "inpage-navigation__item-active": activeItem?.id === item?.id,
               })}
               onClick={handleClickItem(item)}
-              tabIndex={0}
             >
               {render(item)}
-            </div>
+            </button>
           ))}
       </div>
     </div>

@@ -71,7 +71,6 @@ export function TagFilterStories() {
   const [filter, setFilter] = React.useState<DemoFilter>(filterValue);
   const [item, setItem] = React.useState<any>(undefined);
   const [value, setValue] = React.useState<[any, any]>([undefined, undefined]);
-  
 
   const handleChangeOrganization = React.useCallback(
     (id, item) => {
@@ -84,8 +83,10 @@ export function TagFilterStories() {
 
   const handleChangeFilter = React.useCallback(
     (listItem) => {
-      const newFilter = {...filter}
-      newFilter.organizationId.in = listItem.map((currentItem) => currentItem.id);
+      const newFilter = { ...filter };
+      newFilter.organizationId.in = listItem.map(
+        (currentItem) => currentItem.id
+      );
       newFilter["organizationValue"] = listItem;
       setFilter({ ...newFilter });
     },
@@ -94,10 +95,10 @@ export function TagFilterStories() {
 
   const handleChangeFilterTotal = React.useCallback(
     (value) => {
-      filter.total.lessEqual = value[1]
+      filter.total.lessEqual = value[1];
       filter.total.greaterEqual = value[0];
-    
-      setFilter({ ...filter});
+
+      setFilter({ ...filter });
     },
     [filter]
   );
@@ -160,7 +161,10 @@ export function TagFilterStories() {
         />
         <AdvanceInputRangeFilter
           placeHolderRange={["From...", "To..."]}
-          valueRange={[filter?.total?.greaterEqual as number, filter?.total?.lessEqual as number]}
+          valueRange={[
+            filter?.total?.greaterEqual as number,
+            filter?.total?.lessEqual as number,
+          ]}
           onChangeRange={handleChangeFilterTotal}
           label={"Tổng hàng xuất kho"}
         />
@@ -171,6 +175,7 @@ export function TagFilterStories() {
         keyTranslate={"demo"}
         onClear={handleClear}
         handleChangeFilter={handleChangeAllFilter}
+        hiddenField={["appUserId"]}
         exceptField={["appUserId"]}
       />
     </div>

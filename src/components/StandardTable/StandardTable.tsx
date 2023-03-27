@@ -1,10 +1,10 @@
 import LoadingOutlined from "@ant-design/icons/LoadingOutlined";
 import { Table } from "antd";
-import "antd/dist/antd.css";
 import type { TableProps } from "antd/lib/table";
 import classNames from "classnames";
 import React from "react";
 import "./StandardTable.scss";
+
 export interface StandardTableCustomProps extends TableProps<any> {
   idContainer?: string;
   isDragable?: boolean;
@@ -12,6 +12,7 @@ export interface StandardTableCustomProps extends TableProps<any> {
   tableSize?: "lg" | "md" | "sm";
   spinning?: boolean;
 }
+
 function StandardTable(props: StandardTableCustomProps) {
   const {
     className,

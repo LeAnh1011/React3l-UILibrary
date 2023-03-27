@@ -328,6 +328,7 @@ AdvanceTreeFilter.defaultProps = {
   checkable: false,
   disabled: false,
   selectable: true,
+  bgColor: "white",
   treeTitleRender: (t: any) => t?.title,
 };
 

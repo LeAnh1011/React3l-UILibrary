@@ -475,6 +475,7 @@ AdvanceEnumFilter.defaultProps = {
   appendToBody: false,
   render: defaultRenderObject,
   disabled: false,
+  bgColor: "white",
 };
 
 export default AdvanceEnumFilter;

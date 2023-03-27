@@ -378,6 +378,7 @@ AdvanceIdFilter.defaultProps = {
   isMaterial: false,
   disabled: false,
   maxLengthItem: 30,
+  bgColor: "white",
 };
 
 export default AdvanceIdFilter;

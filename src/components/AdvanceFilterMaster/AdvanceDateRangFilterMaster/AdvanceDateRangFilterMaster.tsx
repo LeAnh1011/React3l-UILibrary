@@ -446,6 +446,7 @@ AdvanceDateRangeFilterMaster.defaultProps = {
   type: ADVANCE_DATE_RANGE_TYPE.SHORT,
   placeHolderSelect: "",
   appendToBody: false,
+  bgColor: "white",
 };
 
 export default AdvanceDateRangeFilterMaster;

@@ -359,6 +359,7 @@ AdvanceNumberFilter.defaultProps = {
   decimalDigit: 4,
   disabled: false,
   prefix: "",
+  bgColor: "white",
 };
 
 export default AdvanceNumberFilter;

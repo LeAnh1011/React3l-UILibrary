@@ -217,6 +217,7 @@ AdvanceStringFilter.defaultProps = {
   disabled: false,
   className: "",
   maxLength: 0,
+  bgColor: "white",
 };
 
 export default AdvanceStringFilter;

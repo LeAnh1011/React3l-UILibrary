@@ -93,6 +93,7 @@ AdvanceInputRangeFilter.defaultProps = {
   disabled: false,
   className: "",
   maxLength: 0,
+  bgColor: "white",
 };
 
 export default AdvanceInputRangeFilter;

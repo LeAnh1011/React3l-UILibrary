@@ -145,6 +145,7 @@ AdvanceDateFilter.defaultProps = {
   isRequired: false,
   disabled: false,
   className: "",
+  bgColor: "white",
 };
 
 export default AdvanceDateFilter;

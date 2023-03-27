@@ -422,6 +422,7 @@ AdvanceIdMultipleFilter.defaultProps = {
   render: defaultRenderObject,
   isMaterial: false,
   disabled: false,
+  bgColor: "white",
 };
 
 export default AdvanceIdMultipleFilter;

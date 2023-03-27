@@ -1,0 +1,60 @@
+import classNames from "classnames";
+import React from "react";
+import { Model } from "react3l-common";
+import "./InpageNavigation.scss";
+
+export interface InpageNavigationProps {
+  className?: string;
+  list?: Model[];
+  title?: string;
+  description?: string;
+  onChange?: (data?: any) => void;
+  render?: (t: Model) => string;
+}
+
+function defaultRenderObject<T extends Model>(t: T) {
+  return t?.name;
+}
+function InpageNavigation(props: InpageNavigationProps) {
+  const { className, list, title, description, onChange, render } = props;
+
+  const [activeItem, setActiveItem] = React.useState<Model>(null);
+
+  const handleClickItem = React.useCallback(
+    (item) => () => {
+      setActiveItem(item);
+      if (typeof onChange === "function") {
+        onChange(item);
+      }
+    },
+    [onChange]
+  );
+  return (
+    <div className={classNames(className, "inpage-navigation-container")}>
+      <div className="inpage-navigation__content">
+        <div className="inpage-navigation__title">{title}</div>
+        <div className="inpage-navigation__description">{description}</div>
+      </div>
+
+      <div className="inpage-navigation__wrapper">
+        {list &&
+          list?.length > 0 &&
+          list.map((item) => (
+            <div
+              className={classNames("inpage-navigation__item", {
+                "inpage-navigation__item-active": activeItem?.id === item?.id,
+              })}
+              onClick={handleClickItem(item)}
+              tabIndex={0}
+            >
+              {render(item)}
+            </div>
+          ))}
+      </div>
+    </div>
+  );
+}
+InpageNavigation.defaultProps = {
+  render: defaultRenderObject,
+};
+export default InpageNavigation;

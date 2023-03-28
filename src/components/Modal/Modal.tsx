@@ -115,7 +115,7 @@ function Modal(props: ModalCustomProps) {
     return (
       <div
         className={classNames(
-          "btn-component btn-only-icon btn--xxl btn--icon-only-ghost"
+          "btn-component btn-only-icon btn--2xl btn--icon-only-ghost"
         )}
       >
         <Close20 />

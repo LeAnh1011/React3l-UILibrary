@@ -352,7 +352,7 @@ export function AdvanceIdMultipleFilter(
                     internalList.map((item, index) => (
                       <div
                         className={classNames(
-                          "advance-id-filter__item p-l--xs p-y--xs p-r--xxs",
+                          "advance-id-filter__item p-l--xs p-y--xs p-r--2xs",
                           {
                             "advance-id-filter__item--selected":
                               item.isSelected,
@@ -390,7 +390,7 @@ export function AdvanceIdMultipleFilter(
                   internalPreferOptions.map((item, index) => (
                     <div
                       className={classNames(
-                        "advance-id-filter__prefer-option advance-id-filter__item p-l--xs p-y--xs p-r--xxs"
+                        "advance-id-filter__prefer-option advance-id-filter__item p-l--xs p-y--xs p-r--2xs"
                       )}
                       key={index}
                       onKeyDown={handleMove(item)}

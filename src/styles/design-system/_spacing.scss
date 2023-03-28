@@ -1,7 +1,7 @@
 $spacings: (
-  xxxs: calc(0.25 * var(--space-unit)),
+  3xs: calc(0.25 * var(--space-unit)),
   // default with 4px;
-  xxs: calc(0.5 * var(--space-unit)),
+  2xs: calc(0.5 * var(--space-unit)),
   // default with 8px;
   xs: calc(0.75 * var(--space-unit)),
   // default with 12px;
@@ -13,9 +13,9 @@ $spacings: (
   // default with 24px;
   xl: calc(1.75 * var(--space-unit)),
   // default with 28px;
-  xxl: calc(2 * var(--space-unit)),
+  2xl: calc(2 * var(--space-unit)),
   // default with 32px;
-  xxxl: calc(2.25 * var(--space-unit)),
+  3xl: calc(2.25 * var(--space-unit)),
   // default with 36px;
   max: calc(2.25 * var(--space-unit)),
   // default with 40px;

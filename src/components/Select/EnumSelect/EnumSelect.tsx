@@ -418,7 +418,7 @@ function EnumSelect(props: SelectProps<Model>) {
                         internalList.map((item, index) => (
                           <div
                             className={classNames(
-                              "select__item p-l--xs p-y--xs p-r--xxs",
+                              "select__item p-l--xs p-y--xs p-r--2xs",
                               {
                                 "select__item--selected": item.isSelected,
                               }
@@ -521,7 +521,7 @@ function EnumSelect(props: SelectProps<Model>) {
                     )}
                     onClick={selectWithAdd}
                   >
-                    <Add16 className="m-l--xxs" />
+                    <Add16 className="m-l--2xs" />
                     <span>Add new</span>
                   </div>
                 )}

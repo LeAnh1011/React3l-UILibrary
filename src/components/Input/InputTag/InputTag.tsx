@@ -117,7 +117,7 @@ function InputTag(props: InputTagProps<Model>) {
     <>
       <div className="input-tag__wrapper">
         <div
-          className="input-tag__label m-b--xxxs"
+          className="input-tag__label m-b--3xs"
           onClick={(event) => {
             event.stopPropagation();
           }}
@@ -135,7 +135,7 @@ function InputTag(props: InputTagProps<Model>) {
           <span style={{ width: "100%" }}></span>
           {action && (
             <span
-              className="m-l--xxxs body-text--md color-link"
+              className="m-l--3xs body-text--md color-link"
               style={{ cursor: "pointer" }}
               onClick={action.action}
             >
@@ -147,7 +147,7 @@ function InputTag(props: InputTagProps<Model>) {
           className={classNames("component__input input-tag__container", {
             "input-tag__container--sm": isSmall,
             "input-tag__container--white": bgColor === "white",
-            "p-y--xxs": isSmall,
+            "p-y--2xs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
             "input-tag__container--material": type === BORDER_TYPE.MATERIAL,
@@ -186,13 +186,12 @@ function InputTag(props: InputTagProps<Model>) {
                 >
                   <span
                     className={classNames(
-                      "input-tag-item__label m-r--xxxs m-b--xxxs",
+                      "input-tag-item__label m-r--3xs m-b--3xs",
                       {
                         "input-tag-item__label--small":
                           type === BORDER_TYPE.FLOAT_LABEL && isSmall,
-                        "p-l--xxxs":
-                          type === BORDER_TYPE.FLOAT_LABEL && isSmall,
-                        "p-l--xxs": !(
+                        "p-l--3xs": type === BORDER_TYPE.FLOAT_LABEL && isSmall,
+                        "p-l--2xs": !(
                           type === BORDER_TYPE.FLOAT_LABEL && isSmall
                         ),
                       }
@@ -217,12 +216,12 @@ function InputTag(props: InputTagProps<Model>) {
               {internalListValue && internalListValue.length > 0 && (
                 <span
                   className={classNames(
-                    "input-tag-item__label m-r--xxxs m-b--xxxs",
+                    "input-tag-item__label m-r--3xs m-b--3xs",
                     {
                       "input-tag-item__label--small":
                         type === BORDER_TYPE.FLOAT_LABEL && isSmall,
-                      "p-l--xxxs": type === BORDER_TYPE.FLOAT_LABEL && isSmall,
-                      "p-l--xxs": !(
+                      "p-l--3xs": type === BORDER_TYPE.FLOAT_LABEL && isSmall,
+                      "p-l--2xs": !(
                         type === BORDER_TYPE.FLOAT_LABEL && isSmall
                       ),
                     }
@@ -285,7 +284,7 @@ function InputTag(props: InputTagProps<Model>) {
 
           {!disabled && searchTerm && (
             <CloseFilled16
-              className="input-icon input-icon__clear m-x--xxs"
+              className="input-icon input-icon__clear m-x--2xs"
               onClick={handleClearInput}
             ></CloseFilled16>
           )}

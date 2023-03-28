@@ -90,7 +90,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
       className={classNames("date-range__wrapper", className)}
       ref={wrapperRef}
     >
-      <div className="date-range__label m-b--xxxs">
+      <div className="date-range__label m-b--3xs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label
             className={classNames("component__title", {
@@ -104,7 +104,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
         <span style={{ width: "100%" }}></span>
         {action && (
           <span
-            className="m-l--xxxs body-text--md color-link"
+            className="m-l--3xs body-text--md color-link"
             style={{ cursor: "pointer" }}
             onClick={action.action}
           >
@@ -122,7 +122,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
           placeholder={placeholder}
           suffixIcon={<SuffixDateIcon />}
           className={classNames({
-            "p-y--xxs": isSmall,
+            "p-y--2xs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
             "date-range--sm": isSmall,
@@ -164,7 +164,7 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
               )}
             >
               <CloseFilled16
-                className={classNames("date-range__icon-clear", "m-l--xxs")}
+                className={classNames("date-range__icon-clear", "m-l--2xs")}
                 onClick={handleClearDate}
               ></CloseFilled16>
             </span>

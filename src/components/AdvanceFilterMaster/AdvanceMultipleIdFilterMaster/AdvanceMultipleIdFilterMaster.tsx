@@ -322,7 +322,7 @@ function AdvanceMultipleIdFilterMaster(
               "filter-active": values?.length > 0,
             })}
           >
-            <span className="advance-count-item__text p-r--xxxs">
+            <span className="advance-count-item__text p-r--3xs">
               {values?.length > 0 && <>({values?.length})</>}
             </span>
             <div className="advance-id-filter-master__title">
@@ -332,7 +332,7 @@ function AdvanceMultipleIdFilterMaster(
           </label>
         </div>
         {isExpand && (
-          <div className="advance-id-filter-master__list-container m-t--xxxs">
+          <div className="advance-id-filter-master__list-container m-t--3xs">
             <div className="advance-id-filter__input p--xs">
               <InputText
                 isSmall={false}
@@ -351,7 +351,7 @@ function AdvanceMultipleIdFilterMaster(
                   internalList.map((item, index) => (
                     <div
                       className={classNames(
-                        "advance-id-filter__item p-l--xs p-y--xs p-r--xxs",
+                        "advance-id-filter__item p-l--xs p-y--xs p-r--2xs",
                         {
                           "advance-id-filter__item--selected": item.isSelected,
                         }
@@ -395,7 +395,7 @@ function AdvanceMultipleIdFilterMaster(
                   internalPreferOptions.map((item, index) => (
                     <div
                       className={classNames(
-                        "advance-id-filter__prefer-option advance-id-filter__item p-l--xs p-y--xs p-r--xxs"
+                        "advance-id-filter__prefer-option advance-id-filter__item p-l--xs p-y--xs p-r--2xs"
                       )}
                       key={index}
                       onKeyDown={handleMove(item)}

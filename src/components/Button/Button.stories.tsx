@@ -1760,7 +1760,7 @@ function IconOnlyButtonView() {
         <Button
           type="icon-only-primary"
           icon={<Add16 />}
-          className="btn--xxl"
+          className="btn--2xl"
         />
       </div>
       <div
@@ -1799,7 +1799,7 @@ function IconOnlyButtonView() {
         <Button
           type="icon-only-primary"
           icon={<Add16 />}
-          className="btn--xxl"
+          className="btn--2xl"
           disabled={true}
         />
       </div>
@@ -1835,7 +1835,7 @@ function IconOnlyButtonView() {
         <Button
           type="icon-only-outline-primary"
           icon={<Add16 />}
-          className="btn--xxl"
+          className="btn--2xl"
         />
       </div>
       <div
@@ -1874,7 +1874,7 @@ function IconOnlyButtonView() {
         <Button
           type="icon-only-outline-primary"
           icon={<Add16 />}
-          className="btn--xxl"
+          className="btn--2xl"
           disabled={true}
         />
       </div>
@@ -1910,7 +1910,7 @@ function IconOnlyButtonView() {
         <Button
           type="icon-only-danger"
           icon={<TrashCan16 />}
-          className="btn--xxl"
+          className="btn--2xl"
         />
       </div>
       <div
@@ -1949,7 +1949,7 @@ function IconOnlyButtonView() {
         <Button
           type="icon-only-danger"
           icon={<TrashCan16 />}
-          className="btn--xxl"
+          className="btn--2xl"
           disabled={true}
         />
       </div>
@@ -1985,7 +1985,7 @@ function IconOnlyButtonView() {
         <Button
           type="icon-only-outline-danger"
           icon={<TrashCan16 />}
-          className="btn--xxl"
+          className="btn--2xl"
         />
       </div>
       <div
@@ -2024,7 +2024,7 @@ function IconOnlyButtonView() {
         <Button
           type="icon-only-outline-danger"
           icon={<TrashCan16 />}
-          className="btn--xxl"
+          className="btn--2xl"
           disabled={true}
         />
       </div>
@@ -2041,7 +2041,7 @@ function IconOnlyButtonView() {
         <Button type="icon-only-ghost" icon={<Add16 />} className="btn--md" />
         <Button type="icon-only-ghost" icon={<Add16 />} className="btn--lg" />
         <Button type="icon-only-ghost" icon={<Add16 />} className="btn--xl" />
-        <Button type="icon-only-ghost" icon={<Add16 />} className="btn--xxl" />
+        <Button type="icon-only-ghost" icon={<Add16 />} className="btn--2xl" />
       </div>
       <div
         style={{
@@ -2079,7 +2079,7 @@ function IconOnlyButtonView() {
         <Button
           type="icon-only-ghost"
           icon={<Add16 />}
-          className="btn--xxl"
+          className="btn--2xl"
           disabled={true}
         />
       </div>

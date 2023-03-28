@@ -118,7 +118,7 @@ const AdvanceStringFilter = React.forwardRef(
 
     return (
       <div className={classNames("advance-string-filter__wrapper", className)}>
-        <div className="advance-string-filter__label m-b--xxxs">
+        <div className="advance-string-filter__label m-b--3xs">
           {type !== BORDER_TYPE.FLOAT_LABEL && label && (
             <label
               className={classNames("component__title", {
@@ -136,7 +136,7 @@ const AdvanceStringFilter = React.forwardRef(
             {
               "advance-string-filter__container--sm": isSmall,
               "advance-string-filter__container--white": bgColor === "white",
-              "p-y--xxs": isSmall,
+              "p-y--2xs": isSmall,
               "p-x--xs": isSmall,
               "p--xs": !isSmall,
               "advance-string-filter--material": type === BORDER_TYPE.MATERIAL,
@@ -152,7 +152,7 @@ const AdvanceStringFilter = React.forwardRef(
           {prefix && (
             <>
               {typeof prefix === "string" ? (
-                <span className="p-r--xxs advance-string-filter__string">
+                <span className="p-r--2xs advance-string-filter__string">
                   {prefix}
                 </span>
               ) : (
@@ -190,16 +190,16 @@ const AdvanceStringFilter = React.forwardRef(
             </label>
           )}
           {internalValue && !disabled && (
-            <div className={classNames("input-icon__clear", "m-l--xxs")}>
+            <div className={classNames("input-icon__clear", "m-l--2xs")}>
               <CloseFilled16 onClick={handleClearInput}></CloseFilled16>
             </div>
           )}
           {suffix && (
             <>
               {typeof suffix === "string" ? (
-                <span className="body-text--md m-l--xxs">{suffix}</span>
+                <span className="body-text--md m-l--2xs">{suffix}</span>
               ) : (
-                <div className="m-l--xxs">{suffix}</div>
+                <div className="m-l--2xs">{suffix}</div>
               )}
             </>
           )}

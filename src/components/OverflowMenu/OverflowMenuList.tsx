@@ -74,7 +74,7 @@ function OverflowMenuList(props: CustomProps) {
                 item.isShow && (
                   <button
                     className={classNames("select__item ", {
-                      "btn--md p-l--sm p-y--xxs": size === "md",
+                      "btn--md p-l--sm p-y--2xs": size === "md",
                       "btn--xl p-l--sm p-y--xs": size === "xl",
                     })}
                     key={index}

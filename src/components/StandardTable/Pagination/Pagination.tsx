@@ -125,7 +125,7 @@ function Pagination(props: PaginationProps) {
       <div className="number-per-page-box">
         {canChangePageSize === true && (
           <div className="number-per-page-box-1">
-            <div className="m-r--xxxs">Số bản ghi mỗi trang : </div>
+            <div className="m-r--3xs">Số bản ghi mỗi trang : </div>
             <div>
               <Dropdown
                 className="dropdown-pagination-per-page"

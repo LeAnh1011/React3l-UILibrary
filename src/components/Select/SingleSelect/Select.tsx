@@ -391,7 +391,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                 )}
                 onClick={selectWithAdd}
               >
-                <Add16 className="m-l--xxs" />
+                <Add16 className="m-l--2xs" />
                 <span>
                   {selectWithAddTitle ? selectWithAddTitle : "Add new"}
                 </span>

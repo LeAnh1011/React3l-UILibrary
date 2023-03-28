@@ -94,7 +94,7 @@ function TextArea(props: TextAreaProps) {
   return (
     <>
       <div className={classNames("text-area__wrapper", className)}>
-        <div className="text-area__label m-b--xxxs">
+        <div className="text-area__label m-b--3xs">
           {type !== BORDER_TYPE.FLOAT_LABEL && label && (
             <label className="component__title">
               {label}
@@ -109,7 +109,7 @@ function TextArea(props: TextAreaProps) {
           )}
           {action && (
             <span
-              className="m-l--xxxs body-text--md color-link"
+              className="m-l--3xs body-text--md color-link"
               style={{ cursor: "pointer" }}
               onClick={action.action}
             >
@@ -119,7 +119,7 @@ function TextArea(props: TextAreaProps) {
         </div>
         <div
           className={classNames(
-            "component__input text-area__container p-l--xs p-r--xxs p-b--xxs p-t--xs",
+            "component__input text-area__container p-l--xs p-r--2xs p-b--2xs p-t--xs",
             {
               "text-area--white": bgColor === "white",
               "text-area--disabled ": disabled,

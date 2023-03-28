@@ -218,7 +218,7 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
                   <>{menu}</>
                 ))}
               </div>
-              <div className="m-t--xxs">
+              <div className="m-t--2xs">
                 <CloudUpload24 />
               </div>
             </>
@@ -236,7 +236,7 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
                   <div className="upload-image--minimized__num">
                     {files.length > 1 ? `${files.length - 1}+` : ""}
                   </div>
-                  <div className="upload-image--minimized__act p-t--xxs">
+                  <div className="upload-image--minimized__act p-t--2xs">
                     <Edit24 />
                   </div>
                 </div>

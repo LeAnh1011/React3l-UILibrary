@@ -53,7 +53,7 @@ function FormItem(props: FormItemProps) {
         >
           {children}
         </div>
-        <div className="form-item__message m-t--xxxs">{messageValue}</div>
+        <div className="form-item__message m-t--3xs">{messageValue}</div>
       </div>
     </>
   );

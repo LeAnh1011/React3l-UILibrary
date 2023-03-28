@@ -148,7 +148,7 @@ const InputText = React.forwardRef(
 
     return (
       <div className={classNames("input-text__wrapper", className)}>
-        <div className="input-text__label m-b--xxxs">
+        <div className="input-text__label m-b--3xs">
           {type !== BORDER_TYPE.FLOAT_LABEL && label && (
             <label
               className={classNames("component__title", {
@@ -167,7 +167,7 @@ const InputText = React.forwardRef(
           )}
           {action && (
             <span
-              className="m-l--xxxs body-text--md color-link"
+              className="m-l--3xs body-text--md color-link"
               style={{ cursor: "pointer" }}
               onClick={action.action}
             >
@@ -179,7 +179,7 @@ const InputText = React.forwardRef(
           className={classNames("component__input input-text__container", {
             "input-text__container--sm": isSmall,
             "input-text__container--white": bgColor === "white",
-            "p-y--xxs": isSmall,
+            "p-y--2xs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
             "input-text--material": type === BORDER_TYPE.MATERIAL,
@@ -194,7 +194,7 @@ const InputText = React.forwardRef(
           {prefix && (
             <>
               {typeof prefix === "string" ? (
-                <span className="p-r--xxs input-text__string">{prefix}</span>
+                <span className="p-r--2xs input-text__string">{prefix}</span>
               ) : (
                 <div className="m-r--xs input-text__icon">{prefix}</div>
               )}
@@ -233,16 +233,16 @@ const InputText = React.forwardRef(
             </label>
           )}
           {internalValue && !disabled && (
-            <div className={classNames("input-icon__clear", "m-l--xxs")}>
+            <div className={classNames("input-icon__clear", "m-l--2xs")}>
               <CloseFilled16 onClick={handleClearInput}></CloseFilled16>
             </div>
           )}
           {suffix && (
             <>
               {typeof suffix === "string" ? (
-                <span className="m-l--xxs input-text__string">{suffix}</span>
+                <span className="m-l--2xs input-text__string">{suffix}</span>
               ) : (
-                <div className="m-l--xxs input-text__icon">{suffix}</div>
+                <div className="m-l--2xs input-text__icon">{suffix}</div>
               )}
             </>
           )}

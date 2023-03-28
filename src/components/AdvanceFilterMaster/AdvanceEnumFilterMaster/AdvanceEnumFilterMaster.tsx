@@ -349,7 +349,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
           >
             {isMultiple
               ? isExpand && (
-                  <div className="advance-enum-filter-master__list-container m-t--xxxs">
+                  <div className="advance-enum-filter-master__list-container m-t--3xs">
                     {
                       <>
                         <div
@@ -361,7 +361,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
                             internalList.map((item, index) => (
                               <div
                                 className={classNames(
-                                  "advance-enum-filter__item p-l--xs p-y--xs p-r--xxs",
+                                  "advance-enum-filter__item p-l--xs p-y--xs p-r--2xs",
                                   {
                                     "advance-enum-filter__item--selected":
                                       item.isSelected,
@@ -400,7 +400,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
                 )
               : isExpand && (
                   <div
-                    className="advance-enum-filter-master__list-container m-t--xxxs"
+                    className="advance-enum-filter-master__list-container m-t--3xs"
                     style={appendToBodyStyle}
                   >
                     {

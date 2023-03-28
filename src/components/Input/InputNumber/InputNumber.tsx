@@ -288,7 +288,7 @@ function InputNumber(props: InputNumberProps) {
 
   return (
     <div className={classNames("input-number__wrapper", className)}>
-      <div className="input-number__label m-b--xxxs">
+      <div className="input-number__label m-b--2xs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label
             className={classNames("component__title", {
@@ -302,7 +302,7 @@ function InputNumber(props: InputNumberProps) {
         <span style={{ width: "100%" }}></span>
         {action && (
           <span
-            className="m-l--xxxs body-text--md color-link"
+            className="m-l--3xs body-text--md color-link"
             style={{ cursor: "pointer" }}
             onClick={action.action}
           >
@@ -316,7 +316,7 @@ function InputNumber(props: InputNumberProps) {
           {
             "input-number__container--sm": isSmall,
             "input-number__container--white": bgColor === "white",
-            "py--xxs": isSmall,
+            "py--2xs": isSmall,
             "px--xs": isSmall,
             "p--xs": !isSmall,
             "input-number--material": type === BORDER_TYPE.MATERIAL,
@@ -331,7 +331,7 @@ function InputNumber(props: InputNumberProps) {
         {prefix && (
           <>
             {typeof prefix === "string" ? (
-              <span className="p-r--xxs">{prefix}</span>
+              <span className="p-r--2xs">{prefix}</span>
             ) : (
               <div className="m-r--xs input-number__icon">{prefix}</div>
             )}
@@ -365,16 +365,16 @@ function InputNumber(props: InputNumberProps) {
           </label>
         )}
         {internalValue && !disabled && (
-          <div className={classNames("input-icon__clear", "m-l--xxs")}>
+          <div className={classNames("input-icon__clear", "m-l--2xs")}>
             <CloseFilled16 onClick={handleClearInput}></CloseFilled16>
           </div>
         )}
         {suffix && (
           <>
             {typeof suffix === "string" ? (
-              <span className="body-text--md m-l--xxs">{suffix}</span>
+              <span className="body-text--md m-l--2xs">{suffix}</span>
             ) : (
-              <div className="m-l--xxs input-text__icon">{suffix}</div>
+              <div className="m-l--2xs input-text__icon">{suffix}</div>
             )}
           </>
         )}

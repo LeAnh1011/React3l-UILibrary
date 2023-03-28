@@ -16,7 +16,7 @@ import "./AdvanceIdFilterMaster.scss";
 export interface AdvanceIdFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
-  > {
+> {
   value?: number | string;
 
   label?: string;
@@ -83,7 +83,6 @@ function AdvanceIdFilterMaster(
     maxLengthItem,
   } = props;
 
-
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const [list, setList] = React.useState<Model[]>([]);
@@ -140,7 +139,7 @@ function AdvanceIdFilterMaster(
     try {
       const filter = valueFilter ? { ...valueFilter } : new ClassFilter();
       handleGetList(filter);
-    } catch (error) { }
+    } catch (error) {}
   }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(
@@ -199,7 +198,6 @@ function AdvanceIdFilterMaster(
     [handleClickItem]
   );
 
-
   const handleKeyDown = React.useCallback(
     (event) => {
       switch (event.keyCode) {
@@ -249,7 +247,7 @@ function AdvanceIdFilterMaster(
           </div>
         </div>
         {isExpand && (
-          <div className="advance-id-filter-master__list-container m-t--xxxs">
+          <div className="advance-id-filter-master__list-container m-t--3xs">
             <div className="advance-id-filter__input p--xs">
               <InputText
                 isSmall={false}
@@ -307,7 +305,7 @@ function AdvanceIdFilterMaster(
                     >
                       <span className="advance-id-master__text">
                         {maxLengthItem &&
-                          render(item)?.length > maxLengthItem ? (
+                        render(item)?.length > maxLengthItem ? (
                           <Tooltip title={render(item)}>
                             {CommonService.limitWord(
                               render(item),

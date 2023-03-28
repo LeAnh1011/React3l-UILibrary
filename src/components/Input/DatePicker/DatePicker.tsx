@@ -70,7 +70,7 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
       className={classNames("date-picker__wrapper", className)}
       ref={wrapperRef}
     >
-      <div className="date-picker__label m-b--xxxs">
+      <div className="date-picker__label m-b--3xs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label
             className={classNames("component__title", {
@@ -84,7 +84,7 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
         <span style={{ width: "100%" }}></span>
         {action && (
           <span
-            className="m-l--xxxs body-text--md color-link"
+            className="m-l--3xs body-text--md color-link"
             style={{ cursor: "pointer" }}
             onClick={action.action}
           >
@@ -101,7 +101,7 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
           allowClear={false}
           format={dateFormat}
           className={classNames({
-            "p-y--xxs": isSmall,
+            "p-y--2xs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
             "date-picker--sm": isSmall,
@@ -137,7 +137,7 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
             )}
           >
             <CloseFilled16
-              className={classNames("date-picker__icon-clear", "m-l--xxs")}
+              className={classNames("date-picker__icon-clear", "m-l--2xs")}
               onClick={handleClearDate}
             ></CloseFilled16>
           </span>

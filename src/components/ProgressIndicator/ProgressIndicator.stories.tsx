@@ -45,7 +45,7 @@ function Horizontal() {
       />
       <ProgressIndicator.Content
         contentId="container-frame"
-        className="m-t--xxxl"
+        className="m-t--3xl"
       >
         <div id="frame-1" style={{ height: 400, backgroundColor: "red" }}>
           {listEnum[0].sectionName}

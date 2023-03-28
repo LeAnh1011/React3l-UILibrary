@@ -123,7 +123,7 @@ export function UploadFile(props: UploadFileProps) {
               </Tooltip>
             </div>
             <div>
-              <WarningFilled16 color="red" className="m-r--xxxs" />
+              <WarningFilled16 color="red" className="m-r--3xs" />
               <Popconfirm
                 placement="leftTop"
                 title={"Bạn có chắc chắn muốn xóa?"}
@@ -178,7 +178,7 @@ export function UploadFile(props: UploadFileProps) {
               </a>
             </div>
             <div>
-              <WarningFilled16 color="red" className="m-r--xxxs" />
+              <WarningFilled16 color="red" className="m-r--3xs" />
               <CloseFilled16
                 onClick={() => removeFile(file.id)}
                 className="remove-file"
@@ -208,7 +208,7 @@ export function UploadFile(props: UploadFileProps) {
           {type === "link" ? (
             <div className="upload-link" onClick={handleClickButton}>
               {icon ? icon : <Upload16 />}
-              <span className="upload-content m-l--xxs">{uploadContent}</span>
+              <span className="upload-content m-l--2xs">{uploadContent}</span>
             </div>
           ) : (
             <Button
@@ -229,7 +229,7 @@ export function UploadFile(props: UploadFileProps) {
           />
         </div>
       )}
-      <div className="upload-button__list-file m-t--xxs">
+      <div className="upload-button__list-file m-t--2xs">
         {oldFiles?.length > 0 &&
           oldFiles.map((file, index) => renderOldFile(file, index))}
         {listFileLoading?.length > 0 &&

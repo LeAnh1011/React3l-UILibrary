@@ -393,9 +393,9 @@ function TagFilter(props: TagFilterProps) {
               <Fragment key={index}>
                 {itemTag?.value && itemTag?.value?.length > 0 && (
                   <>
-                    <div className="tag-detail m--xxs">
+                    <div className="tag-detail m--2xs">
                       <div className="tag-filte__container-text">
-                        <div className="tag-detail__title m-r--xxxs">
+                        <div className="tag-detail__title m-r--3xs">
                           {translate
                             ? translate(`${keyTranslate}.${itemTag?.key}`)
                             : itemTag?.key}
@@ -467,7 +467,7 @@ function TagFilter(props: TagFilterProps) {
                                               </span>
                                               {index <
                                                 itemTag?.value?.length - 1 && (
-                                                <span className="m-r--xxxs">
+                                                <span className="m-r--3xs">
                                                   &#44;
                                                 </span>
                                               )}
@@ -486,7 +486,7 @@ function TagFilter(props: TagFilterProps) {
                                       : itemTag?.value[0]?.name}
                                   </span>
                                   {index < itemTag?.value?.length - 1 && (
-                                    <span className="m-r--xxxs">&#44;</span>
+                                    <span className="m-r--3xs">&#44;</span>
                                   )}
                                   <span>
                                     {" "}
@@ -517,7 +517,7 @@ function TagFilter(props: TagFilterProps) {
                                           </span>
                                           {index <
                                             itemTag?.value?.length - 1 && (
-                                            <span className="m-r--xxxs">
+                                            <span className="m-r--3xs">
                                               &#44;
                                             </span>
                                           )}

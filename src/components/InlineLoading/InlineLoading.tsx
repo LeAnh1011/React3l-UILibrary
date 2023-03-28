@@ -28,7 +28,7 @@ const InlineLoading = React.forwardRef(
         {status === "submitting" && (
           <div className="submitting-box">
             <IconLoading color="#0F62FE" />
-            <div className="p-l--xxs">{titleLoading}</div>
+            <div className="p-l--2xs">{titleLoading}</div>
           </div>
         )}
         {status === "submitted" && (

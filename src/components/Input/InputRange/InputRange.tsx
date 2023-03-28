@@ -21,7 +21,8 @@ function InputRange(props: InputRangeProps) {
   } = props;
 
   const validateRange = React.useCallback((fromValue, toValue) => {
-    if (typeof fromValue === 'undefined' || typeof toValue === 'undefined') return true;
+    if (typeof fromValue === "undefined" || typeof toValue === "undefined")
+      return true;
     if (fromValue > toValue) return false;
     return true;
   }, []);
@@ -51,7 +52,7 @@ function InputRange(props: InputRangeProps) {
   return (
     <>
       <div className="input-range__container">
-        <div className="input-range__input-number m-r--xxs">
+        <div className="input-range__input-number m-r--2xs">
           <InputNumber
             {...props}
             value={valueRange[0]}

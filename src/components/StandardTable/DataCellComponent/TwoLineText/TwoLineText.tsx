@@ -46,7 +46,7 @@ function TwoLineText(props: TwoLineTextProps) {
     <>
       <div className={classNames("cell-two-line", className)}>
         {avatar && (
-          <div className="m-r--xxs">
+          <div className="m-r--2xs">
             {avatar && (
               <img
                 src={avatar}
@@ -65,7 +65,7 @@ function TwoLineText(props: TwoLineTextProps) {
           >
             {icon && (
               <i
-                className={classNames(icon, `icon-two-line-text m-r--xxs`)}
+                className={classNames(icon, `icon-two-line-text m-r--2xs`)}
               ></i>
             )}
             {countCharacters1 && countCharacters1 > 0 ? (
@@ -84,11 +84,7 @@ function TwoLineText(props: TwoLineTextProps) {
             )}
           >
             {link ? (
-              <a
-                href={link}
-                rel="noopener noreferrer"
-                className="link-text"
-              >
+              <a href={link} rel="noopener noreferrer" className="link-text">
                 {countCharacters2 && countCharacters2 > 0 ? (
                   <Tooltip title={valueLine2}>
                     {CommonService.limitWord(valueLine2, countCharacters2)}

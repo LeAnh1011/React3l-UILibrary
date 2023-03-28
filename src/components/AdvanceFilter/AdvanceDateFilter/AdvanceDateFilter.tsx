@@ -64,7 +64,7 @@ function AdvanceDateFilter(
       className={classNames("advance-date-filter__wrapper", className)}
       ref={wrapperRef}
     >
-      <div className="advance-date-filter__label m-b--xxxs">
+      <div className="advance-date-filter__label m-b--3xs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label
             className={classNames("component__title", {
@@ -85,7 +85,7 @@ function AdvanceDateFilter(
           allowClear={false}
           format={dateFormat}
           className={classNames({
-            "p-y--xxs": isSmall,
+            "p-y--2xs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
             "advance-date-filter--sm": isSmall,
@@ -125,7 +125,7 @@ function AdvanceDateFilter(
               <CloseFilled16
                 className={classNames(
                   "advance-date-filter__icon-clear",
-                  "m-l--xxs"
+                  "m-l--2xs"
                 )}
                 onClick={handleClearDate}
               ></CloseFilled16>

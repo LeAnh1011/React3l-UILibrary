@@ -51,7 +51,7 @@ const Template: Story = (args) => {
         </div>
       </div>
       <div>Checkbox Group</div>
-      <div className="m-t--xxl">
+      <div className="m-t--2xl">
         <CheckboxGroup
           label="Trạng thái duyệt"
           values={values}

@@ -78,7 +78,7 @@ function AdvanceDateRangeFilter(
       className={classNames("advance-date-range-filter__wrapper", className)}
       ref={wrapperRef}
     >
-      <div className="advance-date-range-filter__label m-b--xxxs">
+      <div className="advance-date-range-filter__label m-b--3xs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label
             className={classNames("component__title", {
@@ -100,7 +100,7 @@ function AdvanceDateRangeFilter(
           placeholder={placeholder}
           suffixIcon={<SuffixDateIcon />}
           className={classNames({
-            "p-y--xxs": isSmall,
+            "p-y--2xs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
             "advance-date-range-filter--sm": isSmall,
@@ -145,7 +145,7 @@ function AdvanceDateRangeFilter(
               <CloseFilled16
                 className={classNames(
                   "advance-date-range-filter__icon-clear",
-                  "m-l--xxs"
+                  "m-l--2xs"
                 )}
                 onClick={handleClearDate}
               ></CloseFilled16>

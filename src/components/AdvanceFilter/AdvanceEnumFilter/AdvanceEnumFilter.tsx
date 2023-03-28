@@ -402,7 +402,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                         internalList.map((item, index) => (
                           <div
                             className={classNames(
-                              "select__item p-l--xs p-y--xs p-r--xxs",
+                              "select__item p-l--xs p-y--xs p-r--2xs",
                               {
                                 "select__item--selected": item.isSelected,
                               }

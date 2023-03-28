@@ -261,7 +261,7 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
 
   return (
     <div className={classNames("advance-number-filter__wrapper", className)}>
-      <div className="advance-number-filter__label m-b--xxxs">
+      <div className="advance-number-filter__label m-b--3xs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label
             className={classNames("component__title", {
@@ -279,7 +279,7 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
           {
             "advance-number-filter__container--sm": isSmall,
             "advance-number-filter__container--white": bgColor === "white",
-            "py--xxs": isSmall,
+            "py--2xs": isSmall,
             "px--xs": isSmall,
             "p--xs": !isSmall,
             "advance-number-filter--material": type === BORDER_TYPE.MATERIAL,
@@ -294,7 +294,7 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
         {prefix && (
           <>
             {typeof prefix === "string" ? (
-              <span className="p-r--xxs">{prefix}</span>
+              <span className="p-r--2xs">{prefix}</span>
             ) : (
               <div className="m-r--xs advance-number-filter__icon">
                 {prefix}
@@ -331,16 +331,16 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
           </label>
         )}
         {internalValue && !disabled && (
-          <div className={classNames("input-icon__clear", "m-l--xxs")}>
+          <div className={classNames("input-icon__clear", "m-l--2xs")}>
             <CloseFilled16 onClick={handleClearInput}></CloseFilled16>
           </div>
         )}
         {suffix && (
           <>
             {typeof suffix === "string" ? (
-              <span className="body-text--md m-l--xxs">{suffix}</span>
+              <span className="body-text--md m-l--2xs">{suffix}</span>
             ) : (
-              <div className="m-l--xxs">{suffix}</div>
+              <div className="m-l--2xs">{suffix}</div>
             )}
           </>
         )}

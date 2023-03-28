@@ -120,7 +120,7 @@ function InputSelect(props: InputSelectProps<Model>) {
     <>
       <div className={classNames("input-select__wrapper", className)}>
         <div
-          className="input-select__label m-b--xxxs"
+          className="input-select__label m-b--3xs"
           onClick={(event) => {
             event.stopPropagation();
           }}
@@ -138,7 +138,7 @@ function InputSelect(props: InputSelectProps<Model>) {
           <span style={{ width: "100%" }}></span>
           {action && (
             <span
-              className="m-l--xxxs body-text--md color-link"
+              className="m-l--3xs body-text--md color-link"
               style={{ cursor: "pointer" }}
               onClick={action.action}
             >
@@ -152,7 +152,7 @@ function InputSelect(props: InputSelectProps<Model>) {
             {
               "input-select__container--sm": isSmall,
               "input-select__container--white": bgColor === "white",
-              "py--xxs": isSmall,
+              "py--2xs": isSmall,
               "px--xs": isSmall,
               "p--xs": !isSmall,
               "input-select--material": type === BORDER_TYPE.MATERIAL,
@@ -198,7 +198,7 @@ function InputSelect(props: InputSelectProps<Model>) {
               )}
               {internalValue && !disabled ? (
                 <CloseFilled16
-                  className="input-icon input-icon__clear m-r--xxs"
+                  className="input-icon input-icon__clear m-r--2xs"
                   onClick={handleClearInput}
                 ></CloseFilled16>
               ) : null}

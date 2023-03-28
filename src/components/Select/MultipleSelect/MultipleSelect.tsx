@@ -371,7 +371,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                     internalList.map((item, index) => (
                       <div
                         className={classNames(
-                          "select__item p-l--xs p-y--xs p-r--xxs",
+                          "select__item p-l--xs p-y--xs p-r--2xs",
                           {
                             "select__item--selected": item.isSelected,
                           }
@@ -418,7 +418,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                   internalPreferOptions.map((item, index) => (
                     <div
                       className={classNames(
-                        "select__prefer-option select__item p-l--xs p-y--xs p-r--xxs"
+                        "select__prefer-option select__item p-l--xs p-y--xs p-r--2xs"
                       )}
                       key={index}
                       onKeyDown={handleMove(item)}

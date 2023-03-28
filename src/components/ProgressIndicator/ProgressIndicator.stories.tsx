@@ -2,7 +2,6 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import nameof from "ts-nameof.macro";
 import ProgressIndicator from "./ProgressIndicator";
-import ProgressIndicatorContent from "./ProgressIndicatorContent/ProgressIndicatorContent";
 
 const listEnum = [
   {
@@ -44,7 +43,7 @@ function Horizontal() {
         idContainer={"container-frame"}
         type={"horizontal"}
       />
-      <ProgressIndicatorContent
+      <ProgressIndicator.Content
         contentId="container-frame"
         className="m-t--xxxl"
       >
@@ -69,7 +68,7 @@ function Horizontal() {
         <div id="frame-7" style={{ height: 200, backgroundColor: "black" }}>
           {listEnum[6].sectionName}
         </div>
-      </ProgressIndicatorContent>
+      </ProgressIndicator.Content>
     </div>
   );
 }
@@ -82,7 +81,7 @@ function Vertical() {
         <div style={{ width: 200 }}>
           <ProgressIndicator list={listEnum} idContainer={"container-frame"} />
         </div>
-        <ProgressIndicatorContent contentId="container-frame" width={900}>
+        <ProgressIndicator.Content contentId="container-frame" width={900}>
           <div id="frame-1" style={{ height: 400, backgroundColor: "red" }}>
             {listEnum[0].sectionName}
           </div>
@@ -104,7 +103,7 @@ function Vertical() {
           <div id="frame-7" style={{ height: 200, backgroundColor: "black" }}>
             {listEnum[6].sectionName}
           </div>
-        </ProgressIndicatorContent>
+        </ProgressIndicator.Content>
       </div>
     </>
   );

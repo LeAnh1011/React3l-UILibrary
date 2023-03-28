@@ -13,17 +13,18 @@ export interface ProgressIndicatorProps {
   className?: string;
 }
 
-export default function ProgressIndicator(props: ProgressIndicatorProps) {
+const ProgressIndicator = (props: ProgressIndicatorProps) => {
   const { type } = props;
   if (type === "vertical") return <VerticalProgressIndicator {...props} />;
   else if (type === "horizontal")
     return <HorizontalProgressIndicator {...props} />;
   return <></>;
 }
-
 ProgressIndicator.Content = ProgressIndicatorContent;
 
 ProgressIndicator.defaultProps = {
   list: [],
   type: "vertical",
 };
+
+export default ProgressIndicator;

@@ -1,6 +1,6 @@
 import HorizontalProgressIndicator from "./HozizontalProgressIndicator/HorizontalProgressIndicator";
 import VerticalProgressIndicator from "./VerticalProgressIndicator/VerticalProgressIndicator";
-
+import ProgressIndicatorContent from "./ProgressIndicatorContent/ProgressIndicatorContent";
 export interface ProgressIndicatorModel {
   sectionName?: string;
   sectionId?: number;
@@ -20,6 +20,8 @@ export default function ProgressIndicator(props: ProgressIndicatorProps) {
     return <HorizontalProgressIndicator {...props} />;
   return <></>;
 }
+
+ProgressIndicator.Content = ProgressIndicatorContent;
 
 ProgressIndicator.defaultProps = {
   list: [],

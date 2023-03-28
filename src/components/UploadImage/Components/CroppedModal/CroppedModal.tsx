@@ -1,7 +1,6 @@
 import { Button, Input, Select, Slider, Modal } from "antd";
 import React, { Reducer } from "react";
 import ReactCrop from "react-image-crop";
-import "react-image-crop/dist/ReactCrop.css";
 import { ImageFile } from "../ComponentUploadImage";
 import "./CroppedModal.scss";
 import classNames from "classnames";

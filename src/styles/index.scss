@@ -1,6 +1,7 @@
 @import "./common/box-shadow";
 @import "./common/custom-antd";
 @import "./common/button";
+@import "./../../node_modules/react-image-crop/dist/ReactCrop.css";
 
 html {
   box-sizing: border-box;
@@ -49,7 +50,6 @@ body {
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
-  
 }
 
 ::-webkit-scrollbar-thumb {

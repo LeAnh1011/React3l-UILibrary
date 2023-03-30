@@ -1,14 +1,19 @@
 /* Style for DatePicker.tsx */
 
-.date-picker__wrapper {
+.time-picker__wrapper {
   width: 100%;
   position: relative;
-  .date-picker__container {
+  .time-picker__container {
     position: relative;
     width: 100%;
   }
+  .time-picker__container {
+    position: relative;
+    width: 100%;
+  }
+ 
 
-  .date-picker__label {
+  .time-picker__label {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -23,7 +28,7 @@
     }
   }
 
-  .date-picker__icon-wrapper {
+  .time-picker__icon-wrapper {
     position: absolute;
     display: flex;
     height: 1.5rem;
@@ -35,24 +40,24 @@
     justify-content: flex-end;
     align-items: center;
 
-    &.date-picker__icon-wrapper--material {
+    &.time-picker__icon-wrapper--material {
       background-color: var(--palette-gray-10);
 
-      .date-picker__icon-clear {
+      .time-picker__icon-clear {
         &:hover {
           cursor: pointer;
         }
       }
     }
 
-    &.date-picker__icon-wrapper--disabled {
+    &.time-picker__icon-wrapper--disabled {
       background-color: var(--palette-grayHover-10);
     }
 
-    &.date-picker__icon-wrapper--sm {
+    &.time-picker__icon-wrapper--sm {
       top: 0.3rem !important;
     }
-    .date-picker__icon-clear {
+    .time-picker__icon-clear {
       color: var(--palette-coolGray-50);
       &:hover {
         cursor: pointer;
@@ -86,25 +91,25 @@
       }
     }
 
-    .date-picker__icon-wrapper ~ .date-picker--disabled {
+    .time-picker__icon-wrapper ~ .time-picker--disabled {
       background-color: var(--palette-grayHover-10) !important;
     }
 
     &:hover,
     &:focus {
-      & + .date-picker__icon-wrapper--material {
+      & + .time-picker__icon-wrapper--material {
         background-color: var(--palette-grayHover-10);
       }
     }
 
-    &:hover:not(.date-picker--disabled) {
+    &:hover:not(.time-picker--disabled) {
       outline-color: var(--color-primary);
       & + .component__title {
         color: var(--color-primary);
       }
     }
 
-    &.date-picker--disabled {
+    &.time-picker--disabled {
       outline-color: var(--palette-coolGray-30);
       background-color: var(--palette-gray-10);
       & + .component__title {
@@ -121,8 +126,8 @@
       outline: 2px solid var(--color-primary);
     }
 
-    &.date-picker--float {
-      &:hover:not(.date-picker--disabled):not(:focus-within) {
+    &.time-picker--float {
+      &:hover:not(.time-picker--disabled):not(:focus-within) {
         outline-color: var(--palette-gray-100);
         & + .component__title {
           color: var(--palette-gray-100);
@@ -138,26 +143,26 @@
       }
     }
 
-    &.date-picker--sm {
+    &.time-picker--sm {
       height: 32px !important;
     }
 
-    &.date-picker--white {
+    &.time-picker--white {
       background-color: var(--color-white);
       &:hover {
-        +.date-picker__icon-wrapper--material {
+        +.time-picker__icon-wrapper--material {
           background-color: var(--palette-grayHover-10);
         }
       }
     }
 
-    &.date-picker--material {
+    &.time-picker--material {
       outline: none;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       border-bottom: 1px solid var(--palette-gray-50);
       margin-bottom: -1px;
-      .date-picker__icon-wrapper {
+      .time-picker__icon-wrapper {
         background-color: var(--palette-gray-10);
       }
 
@@ -165,7 +170,7 @@
         background-color: var(--palette-grayHover-10);
       }
 
-      &.date-picker--disabled {
+      &.time-picker--disabled {
         border-bottom: none;
         background-color: var(--palette-gray-10);
       }
@@ -177,9 +182,9 @@
       }
     }
   }
-  .date-picker__container:has(.date-picker--white) {
+  .time-picker__container:has(.time-picker--white) {
     background-color: var(--color-white);
-    .date-picker__icon-wrapper--material {
+    .time-picker__icon-wrapper--material {
       background-color: var(--color-white);
     }
   }
@@ -202,19 +207,19 @@
   }
 }
 .form-item__container--error {
-  .date-picker__icon-wrapper {
+  .time-picker__icon-wrapper {
     background-color: var(--color-critical-blur) !important;
   }
-  .date-picker--material + .date-picker__icon-wrapper {
+  .time-picker--material + .time-picker__icon-wrapper {
     background-color: var(--color-critical-blur) !important;
     &:hover {
       background-color: var(--palette-grayHover-10) !important;
     }
   }
-  .date-picker--material:hover + .date-picker__icon-wrapper {
+  .time-picker--material:hover + .time-picker__icon-wrapper {
     background-color: var(--palette-grayHover-10) !important;
   }
-  .ant-picker.date-picker--material {
+  .ant-picker.time-picker--material {
     border-bottom: none;
   }
 }

@@ -5,6 +5,7 @@ export { default as InputSelect } from "./components/Input/InputSelect";
 export { default as InputTag } from "./components/Input/InputTag";
 export { default as InputSearch } from "./components/Input/InputSearch";
 export { default as TextArea } from "./components/Input/TextArea";
+export { default as InputView } from "./components/Input/InputView";
 export { default as InputRange } from "./components/Input/InputRange";
 export { default as DatePicker } from "./components/Input/DatePicker";
 export { default as TimePicker } from "./components/Input/TimePicker";

@@ -13,11 +13,13 @@ export default {
     // Input field components
     "src/components/Input/InputText/index.ts",
     "src/components/Input/InputNumber/index.ts",
+    "src/components/Input/InputView/index.ts",
     "src/components/Input/InputSelect/index.ts",
     "src/components/Input/InputTag/index.ts",
     "src/components/Input/InputSearch/index.ts",
     "src/components/Input/InputRange/index.ts",
     "src/components/Input/DatePicker/index.ts",
+    "src/components/Input/TimePicker/index.ts",
     "src/components/Input/DateRange/index.ts",
     "src/components/Input/TextArea/index.ts",
     // Dropdown components

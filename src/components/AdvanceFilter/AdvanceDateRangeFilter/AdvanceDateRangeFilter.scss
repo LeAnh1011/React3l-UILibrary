@@ -130,6 +130,11 @@
 
     &.advance-date-range-filter--white {
       background-color: var(--color-white);
+      &:hover {
+        +.advance-date-range-filter__icon-wrapper--material {
+          background-color: var(--palette-grayHover-10);
+        }
+      }
     }
 
     &.advance-date-range-filter--material {
@@ -152,6 +157,12 @@
         box-shadow: none;
         outline: 2px solid var(--color-primary);
       }
+    }
+  }
+  .advance-date-range-filter__container:has(.advance-date-range-filter--white) {
+    background-color: var(--color-white);
+    .advance-date-range-filter__icon-wrapper--material {
+      background-color: var(--color-white);
     }
   }
   .component__title--normal {

@@ -143,7 +143,12 @@
     }
 
     &.date-picker--white {
-      background: var(--color-white);
+      background-color: var(--color-white);
+      &:hover {
+        +.date-picker__icon-wrapper--material {
+          background-color: var(--palette-grayHover-10);
+        }
+      }
     }
 
     &.date-picker--material {
@@ -170,6 +175,12 @@
         box-shadow: none;
         outline: 2px solid var(--color-primary);
       }
+    }
+  }
+  .date-picker__container:has(.date-picker--white) {
+    background-color: var(--color-white);
+    .date-picker__icon-wrapper--material {
+      background-color: var(--color-white);
     }
   }
 

@@ -8,6 +8,7 @@ import { InputTextStories } from "./InputText/InputText.stories";
 import { DatePickerStories } from "./DatePicker/DatePicker.stories";
 import { DateRangeStories } from "./DateRange/DateRange.stories";
 import { TextAreaStories } from "./TextArea/TextArea.stories";
+import { TimePickerStories } from "./TimePicker/TimePicker.stories";
 
 storiesOf("Input", module)
   .add("InputNumberStories", InputNumberStories)
@@ -18,4 +19,5 @@ storiesOf("Input", module)
   .add("InputRangeStories", InputRangeStories)
   .add("TextAreaStories", TextAreaStories)
   .add("DatePickerStories", DatePickerStories)
+  .add("TimePickerStories", TimePickerStories)
   .add("DateRangeStories", DateRangeStories);

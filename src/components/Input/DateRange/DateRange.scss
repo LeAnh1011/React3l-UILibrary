@@ -121,6 +121,11 @@
 
     &.date-range--white {
       background: var(--color-white);
+      &:hover {
+        +.date-range__icon-wrapper--material {
+          background-color: var(--palette-grayHover-10);
+        }
+      }
     }
 
     &.date-range--float {
@@ -161,6 +166,12 @@
         box-shadow: none;
         outline: 2px solid var(--color-primary);
       }
+    }
+  }
+  .date-range__container:has(.date-range--white) {
+    background-color: var(--color-white);
+    .date-range__icon-wrapper--material {
+      background-color: var(--color-white);
     }
   }
   .component__title--normal {

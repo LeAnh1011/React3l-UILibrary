@@ -60,6 +60,8 @@ function CheckboxGroup(props: CheckboxGroupComponentProps<Model>) {
   React.useEffect(() => {
     if (values?.length > 0) {
       setListCheckedKey([...values]);
+    } else {
+      setListCheckedKey([]);
     }
   }, [values]);
 

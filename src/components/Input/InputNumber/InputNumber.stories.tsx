@@ -94,6 +94,7 @@ export function InputNumberStories() {
               name: "Help",
               action: () => {},
             }}
+            bgColor="white"
           />
         </FormItem>
       </div>

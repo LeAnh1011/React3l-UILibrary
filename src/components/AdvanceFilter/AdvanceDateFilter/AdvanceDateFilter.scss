@@ -114,6 +114,11 @@
 
     &.advance-date-filter--white {
       background-color: var(--color-white);
+      &:hover {
+        +.advance-date-filter__icon-wrapper--material {
+          background-color: var(--palette-grayHover-10);
+        }
+      }
     }
 
     &.advance-date-filter--float {
@@ -152,7 +157,12 @@
       }
     }
   }
-
+  .advance-date-filter__container:has(.advance-date-filter--white) {
+    background-color: var(--color-white);
+    .advance-date-filter__icon-wrapper--material {
+      background-color: var(--color-white);
+    }
+  }
   .component__title--normal {
     position: absolute;
     color: gray;

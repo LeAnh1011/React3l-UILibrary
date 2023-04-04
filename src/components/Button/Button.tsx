@@ -4,13 +4,14 @@ import React, {
   ReactNode,
 } from "react";
 import BleedButton from "./BleedButton";
-import "./Button.scss";
 import GhostButton from "./GhostButton";
 import IconButton from "./IconButton";
 import LinkButton from "./LinkButton";
 import LinkPlainButton from "./LinkPlainButton";
 import NormalButton from "./NormalButton/NormalButton";
 import OutlineButton from "./OutlineButton";
+import "./ButtonComponent.scss";
+
 export type ButtonType =
   | "primary"
   | "secondary"

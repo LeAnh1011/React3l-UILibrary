@@ -13,6 +13,7 @@ export interface InputAction {
 export interface InputTextProps {
   label?: string;
   type?: BORDER_TYPE;
+  typeInput?: 'text' | 'password';
   isRequired?: boolean;
   floatLabel?: boolean;
   isMaterial?: boolean;
@@ -50,6 +51,7 @@ const InputText = React.forwardRef(
       className,
       isSmall,
       bgColor,
+      typeInput,
       onChange,
       onEnter,
       onBlur,
@@ -203,7 +205,7 @@ const InputText = React.forwardRef(
           <Tooltip title={isShowToolTip ? internalValue : undefined}>
             <div style={{ flexGrow: 1 }}>
               <input
-                type="text"
+                type={typeInput}
                 value={internalValue}
                 onChange={handleChange}
                 onKeyPress={handleKeyPress}
@@ -264,6 +266,7 @@ InputText.defaultProps = {
   disabled: false,
   className: "",
   maxLength: 0,
+  typeInput: "text"
 };
 
 export default InputText;

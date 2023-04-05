@@ -10,7 +10,7 @@ import Button from "@Components/Button";
 export interface PaginationProps extends AntdPaginationProps {
   skip?: number;
   take?: number;
-  pageSizeOptions: string[];
+  pageSizeOptions: number[];
   onChange?: (skip: number, take: number) => void;
   canChangePageSize?: boolean;
 }
@@ -70,9 +70,8 @@ function Pagination(props: PaginationProps) {
     return {
       onClick: handleMenuPageClick,
       selectedKeys: ["" + currentPage],
-      className: `menu-page-change, ${
-        pageArray?.length > 6 ? "options-select-page-height" : ""
-      }`,
+      className: `menu-page-change, ${pageArray?.length > 6 ? "options-select-page-height" : ""
+        }`,
       items: pageArray.map((page) => {
         return {
           key: page,

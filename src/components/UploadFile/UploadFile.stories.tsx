@@ -73,14 +73,16 @@ export const Default = () => {
   };
 
   return (
-    <UploadFile
-      files={model?.files || []}
-      uploadFile={demoUploadFile}
-      updateList={handleUpdateList}
-      removeFile={handleRemoveFile}
-      isMultiple={false}
-      type="link"
-    ></UploadFile>
+    <div style={{ width: 260 }}>
+      <UploadFile
+        files={model?.files || []}
+        uploadFile={demoUploadFile}
+        updateList={handleUpdateList}
+        removeFile={handleRemoveFile}
+        isMultiple={false}
+        type="box"
+      ></UploadFile>
+    </div>
   );
 };
 

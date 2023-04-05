@@ -2,12 +2,13 @@ import CheckmarkFilled16 from "@carbon/icons-react/es/checkmark--filled/16";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import Upload16 from "@carbon/icons-react/es/upload/16";
 import WarningFilled16 from "@carbon/icons-react/es/warning--filled/16";
-import { notification, Popconfirm, Tooltip } from "antd";
 import Button from "@Components/Button";
+import IconLoading from "@Components/IconLoading";
+import { notification, Popconfirm, Tooltip } from "antd";
 import React, { ReactNode, RefObject } from "react";
+import { useDropzone } from "react-dropzone";
 import type { Observable } from "rxjs";
 import "./UploadFile.scss";
-import IconLoading from "@Components/IconLoading";
 
 export interface FileModel {
   id?: number;
@@ -35,7 +36,7 @@ export interface UploadFileProps {
   removeFile?: (fileId: string | number) => void;
   isBtnOutLine?: boolean;
   maximumSize?: number;
-  type?: "link" | "button";
+  type?: "link" | "button" | "box";
   icon?: ReactNode;
   isViewMode?: boolean;
 }
@@ -53,6 +54,7 @@ export function UploadFile(props: UploadFileProps) {
     type = "button",
     icon,
   } = props;
+
   const [listFileLoading, setListFileLoading] = React.useState<FileModel[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>();
@@ -201,11 +203,20 @@ export function UploadFile(props: UploadFileProps) {
     [removeFile]
   );
 
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop: (...[, , event]) =>
+      handleChangeFile(event as React.ChangeEvent<HTMLInputElement>),
+  });
+
   return (
     <div className="upload-button__container">
       {!isViewMode && (
         <div>
-          {type === "link" ? (
+          {type === "box" ? (
+            <div className="upload-dropzone" {...getRootProps()}>
+              <div>Drag and drop files here or upload</div>
+            </div>
+          ) : type === "link" ? (
             <div className="upload-link" onClick={handleClickButton}>
               {icon ? icon : <Upload16 />}
               <span className="upload-content m-l--2xs">{uploadContent}</span>
@@ -225,7 +236,7 @@ export function UploadFile(props: UploadFileProps) {
             style={{ display: "none" }}
             multiple={isMultiple}
             ref={fileRef}
-            onChange={handleChangeFile}
+            {...getInputProps()}
           />
         </div>
       )}

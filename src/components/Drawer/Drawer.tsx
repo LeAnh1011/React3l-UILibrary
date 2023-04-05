@@ -4,7 +4,10 @@ import classNames from "classnames";
 import Button from "@Components/Button";
 import { NUMBER_BUTTON } from "@Configs/enum";
 import React, { ReactNode, RefObject } from "react";
+import { LoadingOutlined } from '@ant-design/icons';
 import "./Drawer.scss";
+
+const antIcon = <LoadingOutlined style={{ fontSize: 24, color: "#0f62fe" }} spin />;
 
 export interface DrawerProps {
   children?: ReactNode;
@@ -101,7 +104,7 @@ function Drawer(props: DrawerProps) {
           "slide-out": visible === true,
         })}
       >
-        <Spin spinning={loading}>
+        <Spin spinning={loading} indicator={antIcon}>
           <div className="drawer__content">
             <div className="drawer__header">
               <div

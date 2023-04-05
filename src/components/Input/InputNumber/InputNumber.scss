@@ -6,7 +6,7 @@
   .input-number__label {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 
     .component__title--disabled {
       color: var(--palette-gray-40);

@@ -80,7 +80,6 @@ function TimePicker(props: TimePickerProps & AntdTimePickerProps) {
             {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
-        <span style={{ width: "100%" }}></span>
         {action && (
           <span
             className="m-l--3xs body-text--md color-link"

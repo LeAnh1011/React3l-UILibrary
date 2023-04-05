@@ -74,7 +74,6 @@ function AdvanceDateFilter(
             {label}
           </label>
         )}
-        <span style={{ width: "100%" }}></span>
       </div>
       <div className="advance-date-filter__container">
         <DatePickerAntd

@@ -135,7 +135,6 @@ function InputSelect(props: InputSelectProps<Model>) {
               {isRequired && <span className="text-danger">&nbsp;*</span>}
             </label>
           )}
-          <span style={{ width: "100%" }}></span>
           {action && (
             <span
               className="m-l--3xs body-text--md color-link"
@@ -172,8 +171,8 @@ function InputSelect(props: InputSelectProps<Model>) {
                   value
                     ? (render(value) as string)
                     : type === BORDER_TYPE.FLOAT_LABEL && label
-                    ? " "
-                    : placeHolder
+                      ? " "
+                      : placeHolder
                 }
                 ref={inputRef}
                 disabled={disabled}

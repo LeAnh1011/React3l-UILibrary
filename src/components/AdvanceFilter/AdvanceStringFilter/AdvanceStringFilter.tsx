@@ -128,7 +128,6 @@ const AdvanceStringFilter = React.forwardRef(
               {label}
             </label>
           )}
-          <span style={{ width: "100%" }}></span>
         </div>
         <div
           className={classNames(

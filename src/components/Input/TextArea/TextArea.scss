@@ -14,8 +14,15 @@
       white-space: nowrap;
     }
 
-    span.text-area__count {
-      color: var(--palette-gray-60);
+    .label__right {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      span.text-area__count {
+        color: var(--palette-gray-60);
+      }
     }
   }
   .text-area__container {

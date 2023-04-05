@@ -49,7 +49,7 @@ const InputView = React.forwardRef(
       className,
       isSmall,
       bgColor,
-   
+
     } = props;
 
     const [internalValue, setInternalValue] = React.useState<string>("");
@@ -98,7 +98,6 @@ const InputView = React.forwardRef(
               {isRequired && <span className="view-danger">&nbsp;*</span>}
             </label>
           )}
-          <span style={{ width: "100%" }}></span>
           {showCount && maxLength > 0 && (
             <span className="input-view__count p-l--xs body-text--xs">
               {internalValue.length}/{maxLength}
@@ -144,7 +143,7 @@ const InputView = React.forwardRef(
                 className={classNames("component__input", {
                   "disabled-field": disabled,
                 })}
-                
+
               />
             </div>
           </Tooltip>

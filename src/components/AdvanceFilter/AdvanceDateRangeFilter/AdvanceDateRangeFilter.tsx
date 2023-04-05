@@ -88,7 +88,6 @@ function AdvanceDateRangeFilter(
             {label}
           </label>
         )}
-        <span style={{ width: "100%" }}></span>
       </div>
       <div className="advance-date-range-filter__container">
         <RangePicker

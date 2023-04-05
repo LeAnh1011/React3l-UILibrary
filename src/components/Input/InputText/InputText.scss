@@ -19,8 +19,14 @@
       color: var(--palette-gray-70);
     }
 
-    span.input-text__count {
-      color: var(--palette-gray-60);
+    .label__right {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      span.input-text__count {
+        color: var(--palette-gray-60);
+      }
     }
   }
 

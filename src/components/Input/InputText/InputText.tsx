@@ -161,21 +161,22 @@ const InputText = React.forwardRef(
               {isRequired && <span className="text-danger">&nbsp;*</span>}
             </label>
           )}
-          <span style={{ width: "100%" }}></span>
-          {showCount && maxLength > 0 && (
-            <span className="input-text__count p-l--xs body-text--xs">
-              {internalValue.length}/{maxLength}
-            </span>
-          )}
-          {action && (
-            <span
-              className="m-l--3xs body-text--md color-link"
-              style={{ cursor: "pointer" }}
-              onClick={action.action}
-            >
-              {action.name}
-            </span>
-          )}
+          <div className="label__right">
+            {showCount && maxLength > 0 && (
+              <span className="input-text__count p-l--xs body-text--xs">
+                {internalValue.length}/{maxLength}
+              </span>
+            )}
+            {action && (
+              <span
+                className="m-l--3xs body-text--md color-link"
+                style={{ cursor: "pointer" }}
+                onClick={action.action}
+              >
+                {action.name}
+              </span>
+            )}
+          </div>
         </div>
         <div
           className={classNames("component__input input-text__container", {

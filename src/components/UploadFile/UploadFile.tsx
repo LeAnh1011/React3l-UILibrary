@@ -33,7 +33,7 @@ export interface UploadFileProps {
   uploadFile?: (files: File[] | Blob[]) => Observable<FileModel[]>;
   isBtnOutLine?: boolean;
   maximumSize?: number;
-  type?: "link" | "button" | "box";
+  type?: "link" | "button" | "dragAndDrop";
   icon?: ReactNode;
   isViewMode?: boolean;
   setListFileLoading?: React.Dispatch<SetStateAction<FileModel[]>>;
@@ -149,7 +149,7 @@ export function UploadFile(props: UploadFileProps) {
   return (
     <div className="upload-button__container">
       <div>
-        {type === "box" ? (
+        {type === "dragAndDrop" ? (
           <div className={classNames("upload-dropzone")} {...getRootProps()}>
             {uploadContent}
             <input

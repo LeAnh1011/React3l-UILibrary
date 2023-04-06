@@ -79,7 +79,7 @@ export const Default = () => {
         uploadFile={demoUploadFile}
         updateList={handleUpdateList}
         isMultiple={false}
-        type="box"
+        type="dragAndDrop"
         uploadContent="Drag and drop files here or upload"
         setListFileLoading={setFileLoading}
       ></UploadFile>

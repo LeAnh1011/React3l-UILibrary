@@ -73,7 +73,7 @@ export const Default = () => {
   };
 
   return (
-    <div style={{ width: 260 }}>
+    <div style={{ width: 660 }}>
       <UploadFile
         files={model?.files || []}
         uploadFile={demoUploadFile}
@@ -81,6 +81,7 @@ export const Default = () => {
         removeFile={handleRemoveFile}
         isMultiple={false}
         type="box"
+        uploadContent="Drag and drop files here or upload"
       ></UploadFile>
     </div>
   );

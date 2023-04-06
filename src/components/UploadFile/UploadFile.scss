@@ -1,20 +1,19 @@
 .upload-button__container {
     .upload-dropzone {
-        border: 1px dashed var(--palette-gray-50);
+        outline: 1px dashed var(--palette-gray-50);
         padding: 16px 85px 48px 16px;
         height: 96px;
-
-        div {
-            font-weight: 400;
-            font-size: 14px;
-            line-height: 16px;
-            letter-spacing: 0.16px;
-            color: var(--color-primary);
-        }
+        width: 100%;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.16px;
+        color: var(--color-primary);
 
         &:focus,
-        &:hover {
-            border: 2px solid #0F62FE;
+        &:hover,
+        &.is-active {
+            outline: 2px solid var(--color-primary);
         }
     }
 

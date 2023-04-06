@@ -9,6 +9,7 @@ import React, { ReactNode, RefObject } from "react";
 import { useDropzone } from "react-dropzone";
 import type { Observable } from "rxjs";
 import "./UploadFile.scss";
+import classNames from "classnames";
 
 export interface FileModel {
   id?: number;
@@ -64,12 +65,10 @@ export function UploadFile(props: UploadFileProps) {
   }, []);
 
   const handleValidateFile = React.useCallback(
-    (fileList: FileList) => {
+    (files: File[]) => {
       let checkValidate = true;
-      const files: File[] = [];
       let totalSize = 0;
-      Array.from(fileList).forEach((file) => {
-        files.push(file);
+      files.forEach((file) => {
         totalSize = totalSize + file.size;
         if (totalSize > maximumSize) {
           notification.error({
@@ -82,14 +81,43 @@ export function UploadFile(props: UploadFileProps) {
           checkValidate = false;
         }
       });
-      return { files, checkValidate };
+      return { checkValidate };
     },
     [maximumSize]
   );
 
-  const handleChangeFile = React.useCallback(
+  const handleChangeFileInput = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { files, checkValidate } = handleValidateFile(event.target.files);
+      const files: File[] = [];
+      Array.from(event.target.files).forEach((file) => {
+        files.push(file);
+      });
+      const { checkValidate } = handleValidateFile(files);
+      if (!checkValidate) return null;
+      setListFileLoading([...files]);
+      if (files && files.length > 0) {
+        setIsLoading(true);
+        uploadFile(files).subscribe({
+          next: (res: FileModel[]) => {
+            if (res && res.length > 0) {
+              setIsLoading(false);
+              updateList([...res]);
+              setListFileLoading([]);
+            }
+          },
+          error: () => {
+            setListFileLoading([]);
+            setIsLoading(false);
+          },
+        });
+      }
+    },
+    [handleValidateFile, updateList, uploadFile]
+  );
+
+  const handleChangeFileDropzone = React.useCallback(
+    (files: File[]) => {
+      const { checkValidate } = handleValidateFile(files);
       if (!checkValidate) return null;
       setListFileLoading([...files]);
       if (files && files.length > 0) {
@@ -204,8 +232,22 @@ export function UploadFile(props: UploadFileProps) {
   );
 
   const { getRootProps, getInputProps } = useDropzone({
-    onDrop: (...[, , event]) =>
-      handleChangeFile(event as React.ChangeEvent<HTMLInputElement>),
+    onDrop: handleChangeFileDropzone,
+  });
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      const dropzone = document.getElementsByClassName("upload-dropzone")?.[0];
+      dropzone.addEventListener("dragenter", () => {
+        dropzone.classList.add("is-active");
+      });
+      dropzone.addEventListener("dragleave", () => {
+        dropzone.classList.remove("is-active");
+      });
+      dropzone.addEventListener("drop", () => {
+        dropzone.classList.remove("is-active");
+      });
+    }, 200);
   });
 
   return (
@@ -213,8 +255,16 @@ export function UploadFile(props: UploadFileProps) {
       {!isViewMode && (
         <div>
           {type === "box" ? (
-            <div className="upload-dropzone" {...getRootProps()}>
-              <div>Drag and drop files here or upload</div>
+            <div className={classNames("upload-dropzone")} {...getRootProps()}>
+              {uploadContent}
+              <input
+                type="file"
+                style={{ display: "none" }}
+                className="input-dropzone"
+                multiple={isMultiple}
+                ref={fileRef}
+                {...getInputProps()}
+              />
             </div>
           ) : type === "link" ? (
             <div className="upload-link" onClick={handleClickButton}>
@@ -236,7 +286,7 @@ export function UploadFile(props: UploadFileProps) {
             style={{ display: "none" }}
             multiple={isMultiple}
             ref={fileRef}
-            {...getInputProps()}
+            onChange={handleChangeFileInput}
           />
         </div>
       )}

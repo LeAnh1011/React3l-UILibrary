@@ -10,13 +10,14 @@ export interface InpageNavigationProps {
   description?: string;
   onChange?: (data?: any) => void;
   render?: (t: Model) => string;
+  defaultActiveItem?: Model;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
   return t?.name;
 }
 function InpageNavigation(props: InpageNavigationProps) {
-  const { className, list, title, description, onChange, render } = props;
+  const { className, list, title, description, defaultActiveItem, onChange, render } = props;
 
   const [activeItem, setActiveItem] = React.useState<Model>(null);
 
@@ -29,6 +30,10 @@ function InpageNavigation(props: InpageNavigationProps) {
     },
     [onChange]
   );
+
+  React.useEffect(() => {
+    if (defaultActiveItem) setActiveItem(defaultActiveItem);
+  }, [defaultActiveItem])
 
   return (
     <div className={classNames(className, "inpage-navigation-container")}>

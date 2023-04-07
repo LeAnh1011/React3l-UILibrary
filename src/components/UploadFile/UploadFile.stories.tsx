@@ -4,7 +4,6 @@ import { Model } from "react3l-common";
 import { Observable } from "rxjs";
 import nameof from "ts-nameof.macro";
 import UploadFile, { FileModel } from "./UploadFile";
-
 const demoList = [
   {
     path:
@@ -72,15 +71,28 @@ export const Default = () => {
     return demoObservable;
   };
 
+  const [fileLoading, setFileLoading] = React.useState<FileModel[]>([]);
+
   return (
-    <UploadFile
-      files={model?.files || []}
-      uploadFile={demoUploadFile}
-      updateList={handleUpdateList}
-      removeFile={handleRemoveFile}
-      isMultiple={false}
-      type="link"
-    ></UploadFile>
+    <div style={{ width: 260 }}>
+      <UploadFile
+        uploadFile={demoUploadFile}
+        updateList={handleUpdateList}
+        isMultiple={false}
+        type="dragAndDrop"
+        uploadContent="Drag and drop files here or upload"
+        setListFileLoading={setFileLoading}
+      ></UploadFile>
+      <UploadFile.FileLoadingContent
+        loadingFiles={fileLoading}
+        className="content-loading"
+      />
+      <UploadFile.FileLoadedContent
+        loadedFiles={model?.files}
+        removeFile={handleRemoveFile}
+        className="content-loaded"
+      />
+    </div>
   );
 };
 

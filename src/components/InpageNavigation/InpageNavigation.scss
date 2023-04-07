@@ -1,7 +1,7 @@
 .inpage-navigation-container {
   display: flex;
   flex-direction: column;
-  width: 264px;
+  width: 100%;
   cursor: pointer;
   background-color: var(--color-white);
   .inpage-navigation__content {
@@ -21,6 +21,8 @@
 
   .inpage-navigation__wrapper {
     .inpage-navigation__item {
+      width: 100%;
+      text-align: left;
       padding: 8px 16px 8px 32px;
       font-weight: 400;
       font-size: 14px;

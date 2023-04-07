@@ -47,6 +47,7 @@ function InpageNavigation(props: InpageNavigationProps) {
                 "inpage-navigation__item-active": activeItem?.id === item?.id,
               })}
               onClick={handleClickItem(item)}
+              key={item?.id}
             >
               {render(item)}
             </button>

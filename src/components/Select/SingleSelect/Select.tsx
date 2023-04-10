@@ -10,9 +10,9 @@ import type { ErrorObserver, Observable } from "rxjs";
 import { CommonService } from "@Services/common-service";
 import InputSelect from "@Components/Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "@Configs/enum";
-import "./Select.scss";
 import IconLoading from "@Components/IconLoading/IconLoading";
 import { InputAction } from "@Components/Input/InputText/InputText";
+import "./Select.scss";
 
 export interface SelectProps<
   T extends Model,
@@ -143,7 +143,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
       subscription.add(getList);
       const filter = valueFilter ? valueFilter : new ClassFilter();
       handleGetList(filter);
-    } catch (error) {}
+    } catch (error) { }
   }, [subscription, getList, valueFilter, ClassFilter, handleGetList]);
 
   const { run } = useDebounceFn(
@@ -325,7 +325,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                         onClick={handleClickItem(item)}
                       >
                         {maxLengthItem &&
-                        render(item)?.length > maxLengthItem ? (
+                          render(item)?.length > maxLengthItem ? (
                           <Tooltip title={render(item)}>
                             <span className="select__text">
                               {CommonService.limitWord(

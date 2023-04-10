@@ -1,8 +1,7 @@
-import { ReactNode } from "react";
-import "./FormItem.scss";
+import React, { ReactNode } from "react";
 import classNames from "classnames";
 import { ValidateStatus } from "@Configs/enum";
-import React from "react";
+import "./FormItem.scss";
 
 export interface ValidateObject {
   validateStatus: ValidateStatus;

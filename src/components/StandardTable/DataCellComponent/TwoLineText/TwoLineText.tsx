@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import React from "react";
-import "./TwoLineText.scss";
 import { Tooltip } from "antd";
 import { CommonService } from "@Services/common-service";
+import "./TwoLineText.scss";
 
 export interface TwoLineTextProps {
   className?: string;

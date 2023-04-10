@@ -1,8 +1,8 @@
 import classNames from "classnames";
-import "./OneLineText.scss";
 import { Tooltip } from "antd";
 import { CommonService } from "@Services/common-service";
 import { Link } from "react-router-dom";
+import "./OneLineText.scss";
 
 export interface OneLineTextProps {
   className?: string;

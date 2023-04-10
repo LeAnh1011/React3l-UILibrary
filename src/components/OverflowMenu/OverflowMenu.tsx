@@ -3,8 +3,8 @@ import OverflowMenuHorizontal16 from "@carbon/icons-react/es/overflow-menu--hori
 import classNames from "classnames";
 import React, { RefObject } from "react";
 import { CommonService } from "@Services/common-service";
-import "./OverflowMenu.scss";
 import OverflowMenuList, { ListOverflowMenu } from "./OverflowMenuList";
+import "./OverflowMenu.scss";
 
 export interface CustomProps {
   list?: ListOverflowMenu[];

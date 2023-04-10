@@ -4,6 +4,7 @@ import type { Observable } from "rxjs";
 import { ComponentUploadAvatar } from "./Components/ComponentUploadAvatar";
 import { ComponentUploadImage } from "./Components/ComponentUploadImage";
 import "./UploadImage.scss";
+
 export class File extends Model {
   public id?: number;
 
@@ -21,6 +22,7 @@ export class File extends Model {
 
   public error?: string;
 }
+
 export interface FileModel extends File {
   content?: string;
   mimeType?: string;

@@ -8,10 +8,10 @@ import { DEBOUNCE_TIME_300 } from "@Configs/consts";
 import React, { RefObject } from "react";
 import type { ErrorObserver, Observable } from "rxjs";
 import { BORDER_TYPE } from "@Configs/enum";
-import "./MultipleSelect.scss";
 import { Checkbox, Empty, Tooltip } from "antd";
 import IconLoading from "@Components/IconLoading/IconLoading";
 import { InputAction } from "@Components/Input/InputText/InputText";
+import "./MultipleSelect.scss";
 
 export interface MultipleSelectProps<
   T extends Model,
@@ -190,7 +190,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     try {
       const filter = valueFilter ? valueFilter : new ClassFilter();
       handleGetList(filter);
-    } catch (error) {}
+    } catch (error) { }
   }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(
@@ -387,7 +387,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                         >
                           <span className="select__text">
                             {maxLengthItem &&
-                            render(item)?.length > maxLengthItem ? (
+                              render(item)?.length > maxLengthItem ? (
                               <Tooltip title={item?.name}>
                                 {CommonService.limitWord(
                                   render(item),
@@ -430,7 +430,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                       >
                         <span className="select__text">
                           {maxLengthItem &&
-                          render(item)?.length > maxLengthItem ? (
+                            render(item)?.length > maxLengthItem ? (
                             <Tooltip title={item?.name}>
                               {CommonService.limitWord(
                                 render(item),

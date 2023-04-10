@@ -7,9 +7,9 @@ import { DEBOUNCE_TIME_300 } from "@Configs/consts";
 import React, { RefObject } from "react";
 import type { ErrorObserver, Observable } from "rxjs";
 import { BORDER_TYPE } from "@Configs/enum";
-import "./AdvanceIdMultipleFilter.scss";
 import { Checkbox, Empty } from "antd";
 import IconLoading from "@Components/IconLoading/IconLoading";
+import "./AdvanceIdMultipleFilter.scss";
 
 export interface AdvanceIdMultipleFilterProps<
   T extends Model,
@@ -172,7 +172,7 @@ export function AdvanceIdMultipleFilter(
     try {
       const filter = valueFilter ? valueFilter : new ClassFilter();
       handleGetList(filter);
-    } catch (error) {}
+    } catch (error) { }
   }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(

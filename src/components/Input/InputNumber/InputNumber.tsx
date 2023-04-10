@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import React, { ReactSVGElement, RefObject } from "react";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
-import "./InputNumber.scss";
 import { ReactNode } from "react";
 import { BORDER_TYPE } from "@Configs/enum";
+import "./InputNumber.scss";
 
 export const DECIMAL: string = "DECIMAL";
 export const LONG: string = "LONG";

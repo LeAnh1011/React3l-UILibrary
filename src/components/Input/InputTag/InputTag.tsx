@@ -2,12 +2,12 @@ import React, { ReactSVGElement, RefObject } from "react";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import Close16 from "@carbon/icons-react/es/close/16";
-import "./InputTag.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
 import { BORDER_TYPE } from "@Configs/enum";
 import { Tooltip } from "antd";
 import { InputAction } from "../InputText/InputText";
+import "./InputTag.scss";
 
 export interface InputTagProps<T extends Model> {
   listValue?: T[];

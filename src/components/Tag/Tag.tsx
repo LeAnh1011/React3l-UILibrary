@@ -1,8 +1,8 @@
 import { Tooltip } from "antd";
 import classNames from "classnames";
 import { CommonService } from "@Services/common-service";
-import "./Tag.scss";
 import Close16 from "@carbon/icons-react/es/close/16";
+import "./Tag.scss";
 
 export interface TagProps {
   className?: string;
@@ -26,7 +26,7 @@ function Tag(props: TagProps) {
   } = props;
   return (
     <div
-      className={classNames(className, "tag-container", )}
+      className={classNames(className, "tag-container",)}
       style={{ backgroundColor: backgroundColor, color: color }}
     >
       <span className={classNames("tag-wrapper", {

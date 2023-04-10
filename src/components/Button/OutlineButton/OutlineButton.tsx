@@ -3,7 +3,8 @@ import IconLoading from "@Components/IconLoading";
 import React, { PropsWithChildren } from "react";
 import { ButtonProps } from "../Button";
 import "./OutlineButton.scss";
-export interface OutlineButtonProps extends ButtonProps {}
+
+export interface OutlineButtonProps extends ButtonProps { }
 
 const OutlineButton = React.forwardRef(
   (props: PropsWithChildren<OutlineButtonProps>, ref: React.Ref<any>) => {

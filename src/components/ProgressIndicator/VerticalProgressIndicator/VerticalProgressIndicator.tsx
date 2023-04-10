@@ -1,9 +1,9 @@
 import React from "react";
-import "./VerticalProgressIndicator.scss";
 import { Radio } from "antd";
 import classNames from "classnames";
 import _throttle from "lodash/throttle";
 import { ProgressIndicatorModel } from "../ProgressIndicator";
+import "./VerticalProgressIndicator.scss";
 
 export interface VerticalProgressIndicatorProps {
   list?: ProgressIndicatorModel[];

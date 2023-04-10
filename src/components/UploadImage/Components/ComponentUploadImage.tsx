@@ -3,12 +3,12 @@ import React, { Reducer, RefObject } from "react";
 import { useDropzone } from "react-dropzone";
 import { UploadImageProps } from "../UploadImage";
 import CroppedModal, { ImageResult } from "./CroppedModal/CroppedModal";
-import "./ComponentUploadImage.scss";
 import { Menu } from "./ComponentMenuImage";
 import classNames from "classnames";
 import { notification } from "antd";
 import CloudUpload24 from "@carbon/icons-react/es/cloud--upload/24";
 import Edit24 from "@carbon/icons-react/es/edit/24";
+import "./ComponentUploadImage.scss";
 
 export interface ImageFile {
   fileId: string | number;
@@ -55,7 +55,7 @@ const fileReducer = (
 };
 
 export interface ComponentUploadImageProps
-  extends UploadImageProps<Model, ModelFilter> {}
+  extends UploadImageProps<Model, ModelFilter> { }
 
 export function ComponentUploadImage(props: ComponentUploadImageProps) {
   const {
@@ -176,7 +176,7 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
 
   React.useEffect(() => {
     if (typeof getListFile === "function") {
-      getListFile().subscribe((res) => {});
+      getListFile().subscribe((res) => { });
     } else {
       if (files && files.length > 0) {
         let loadedFiles = [...files];

@@ -1,7 +1,7 @@
 import React from "react";
-import "./FileLoadingContent.scss";
 import { FileModel } from "../UploadFile";
 import IconLoading from "@Components/IconLoading/IconLoading";
+import "./FileLoadingContent.scss";
 
 export interface FileLoadingContentProps {
   loadingFiles?: FileModel[];

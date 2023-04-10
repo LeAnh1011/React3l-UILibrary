@@ -1,6 +1,5 @@
 import React, { RefObject, Reducer } from "react";
 import { v4 as uuidv4 } from "uuid";
-import "./AdvanceTreeFilter.scss";
 import { Model, ModelFilter } from "react3l-common";
 import Tree from "../../Tree";
 import { useDebounceFn } from "ahooks";
@@ -11,6 +10,7 @@ import InputTag from "@Components/Input/InputTag";
 import InputSelect from "../../Input/InputSelect";
 import { BORDER_TYPE } from "@Configs/enum";
 import { IdFilter } from "react3l-advanced-filters";
+import "./AdvanceTreeFilter.scss";
 
 export interface AdvanceTreeFilterProps<
   T extends Model,

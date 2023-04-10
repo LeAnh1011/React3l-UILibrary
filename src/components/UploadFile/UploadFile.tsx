@@ -5,9 +5,9 @@ import classNames from "classnames";
 import React, { ReactNode, RefObject, SetStateAction } from "react";
 import { useDropzone } from "react-dropzone";
 import type { Observable } from "rxjs";
-import "./UploadFile.scss";
 import FileLoadedContent from "./FileLoadedContent/FileLoadedContent";
 import FileLoadingContent from "./FileLoadingContent/FileLoadingContent";
+import "./UploadFile.scss";
 
 export interface FileModel {
   id?: number;

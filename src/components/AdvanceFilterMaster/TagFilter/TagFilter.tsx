@@ -411,8 +411,8 @@ function TagFilter(props: TagFilterProps) {
                             <Fragment key={index}>
                               {(item?.filterType === "greaterEqual" ||
                                 item?.filterType === "greater") && (
-                                <>{formatNumber(item.filterValue)}&minus;</>
-                              )}
+                                  <>{formatNumber(item.filterValue)}&minus;</>
+                                )}
                             </Fragment>
                           ))}
                         {itemTag?.type === "number" &&
@@ -431,8 +431,8 @@ function TagFilter(props: TagFilterProps) {
                             <Fragment key={index}>
                               {(item?.filterType === "greaterEqual" ||
                                 item?.filterType === "greater") && (
-                                <>{formatDate(item.filterValue)}&minus;</>
-                              )}
+                                  <>{formatDate(item.filterValue)}&minus;</>
+                                )}
                             </Fragment>
                           ))}
                         {itemTag?.type === "date" &&
@@ -459,18 +459,18 @@ function TagFilter(props: TagFilterProps) {
                                               <span>
                                                 {checkMappingField(itemTag.key)
                                                   ? itemValue[
-                                                      checkMappingField(
-                                                        itemTag.key
-                                                      )
-                                                    ]
+                                                  checkMappingField(
+                                                    itemTag.key
+                                                  )
+                                                  ]
                                                   : itemValue?.name}
                                               </span>
                                               {index <
                                                 itemTag?.value?.length - 1 && (
-                                                <span className="m-r--3xs">
-                                                  &#44;
-                                                </span>
-                                              )}
+                                                  <span className="m-r--3xs">
+                                                    &#44;
+                                                  </span>
+                                                )}
                                             </>
                                           </span>
                                         )
@@ -481,8 +481,8 @@ function TagFilter(props: TagFilterProps) {
                                   <span>
                                     {checkMappingField(itemTag.key)
                                       ? itemTag?.value[0][
-                                          checkMappingField(itemTag.key)
-                                        ]
+                                      checkMappingField(itemTag.key)
+                                      ]
                                       : itemTag?.value[0]?.name}
                                   </span>
                                   {index < itemTag?.value?.length - 1 && (
@@ -492,8 +492,8 @@ function TagFilter(props: TagFilterProps) {
                                     {" "}
                                     {checkMappingField(itemTag.key)
                                       ? itemTag?.value[1][
-                                          checkMappingField(itemTag.key)
-                                        ]
+                                      checkMappingField(itemTag.key)
+                                      ]
                                       : itemTag?.value[1]?.name}
                                   </span>
                                   <span>
@@ -511,16 +511,16 @@ function TagFilter(props: TagFilterProps) {
                                           <span>
                                             {checkMappingField(itemTag.key)
                                               ? itemValue[
-                                                  checkMappingField(itemTag.key)
-                                                ]
+                                              checkMappingField(itemTag.key)
+                                              ]
                                               : itemValue?.name}
                                           </span>
                                           {index <
                                             itemTag?.value?.length - 1 && (
-                                            <span className="m-r--3xs">
-                                              &#44;
-                                            </span>
-                                          )}
+                                              <span className="m-r--3xs">
+                                                &#44;
+                                              </span>
+                                            )}
                                         </>
                                       </span>
                                     )

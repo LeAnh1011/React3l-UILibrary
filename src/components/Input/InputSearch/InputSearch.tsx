@@ -1,5 +1,4 @@
 import React, { RefObject } from "react";
-import "./InputSearch.scss";
 import { Model, ModelFilter } from "react3l-common";
 import classNames from "classnames";
 import { Empty } from "antd";
@@ -15,6 +14,7 @@ import {
 } from "rxjs";
 import InputSearchSelect from "./InputSearchSelect/InputSearchSelect";
 import IconLoading from "@Components/IconLoading/IconLoading";
+import "./InputSearch.scss";
 
 export interface InputSearchProps<
   T extends Model,

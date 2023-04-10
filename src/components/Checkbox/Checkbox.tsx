@@ -3,8 +3,8 @@ import {
   Checkbox as CheckboxAntd,
   CheckboxProps as CheckboxPropsAntd,
 } from "antd";
-import "./Checkbox.scss";
 import CheckboxGroup from "./CheckboxGroup";
+import "./Checkbox.scss";
 
 export interface CheckboxProps {
   onChange?: (value: boolean) => void;

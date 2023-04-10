@@ -1,6 +1,5 @@
 import React, { RefObject, Reducer } from "react";
 import { v4 as uuidv4 } from "uuid";
-import "./AdvanceTreeFilterMaster.scss";
 import { Model, ModelFilter } from "react3l-common";
 import Tree from "../../Tree";
 import { useDebounceFn } from "ahooks";
@@ -12,6 +11,7 @@ import classNames from "classnames";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import Search16 from "@carbon/icons-react/es/search/16";
 import { IdFilter } from "react3l-advanced-filters";
+import "./AdvanceTreeFilterMaster.scss";
 
 export interface AdvanceTreeFilterMasterProps<
   T extends Model,

@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import React, { ReactSVGElement, RefObject } from "react";
-import "./AdvanceNumberFilter.scss";
 import { ReactNode } from "react";
 import { BORDER_TYPE } from "@Configs/enum";
+import "./AdvanceNumberFilter.scss";
 
 export const DECIMAL: string = "DECIMAL";
 export const LONG: string = "LONG";
@@ -162,7 +162,7 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
             number = parseFloat(stringValue);
             isOutOfRange =
               (typeof max === "number" && number > max) ||
-              (typeof min === "number" && number < min)
+                (typeof min === "number" && number < min)
                 ? true
                 : false;
             return [number, isOutOfRange];
@@ -170,7 +170,7 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
             number = parseInt(stringValue);
             isOutOfRange =
               (typeof max === "number" && number > max) ||
-              (typeof min === "number" && number < min)
+                (typeof min === "number" && number < min)
                 ? true
                 : false;
             return [number, isOutOfRange];

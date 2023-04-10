@@ -8,10 +8,10 @@ import { ErrorObserver, forkJoin, Observable, finalize } from "rxjs";
 import Modal from "../Modal/Modal";
 import Button from "@Components/Button";
 import { Creator, FileModel, Message } from "./Comment.model";
-import "./Comment.scss";
 import ContentEditable from "./ContentEditable/ContentEditable";
 import IconLoading from "@Components/IconLoading";
 import { Popconfirm } from "antd";
+import "./Comment.scss";
 
 export interface CommentProps<TFilter extends ModelFilter> {
   userInfo: Creator;
@@ -294,7 +294,7 @@ function Comment(props: CommentProps<ModelFilter>) {
             }, 200);
             getListMessages();
           },
-          (err: ErrorObserver<Error>) => {}
+          (err: ErrorObserver<Error>) => { }
         );
     }
   }, [messageCurrentEdit, updateMessage, getListMessages, bindEventClick]);

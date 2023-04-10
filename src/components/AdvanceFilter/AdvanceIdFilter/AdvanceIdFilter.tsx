@@ -1,16 +1,16 @@
+import React, { RefObject } from "react";
 import { DEBOUNCE_TIME_300 } from "@Configs/consts";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { Model, ModelFilter } from "react3l-common";
 import { useDebounceFn } from "ahooks";
 import { Empty, Tooltip } from "antd";
 import classNames from "classnames";
-import React, { RefObject } from "react";
 import type { ErrorObserver, Observable } from "rxjs";
 import { CommonService } from "@Services/common-service";
 import InputSelect from "@Components/Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "@Configs/enum";
-import "./AdvanceIdFilter.scss";
 import IconLoading from "@Components/IconLoading/IconLoading";
+import "./AdvanceIdFilter.scss";
 
 export interface AdvanceIdFilterProps<
   T extends Model,
@@ -141,7 +141,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
         ? JSON.parse(JSON.stringify(valueFilter))
         : new ClassFilter();
       handleGetList(filter);
-    } catch (error) {}
+    } catch (error) { }
   }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(
@@ -305,7 +305,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                         onClick={handleClickItem(item)}
                       >
                         {maxLengthItem &&
-                        render(item)?.length > maxLengthItem ? (
+                          render(item)?.length > maxLengthItem ? (
                           <Tooltip title={render(item)}>
                             {CommonService.limitWord(
                               render(item),
@@ -347,7 +347,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                     >
                       <span className="advance-id-filter__text">
                         {maxLengthItem &&
-                        render(item)?.length > maxLengthItem ? (
+                          render(item)?.length > maxLengthItem ? (
                           <Tooltip title={render(item)}>
                             {CommonService.limitWord(
                               render(item),

@@ -1,7 +1,7 @@
 import { Radio as RadioAntd, RadioGroupProps, RadioProps } from "antd";
 import React from "react";
-import "./Radio.scss";
 import RadioGroup from "./RadioGroup";
+import "./Radio.scss";
 
 export interface RadioComponentProps {
   onChange?: (value: boolean) => void;

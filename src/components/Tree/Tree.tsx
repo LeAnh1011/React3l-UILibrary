@@ -14,8 +14,8 @@ import React, { RefObject } from "react";
 import { Model, ModelFilter } from "react3l-common";
 import type { Observable } from "rxjs";
 import { CommonService } from "@Services/common-service";
-import "./Tree.scss";
 import { TreeNode as CustomTreeNode } from "./TreeNode";
+import "./Tree.scss";
 
 function SwitcherIcon() {
   return (
@@ -250,7 +250,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
         },
       });
     }
-    return () => {};
+    return () => { };
   }, [
     getTreeData,
     selectedKey,
@@ -390,7 +390,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                         {render && typeof render === "function" ? (
                           <>
                             {maxLengthItem &&
-                            render(node?.item)?.length > maxLengthItem ? (
+                              render(node?.item)?.length > maxLengthItem ? (
                               <Tooltip title={render(node?.item)}>
                                 {CommonService.limitWord(
                                   render(node?.item),
@@ -404,7 +404,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                         ) : (
                           <>
                             {maxLengthItem &&
-                            node?.title?.length > maxLengthItem ? (
+                              node?.title?.length > maxLengthItem ? (
                               <Tooltip title={node?.title}>
                                 {CommonService.limitWord(
                                   node?.title,
@@ -452,7 +452,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                             >
                               <div>
                                 {maxLengthItem &&
-                                node?.title?.length > maxLengthItem ? (
+                                  node?.title?.length > maxLengthItem ? (
                                   <Tooltip title={node?.title}>
                                     {CommonService.limitWord(
                                       node?.title,

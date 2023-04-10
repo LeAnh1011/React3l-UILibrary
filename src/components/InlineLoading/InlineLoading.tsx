@@ -1,9 +1,10 @@
 import classNames from "classnames";
 import React, { PropsWithChildren } from "react";
-import "./InlineLoading.scss";
 import CheckmarkFilled16 from "@carbon/icons-react/es/checkmark--filled/16";
 import ErrorFilled16 from "@carbon/icons-react/es/error--filled/16";
 import IconLoading from "@Components/IconLoading";
+import "./InlineLoading.scss";
+
 export type StatusLoading = "default" | "submitting" | "submitted" | "error";
 export interface InlineLoadingProps {
   className?: string;

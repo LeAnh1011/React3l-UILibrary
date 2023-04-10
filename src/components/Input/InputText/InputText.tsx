@@ -2,8 +2,8 @@ import classNames from "classnames";
 import { BORDER_TYPE } from "@Configs/enum";
 import React, { ReactNode, ReactSVGElement, RefObject } from "react";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
-import "./InputText.scss";
 import { Tooltip } from "antd";
+import "./InputText.scss";
 
 export interface InputAction {
   name?: ReactNode;

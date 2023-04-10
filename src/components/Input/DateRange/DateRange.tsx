@@ -7,7 +7,6 @@ import React, { ReactSVGElement, RefObject } from "react";
 import { CommonService } from "@Services/common-service";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import Calendar16 from "@carbon/icons-react/es/calendar/16";
-
 import "./DateRange.scss";
 
 const { RangePicker } = DatePicker;

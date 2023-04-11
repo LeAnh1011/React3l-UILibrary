@@ -21,7 +21,7 @@ function SuffixDateIcon() {
 
 interface AdvanceDateRangeFilterProps {
   label?: string;
-  value: [Moment, Moment];
+  values: [Moment, Moment];
   open?: boolean;
   dateFormat?: string[];
   onChange?: (value: [Moment, Moment], dateString?: [string, string]) => void;
@@ -37,7 +37,7 @@ function AdvanceDateRangeFilter(
   props: AdvanceDateRangeFilterProps & RangePickerProps
 ) {
   const {
-    value,
+    values,
     dateFormat,
     onChange,
     type,
@@ -56,14 +56,14 @@ function AdvanceDateRangeFilter(
 
   const internalValue: [Moment, Moment] = React.useMemo(() => {
     return [
-      typeof value[0] === "string"
-        ? CommonService.toMomentDate(value[0])
-        : value[0],
-      typeof value[1] === "string"
-        ? CommonService.toMomentDate(value[1])
-        : value[1],
+      typeof values[0] === "string"
+        ? CommonService.toMomentDate(values[0])
+        : values[0],
+      typeof values[1] === "string"
+        ? CommonService.toMomentDate(values[1])
+        : values[1],
     ];
-  }, [value]);
+  }, [values]);
 
   const handleClearDate = React.useCallback(
     (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {

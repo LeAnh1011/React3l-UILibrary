@@ -11,7 +11,6 @@
   .advance-date-range-filter__label {
     width: 100%;
     display: flex;
-    justify-content: center;
 
     label {
       font-size: 0.75em;
@@ -131,7 +130,7 @@
     &.advance-date-range-filter--white {
       background-color: var(--color-white);
       &:hover {
-        +.advance-date-range-filter__icon-wrapper--material {
+        + .advance-date-range-filter__icon-wrapper--material {
           background-color: var(--palette-grayHover-10);
         }
       }

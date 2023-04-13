@@ -11,12 +11,11 @@
     position: relative;
     width: 100%;
   }
- 
 
   .time-picker__label {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 
     label {
       font-size: 0.75em;
@@ -150,7 +149,7 @@
     &.time-picker--white {
       background-color: var(--color-white);
       &:hover {
-        +.time-picker__icon-wrapper--material {
+        + .time-picker__icon-wrapper--material {
           background-color: var(--palette-grayHover-10);
         }
       }

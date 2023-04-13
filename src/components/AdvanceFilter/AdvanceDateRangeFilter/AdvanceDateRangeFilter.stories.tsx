@@ -48,7 +48,7 @@ export function AdvanceDateRangeFilterStories() {
             label="Ngày nhập hàng"
             placeholder={["Chọn ngày ...", "Chọn ngày ..."]}
             onChange={handleChange}
-            value={value}
+            values={value}
             disabled={isDisabled}
           />
         </FormItem>

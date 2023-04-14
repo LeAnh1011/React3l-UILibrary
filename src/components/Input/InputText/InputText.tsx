@@ -221,7 +221,7 @@ const InputText = React.forwardRef(
                 className={classNames("component__input", {
                   "disabled-field": disabled,
                 })}
-                autoComplete="off"
+                autoComplete="nope"
               />
             </div>
           </Tooltip>

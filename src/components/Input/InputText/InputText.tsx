@@ -13,7 +13,7 @@ export interface InputAction {
 export interface InputTextProps {
   label?: string;
   type?: BORDER_TYPE;
-  typeInput?: 'text' | 'password';
+  typeInput?: "text" | "password";
   isRequired?: boolean;
   floatLabel?: boolean;
   isMaterial?: boolean;
@@ -32,6 +32,7 @@ export interface InputTextProps {
   onEnter?: (T: string | null) => void;
   onBlur?: (T: string | null) => void;
   onKeyDown?: (event: any) => void;
+  autoComplete?: boolean;
 }
 
 const InputText = React.forwardRef(
@@ -220,6 +221,7 @@ const InputText = React.forwardRef(
                 className={classNames("component__input", {
                   "disabled-field": disabled,
                 })}
+                autoComplete="off"
               />
             </div>
           </Tooltip>
@@ -267,7 +269,7 @@ InputText.defaultProps = {
   disabled: false,
   className: "",
   maxLength: 0,
-  typeInput: "text"
+  typeInput: "text",
 };
 
 export default InputText;

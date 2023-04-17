@@ -11,10 +11,11 @@ export interface CustomProps {
   size?: "md" | "xl";
   appendToBody?: boolean;
   type?: "vertical" | "horizontal";
+  disabled?: boolean;
 }
 
 function OverflowMenu(props: CustomProps) {
-  const { size, list, type } = props;
+  const { size, list, type, disabled } = props;
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
@@ -97,10 +98,12 @@ function OverflowMenu(props: CustomProps) {
               "btn--md": size === "md",
               "btn--xl": size === "xl",
               "btn--shadow": isExpand,
+              "overflow-menu--disabled": disabled,
             }
           )}
           onClick={handleExpand}
           onKeyDown={handleKeyDown}
+          disabled={disabled}
         >
           {type === "vertical" ? (
             <OverflowMenuVertical16 />

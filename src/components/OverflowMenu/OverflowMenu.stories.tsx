@@ -39,7 +39,7 @@ function Default() {
 
   return (
     <div style={{ width: "600px" }}>
-      <OverflowMenu size={size} list={list}></OverflowMenu>
+      <OverflowMenu size={size} list={list} disabled={true}></OverflowMenu>
 
       <Radio.Group onChange={handleChangeSize} value={size}>
         <Radio value={"md"}>md</Radio>

@@ -33,6 +33,7 @@ export interface InputTextProps {
   onBlur?: (T: string | null) => void;
   onKeyDown?: (event: any) => void;
   autoComplete?: boolean;
+  nameAttr?: string;
 }
 
 const InputText = React.forwardRef(
@@ -57,6 +58,7 @@ const InputText = React.forwardRef(
       onEnter,
       onBlur,
       onKeyDown,
+      nameAttr,
     } = props;
 
     const [internalValue, setInternalValue] = React.useState<string>("");
@@ -221,7 +223,8 @@ const InputText = React.forwardRef(
                 className={classNames("component__input", {
                   "disabled-field": disabled,
                 })}
-                autoComplete="nope"
+                autoComplete="off"
+                name={nameAttr}
               />
             </div>
           </Tooltip>

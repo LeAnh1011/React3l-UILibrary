@@ -39,7 +39,7 @@ body {
 }
 
 .link-text {
-  color: #000000d9;
+  color: var(--color-primary);
   text-decoration: underline;
   &:hover {
     color: #0f62fe;

@@ -70,7 +70,10 @@ export function AdvanceTreeFilterMasterStories() {
 
   const [item, setItem] = React.useState<Model>(demoItem);
 
-  const [isMultiple, setMultiple] = React.useState(false);
+  const [isMultiple, setMultiple] = React.useState(true);
+
+  const [isCheckStrictly, setIsCheckStrictly] = React.useState(true);
+
   const [
     isSelectWithPreferOption,
     setIsSelectWithPreferOption,
@@ -80,6 +83,11 @@ export function AdvanceTreeFilterMasterStories() {
     if (event.target.value) setItem(new Model());
     else dispatch({ type: "UPDATE_MODEL", data: [] });
     setMultiple(event.target.value);
+  }, []);
+
+  const handleChangeStrictly = React.useCallback((event: RadioChangeEvent) => {
+    dispatch({ type: "UPDATE_MODEL", data: [] });
+    setIsCheckStrictly(event.target.value);
   }, []);
 
   const handleChangeItem = React.useCallback((items: Model[], isMultiple) => {
@@ -107,15 +115,15 @@ export function AdvanceTreeFilterMasterStories() {
           selectable={!isMultiple}
           classFilter={DistrictFilter}
           onChange={handleChangeItem}
-          checkStrictly={true}
-          item={item}
+          item={isMultiple ? undefined : item}
           listItem={isMultiple ? listItem : []}
           getTreeData={demoSearchFunc}
           disabled={false}
+          checkStrictly={isCheckStrictly}
           selectWithPreferOption={isSelectWithPreferOption}
           preferOptions={isSelectWithPreferOption ? list : undefined}
-          maxLengthItem={10}
-          render={(t) => t?.code}
+          maxLengthItem={20}
+          render={(t) => t?.name}
         />
       </div>
 
@@ -133,6 +141,12 @@ export function AdvanceTreeFilterMasterStories() {
         >
           <Radio value={true}>Select with prefer option</Radio>
           <Radio value={false}>Not select with prefer option</Radio>
+        </Radio.Group>
+      </div>
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeStrictly} value={isCheckStrictly}>
+          <Radio value={false}>Un strictly</Radio>
+          <Radio value={true}>Strictly</Radio>
         </Radio.Group>
       </div>
     </div>

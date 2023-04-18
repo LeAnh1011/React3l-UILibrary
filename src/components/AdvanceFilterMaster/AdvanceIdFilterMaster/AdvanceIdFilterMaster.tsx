@@ -147,7 +147,7 @@ function AdvanceIdFilterMaster(
       if (!disabled) {
         setExpand(true);
         setTimeout(() => {
-          inputRef.current.children[0].focus();
+          inputRef.current.children[0].children[0].focus();
         }, 300);
         await handleLoadList();
       }

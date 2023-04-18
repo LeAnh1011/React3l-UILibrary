@@ -64,6 +64,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     preferOptions,
     maxLengthItem = 30,
     render,
+    checkStrictly,
   } = props;
 
   const [internalTreeData, setInternalTreeData] = React.useState<
@@ -171,6 +172,23 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   }, []);
 
   const handleCheck: any = React.useCallback(
+    (checkedKeys: Key[]) => {
+      setInternalCheckedKeys(checkedKeys);
+      if (typeof onChange === "function") {
+        const checkedNodes = searchTree(
+          [...internalTreeData, ...internalPreferOptionsTreeData],
+          checkedKeys
+        );
+        const checkedItems = checkedNodes.map(
+          (currentNode) => currentNode.item
+        );
+        onChange([...checkedItems]);
+      }
+    },
+    [internalPreferOptionsTreeData, internalTreeData, onChange, searchTree]
+  );
+
+  const handleCheckStrictly: any = React.useCallback(
     (checkedKeys: { checked: Key[]; halfChecked: Key[] }) => {
       setInternalCheckedKeys(checkedKeys.checked);
       if (typeof onChange === "function") {
@@ -250,7 +268,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
         },
       });
     }
-    return () => { };
+    return () => {};
   }, [
     getTreeData,
     selectedKey,
@@ -321,7 +339,11 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
             } else {
               checkedKeys = [...internalCheckedKeys, item.key];
             }
-            handleCheck({ checked: checkedKeys, halfChecked: [] });
+            if (checkStrictly) {
+              handleCheckStrictly({ checked: checkedKeys, halfChecked: [] });
+            } else {
+              handleCheck(checkedKeys);
+            }
           }
 
           break;
@@ -348,7 +370,14 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       }
       return;
     },
-    [checkable, handleCheck, handleSelect, internalCheckedKeys]
+    [
+      checkStrictly,
+      checkable,
+      handleCheck,
+      handleCheckStrictly,
+      handleSelect,
+      internalCheckedKeys,
+    ]
   );
 
   return (
@@ -372,7 +401,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                   showLine={false && { showLeafIcon: false }}
                   switcherIcon={<SwitcherIcon />}
                   onExpand={handleExpandKey}
-                  onCheck={handleCheck}
+                  onCheck={checkStrictly ? handleCheckStrictly : handleCheck}
                   onSelect={handleSelect}
                   treeData={internalTreeData}
                   titleRender={(node: any) => (
@@ -390,7 +419,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                         {render && typeof render === "function" ? (
                           <>
                             {maxLengthItem &&
-                              render(node?.item)?.length > maxLengthItem ? (
+                            render(node?.item)?.length > maxLengthItem ? (
                               <Tooltip title={render(node?.item)}>
                                 {CommonService.limitWord(
                                   render(node?.item),
@@ -404,7 +433,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                         ) : (
                           <>
                             {maxLengthItem &&
-                              node?.title?.length > maxLengthItem ? (
+                            node?.title?.length > maxLengthItem ? (
                               <Tooltip title={node?.title}>
                                 {CommonService.limitWord(
                                   node?.title,
@@ -438,7 +467,9 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                           showLine={false && { showLeafIcon: false }}
                           treeData={internalPreferOptionsTreeData} // pass internalTreeData here  showLine={false && { showLeafIcon: false }}
                           switcherIcon={<SwitcherIcon />}
-                          onCheck={handleCheck}
+                          onCheck={
+                            checkStrictly ? handleCheckStrictly : handleCheck
+                          }
                           onSelect={handleSelect}
                           checkedKeys={internalCheckedKeys}
                           selectedKeys={internalSelectedKeys}
@@ -452,7 +483,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                             >
                               <div>
                                 {maxLengthItem &&
-                                  node?.title?.length > maxLengthItem ? (
+                                node?.title?.length > maxLengthItem ? (
                                   <Tooltip title={node?.title}>
                                     {CommonService.limitWord(
                                       node?.title,

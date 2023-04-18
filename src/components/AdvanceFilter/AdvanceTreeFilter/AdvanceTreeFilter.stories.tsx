@@ -161,7 +161,7 @@ export function AdvanceTreeFilterStories() {
             classFilter={DistrictFilter}
             onChange={handleChangeItem}
             checkStrictly={true}
-            item={item}
+            item={isMultiple ? undefined : item}
             listItem={isMultiple ? listItem : []}
             getTreeData={demoSearchFunc}
             type={type}

@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 import {
   AdvanceFilterAction,
   advanceFilterReducer,
-  advanceFilterService
+  advanceFilterService,
 } from "../../../services/advance-filter-service";
 import AdvanceEnumFilterMaster from "./AdvanceEnumFilterMaster";
 export class DemoFilter extends ModelFilter {
@@ -89,10 +89,9 @@ export function AdvanceEnumFilterMasterStories() {
           render={handleRenderModel}
           onChange={setValue}
           getList={demoSearchFunc}
-          label={"Label"}
+          label={"Đơn vị"}
           isMultiple={isMultiple}
           onChangeMultiple={handleChangeFilter} // if type is multiple pass this props
-          title="Đơn vị"
         />
       </div>
 

@@ -3,14 +3,17 @@ import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
 import { Observable, Subscription } from "rxjs";
 import nameof from "ts-nameof.macro";
-import AdvanceMultipleIdFilterMaster from './AdvanceMultipleIdFilterMaster';
-
+import AdvanceMultipleIdFilterMaster from "./AdvanceMultipleIdFilterMaster";
 
 const demoObservable = new Observable<Model[]>((observer) => {
   setTimeout(() => {
     observer.next([
       { id: 4, name: "Ban hành chính", code: "FAD" },
-      { id: 1, name: "Ban công nghệ thông tin Ban công nghệ thông tin", code: "FIM" },
+      {
+        id: 1,
+        name: "Ban công nghệ thông tin Ban công nghệ thông tin",
+        code: "FIM",
+      },
       { id: 2, name: "Ban nhân sự", code: "FHR" },
       { id: 3, name: "Ban tài chính", code: "FAF" },
       { id: 5, name: "Ban đời sống", code: "DSS" },
@@ -40,7 +43,6 @@ const demoSearchFunc = (TModelFilter?: ModelFilter) => {
 };
 
 export function AdvanceMultipleIdFilterMasterStories() {
-
   const [filter, setFilter] = React.useState(new DemoFilter());
 
   React.useEffect(() => {
@@ -48,18 +50,20 @@ export function AdvanceMultipleIdFilterMasterStories() {
     if (!filter.id.in) {
       setFilter({
         ...filter,
-        id: { in: [10, 9, 4, 6] }
-      })
+        id: { in: [10, 9, 4, 6] },
+      });
     }
     return function cleanup() {
       subscription.unsubscribe();
     };
   }, [filter]);
 
-  const handleChangeFilter = React.useCallback((listItemm, ids) => {
-    setFilter({ ...filter, id: { in: ids } });
-  }, [filter]);
-
+  const handleChangeFilter = React.useCallback(
+    (listItemm, ids) => {
+      setFilter({ ...filter, id: { in: ids } });
+    },
+    [filter]
+  );
 
   return (
     <div style={{ margin: "10px", width: "250px" }}>
@@ -70,7 +74,7 @@ export function AdvanceMultipleIdFilterMasterStories() {
         searchProperty={nameof(DemoFilter.name)}
         onChange={handleChangeFilter}
         getList={demoSearchFunc}
-        title={'Đơn vị'}
+        label={"Đơn vị"}
         preferOptions={list}
       />
     </div>

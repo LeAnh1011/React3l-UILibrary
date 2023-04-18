@@ -138,7 +138,7 @@ function AdvanceTreeFilterMaster(
       if (!disabled) {
         if (!expanded) {
           setTimeout(() => {
-            inputRef.current.children[0].focus();
+            inputRef.current.children[0].children[0].focus();
           }, 400);
           const filterData = valueFilter
             ? { ...valueFilter }

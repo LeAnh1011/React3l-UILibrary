@@ -1,9 +1,17 @@
-import { ModelFilter } from "react3l-common";
-import { storiesOf } from "@storybook/react";
+import {
+  ArgsTable,
+  Description,
+  PRIMARY_STORY,
+  Primary,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import moment from "moment";
 import React from "react";
+import { ModelFilter } from "react3l-common";
 import { Observable, of } from "rxjs";
-import nameof from "ts-nameof.macro";
 import Comment from "./Comment";
 import { FileModel, Message } from "./Comment.model";
 
@@ -171,10 +179,50 @@ const demoGetList = (value: any) => {
   return of(userList);
 };
 
-function Default() {
+export default {
+  title: "Comment",
+  component: Comment,
+  subcomponents: { Comment },
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    placeholder: {
+      defaultValue: "Nhập bình luận...",
+    },
+    titleSave: {
+      defaultValue: "Lưu",
+    },
+    titleCancel: {
+      defaultValue: "Hủy",
+    },
+    isShowHeader: {
+      defaultValue: false,
+    },
+    canSend: {
+      defaultValue: true,
+    },
+  },
+};
+
+const Template: Story = (args) => {
   return (
     <div style={{ width: "880px", maxHeight: "600px" }}>
       <Comment
+        {...args}
         getMessages={demoSearchFunc}
         countMessages={demoCountFunc}
         postMessage={demoPostFunc}
@@ -189,14 +237,9 @@ function Default() {
           displayName: "Hangntt123",
           avatar: "",
         }}
-        placeholder="Nhập bình luận..."
-        titleSave="Lưu"
-        titleCancel="Hủy"
-        isShowHeader={true}
-        canSend={true}
       />
     </div>
   );
-}
+};
 
-storiesOf("Comment", module).add(nameof(Default), Default);
+export const Default = Template.bind({});

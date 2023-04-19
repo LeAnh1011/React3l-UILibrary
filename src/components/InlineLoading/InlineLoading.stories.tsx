@@ -1,13 +1,46 @@
 import React from "react";
-import { storiesOf } from "@storybook/react";
-import nameof from "ts-nameof.macro";
+import {
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import Button from "../Button";
 import { Tabs } from "antd";
 import Add16 from "@carbon/icons-react/es/add/16";
 import InlineLoading from "./InlineLoading";
 export type LoadingType = "default" | "submitting" | "submitted" | "error";
 const { TabPane } = Tabs;
-function InlineLoadingView() {
+export default {
+  title: "InlineLoading",
+  component: InlineLoading,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    status: {
+      defaultValue: "default",
+    },
+  },
+};
+const Template: Story = (args) => {
   const [loadingType, setLoadingType] = React.useState<LoadingType>("default");
   let i = 0;
   const handleOnClick = React.useCallback(() => {
@@ -40,6 +73,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-normal-no-icon btn--sm"
                 />
@@ -57,6 +91,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-normal-no-icon btn--sm"
                 />
@@ -74,6 +109,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-normal-no-icon btn--lg"
                 />
@@ -91,6 +127,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-normal-no-icon btn--xl"
                 />
@@ -118,6 +155,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-normal-no-icon btn--sm"
                 />
@@ -136,6 +174,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-normal-no-icon btn--sm"
                 />
@@ -154,6 +193,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-normal-no-icon btn--lg"
                 />
@@ -172,6 +212,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-normal-no-icon btn--xl"
                 />
@@ -202,6 +243,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-outline-no-icon btn--sm"
                 />
@@ -219,6 +261,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-outline-no-icon btn--sm"
                 />
@@ -236,6 +279,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-outline-no-icon btn--lg"
                 />
@@ -253,6 +297,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-outline-no-icon btn--xl"
                 />
@@ -280,6 +325,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-outline-no-icon btn--sm"
                 />
@@ -298,6 +344,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-outline-no-icon btn--sm"
                 />
@@ -316,6 +363,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-outline-no-icon btn--lg"
                 />
@@ -334,6 +382,7 @@ function InlineLoadingView() {
             <>
               {loadingType !== "default" && (
                 <InlineLoading
+                  {...args}
                   status={loadingType}
                   className="il-outline-no-icon btn--xl"
                 />
@@ -363,6 +412,7 @@ function InlineLoadingView() {
           >
             {loadingType !== "default" && (
               <InlineLoading
+                {...args}
                 status={loadingType}
                 className="il-bleed-no-icon btn--xl"
               />
@@ -374,6 +424,7 @@ function InlineLoadingView() {
             )}
             {loadingType !== "default" && (
               <InlineLoading
+                {...args}
                 status={loadingType}
                 className="il-bleed-no-icon btn--xl"
               />
@@ -392,9 +443,6 @@ function InlineLoadingView() {
       </Tabs>
     </div>
   );
-}
+};
 
-storiesOf("InlineLoading", module).add(
-  nameof(InlineLoadingView),
-  InlineLoadingView
-);
+export const Default = Template.bind({});

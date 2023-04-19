@@ -16,7 +16,7 @@ import {
   Title,
 } from "@storybook/addon-docs";
 
-export class DemoFilter extends ModelFilter {
+class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
   name: StringFilter = new StringFilter();
   code: StringFilter = new StringFilter();

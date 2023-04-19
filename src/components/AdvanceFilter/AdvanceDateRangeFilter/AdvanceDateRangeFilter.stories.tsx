@@ -47,7 +47,7 @@ export default {
           BORDER_TYPE.FLOAT_LABEL,
         ],
       },
-      defaultValue: 0,
+      defaultValue: 1,
     },
     value: {},
     dateFormat: {},

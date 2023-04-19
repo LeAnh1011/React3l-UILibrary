@@ -43,11 +43,11 @@ export default {
         type: "radio",
         options: [
           BORDER_TYPE.MATERIAL,
-          BORDER_TYPE.FLOAT_LABEL,
           BORDER_TYPE.BORDERED,
+          BORDER_TYPE.FLOAT_LABEL,
         ],
+        defaultValue: 1,
       },
-      defaultValue: 0,
     },
     value: {},
     dateFormat: {},

@@ -9,10 +9,14 @@ export interface ValidateObject {
 }
 
 export interface FormItemProps {
+  /**Show the status validation*/
   validateStatus?: ValidateStatus;
+  /**The validated message*/
   message?: string;
   children: ReactNode;
+  /**Place content to the right*/
   placeRight?: boolean;
+  /**Pass object validated to display state of  children field*/
   validateObject?: ValidateObject;
 }
 

@@ -16,42 +16,39 @@ export interface AdvanceIdFilterProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
+  /**Value users select*/
   value?: Model;
-
+  /**Value filter for api get data option*/
   valueFilter?: TModelFilter;
-
+  /**The property name of the model filter you want to search in the list data*/
   searchProperty?: string;
-
+  /**The type of searchProperty you want to search in the list data*/
   searchType?: string;
-
+  /**Placeholder of the component*/
   placeHolder?: string;
-
+  /**Not allow to handle change filter*/
   disabled?: boolean;
-
-  isMaterial?: boolean;
-
+  /**Append this component to body*/
   appendToBody?: boolean;
-
+  /**Api to get list data filter*/
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
-
+  /**Handle the change value of the component*/
   onChange?: (id: number, T?: T) => void;
-
+  /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
-
+  /**Model filter class of API get list data*/
   classFilter: new () => TModelFilter;
-
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
-
+  /**Label for filter field*/
   label?: string;
-
-  selectWithPreferOption?: boolean;
-
+  /**Control the size of the component*/
   isSmall?: boolean;
-
+  /**Prefer option filter to select*/
   preferOptions?: T[];
-
+  /**Set maximum length of each data row to render*/
   maxLengthItem?: number;
-
+  /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
 }
 
@@ -141,7 +138,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
         ? JSON.parse(JSON.stringify(valueFilter))
         : new ClassFilter();
       handleGetList(filter);
-    } catch (error) { }
+    } catch (error) {}
   }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(
@@ -305,7 +302,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                         onClick={handleClickItem(item)}
                       >
                         {maxLengthItem &&
-                          render(item)?.length > maxLengthItem ? (
+                        render(item)?.length > maxLengthItem ? (
                           <Tooltip title={render(item)}>
                             {CommonService.limitWord(
                               render(item),
@@ -347,7 +344,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                     >
                       <span className="advance-id-filter__text">
                         {maxLengthItem &&
-                          render(item)?.length > maxLengthItem ? (
+                        render(item)?.length > maxLengthItem ? (
                           <Tooltip title={render(item)}>
                             {CommonService.limitWord(
                               render(item),
@@ -375,7 +372,6 @@ AdvanceIdFilter.defaultProps = {
   searchType: "contain",
   appendToBody: false,
   render: defaultRenderObject,
-  isMaterial: false,
   disabled: false,
   maxLengthItem: 30,
   bgColor: "white",

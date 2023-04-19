@@ -1,64 +1,145 @@
-import Radio, { RadioChangeEvent } from "antd/lib/radio";
 import React from "react";
 import { NumberFilter } from "react3l-advanced-filters";
 import { ModelFilter } from "react3l-common";
 import { BORDER_TYPE } from "../../../config/enum";
-import FormItem from "../../FormItem/FormItem";
 import AdvanceInputRangeFilter from "./AdvanceInputRangeFilter";
+import {
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 
 class DemoFilter extends ModelFilter {
   number: NumberFilter = new NumberFilter();
 }
 
-export function AdvanceInputRangeFilterStories() {
-  const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
-  const [isSmall, setIsSmall] = React.useState(false);
+export default {
+  title: "AdvanceFilter/AdvanceInputRangeFilter",
+  component: AdvanceInputRangeFilter,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    valueRange: {},
+    placeHolderRange: {
+      defaultValue: ["Từ", "Đến"],
+    },
+    onChangeRange: {},
+    label: {
+      control: "text",
+      defaultValue: "Tổng doanh thu",
+      description: "Label for filter field",
+    },
+    type: {
+      control: {
+        type: "radio",
+        options: [
+          BORDER_TYPE.MATERIAL,
+          BORDER_TYPE.BORDERED,
+          BORDER_TYPE.FLOAT_LABEL,
+        ],
+      },
+      defaultValue: 1,
+    },
+    isSmall: {},
+    isRequired: {
+      description: "Prop of InputNumber Component",
+    },
+    value: {
+      description: "Prop of InputNumber Component",
+    },
+    prefix: {
+      description: "Prop of InputNumber Component",
+    },
+    suffix: {
+      description: "Prop of InputNumber Component",
+    },
+    placeHolder: {
+      description: "Prop of InputNumber Component",
+    },
+    allowNegative: {
+      description: "Prop of InputNumber Component",
+    },
+    numberType: {
+      description: "Prop of InputNumber Component",
+    },
+    decimalDigit: {
+      description: "Prop of InputNumber Component",
+    },
+    isReverseSymb: {
+      description: "Prop of InputNumber Component",
+    },
+    disabled: {
+      description: "Prop of InputNumber Component",
+    },
+    className: {
+      description: "Prop of InputNumber Component",
+    },
+    min: {
+      description: "Prop of InputNumber Component",
+    },
+    max: {
+      description: "Prop of InputNumber Component",
+    },
+    action: {
+      description: "Prop of InputNumber Component",
+    },
+    onChange: {
+      description: "Prop of InputNumber Component",
+    },
+    onBlur: {
+      description: "Prop of InputNumber Component",
+    },
+    onEnter: {
+      description: "Prop of InputNumber Component",
+    },
+  },
+};
 
-
-  const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
-    setType(event.target.value);
-  }, []);
-
-  const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
-    setIsSmall(event.target.value);
-  }, []);
-
+const Template: Story = (args) => {
   const [filter, dispatch] = React.useState<DemoFilter>(new DemoFilter());
   const [numberRange, setNumberRange] = React.useState<[]>([]);
 
-  const handleChangeFilter = React.useCallback((value) => {
-    setNumberRange({ ...value });
-    dispatch({...filter, number: {lessEqual: value[0], greaterEqual: value[1]}})
-  }, [filter]);
+  const handleChangeFilter = React.useCallback(
+    (value) => {
+      setNumberRange({ ...value });
+      dispatch({
+        ...filter,
+        number: { lessEqual: value[0], greaterEqual: value[1] },
+      });
+    },
+    [filter]
+  );
 
   return (
     <div style={{ width: "300px", margin: "10px" }}>
       <div style={{ margin: "10px", width: "250px" }}>
-        <FormItem message={"Field required!"}>
-          <AdvanceInputRangeFilter
-            type={type}
-            placeHolderRange={["From...", "To..."]}
-            valueRange={numberRange}
-            onChangeRange={handleChangeFilter}
-            isSmall={isSmall}
-            label={"Ngày xuất kho"}
-          />
-        </FormItem>
-      </div>
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeStyle} value={type}>
-          <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
-          <Radio value={BORDER_TYPE.FLOAT_LABEL}>Float Label</Radio>
-          <Radio value={BORDER_TYPE.BORDERED}>Bordered</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeSize} value={isSmall}>
-          <Radio value={true}>Small</Radio>
-          <Radio value={false}>Default</Radio>
-        </Radio.Group>
+        <AdvanceInputRangeFilter
+          {...args}
+          valueRange={numberRange}
+          onChangeRange={handleChangeFilter}
+        />
       </div>
     </div>
   );
-}
+};
+
+export const Default = Template.bind({});

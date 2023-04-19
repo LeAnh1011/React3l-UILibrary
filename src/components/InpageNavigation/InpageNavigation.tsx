@@ -4,12 +4,19 @@ import { Model } from "react3l-common";
 import "./InpageNavigation.scss";
 
 export interface InpageNavigationProps {
+  /**Use to custom style the component*/
   className?: string;
+  /**List navigation */
   list?: Model[];
+  /**Title of component */
   title?: string;
+  /**Description of component */
   description?: string;
+  /**Handle onChange when onClick to navigation_item */
   onChange?: (data?: any) => void;
+  /**Option to custom render name of navigation_item */
   render?: (t: Model) => string;
+  /**Pass default navigation_item-active */
   defaultActiveItem?: Model;
 }
 
@@ -17,7 +24,15 @@ function defaultRenderObject<T extends Model>(t: T) {
   return t?.name;
 }
 function InpageNavigation(props: InpageNavigationProps) {
-  const { className, list, title, description, defaultActiveItem, onChange, render } = props;
+  const {
+    className,
+    list,
+    title,
+    description,
+    defaultActiveItem,
+    onChange,
+    render,
+  } = props;
 
   const [activeItem, setActiveItem] = React.useState<Model>(null);
 
@@ -33,7 +48,7 @@ function InpageNavigation(props: InpageNavigationProps) {
 
   React.useEffect(() => {
     if (defaultActiveItem) setActiveItem(defaultActiveItem);
-  }, [defaultActiveItem])
+  }, [defaultActiveItem]);
 
   return (
     <div className={classNames(className, "inpage-navigation-container")}>

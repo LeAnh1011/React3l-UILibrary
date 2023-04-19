@@ -1,4 +1,13 @@
-import { storiesOf } from "@storybook/react";
+import {
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import React from "react";
 import InpageNavigation from "./InpageNavigation";
 
@@ -36,7 +45,28 @@ const list = [
     name: "Side Menu Level 1",
   },
 ];
-function Default() {
+export default {
+  title: "InpageNavigation",
+  component: InpageNavigation,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+};
+
+const Template: Story = (args) => {
   const handleChangeNavigate = React.useCallback((item) => {}, []);
   return (
     <>
@@ -50,6 +80,5 @@ function Default() {
       />
     </>
   );
-}
-
-storiesOf("InpageNavigation", module).add("Default", Default);
+};
+export const Default = Template.bind({});

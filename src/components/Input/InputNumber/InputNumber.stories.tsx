@@ -47,11 +47,11 @@ export default {
         type: "radio",
         options: [
           BORDER_TYPE.MATERIAL,
-          BORDER_TYPE.FLOAT_LABEL,
           BORDER_TYPE.BORDERED,
+          BORDER_TYPE.FLOAT_LABEL,
         ],
       },
-      defaultValue: 0,
+      defaultValue: 1,
     },
     numberType: {
       control: { type: "radio", options: [LONG, DECIMAL] },

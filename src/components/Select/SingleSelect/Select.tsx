@@ -143,7 +143,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
       subscription.add(getList);
       const filter = valueFilter ? valueFilter : new ClassFilter();
       handleGetList(filter);
-    } catch (error) { }
+    } catch (error) {}
   }, [subscription, getList, valueFilter, ClassFilter, handleGetList]);
 
   const { run } = useDebounceFn(
@@ -325,7 +325,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                         onClick={handleClickItem(item)}
                       >
                         {maxLengthItem &&
-                          render(item)?.length > maxLengthItem ? (
+                        render(item)?.length > maxLengthItem ? (
                           <Tooltip title={render(item)}>
                             <span className="select__text">
                               {CommonService.limitWord(

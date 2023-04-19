@@ -14,10 +14,18 @@ export interface CustomProps {
   selectListRef?: RefObject<HTMLDivElement>;
   appendToBodyStyle?: React.CSSProperties;
   size?: "md" | "xl";
+  floatingDirection: "bottom" | "top";
 }
 
 function OverflowMenuList(props: CustomProps) {
-  const { setExpand, list, selectListRef, appendToBodyStyle, size } = props;
+  const {
+    setExpand,
+    list,
+    selectListRef,
+    appendToBodyStyle,
+    size,
+    floatingDirection,
+  } = props;
 
   const handleMove = React.useCallback(
     (action) => (event: any) => {
@@ -63,7 +71,7 @@ function OverflowMenuList(props: CustomProps) {
             "select__list--md": size === "md",
             "select__list--xl": size === "xl",
           })}
-          data-floating-menu-direction="bottom"
+          data-floating-menu-direction={floatingDirection}
           onClick={() => setExpand(false)}
           ref={selectListRef}
         >

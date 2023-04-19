@@ -29,7 +29,12 @@ function Default() {
     {
       title: "Xóa",
       action: handleDelete,
-      isShow: false,
+      isShow: true,
+    },
+    {
+      title: "Xóa nhiều",
+      action: handleDelete,
+      isShow: true,
     },
   ];
 
@@ -38,8 +43,8 @@ function Default() {
   }, []);
 
   return (
-    <div style={{ width: "600px" }}>
-      <OverflowMenu size={size} list={list} disabled={true}></OverflowMenu>
+    <div style={{ width: "600px", marginTop: 100 }}>
+      <OverflowMenu size={size} list={list}></OverflowMenu>
 
       <Radio.Group onChange={handleChangeSize} value={size}>
         <Radio value={"md"}>md</Radio>

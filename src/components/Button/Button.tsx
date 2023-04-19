@@ -32,20 +32,21 @@ export type ButtonType =
   | "icon-only-ghost";
 
 export interface ButtonProps {
+  /**Change the design of button*/
   type?: ButtonType;
-
+  /**Is the button loading or not*/
   loading?: boolean;
-
+  /**Type of component – button*/
   htmlType?: ButtonHTMLAttributes<any>["type"];
-
+  /**Pass the classname to change the style of button*/
   className?: string;
-
+  /**Function to be called when the button is clicked*/
   onClick?: ButtonHTMLAttributes<any>["onClick"];
 
   children?: ReactNode;
-
+  /**Disabled state of button*/
   disabled?: boolean;
-
+  /**Set the icon of button*/
   icon?: JSX.Element;
 }
 

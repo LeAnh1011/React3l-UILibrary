@@ -42,7 +42,7 @@ interface AdvanceDateRangeFilterMasterProps {
   label?: string;
   /**Selected value of list value suggest*/
   activeItem?: any;
-  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
+  /**Control the type of component: SHORT, INPUT */
   type?: ADVANCE_DATE_RANGE_TYPE;
   /**Prop of component InputSelect*/
   inputType?: BORDER_TYPE;

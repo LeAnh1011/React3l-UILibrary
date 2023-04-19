@@ -1,47 +1,45 @@
+import { CommonService } from "@Services/common-service";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import { Checkbox, Empty, Tooltip } from "antd";
 import classNames from "classnames";
-import { BORDER_TYPE } from "@Configs/enum";
 import React, { RefObject } from "react";
 import { Model } from "react3l-common";
 import { ErrorObserver, Observable, Subscription } from "rxjs";
-import { CommonService } from "@Services/common-service";
 import "./AdvanceEnumFilterMaster.scss";
 
 export interface AdvanceEnumMasterProps<T extends Model> {
+  /**Value users select*/
   value?: number | string;
-
+  /**List value users select*/
   listValue?: number[];
-
+  /**Placeholder of the component*/
   placeHolder?: string;
-
+  /**Not allow to handle change the component*/
   disabled?: boolean;
-
+  /**Append this component to body*/
   appendToBody?: boolean;
-
+  /**Handle the change value of the component*/
   onChange?: (id: number, T?: T) => void;
-
+  /**Handle the change list value of the component */
   onChangeMultiple?: (ids?: [], selectedList?: T[]) => void;
-
+  /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
-
-  type?: BORDER_TYPE;
-
+  /**Label for filter field*/
   label?: string;
-
+  /**Control the size of the component*/
   isSmall?: boolean;
-
+  /**Prefer option filter to select*/
   preferOptions?: T[];
-
+  /**Option to select multiple*/
   isMultiple?: boolean;
-
+  /**Api to get list data filter*/
   getList?: () => Observable<T[]>;
-
+  /**Use to custom style the component*/
   className?: string;
-
+  /**Show maximum number of characters of each item in the dropdown*/
   maxLengthItem?: number;
-
+  /**Custom height of dropdown data list*/
   height?: number;
 }
 

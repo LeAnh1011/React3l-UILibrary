@@ -16,38 +16,37 @@ export interface AdvanceMultipleIdFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
+  /**list value users select*/
   values?: any[];
-
+  /**Label for filter field*/
   label?: string;
-
+  /**Value filter for api get data option*/
   valueFilter?: TModelFilter;
-
+  /**The property name of the model filter you want to search in the list data*/
   searchProperty?: string;
-
+  /**The type of searchProperty you want to search in the list data*/
   searchType?: string;
-
+  /**Placeholder of the component*/
   placeHolder?: string;
-
+  /**Not allow to handle change filter*/
   disabled?: boolean;
-
-  isMaterial?: boolean;
-
+  /**True for data list of filter is Enum*/
   isEnumList?: boolean;
-
+  /**Api to get list data filter*/
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
-
+  /**Handle the change value of the component*/
   onChange?: (selectedList?: T[], ids?: []) => void;
-
+  /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
-
+  /**Model filter class of API get list data*/
   classFilter: new () => TModelFilter;
-
+  /**Use to custom style the component*/
   className?: string;
-
+  /**Prefer option filter to select*/
   preferOptions?: T[];
-
+  /**Set maximum length of text to search*/
   maxLength?: number;
-
+  /**Show maximum number of characters of each item in the dropdown*/
   maxLengthItem?: number;
 }
 
@@ -66,7 +65,6 @@ function AdvanceMultipleIdFilterMaster(
     searchType,
     placeHolder,
     disabled,
-    isMaterial,
     isEnumList,
     getList,
     onChange,
@@ -340,7 +338,6 @@ function AdvanceMultipleIdFilterMaster(
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
                 suffix={<Search16 />}
-                isMaterial={isMaterial}
                 ref={inputRef}
                 onKeyDown={handleKeyDown}
               />
@@ -435,7 +432,6 @@ AdvanceMultipleIdFilterMaster.defaultProps = {
   searchType: "contain",
   isEnumList: false,
   render: defaultRenderObject,
-  isMaterial: false,
   disabled: false,
   typeRender: "name",
   isIdValue: true,

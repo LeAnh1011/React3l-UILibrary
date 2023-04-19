@@ -1,7 +1,3 @@
-import React from "react";
-import AdvanceDateRangeFilter from "./AdvanceDateRangeFilter";
-import { BORDER_TYPE } from "../../../config/enum";
-import FormItem from "../../FormItem/FormItem";
 import {
   ArgsTable,
   Description,
@@ -12,6 +8,9 @@ import {
   Title,
 } from "@storybook/addon-docs";
 import { Story } from "@storybook/react";
+import React from "react";
+import { BORDER_TYPE } from "../../../config/enum";
+import AdvanceDateRangeFilter from "./AdvanceDateRangeFilter";
 
 export default {
   title: "AdvanceFilter/AdvanceDateRangeFilter",
@@ -62,13 +61,11 @@ const Template: Story = (args) => {
   return (
     <div style={{ margin: "10px", width: "300px" }}>
       <div style={{ margin: "10px", width: "300px" }}>
-        <FormItem message={"Helper text"}>
-          <AdvanceDateRangeFilter
-            {...args}
-            onChange={handleChange}
-            values={value}
-          />
-        </FormItem>
+        <AdvanceDateRangeFilter
+          {...args}
+          onChange={handleChange}
+          values={value}
+        />
       </div>
     </div>
   );

@@ -1,3 +1,13 @@
+import {
+  ArgsTable,
+  Description,
+  PRIMARY_STORY,
+  Primary,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import React from "react";
 import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
@@ -5,16 +15,6 @@ import { Observable } from "rxjs";
 import FormItem from "../../FormItem/FormItem";
 import { BORDER_TYPE } from "./../../../config/enum";
 import AdvanceEnumFilter from "./AdvanceEnumFilter";
-import { Story } from "@storybook/react";
-import {
-  ArgsTable,
-  Description,
-  Primary,
-  PRIMARY_STORY,
-  Stories,
-  Subtitle,
-  Title,
-} from "@storybook/addon-docs";
 
 class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
@@ -122,17 +122,15 @@ const Template: Story = (args) => {
   return (
     <div style={{ margin: "10px", width: "300px" }}>
       <div style={{ margin: "10px", width: "300px" }}>
-        <FormItem message={"Error label"}>
-          <AdvanceEnumFilter
-            {...args}
-            value={selectModel}
-            render={handleRenderModel}
-            onChange={handleSetModel}
-            getList={demoSearchFunc}
-            onChangeMultiple={handleChangeFilter} // if type is multiple pass this props
-            listValue={list} // if type is multiple pass this prop
-          />
-        </FormItem>
+        <AdvanceEnumFilter
+          {...args}
+          value={selectModel}
+          render={handleRenderModel}
+          onChange={handleSetModel}
+          getList={demoSearchFunc}
+          onChangeMultiple={handleChangeFilter} // if type is multiple pass this props
+          listValue={list} // if type is multiple pass this prop
+        />
       </div>
     </div>
   );

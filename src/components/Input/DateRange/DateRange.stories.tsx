@@ -34,7 +34,7 @@ export default {
   argTypes: {
     label: {
       control: "text",
-      defaultValue: "Ngày nhập kho",
+      defaultValue: "Ngày nhập hàng",
     },
     type: {
       control: {
@@ -59,12 +59,7 @@ const Template: Story = (args) => {
 
   return (
     <div style={{ margin: "10px", width: "300px" }}>
-      <DateRange
-        {...args}
-        label="Ngày nhập hàng"
-        onChange={handleChange}
-        value={value}
-      />
+      <DateRange {...args} onChange={handleChange} value={value} />
     </div>
   );
 };

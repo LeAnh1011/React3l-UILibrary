@@ -1,14 +1,20 @@
 import React from "react";
 
-import AdvanceTreeFilterMaster from "./AdvanceTreeFilterMaster";
+import {
+  ArgsTable,
+  Description,
+  PRIMARY_STORY,
+  Primary,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
+import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
 import { Observable } from "rxjs";
-import { IdFilter } from "react3l-advanced-filters";
-import { StringFilter } from "react3l-advanced-filters";
-import { Radio } from "antd";
-import { RadioChangeEvent } from "antd/lib/radio";
-
-export class DistrictFilter extends ModelFilter {
+import AdvanceTreeFilterMaster from "./AdvanceTreeFilterMaster";
+class DistrictFilter extends ModelFilter {
   public id: IdFilter = new IdFilter();
 
   public name: StringFilter = new StringFilter();
@@ -65,30 +71,47 @@ const demoSearchFunc = (TModelFilter?: ModelFilter) => {
   return demoObservable;
 };
 
-export function AdvanceTreeFilterMasterStories() {
+export default {
+  title: "AdvanceFilterMaster/AdvanceTreeFilterMaster",
+  component: AdvanceTreeFilterMaster,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    label: {
+      control: "text",
+      defaultValue: "Đơn vị tổ chức",
+    },
+    placeHolder: {
+      defaultValue: "Chọn đơn vị",
+    },
+
+    maxLength: {
+      defaultValue: 200,
+    },
+    maxLengthItem: {
+      defaultValue: 30,
+    },
+  },
+};
+
+const Template: Story = (args) => {
   const [listItem, dispatch] = React.useReducer(reducerFunc, demoList);
 
   const [item, setItem] = React.useState<Model>(demoItem);
-
-  const [isMultiple, setMultiple] = React.useState(true);
-
-  const [isCheckStrictly, setIsCheckStrictly] = React.useState(true);
-
-  const [
-    isSelectWithPreferOption,
-    setIsSelectWithPreferOption,
-  ] = React.useState<boolean>(false);
-
-  const handleChangeRadio = React.useCallback((event: RadioChangeEvent) => {
-    if (event.target.value) setItem(new Model());
-    else dispatch({ type: "UPDATE_MODEL", data: [] });
-    setMultiple(event.target.value);
-  }, []);
-
-  const handleChangeStrictly = React.useCallback((event: RadioChangeEvent) => {
-    dispatch({ type: "UPDATE_MODEL", data: [] });
-    setIsCheckStrictly(event.target.value);
-  }, []);
 
   const handleChangeItem = React.useCallback((items: Model[], isMultiple) => {
     if (isMultiple) {
@@ -98,57 +121,22 @@ export function AdvanceTreeFilterMasterStories() {
     }
   }, []);
 
-  const handleChangeSelectWithPreferOption = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setIsSelectWithPreferOption(event.target.value);
-    },
-    []
-  );
-
   return (
     <div style={{ margin: "10px", width: "300px" }}>
       <div style={{ margin: "10px", width: "300px" }}>
         <AdvanceTreeFilterMaster
-          label="Đơn vị"
-          checkable={isMultiple}
-          placeHolder={"Chọn đơn vị"}
-          selectable={!isMultiple}
+          {...args}
           classFilter={DistrictFilter}
           onChange={handleChangeItem}
-          item={isMultiple ? undefined : item}
-          listItem={isMultiple ? listItem : []}
+          item={item}
+          listItem={args?.isMultiple ? listItem : []}
           getTreeData={demoSearchFunc}
-          disabled={false}
-          checkStrictly={isCheckStrictly}
-          selectWithPreferOption={isSelectWithPreferOption}
-          preferOptions={isSelectWithPreferOption ? list : undefined}
-          maxLengthItem={20}
-          render={(t) => t?.name}
+          preferOptions={args?.isSelectWithPreferOption ? list : undefined}
+          render={(t) => t?.code}
         />
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeRadio} value={isMultiple}>
-          <Radio value={false}>Single</Radio>
-          <Radio value={true}>Multiple</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "800px" }}>
-        <Radio.Group
-          onChange={handleChangeSelectWithPreferOption}
-          value={isSelectWithPreferOption}
-        >
-          <Radio value={true}>Select with prefer option</Radio>
-          <Radio value={false}>Not select with prefer option</Radio>
-        </Radio.Group>
-      </div>
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeStrictly} value={isCheckStrictly}>
-          <Radio value={false}>Un strictly</Radio>
-          <Radio value={true}>Strictly</Radio>
-        </Radio.Group>
       </div>
     </div>
   );
-}
+};
+
+export const Default = Template.bind({});

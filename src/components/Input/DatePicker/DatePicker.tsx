@@ -16,18 +16,29 @@ interface DatePickerAction {
   action?: any;
 }
 interface DatePickerProps {
+  /**User-selected value*/
   value?: Moment | any;
+  /**Label for filter field*/
   label?: string;
-  isMaterial?: boolean;
+  /** Use to format the date selected */
   dateFormat?: string[];
+  /** Handle the change value of the component */
   onChange?: (value: Moment | null, dateString?: string) => void;
+  /** Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
+  /** Control the size of the component */
   isSmall?: boolean;
+  /** Not allow to handle change the component */
   disabled?: boolean;
+  /** Prop of InputNumber Component */
   isRequired?: boolean;
+  /** Use to custom style the component */
   className?: string;
+  /** Provide a custom action (onClick) to the component */
   action?: DatePickerAction;
+  /** Placeholder of the component */
   placeholder?: string;
+  /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
 }
 
@@ -145,7 +156,6 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
   );
 }
 DatePicker.defaultProps = {
-  isMaterial: false,
   dateFormat: ["DD/MM/YYYY", "YYYY/MM/DD"],
   label: "",
   isSmall: false,

@@ -30,7 +30,7 @@ interface DatePickerProps {
   isSmall?: boolean;
   /** Not allow to handle change the component */
   disabled?: boolean;
-  /** Prop of InputNumber Component */
+  /** Show * as required field */
   isRequired?: boolean;
   /** Use to custom style the component */
   className?: string;

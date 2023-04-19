@@ -25,20 +25,33 @@ interface DateRangeAction {
 }
 
 interface DateRangeProps {
+  /**Label for filter field*/
   label?: string;
+  /**User-selected values*/
   value: [Moment, Moment];
-  open?: boolean;
+  /** Use to format the date selected */
   dateFormat?: string[];
+  /** Handle the change value of the component */
   onChange?: (value: [Moment, Moment], dateString?: [string, string]) => void;
+  /** Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
+  /** Control the size of the component */
   isSmall?: boolean;
+  /** Not allow to handle change the component */
   disabled?: boolean;
+  /** Show * as required field */
   isRequired?: boolean;
+  /** Use to custom style the component */
   className?: string;
+  /** Provide a custom action (onClick) to the component */
   action?: DateRangeAction;
+  /** Placeholder of the component */
   placeholder?: [string, string];
+  /**Return element Popup container */
   getPopupContainer?: () => HTMLElement;
+  /**Pass className to style for dropdown */
   dropdownClassName?: any;
+  /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
 }
 

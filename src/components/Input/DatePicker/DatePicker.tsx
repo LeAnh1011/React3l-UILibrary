@@ -20,7 +20,6 @@ interface DatePickerProps {
   label?: string;
   isMaterial?: boolean;
   dateFormat?: string[];
-  error?: string;
   onChange?: (value: Moment | null, dateString?: string) => void;
   type?: BORDER_TYPE;
   isSmall?: boolean;

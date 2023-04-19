@@ -28,7 +28,6 @@ export interface TreeSelectProps<
   disabled?: boolean;
   valueFilter?: TModelFilter;
   placeHolder?: string;
-  error?: string;
   selectedKey?: number;
   onlySelectLeaf?: boolean;
   isRequired?: boolean;
@@ -268,7 +267,6 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
           {checkable ? (
             <InputTag
               listValue={listItem}
-              isMaterial={isMaterial}
               render={render}
               placeHolder={placeHolder}
               disabled={disabled}

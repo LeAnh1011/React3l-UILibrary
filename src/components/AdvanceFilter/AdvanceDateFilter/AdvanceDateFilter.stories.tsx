@@ -49,13 +49,6 @@ export default {
         defaultValue: 1,
       },
     },
-    value: {},
-    dateFormat: {},
-    className: {},
-    isRequired: {},
-    isSmall: {},
-    disabled: {},
-    placeholder: {},
   },
 };
 const Template: Story = (args) => {

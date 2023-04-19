@@ -11,7 +11,6 @@ export interface InputSelectProps<T extends Model> {
   value?: T;
   disabled?: boolean;
   expanded?: boolean;
-  isMaterial?: boolean;
   placeHolder?: string;
   render?: (t: T) => string;
   onClear?: (T: T) => void;
@@ -171,8 +170,8 @@ function InputSelect(props: InputSelectProps<Model>) {
                   value
                     ? (render(value) as string)
                     : type === BORDER_TYPE.FLOAT_LABEL && label
-                      ? " "
-                      : placeHolder
+                    ? " "
+                    : placeHolder
                 }
                 ref={inputRef}
                 disabled={disabled}
@@ -261,7 +260,6 @@ function defaultRenderObject<T extends Model>(t: T) {
 
 InputSelect.defaultProps = {
   render: defaultRenderObject,
-  isMaterial: false,
   expanded: false,
   disabled: false,
 };

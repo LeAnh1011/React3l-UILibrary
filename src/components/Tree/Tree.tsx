@@ -40,7 +40,6 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   classFilter?: new () => TModelFilter;
   isMultiple?: boolean;
   selectWithAdd?: () => void;
-  selectWithPreferOption?: boolean;
   preferOptions?: T[];
   selectListRef?: RefObject<any>;
   isExpand?: boolean;

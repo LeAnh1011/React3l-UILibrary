@@ -18,8 +18,7 @@ interface TimePickerAction {
 interface TimePickerProps {
   value?: Moment | any;
   label?: string;
-  timeFormat?: string | any[]
-  error?: string;
+  timeFormat?: string | any[];
   onChange?: (value: Moment | null, timeString?: string) => void;
   type?: BORDER_TYPE;
   isSmall?: boolean;

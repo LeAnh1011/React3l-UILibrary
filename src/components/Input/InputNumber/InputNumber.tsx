@@ -17,12 +17,10 @@ export interface InputNumberProps {
   label?: string;
   isRequired?: boolean;
   type?: BORDER_TYPE;
-  floatLabel?: boolean;
   value?: number;
   prefix?: string | ReactNode;
   suffix?: string | ReactNode;
   allowNegative?: boolean;
-  error?: string;
   numberType?: string;
   isReverseSymb?: boolean;
   decimalDigit?: number;
@@ -184,7 +182,7 @@ function InputNumber(props: InputNumberProps) {
             number = parseFloat(stringValue);
             isOutOfRange =
               (typeof max === "number" && number > max) ||
-                (typeof min === "number" && number < min)
+              (typeof min === "number" && number < min)
                 ? true
                 : false;
             return [number, isOutOfRange];
@@ -192,7 +190,7 @@ function InputNumber(props: InputNumberProps) {
             number = parseInt(stringValue);
             isOutOfRange =
               (typeof max === "number" && number > max) ||
-                (typeof min === "number" && number < min)
+              (typeof min === "number" && number < min)
                 ? true
                 : false;
             return [number, isOutOfRange];

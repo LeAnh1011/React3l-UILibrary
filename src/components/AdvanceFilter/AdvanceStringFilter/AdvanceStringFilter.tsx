@@ -21,7 +21,7 @@ export interface AdvanceStringFilterProps {
   placeHolder?: string;
   /** Use to custom style the component */
   className?: string;
-  /** Set maximum number of characters value filter */
+  /** Set maximum length of value filter */
   maxLength?: number;
   /** Control the size of the component */
   isSmall?: boolean;

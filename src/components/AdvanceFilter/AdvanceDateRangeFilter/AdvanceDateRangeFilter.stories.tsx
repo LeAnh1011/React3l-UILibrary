@@ -49,15 +49,6 @@ export default {
       },
       defaultValue: 1,
     },
-    value: {},
-    dateFormat: {},
-    className: {},
-    isSmall: {},
-    isRequired: {},
-    disabled: {},
-    placeholder: {},
-    onChange: {},
-    action: {},
   },
 };
 

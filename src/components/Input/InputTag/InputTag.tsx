@@ -13,7 +13,6 @@ export interface InputTagProps<T extends Model> {
   listValue?: T[];
   placeHolder?: string;
   disabled?: boolean;
-  error?: string;
   render?: (t: T) => string;
   onClear?: (T: T) => void;
   onClearMulti?: () => void;

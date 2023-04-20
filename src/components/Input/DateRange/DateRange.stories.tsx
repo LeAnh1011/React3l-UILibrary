@@ -13,7 +13,7 @@ import { BORDER_TYPE } from "../../../config/enum";
 import DateRange from "./DateRange";
 
 export default {
-  title: "DateRange",
+  title: "Input/DateRange",
   component: DateRange,
   parameters: {
     controls: { expanded: true },

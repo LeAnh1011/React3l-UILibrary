@@ -13,7 +13,7 @@ import React from "react";
 import { BORDER_TYPE } from "../../../config/enum";
 import DatePicker from "./DatePicker";
 export default {
-  title: "DatePicker",
+  title: "Input/DatePicker",
   component: DatePicker,
   parameters: {
     controls: { expanded: true },

@@ -37,11 +37,10 @@ function Default() {
           </TabPane>
         </Tabs>
 
-        <Tabs mode={type}>
+        <Tabs mode={type} lightColor>
           <TabPane tab="Tab 1" key="tabso1">
             Content of Tab Pane 1
           </TabPane>
-         
         </Tabs>
       </div>
 

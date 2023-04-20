@@ -10,7 +10,7 @@ export interface LayoutCellProps {
   /** Option to align display value */
   position?: "left" | "right" | "center";
   children: ReactNode;
-  // Pass table size
+  /**Pass table size */
   tableSize?: "lg" | "md" | "sm";
 }
 

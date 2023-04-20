@@ -68,7 +68,12 @@ const Template: Story = (args) => {
     {
       title: "Xóa",
       action: handleDelete,
-      isShow: false,
+      isShow: true,
+    },
+    {
+      title: "Xóa nhiều",
+      action: handleDelete,
+      isShow: true,
     },
   ];
 

@@ -10,8 +10,7 @@
   .advance-date-filter__label {
     width: 100%;
     display: flex;
-    justify-content: center;
-
+    
     label {
       font-size: 0.75em;
       white-space: nowrap;
@@ -115,7 +114,7 @@
     &.advance-date-filter--white {
       background-color: var(--color-white);
       &:hover {
-        +.advance-date-filter__icon-wrapper--material {
+        + .advance-date-filter__icon-wrapper--material {
           background-color: var(--palette-grayHover-10);
         }
       }

@@ -5,12 +5,19 @@ import Close16 from "@carbon/icons-react/es/close/16";
 import "./Tag.scss";
 
 export interface TagProps {
+  /**Used to change style Component */
   className?: string;
+  /**Value of Tag*/
   value?: string;
+  /**Set background color Tag */
   backgroundColor?: string;
+  /**Set color Tag */
   color?: string;
+  /**Max length of display value */
   countCharacters?: number;
+  /** Provide a custom action (onClick) to the component */
   action?: () => void;
+  /**Option change size of component */
   size?: "sm" | "md";
 }
 
@@ -26,13 +33,15 @@ function Tag(props: TagProps) {
   } = props;
   return (
     <div
-      className={classNames(className, "tag-container",)}
+      className={classNames(className, "tag-container")}
       style={{ backgroundColor: backgroundColor, color: color }}
     >
-      <span className={classNames("tag-wrapper", {
-        "tag-wrapper__sm": size === "sm",
-        "tag-wrapper__md": size === "md",
-      })}>
+      <span
+        className={classNames("tag-wrapper", {
+          "tag-wrapper__sm": size === "sm",
+          "tag-wrapper__md": size === "md",
+        })}
+      >
         {countCharacters && countCharacters > 0 ? (
           <Tooltip title={value}>
             {CommonService.limitWord(value, countCharacters)}
@@ -52,6 +61,6 @@ function Tag(props: TagProps) {
 Tag.defaultProps = {
   backgroundColor: "#161616",
   color: "#FFFFFF",
-  size: "md"
+  size: "md",
 };
 export default Tag;

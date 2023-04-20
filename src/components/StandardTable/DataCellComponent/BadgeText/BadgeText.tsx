@@ -4,10 +4,15 @@ import { CommonService } from "@Services/common-service";
 import "./BadgeText.scss";
 
 export interface BadgeTextProps {
+  /**Used to change style of badge text */
   className?: string;
+  /**Value to display */
   value?: string;
+  /**Background color to display */
   backgroundColor?: string;
+  /**Customer value color */
   color?: string;
+  /**Max length of display value */
   countCharacters?: number;
 }
 

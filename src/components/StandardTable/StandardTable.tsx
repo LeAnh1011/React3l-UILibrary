@@ -6,10 +6,15 @@ import React from "react";
 import "./StandardTable.scss";
 
 export interface StandardTableCustomProps extends TableProps<any> {
+  /**Option pass id of table */
   idContainer?: string;
+  /**Table is draggable */
   isDragable?: boolean;
+  /**Used to change style table */
   className?: string;
+  /**Control the row height of the table */
   tableSize?: "lg" | "md" | "sm";
+  /**Control the spinning of the table */
   spinning?: boolean;
 }
 

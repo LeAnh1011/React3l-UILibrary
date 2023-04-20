@@ -5,12 +5,19 @@ import Sorter from "../Sorter/Sorter";
 import "./LayoutHeader.scss";
 
 export interface LayoutHeaderProps {
+  /**Used to change style Component */
   className?: string;
+  /** Use to custom padding of each header column */
   orderType?: "left" | "right" | "center";
+  /** Option to align display value */
   position?: "left" | "right" | "center";
+  /** Title of header */
   title?: string;
+  /** Maxlength of title to display */
   maxLength?: number;
+  /** Boolean to check if column is sorting */
   isSorter?: boolean;
+  /** Option to add state of sorting */
   sortedColumn?: any;
 }
 

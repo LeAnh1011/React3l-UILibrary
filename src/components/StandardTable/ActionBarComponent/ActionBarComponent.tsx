@@ -5,14 +5,18 @@ import Button from "@Components/Button";
 import "./ActionBarComponent.scss";
 
 export interface ActionBarComponentProps {
-  name?: string;
   children?: ReactNode;
+  /** SelectedRowKeys of table */
   selectedRowKeys?: Key[];
+  /** SetSelectedRowKeys of table*/
   setSelectedRowKeys?: Dispatch<SetStateAction<Key[]>>;
+  /**Handle cancel selection */
   handleCancelAction?: () => void;
+  /**Row selection */
   rowSelections?: any;
   translateSelected?: string;
   translateLine?: string;
+  /** Translate name of button cancel */
   translateTitleCancelButton?: string;
 }
 

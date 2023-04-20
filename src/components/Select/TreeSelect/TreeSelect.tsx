@@ -68,7 +68,7 @@ export interface TreeSelectProps<
   isUsingSearch?: boolean;
   /** Prefer node item of tree*/
   preferOptions?: T[];
-  /** Show maximum number of characters in tree node*/
+  /** Show maximum length of item in each data row in tree*/
   maxLengthItem?: number;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "gray" | "white";
@@ -340,7 +340,6 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               onlySelectLeaf={onlySelectLeaf}
               checkedKeys={listIds}
               valueFilter={filter}
-              classFilter={ClassFilter}
               checkStrictly={checkStrictly}
               height={300}
               render={render}

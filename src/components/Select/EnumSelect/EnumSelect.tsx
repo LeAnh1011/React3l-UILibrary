@@ -12,44 +12,45 @@ import { ErrorObserver, Observable, Subscription } from "rxjs";
 import { InputAction } from "@Components/Input/InputText/InputText";
 
 export interface SelectProps<T extends Model> {
+  /**Value users select*/
   value?: Model;
-
+  /**List value users select*/
   listValue?: Model[];
-
+  /**Placeholder of the component*/
   placeHolder?: string;
-
+  /**Not allow to handle change value*/
   disabled?: boolean;
-
+  /**Append this component to body*/
   appendToBody?: boolean;
-
+  /**Show symbol * as required field*/
   isRequired?: boolean;
-
+  /**Handle the change value of the field*/
   onChange?: (id: number, T?: T) => void;
-
+  /**Handle the change list value of the component */
   onChangeMultiple?: (selectedList?: T[], ids?: []) => void;
-
+  /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
-
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
-
+  /**Label for filter field*/
   label?: string;
-
+  /**Option show button add new*/
   selectWithAdd?: () => void;
-
+  /**Control the size of the component*/
   isSmall?: boolean;
-
+  /**Prefer option to select*/
   preferOptions?: T[];
-
+  /**Option to select multiple*/
   isMultiple?: boolean;
-
+  /**Api to get list data*/
   getList?: () => Observable<T[]>;
-
-  action?: InputAction;
-
+  /**Custom height of dropdown data list*/
   height?: number;
-
+  /** Provide a custom action (onClick) to the component */
+  action?: InputAction;
+  /**Show maximum length of item in each data row*/
   maxLengthItem?: number;
-
+  /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
 }
 

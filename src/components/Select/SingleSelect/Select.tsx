@@ -18,52 +18,49 @@ export interface SelectProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
+  /**Value users select*/
   value?: Model;
-
+  /**Value filter for api get data option*/
   valueFilter?: TModelFilter;
-
+  /**The property name of the model filter you want to search in the list data*/
   searchProperty?: string;
-
+  /**The type of searchProperty you want to search in the list data*/
   searchType?: string;
-
+  /**Placeholder of the component*/
   placeHolder?: string;
-
+  /**Not allow to handle change value*/
   disabled?: boolean;
-
-  isMaterial?: boolean;
-
+  /**True for data list  is Enum*/
   isEnumerable?: boolean;
-
+  /**Append this component to body*/
   appendToBody?: boolean;
-
+  /**Show symbol * as required field*/
   isRequired?: boolean;
-
+  /**Api to get list data*/
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
-
+  /**Handle the change value of the component*/
   onChange?: (id: number, T?: T) => void;
-
+  /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
-
+  /**Model filter class of API get list data*/
   classFilter: new () => TModelFilter;
-
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
-
+  /**Label for filter field*/
   label?: string;
-
+  /**Option show button add new*/
   selectWithAdd?: () => void;
-
+  /**Title of button add new */
   selectWithAddTitle?: string;
-
-  selectWithPreferOption?: boolean;
-
+  /** Control the size of the component */
   isSmall?: boolean;
-
+  /**Prefer option to select*/
   preferOptions?: T[];
-
+  /**Show maximum length of item in each data row*/
   maxLengthItem?: number;
-
+  /** Provide a custom action (onClick) to the component */
   action?: InputAction;
-
+  /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
 }
 
@@ -143,7 +140,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
       subscription.add(getList);
       const filter = valueFilter ? valueFilter : new ClassFilter();
       handleGetList(filter);
-    } catch (error) { }
+    } catch (error) {}
   }, [subscription, getList, valueFilter, ClassFilter, handleGetList]);
 
   const { run } = useDebounceFn(
@@ -325,7 +322,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                         onClick={handleClickItem(item)}
                       >
                         {maxLengthItem &&
-                          render(item)?.length > maxLengthItem ? (
+                        render(item)?.length > maxLengthItem ? (
                           <Tooltip title={render(item)}>
                             <span className="select__text">
                               {CommonService.limitWord(

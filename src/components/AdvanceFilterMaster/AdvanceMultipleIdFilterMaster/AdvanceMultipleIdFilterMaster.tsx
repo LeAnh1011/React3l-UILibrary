@@ -46,7 +46,7 @@ export interface AdvanceMultipleIdFilterMasterProps<
   preferOptions?: T[];
   /**Set maximum length of text to search*/
   maxLength?: number;
-  /**Show maximum number of characters of each item in the dropdown*/
+  /**Show maximum length of item of each item in the dropdown*/
   maxLengthItem?: number;
 }
 

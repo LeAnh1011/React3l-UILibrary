@@ -37,7 +37,7 @@ export interface AdvanceEnumMasterProps<T extends Model> {
   getList?: () => Observable<T[]>;
   /**Use to custom style the component*/
   className?: string;
-  /**Show maximum number of characters of each item in the dropdown*/
+  /**Show maximum length of item of each item in the dropdown*/
   maxLengthItem?: number;
   /**Custom height of dropdown data list*/
   height?: number;

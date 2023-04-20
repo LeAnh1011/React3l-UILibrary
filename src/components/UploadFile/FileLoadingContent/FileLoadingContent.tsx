@@ -4,7 +4,9 @@ import IconLoading from "@Components/IconLoading/IconLoading";
 import "./FileLoadingContent.scss";
 
 export interface FileLoadingContentProps {
+  /**Pass list file loading */
   loadingFiles?: FileModel[];
+  /**Use to custom style the component*/
   className?: string;
 }
 

@@ -27,15 +27,25 @@ export interface FileModel {
   handleInput?: (e: any) => void;
 }
 export interface UploadFileProps {
+  /**Option for multiple UploadFile */
   isMultiple?: boolean;
+  /**Content of UploadFile component */
   uploadContent?: string;
+  /**Function change list file uploaded */
   updateList?: (files: FileModel[]) => void;
+  /**API use to upload list file selected to server*/
   uploadFile?: (files: File[] | Blob[]) => Observable<FileModel[]>;
+  /**Option change style UploadFile to OutLine */
   isBtnOutLine?: boolean;
+  /**Option limit maximum size (b) of list file to upload to server */
   maximumSize?: number;
+  /** Option to change style of upload  "link", "button", "dragAndDrop"*/
   type?: "link" | "button" | "dragAndDrop";
+  /**Icon of component */
   icon?: ReactNode;
+  /**Option to set component have only view mode */
   isViewMode?: boolean;
+  /**Function to set list file in status loading */
   setListFileLoading?: React.Dispatch<SetStateAction<FileModel[]>>;
 }
 export function UploadFile(props: UploadFileProps) {

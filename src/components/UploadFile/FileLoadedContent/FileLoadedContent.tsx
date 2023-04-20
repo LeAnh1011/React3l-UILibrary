@@ -6,9 +6,13 @@ import { Popconfirm, Tooltip } from "antd";
 import "./FileLoadedContent.scss";
 
 export interface FileLoadedContentProps {
+  /**Pass list file loaded */
   loadedFiles?: FileModel[];
+  /**Function use to remove file */
   removeFile?: (fileId: string | number) => void;
+  /**Option to set component have only view mode */
   isViewMode?: boolean;
+  /**Use to custom style the component*/
   className?: string;
 }
 

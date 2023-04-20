@@ -1,37 +1,63 @@
-import Radio, { RadioChangeEvent } from "antd/lib/radio";
+import {
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import React from "react";
-import { StringFilter } from "react3l-advanced-filters";
-import { ModelFilter } from "react3l-common";
 import FormItem from "../../FormItem/FormItem";
-import TextArea from "./TextArea";
 import { BORDER_TYPE } from "./../../../config/enum";
-import { ValidateStatus } from "./../../../config/enum";
+import TextArea, { TextAreaProps } from "./TextArea";
 
-export class DemoFilter extends ModelFilter {
-  name: StringFilter = new StringFilter();
-  code: StringFilter = new StringFilter();
-}
+export default {
+  title: "Input/TextArea",
+  component: TextArea,
+  subcomponents: { FormItem },
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    label: {
+      control: "text",
+      defaultValue: "First Name",
+    },
+    placeHolder: {
+      control: "text",
+      defaultValue: "Enter text",
+    },
+    type: {
+      control: {
+        type: "radio",
+        options: [
+          BORDER_TYPE.MATERIAL,
+          BORDER_TYPE.BORDERED,
+          BORDER_TYPE.FLOAT_LABEL,
+        ],
+      },
+      defaultValue: 1,
+    },
+  },
+};
 
-export function TextAreaStories() {
+const Template: Story = (args: TextAreaProps) => {
   const [inputValue, setInputVal] = React.useState();
-
-  const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
-
-  const [isDisabled, setIsDisabled] = React.useState(false);
-
-  const [isValidated, setValidated] = React.useState(false);
-
-  const handleChangeValidated = React.useCallback((event: RadioChangeEvent) => {
-    setValidated(event.target.value);
-  }, []);
-
-  const handleChangeDisabled = React.useCallback((event: RadioChangeEvent) => {
-    setIsDisabled(event.target.value);
-  }, []);
-
-  const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
-    setType(event.target.value);
-  }, []);
 
   const handleChangeValue = React.useCallback((value) => {
     setInputVal(value);
@@ -40,48 +66,17 @@ export function TextAreaStories() {
   return (
     <div style={{ width: "244px", padding: "10px" }}>
       <div style={{ margin: "15px 0" }}>
-        <FormItem
-          message="Helper"
-          validateStatus={isValidated ? ValidateStatus.error : null}
-        >
+        <FormItem message="Helper">
           <TextArea
-            type={type}
-            label="First Name"
-            showCount={true}
-            maxLength={100}
+            {...args}
+            label={args.label}
             value={inputValue}
             onChange={handleChangeValue}
-            placeHolder={"Enter text..."}
-            disabled={isDisabled}
-            action={{
-              name: "Help",
-              action: () => {},
-            }}
           />
         </FormItem>
       </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <div style={{ margin: "10px", width: "300px" }}>
-          <Radio.Group onChange={handleChangeStyle} value={type}>
-            <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
-            <Radio value={BORDER_TYPE.FLOAT_LABEL}>Float Label</Radio>
-            <Radio value={BORDER_TYPE.BORDERED}>Bordered</Radio>
-          </Radio.Group>
-        </div>
-        <div style={{ margin: "10px", width: "300px" }}>
-          <Radio.Group onChange={handleChangeDisabled} value={isDisabled}>
-            <Radio value={true}>Disabled</Radio>
-            <Radio value={false}>Not Disabled</Radio>
-          </Radio.Group>
-        </div>
-        <div style={{ margin: "10px", width: "300px" }}>
-          <Radio.Group onChange={handleChangeValidated} value={isValidated}>
-            <Radio value={true}>Validated</Radio>
-            <Radio value={false}>Not Validated</Radio>
-          </Radio.Group>
-        </div>
-      </div>
     </div>
   );
-}
+};
+
+export const Default = Template.bind({});

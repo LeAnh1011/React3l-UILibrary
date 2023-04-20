@@ -25,25 +25,35 @@ function SwitcherIcon() {
   );
 }
 export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
+  /**List TreeNode data*/
   treeData?: CustomTreeNode<T>[];
+  /**Value filter for api getTreeData*/
   valueFilter?: TModelFilter;
+  /**List key of node is expanding*/
   expandedKeys?: number[];
+  /**List key of node checked*/
   checkedKeys?: number[];
+  /**Switch to multiple check option*/
   checkable?: boolean;
+  /**Key of selected node */
   selectedKey?: number;
+  /**Not allow to select the father item that contain a lot of items inside*/
   onlySelectLeaf?: boolean;
-  searchProperty?: string;
-  searchType?: string;
+  /**API to get data*/
   getTreeData?: (TModelFilter?: TModelFilter) => Observable<T[]>;
+  /**Function to change selected items*/
   onChange?: (treeNode: CustomTreeNode<T>[]) => void;
+  /**Provide a function to render a specific property as name*/
   render?: (treeNode: T) => string;
-  classFilter?: new () => TModelFilter;
-  isMultiple?: boolean;
+  /**Option to show add new button*/
   selectWithAdd?: () => void;
+  /**Prefer node item of tree*/
   preferOptions?: T[];
+  /**Show maximum length of each row item in tree*/
+  maxLengthItem?: number;
+  /**Pass ref of list data select */
   selectListRef?: RefObject<any>;
   isExpand?: boolean;
-  maxLengthItem?: number;
 }
 function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const {
@@ -54,9 +64,6 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     checkable,
     selectedKey,
     onlySelectLeaf,
-    // searchProperty,
-    // searchType,
-    classFilter: ClassFilter,
     getTreeData,
     onChange,
     selectWithAdd,
@@ -268,14 +275,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       });
     }
     return () => {};
-  }, [
-    getTreeData,
-    selectedKey,
-    ClassFilter,
-    subscription,
-    onlySelectLeaf,
-    valueFilter,
-  ]);
+  }, [getTreeData, selectedKey, subscription, onlySelectLeaf, valueFilter]);
 
   // local filter tree base on model filter commented because now using server filter data
   // React.useEffect(() => {

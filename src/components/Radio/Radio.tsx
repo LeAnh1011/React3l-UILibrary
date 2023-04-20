@@ -4,9 +4,11 @@ import RadioGroup from "./RadioGroup";
 import "./Radio.scss";
 
 export interface RadioComponentProps {
+  /**Handle the change value */
   onChange?: (value: boolean) => void;
-
+  /**Specifies whether the radio is selected */
   checked?: boolean;
+  /**Not allow change value */
   disabled?: boolean;
 }
 

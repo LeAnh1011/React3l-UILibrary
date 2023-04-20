@@ -1,6 +1,14 @@
-import { storiesOf } from "@storybook/react";
+import {
+  ArgsTable,
+  Description,
+  PRIMARY_STORY,
+  Primary,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import React from "react";
-import nameof from "ts-nameof.macro";
 import ProgressIndicator from "./ProgressIndicator";
 
 const listEnum = [
@@ -33,8 +41,29 @@ const listEnum = [
     sectionName: "TestFrame",
   },
 ];
-function Horizontal() {
-  // const [currentId,setCurrentId] = React.useState<number>(1);
+
+export default {
+  title: "ProgressIndicator",
+  component: ProgressIndicator,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+};
+
+const Template1: Story = (args) => {
   return (
     <div>
       <div style={{ height: 100 }}> height 100</div>
@@ -71,9 +100,9 @@ function Horizontal() {
       </ProgressIndicator.Content>
     </div>
   );
-}
-function Vertical() {
-  // const [currentId,setCurrentId] = React.useState<number>(1);
+};
+
+const Template2: Story = (args) => {
   return (
     <>
       <div style={{ height: 100 }}> height 100</div>
@@ -107,7 +136,6 @@ function Vertical() {
       </div>
     </>
   );
-}
-storiesOf("ProgressIndicator", module)
-  .add(nameof(Vertical), Vertical)
-  .add(nameof(Horizontal), Horizontal);
+};
+export const Horizontal = Template1.bind({});
+export const Vertical = Template2.bind({});

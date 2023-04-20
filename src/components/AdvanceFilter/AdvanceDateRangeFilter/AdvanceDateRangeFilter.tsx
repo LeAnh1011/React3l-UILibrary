@@ -20,7 +20,7 @@ function SuffixDateIcon() {
 }
 
 interface AdvanceDateRangeFilterProps {
-  /**Label for filter field */
+  /**Label for current field */
   label?: string;
   /**Value filter [fromDate, toDate] users select */
   values: [Moment, Moment];

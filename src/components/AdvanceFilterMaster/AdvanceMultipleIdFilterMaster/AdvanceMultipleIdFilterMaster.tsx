@@ -18,7 +18,7 @@ export interface AdvanceMultipleIdFilterMasterProps<
 > {
   /**list value users select*/
   values?: any[];
-  /**Label for filter field*/
+  /**Label for current field*/
   label?: string;
   /**Value filter for api get data option*/
   valueFilter?: TModelFilter;

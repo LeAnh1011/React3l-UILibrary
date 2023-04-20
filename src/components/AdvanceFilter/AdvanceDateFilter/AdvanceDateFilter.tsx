@@ -14,7 +14,7 @@ import "./AdvanceDateFilter.scss";
 interface AdvanceDateFilterProps {
   /** Value users select */
   value?: Moment;
-  /** Label for filter field */
+  /** Label for current field */
   label?: string;
   /** Use to format the date selected */
   dateFormat?: string[];

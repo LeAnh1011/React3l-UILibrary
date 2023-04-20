@@ -41,7 +41,7 @@ export interface MultipleSelectProps<
   render?: (t: T) => string;
   /**Model filter class of API get list data*/
   classFilter: new () => TFilter;
-  /**Label for filter field*/
+  /**Label for current field*/
   label?: string;
   /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;

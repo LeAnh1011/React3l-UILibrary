@@ -9,7 +9,7 @@ export const DECIMAL: string = "DECIMAL";
 export const LONG: string = "LONG";
 
 export interface AdvanceNumberProps {
-  /**Label for filter field*/
+  /**Label for current field*/
   label?: string;
   /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;

@@ -32,7 +32,7 @@ export interface InputSelectProps<T extends Model> {
   className?: string;
   /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
-  /**Label for filter field*/
+  /**Label for current field*/
   label?: string;
   /** Show symbol * as required field */
   isRequired?: boolean;

@@ -25,7 +25,7 @@ interface DateRangeAction {
 }
 
 interface DateRangeProps {
-  /**Label for filter field*/
+  /**Label for current field*/
   label?: string;
   /**User-selected values*/
   value: [Moment, Moment];

@@ -25,7 +25,7 @@ export interface AdvanceEnumMasterProps<T extends Model> {
   onChangeMultiple?: (ids?: [], selectedList?: T[]) => void;
   /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
-  /**Label for filter field*/
+  /**Label for current field*/
   label?: string;
   /**Control the size of the component*/
   isSmall?: boolean;

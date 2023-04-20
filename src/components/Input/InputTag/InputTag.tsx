@@ -26,7 +26,7 @@ export interface InputTagProps<T extends Model> {
   onSearch?: (T: string) => void;
   /**Show symbol * as required field*/
   isRequired?: boolean;
-  /**Label for filter field*/
+  /**Label for current field*/
   label?: string;
   /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;

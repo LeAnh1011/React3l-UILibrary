@@ -50,7 +50,7 @@ export interface AdvanceTreeFilterProps<
   classFilter?: new () => TModelFilter;
   /** Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
-  /** Label for filter field*/
+  /** Label for current field*/
   label?: string;
   /** Control the size of the component*/
   isSmall?: boolean;

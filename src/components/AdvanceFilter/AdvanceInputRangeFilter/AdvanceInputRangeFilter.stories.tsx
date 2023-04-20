@@ -46,7 +46,7 @@ export default {
     label: {
       control: "text",
       defaultValue: "Tổng doanh thu",
-      description: "Label for filter field",
+      description: "Label for current field",
     },
     type: {
       control: {

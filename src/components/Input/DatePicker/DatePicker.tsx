@@ -18,7 +18,7 @@ interface DatePickerAction {
 interface DatePickerProps {
   /**User-selected value*/
   value?: Moment | any;
-  /**Label for filter field*/
+  /**Label for current field*/
   label?: string;
   /** Use to format the date selected */
   dateFormat?: string[];

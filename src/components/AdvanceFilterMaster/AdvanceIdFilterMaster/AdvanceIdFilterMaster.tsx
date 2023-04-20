@@ -19,7 +19,7 @@ export interface AdvanceIdFilterMasterProps<
 > {
   /**Value users select*/
   value?: number | string;
-  /**Label for filter field*/
+  /**Label for current field*/
   label?: string;
   /**Value filter for api get data option*/
   valueFilter?: TModelFilter;

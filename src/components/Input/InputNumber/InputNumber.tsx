@@ -14,7 +14,7 @@ interface InputNumberAction {
 }
 
 export interface InputNumberProps {
-  /**Label for filter field*/
+  /**Label for current field*/
   label?: string;
   /**Show symbol * as required field*/
   isRequired?: boolean;

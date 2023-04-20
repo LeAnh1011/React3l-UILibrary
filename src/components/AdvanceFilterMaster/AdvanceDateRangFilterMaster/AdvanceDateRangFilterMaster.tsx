@@ -38,7 +38,7 @@ interface AdvanceDateRangeFilterMasterProps {
   typeCustomDate?: BORDER_TYPE;
   /**Control the size of the component*/
   isSmall?: boolean;
-  /**Label for filter field*/
+  /**Label for current field*/
   label?: string;
   /**Selected value of list value suggest*/
   activeItem?: any;

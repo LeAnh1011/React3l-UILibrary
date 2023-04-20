@@ -17,7 +17,7 @@ export interface AdvanceTreeFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
-  /**Label for filter field*/
+  /**Label for current field*/
   label?: string;
   /**User-selected values*/
   listItem?: Model[];

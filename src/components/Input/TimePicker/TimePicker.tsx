@@ -18,7 +18,7 @@ interface TimePickerAction {
 interface TimePickerProps {
   /**User-selected time value*/
   value?: Moment | any;
-  /**Label for filter field*/
+  /**Label for current field*/
   label?: string;
   /** Use to format the time selected */
   timeFormat?: string | any[];

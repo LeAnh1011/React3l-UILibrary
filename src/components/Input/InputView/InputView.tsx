@@ -15,7 +15,7 @@ export enum BORDER_TYPE {
 }
 
 export interface InputViewProps {
-  /**Label for filter field*/
+  /**Label for current field*/
   label?: string;
   /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL, NOT_BORDERED */
   type?: BORDER_TYPE;

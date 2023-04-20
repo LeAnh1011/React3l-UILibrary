@@ -1,14 +1,13 @@
-import { Model, ModelFilter } from "react3l-common";
+import CloudUpload24 from "@carbon/icons-react/es/cloud--upload/24";
+import Edit24 from "@carbon/icons-react/es/edit/24";
+import { notification } from "antd";
+import classNames from "classnames";
 import React, { Reducer, RefObject } from "react";
 import { useDropzone } from "react-dropzone";
 import { UploadImageProps } from "../UploadImage";
-import CroppedModal, { ImageResult } from "./CroppedModal/CroppedModal";
 import { Menu } from "./ComponentMenuImage";
-import classNames from "classnames";
-import { notification } from "antd";
-import CloudUpload24 from "@carbon/icons-react/es/cloud--upload/24";
-import Edit24 from "@carbon/icons-react/es/edit/24";
 import "./ComponentUploadImage.scss";
+import CroppedModal, { ImageResult } from "./CroppedModal/CroppedModal";
 
 export interface ImageFile {
   fileId: string | number;
@@ -54,8 +53,7 @@ const fileReducer = (
   }
 };
 
-export interface ComponentUploadImageProps
-  extends UploadImageProps<Model, ModelFilter> { }
+export interface ComponentUploadImageProps extends UploadImageProps {}
 
 export function ComponentUploadImage(props: ComponentUploadImageProps) {
   const {
@@ -63,7 +61,6 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
     isMultiple,
     isMinimized,
     files,
-    getListFile,
     uploadFile,
     removeFile,
     updateList,
@@ -175,32 +172,21 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   React.useEffect(() => {
-    if (typeof getListFile === "function") {
-      getListFile().subscribe((res) => { });
-    } else {
-      if (files && files.length > 0) {
-        let loadedFiles = [...files];
-        if (!isMultiple) {
-          loadedFiles.length = 1;
-        }
-        loadedFiles.forEach((file) => {
-          file.clearAction = handleClearItem;
-        });
-        const menus = Menu(loadedFiles, handleNewInput);
-        dispatchMenuFile({
-          type: "BULK_UPDATE",
-          datas: menus,
-        });
+    if (files && files.length > 0) {
+      let loadedFiles = [...files];
+      if (!isMultiple) {
+        loadedFiles.length = 1;
       }
+      loadedFiles.forEach((file) => {
+        file.clearAction = handleClearItem;
+      });
+      const menus = Menu(loadedFiles, handleNewInput);
+      dispatchMenuFile({
+        type: "BULK_UPDATE",
+        datas: menus,
+      });
     }
-  }, [
-    getListFile,
-    files,
-    isMultiple,
-    removeFile,
-    handleClearItem,
-    handleNewInput,
-  ]);
+  }, [files, isMultiple, removeFile, handleClearItem, handleNewInput]);
 
   return (
     <>

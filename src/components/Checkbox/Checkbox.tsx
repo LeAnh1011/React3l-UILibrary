@@ -7,9 +7,13 @@ import CheckboxGroup from "./CheckboxGroup";
 import "./Checkbox.scss";
 
 export interface CheckboxProps {
+  /**Handle change value checkbox */
   onChange?: (value: boolean) => void;
+  /**Specifies whether the checkbox is selected */
   checked?: boolean;
+  /**True to not allow change value */
   disabled?: boolean;
+  /**Label of this checkbox item */
   label?: string;
 }
 

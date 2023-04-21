@@ -1,16 +1,26 @@
 import OverflowMenuVertical16 from "@carbon/icons-react/es/overflow-menu--vertical/16";
+import OverflowMenuHorizontal16 from "@carbon/icons-react/es/overflow-menu--horizontal/16";
 import classNames from "classnames";
 import React, { RefObject } from "react";
 import { CommonService } from "@Services/common-service";
-import "./OverflowMenu.scss";
 import OverflowMenuList, { ListOverflowMenu } from "./OverflowMenuList";
+import "./OverflowMenu.scss";
+
 export interface CustomProps {
+  /**List object action {name,function} of menu */
   list?: ListOverflowMenu[];
+  /**Change the size of button */
   size?: "md" | "xl";
+  /**Append this component to body */
   appendToBody?: boolean;
+  /**Option to set type vertical or horizontal */
+  type?: "vertical" | "horizontal";
+  /**Option to set not allow to click Component */
+  disabled?: boolean;
 }
+
 function OverflowMenu(props: CustomProps) {
-  const { size, list } = props;
+  const { size, list, type, disabled } = props;
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
@@ -27,6 +37,10 @@ function OverflowMenu(props: CustomProps) {
   const selectListRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
     null
   );
+
+  const [floatingDirection, setFloatingDirection] = React.useState<
+    "top" | "bottom"
+  >("top");
 
   const handleExpand = React.useCallback(() => {
     setExpand(true);
@@ -52,21 +66,32 @@ function OverflowMenu(props: CustomProps) {
   React.useEffect(() => {
     if (isExpand && check) {
       const currentPosition = buttonRef.current.getBoundingClientRect();
-      if (size === "md") {
+      const heightOfList = selectListRef.current.clientHeight;
+      const spaceBelow = window.innerHeight - currentPosition.bottom;
+      if (spaceBelow <= 200) {
         setAppendToBodyStyle({
           position: "absolute",
-          top: currentPosition.top + 32,
+          top: currentPosition.top - heightOfList,
           right: window.innerWidth - currentPosition.right,
         });
-        setCheck(false);
+        setFloatingDirection("bottom");
       } else {
-        setAppendToBodyStyle({
-          position: "absolute",
-          top: currentPosition.top + 40,
-          right: window.innerWidth - currentPosition.right,
-        });
-        setCheck(false);
+        if (size === "md") {
+          setAppendToBodyStyle({
+            position: "absolute",
+            top: currentPosition.top + 32,
+            right: window.innerWidth - currentPosition.right,
+          });
+        } else {
+          setAppendToBodyStyle({
+            position: "absolute",
+            top: currentPosition.top + 40,
+            right: window.innerWidth - currentPosition.right,
+          });
+        }
+        setFloatingDirection("top");
       }
+      setCheck(false);
     }
   }, [appendToBodyStyle, check, isExpand, size]);
 
@@ -93,12 +118,18 @@ function OverflowMenu(props: CustomProps) {
               "btn--md": size === "md",
               "btn--xl": size === "xl",
               "btn--shadow": isExpand,
+              "overflow-menu--disabled": disabled,
             }
           )}
           onClick={handleExpand}
           onKeyDown={handleKeyDown}
+          disabled={disabled}
         >
-          <OverflowMenuVertical16 />
+          {type === "vertical" ? (
+            <OverflowMenuVertical16 />
+          ) : (
+            <OverflowMenuHorizontal16 />
+          )}
         </button>
       </div>
       {isExpand && (
@@ -108,6 +139,7 @@ function OverflowMenu(props: CustomProps) {
           selectListRef={selectListRef}
           appendToBodyStyle={appendToBodyStyle}
           size={size}
+          floatingDirection={floatingDirection}
         />
       )}
     </div>
@@ -115,5 +147,6 @@ function OverflowMenu(props: CustomProps) {
 }
 OverflowMenu.defaultProps = {
   size: "md",
+  type: "vertical",
 };
 export default OverflowMenu;

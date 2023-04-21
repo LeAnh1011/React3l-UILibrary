@@ -7,7 +7,9 @@ export interface IconLoadingAction {
 }
 
 export interface IconLoadingProps {
+  /** Size of icon */
   size?: number;
+  /** Color of icon */
   color?: string;
 }
 function IconLoading(props: IconLoadingProps) {

@@ -1,5 +1,4 @@
 import React, { RefObject } from "react";
-import "./InputSearch.scss";
 import { Model, ModelFilter } from "react3l-common";
 import classNames from "classnames";
 import { Empty } from "antd";
@@ -15,23 +14,38 @@ import {
 } from "rxjs";
 import InputSearchSelect from "./InputSearchSelect/InputSearchSelect";
 import IconLoading from "@Components/IconLoading/IconLoading";
+import "./InputSearch.scss";
 
 export interface InputSearchProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
+  /**User-filled value to filter*/
   value?: string | null;
+  /**Property of inputSearchSelect*/
   valueFilter?: TModelFilter;
+  /**Property of inputSearchSelect*/
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
+  /**Property of inputSearchSelect*/
   classFilter: new () => TModelFilter;
+  /**Property of inputSearchSelect*/
   render?: (t: T) => string;
+  /**Property of inputSearchSelect*/
   searchType?: string;
+  /**Property of inputSearchSelect*/
   searchProperty?: string;
+  /**Use to custom style the component*/
   className?: string;
+  /**Property of inputSearchSelect*/
   onChangeSearchField?: (id: number, T?: T) => void;
+  /**Handle the change value of the component*/
   onChange?: (value: string) => void;
+  /**Placeholder of the component*/
   placeHolder?: string;
+  /**Boolean to set input show with animation*/
   animationInput?: boolean;
+  /**Option to set position for InputSearch */
+  position?: "left" | "right";
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -52,6 +66,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     className,
     animationInput,
     onChange,
+    position,
   } = props;
   const [showListItem, setShowListItem] = React.useState<boolean>();
   const [fullWidth, setFullWidth] = React.useState<boolean>(!animationInput);
@@ -259,6 +274,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           "active-background": activeBackground && showInput,
           "visible__input-search": showInput,
           "hidden__input-search": !showInput,
+          "position-right": position === "right",
         })}
         onClick={handleToggle}
         tabIndex={0}

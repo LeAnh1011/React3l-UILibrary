@@ -16,45 +16,43 @@ export interface AdvanceMultipleIdFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
+  /**list value users select*/
   values?: any[];
-
+  /**Label for current field*/
   label?: string;
-
+  /**Value filter for api get data option*/
   valueFilter?: TModelFilter;
-
+  /**The property name of the model filter you want to search in the list data*/
   searchProperty?: string;
-
+  /**The type of searchProperty you want to search in the list data*/
   searchType?: string;
-
+  /**Placeholder of the component*/
   placeHolder?: string;
-
+  /**Not allow to handle change filter*/
   disabled?: boolean;
-
-  isMaterial?: boolean;
-
+  /**True for data list of filter is Enum*/
   isEnumList?: boolean;
-
+  /**Api to get list data filter*/
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
-
+  /**Handle the change value of the component*/
   onChange?: (selectedList?: T[], ids?: []) => void;
-
+  /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
-
+  /**Model filter class of API get list data*/
   classFilter: new () => TModelFilter;
-
+  /**Use to custom style the component*/
   className?: string;
-
+  /**Prefer option filter to select*/
   preferOptions?: T[];
-
+  /**Set maximum length of text to search*/
   maxLength?: number;
-
+  /**Show maximum length of item of each item in the dropdown*/
   maxLengthItem?: number;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
   return CommonService.limitWord(t?.name, 25);
 }
-
 
 function AdvanceMultipleIdFilterMaster(
   props: AdvanceMultipleIdFilterMasterProps<Model, ModelFilter>
@@ -63,11 +61,10 @@ function AdvanceMultipleIdFilterMaster(
     valueFilter,
     label,
     values,
-    searchProperty, 
+    searchProperty,
     searchType,
     placeHolder,
     disabled,
-    isMaterial,
     isEnumList,
     getList,
     onChange,
@@ -82,7 +79,6 @@ function AdvanceMultipleIdFilterMaster(
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const [list, setList] = React.useState<Model[]>([]);
-
 
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
@@ -133,7 +129,6 @@ function AdvanceMultipleIdFilterMaster(
     return [];
   }, [list, values]);
 
-
   const selectedList = React.useMemo(() => {
     if (list && list.length > 0) {
       const select = list.filter((current) => {
@@ -141,14 +136,12 @@ function AdvanceMultipleIdFilterMaster(
           values &&
           values?.length > 0 &&
           values.filter((item) => Number(item) === Number(current.id))[0];
-       return filteredItem;
+        return filteredItem;
       });
       return [...select];
     }
     return [];
   }, [list, values]);
-
-  
 
   const internalPreferOptions = React.useMemo(() => {
     if (preferOptions && preferOptions.length > 0) {
@@ -197,7 +190,7 @@ function AdvanceMultipleIdFilterMaster(
       if (!disabled) {
         setExpand(true);
         setTimeout(() => {
-          inputRef.current.children[0].focus();
+          inputRef.current.children[0].children[0].focus();
         }, 400);
         await handleLoadList();
       }
@@ -211,9 +204,7 @@ function AdvanceMultipleIdFilterMaster(
 
   const handleClickItem = React.useCallback(
     (item: Model) => (event: any) => {
-      let filteredItem = values?.filter(
-        (id) => id === item.id
-      )[0];
+      let filteredItem = values?.filter((id) => id === item.id)[0];
       const cloneValueFilter = valueFilter
         ? { ...valueFilter }
         : new ClassFilter();
@@ -225,7 +216,7 @@ function AdvanceMultipleIdFilterMaster(
       }
       if (filteredItem) {
         const tmpSelect = [...selectedList];
-        const tmp = [...values];
+        const tmp = [...(values ?? [])];
         const ids = values?.map((item) => item?.id);
         const index = tmp.indexOf(filteredItem);
         tmp.splice(index, 1);
@@ -305,8 +296,6 @@ function AdvanceMultipleIdFilterMaster(
     handleCloseAdvanceMultipleIdFilterMaster
   );
 
-
-
   return (
     <>
       <div
@@ -331,7 +320,7 @@ function AdvanceMultipleIdFilterMaster(
               "filter-active": values?.length > 0,
             })}
           >
-            <span className="advance-count-item__text p-r--xxxs">
+            <span className="advance-count-item__text p-r--3xs">
               {values?.length > 0 && <>({values?.length})</>}
             </span>
             <div className="advance-id-filter-master__title">
@@ -341,7 +330,7 @@ function AdvanceMultipleIdFilterMaster(
           </label>
         </div>
         {isExpand && (
-          <div className="advance-id-filter-master__list-container m-t--xxxs">
+          <div className="advance-id-filter-master__list-container m-t--3xs">
             <div className="advance-id-filter__input p--xs">
               <InputText
                 isSmall={false}
@@ -349,7 +338,6 @@ function AdvanceMultipleIdFilterMaster(
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
                 suffix={<Search16 />}
-                isMaterial={isMaterial}
                 ref={inputRef}
                 onKeyDown={handleKeyDown}
               />
@@ -360,7 +348,7 @@ function AdvanceMultipleIdFilterMaster(
                   internalList.map((item, index) => (
                     <div
                       className={classNames(
-                        "advance-id-filter__item p-l--xs p-y--xs p-r--xxs",
+                        "advance-id-filter__item p-l--xs p-y--xs p-r--2xs",
                         {
                           "advance-id-filter__item--selected": item.isSelected,
                         }
@@ -404,7 +392,7 @@ function AdvanceMultipleIdFilterMaster(
                   internalPreferOptions.map((item, index) => (
                     <div
                       className={classNames(
-                        "advance-id-filter__prefer-option advance-id-filter__item p-l--xs p-y--xs p-r--xxs"
+                        "advance-id-filter__prefer-option advance-id-filter__item p-l--xs p-y--xs p-r--2xs"
                       )}
                       key={index}
                       onKeyDown={handleMove(item)}
@@ -444,7 +432,6 @@ AdvanceMultipleIdFilterMaster.defaultProps = {
   searchType: "contain",
   isEnumList: false,
   render: defaultRenderObject,
-  isMaterial: false,
   disabled: false,
   typeRender: "name",
   isIdValue: true,

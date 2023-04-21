@@ -1,32 +1,51 @@
 import React, { ReactSVGElement, RefObject } from "react";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
-import "./InputSelect.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
 import { BORDER_TYPE } from "@Configs/enum";
 import { InputAction } from "../InputText/InputText";
+import "./InputSelect.scss";
 
 export interface InputSelectProps<T extends Model> {
+  /**User-selected value*/
   value?: T;
+  /**Not allow to handle change value*/
   disabled?: boolean;
+  /** Focus to input of inputSelect */
   expanded?: boolean;
-  isMaterial?: boolean;
+  /** Placeholder of the Component */
   placeHolder?: string;
+  /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
+  /**Handle the action when click clear value*/
   onClear?: (T: T) => void;
+  /**Handle action on search*/
   onSearch?: (T: string) => void;
+  /**Handle onKeyDown action*/
   onKeyDown?: (event: any) => void;
+  /**Handle onEnter action*/
   onKeyEnter?: (event: any) => void;
+  /**Handle the action when clear input search*/
   handleClearInput?: () => void;
+  /**Use to custom style the component*/
   className?: string;
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
+  /**Label for current field*/
   label?: string;
-  action?: InputAction;
+  /** Show symbol * as required field */
   isRequired?: boolean;
+  /**Control the size of the component*/
   isSmall?: boolean;
+  /**True for data list of filter is Enum (not use in code)*/
   isEnumerable?: boolean;
+  /**Boolean true if used for filter*/
   isFilter?: boolean;
+  /** Provide a custom action (onClick) to the component */
+  action?: InputAction;
+  /** Custom background color for component: "white" || "gray" */
+  bgColor?: "white" | "gray";
 }
 
 function InputSelect(props: InputSelectProps<Model>) {
@@ -49,6 +68,7 @@ function InputSelect(props: InputSelectProps<Model>) {
     isSmall,
     isEnumerable,
     isFilter,
+    bgColor,
   } = props;
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
@@ -118,7 +138,7 @@ function InputSelect(props: InputSelectProps<Model>) {
     <>
       <div className={classNames("input-select__wrapper", className)}>
         <div
-          className="input-select__label m-b--xxxs"
+          className="input-select__label m-b--3xs"
           onClick={(event) => {
             event.stopPropagation();
           }}
@@ -133,10 +153,9 @@ function InputSelect(props: InputSelectProps<Model>) {
               {isRequired && <span className="text-danger">&nbsp;*</span>}
             </label>
           )}
-          <span style={{ width: "100%" }}></span>
           {action && (
             <span
-              className="m-l--xxxs body-text--md color-link"
+              className="m-l--3xs body-text--md color-link"
               style={{ cursor: "pointer" }}
               onClick={action.action}
             >
@@ -149,7 +168,8 @@ function InputSelect(props: InputSelectProps<Model>) {
             "component__input input-select__container p--xs",
             {
               "input-select__container--sm": isSmall,
-              "py--xxs": isSmall,
+              "input-select__container--white": bgColor === "white",
+              "py--2xs": isSmall,
               "px--xs": isSmall,
               "p--xs": !isSmall,
               "input-select--material": type === BORDER_TYPE.MATERIAL,
@@ -195,7 +215,7 @@ function InputSelect(props: InputSelectProps<Model>) {
               )}
               {internalValue && !disabled ? (
                 <CloseFilled16
-                  className="input-icon input-icon__clear m-r--xxs"
+                  className="input-icon input-icon__clear m-r--2xs"
                   onClick={handleClearInput}
                 ></CloseFilled16>
               ) : null}
@@ -216,8 +236,6 @@ function InputSelect(props: InputSelectProps<Model>) {
                 }
                 onKeyDown={handleEnter}
                 className={classNames("component__input", {
-                  "component__input--material": type === BORDER_TYPE.MATERIAL,
-                  "component__input--bordered": type === BORDER_TYPE.BORDERED,
                   "disabled-field": disabled,
                 })}
                 disabled={disabled}
@@ -261,7 +279,6 @@ function defaultRenderObject<T extends Model>(t: T) {
 
 InputSelect.defaultProps = {
   render: defaultRenderObject,
-  isMaterial: false,
   expanded: false,
   disabled: false,
 };

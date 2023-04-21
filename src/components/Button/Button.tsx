@@ -4,13 +4,14 @@ import React, {
   ReactNode,
 } from "react";
 import BleedButton from "./BleedButton";
-import "./Button.scss";
 import GhostButton from "./GhostButton";
 import IconButton from "./IconButton";
 import LinkButton from "./LinkButton";
 import LinkPlainButton from "./LinkPlainButton";
 import NormalButton from "./NormalButton/NormalButton";
 import OutlineButton from "./OutlineButton";
+import "./ButtonComponent.scss";
+
 export type ButtonType =
   | "primary"
   | "secondary"
@@ -31,20 +32,21 @@ export type ButtonType =
   | "icon-only-ghost";
 
 export interface ButtonProps {
+  /**Change the design of button*/
   type?: ButtonType;
-
+  /**Is the button loading or not*/
   loading?: boolean;
-
+  /**Type of component – button*/
   htmlType?: ButtonHTMLAttributes<any>["type"];
-
+  /**Pass the classname to change the style of button*/
   className?: string;
-
+  /**Function to be called when the button is clicked*/
   onClick?: ButtonHTMLAttributes<any>["onClick"];
 
   children?: ReactNode;
-
+  /**Disabled state of button*/
   disabled?: boolean;
-
+  /**Set the icon of button*/
   icon?: JSX.Element;
 }
 
@@ -98,7 +100,6 @@ Button.defaultProps = {
   type: "primary",
   htmlType: "button",
   disabled: false,
-  loading: false,
 };
 
 export default Button;

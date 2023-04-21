@@ -6,7 +6,7 @@
   .input-number__label {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 
     .component__title--disabled {
       color: var(--palette-gray-40);
@@ -27,11 +27,15 @@
     align-items: center;
     width: 100%;
     outline: 1px solid var(--palette-coolGray-50);
-    background-color: var(--color-white);
     height: 40px;
+    background-color: var(--palette-gray-10);
 
     &.input-number__container--sm {
       height: 32px !important;
+    }
+
+    &.input-number__container--white {
+      background-color: var(--color-white);
     }
 
     &:hover {
@@ -74,7 +78,6 @@
     }
 
     &.input-number--material {
-      background-color: var(--palette-gray-10);
       outline: none;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;

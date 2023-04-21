@@ -6,11 +6,18 @@ import React from "react";
 import "./AdvanceInputRangeFilter.scss";
 
 export interface AdvanceInputRangeFilterProps extends InputNumberProps {
+  /**[filterValueFrom, filterValueTo] of filter*/
   valueRange: [number, number] | [];
+  /**Placeholder of the component*/
   placeHolderRange?: [string, string];
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
+  /**Handle the change values of the component*/
   onChangeRange: (T: [number, number]) => void;
+  /**Control the size of the component*/
   isSmall?: boolean;
+  /** Custom background color for component: "white" || "gray" */
+  bgColor?: "white" | "gray";
 }
 
 function AdvanceInputRangeFilter(props: AdvanceInputRangeFilterProps) {
@@ -20,6 +27,7 @@ function AdvanceInputRangeFilter(props: AdvanceInputRangeFilterProps) {
     placeHolderRange = [null, null],
     onChangeRange,
     isSmall,
+    bgColor,
   } = props;
 
   const validateRange = React.useCallback((fromValue, toValue) => {
@@ -54,7 +62,7 @@ function AdvanceInputRangeFilter(props: AdvanceInputRangeFilterProps) {
   return (
     <>
       <div className="input-range__container">
-        <div className="input-range__input-number m-r--xxs">
+        <div className="input-range__input-number m-r--2xs">
           <InputNumber
             {...props}
             value={valueRange[0]}
@@ -62,6 +70,7 @@ function AdvanceInputRangeFilter(props: AdvanceInputRangeFilterProps) {
             type={type}
             placeHolder={placeHolderRange[0]}
             isSmall={isSmall}
+            bgColor={bgColor}
           />
         </div>
 
@@ -73,6 +82,7 @@ function AdvanceInputRangeFilter(props: AdvanceInputRangeFilterProps) {
             type={type}
             isSmall={isSmall}
             placeHolder={placeHolderRange[1]}
+            bgColor={bgColor}
           />
         </div>
       </div>
@@ -84,11 +94,11 @@ AdvanceInputRangeFilter.defaultProps = {
   label: "",
   isSmall: false,
   type: BORDER_TYPE.BORDERED,
-  isRequired: false,
   prefix: "",
   disabled: false,
   className: "",
   maxLength: 0,
+  bgColor: "white",
 };
 
 export default AdvanceInputRangeFilter;

@@ -1,3 +1,4 @@
+import React, { ReactSVGElement, RefObject } from "react";
 import {
   DatePicker as DatePickerAntd,
   DatePickerProps as AntdDatePickerProps,
@@ -6,29 +7,31 @@ import classNames from "classnames";
 import { DEFAULT_DATETIME_VALUE } from "@Configs/consts";
 import { BORDER_TYPE } from "@Configs/enum";
 import { Moment } from "moment";
-import React, { ReactSVGElement, RefObject } from "react";
 import { CommonService } from "@Services/common-service";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import "./AdvanceDateFilter.scss";
 
-interface AdvanceDateFilterAction {
-  name?: string;
-  action?: any;
-}
 interface AdvanceDateFilterProps {
+  /** Value users select */
   value?: Moment;
+  /** Label for current field */
   label?: string;
-  isMaterial?: boolean;
+  /** Use to format the date selected */
   dateFormat?: string[];
-  error?: string;
+  /** Handle the change value of the component */
   onChange?: (value: Moment | null, dateString?: string) => void;
+  /** Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
+  /** Control the size of the component */
   isSmall?: boolean;
+  /** Not allow to handle change the component */
   disabled?: boolean;
-  isRequired?: boolean;
+  /** Use to custom style the component */
   className?: string;
-  action?: AdvanceDateFilterAction;
+  /** Placeholder of the component */
   placeholder?: string;
+  /** Custom background color for component: "white" || "gray" */
+  bgColor?: "white" | "gray";
 }
 
 function AdvanceDateFilter(
@@ -41,11 +44,10 @@ function AdvanceDateFilter(
     className,
     type,
     label,
-    isRequired,
-    action,
     isSmall,
     disabled,
     placeholder,
+    bgColor,
   } = props;
 
   const dateRef = React.useRef<any>();
@@ -71,7 +73,7 @@ function AdvanceDateFilter(
       className={classNames("advance-date-filter__wrapper", className)}
       ref={wrapperRef}
     >
-      <div className="advance-date-filter__label m-b--xxxs">
+      <div className="advance-date-filter__label m-b--3xs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label
             className={classNames("component__title", {
@@ -79,18 +81,7 @@ function AdvanceDateFilter(
             })}
           >
             {label}
-            {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
-        )}
-        <span style={{ width: "100%" }}></span>
-        {action && (
-          <span
-            className="m-l--xxxs body-text--md color-link"
-            style={{ cursor: "pointer" }}
-            onClick={action.action}
-          >
-            {action.name}
-          </span>
         )}
       </div>
       <div className="advance-date-filter__container">
@@ -102,10 +93,11 @@ function AdvanceDateFilter(
           allowClear={false}
           format={dateFormat}
           className={classNames({
-            "advance-date-filter__wrapper--sm": isSmall,
-            "p-y--xxs": isSmall,
+            "p-y--2xs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
+            "advance-date-filter--sm": isSmall,
+            "advance-date-filter--white": bgColor === "white",
             "advance-date-filter--material": type === BORDER_TYPE.MATERIAL,
             "advance-date-filter--disabled ": disabled,
             "advance-date-filter--float": type === BORDER_TYPE.FLOAT_LABEL,
@@ -121,7 +113,6 @@ function AdvanceDateFilter(
             })}
           >
             {label}
-            {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
         {internalValue &&
@@ -142,7 +133,7 @@ function AdvanceDateFilter(
               <CloseFilled16
                 className={classNames(
                   "advance-date-filter__icon-clear",
-                  "m-l--xxs"
+                  "m-l--2xs"
                 )}
                 onClick={handleClearDate}
               ></CloseFilled16>
@@ -154,7 +145,6 @@ function AdvanceDateFilter(
 }
 
 AdvanceDateFilter.defaultProps = {
-  isMaterial: false,
   dateFormat: ["DD/MM/YYYY", "YYYY/MM/DD"],
   label: "",
   isSmall: false,
@@ -162,6 +152,7 @@ AdvanceDateFilter.defaultProps = {
   isRequired: false,
   disabled: false,
   className: "",
+  bgColor: "white",
 };
 
 export default AdvanceDateFilter;

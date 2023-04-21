@@ -1,10 +1,10 @@
 import React, { ReactNode } from "react";
-import "./Modal.scss";
 import { Modal as AntModal, ModalProps as AntModalProps } from "antd";
 import classNames from "classnames";
 import Button from "@Components/Button";
 import Close20 from "@carbon/icons-react/es/close/20";
 import InlineLoading from "@Components/InlineLoading";
+import "./Modal.scss";
 
 export enum MODAL_SIZE {
   SIZE_320 = 320,
@@ -16,14 +16,23 @@ export enum MODAL_SIZE {
 
 export interface ModalCustomProps extends AntModalProps {
   children?: ReactNode;
+  /**Is the modal footer (cancel, apply, apply next button) visible or not*/
   visibleFooter?: boolean;
+  /**Change the size of modal*/
   size?: MODAL_SIZE;
+  /**Name of apply button*/
   titleButtonApply?: string;
+  /**Name of apply next button*/
   titleButtonApplyNext?: string;
+  /**Name of cancel button*/
   titleButtonCancel?: string;
+  /**Cancel the form*/
   handleCancel?: (event: any) => void;
+  /**Save the form*/
   handleSave?: (event: any) => void;
+  /**Apply and process to next form*/
   handleApplyNext?: (event: any) => void;
+  /**Pass state of loading */
   loadingType?: "default" | "submitting" | "submitted" | "error";
 }
 
@@ -115,7 +124,7 @@ function Modal(props: ModalCustomProps) {
     return (
       <div
         className={classNames(
-          "btn-component btn-only-icon btn--xxl btn--icon-only-ghost"
+          "btn-component btn-only-icon btn--2xl btn--icon-only-ghost"
         )}
       >
         <Close20 />

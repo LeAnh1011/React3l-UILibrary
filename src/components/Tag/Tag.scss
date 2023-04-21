@@ -1,0 +1,37 @@
+.tag-container {
+  border-radius: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  line-height: 16px;
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  cursor: pointer;
+  .tag-wrapper {
+    &.tag-wrapper__sm {
+      padding: 0px 4px;
+      & + .tag-clear {
+        svg {
+          margin: 4px;
+        }
+      }
+    }
+    &.tag-wrapper__md {
+      padding: 0px 4px 0px 8px;
+      & + .tag-clear {
+        svg {
+          margin: 6px;
+        }
+      }
+    }
+  }
+  .tag-clear {
+    display: flex;
+    &:hover {
+      background-color: var(--palette-gray-80);
+      border-radius: 50%;
+    }
+  }
+}

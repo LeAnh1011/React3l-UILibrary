@@ -1,10 +1,17 @@
-import { storiesOf } from "@storybook/react";
+import {
+  ArgsTable,
+  Description,
+  PRIMARY_STORY,
+  Primary,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { ComponentMeta, Story } from "@storybook/react";
 import React from "react";
 import { Model } from "react3l-common";
 import { Observable } from "rxjs";
-import nameof from "ts-nameof.macro";
 import UploadFile, { FileModel } from "./UploadFile";
-
 const demoList = [
   {
     path:
@@ -37,8 +44,29 @@ class ModelOBJ extends Model {
   public name?: string;
   public files?: FileModel[];
 }
+export default {
+  title: "UploadFile",
+  component: UploadFile,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {},
+} as ComponentMeta<typeof UploadFile>;
 
-export const Default = () => {
+const Template: Story = (args) => {
   const [model, setModel] = React.useState<ModelOBJ>({ ...new ModelOBJ() });
 
   const handleUpdateList = React.useCallback(
@@ -72,16 +100,29 @@ export const Default = () => {
     return demoObservable;
   };
 
+  const [fileLoading, setFileLoading] = React.useState<FileModel[]>([]);
+
   return (
-    <UploadFile
-      files={model?.files || []}
-      uploadFile={demoUploadFile}
-      updateList={handleUpdateList}
-      removeFile={handleRemoveFile}
-      isMultiple={false}
-      type="link"
-    ></UploadFile>
+    <div style={{ width: 260 }}>
+      <UploadFile
+        uploadFile={demoUploadFile}
+        updateList={handleUpdateList}
+        isMultiple={false}
+        type="dragAndDrop"
+        uploadContent="Drag and drop files here or upload"
+        setListFileLoading={setFileLoading}
+      ></UploadFile>
+      <UploadFile.FileLoadingContent
+        loadingFiles={fileLoading}
+        className="content-loading"
+      />
+      <UploadFile.FileLoadedContent
+        loadedFiles={model?.files}
+        removeFile={handleRemoveFile}
+        className="content-loaded"
+      />
+    </div>
   );
 };
 
-storiesOf("UploadFile", module).add(nameof(Default), Default);
+export const Default = Template.bind({});

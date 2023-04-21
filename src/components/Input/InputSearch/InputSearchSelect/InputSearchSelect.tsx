@@ -75,10 +75,10 @@ function InputSearchSelect(props: InputSelectProps) {
           {inputRef.current?.value && inputRef.current.value.length > 0 && (
             <div
               style={{ width: "16px", height: "20px", paddingTop: 2 }}
-              className="m-r--xxs"
+              className="m-r--2xs"
             >
               <CloseFilled16
-                className="input-icon__clear m-r--xxs mt--xxxs"
+                className="input-icon__clear m-r--2xs"
                 onClick={handleClearInput}
               ></CloseFilled16>
             </div>

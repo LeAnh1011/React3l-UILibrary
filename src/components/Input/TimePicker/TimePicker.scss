@@ -1,0 +1,224 @@
+/* Style for DatePicker.tsx */
+
+.time-picker__wrapper {
+  width: 100%;
+  position: relative;
+  .time-picker__container {
+    position: relative;
+    width: 100%;
+  }
+  .time-picker__container {
+    position: relative;
+    width: 100%;
+  }
+
+  .time-picker__label {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    label {
+      font-size: 0.75em;
+      white-space: nowrap;
+    }
+
+    .component__title--disabled {
+      color: var(--palette-gray-40);
+    }
+  }
+
+  .time-picker__icon-wrapper {
+    position: absolute;
+    display: flex;
+    height: 1.5rem;
+    width: 2rem;
+    top: 0.5rem;
+    right: 0.5rem;
+    box-sizing: border-box;
+    background-color: var(--color-white);
+    justify-content: flex-end;
+    align-items: center;
+
+    &.time-picker__icon-wrapper--material {
+      background-color: var(--palette-gray-10);
+
+      .time-picker__icon-clear {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    &.time-picker__icon-wrapper--disabled {
+      background-color: var(--palette-grayHover-10);
+    }
+
+    &.time-picker__icon-wrapper--sm {
+      top: 0.3rem !important;
+    }
+    .time-picker__icon-clear {
+      color: var(--palette-coolGray-50);
+      &:hover {
+        cursor: pointer;
+        color: var(--palette-coolGrayHover-50);
+      }
+    }
+  }
+
+  .ant-picker {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    outline: 1px solid var(--palette-gray-50);
+    border: none;
+    height: 40px;
+    border-radius: 0px;
+    font-size: 14px;
+    background-color: var(--palette-gray-10);
+
+    .ant-picker-input {
+      input {
+        &::placeholder {
+          color: var(--palette-gray-60);
+        }
+        &:disabled::placeholder {
+          color: var(--palette-gray-40);
+        }
+      }
+    }
+
+    .time-picker__icon-wrapper ~ .time-picker--disabled {
+      background-color: var(--palette-grayHover-10) !important;
+    }
+
+    &:hover,
+    &:focus {
+      & + .time-picker__icon-wrapper--material {
+        background-color: var(--palette-grayHover-10);
+      }
+    }
+
+    &:hover:not(.time-picker--disabled) {
+      outline-color: var(--color-primary);
+      & + .component__title {
+        color: var(--color-primary);
+      }
+    }
+
+    &.time-picker--disabled {
+      outline-color: var(--palette-coolGray-30);
+      background-color: var(--palette-gray-10);
+      & + .component__title {
+        pointer-events: none;
+      }
+    }
+
+    &.ant-picker--bordered {
+      background-color: var(--color-white);
+    }
+
+    &.ant-picker-focused {
+      box-shadow: none;
+      outline: 2px solid var(--color-primary);
+    }
+
+    &.time-picker--float {
+      &:hover:not(.time-picker--disabled):not(:focus-within) {
+        outline-color: var(--palette-gray-100);
+        & + .component__title {
+          color: var(--palette-gray-100);
+        }
+      }
+
+      &.ant-picker-focused {
+        box-shadow: none;
+        outline: 2px solid var(--color-primary);
+        & + .component__title {
+          color: var(--color-primary);
+        }
+      }
+    }
+
+    &.time-picker--sm {
+      height: 32px !important;
+    }
+
+    &.time-picker--white {
+      background-color: var(--color-white);
+      &:hover {
+        + .time-picker__icon-wrapper--material {
+          background-color: var(--palette-grayHover-10);
+        }
+      }
+    }
+
+    &.time-picker--material {
+      outline: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom: 1px solid var(--palette-gray-50);
+      margin-bottom: -1px;
+      .time-picker__icon-wrapper {
+        background-color: var(--palette-gray-10);
+      }
+
+      &:hover {
+        background-color: var(--palette-grayHover-10);
+      }
+
+      &.time-picker--disabled {
+        border-bottom: none;
+        background-color: var(--palette-gray-10);
+      }
+
+      &.ant-picker-focused {
+        border-bottom: none !important;
+        box-shadow: none;
+        outline: 2px solid var(--color-primary);
+      }
+    }
+  }
+  .time-picker__container:has(.time-picker--white) {
+    background-color: var(--color-white);
+    .time-picker__icon-wrapper--material {
+      background-color: var(--color-white);
+    }
+  }
+
+  .component__title--normal {
+    position: absolute;
+    color: gray;
+    transition: all 0.1s ease-out;
+    padding: 0 4px;
+    z-index: 200;
+    top: -1px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.16px;
+    left: 8px;
+    background-color: var(--color-white);
+    transform: translateY(-50%) scale(0.9);
+  }
+}
+.form-item__container--error {
+  .time-picker__icon-wrapper {
+    background-color: var(--color-critical-blur) !important;
+  }
+  .time-picker--material + .time-picker__icon-wrapper {
+    background-color: var(--color-critical-blur) !important;
+    &:hover {
+      background-color: var(--palette-grayHover-10) !important;
+    }
+  }
+  .time-picker--material:hover + .time-picker__icon-wrapper {
+    background-color: var(--palette-grayHover-10) !important;
+  }
+  .ant-picker.time-picker--material {
+    border-bottom: none;
+  }
+}

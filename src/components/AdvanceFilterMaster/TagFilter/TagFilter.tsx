@@ -16,13 +16,23 @@ import { Model, ModelFilter } from "react3l-common";
 import "./TagFilter.scss";
 
 export interface TagFilterProps {
+  /**Use to custom style the component*/
   className?: string;
+  /**Current value filter*/
   value?: ModelFilter;
+  /**KeyWord of data file to be translated*/
   keyTranslate?: string;
+  /** Set fields that not display value filter*/
+  hiddenField?: string[];
+  /**Fields that icon clear is disabled*/
   exceptField?: string[];
+  /**Provide a prop to show filter field mapping*/
   mappingField?: { [key: string]: string };
+  /**Provide a translate function*/
   translate?: TFunction;
+  /**Handle the action when click clear filter*/
   onClear?: (t: any) => void;
+  /**Handle the change value of the component*/
   handleChangeFilter?: (valueFilter: ModelFilter) => void;
 }
 
@@ -39,6 +49,7 @@ function TagFilter(props: TagFilterProps) {
     className,
     value,
     keyTranslate,
+    hiddenField,
     exceptField,
     mappingField,
     onClear,
@@ -337,6 +348,19 @@ function TagFilter(props: TagFilterProps) {
     return list;
   }, []);
 
+  const checkHiddenField = React.useCallback(
+    (field: string) => {
+      if (hiddenField && hiddenField.length > 0) {
+        const filteredField = hiddenField.filter(
+          (current) => current === field
+        );
+        return filteredField && filteredField.length > 0 ? true : false;
+      }
+      return false;
+    },
+    [hiddenField]
+  );
+
   const handleCheckField = React.useCallback(
     (field: string) => {
       if (exceptField && exceptField.length > 0) {
@@ -373,69 +397,123 @@ function TagFilter(props: TagFilterProps) {
       {list &&
         list?.length > 0 &&
         list.map((itemTag: Tag, index: number) => (
-          <Fragment key={index}>
-            {itemTag?.value && itemTag?.value?.length > 0 && (
-              <>
-                <div className="tag-detail m--xxs">
-                  <div className="tag-filte__container-text">
-                    <div className="tag-detail__title m-r--xxxs">
-                      {translate
-                        ? translate(`${keyTranslate}.${itemTag?.key}`)
-                        : itemTag?.key}
-                      :{" "}
-                    </div>
-                    {itemTag?.type === "string" && itemTag?.value}
-                    {itemTag?.type === "number" &&
-                      !itemTag?.value?.length &&
-                      formatNumber(itemTag?.value)}
-                    {itemTag?.type === "number" &&
-                      itemTag?.value?.length > 0 &&
-                      itemTag?.value?.map((item: any, index: number) => (
-                        <Fragment key={index}>
-                          {(item?.filterType === "greaterEqual" ||
-                            item?.filterType === "greater") && (
-                            <>{formatNumber(item.filterValue)}&minus;</>
-                          )}
-                        </Fragment>
-                      ))}
-                    {itemTag?.type === "number" &&
-                      itemTag?.value?.length > 0 &&
-                      itemTag?.value?.map((item: any, index: number) => (
-                        <Fragment key={index}>
-                          {(item?.filterType === "lessEqual" ||
-                            item?.filterType === "less") &&
-                            formatNumber(item.filterValue)}
-                        </Fragment>
-                      ))}
+          <>
+            {checkHiddenField(itemTag.key) ? null : (
+              <Fragment key={index}>
+                {itemTag?.value && itemTag?.value?.length > 0 && (
+                  <>
+                    <div className="tag-detail m--2xs">
+                      <div className="tag-filte__container-text">
+                        <div className="tag-detail__title m-r--3xs">
+                          {translate
+                            ? translate(`${keyTranslate}.${itemTag?.key}`)
+                            : itemTag?.key}
+                          :{" "}
+                        </div>
+                        {itemTag?.type === "string" && itemTag?.value}
+                        {itemTag?.type === "number" &&
+                          !itemTag?.value?.length &&
+                          formatNumber(itemTag?.value)}
+                        {itemTag?.type === "number" &&
+                          itemTag?.value?.length > 0 &&
+                          itemTag?.value?.map((item: any, index: number) => (
+                            <Fragment key={index}>
+                              {(item?.filterType === "greaterEqual" ||
+                                item?.filterType === "greater") && (
+                                <>{formatNumber(item.filterValue)}&minus;</>
+                              )}
+                            </Fragment>
+                          ))}
+                        {itemTag?.type === "number" &&
+                          itemTag?.value?.length > 0 &&
+                          itemTag?.value?.map((item: any, index: number) => (
+                            <Fragment key={index}>
+                              {(item?.filterType === "lessEqual" ||
+                                item?.filterType === "less") &&
+                                formatNumber(item.filterValue)}
+                            </Fragment>
+                          ))}
 
-                    {itemTag?.type === "date" &&
-                      itemTag?.value?.length > 0 &&
-                      itemTag?.value?.map((item: any, index: number) => (
-                        <Fragment key={index}>
-                          {(item?.filterType === "greaterEqual" ||
-                            item?.filterType === "greater") && (
-                            <>{formatDate(item.filterValue)}&minus;</>
-                          )}
-                        </Fragment>
-                      ))}
-                    {itemTag?.type === "date" &&
-                      itemTag?.value?.length > 0 &&
-                      itemTag?.value?.map((item: any, index: number) => (
-                        <Fragment key={index}>
-                          {(item?.filterType === "lessEqual" ||
-                            item?.filterType === "less") &&
-                            formatDate(item.filterValue)}
-                        </Fragment>
-                      ))}
-                    {itemTag?.type === "id" && itemTag?.value?.length > 0 && (
-                      <>
-                        {itemTag?.value?.length > 2 ? (
+                        {itemTag?.type === "date" &&
+                          itemTag?.value?.length > 0 &&
+                          itemTag?.value?.map((item: any, index: number) => (
+                            <Fragment key={index}>
+                              {(item?.filterType === "greaterEqual" ||
+                                item?.filterType === "greater") && (
+                                <>{formatDate(item.filterValue)}&minus;</>
+                              )}
+                            </Fragment>
+                          ))}
+                        {itemTag?.type === "date" &&
+                          itemTag?.value?.length > 0 &&
+                          itemTag?.value?.map((item: any, index: number) => (
+                            <Fragment key={index}>
+                              {(item?.filterType === "lessEqual" ||
+                                item?.filterType === "less") &&
+                                formatDate(item.filterValue)}
+                            </Fragment>
+                          ))}
+                        {itemTag?.type === "id" && itemTag?.value?.length > 0 && (
                           <>
-                            <Tooltip
-                              placement="topLeft"
-                              title={
-                                <>
-                                  {itemTag?.value?.map(
+                            {itemTag?.value?.length > 2 ? (
+                              <>
+                                <Tooltip
+                                  placement="topLeft"
+                                  title={
+                                    <>
+                                      {itemTag?.value?.map(
+                                        (itemValue: any, index: number) => (
+                                          <span key={index}>
+                                            <>
+                                              <span>
+                                                {checkMappingField(itemTag.key)
+                                                  ? itemValue[
+                                                      checkMappingField(
+                                                        itemTag.key
+                                                      )
+                                                    ]
+                                                  : itemValue?.name}
+                                              </span>
+                                              {index <
+                                                itemTag?.value?.length - 1 && (
+                                                <span className="m-r--3xs">
+                                                  &#44;
+                                                </span>
+                                              )}
+                                            </>
+                                          </span>
+                                        )
+                                      )}
+                                    </>
+                                  }
+                                >
+                                  <span>
+                                    {checkMappingField(itemTag.key)
+                                      ? itemTag?.value[0][
+                                          checkMappingField(itemTag.key)
+                                        ]
+                                      : itemTag?.value[0]?.name}
+                                  </span>
+                                  {index < itemTag?.value?.length - 1 && (
+                                    <span className="m-r--3xs">&#44;</span>
+                                  )}
+                                  <span>
+                                    {" "}
+                                    {checkMappingField(itemTag.key)
+                                      ? itemTag?.value[1][
+                                          checkMappingField(itemTag.key)
+                                        ]
+                                      : itemTag?.value[1]?.name}
+                                  </span>
+                                  <span>
+                                    ... + {itemTag?.value?.length - 2}
+                                  </span>
+                                </Tooltip>
+                              </>
+                            ) : (
+                              <>
+                                {itemTag?.value?.length > 0 &&
+                                  itemTag?.value?.map(
                                     (itemValue: any, index: number) => (
                                       <span key={index}>
                                         <>
@@ -448,7 +526,7 @@ function TagFilter(props: TagFilterProps) {
                                           </span>
                                           {index <
                                             itemTag?.value?.length - 1 && (
-                                            <span className="m-r--xxxs">
+                                            <span className="m-r--3xs">
                                               &#44;
                                             </span>
                                           )}
@@ -456,73 +534,30 @@ function TagFilter(props: TagFilterProps) {
                                       </span>
                                     )
                                   )}
-                                </>
-                              }
-                            >
-                              <span>
-                                {checkMappingField(itemTag.key)
-                                  ? itemTag?.value[0][
-                                      checkMappingField(itemTag.key)
-                                    ]
-                                  : itemTag?.value[0]?.name}
-                              </span>
-                              {index < itemTag?.value?.length - 1 && (
-                                <span className="m-r--xxxs">&#44;</span>
-                              )}
-                              <span>
-                                {" "}
-                                {checkMappingField(itemTag.key)
-                                  ? itemTag?.value[1][
-                                      checkMappingField(itemTag.key)
-                                    ]
-                                  : itemTag?.value[1]?.name}
-                              </span>
-                              <span>... + {itemTag?.value?.length - 2}</span>
-                            </Tooltip>
-                          </>
-                        ) : (
-                          <>
-                            {itemTag?.value?.length > 0 &&
-                              itemTag?.value?.map(
-                                (itemValue: any, index: number) => (
-                                  <span key={index}>
-                                    <>
-                                      <span>
-                                        {checkMappingField(itemTag.key)
-                                          ? itemValue[
-                                              checkMappingField(itemTag.key)
-                                            ]
-                                          : itemValue?.name}
-                                      </span>
-                                      {index < itemTag?.value?.length - 1 && (
-                                        <span className="m-r--xxxs">&#44;</span>
-                                      )}
-                                    </>
-                                  </span>
-                                )
-                              )}
+                              </>
+                            )}
                           </>
                         )}
-                      </>
-                    )}
-                  </div>
-                  <Close16
-                    aria-label="Add"
-                    className={classNames("tag-filter__container-clear", {
-                      "tag-filter__container-clear--disabled": handleCheckField(
-                        itemTag.key
-                      ),
-                    })}
-                    onClick={() => {
-                      if (!handleCheckField(itemTag.key)) {
-                        handleClear(itemTag);
-                      }
-                    }}
-                  />
-                </div>
-              </>
+                      </div>
+                      <Close16
+                        aria-label="Add"
+                        className={classNames("tag-filter__container-clear", {
+                          "tag-filter__container-clear--disabled": handleCheckField(
+                            itemTag.key
+                          ),
+                        })}
+                        onClick={() => {
+                          if (!handleCheckField(itemTag.key)) {
+                            handleClear(itemTag);
+                          }
+                        }}
+                      />
+                    </div>
+                  </>
+                )}
+              </Fragment>
             )}
-          </Fragment>
+          </>
         ))}
     </div>
   );

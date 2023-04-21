@@ -14,8 +14,8 @@ import React, { RefObject } from "react";
 import { Model, ModelFilter } from "react3l-common";
 import type { Observable } from "rxjs";
 import { CommonService } from "@Services/common-service";
-import "./Tree.scss";
 import { TreeNode as CustomTreeNode } from "./TreeNode";
+import "./Tree.scss";
 
 function SwitcherIcon() {
   return (
@@ -25,26 +25,35 @@ function SwitcherIcon() {
   );
 }
 export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
+  /**List TreeNode data*/
   treeData?: CustomTreeNode<T>[];
+  /**Value filter for api getTreeData*/
   valueFilter?: TModelFilter;
+  /**List key of node is expanding*/
   expandedKeys?: number[];
+  /**List key of node checked*/
   checkedKeys?: number[];
+  /**Switch to multiple check option*/
   checkable?: boolean;
+  /**Key of selected node */
   selectedKey?: number;
+  /**Not allow to select the father item that contain a lot of items inside*/
   onlySelectLeaf?: boolean;
-  searchProperty?: string;
-  searchType?: string;
+  /**API to get data*/
   getTreeData?: (TModelFilter?: TModelFilter) => Observable<T[]>;
+  /**Function to change selected items*/
   onChange?: (treeNode: CustomTreeNode<T>[]) => void;
+  /**Provide a function to render a specific property as name*/
   render?: (treeNode: T) => string;
-  classFilter?: new () => TModelFilter;
-  isMultiple?: boolean;
+  /**Option to show add new button*/
   selectWithAdd?: () => void;
-  selectWithPreferOption?: boolean;
+  /**Prefer node item of tree*/
   preferOptions?: T[];
+  /**Show maximum length of each row item in tree*/
+  maxLengthItem?: number;
+  /**Pass ref of list data select */
   selectListRef?: RefObject<any>;
   isExpand?: boolean;
-  maxLengthItem?: number;
 }
 function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const {
@@ -55,15 +64,13 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     checkable,
     selectedKey,
     onlySelectLeaf,
-    // searchProperty,
-    // searchType,
-    classFilter: ClassFilter,
     getTreeData,
     onChange,
     selectWithAdd,
     preferOptions,
     maxLengthItem = 30,
     render,
+    checkStrictly,
   } = props;
 
   const [internalTreeData, setInternalTreeData] = React.useState<
@@ -171,6 +178,23 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   }, []);
 
   const handleCheck: any = React.useCallback(
+    (checkedKeys: Key[]) => {
+      setInternalCheckedKeys(checkedKeys);
+      if (typeof onChange === "function") {
+        const checkedNodes = searchTree(
+          [...internalTreeData, ...internalPreferOptionsTreeData],
+          checkedKeys
+        );
+        const checkedItems = checkedNodes.map(
+          (currentNode) => currentNode.item
+        );
+        onChange([...checkedItems]);
+      }
+    },
+    [internalPreferOptionsTreeData, internalTreeData, onChange, searchTree]
+  );
+
+  const handleCheckStrictly: any = React.useCallback(
     (checkedKeys: { checked: Key[]; halfChecked: Key[] }) => {
       setInternalCheckedKeys(checkedKeys.checked);
       if (typeof onChange === "function") {
@@ -251,14 +275,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       });
     }
     return () => {};
-  }, [
-    getTreeData,
-    selectedKey,
-    ClassFilter,
-    subscription,
-    onlySelectLeaf,
-    valueFilter,
-  ]);
+  }, [getTreeData, selectedKey, subscription, onlySelectLeaf, valueFilter]);
 
   // local filter tree base on model filter commented because now using server filter data
   // React.useEffect(() => {
@@ -321,7 +338,11 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
             } else {
               checkedKeys = [...internalCheckedKeys, item.key];
             }
-            handleCheck({ checked: checkedKeys, halfChecked: [] });
+            if (checkStrictly) {
+              handleCheckStrictly({ checked: checkedKeys, halfChecked: [] });
+            } else {
+              handleCheck(checkedKeys);
+            }
           }
 
           break;
@@ -348,7 +369,14 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       }
       return;
     },
-    [checkable, handleCheck, handleSelect, internalCheckedKeys]
+    [
+      checkStrictly,
+      checkable,
+      handleCheck,
+      handleCheckStrictly,
+      handleSelect,
+      internalCheckedKeys,
+    ]
   );
 
   return (
@@ -372,7 +400,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                   showLine={false && { showLeafIcon: false }}
                   switcherIcon={<SwitcherIcon />}
                   onExpand={handleExpandKey}
-                  onCheck={handleCheck}
+                  onCheck={checkStrictly ? handleCheckStrictly : handleCheck}
                   onSelect={handleSelect}
                   treeData={internalTreeData}
                   titleRender={(node: any) => (
@@ -438,7 +466,9 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                           showLine={false && { showLeafIcon: false }}
                           treeData={internalPreferOptionsTreeData} // pass internalTreeData here  showLine={false && { showLeafIcon: false }}
                           switcherIcon={<SwitcherIcon />}
-                          onCheck={handleCheck}
+                          onCheck={
+                            checkStrictly ? handleCheckStrictly : handleCheck
+                          }
                           onSelect={handleSelect}
                           checkedKeys={internalCheckedKeys}
                           selectedKeys={internalSelectedKeys}

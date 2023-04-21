@@ -1,61 +1,55 @@
+import React, { RefObject } from "react";
 import { DEBOUNCE_TIME_300 } from "@Configs/consts";
-import Add16 from "@carbon/icons-react/es/add/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { Model, ModelFilter } from "react3l-common";
 import { useDebounceFn } from "ahooks";
 import { Empty, Tooltip } from "antd";
 import classNames from "classnames";
-import React, { RefObject } from "react";
 import type { ErrorObserver, Observable } from "rxjs";
 import { CommonService } from "@Services/common-service";
 import InputSelect from "@Components/Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "@Configs/enum";
-import "./AdvanceIdFilter.scss";
 import IconLoading from "@Components/IconLoading/IconLoading";
+import "./AdvanceIdFilter.scss";
 
 export interface AdvanceIdFilterProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
+  /**Value users select*/
   value?: Model;
-
+  /**Value filter for api get data option*/
   valueFilter?: TModelFilter;
-
+  /**The property name of the model filter you want to search in the list data*/
   searchProperty?: string;
-
+  /**The type of searchProperty you want to search in the list data*/
   searchType?: string;
-
+  /**Placeholder of the component*/
   placeHolder?: string;
-
+  /**Not allow to handle change filter*/
   disabled?: boolean;
-
-  isMaterial?: boolean;
-
-  isEnumerable?: boolean;
-
+  /**Append this component to body*/
   appendToBody?: boolean;
-
+  /**Api to get list data filter*/
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
-
+  /**Handle the change value of the component*/
   onChange?: (id: number, T?: T) => void;
-
+  /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
-
+  /**Model filter class of API get list data*/
   classFilter: new () => TModelFilter;
-
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
-
+  /**Label for current field*/
   label?: string;
-
-  selectWithAdd?: () => void;
-
-  selectWithPreferOption?: boolean;
-
+  /**Control the size of the component*/
   isSmall?: boolean;
-
+  /**Prefer option filter to select*/
   preferOptions?: T[];
-
+  /**Set maximum length of each data row to render*/
   maxLengthItem?: number;
+  /** Custom background color for component: "white" || "gray" */
+  bgColor?: "white" | "gray";
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -70,7 +64,6 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
     searchType,
     placeHolder,
     disabled,
-    isEnumerable,
     appendToBody,
     getList,
     onChange,
@@ -78,10 +71,10 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
     classFilter: ClassFilter,
     type,
     label,
-    selectWithAdd,
     isSmall,
     preferOptions,
     maxLengthItem,
+    bgColor,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -129,11 +122,9 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
       const cloneValueFilter = valueFilter
         ? { ...valueFilter }
         : new ClassFilter();
-      if (!isEnumerable) {
-        if (searchType) {
-          cloneValueFilter[searchProperty][searchType] = searchTerm;
-        } else cloneValueFilter[searchProperty] = searchTerm;
-      }
+      if (searchType) {
+        cloneValueFilter[searchProperty][searchType] = searchTerm;
+      } else cloneValueFilter[searchProperty] = searchTerm;
       handleGetList(cloneValueFilter);
     },
     {
@@ -154,16 +145,10 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
     async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (!disabled) {
         setExpand(true);
-        if (isEnumerable) {
-          if (list.length === 0) {
-            await handleLoadList();
-          }
-        } else {
-          await handleLoadList();
-        }
+        await handleLoadList();
       }
     },
-    [handleLoadList, isEnumerable, list, disabled]
+    [handleLoadList, disabled]
   );
 
   const handleCloseSelect = React.useCallback(() => {
@@ -276,7 +261,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
       <div className="advance-id-filter__container" ref={wrapperRef}>
         <div className="select__input" onClick={handleToggle}>
           <InputSelect
-            value={internalValue} // value of input, event should change these on update
+            value={internalValue}
             render={render}
             placeHolder={placeHolder}
             expanded={isExpand}
@@ -290,6 +275,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
             label={label}
             isSmall={isSmall}
             isFilter={true}
+            bgColor={bgColor}
           />
         </div>
         {isExpand && (
@@ -374,17 +360,6 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
                   ))}
               </div>
             )}
-            {typeof selectWithAdd !== "undefined" && (
-              <div
-                className={classNames(
-                  "advance-id-filter__bottom-button advance-id-filter__add-button p-y--xs"
-                )}
-                onClick={selectWithAdd}
-              >
-                <Add16 className="m-l--xxs" />
-                <span>Add new</span>
-              </div>
-            )}
           </div>
         )}
       </div>
@@ -395,12 +370,11 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
 AdvanceIdFilter.defaultProps = {
   searchProperty: "name",
   searchType: "contain",
-  isEnumerable: false,
   appendToBody: false,
   render: defaultRenderObject,
-  isMaterial: false,
   disabled: false,
   maxLengthItem: 30,
+  bgColor: "white",
 };
 
 export default AdvanceIdFilter;

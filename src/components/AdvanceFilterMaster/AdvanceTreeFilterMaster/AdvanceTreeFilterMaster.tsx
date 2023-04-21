@@ -1,6 +1,5 @@
 import React, { RefObject, Reducer } from "react";
 import { v4 as uuidv4 } from "uuid";
-import "./AdvanceTreeFilterMaster.scss";
 import { Model, ModelFilter } from "react3l-common";
 import Tree from "../../Tree";
 import { useDebounceFn } from "ahooks";
@@ -12,32 +11,51 @@ import classNames from "classnames";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import Search16 from "@carbon/icons-react/es/search/16";
 import { IdFilter } from "react3l-advanced-filters";
+import "./AdvanceTreeFilterMaster.scss";
 
 export interface AdvanceTreeFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
+  /**Label for current field*/
   label?: string;
+  /**User-selected values*/
   listItem?: Model[];
+  /**User-selected value*/
   item?: Model;
-  isMaterial?: boolean;
+  /**The property name of the model filter you want to search in the list data*/
   searchProperty?: string;
+  /**The type of searchProperty you want to search in the list data*/
   searchType?: string;
+  /**An optional to multiple check filter values*/
   checkable?: boolean;
+  /**Prop of AntdTreeProps*/
   selectable?: boolean;
+  /**Check treeNode precisely; parent treeNode and children treeNodes are not associated*/
   checkStrictly?: boolean;
+  /**Not allow to handle change filter*/
   disabled?: boolean;
+  /**Value filter for api get data option*/
   valueFilter?: TModelFilter;
+  /**Placeholder of the component*/
   placeHolder?: string;
+  /**Key of selected node */
   selectedKey?: number;
+  /**Not allow to select the father item that contain a lot of items inside*/
   onlySelectLeaf?: boolean;
+  /**API to get data*/
   getTreeData?: (TModelFilter?: TModelFilter) => Observable<T[]>;
+  /**Function to change selected items*/
   onChange?: (T: Model[], TT: boolean) => void;
+  /**Model filter class of API get list data*/
   classFilter?: new () => TModelFilter;
+  /**Provide a function to render a specific property as name*/
   render?: (T: T) => string;
-  selectWithPreferOption?: boolean;
+  /**Prefer node item of tree*/
   preferOptions?: T[];
+  /**Set maximum length of text to search*/
   maxLength?: number;
+  /**Set maximum length of data name display in each row of tree*/
   maxLengthItem?: number;
 }
 export interface filterAction {
@@ -59,7 +77,6 @@ function AdvanceTreeFilterMaster(
   const {
     listItem,
     item,
-    isMaterial,
     checkStrictly,
     searchProperty,
     searchType,
@@ -74,7 +91,6 @@ function AdvanceTreeFilterMaster(
     getTreeData,
     onChange,
     render,
-    selectWithPreferOption,
     preferOptions,
     label,
     maxLength,
@@ -138,7 +154,7 @@ function AdvanceTreeFilterMaster(
       if (!disabled) {
         if (!expanded) {
           setTimeout(() => {
-            inputRef.current.children[0].focus();
+            inputRef.current.children[0].children[0].focus();
           }, 400);
           const filterData = valueFilter
             ? { ...valueFilter }
@@ -215,7 +231,6 @@ function AdvanceTreeFilterMaster(
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
                 suffix={<Search16 />}
-                isMaterial={isMaterial}
                 ref={inputRef}
                 onKeyDown={handleKeyPress}
               />
@@ -234,7 +249,6 @@ function AdvanceTreeFilterMaster(
                 checkable={checkable}
                 render={render}
                 selectWithAdd={undefined}
-                selectWithPreferOption={selectWithPreferOption}
                 preferOptions={preferOptions}
                 isExpand={expanded}
                 maxLengthItem={maxLengthItem}
@@ -253,7 +267,6 @@ AdvanceTreeFilterMaster.defaultProps = {
   searchType: "contain",
   classFilter: ModelFilter,
   onlySelectLeaf: false,
-  isMaterial: false,
   checkable: false,
   disabled: false,
   selectable: true,

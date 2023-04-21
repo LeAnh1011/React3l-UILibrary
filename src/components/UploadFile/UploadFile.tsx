@@ -1,13 +1,13 @@
-import CheckmarkFilled16 from "@carbon/icons-react/es/checkmark--filled/16";
-import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import Upload16 from "@carbon/icons-react/es/upload/16";
-import WarningFilled16 from "@carbon/icons-react/es/warning--filled/16";
-import { notification, Popconfirm, Tooltip } from "antd";
 import Button from "@Components/Button";
-import React, { ReactNode, RefObject } from "react";
+import { notification } from "antd";
+import classNames from "classnames";
+import React, { ReactNode, RefObject, SetStateAction } from "react";
+import { useDropzone } from "react-dropzone";
 import type { Observable } from "rxjs";
+import FileLoadedContent from "./FileLoadedContent/FileLoadedContent";
+import FileLoadingContent from "./FileLoadingContent/FileLoadingContent";
 import "./UploadFile.scss";
-import IconLoading from "@Components/IconLoading";
 
 export interface FileModel {
   id?: number;
@@ -27,34 +27,40 @@ export interface FileModel {
   handleInput?: (e: any) => void;
 }
 export interface UploadFileProps {
-  files?: FileModel[];
+  /**Option for multiple UploadFile */
   isMultiple?: boolean;
+  /**Content of UploadFile component */
   uploadContent?: string;
+  /**Function change list file uploaded */
   updateList?: (files: FileModel[]) => void;
+  /**API use to upload list file selected to server*/
   uploadFile?: (files: File[] | Blob[]) => Observable<FileModel[]>;
-  removeFile?: (fileId: string | number) => void;
+  /**Option change style UploadFile to OutLine */
   isBtnOutLine?: boolean;
+  /**Option limit maximum size (b) of list file to upload to server */
   maximumSize?: number;
-  type?: "link" | "button";
+  /** Option to change style of upload  "link", "button", "dragAndDrop"*/
+  type?: "link" | "button" | "dragAndDrop";
+  /**Icon of component */
   icon?: ReactNode;
+  /**Option to set component have only view mode */
   isViewMode?: boolean;
+  /**Function to set list file in status loading */
+  setListFileLoading?: React.Dispatch<SetStateAction<FileModel[]>>;
 }
 export function UploadFile(props: UploadFileProps) {
   const {
-    files: oldFiles,
     uploadContent,
     isMultiple,
     updateList,
     uploadFile,
-    removeFile,
     isBtnOutLine,
     maximumSize,
-    isViewMode,
     type = "button",
     icon,
+    setListFileLoading,
   } = props;
-  const [listFileLoading, setListFileLoading] = React.useState<FileModel[]>([]);
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>();
 
   const handleClickButton = React.useCallback(() => {
@@ -62,12 +68,10 @@ export function UploadFile(props: UploadFileProps) {
   }, []);
 
   const handleValidateFile = React.useCallback(
-    (fileList: FileList) => {
+    (files: File[]) => {
       let checkValidate = true;
-      const files: File[] = [];
       let totalSize = 0;
-      Array.from(fileList).forEach((file) => {
-        files.push(file);
+      files.forEach((file) => {
         totalSize = totalSize + file.size;
         if (totalSize > maximumSize) {
           notification.error({
@@ -80,181 +84,126 @@ export function UploadFile(props: UploadFileProps) {
           checkValidate = false;
         }
       });
-      return { files, checkValidate };
+      return { checkValidate };
     },
     [maximumSize]
   );
 
-  const handleChangeFile = React.useCallback(
+  const handleChangeFileInput = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { files, checkValidate } = handleValidateFile(event.target.files);
+      const files: File[] = [];
+      Array.from(event.target.files).forEach((file) => {
+        files.push(file);
+      });
+      const { checkValidate } = handleValidateFile(files);
       if (!checkValidate) return null;
       setListFileLoading([...files]);
       if (files && files.length > 0) {
-        setIsLoading(true);
         uploadFile(files).subscribe({
           next: (res: FileModel[]) => {
             if (res && res.length > 0) {
-              setIsLoading(false);
               updateList([...res]);
               setListFileLoading([]);
             }
           },
           error: () => {
             setListFileLoading([]);
-            setIsLoading(false);
           },
         });
       }
     },
-    [handleValidateFile, updateList, uploadFile]
+    [handleValidateFile, setListFileLoading, updateList, uploadFile]
   );
 
-  const renderOldFile = React.useCallback(
-    (file, index) => {
-      return file?.errors ? (
-        <div className="file-error" key={index}>
-          <div className="file-container">
-            <div className="w-file-name">
-              <Tooltip title={file?.name}>
-                <a href={file?.path} download>
-                  {file?.name}
-                </a>
-              </Tooltip>
-            </div>
-            <div>
-              <WarningFilled16 color="red" className="m-r--xxxs" />
-              <Popconfirm
-                placement="leftTop"
-                title={"Bạn có chắc chắn muốn xóa?"}
-                onConfirm={() => removeFile(file.id)}
-                okText="Xóa"
-                cancelText="Hủy"
-                okType="danger"
-              >
-                <CloseFilled16 className="remove-file" />
-              </Popconfirm>
-            </div>
-          </div>
-          <div className="content-error">
-            {file?.errors && file?.errors?.name}
-          </div>
-        </div>
-      ) : (
-        <div className="file-container" key={index}>
-          <div className="w-file-name">
-            <a href={file?.path} download>
-              {file?.name}
-            </a>
-          </div>
-          {!isViewMode && (
-            <div>
-              <Popconfirm
-                placement="leftTop"
-                title={"Bạn có chắc chắn muốn xóa?"}
-                onConfirm={() => removeFile(file.id)}
-                okText="Xóa"
-                cancelText="Hủy"
-                okType="danger"
-              >
-                <CloseFilled16 className="remove-file" />
-              </Popconfirm>
-            </div>
-          )}
-        </div>
-      );
+  const handleChangeFileDropzone = React.useCallback(
+    (files: File[]) => {
+      const { checkValidate } = handleValidateFile(files);
+      if (!checkValidate) return null;
+      setListFileLoading([...files]);
+      if (files && files.length > 0) {
+        uploadFile(files).subscribe({
+          next: (res: FileModel[]) => {
+            if (res && res.length > 0) {
+              updateList([...res]);
+              setListFileLoading([]);
+            }
+          },
+          error: () => {
+            setListFileLoading([]);
+          },
+        });
+      }
     },
-    [removeFile, isViewMode]
+    [handleValidateFile, setListFileLoading, updateList, uploadFile]
   );
 
-  const renderLoadingFile = React.useCallback(
-    (file, index) => {
-      return file?.errors ? (
-        <div className="file-error" key={index}>
-          <div className="file-container">
-            <div>
-              <a href={file?.path} download>
-                {file?.name}
-              </a>
-            </div>
-            <div>
-              <WarningFilled16 color="red" className="m-r--xxxs" />
-              <CloseFilled16
-                onClick={() => removeFile(file.id)}
-                className="remove-file"
-              />
-            </div>
-          </div>
-          <div className="content-error">
-            {file?.errors && file?.errors?.name}
-          </div>
-        </div>
-      ) : (
-        <div className="file-container" key={index}>
-          <a href={file?.path} download>
-            {file?.name}
-          </a>
-          <CheckmarkFilled16 color="#0F62FE" />
-        </div>
-      );
-    },
-    [removeFile]
-  );
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop: handleChangeFileDropzone,
+  });
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      const dropzone = document.getElementsByClassName("upload-dropzone")?.[0];
+      dropzone.addEventListener("dragenter", () => {
+        dropzone.classList.add("is-active");
+      });
+      dropzone.addEventListener("dragleave", () => {
+        dropzone.classList.remove("is-active");
+      });
+      dropzone.addEventListener("drop", () => {
+        dropzone.classList.remove("is-active");
+      });
+    }, 200);
+  });
 
   return (
     <div className="upload-button__container">
-      {!isViewMode && (
-        <div>
-          {type === "link" ? (
-            <div className="upload-link" onClick={handleClickButton}>
-              {icon ? icon : <Upload16 />}
-              <span className="upload-content m-l--xxs">{uploadContent}</span>
-            </div>
-          ) : (
-            <Button
-              type={isBtnOutLine ? "outline-primary" : "primary"}
-              className="btn--lg"
-              onClick={handleClickButton}
-            >
-              {uploadContent}
-            </Button>
-          )}
+      <div>
+        {type === "dragAndDrop" ? (
+          <div className={classNames("upload-dropzone")} {...getRootProps()}>
+            {uploadContent}
+            <input
+              type="file"
+              style={{ display: "none" }}
+              className="input-dropzone"
+              multiple={isMultiple}
+              ref={fileRef}
+              {...getInputProps()}
+            />
+          </div>
+        ) : type === "link" ? (
+          <div className="upload-link" onClick={handleClickButton}>
+            {icon ? icon : <Upload16 />}
+            <span className="upload-content m-l--2xs">{uploadContent}</span>
+          </div>
+        ) : (
+          <Button
+            type={isBtnOutLine ? "outline-primary" : "primary"}
+            className="btn--lg"
+            onClick={handleClickButton}
+          >
+            {uploadContent}
+          </Button>
+        )}
 
-          <input
-            type="file"
-            style={{ display: "none" }}
-            multiple={isMultiple}
-            ref={fileRef}
-            onChange={handleChangeFile}
-          />
-        </div>
-      )}
-      <div className="upload-button__list-file m-t--xxs">
-        {oldFiles?.length > 0 &&
-          oldFiles.map((file, index) => renderOldFile(file, index))}
-        {listFileLoading?.length > 0 &&
-          !isViewMode &&
-          listFileLoading.map((file, index) =>
-            isLoading ? (
-              <div className="file-container" key={index}>
-                <a href={file?.path} download>
-                  {file?.name}
-                </a>
-                <IconLoading color="#0F62FE" />
-              </div>
-            ) : (
-              renderLoadingFile(file, index)
-            )
-          )}
+        <input
+          type="file"
+          style={{ display: "none" }}
+          multiple={isMultiple}
+          ref={fileRef}
+          onChange={handleChangeFileInput}
+        />
       </div>
+      <div className="upload-button__list-file m-t--2xs"></div>
     </div>
   );
 }
+UploadFile.FileLoadedContent = FileLoadedContent;
+UploadFile.FileLoadingContent = FileLoadingContent;
 
 UploadFile.defaultProps = {
   isMultiple: true,
   uploadContent: "Upload",
-  isViewMode: false,
   files: [],
   isBtnOutLine: false,
   maximumSize: 5000000,

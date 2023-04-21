@@ -7,8 +7,7 @@
   .advance-string-filter__label {
     width: 100%;
     display: flex;
-    justify-content: center;
-
+    
     .component__title--disabled {
       color: var(--palette-gray-40);
     }
@@ -32,11 +31,15 @@
     align-items: center;
     width: 100%;
     outline: 1px solid var(--palette-coolGray-50);
-    background-color: var(--color-white);
+    background-color: var(--palette-gray-10);
     height: 40px;
 
     &.advance-string-filter__container--sm {
       height: 32px !important;
+    }
+
+    &.advance-string-filter__container--white {
+      background-color: var(--color-white);
     }
 
     &:hover {
@@ -77,7 +80,6 @@
     }
 
     &.advance-string-filter--material {
-      background-color: var(--palette-gray-10);
       outline: none;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
@@ -131,12 +133,13 @@
     }
 
     .advance-string-filter__icon {
-      position: absolute;
-      right: 0.5rem;
-      top: 30%;
-      &:hover {
-        opacity: 0.7;
-      }
+      display: flex;
+      align-items: center;
+      color: var(--palette-gray-60);
+    }
+
+    .advance-string-filter__string {
+      white-space: nowrap;
     }
 
     span {

@@ -1,20 +1,19 @@
-import { IdFilter } from "react3l-advanced-filters";
-import { StringFilter } from "react3l-advanced-filters";
-import { Model, ModelFilter } from "react3l-common";
-import { Radio } from "antd";
-import { RadioChangeEvent } from "antd/lib/radio";
+import {
+  ArgsTable,
+  Description,
+  PRIMARY_STORY,
+  Primary,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import React from "react";
-import FormItem from "../../FormItem/FormItem";
-import EnumSelect from "./EnumSelect";
-import { ValidateStatus } from "./../../../config/enum";
-import { BORDER_TYPE } from "./../../../config/enum";
+import { Model } from "react3l-common";
 import { Observable } from "rxjs";
-
-export class DemoFilter extends ModelFilter {
-  id: IdFilter = new IdFilter();
-  name: StringFilter = new StringFilter();
-  code: StringFilter = new StringFilter();
-}
+import FormItem from "../../FormItem/FormItem";
+import { BORDER_TYPE } from "./../../../config/enum";
+import EnumSelect from "./EnumSelect";
 
 const demoListEnum = new Observable<Model[]>((observer) => {
   setTimeout(() => {
@@ -36,7 +35,53 @@ const demoListEnum = new Observable<Model[]>((observer) => {
 const demoSearchFunc = () => {
   return demoListEnum;
 };
-export function EnumSelectStories() {
+
+export default {
+  title: "Select/EnumSelect",
+  component: EnumSelect,
+  subcomponents: { FormItem },
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    label: {
+      control: "text",
+      defaultValue: "Đơn vị tổ chức",
+    },
+    placeHolder: {
+      defaultValue: "Chọn đơn vị",
+    },
+    type: {
+      control: {
+        type: "radio",
+        options: [
+          BORDER_TYPE.MATERIAL,
+          BORDER_TYPE.BORDERED,
+          BORDER_TYPE.FLOAT_LABEL,
+        ],
+      },
+      defaultValue: 1,
+    },
+
+    maxLengthItem: {
+      defaultValue: 30,
+    },
+  },
+};
+const Template: Story = (args) => {
   const [selectModel, setSelectModel] = React.useState<Model>({
     id: 0,
     name: "Option 2",
@@ -44,20 +89,6 @@ export function EnumSelectStories() {
   });
 
   const [models, setModels] = React.useState<any>([]);
-
-  const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
-
-  const [isValidated, setValidated] = React.useState(false);
-
-  const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
-
-  const [isSmall, setIsSmall] = React.useState<boolean>(false);
-
-  const [isMultiple, setIsMultiple] = React.useState<boolean>(false);
-
-  const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
-    setType(event.target.value);
-  }, []);
 
   const handleSetModel = React.useCallback((...[, item]) => {
     setSelectModel(item);
@@ -71,22 +102,6 @@ export function EnumSelectStories() {
     }
   }, []);
 
-  const handleChangeValidated = React.useCallback((event: RadioChangeEvent) => {
-    setValidated(event.target.value);
-  }, []);
-
-  const handleChangeDisabled = React.useCallback((event: RadioChangeEvent) => {
-    setIsDisabled(event.target.value);
-  }, []);
-
-  const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
-    setIsSmall(event.target.value);
-  }, []);
-
-  const handleChangeMultipe = React.useCallback((event: RadioChangeEvent) => {
-    setIsMultiple(event.target.value);
-  }, []);
-
   const handleChangeModels = React.useCallback((listItem, ids) => {
     setModels(listItem);
   }, []);
@@ -94,62 +109,20 @@ export function EnumSelectStories() {
   return (
     <div style={{ margin: "10px", width: "300px" }}>
       <div style={{ margin: "10px", width: "300px" }}>
-        <FormItem
-          validateStatus={isValidated ? ValidateStatus.error : null}
-          message={isValidated ? "Error label" : ""}
-        >
+        <FormItem>
           <EnumSelect
-            placeHolder={"Select Organization"}
+            {...args}
             value={selectModel}
             render={handleRenderModel}
             onChange={handleSetModel}
             getList={demoSearchFunc}
-            type={type}
-            label={"Label"}
-            disabled={isDisabled}
-            isSmall={isSmall}
-            isMultiple={isMultiple}
             onChangeMultiple={handleChangeModels} // if type is multiple pass this props
             listValue={models} // if type is multiple pass this prop
           />
         </FormItem>
       </div>
-
-      <div style={{ margin: "10px", width: "400px" }}>
-        <Radio.Group onChange={handleChangeStyle} value={type}>
-          <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
-          <Radio value={BORDER_TYPE.FLOAT_LABEL}>Float Label</Radio>
-          <Radio value={BORDER_TYPE.BORDERED}>Bordered</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeValidated} value={isValidated}>
-          <Radio value={true}>Validated</Radio>
-          <Radio value={false}>Not Validated</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeDisabled} value={isDisabled}>
-          <Radio value={true}>Disabled</Radio>
-          <Radio value={false}>Not Disabled</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeSize} value={isSmall}>
-          <Radio value={true}>Small</Radio>
-          <Radio value={false}>Default</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeMultipe} value={isMultiple}>
-          <Radio value={true}>Multiple</Radio>
-          <Radio value={false}>Single</Radio>
-        </Radio.Group>
-      </div>
     </div>
   );
-}
+};
+
+export const Default = Template.bind({});

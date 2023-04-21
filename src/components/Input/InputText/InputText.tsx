@@ -2,8 +2,8 @@ import classNames from "classnames";
 import { BORDER_TYPE } from "@Configs/enum";
 import React, { ReactNode, ReactSVGElement, RefObject } from "react";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
-import "./InputText.scss";
 import { Tooltip } from "antd";
+import "./InputText.scss";
 
 export interface InputAction {
   name?: ReactNode;
@@ -11,25 +11,46 @@ export interface InputAction {
 }
 
 export interface InputTextProps {
+  /**Label for current field*/
   label?: string;
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
+  /**Option to set password field */
+  typeInput?: "text" | "password";
+  /**Show symbol * as required field*/
   isRequired?: boolean;
-  floatLabel?: boolean;
-  isMaterial?: boolean;
+  /**Prefix for filter value*/
   prefix?: string | JSX.Element;
+  /**Suffix for filter value*/
   suffix?: string | JSX.Element;
+  /**User-filled value*/
   value?: string;
+  /**Not allow to handle change value*/
   disabled?: boolean;
+  /**Placeholder of the component*/
   placeHolder?: string;
+  /**Use to custom style the component*/
   className?: string;
+  /**Boolean to show the lenght of value user-filled*/
   showCount?: boolean;
+  /**Set maximum length of value*/
   maxLength?: number;
+  /**Control the size of the component*/
   isSmall?: boolean;
+  /**Provide a custom action (onClick) to the component*/
   action?: InputAction;
+  /**Handle the change value of the field*/
   onChange?: (T: string | null) => void;
+  /**Handle onEnter action*/
   onEnter?: (T: string | null) => void;
+  /**Handle onBlur action*/
   onBlur?: (T: string | null) => void;
+  /**Handle onKeyDown action*/
   onKeyDown?: (event: any) => void;
+  /** Custom background color for component: "white" || "gray" */
+  bgColor?: "white" | "gray";
+  autoComplete?: boolean;
+  nameAttr?: string;
 }
 
 const InputText = React.forwardRef(
@@ -48,10 +69,13 @@ const InputText = React.forwardRef(
       placeHolder,
       className,
       isSmall,
+      bgColor,
+      typeInput,
       onChange,
       onEnter,
       onBlur,
       onKeyDown,
+      nameAttr,
     } = props;
 
     const [internalValue, setInternalValue] = React.useState<string>("");
@@ -146,7 +170,7 @@ const InputText = React.forwardRef(
 
     return (
       <div className={classNames("input-text__wrapper", className)}>
-        <div className="input-text__label m-b--xxxs">
+        <div className="input-text__label m-b--3xs">
           {type !== BORDER_TYPE.FLOAT_LABEL && label && (
             <label
               className={classNames("component__title", {
@@ -157,26 +181,28 @@ const InputText = React.forwardRef(
               {isRequired && <span className="text-danger">&nbsp;*</span>}
             </label>
           )}
-          <span style={{ width: "100%" }}></span>
-          {showCount && maxLength > 0 && (
-            <span className="input-text__count p-l--xs body-text--xs">
-              {internalValue.length}/{maxLength}
-            </span>
-          )}
-          {action && (
-            <span
-              className="m-l--xxxs body-text--md color-link"
-              style={{ cursor: "pointer" }}
-              onClick={action.action}
-            >
-              {action.name}
-            </span>
-          )}
+          <div className="label__right">
+            {showCount && maxLength > 0 && (
+              <span className="input-text__count p-l--xs body-text--xs">
+                {internalValue.length}/{maxLength}
+              </span>
+            )}
+            {action && (
+              <span
+                className="m-l--3xs body-text--md color-link"
+                style={{ cursor: "pointer" }}
+                onClick={action.action}
+              >
+                {action.name}
+              </span>
+            )}
+          </div>
         </div>
         <div
           className={classNames("component__input input-text__container", {
             "input-text__container--sm": isSmall,
-            "p-y--xxs": isSmall,
+            "input-text__container--white": bgColor === "white",
+            "p-y--2xs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
             "input-text--material": type === BORDER_TYPE.MATERIAL,
@@ -191,7 +217,7 @@ const InputText = React.forwardRef(
           {prefix && (
             <>
               {typeof prefix === "string" ? (
-                <span className="p-r--xxs input-text__string">{prefix}</span>
+                <span className="p-r--2xs input-text__string">{prefix}</span>
               ) : (
                 <div className="m-r--xs input-text__icon">{prefix}</div>
               )}
@@ -200,7 +226,7 @@ const InputText = React.forwardRef(
           <Tooltip title={isShowToolTip ? internalValue : undefined}>
             <div style={{ flexGrow: 1 }}>
               <input
-                type="text"
+                type={typeInput}
                 value={internalValue}
                 onChange={handleChange}
                 onKeyPress={handleKeyPress}
@@ -214,6 +240,8 @@ const InputText = React.forwardRef(
                 className={classNames("component__input", {
                   "disabled-field": disabled,
                 })}
+                autoComplete="new-password"
+                name={nameAttr}
               />
             </div>
           </Tooltip>
@@ -230,16 +258,16 @@ const InputText = React.forwardRef(
             </label>
           )}
           {internalValue && !disabled && (
-            <div className={classNames("input-icon__clear", "m-l--xxs")}>
+            <div className={classNames("input-icon__clear", "m-l--2xs")}>
               <CloseFilled16 onClick={handleClearInput}></CloseFilled16>
             </div>
           )}
           {suffix && (
             <>
               {typeof suffix === "string" ? (
-                <span className="m-l--xxs input-text__string">{suffix}</span>
+                <span className="m-l--2xs input-text__string">{suffix}</span>
               ) : (
-                <div className="m-l--xxs input-text__icon">{suffix}</div>
+                <div className="m-l--2xs input-text__icon">{suffix}</div>
               )}
             </>
           )}
@@ -261,6 +289,7 @@ InputText.defaultProps = {
   disabled: false,
   className: "",
   maxLength: 0,
+  typeInput: "text",
 };
 
 export default InputText;

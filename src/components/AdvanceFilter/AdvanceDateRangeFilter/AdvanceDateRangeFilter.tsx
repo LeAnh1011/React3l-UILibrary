@@ -1,9 +1,9 @@
+import React, { ReactSVGElement, RefObject } from "react";
 import { DatePicker } from "antd";
 import { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import { BORDER_TYPE } from "@Configs/enum";
 import { Moment } from "moment";
-import React, { ReactSVGElement, RefObject } from "react";
 import { CommonService } from "@Services/common-service";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import Calendar16 from "@carbon/icons-react/es/calendar/16";
@@ -19,41 +19,43 @@ function SuffixDateIcon() {
   );
 }
 
-interface AdvanceDateRangeFilterAction {
-  name?: string;
-  action?: any;
-}
-
 interface AdvanceDateRangeFilterProps {
+  /**Label for current field */
   label?: string;
-  value: [Moment, Moment];
-  open?: boolean;
+  /**Value filter [fromDate, toDate] users select */
+  values: [Moment, Moment];
+  /**Use to format the date selected */
   dateFormat?: string[];
+  /** Handle the change value of the component */
   onChange?: (value: [Moment, Moment], dateString?: [string, string]) => void;
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL  */
   type?: BORDER_TYPE;
+  /**Control the size of the component */
   isSmall?: boolean;
+  /**Not allow to handle change the component */
   disabled?: boolean;
-  isRequired?: boolean;
+  /**Use to custom style the component */
   className?: string;
-  action?: AdvanceDateRangeFilterAction;
+  /**Placeholder of the component */
   placeholder?: [string, string];
+  /** Custom background color for component: "white" || "gray" */
+  bgColor?: "white" | "gray";
 }
 
 function AdvanceDateRangeFilter(
   props: AdvanceDateRangeFilterProps & RangePickerProps
 ) {
   const {
-    value,
+    values,
     dateFormat,
     onChange,
     type,
     label,
-    isRequired,
-    action,
     isSmall,
     disabled,
     placeholder,
     className,
+    bgColor,
   } = props;
 
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
@@ -63,14 +65,14 @@ function AdvanceDateRangeFilter(
 
   const internalValue: [Moment, Moment] = React.useMemo(() => {
     return [
-      typeof value[0] === "string"
-        ? CommonService.toMomentDate(value[0])
-        : value[0],
-      typeof value[1] === "string"
-        ? CommonService.toMomentDate(value[1])
-        : value[1],
+      typeof values[0] === "string"
+        ? CommonService.toMomentDate(values[0])
+        : values[0],
+      typeof values[1] === "string"
+        ? CommonService.toMomentDate(values[1])
+        : values[1],
     ];
-  }, [value]);
+  }, [values]);
 
   const handleClearDate = React.useCallback(
     (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
@@ -85,7 +87,7 @@ function AdvanceDateRangeFilter(
       className={classNames("advance-date-range-filter__wrapper", className)}
       ref={wrapperRef}
     >
-      <div className="date-picker__label m-b--xxxs">
+      <div className="advance-date-range-filter__label m-b--3xs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label
             className={classNames("component__title", {
@@ -93,18 +95,7 @@ function AdvanceDateRangeFilter(
             })}
           >
             {label}
-            {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
-        )}
-        <span style={{ width: "100%" }}></span>
-        {action && (
-          <span
-            className="m-l--xxxs body-text--md color-link"
-            style={{ cursor: "pointer" }}
-            onClick={action.action}
-          >
-            {action.name}
-          </span>
         )}
       </div>
       <div className="advance-date-range-filter__container">
@@ -117,13 +108,16 @@ function AdvanceDateRangeFilter(
           placeholder={placeholder}
           suffixIcon={<SuffixDateIcon />}
           className={classNames({
-            "date-picker__wrapper--sm": isSmall,
-            "p-y--xxs": isSmall,
+            "p-y--2xs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
-            "date-picker--material": type === BORDER_TYPE.MATERIAL,
-            "date-picker--disabled ": disabled,
-            "date-picker--float": type === BORDER_TYPE.FLOAT_LABEL,
+            "advance-date-range-filter--sm": isSmall,
+            "advance-date-range-filter--white": bgColor === "white",
+            "advance-date-range-filter--material":
+              type === BORDER_TYPE.MATERIAL,
+            "advance-date-range-filter--disabled ": disabled,
+            "advance-date-range-filter--float":
+              type === BORDER_TYPE.FLOAT_LABEL,
           })}
           ref={dateRef}
         />
@@ -137,7 +131,6 @@ function AdvanceDateRangeFilter(
             })}
           >
             {label}
-            {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
         {internalValue[0] && !disabled && (
@@ -160,7 +153,7 @@ function AdvanceDateRangeFilter(
               <CloseFilled16
                 className={classNames(
                   "advance-date-range-filter__icon-clear",
-                  "m-l--xxs"
+                  "m-l--2xs"
                 )}
                 onClick={handleClearDate}
               ></CloseFilled16>
@@ -180,6 +173,7 @@ AdvanceDateRangeFilter.defaultProps = {
   isRequired: false,
   disabled: false,
   className: "",
+  bgColor: "white",
 };
 
 export default AdvanceDateRangeFilter;

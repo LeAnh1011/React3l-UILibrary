@@ -1,15 +1,21 @@
 import classNames from "classnames";
 import React, { PropsWithChildren } from "react";
-import "./InlineLoading.scss";
 import CheckmarkFilled16 from "@carbon/icons-react/es/checkmark--filled/16";
 import ErrorFilled16 from "@carbon/icons-react/es/error--filled/16";
 import IconLoading from "@Components/IconLoading";
+import "./InlineLoading.scss";
+
 export type StatusLoading = "default" | "submitting" | "submitted" | "error";
 export interface InlineLoadingProps {
+  /**Pass the classname to change the style inline loading */
   className?: string;
-  status?: StatusLoading;
+  /**State of inline loading*/
+  status?: "default" | "submitting" | "submitted" | "error";
+  /**Title for status submitting*/
   titleLoading?: string;
+  /**Title for status submitted*/
   titleSubmitted?: string;
+  /**Title for status error*/
   titleError?: string;
 }
 
@@ -28,7 +34,7 @@ const InlineLoading = React.forwardRef(
         {status === "submitting" && (
           <div className="submitting-box">
             <IconLoading color="#0F62FE" />
-            <div className="p-l--xxs">{titleLoading}</div>
+            <div className="p-l--2xs">{titleLoading}</div>
           </div>
         )}
         {status === "submitted" && (

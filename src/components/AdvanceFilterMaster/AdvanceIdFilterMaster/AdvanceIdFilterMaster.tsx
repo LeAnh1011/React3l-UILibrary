@@ -16,43 +16,42 @@ import "./AdvanceIdFilterMaster.scss";
 export interface AdvanceIdFilterMasterProps<
   T extends Model,
   TModelFilter extends ModelFilter
-  > {
+> {
+  /**Value users select*/
   value?: number | string;
-
+  /**Label for current field*/
   label?: string;
-
+  /**Value filter for api get data option*/
   valueFilter?: TModelFilter;
-
+  /**The property name of the model filter you want to search in the list data*/
   searchProperty?: string;
-
+  /**The type of searchProperty you want to search in the list data*/
   searchType?: string;
-
+  /**Placeholder of the component*/
   placeHolder?: string;
-
+  /**Not allow to handle change filter*/
   disabled?: boolean;
-
-  isMaterial?: boolean;
-
+  /**True for data list of filter is Enum*/
   isEnumList?: boolean;
-
+  /**Boolean set false if value is not an IdValue*/
   isIdValue?: boolean;
-
+  /**Name of property to set value to if value is not an IdValue */
   typeRender?: string;
-
+  /**Api to get list data filter*/
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
-
+  /**Handle the change value of the component*/
   onChange?: (T: number, value?: T) => void;
-
+  /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
-
+  /**Model filter class of API get list data*/
   classFilter: new () => TModelFilter;
-
+  /**Use to custom style the component*/
   className?: string;
-
+  /**Prefer option filter to select*/
   preferOptions?: T[];
-
+  /**Set maximum length of text to search*/
   maxLength?: number;
-
+  /**Show maximum length of item of each item in the dropdown*/
   maxLengthItem?: number;
 }
 
@@ -71,7 +70,6 @@ function AdvanceIdFilterMaster(
     searchType,
     placeHolder,
     disabled,
-    isMaterial,
     isEnumList,
     getList,
     onChange,
@@ -82,7 +80,6 @@ function AdvanceIdFilterMaster(
     maxLength,
     maxLengthItem,
   } = props;
-
 
   const [loading, setLoading] = React.useState<boolean>(false);
 
@@ -140,7 +137,7 @@ function AdvanceIdFilterMaster(
     try {
       const filter = valueFilter ? { ...valueFilter } : new ClassFilter();
       handleGetList(filter);
-    } catch (error) { }
+    } catch (error) {}
   }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(
@@ -148,7 +145,7 @@ function AdvanceIdFilterMaster(
       if (!disabled) {
         setExpand(true);
         setTimeout(() => {
-          inputRef.current.children[0].focus();
+          inputRef.current.children[0].children[0].focus();
         }, 300);
         await handleLoadList();
       }
@@ -199,7 +196,6 @@ function AdvanceIdFilterMaster(
     [handleClickItem]
   );
 
-
   const handleKeyDown = React.useCallback(
     (event) => {
       switch (event.keyCode) {
@@ -249,7 +245,7 @@ function AdvanceIdFilterMaster(
           </div>
         </div>
         {isExpand && (
-          <div className="advance-id-filter-master__list-container m-t--xxxs">
+          <div className="advance-id-filter-master__list-container m-t--3xs">
             <div className="advance-id-filter__input p--xs">
               <InputText
                 isSmall={false}
@@ -257,7 +253,6 @@ function AdvanceIdFilterMaster(
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
                 suffix={<Search16 />}
-                isMaterial={isMaterial}
                 ref={inputRef}
                 onKeyDown={handleKeyDown}
               />
@@ -307,7 +302,7 @@ function AdvanceIdFilterMaster(
                     >
                       <span className="advance-id-master__text">
                         {maxLengthItem &&
-                          render(item)?.length > maxLengthItem ? (
+                        render(item)?.length > maxLengthItem ? (
                           <Tooltip title={render(item)}>
                             {CommonService.limitWord(
                               render(item),
@@ -335,7 +330,6 @@ AdvanceIdFilterMaster.defaultProps = {
   searchType: "contain",
   isEnumList: false,
   render: defaultRenderObject,
-  isMaterial: false,
   disabled: false,
   maxLength: 200,
   maxLengthItem: 30,

@@ -5,15 +5,19 @@ import React, { ReactNode } from "react";
 import "./Tabs.scss";
 
 export interface TabsProps extends TabsPropsAnt {
+  /**Option change tab styling */
   mode?: TabsType;
   children?: ReactNode;
+  /**List key of error tab */
   tabErrorKeys?: string[];
+  /**Option for change background color tab to white  */
+  lightColor?: boolean;
 }
 
 const { TabPane } = TabsAntd;
 
 function Tabs(props: TabsProps) {
-  const { mode, children, tabErrorKeys, ...rest } = props;
+  const { mode, children, tabErrorKeys, lightColor, ...rest } = props;
   const tabRef: React.LegacyRef<HTMLDivElement> = React.useRef();
 
   React.useEffect(() => {
@@ -51,7 +55,12 @@ function Tabs(props: TabsProps) {
 
   return (
     <>
-      <div className={classNames("tabs__container")} ref={tabRef}>
+      <div
+        className={classNames("tabs__container ", {
+          "tabs__container--white": lightColor,
+        })}
+        ref={tabRef}
+      >
         <TabsAntd {...rest} type={mode}>
           {children}
         </TabsAntd>

@@ -1,6 +1,5 @@
 import React, { RefObject } from "react";
 import { Model } from "react3l-common";
-import Add16 from "@carbon/icons-react/es/add/16";
 import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
 import { Checkbox, Empty } from "antd";
 import classNames from "classnames";
@@ -11,37 +10,38 @@ import { CommonService } from "@Services/common-service";
 import { ErrorObserver, Observable, Subscription } from "rxjs";
 
 export interface AdvanceEnumProps<T extends Model> {
+  /**Value users select*/
   value?: Model;
-
+  /**List value users select*/
   listValue?: Model[];
-
+  /**Placeholder of the component*/
   placeHolder?: string;
-
+  /**Not allow to handle change the component*/
   disabled?: boolean;
-
+  /**Append this component to body*/
   appendToBody?: boolean;
-
+  /**Handle the change value of the component*/
   onChange?: (id: number, T?: T) => void;
-
+  /**Handle the change list value of the component */
   onChangeMultiple?: (selectedList?: T[], ids?: []) => void;
-
+  /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
-
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
-
+  /**Label for current field*/
   label?: string;
-
-  selectWithAdd?: () => void;
-
+  /**Control the size of the component*/
   isSmall?: boolean;
-
+  /**Prefer option filter to select*/
   preferOptions?: T[];
-
+  /**Option to select multiple*/
   isMultiple?: boolean;
-
+  /**Api to get list data filter*/
   getList?: () => Observable<T[]>;
-
+  /**Custom height of dropdown data list*/
   height?: number;
+  /** Custom background color for component: "white" || "gray" */
+  bgColor?: "white" | "gray";
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -80,13 +80,13 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
     render,
     type,
     label,
-    selectWithAdd,
     isSmall,
     isMultiple,
     listValue,
     onChangeMultiple,
     getList,
     height,
+    bgColor,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -131,7 +131,6 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
     };
   }, [firstLoad, getList]);
 
-  // use this for multiple type
   const internalList = React.useMemo(() => {
     if (list && list.length > 0) {
       list.forEach((current) => {
@@ -369,6 +368,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
               isFilter={true}
               isNotExpand={!isExpand}
               isShowTooltip
+              bgColor={bgColor}
             />
           ) : (
             <InputSelect
@@ -385,6 +385,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
               isSmall={isSmall}
               isEnumerable={true}
               isFilter={true}
+              bgColor={bgColor}
             />
           )}
         </div>
@@ -402,7 +403,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                         internalList.map((item, index) => (
                           <div
                             className={classNames(
-                              "select__item p-l--xs p-y--xs p-r--xxs",
+                              "select__item p-l--xs p-y--xs p-r--2xs",
                               {
                                 "select__item--selected": item.isSelected,
                               }
@@ -428,18 +429,6 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                     </div>
                   </>
                 }
-
-                {typeof selectWithAdd !== "undefined" && (
-                  <div
-                    className={classNames(
-                      "select__bottom-button select__add-button p-y--xs"
-                    )}
-                    onClick={selectWithAdd}
-                  >
-                    <Add16 className="m-l--xs" />
-                    <span className="m-l--xs">Add new</span>
-                  </div>
-                )}
               </div>
             )
           : isExpand && (
@@ -476,16 +465,6 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                     </div>
                   </>
                 }
-                {selectWithAdd && (
-                  <div
-                    className={classNames(
-                      "select__bottom-button select__add-button p-y--xs"
-                    )}
-                  >
-                    <Add16 className="m-l--xxs" />
-                    <span>Add new</span>
-                  </div>
-                )}
               </div>
             )}
       </div>
@@ -497,6 +476,7 @@ AdvanceEnumFilter.defaultProps = {
   appendToBody: false,
   render: defaultRenderObject,
   disabled: false,
+  bgColor: "white",
 };
 
 export default AdvanceEnumFilter;

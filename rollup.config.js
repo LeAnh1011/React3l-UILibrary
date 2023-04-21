@@ -13,17 +13,22 @@ export default {
     // Input field components
     "src/components/Input/InputText/index.ts",
     "src/components/Input/InputNumber/index.ts",
+    "src/components/Input/InputView/index.ts",
     "src/components/Input/InputSelect/index.ts",
     "src/components/Input/InputTag/index.ts",
     "src/components/Input/InputSearch/index.ts",
     "src/components/Input/InputRange/index.ts",
-    "src/components/TextArea/index.ts",
-    // Dropdown list components
+    "src/components/Input/DatePicker/index.ts",
+    "src/components/Input/TimePicker/index.ts",
+    "src/components/Input/DateRange/index.ts",
+    "src/components/Input/TextArea/index.ts",
+    // Dropdown components
     "src/components/Select/SingleSelect/index.ts",
     "src/components/Select/MultipleSelect/index.ts",
     "src/components/Select/EnumSelect/index.ts",
+    "src/components/Select/TreeSelect/index.ts",
+    // Tree component
     "src/components/Tree/index.ts",
-    "src/components/TreeSelect/index.ts",
     // AdvacenFilter master components
     "src/components/AdvanceFilterMaster/AdvanceIdFilterMaster/index.ts",
     "src/components/AdvanceFilterMaster/AdvanceMultipleIdFilterMaster/index.ts",
@@ -43,12 +48,11 @@ export default {
     "src/components/AdvanceFilter/AdvanceInputRangeFilter/index.ts",
     // Button
     "src/components/Button/index.ts",
-    // Calendar
-    "src/components/Calendar/DatePicker/index.ts",
-    "src/components/Calendar/DateRange/index.ts",
     // Loading/Spinner
     "src/components/IconLoading/index.ts",
     "src/components/InlineLoading/index.ts",
+    // InpageNavigation
+    "src/components/InpageNavigation/index.ts",
     //Modal/Drawer
     "src/components/Modal/index.ts",
     "src/components/Drawer/index.ts",
@@ -71,7 +75,9 @@ export default {
     "src/components/StandardTable/DataCellComponent/StatusLine/index.ts",
     // Boolean component
     "src/components/Checkbox/index.ts",
-    "src/components/Radio/index.ts"
+    "src/components/Radio/index.ts",
+    // Tag component
+    "src/components/Tag/index.ts",
   ],
   output: [
     {
@@ -88,23 +94,26 @@ export default {
     peerDepsExternal(),
     commonjs(),
     // typescript({ useTsconfigDeclarationDir: true }),
-    typescript({ 
-      typescript: require('ttypescript'),
+    typescript({
+      typescript: require("ttypescript"),
       tsconfigDefaults: {
         compilerOptions: {
           plugins: [
-            { "transform": "typescript-transform-paths" },
-            { "transform": "typescript-transform-paths", "afterDeclarations": true }
-          ]
-        }
-      }
+            { transform: "typescript-transform-paths" },
+            {
+              transform: "typescript-transform-paths",
+              afterDeclarations: true,
+            },
+          ],
+        },
+      },
     }),
     postcss({
       use: ["sass"],
       //modules: true,
       sourceMap: true,
-      extract: false
+      extract: false,
     }),
     terser(),
-  ]
+  ],
 };

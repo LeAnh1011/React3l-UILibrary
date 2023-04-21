@@ -1,20 +1,31 @@
 import classNames from "classnames";
 import React from "react";
-import "./TwoLineText.scss";
 import { Tooltip } from "antd";
 import { CommonService } from "@Services/common-service";
+import "./TwoLineText.scss";
 
 export interface TwoLineTextProps {
+  /**Used to change style Component */
   className?: string;
+  /**URL of avatar to display */
   avatar?: string;
+  /**Shape option of avatar*/
   avatarType?: "circle" | "square";
+  /** Icon name to display */
   icon?: string;
+  /** Display value of line 1*/
   valueLine1?: string;
+  /** Display value of line 2*/
   valueLine2?: string;
+  /** ClassName to style for display line 1 */
   classNameFirstLine?: string;
+  /** ClassName to style for display line 2 */
   classNameSecondLine?: string;
+  /**Option to add link into cell */
   link?: string;
+  /** Count max length to display of line 1 */
   countCharacters1?: number;
+  /** Count max length to display of line 2 */
   countCharacters2?: number;
 }
 
@@ -46,7 +57,7 @@ function TwoLineText(props: TwoLineTextProps) {
     <>
       <div className={classNames("cell-two-line", className)}>
         {avatar && (
-          <div className="m-r--xxs">
+          <div className="m-r--2xs">
             {avatar && (
               <img
                 src={avatar}
@@ -65,7 +76,7 @@ function TwoLineText(props: TwoLineTextProps) {
           >
             {icon && (
               <i
-                className={classNames(icon, `icon-two-line-text m-r--xxs`)}
+                className={classNames(icon, `icon-two-line-text m-r--2xs`)}
               ></i>
             )}
             {countCharacters1 && countCharacters1 > 0 ? (
@@ -84,11 +95,7 @@ function TwoLineText(props: TwoLineTextProps) {
             )}
           >
             {link ? (
-              <a
-                href={link}
-                rel="noopener noreferrer"
-                className="link-text"
-              >
+              <a href={link} rel="noopener noreferrer" className="link-text">
                 {countCharacters2 && countCharacters2 > 0 ? (
                   <Tooltip title={valueLine2}>
                     {CommonService.limitWord(valueLine2, countCharacters2)}

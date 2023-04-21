@@ -1,8 +1,7 @@
-import { ReactNode } from "react";
-import "./FormItem.scss";
+import React, { ReactNode } from "react";
 import classNames from "classnames";
 import { ValidateStatus } from "@Configs/enum";
-import React from "react";
+import "./FormItem.scss";
 
 export interface ValidateObject {
   validateStatus: ValidateStatus;
@@ -10,10 +9,14 @@ export interface ValidateObject {
 }
 
 export interface FormItemProps {
+  /**Show the status validation*/
   validateStatus?: ValidateStatus;
+  /**The validated message*/
   message?: string;
   children: ReactNode;
+  /**Place content to the right*/
   placeRight?: boolean;
+  /**Pass object validated to display state of  children field*/
   validateObject?: ValidateObject;
 }
 
@@ -53,7 +56,7 @@ function FormItem(props: FormItemProps) {
         >
           {children}
         </div>
-        <div className="form-item__message m-t--xxxs">{messageValue}</div>
+        <div className="form-item__message m-t--3xs">{messageValue}</div>
       </div>
     </>
   );

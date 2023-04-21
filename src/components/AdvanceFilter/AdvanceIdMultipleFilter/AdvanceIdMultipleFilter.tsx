@@ -1,5 +1,4 @@
 import { Model, ModelFilter } from "react3l-common";
-import Add16 from "@carbon/icons-react/es/add/16";
 import { useDebounceFn } from "ahooks";
 import { CommonService } from "@Services/common-service";
 import classNames from "classnames";
@@ -8,49 +7,46 @@ import { DEBOUNCE_TIME_300 } from "@Configs/consts";
 import React, { RefObject } from "react";
 import type { ErrorObserver, Observable } from "rxjs";
 import { BORDER_TYPE } from "@Configs/enum";
-import "./AdvanceIdMultipleFilter.scss";
 import { Checkbox, Empty } from "antd";
 import IconLoading from "@Components/IconLoading/IconLoading";
+import "./AdvanceIdMultipleFilter.scss";
 
 export interface AdvanceIdMultipleFilterProps<
   T extends Model,
   TFilter extends ModelFilter
 > {
+  /**list value users select*/
   values?: Model[];
-
+  /**Value filter for api get data option*/
   valueFilter?: TFilter;
-
+  /**The property name of the model filter you want to search in the list data*/
   searchProperty?: string;
-
+  /**The type of searchProperty you want to search in the list data*/
   searchType?: string;
-
+  /**Placeholder of the component*/
   placeHolder?: string;
-
+  /**Not allow to handle change filter*/
   disabled?: boolean;
-
-  isMaterial?: boolean;
-
+  /**Api to get list data filter*/
   getList?: (TModelFilter?: TFilter) => Observable<T[]>;
-
+  /**Handle the change value of the component*/
   onChange?: (selectedList?: T[], ids?: []) => void;
-
+  /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
-
+  /**Model filter class of API get list data*/
   classFilter: new () => TFilter;
-
+  /**Label for current field*/
   label?: string;
-
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
-
+  /**Control the size of the component*/
   isSmall?: boolean;
-
-  selectWithAdd?: () => void;
-
-  selectWithPreferOption?: boolean;
-
-  isUsingSearch?: boolean;
-
+  /**Prefer option filter to select*/
   preferOptions?: T[];
+  /**Append this component to body*/
+  appendToBody?: boolean;
+  /** Custom background color for component: "white" || "gray" */
+  bgColor?: "white" | "gray";
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -67,7 +63,6 @@ export function AdvanceIdMultipleFilter(
     searchType,
     placeHolder,
     disabled,
-    isMaterial,
     getList,
     onChange,
     render,
@@ -75,9 +70,9 @@ export function AdvanceIdMultipleFilter(
     label,
     type,
     isSmall,
-    selectWithAdd,
-    isUsingSearch,
     preferOptions,
+    bgColor,
+    appendToBody,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -93,6 +88,8 @@ export function AdvanceIdMultipleFilter(
   const selectListRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
     null
   );
+
+  const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
 
   const [subscription] = CommonService.useSubscription();
 
@@ -192,7 +189,7 @@ export function AdvanceIdMultipleFilter(
     (item: Model) => (event: any) => {
       let filteredItem = values?.filter((current) => current.id === item.id)[0];
       if (filteredItem) {
-        const tmp = [...values];
+        const tmp = [...(values ?? [])];
         const ids = values?.map((item) => item?.id);
         const index = tmp.indexOf(filteredItem);
         tmp.splice(index, 1);
@@ -200,7 +197,7 @@ export function AdvanceIdMultipleFilter(
         onChange([...tmp], ids as any);
       } else {
         const ids = values?.map((item) => item?.id);
-        onChange([...values, item], [...ids, item?.id] as any);
+        onChange([...(values ?? []), item], [...ids, item?.id] as any);
       }
     },
     [values, onChange]
@@ -283,6 +280,30 @@ export function AdvanceIdMultipleFilter(
     [handleToggle]
   );
 
+  React.useEffect(() => {
+    if (isExpand && appendToBody) {
+      const currentPosition = wrapperRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - currentPosition.bottom;
+      if (spaceBelow <= 200) {
+        setTimeout(() => {
+          setAppendToBodyStyle({
+            position: "fixed",
+            bottom: spaceBelow + wrapperRef.current.clientHeight,
+            left: currentPosition.left,
+            maxWidth: wrapperRef.current.clientWidth,
+          });
+        }, 100);
+      } else {
+        setAppendToBodyStyle({
+          position: "fixed",
+          top: currentPosition.top + wrapperRef.current.clientHeight,
+          left: currentPosition.left,
+          maxWidth: wrapperRef.current.clientWidth,
+        });
+      }
+    }
+  }, [appendToBody, isExpand]);
+
   CommonService.useClickOutside(wrapperRef, handleCloseSelect);
 
   return (
@@ -294,7 +315,6 @@ export function AdvanceIdMultipleFilter(
         <div className="advance-id-filter__input" onClick={handleToggle}>
           <InputTag
             listValue={values}
-            isMaterial={isMaterial}
             render={render}
             placeHolder={placeHolder}
             disabled={disabled}
@@ -303,16 +323,20 @@ export function AdvanceIdMultipleFilter(
             onClearMulti={handleClearAll}
             type={type}
             isSmall={isSmall}
-            isUsingSearch={isUsingSearch}
+            isUsingSearch={true}
             onKeyDown={handleKeyPress}
             onKeyEnter={handleKeyEnter}
             isFilter={true}
             isNotExpand={!isExpand}
+            bgColor={bgColor}
             isShowTooltip
           />
         </div>
         {isExpand && (
-          <div className="advance-id-filter__list-container">
+          <div
+            className="advance-id-filter__list-container"
+            style={appendToBodyStyle}
+          >
             {!loading ? (
               <>
                 <div
@@ -323,7 +347,7 @@ export function AdvanceIdMultipleFilter(
                     internalList.map((item, index) => (
                       <div
                         className={classNames(
-                          "advance-id-filter__item p-l--xs p-y--xs p-r--xxs",
+                          "advance-id-filter__item p-l--xs p-y--xs p-r--2xs",
                           {
                             "advance-id-filter__item--selected":
                               item.isSelected,
@@ -361,7 +385,7 @@ export function AdvanceIdMultipleFilter(
                   internalPreferOptions.map((item, index) => (
                     <div
                       className={classNames(
-                        "advance-id-filter__prefer-option advance-id-filter__item p-l--xs p-y--xs p-r--xxs"
+                        "advance-id-filter__prefer-option advance-id-filter__item p-l--xs p-y--xs p-r--2xs"
                       )}
                       key={index}
                       onKeyDown={handleMove(item)}
@@ -379,17 +403,6 @@ export function AdvanceIdMultipleFilter(
                   ))}
               </div>
             )}
-            {typeof selectWithAdd !== "undefined" && (
-              <div
-                className={classNames(
-                  "advance-id-filter__bottom-button advance-id-filter__add-button p-y--xs"
-                )}
-                onClick={selectWithAdd}
-              >
-                <Add16 className="m-l--xs" />
-                <span className="m-l--xs">Add new</span>
-              </div>
-            )}
           </div>
         )}
       </div>
@@ -402,8 +415,8 @@ AdvanceIdMultipleFilter.defaultProps = {
   searchType: "startWith",
   isEnumerable: false,
   render: defaultRenderObject,
-  isMaterial: false,
   disabled: false,
+  bgColor: "white",
 };
 
 export default AdvanceIdMultipleFilter;

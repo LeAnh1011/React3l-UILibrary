@@ -8,9 +8,9 @@ import React, {
   RefObject,
 } from "react";
 import type { Observable } from "rxjs";
-import "./ContentEditable.scss";
 import classNames from "classnames";
 import Attachment16 from "@carbon/icons-react/es/attachment/16";
+import "./ContentEditable.scss";
 
 export interface contentAction {
   action: string;

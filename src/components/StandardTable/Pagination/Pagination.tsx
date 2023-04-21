@@ -1,17 +1,22 @@
-import { Menu, Dropdown, PaginationProps as AntdPaginationProps } from "antd";
+import { Dropdown, PaginationProps as AntdPaginationProps } from "antd";
 import React from "react";
-import "./Pagination.scss";
 import CaretRight16 from "@carbon/icons-react/es/caret--right/16";
 import CaretLeft16 from "@carbon/icons-react/es/caret--left/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
-import classNames from "classnames";
+import type { MenuProps } from "antd";
 import Button from "@Components/Button";
+import "./Pagination.scss";
 
 export interface PaginationProps extends AntdPaginationProps {
+  /**Current page is skipped */
   skip?: number;
+  /**Number of records to get in current page */
   take?: number;
-  pageSizeOptions: string[];
+  /**Used to custom the page size options */
+  pageSizeOptions: number[];
+  /**Function to change current page */
   onChange?: (skip: number, take: number) => void;
+  /**False to hide option to change the page size */
   canChangePageSize?: boolean;
 }
 
@@ -52,35 +57,34 @@ function Pagination(props: PaginationProps) {
     [onChange, take]
   );
 
-  const menuPageSize = React.useMemo(() => {
-    return (
-      <Menu
-        className="menu-page-size"
-        onClick={handleMenuTakeClick}
-        selectedKeys={["" + take]}
-      >
-        {pageSizeOptions.map((page, index) => {
-          return <Menu.Item key={page}>{page}</Menu.Item>;
-        })}
-      </Menu>
-    );
+  const menuPageSize: MenuProps = React.useMemo(() => {
+    return {
+      onClick: handleMenuTakeClick,
+      className: "menu-page-size",
+      selectedKeys: ["" + take],
+      items: pageSizeOptions.map((page) => {
+        return {
+          key: page,
+          label: page,
+        };
+      }),
+    };
   }, [pageSizeOptions, handleMenuTakeClick, take]);
 
-  const menuPageChange = React.useMemo(() => {
-    return (
-      <Menu
-        onClick={handleMenuPageClick}
-        selectedKeys={["" + currentPage]}
-        className={classNames(
-          "menu-page-change",
-          pageArray?.length > 6 ? "options-select-page-height" : ""
-        )}
-      >
-        {pageArray.map((page) => {
-          return <Menu.Item key={page}>{page}</Menu.Item>;
-        })}
-      </Menu>
-    );
+  const menuPageChange: MenuProps = React.useMemo(() => {
+    return {
+      onClick: handleMenuPageClick,
+      selectedKeys: ["" + currentPage],
+      className: `menu-page-change, ${
+        pageArray?.length > 6 ? "options-select-page-height" : ""
+      }`,
+      items: pageArray.map((page) => {
+        return {
+          key: page,
+          label: page,
+        };
+      }),
+    };
   }, [handleMenuPageClick, currentPage, pageArray]);
 
   const handleChangeCurrentPage = React.useCallback(
@@ -126,11 +130,11 @@ function Pagination(props: PaginationProps) {
       <div className="number-per-page-box">
         {canChangePageSize === true && (
           <div className="number-per-page-box-1">
-            <div className="m-r--xxxs">Số bản ghi mỗi trang : </div>
+            <div className="m-r--3xs">Số bản ghi mỗi trang : </div>
             <div>
               <Dropdown
                 className="dropdown-pagination-per-page"
-                overlay={menuPageSize}
+                menu={menuPageSize}
                 trigger={["click"]}
               >
                 <Button
@@ -153,7 +157,7 @@ function Pagination(props: PaginationProps) {
         <div className="change-page-box-1">
           <Dropdown
             className="dropdown-pagination-page"
-            overlay={menuPageChange}
+            menu={menuPageChange}
             trigger={["click"]}
           >
             <Button type="ghost" className="btn--lg" icon={<ChevronDown16 />}>

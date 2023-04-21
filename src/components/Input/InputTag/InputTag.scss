@@ -25,8 +25,8 @@
     align-items: center;
     width: 100%;
     outline: 1px solid var(--palette-coolGray-50);
-    background-color: var(--color-white);
     height: 40px;
+    background-color: var(--palette-gray-10);
 
     &.input-tag--filter-have-item {
       outline: 1px solid var(--color-primary);
@@ -39,6 +39,10 @@
 
     &.input-tag__container--sm {
       height: 32px !important;
+    }
+
+    &.input-tag__container--white {
+      background-color: var(--color-white);
     }
 
     &:hover {
@@ -82,7 +86,6 @@
     }
 
     &.input-tag__container--material {
-      background-color: var(--palette-gray-10);
       outline: none;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;

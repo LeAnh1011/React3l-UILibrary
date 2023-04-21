@@ -1,5 +1,13 @@
-import { Radio } from "antd";
-import { RadioChangeEvent } from "antd/lib/radio";
+import {
+  ArgsTable,
+  Description,
+  PRIMARY_STORY,
+  Primary,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import React, { Reducer } from "react";
 import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
@@ -7,10 +15,11 @@ import { Observable } from "rxjs";
 import {
   AdvanceFilterAction,
   advanceFilterReducer,
-  advanceFilterService
+  advanceFilterService,
 } from "../../../services/advance-filter-service";
 import AdvanceEnumFilterMaster from "./AdvanceEnumFilterMaster";
-export class DemoFilter extends ModelFilter {
+
+class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
   name: StringFilter = new StringFilter();
   code: StringFilter = new StringFilter();
@@ -41,7 +50,36 @@ const demoSearchFunc = () => {
 };
 
 const filterValue = new DemoFilter();
-export function AdvanceEnumFilterMasterStories() {
+export default {
+  title: "AdvanceFilterMaster/AdvanceEnumFilterMaster",
+  component: AdvanceEnumFilterMaster,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    label: {
+      control: "text",
+      defaultValue: "Đơn vị tổ chức",
+    },
+    placeHolder: {
+      defaultValue: "Chọn đơn vị",
+    },
+  },
+};
+const Template: Story = (args) => {
   const [filter, dispatch] = React.useReducer<
     Reducer<DemoFilter, AdvanceFilterAction<DemoFilter>>
   >(advanceFilterReducer, filterValue);
@@ -61,8 +99,6 @@ export function AdvanceEnumFilterMasterStories() {
     [multifilter]
   );
 
-  const [isMultiple, setIsMultiple] = React.useState<boolean>(false);
-
   const handleRenderModel = React.useCallback((item: Model) => {
     if (item) {
       return item.name;
@@ -71,37 +107,21 @@ export function AdvanceEnumFilterMasterStories() {
     }
   }, []);
 
-  const handleChangeMultipe = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setIsMultiple(event.target.value);
-      setValue(0);
-    },
-    [setValue]
-  );
-
   return (
     <div style={{ margin: "10px", width: "300px" }}>
       <div style={{ margin: "10px", width: "300px" }}>
         <AdvanceEnumFilterMaster
-          placeHolder={"Select Enum"}
+          {...args}
           value={id}
           listValue={multifilter.id.in}
           render={handleRenderModel}
           onChange={setValue}
           getList={demoSearchFunc}
-          label={"Label"}
-          isMultiple={isMultiple}
           onChangeMultiple={handleChangeFilter} // if type is multiple pass this props
-          title="Đơn vị"
         />
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeMultipe} value={isMultiple}>
-          <Radio value={true}>Multiple</Radio>
-          <Radio value={false}>Single</Radio>
-        </Radio.Group>
       </div>
     </div>
   );
-}
+};
+
+export const Default = Template.bind({});

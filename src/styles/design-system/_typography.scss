@@ -25,13 +25,13 @@ form legend {
 }
 
 /* text style heading */
-.text--xxxl {
+.text--3xl {
   font-size: calc(2.25 * var(--text-base-size));
   line-height: calc(2.75 * var(--text-base-line-height));
 }
 
 h1,
-.heading-text--xxl {
+.heading-text--2xl {
   font-size: calc(2 * var(--text-base-size));
   line-height: calc(2.5 * var(--text-base-line-height));
 }

@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import React, { ReactSVGElement, RefObject } from "react";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
-import "./InputNumber.scss";
 import { ReactNode } from "react";
 import { BORDER_TYPE } from "@Configs/enum";
+import "./InputNumber.scss";
 
 export const DECIMAL: string = "DECIMAL";
 export const LONG: string = "LONG";
@@ -14,28 +14,48 @@ interface InputNumberAction {
 }
 
 export interface InputNumberProps {
+  /**Label for current field*/
   label?: string;
+  /**Show symbol * as required field*/
   isRequired?: boolean;
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
-  floatLabel?: boolean;
+  /**User-filled value*/
   value?: number;
+  /**Prefix for filter value*/
   prefix?: string | ReactNode;
+  /**Suffix for filter value*/
   suffix?: string | ReactNode;
+  /**Allow value to be negative or not*/
   allowNegative?: boolean;
-  error?: string;
+  /**Provide an option set decimal number type for value*/
   numberType?: string;
+  /**Reverse symbol “.” and “,”*/
   isReverseSymb?: boolean;
+  /**Provide a length of number behind the point (character)*/
   decimalDigit?: number;
+  /**Placeholder of the component*/
   placeHolder?: string;
+  /**Not allow to handle change value*/
   disabled?: boolean;
+  /**Use to custom style the component*/
   className?: string;
+  /**Min of the value number*/
   min?: number;
+  /**Max of the value number*/
   max?: number;
+  /** Provide a custom action (onClick) to the component */
   action?: InputNumberAction;
+  /**Control the size of the component*/
   isSmall?: boolean;
+  /**Handle the change value of the component*/
   onChange?: (T: number) => void;
+  /**Handle onEnter action*/
   onEnter?: (T: number) => void;
+  /**Handle onBlur action*/
   onBlur?: (T: number) => void;
+  /** Custom background color for component: "white" || "gray" */
+  bgColor?: "white" | "gray";
 }
 
 function InputNumber(props: InputNumberProps) {
@@ -57,6 +77,7 @@ function InputNumber(props: InputNumberProps) {
     min,
     max,
     isSmall,
+    bgColor,
     onChange,
     onEnter,
     onBlur,
@@ -286,7 +307,7 @@ function InputNumber(props: InputNumberProps) {
 
   return (
     <div className={classNames("input-number__wrapper", className)}>
-      <div className="input-number__label m-b--xxxs">
+      <div className="input-number__label m-b--2xs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label
             className={classNames("component__title", {
@@ -297,10 +318,9 @@ function InputNumber(props: InputNumberProps) {
             {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
-        <span style={{ width: "100%" }}></span>
         {action && (
           <span
-            className="m-l--xxxs body-text--md color-link"
+            className="m-l--3xs body-text--md color-link"
             style={{ cursor: "pointer" }}
             onClick={action.action}
           >
@@ -313,7 +333,8 @@ function InputNumber(props: InputNumberProps) {
           "component__input input-number__container p--xs",
           {
             "input-number__container--sm": isSmall,
-            "py--xxs": isSmall,
+            "input-number__container--white": bgColor === "white",
+            "py--2xs": isSmall,
             "px--xs": isSmall,
             "p--xs": !isSmall,
             "input-number--material": type === BORDER_TYPE.MATERIAL,
@@ -328,7 +349,7 @@ function InputNumber(props: InputNumberProps) {
         {prefix && (
           <>
             {typeof prefix === "string" ? (
-              <span className="p-r--xxs">{prefix}</span>
+              <span className="p-r--2xs">{prefix}</span>
             ) : (
               <div className="m-r--xs input-number__icon">{prefix}</div>
             )}
@@ -362,16 +383,16 @@ function InputNumber(props: InputNumberProps) {
           </label>
         )}
         {internalValue && !disabled && (
-          <div className={classNames("input-icon__clear", "m-l--xxs")}>
+          <div className={classNames("input-icon__clear", "m-l--2xs")}>
             <CloseFilled16 onClick={handleClearInput}></CloseFilled16>
           </div>
         )}
         {suffix && (
           <>
             {typeof suffix === "string" ? (
-              <span className="body-text--md m-l--xxs">{suffix}</span>
+              <span className="body-text--md m-l--2xs">{suffix}</span>
             ) : (
-              <div className="m-l--xxs input-text__icon">{suffix}</div>
+              <div className="m-l--2xs input-text__icon">{suffix}</div>
             )}
           </>
         )}

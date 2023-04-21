@@ -8,14 +8,9 @@
     width: 100%;
   }
 
-  .date-picker__wrapper--sm {
-    height: 32px !important;
-  }
-
-  .date-picker__label {
+  .advance-date-range-filter__label {
     width: 100%;
     display: flex;
-    justify-content: center;
 
     label {
       font-size: 0.75em;
@@ -40,7 +35,7 @@
     align-items: center;
 
     &.advance-date-range-filter__icon-wrapper--material {
-      background-color: var(--palette-gray-10) ;
+      background-color: var(--palette-gray-10);
       .advance-date-range-filter__icon-clear {
         &:hover {
           cursor: pointer;
@@ -48,11 +43,11 @@
         }
       }
     }
-    &.advance-date-range-filter__icon-wrapper--disabled{
-      background-color: var(--palette-grayHover-10) ;
+    &.advance-date-range-filter__icon-wrapper--disabled {
+      background-color: var(--palette-grayHover-10);
     }
     &.advance-date-range-filter__icon-wrapper--sm {
-      top: 0.3rem!important;
+      top: 0.3rem !important;
     }
     .advance-date-range-filter__icon-clear {
       color: var(--palette-coolGray-50);
@@ -72,7 +67,7 @@
     width: 100%;
     outline: 1px solid var(--palette-gray-50);
     border: none;
-    background: var(--color-white);
+    background-color: var(--palette-gray-10);
     height: 40px;
     border-radius: 0px;
     font-size: 14px;
@@ -88,7 +83,7 @@
       }
     }
 
-    &.date-picker--disabled {
+    &.advance-date-range-filter--disabled {
       background-color: var(--palette-grayHover-10);
       & + .component__title {
         pointer-events: none;
@@ -117,7 +112,7 @@
       outline: 2px solid var(--color-primary);
     }
 
-    &.date-picker--float {
+    &.advance-date-range-filter--float {
       &.ant-picker-focused {
         border-bottom: none !important;
         box-shadow: none !important;
@@ -128,8 +123,20 @@
       }
     }
 
-    &.date-picker--material {
-      background-color: var(--palette-gray-10);
+    &.advance-date-range-filter--sm {
+      height: 32px !important;
+    }
+
+    &.advance-date-range-filter--white {
+      background-color: var(--color-white);
+      &:hover {
+        + .advance-date-range-filter__icon-wrapper--material {
+          background-color: var(--palette-grayHover-10);
+        }
+      }
+    }
+
+    &.advance-date-range-filter--material {
       outline: none;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
@@ -141,7 +148,7 @@
       &:hover {
         background-color: var(--palette-grayHover-10);
       }
-      &.date-picker--disabled {
+      &.advance-date-range-filter--disabled {
         background-color: var(--palette-gray-10);
       }
       &.ant-picker-focused {
@@ -149,6 +156,12 @@
         box-shadow: none;
         outline: 2px solid var(--color-primary);
       }
+    }
+  }
+  .advance-date-range-filter__container:has(.advance-date-range-filter--white) {
+    background-color: var(--color-white);
+    .advance-date-range-filter__icon-wrapper--material {
+      background-color: var(--color-white);
     }
   }
   .component__title--normal {
@@ -173,16 +186,18 @@
   .advance-date-range-filter__icon-wrapper {
     background-color: var(--color-critical-blur) !important;
   }
-  .date-picker--material + .advance-date-range-filter__icon-wrapper {
+  .advance-date-range-filter--material
+    + .advance-date-range-filter__icon-wrapper {
     background-color: var(--color-critical-blur) !important;
     &:hover {
       background-color: var(--palette-grayHover-10) !important;
     }
   }
-  .date-picker--material:hover + .advance-date-range-filter__icon-wrapper {
+  .advance-date-range-filter--material:hover
+    + .advance-date-range-filter__icon-wrapper {
     background-color: var(--palette-grayHover-10) !important;
   }
-  .ant-picker.date-picker--material {
+  .ant-picker.advance-date-range-filter--material {
     border-bottom: none;
     outline: 1px solid var(--color-critical) !important;
   }

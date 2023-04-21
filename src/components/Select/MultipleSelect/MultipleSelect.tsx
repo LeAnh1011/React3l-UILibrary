@@ -8,60 +8,59 @@ import { DEBOUNCE_TIME_300 } from "@Configs/consts";
 import React, { RefObject } from "react";
 import type { ErrorObserver, Observable } from "rxjs";
 import { BORDER_TYPE } from "@Configs/enum";
-import "./MultipleSelect.scss";
 import { Checkbox, Empty, Tooltip } from "antd";
 import IconLoading from "@Components/IconLoading/IconLoading";
 import { InputAction } from "@Components/Input/InputText/InputText";
+import "./MultipleSelect.scss";
 
 export interface MultipleSelectProps<
   T extends Model,
   TFilter extends ModelFilter
 > {
+  /**list value users select*/
   values?: Model[];
-
+  /**Value filter for api get data option*/
   valueFilter?: TFilter;
-
+  /**The property name of the model filter you want to search in the list data*/
   searchProperty?: string;
-
+  /**The type of searchProperty you want to search in the list data*/
   searchType?: string;
-
+  /**Placeholder of the component*/
   placeHolder?: string;
-
+  /**Not allow to handle change value*/
   disabled?: boolean;
-
-  isMaterial?: boolean;
-
+  /**Show symbol * as required field*/
   isRequired?: boolean;
-
+  /**Append this component to body*/
   appendToBody?: boolean;
-
+  /**Api to get list data*/
   getList?: (TModelFilter?: TFilter) => Observable<T[]>;
-
+  /**Handle the change value of the field*/
   onChange?: (selectedList?: T[], ids?: []) => void;
-
+  /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
-
+  /**Model filter class of API get list data*/
   classFilter: new () => TFilter;
-
+  /**Label for current field*/
   label?: string;
-
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
-
+  /**Control the size of the component*/
   isSmall?: boolean;
-
+  /**Option show button add new*/
   selectWithAdd?: () => void;
-
-  selectWithPreferOption?: boolean;
-
+  /**Component enable to search data list*/
   isUsingSearch?: boolean;
-
+  /**Prefer option to select*/
   preferOptions?: T[];
-
+  /**Show maximum length of item in each data row*/
   maxLengthItem?: number;
-
+  /**Set show tooltip or not */
   isShowTooltip?: boolean;
-
+  /** Provide a custom action (onClick) to the component */
   action?: InputAction;
+  /** Custom background color for component: "white" || "gray" */
+  bgColor?: "white" | "gray";
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -76,7 +75,6 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     searchType,
     placeHolder,
     disabled,
-    isMaterial,
     isRequired,
     appendToBody,
     getList,
@@ -92,6 +90,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     maxLengthItem,
     isShowTooltip,
     action,
+    bgColor,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -208,7 +207,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     (item: Model) => (event: any) => {
       let filteredItem = values?.filter((current) => current.id === item.id)[0];
       if (filteredItem) {
-        const tmp = [...values];
+        const tmp = [...(values ?? [])];
         const ids = values?.map((item) => item?.id);
         const index = tmp.indexOf(filteredItem);
         tmp.splice(index, 1);
@@ -216,7 +215,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
         onChange([...tmp], ids as any);
       } else {
         const ids = values?.map((item) => item?.id);
-        onChange([...values, item], [...ids, item?.id] as any);
+        onChange([...(values ?? []), item], [...ids, item?.id] as any);
       }
     },
     [values, onChange]
@@ -335,7 +334,6 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
           <div>
             <InputTag
               listValue={values}
-              isMaterial={isMaterial}
               render={render}
               placeHolder={placeHolder}
               disabled={disabled}
@@ -351,6 +349,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
               isRequired={isRequired}
               isShowTooltip={isShowTooltip}
               action={action}
+              bgColor={bgColor}
             />
           </div>
         </div>
@@ -367,7 +366,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                     internalList.map((item, index) => (
                       <div
                         className={classNames(
-                          "select__item p-l--xs p-y--xs p-r--xxs",
+                          "select__item p-l--xs p-y--xs p-r--2xs",
                           {
                             "select__item--selected": item.isSelected,
                           }
@@ -414,7 +413,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                   internalPreferOptions.map((item, index) => (
                     <div
                       className={classNames(
-                        "select__prefer-option select__item p-l--xs p-y--xs p-r--xxs"
+                        "select__prefer-option select__item p-l--xs p-y--xs p-r--2xs"
                       )}
                       key={index}
                       onKeyDown={handleMove(item)}

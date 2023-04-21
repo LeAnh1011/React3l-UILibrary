@@ -2,34 +2,52 @@ import React, { ReactSVGElement, RefObject } from "react";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import Close16 from "@carbon/icons-react/es/close/16";
-import "./InputTag.scss";
 import { Model } from "react3l-common";
 import classNames from "classnames";
 import { BORDER_TYPE } from "@Configs/enum";
 import { Tooltip } from "antd";
 import { InputAction } from "../InputText/InputText";
+import "./InputTag.scss";
 
 export interface InputTagProps<T extends Model> {
+  /**List value users select*/
   listValue?: T[];
+  /**Placeholder of the component*/
   placeHolder?: string;
+  /**Not allow to handle change value*/
   disabled?: boolean;
-  isMaterial?: boolean;
-  error?: string;
+  /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
+  /**Handle the action when click clear value*/
   onClear?: (T: T) => void;
+  /**Handle the action when click clear mutiValue*/
   onClearMulti?: () => void;
+  /**Handle action on search*/
   onSearch?: (T: string) => void;
+  /**Show symbol * as required field*/
   isRequired?: boolean;
+  /**Label for current field*/
   label?: string;
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
+  /**Control the size of the component*/
   isSmall?: boolean;
+  /**Component enable to search data list*/
   isUsingSearch?: boolean;
+  /**Handle onKeyDown action*/
   onKeyDown?: (event: any) => void;
+  /**Handle onEnter action*/
   onKeyEnter?: (event: any) => void;
+  /**Boolean true if used for filter*/
   isFilter?: boolean;
+  /**Not expand the title row to see more detail on each post (each row)*/
   isNotExpand?: boolean;
+  /**Boolean to set show tooltip */
   isShowTooltip?: boolean;
+  /** Provide a custom action (onClick) to the component */
   action?: InputAction;
+  /** Custom background color for component: "white" || "gray" */
+  bgColor?: "white" | "gray";
 }
 
 function InputTag(props: InputTagProps<Model>) {
@@ -51,6 +69,7 @@ function InputTag(props: InputTagProps<Model>) {
     isShowTooltip = false,
     render,
     action,
+    bgColor,
   } = props;
 
   const internalListValue = React.useMemo<Model[]>(() => {
@@ -115,7 +134,7 @@ function InputTag(props: InputTagProps<Model>) {
     <>
       <div className="input-tag__wrapper">
         <div
-          className="input-tag__label m-b--xxxs"
+          className="input-tag__label m-b--3xs"
           onClick={(event) => {
             event.stopPropagation();
           }}
@@ -130,10 +149,9 @@ function InputTag(props: InputTagProps<Model>) {
               {isRequired && <span className="text-danger">&nbsp;*</span>}
             </label>
           )}
-          <span style={{ width: "100%" }}></span>
           {action && (
             <span
-              className="m-l--xxxs body-text--md color-link"
+              className="m-l--3xs body-text--md color-link"
               style={{ cursor: "pointer" }}
               onClick={action.action}
             >
@@ -144,7 +162,8 @@ function InputTag(props: InputTagProps<Model>) {
         <div
           className={classNames("component__input input-tag__container", {
             "input-tag__container--sm": isSmall,
-            "p-y--xxs": isSmall,
+            "input-tag__container--white": bgColor === "white",
+            "p-y--2xs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
             "input-tag__container--material": type === BORDER_TYPE.MATERIAL,
@@ -183,13 +202,12 @@ function InputTag(props: InputTagProps<Model>) {
                 >
                   <span
                     className={classNames(
-                      "input-tag-item__label m-r--xxxs m-b--xxxs",
+                      "input-tag-item__label m-r--3xs m-b--3xs",
                       {
                         "input-tag-item__label--small":
                           type === BORDER_TYPE.FLOAT_LABEL && isSmall,
-                        "p-l--xxxs":
-                          type === BORDER_TYPE.FLOAT_LABEL && isSmall,
-                        "p-l--xxs": !(
+                        "p-l--3xs": type === BORDER_TYPE.FLOAT_LABEL && isSmall,
+                        "p-l--2xs": !(
                           type === BORDER_TYPE.FLOAT_LABEL && isSmall
                         ),
                       }
@@ -214,12 +232,12 @@ function InputTag(props: InputTagProps<Model>) {
               {internalListValue && internalListValue.length > 0 && (
                 <span
                   className={classNames(
-                    "input-tag-item__label m-r--xxxs m-b--xxxs",
+                    "input-tag-item__label m-r--3xs m-b--3xs",
                     {
                       "input-tag-item__label--small":
                         type === BORDER_TYPE.FLOAT_LABEL && isSmall,
-                      "p-l--xxxs": type === BORDER_TYPE.FLOAT_LABEL && isSmall,
-                      "p-l--xxs": !(
+                      "p-l--3xs": type === BORDER_TYPE.FLOAT_LABEL && isSmall,
+                      "p-l--2xs": !(
                         type === BORDER_TYPE.FLOAT_LABEL && isSmall
                       ),
                     }
@@ -282,7 +300,7 @@ function InputTag(props: InputTagProps<Model>) {
 
           {!disabled && searchTerm && (
             <CloseFilled16
-              className="input-icon input-icon__clear m-x--xxs"
+              className="input-icon input-icon__clear m-x--2xs"
               onClick={handleClearInput}
             ></CloseFilled16>
           )}
@@ -306,7 +324,6 @@ InputTag.defaultProps = {
   type: BORDER_TYPE.BORDERED,
   label: null,
   render: defaultRenderObject,
-  isMaterial: false,
 };
 
 export default InputTag;

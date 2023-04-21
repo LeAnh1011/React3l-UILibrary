@@ -1,6 +1,5 @@
 import React, { RefObject, Reducer } from "react";
 import { v4 as uuidv4 } from "uuid";
-import "./AdvanceTreeFilter.scss";
 import { Model, ModelFilter } from "react3l-common";
 import Tree from "../../Tree";
 import { useDebounceFn } from "ahooks";
@@ -11,38 +10,60 @@ import InputTag from "@Components/Input/InputTag";
 import InputSelect from "../../Input/InputSelect";
 import { BORDER_TYPE } from "@Configs/enum";
 import { IdFilter } from "react3l-advanced-filters";
+import "./AdvanceTreeFilter.scss";
 
 export interface AdvanceTreeFilterProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
+  /** User-selected values*/
   listItem?: Model[];
+  /** User-selected value*/
   item?: Model;
-  isMaterial?: boolean;
+  /**The property name of the model filter you want to search in the list data*/
   searchProperty?: string;
+  /**The type of searchProperty you want to search in the list data*/
   searchType?: string;
+  /** An optional to multiple check filter values*/
   checkable?: boolean;
+  /** Prop of AntdTreeProps*/
   selectable?: boolean;
+  /**Check treeNode precisely; parent treeNode and children treeNodes are not associated*/
   checkStrictly?: boolean;
+  /** Not allow to handle change filter*/
   disabled?: boolean;
+  /** Value filter for api get data option*/
   valueFilter?: TModelFilter;
+  /** Placeholder of the component*/
   placeHolder?: string;
-  error?: string;
+  /** Key of selected node */
   selectedKey?: number;
+  /**Not allow to select the father item that contain a lot of items inside*/
   onlySelectLeaf?: boolean;
+  /** Provide a function to render a specific property as name*/
   render?: (T: T) => string;
+  /** API to get data*/
   getTreeData?: (TModelFilter?: TModelFilter) => Observable<T[]>;
+  /** Function to change selected items*/
   onChange?: (T: Model[], TT: boolean) => void;
+  /** Model filter class of API get list data*/
   classFilter?: new () => TModelFilter;
+  /** Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
+  /** Label for current field*/
   label?: string;
+  /** Control the size of the component*/
   isSmall?: boolean;
-  isUsingSearch?: boolean;
+  /** Prop of AntdTreeProps*/
   treeTitleRender?: (T: T) => string;
-  selectWithAdd?: () => void;
-  selectWithPreferOption?: boolean;
+  /** Prefer node item of tree*/
   preferOptions?: T[];
+  /** Set maximum length of each data row to render*/
   maxLengthItem?: number;
+  /** Custom background color for component: "white" || "gray" */
+  bgColor?: "white" | "gray";
+  /**Append this component to body*/
+  appendToBody?: boolean;
 }
 export interface filterAction {
   type: string;
@@ -61,7 +82,6 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
   const {
     listItem,
     item,
-    isMaterial,
     checkStrictly,
     searchProperty,
     searchType,
@@ -79,12 +99,11 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
     type,
     label,
     isSmall,
-    isUsingSearch,
     treeTitleRender,
-    selectWithAdd,
-    selectWithPreferOption,
     preferOptions,
     maxLengthItem,
+    bgColor,
+    appendToBody,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -100,6 +119,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
     null
   );
+  const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
 
   const [filter, dispatch] = React.useReducer<
     Reducer<ModelFilter, filterAction>
@@ -217,6 +237,30 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
 
   CommonService.useClickOutside(wrapperRef, handleCloseList);
 
+  React.useEffect(() => {
+    if (expanded && appendToBody) {
+      const currentPosition = wrapperRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - currentPosition.bottom;
+      if (spaceBelow <= 200) {
+        setTimeout(() => {
+          setAppendToBodyStyle({
+            position: "fixed",
+            bottom: spaceBelow + wrapperRef.current.clientHeight,
+            left: currentPosition.left,
+            maxWidth: wrapperRef.current.clientWidth,
+          });
+        }, 100);
+      } else {
+        setAppendToBodyStyle({
+          position: "fixed",
+          top: currentPosition.top + wrapperRef.current.clientHeight,
+          left: currentPosition.left,
+          maxWidth: wrapperRef.current.clientWidth,
+        });
+      }
+    }
+  }, [appendToBody, componentId, expanded]);
+
   return (
     <>
       <div className="advance-tree-filter__container" ref={wrapperRef}>
@@ -224,7 +268,6 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
           {checkable ? (
             <InputTag
               listValue={listItem}
-              isMaterial={isMaterial}
               render={render}
               placeHolder={placeHolder}
               disabled={disabled}
@@ -233,18 +276,18 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               type={type}
               label={label}
               isSmall={isSmall}
-              isUsingSearch={isUsingSearch}
+              isUsingSearch={true}
               onClearMulti={handleClearMultiItem}
               onKeyDown={handleKeyPress}
               isFilter={true}
               isNotExpand={!expanded}
               isShowTooltip
+              bgColor={bgColor}
             />
           ) : (
             <InputSelect
               value={item}
               render={render}
-              isMaterial={isMaterial}
               placeHolder={placeHolder}
               expanded={expanded}
               disabled={disabled}
@@ -256,11 +299,16 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               isSmall={isSmall}
               onKeyDown={handleKeyPress}
               isFilter={true}
+              bgColor={bgColor}
             />
           )}
         </div>
         {expanded && (
-          <div className="advance-tree-filter__list" id={componentId}>
+          <div
+            className="advance-tree-filter__list"
+            style={appendToBodyStyle}
+            id={componentId}
+          >
             <Tree
               getTreeData={getTreeData}
               selectedKey={selectedKey}
@@ -275,8 +323,6 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               selectable={selectable}
               checkable={checkable}
               titleRender={treeTitleRender}
-              selectWithAdd={selectWithAdd}
-              selectWithPreferOption={selectWithPreferOption}
               preferOptions={preferOptions}
               isExpand={expanded}
               maxLengthItem={maxLengthItem}
@@ -294,10 +340,10 @@ AdvanceTreeFilter.defaultProps = {
   searchType: "contain",
   classFilter: ModelFilter,
   onlySelectLeaf: false,
-  isMaterial: false,
   checkable: false,
   disabled: false,
   selectable: true,
+  bgColor: "white",
   treeTitleRender: (t: any) => t?.title,
 };
 

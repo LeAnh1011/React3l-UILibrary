@@ -2,7 +2,7 @@ import Calendar16 from "@carbon/icons-react/es/calendar/16";
 import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
 import type { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
-import DateRange from "@Components/Calendar/DateRange";
+import DateRange from "@Components/Input/DateRange";
 import InputSelect from "@Components/Input/InputSelect";
 import { BORDER_TYPE } from "@Configs/enum";
 import moment, { Moment } from "moment";
@@ -24,35 +24,38 @@ class ListDate extends Model {
 }
 
 interface AdvanceDateRangeFilterMasterProps {
+  /**Value [fromDate, toDate] users select*/
   value?: [Moment, Moment];
-
+  /**Use to format the date selected*/
   dateFormat?: string[];
-
-  isMaterial?: boolean;
-
+  /**Handle the change value of the component*/
   onChange?: (item?: any, value?: [Moment, Moment]) => void;
-
+  /**Use to custom style the component*/
   className?: string;
-
+  /**Not allow to handle change the component*/
   disabled?: boolean;
-
+  /**Prop of DateRange Component*/
   typeCustomDate?: BORDER_TYPE;
-
+  /**Control the size of the component*/
   isSmall?: boolean;
-
+  /**Label for current field*/
   label?: string;
-
+  /**Selected value of list value suggest*/
   activeItem?: any;
-
+  /**Control the type of component: SHORT, INPUT */
   type?: ADVANCE_DATE_RANGE_TYPE;
-
+  /**Prop of component InputSelect*/
   inputType?: BORDER_TYPE;
-
+  /**Prop of component InputSelect*/
   placeHolderSelect?: string;
-
+  /**Append this component to body*/
   appendToBody?: boolean;
-
+  /**Provide a translate function*/
   translate?: TFunction;
+  /**Placeholder of the component*/
+  placeholder?: [string, string];
+  /** Custom background color for component: "white" || "gray" */
+  bgColor?: "white" | "gray";
 }
 
 const list: ListDate[] = [
@@ -83,6 +86,7 @@ function AdvanceDateRangeFilterMaster(
     type,
     inputType,
     placeHolderSelect,
+    bgColor,
     translate,
   } = props;
 
@@ -99,6 +103,7 @@ function AdvanceDateRangeFilterMaster(
 
   const panelRef = React.useRef(null);
   const listRef = React.useRef(null);
+  const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
 
   const formatDateFilter = React.useCallback((item: any): [Moment, Moment] => {
     if (item) {
@@ -294,6 +299,30 @@ function AdvanceDateRangeFilterMaster(
     [translate]
   );
 
+  React.useEffect(() => {
+    if (isExpand && appendToBody) {
+      const currentPosition = wrapperRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - currentPosition.bottom;
+      if (spaceBelow <= 200) {
+        setTimeout(() => {
+          setAppendToBodyStyle({
+            position: "fixed",
+            bottom: spaceBelow + wrapperRef.current.clientHeight,
+            left: currentPosition.left,
+            maxWidth: wrapperRef.current.clientWidth,
+          });
+        }, 100);
+      } else {
+        setAppendToBodyStyle({
+          position: "fixed",
+          top: currentPosition.top + wrapperRef.current.clientHeight,
+          left: currentPosition.left,
+          maxWidth: wrapperRef.current.clientWidth,
+        });
+      }
+    }
+  }, [appendToBody, isExpand]);
+
   return (
     <div
       className={classNames(
@@ -337,6 +366,7 @@ function AdvanceDateRangeFilterMaster(
             isSmall={isSmall}
             onKeyDown={handleKeyDown}
             render={renderItem}
+            bgColor={bgColor}
           />
         </div>
       )}
@@ -349,6 +379,7 @@ function AdvanceDateRangeFilterMaster(
               type === ADVANCE_DATE_RANGE_TYPE.SHORT,
             "": type === ADVANCE_DATE_RANGE_TYPE.INPUT,
           })}
+          style={appendToBodyStyle}
           ref={listRef}
         >
           <div className="advance-date-range-master__list" ref={selectListRef}>
@@ -410,12 +441,12 @@ function AdvanceDateRangeFilterMaster(
 }
 
 AdvanceDateRangeFilterMaster.defaultProps = {
-  isMaterial: false,
   dateFormat: ["DD/MM/YYYY", "YYYY/MM/DD"],
   placeholder: ["Từ ngày", "Đến ngày"],
   type: ADVANCE_DATE_RANGE_TYPE.SHORT,
   placeHolderSelect: "",
   appendToBody: false,
+  bgColor: "white",
 };
 
 export default AdvanceDateRangeFilterMaster;

@@ -1,49 +1,57 @@
 import classNames from "classnames";
 import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
 import React, { ReactSVGElement, RefObject } from "react";
-import "./AdvanceNumberFilter.scss";
 import { ReactNode } from "react";
 import { BORDER_TYPE } from "@Configs/enum";
+import "./AdvanceNumberFilter.scss";
 
 export const DECIMAL: string = "DECIMAL";
 export const LONG: string = "LONG";
 
-interface AdvanceNumberFilterAction {
-  name?: string;
-  action?: any;
-}
-
 export interface AdvanceNumberProps {
+  /**Label for current field*/
   label?: string;
-  isRequired?: boolean;
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
-  floatLabel?: boolean;
-  isMaterial?: boolean;
+  /**User-filled value*/
   value?: number;
+  /**Prefix for filter value*/
   prefix?: string | ReactNode;
+  /**Suffix for filter value*/
   suffix?: string | ReactNode;
+  /**Allow values to be negative not*/
   allowPositive?: boolean;
-  error?: string;
+  /**Provide an option set decimal number type for value filter*/
   numberType?: string;
+  /**Reverse symbol “.” and “,”*/
   isReverseSymb?: boolean;
+  /**Provide a length of number behind the point (character)*/
   decimalDigit?: number;
+  /**Placeholder of the component*/
   placeHolder?: string;
+  /**Not allow to handle change filter*/
   disabled?: boolean;
+  /**Use to custom style the component*/
   className?: string;
+  /**Min of the value number*/
   min?: number;
+  /**Max of the value number*/
   max?: number;
-  action?: AdvanceNumberFilterAction;
+  /**Control the size of the component*/
   isSmall?: boolean;
+  /**Handle the change value filter of the component*/
   onChange?: (T: number) => void;
+  /**Handle onEnter action*/
   onEnter?: (T: number) => void;
+  /**Handle onBlur action*/
   onBlur?: (T: number) => void;
+  /** Custom background color for component: "white" || "gray" */
+  bgColor?: "white" | "gary";
 }
 
 function AdvanceNumberFilter(props: AdvanceNumberProps) {
   const {
-    action,
     label,
-    isRequired,
     type,
     prefix,
     suffix,
@@ -58,6 +66,7 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
     min,
     max,
     isSmall,
+    bgColor,
     onChange,
     onEnter,
     onBlur,
@@ -268,7 +277,7 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
 
   return (
     <div className={classNames("advance-number-filter__wrapper", className)}>
-      <div className="advance-number-filter__label m-b--xxxs">
+      <div className="advance-number-filter__label m-b--3xs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label
             className={classNames("component__title", {
@@ -276,18 +285,7 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
             })}
           >
             {label}
-            {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
-        )}
-        <span style={{ width: "100%" }}></span>
-        {action && (
-          <span
-            className="m-l--xxxs body-text--md color-link"
-            style={{ cursor: "pointer" }}
-            onClick={action.action}
-          >
-            {action.name}
-          </span>
         )}
       </div>
       <div
@@ -295,7 +293,8 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
           "component__input advance-number-filter__container p--xs",
           {
             "advance-number-filter__container--sm": isSmall,
-            "py--xxs": isSmall,
+            "advance-number-filter__container--white": bgColor === "white",
+            "py--2xs": isSmall,
             "px--xs": isSmall,
             "p--xs": !isSmall,
             "advance-number-filter--material": type === BORDER_TYPE.MATERIAL,
@@ -310,9 +309,11 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
         {prefix && (
           <>
             {typeof prefix === "string" ? (
-              <span className="p-r--xxs">{prefix}</span>
+              <span className="p-r--2xs">{prefix}</span>
             ) : (
-              <>{prefix}</>
+              <div className="m-r--xs advance-number-filter__icon">
+                {prefix}
+              </div>
             )}
           </>
         )}
@@ -342,20 +343,19 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
             })}
           >
             {label}
-            {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
         {internalValue && !disabled && (
-          <div className={classNames("input-icon__clear", "m-l--xxs")}>
+          <div className={classNames("input-icon__clear", "m-l--2xs")}>
             <CloseFilled16 onClick={handleClearInput}></CloseFilled16>
           </div>
         )}
         {suffix && (
           <>
             {typeof suffix === "string" ? (
-              <span className="body-text--md m-l--xxs">{suffix}</span>
+              <span className="body-text--md m-l--2xs">{suffix}</span>
             ) : (
-              <div className="m-l--xxs">{suffix}</div>
+              <div className="m-l--2xs">{suffix}</div>
             )}
           </>
         )}
@@ -368,13 +368,13 @@ AdvanceNumberFilter.defaultProps = {
   label: "",
   type: BORDER_TYPE.MATERIAL,
   isSmall: false,
-  isRequired: false,
   allowPositive: false,
   isReverseSymb: false,
   numberType: LONG,
   decimalDigit: 4,
   disabled: false,
   prefix: "",
+  bgColor: "white",
 };
 
 export default AdvanceNumberFilter;

@@ -1,74 +1,89 @@
+import {
+  ArgsTable,
+  Description,
+  PRIMARY_STORY,
+  Primary,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import React from "react";
+import { useTranslation } from "react-i18next";
+import { BORDER_TYPE } from "../../../config/enum";
 import AdvanceDateRangFilterMaster, {
   ADVANCE_DATE_RANGE_TYPE,
 } from "./AdvanceDateRangFilterMaster";
-import { Radio, RadioChangeEvent } from "antd";
-import { BORDER_TYPE } from "../../../config/enum";
-import { useTranslation } from "react-i18next";
 
-export function AdvanceDateRangeFilterMasterStories() {
+export default {
+  title: "AdvanceFilterMaster/AdvanceDateRangFilterMaster",
+  component: AdvanceDateRangFilterMaster,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    label: {
+      control: "text",
+      defaultValue: "Ngày giao hàng",
+    },
+    placeholder: {
+      defaultValue: ["Từ ngày", "Đến ngày"],
+    },
+    typeCustomDate: {
+      control: {
+        type: "radio",
+        options: [
+          BORDER_TYPE.MATERIAL,
+          BORDER_TYPE.BORDERED,
+          BORDER_TYPE.FLOAT_LABEL,
+        ],
+      },
+      defaultValue: 1,
+    },
+    type: {
+      control: {
+        type: "radio",
+        options: [ADVANCE_DATE_RANGE_TYPE.SHORT, ADVANCE_DATE_RANGE_TYPE.INPUT],
+      },
+      defaultValue: 0,
+    },
+  },
+};
+
+const Template: Story = (args) => {
   const [translate] = useTranslation();
   const [value, setValue] = React.useState<[any, any]>([null, null]);
   const [item, setItem] = React.useState<any>(null);
-  const [type, setType] = React.useState<ADVANCE_DATE_RANGE_TYPE>(
-    ADVANCE_DATE_RANGE_TYPE.SHORT
-  );
-  const [typeInput, setTypeInput] = React.useState<BORDER_TYPE>(
-    BORDER_TYPE.BORDERED
-  );
-  const [label, setLabel] = React.useState("Ngày giao hàng");
 
   const handleChange = React.useCallback((item, dateMoment) => {
     setValue(dateMoment);
     setItem(item);
   }, []);
 
-  const handleChangeTyle = React.useCallback((event: RadioChangeEvent) => {
-    setType(event.target.value);
-  }, []);
-
-  const handleChangeStyle = React.useCallback((event: RadioChangeEvent) => {
-    setTypeInput(event.target.value);
-  }, []);
-
-  const handleChangeLabel = React.useCallback((event: RadioChangeEvent) => {
-    setLabel(event.target.value);
-  }, []);
-
   return (
     <div style={{ margin: "10px", width: "300px" }}>
       <AdvanceDateRangFilterMaster
-        label={label}
+        {...args}
         onChange={handleChange}
         activeItem={item}
-        type={type}
         value={value}
-        inputType={typeInput}
-        appendToBody={false}
         translate={translate}
       />
-
-      <div style={{ margin: "10px", width: "400px" }}>
-        <Radio.Group onChange={handleChangeTyle} value={type}>
-          <Radio value={ADVANCE_DATE_RANGE_TYPE.SHORT}>SHORT</Radio>
-          <Radio value={ADVANCE_DATE_RANGE_TYPE.INPUT}>Input</Radio>
-        </Radio.Group>
-        <Radio.Group onChange={handleChangeLabel} value={label}>
-          <Radio value={"Ngày giao hàng"}>Ngày giao hàng</Radio>
-          <Radio value={"Ngày giao hàng đã đổi"}>Ngày giao hàng đã đổi</Radio>
-        </Radio.Group>
-      </div>
-      {type === ADVANCE_DATE_RANGE_TYPE.INPUT && (
-        <>
-          <div style={{ margin: "10px", width: "400px" }}>
-            <Radio.Group onChange={handleChangeStyle} value={typeInput}>
-              <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
-              <Radio value={BORDER_TYPE.FLOAT_LABEL}>Float Label</Radio>
-              <Radio value={BORDER_TYPE.BORDERED}>Bordered</Radio>
-            </Radio.Group>
-          </div>
-        </>
-      )}
     </div>
   );
-}
+};
+
+export const Default = Template.bind({});

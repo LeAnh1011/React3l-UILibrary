@@ -5,13 +5,21 @@ import { Link } from "react-router-dom";
 import "./OneLineText.scss";
 
 export interface OneLineTextProps {
+  /**Used to change style Component */
   className?: string;
+  /**URL of avatar to display */
   avatar?: string;
+  /**Shape option of avatar*/
   avatarType?: "circle" | "square";
-  icon?: string;
-  value?: string;
+  /**Size of avatar to display */
   avatarSize?: "lg" | "md" | "sm";
+  /** Icon name to display */
+  icon?: string;
+  /** Value to display */
+  value?: string;
+  /**Option to add link into cell */
   link?: string;
+  /** Count max length to display of value */
   countCharacters?: number;
 }
 

@@ -1,8 +1,16 @@
-import { storiesOf } from "@storybook/react";
+import {
+  ArgsTable,
+  Description,
+  PRIMARY_STORY,
+  Primary,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { ComponentMeta, Story } from "@storybook/react";
 import React from "react";
 import { Model } from "react3l-common";
 import { Observable } from "rxjs";
-import nameof from "ts-nameof.macro";
 import UploadFile, { FileModel } from "./UploadFile";
 const demoList = [
   {
@@ -36,8 +44,29 @@ class ModelOBJ extends Model {
   public name?: string;
   public files?: FileModel[];
 }
+export default {
+  title: "UploadFile",
+  component: UploadFile,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {},
+} as ComponentMeta<typeof UploadFile>;
 
-export const Default = () => {
+const Template: Story = (args) => {
   const [model, setModel] = React.useState<ModelOBJ>({ ...new ModelOBJ() });
 
   const handleUpdateList = React.useCallback(
@@ -96,4 +125,4 @@ export const Default = () => {
   );
 };
 
-storiesOf("UploadFile", module).add(nameof(Default), Default);
+export const Default = Template.bind({});

@@ -1,5 +1,5 @@
-import { Model, ModelFilter } from "react3l-common";
 import React, { ReactNode } from "react";
+import { Model } from "react3l-common";
 import type { Observable } from "rxjs";
 import { ComponentUploadAvatar } from "./Components/ComponentUploadAvatar";
 import { ComponentUploadImage } from "./Components/ComponentUploadImage";
@@ -40,30 +40,40 @@ export enum UPLOADTYPE_IMAGE {
   AVATAR,
 }
 
-export interface UploadImageProps<
-  T extends Model,
-  TModelFilter extends ModelFilter
-> {
+export interface UploadImageProps {
+  /** Option to change style of upload  IMAGE, AVATAR*/
   type?: UPLOADTYPE_IMAGE;
+  /**Auto upload image */
   autoUpload?: boolean;
+  /**Option for multiple UploadImage */
   isMultiple?: boolean;
+  /**Option for minimized size UploadImage */
   isMinimized?: boolean;
+  /**List image uploaded*/
   files?: FileModel[];
-  fileFilter?: (file: unknown, index: number, files: unknown[]) => boolean;
+  /**Function change list image uploaded */
   updateList?: (files: FileModel[]) => void;
-  getListFile?: (TModelFilter?: TModelFilter) => Observable<T[]>;
+  /**API use to upload list image selected to server*/
   uploadFile?: (files: File[] | Blob[]) => Observable<FileModel[]>;
+  /**Icon of component */
   icon?: ReactNode;
+  /**Url of avatar for type UPLOADTYPE_IMAGE.AVATAR */
   currentAvatar?: string;
+  /**API upload image to server for type UPLOADTYPE_IMAGE.AVATAR */
   uploadAvatar?: (file: File | Blob) => Observable<FileModel>;
+  /**Function change currentAvatar for type UPLOADTYPE_IMAGE.AVATAR */
   updateAvatar?: (files: FileModel) => void;
+  /**Function use to remove image */
   removeFile?: (fileId?: string | number) => Observable<boolean>;
+  /**Option change size of UploadImage */
   size?: "lg" | "md" | "sm" | "xs";
+  /**Use to custom style the component*/
   className?: string;
+  /**Option limit maximum size (b) of list image to upload to server */
   maximumSize?: number;
 }
 
-function UploadImage(props: UploadImageProps<Model, ModelFilter>) {
+function UploadImage(props: UploadImageProps) {
   const renderUpload = React.useMemo(() => {
     switch (props.type) {
       case UPLOADTYPE_IMAGE.IMAGE:

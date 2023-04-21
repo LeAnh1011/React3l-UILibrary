@@ -1,5 +1,3 @@
-import { storiesOf } from "@storybook/react";
-import Radio, { RadioChangeEvent } from "antd/lib/radio";
 import FormItem from "../FormItem";
 import Drawer from "./Drawer";
 import InputText from "../Input/InputText/InputText";
@@ -15,8 +13,18 @@ import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { ModelFilter } from "react3l-common";
 import { of } from "rxjs";
 import moment from "moment";
+import {
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 
-export class DemoFilter extends ModelFilter {
+class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
   name: StringFilter = new StringFilter();
   code: StringFilter = new StringFilter();
@@ -36,29 +44,51 @@ const demoListEnum = (TModelFilter?: ModelFilter) => {
     { id: 5, name: "Enum 5", code: "E5" },
   ]);
 };
+export default {
+  title: "Drawer",
+  component: Drawer,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    loading: {
+      defaultValue: false,
+    },
 
-function Default() {
-  const [numberButton, setNumberButton] = React.useState<NUMBER_BUTTON>(
-    NUMBER_BUTTON.TWO
-  );
-  const handleChangeNumberButton = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setNumberButton(event.target.value);
+    visibleFooter: {
+      defaultValue: true,
     },
-    []
-  );
-  const [size, setSize] = React.useState<"sm" | "lg">("sm");
-  const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
-    setSize(event.target.value);
-  }, []);
-  const [haveCloseIcon, setHaveCloseIcon] = React.useState<boolean>(false);
+    disableButton: {
+      defaultValue: false,
+    },
+    numberButton: {
+      defaultValue: NUMBER_BUTTON.TWO,
+    },
+    isHaveCloseIcon: {
+      defaultValue: true,
+    },
+    size: {
+      defaultValue: "sm",
+    },
+  },
+};
+
+const Template: Story = (args) => {
   const [visible, setVisible] = React.useState<boolean>(true);
-  const handleChangeHaveCloseIcon = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setHaveCloseIcon(event.target.value);
-    },
-    []
-  );
+
   function handleClose() {
     setVisible(false);
   }
@@ -72,29 +102,6 @@ function Default() {
 
   return (
     <div>
-      <div>
-        <div style={{ margin: "10px", width: "500px" }}>
-          <Radio.Group onChange={handleChangeSize} value={size}>
-            <Radio value="sm">Small Size</Radio>
-            <Radio value="lg">Large Size</Radio>
-          </Radio.Group>
-        </div>
-        <div style={{ margin: "10px", width: "500px" }}>
-          <Radio.Group onChange={handleChangeNumberButton} value={numberButton}>
-            <Radio value={NUMBER_BUTTON.TWO}>2 Button</Radio>
-            <Radio value={NUMBER_BUTTON.THREE}>3 Button</Radio>
-          </Radio.Group>
-        </div>
-        <div style={{ margin: "10px", width: "500px" }}>
-          <Radio.Group
-            onChange={handleChangeHaveCloseIcon}
-            value={haveCloseIcon}
-          >
-            <Radio value={true}>Has CloseIcon</Radio>
-            <Radio value={false}>None CloseIcon</Radio>
-          </Radio.Group>
-        </div>
-      </div>
       <button
         onClick={() => {
           setVisible(true);
@@ -104,16 +111,12 @@ function Default() {
       </button>
 
       <Drawer
+        {...args}
         visible={visible}
         handleSave={handleSave}
         handleCancel={handleCancel}
         handleClose={handleClose}
         handleApplyNext={handleCreate}
-        isHaveCloseIcon={haveCloseIcon}
-        visibleFooter={true}
-        loading={false}
-        numberButton={numberButton}
-        size={size}
       >
         <div
           style={{
@@ -344,6 +347,6 @@ function Default() {
       </Drawer>
     </div>
   );
-}
+};
 
-storiesOf("Drawer", module).add("Default", Default);
+export const Default = Template.bind({});

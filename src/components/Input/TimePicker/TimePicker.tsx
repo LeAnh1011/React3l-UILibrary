@@ -16,18 +16,29 @@ interface TimePickerAction {
   action?: any;
 }
 interface TimePickerProps {
+  /**User-selected time value*/
   value?: Moment | any;
+  /**Label for current field*/
   label?: string;
-  timeFormat?: string | any[]
-  error?: string;
+  /** Use to format the time selected */
+  timeFormat?: string | any[];
+  /** Handle the change value of the component */
   onChange?: (value: Moment | null, timeString?: string) => void;
+  /** Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
+  /** Control the size of the component */
   isSmall?: boolean;
+  /** Not allow to handle change the component */
   disabled?: boolean;
+  /** Show * as required field */
   isRequired?: boolean;
+  /** Use to custom style the component */
   className?: string;
+  /** Provide a custom action (onClick) to the component */
   action?: TimePickerAction;
+  /** Placeholder of the component */
   placeholder?: string;
+  /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
 }
 

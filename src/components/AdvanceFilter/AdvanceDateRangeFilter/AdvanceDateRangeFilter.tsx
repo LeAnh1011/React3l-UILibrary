@@ -20,16 +20,25 @@ function SuffixDateIcon() {
 }
 
 interface AdvanceDateRangeFilterProps {
+  /**Label for current field */
   label?: string;
+  /**Value filter [fromDate, toDate] users select */
   values: [Moment, Moment];
-  open?: boolean;
+  /**Use to format the date selected */
   dateFormat?: string[];
+  /** Handle the change value of the component */
   onChange?: (value: [Moment, Moment], dateString?: [string, string]) => void;
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL  */
   type?: BORDER_TYPE;
+  /**Control the size of the component */
   isSmall?: boolean;
+  /**Not allow to handle change the component */
   disabled?: boolean;
+  /**Use to custom style the component */
   className?: string;
+  /**Placeholder of the component */
   placeholder?: [string, string];
+  /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
 }
 

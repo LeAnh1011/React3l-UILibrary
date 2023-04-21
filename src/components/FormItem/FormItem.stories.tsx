@@ -1,46 +1,62 @@
+import {
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import React from "react";
-import { storiesOf } from "@storybook/react";
-import FormItem from "./FormItem";
 import InputText from "../Input/InputText/InputText";
-import { ValidateStatus } from "./../../config/enum";
+import FormItem from "./FormItem";
+export default {
+  title: "FormItem",
+  component: FormItem,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {},
+};
 
-function Default() {
+const Template: Story = (args) => {
   return (
     <>
       <div style={{ margin: "10px", width: "250px" }}>
-        <FormItem
-          validateStatus={ValidateStatus.error}
-          message={"Field required!"}
-        >
+        <FormItem {...args}>
           <InputText placeHolder={"Enter text..."} />
         </FormItem>
       </div>
       <div style={{ margin: "10px", width: "250px" }}>
-        <FormItem
-          validateStatus={ValidateStatus.warning}
-          message={"Field required!"}
-        >
+        <FormItem {...args}>
           <InputText placeHolder={"Enter text..."} />
         </FormItem>
       </div>
       <div style={{ margin: "10px", width: "250px" }}>
-        <FormItem
-          validateStatus={ValidateStatus.success}
-          message={"Field required!"}
-        >
+        <FormItem {...args}>
           <InputText placeHolder={"Enter text..."} />
         </FormItem>
       </div>
       <div style={{ margin: "10px", width: "250px" }}>
-        <FormItem
-          validateStatus={ValidateStatus.validating}
-          message={"Field required!"}
-        >
+        <FormItem {...args}>
           <InputText placeHolder={"Enter text..."} />
         </FormItem>
       </div>
     </>
   );
-}
-
-storiesOf("FormItem", module).add("Default", Default);
+};
+export const Default = Template.bind({});

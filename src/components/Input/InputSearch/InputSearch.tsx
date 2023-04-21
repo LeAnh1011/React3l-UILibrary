@@ -20,18 +20,31 @@ export interface InputSearchProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
+  /**User-filled value to filter*/
   value?: string | null;
+  /**Property of inputSearchSelect*/
   valueFilter?: TModelFilter;
+  /**Property of inputSearchSelect*/
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
+  /**Property of inputSearchSelect*/
   classFilter: new () => TModelFilter;
+  /**Property of inputSearchSelect*/
   render?: (t: T) => string;
+  /**Property of inputSearchSelect*/
   searchType?: string;
+  /**Property of inputSearchSelect*/
   searchProperty?: string;
+  /**Use to custom style the component*/
   className?: string;
+  /**Property of inputSearchSelect*/
   onChangeSearchField?: (id: number, T?: T) => void;
+  /**Handle the change value of the component*/
   onChange?: (value: string) => void;
+  /**Placeholder of the component*/
   placeHolder?: string;
+  /**Boolean to set input show with animation*/
   animationInput?: boolean;
+  /**Option to set position for InputSearch */
   position?: "left" | "right";
 }
 

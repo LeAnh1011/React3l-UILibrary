@@ -6,11 +6,17 @@ import React from "react";
 import "./AdvanceInputRangeFilter.scss";
 
 export interface AdvanceInputRangeFilterProps extends InputNumberProps {
+  /**[filterValueFrom, filterValueTo] of filter*/
   valueRange: [number, number] | [];
+  /**Placeholder of the component*/
   placeHolderRange?: [string, string];
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
+  /**Handle the change values of the component*/
   onChangeRange: (T: [number, number]) => void;
+  /**Control the size of the component*/
   isSmall?: boolean;
+  /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
 }
 
@@ -88,7 +94,6 @@ AdvanceInputRangeFilter.defaultProps = {
   label: "",
   isSmall: false,
   type: BORDER_TYPE.BORDERED,
-  isRequired: false,
   prefix: "",
   disabled: false,
   className: "",

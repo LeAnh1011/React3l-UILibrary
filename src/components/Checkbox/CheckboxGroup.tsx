@@ -6,13 +6,21 @@ import Checkbox from ".";
 import "./CheckboxGroup.scss";
 
 export interface CheckboxGroupComponentProps<T extends Model> {
+  /**Handle change the values of CheckboxGroup */
   onChange?: (values: number[], selectedOptions?: T[]) => void;
+  /**List value of checked  */
   values?: number[];
+  /**Not allow change value */
   disabled?: boolean;
+  /**Label of CheckboxGroup */
   label?: string;
+  /**Pass data options (list item and label for list checkbox inside) */
   dataOptions?: T[];
+  /**Option to render item as label of checkbox inside */
   render?: (t: T) => string;
+  /**Maximum length of label checkbox inside */
   maxLengthItem?: number;
+  /**API to get list data for checkbox inside (as dataOptions) */
   getList?: () => Observable<T[]>;
 }
 

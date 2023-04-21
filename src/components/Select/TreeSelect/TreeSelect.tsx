@@ -16,36 +16,61 @@ export interface TreeSelectProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
+  /**Title for filter field*/
   title?: string;
+  /** User-selected values*/
   listItem?: Model[];
+  /** User-selected value*/
   item?: Model;
-  isMaterial?: boolean;
+  /**The property name of the model filter you want to search in the list data*/
   searchProperty?: string;
+  /**The type of searchProperty you want to search in the list data*/
   searchType?: string;
+  /** An optional to multiple check filter values*/
   checkable?: boolean;
+  /** Prop of AntdTreeProps*/
   selectable?: boolean;
+  /**Check treeNode precisely; parent treeNode and children treeNodes are not associated*/
   checkStrictly?: boolean;
+  /** Not allow to handle change filter*/
   disabled?: boolean;
+  /** Value filter for api get data option*/
   valueFilter?: TModelFilter;
+  /** Placeholder of the component*/
   placeHolder?: string;
-  error?: string;
+  /** Key of selected node */
   selectedKey?: number;
+  /**Not allow to select the father item that contain a lot of items inside*/
   onlySelectLeaf?: boolean;
+  /**Show symbol * as required field*/
   isRequired?: boolean;
+  /**Append this component to body*/
   appendToBody?: boolean;
+  /**Provide a function to render a specific property as name*/
   render?: (T: T) => string;
+  /** API to get data*/
   getTreeData?: (TModelFilter?: TModelFilter) => Observable<T[]>;
+  /** Function to change selected items*/
   onChange?: (T: Model[], TT: boolean) => void;
+  /** Model filter class of API get list data*/
   classFilter?: new () => TModelFilter;
+  /** Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
+  /** Label for current field*/
   label?: string;
+  /** Control the size of the component*/
   isSmall?: boolean;
-  isUsingSearch?: boolean;
+  /** Prop of AntdTreeProps*/
   treeTitleRender?: (T: T) => string;
+  /**Option show button add new*/
   selectWithAdd?: () => void;
-  selectWithPreferOption?: boolean;
+  /**Component enable to search data list*/
+  isUsingSearch?: boolean;
+  /** Prefer node item of tree*/
   preferOptions?: T[];
+  /** Show maximum length of item in each data row in tree*/
   maxLengthItem?: number;
+  /** Custom background color for component: "white" || "gray" */
   bgColor?: "gray" | "white";
 }
 export interface filterAction {
@@ -65,7 +90,6 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
   const {
     listItem,
     item,
-    isMaterial,
     checkStrictly,
     searchProperty,
     searchType,
@@ -88,7 +112,6 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     isUsingSearch,
     treeTitleRender,
     selectWithAdd,
-    selectWithPreferOption,
     preferOptions,
     maxLengthItem,
     bgColor,
@@ -268,7 +291,6 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
           {checkable ? (
             <InputTag
               listValue={listItem}
-              isMaterial={isMaterial}
               render={render}
               placeHolder={placeHolder}
               disabled={disabled}
@@ -290,7 +312,6 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
             <InputSelect
               value={item}
               render={render}
-              isMaterial={isMaterial}
               placeHolder={placeHolder}
               expanded={expanded}
               disabled={disabled}
@@ -319,7 +340,6 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               onlySelectLeaf={onlySelectLeaf}
               checkedKeys={listIds}
               valueFilter={filter}
-              classFilter={ClassFilter}
               checkStrictly={checkStrictly}
               height={300}
               render={render}
@@ -328,7 +348,6 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               checkable={checkable}
               titleRender={treeTitleRender}
               selectWithAdd={selectWithAdd}
-              selectWithPreferOption={selectWithPreferOption}
               preferOptions={preferOptions}
               isExpand={expanded}
               maxLengthItem={maxLengthItem}

@@ -1,31 +1,49 @@
-import { storiesOf } from "@storybook/react";
-import { Radio } from "antd";
-import { TabsType } from "antd/lib/tabs";
+import {
+  ArgsTable,
+  Description,
+  Primary,
+  PRIMARY_STORY,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import React from "react";
 import Tabs from "./Tabs";
 
 const { TabPane } = Tabs;
 
-function Default() {
-  const [type, setType] = React.useState<TabsType>("line");
-  const [errors, setErrors] = React.useState<string[]>([]);
-  const handleChangeMode = React.useCallback((event: any) => {
-    setType(event?.target?.value);
-  }, []);
-
-  const handleChangeErrorTab = React.useCallback((event: any) => {
-    const value: string = event?.target?.value;
-    if (value) {
-      setErrors([value]);
-    } else {
-      setErrors([]);
-    }
-  }, []);
-
+export default {
+  title: "Tabs",
+  component: Tabs,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    tabErrorKeys: {
+      defaultValue: ["tabso1"],
+    },
+    mode: {},
+  },
+};
+const Template: Story = (args) => {
   return (
     <>
       <div style={{ margin: "10px", width: "550px" }}>
-        <Tabs mode={type} tabErrorKeys={errors}>
+        <Tabs {...args}>
           <TabPane tab="Tab 1" key={"tabso1"}>
             Content of Tab Pane 1
           </TabPane>
@@ -37,27 +55,14 @@ function Default() {
           </TabPane>
         </Tabs>
 
-        <Tabs mode={type} lightColor>
+        <Tabs {...args}>
           <TabPane tab="Tab 1" key="tabso1">
             Content of Tab Pane 1
           </TabPane>
         </Tabs>
       </div>
-
-      <div style={{ margin: "10px", width: "400px" }}>
-        <Radio.Group onChange={handleChangeMode} value={type}>
-          <Radio value={"card"}>Contained</Radio>
-          <Radio value={"line"}>Line</Radio>
-        </Radio.Group>
-        <Radio.Group onChange={handleChangeErrorTab} value={errors[0]}>
-          <Radio value={"tabso1"}>Tab 1</Radio>
-          <Radio value={"tabso2"}>Tab 2</Radio>
-          <Radio value={"tabso3"}>Tab 3</Radio>
-          <Radio value={undefined}>None</Radio>
-        </Radio.Group>
-      </div>
     </>
   );
-}
+};
 
-storiesOf("Tabs", module).add("Default", Default);
+export const Default = Template.bind({});

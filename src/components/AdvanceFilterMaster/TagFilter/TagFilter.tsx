@@ -16,14 +16,23 @@ import { Model, ModelFilter } from "react3l-common";
 import "./TagFilter.scss";
 
 export interface TagFilterProps {
+  /**Use to custom style the component*/
   className?: string;
+  /**Current value filter*/
   value?: ModelFilter;
+  /**KeyWord of data file to be translated*/
   keyTranslate?: string;
+  /** Set fields that not display value filter*/
   hiddenField?: string[];
+  /**Fields that icon clear is disabled*/
   exceptField?: string[];
+  /**Provide a prop to show filter field mapping*/
   mappingField?: { [key: string]: string };
+  /**Provide a translate function*/
   translate?: TFunction;
+  /**Handle the action when click clear filter*/
   onClear?: (t: any) => void;
+  /**Handle the change value of the component*/
   handleChangeFilter?: (valueFilter: ModelFilter) => void;
 }
 
@@ -411,8 +420,8 @@ function TagFilter(props: TagFilterProps) {
                             <Fragment key={index}>
                               {(item?.filterType === "greaterEqual" ||
                                 item?.filterType === "greater") && (
-                                  <>{formatNumber(item.filterValue)}&minus;</>
-                                )}
+                                <>{formatNumber(item.filterValue)}&minus;</>
+                              )}
                             </Fragment>
                           ))}
                         {itemTag?.type === "number" &&
@@ -431,8 +440,8 @@ function TagFilter(props: TagFilterProps) {
                             <Fragment key={index}>
                               {(item?.filterType === "greaterEqual" ||
                                 item?.filterType === "greater") && (
-                                  <>{formatDate(item.filterValue)}&minus;</>
-                                )}
+                                <>{formatDate(item.filterValue)}&minus;</>
+                              )}
                             </Fragment>
                           ))}
                         {itemTag?.type === "date" &&
@@ -459,18 +468,18 @@ function TagFilter(props: TagFilterProps) {
                                               <span>
                                                 {checkMappingField(itemTag.key)
                                                   ? itemValue[
-                                                  checkMappingField(
-                                                    itemTag.key
-                                                  )
-                                                  ]
+                                                      checkMappingField(
+                                                        itemTag.key
+                                                      )
+                                                    ]
                                                   : itemValue?.name}
                                               </span>
                                               {index <
                                                 itemTag?.value?.length - 1 && (
-                                                  <span className="m-r--3xs">
-                                                    &#44;
-                                                  </span>
-                                                )}
+                                                <span className="m-r--3xs">
+                                                  &#44;
+                                                </span>
+                                              )}
                                             </>
                                           </span>
                                         )
@@ -481,8 +490,8 @@ function TagFilter(props: TagFilterProps) {
                                   <span>
                                     {checkMappingField(itemTag.key)
                                       ? itemTag?.value[0][
-                                      checkMappingField(itemTag.key)
-                                      ]
+                                          checkMappingField(itemTag.key)
+                                        ]
                                       : itemTag?.value[0]?.name}
                                   </span>
                                   {index < itemTag?.value?.length - 1 && (
@@ -492,8 +501,8 @@ function TagFilter(props: TagFilterProps) {
                                     {" "}
                                     {checkMappingField(itemTag.key)
                                       ? itemTag?.value[1][
-                                      checkMappingField(itemTag.key)
-                                      ]
+                                          checkMappingField(itemTag.key)
+                                        ]
                                       : itemTag?.value[1]?.name}
                                   </span>
                                   <span>
@@ -511,16 +520,16 @@ function TagFilter(props: TagFilterProps) {
                                           <span>
                                             {checkMappingField(itemTag.key)
                                               ? itemValue[
-                                              checkMappingField(itemTag.key)
-                                              ]
+                                                  checkMappingField(itemTag.key)
+                                                ]
                                               : itemValue?.name}
                                           </span>
                                           {index <
                                             itemTag?.value?.length - 1 && (
-                                              <span className="m-r--3xs">
-                                                &#44;
-                                              </span>
-                                            )}
+                                            <span className="m-r--3xs">
+                                              &#44;
+                                            </span>
+                                          )}
                                         </>
                                       </span>
                                     )

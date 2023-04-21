@@ -16,14 +16,23 @@ export enum MODAL_SIZE {
 
 export interface ModalCustomProps extends AntModalProps {
   children?: ReactNode;
+  /**Is the modal footer (cancel, apply, apply next button) visible or not*/
   visibleFooter?: boolean;
+  /**Change the size of modal*/
   size?: MODAL_SIZE;
+  /**Name of apply button*/
   titleButtonApply?: string;
+  /**Name of apply next button*/
   titleButtonApplyNext?: string;
+  /**Name of cancel button*/
   titleButtonCancel?: string;
+  /**Cancel the form*/
   handleCancel?: (event: any) => void;
+  /**Save the form*/
   handleSave?: (event: any) => void;
+  /**Apply and process to next form*/
   handleApplyNext?: (event: any) => void;
+  /**Pass state of loading */
   loadingType?: "default" | "submitting" | "submitted" | "error";
 }
 

@@ -1,9 +1,17 @@
 import Camera32 from "@carbon/icons-react/es/camera/32";
-import { storiesOf } from "@storybook/react";
+import {
+  ArgsTable,
+  Description,
+  PRIMARY_STORY,
+  Primary,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { ComponentMeta, Story } from "@storybook/react";
 import React from "react";
 import { Observable } from "rxjs";
-import nameof from "ts-nameof.macro";
-import UploadImage, { FileModel, File, UPLOADTYPE_IMAGE } from "./UploadImage";
+import UploadImage, { File, FileModel, UPLOADTYPE_IMAGE } from "./UploadImage";
 
 const demoList = {
   url:
@@ -37,7 +45,29 @@ const menu = [
   },
 ];
 
-function Default() {
+export default {
+  title: "UploadImage",
+  component: UploadImage,
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {},
+} as ComponentMeta<typeof UploadImage>;
+
+const Template: Story = (args) => {
   const [avatar, setAvatar] = React.useState<string>();
   const [listImage, setlistImage] = React.useState<File[]>([]);
 
@@ -97,7 +127,6 @@ function Default() {
           updateList={handleChangeListImage}
         ></UploadImage>
       </div>
-
       <div style={{ width: "100%", padding: "10px 10px", display: "flex" }}>
         <div>
           Loại thường, multiple = true, IsMinimized = true,
@@ -124,6 +153,6 @@ function Default() {
       </div>
     </div>
   );
-}
+};
 
-storiesOf("UploadImage", module).add(nameof(Default), Default);
+export const Default = Template.bind({});

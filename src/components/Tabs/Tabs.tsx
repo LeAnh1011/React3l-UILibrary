@@ -5,9 +5,12 @@ import React, { ReactNode } from "react";
 import "./Tabs.scss";
 
 export interface TabsProps extends TabsPropsAnt {
+  /**Option change tab styling */
   mode?: TabsType;
   children?: ReactNode;
+  /**List key of error tab */
   tabErrorKeys?: string[];
+  /**Option for change background color tab to white  */
   lightColor?: boolean;
 }
 

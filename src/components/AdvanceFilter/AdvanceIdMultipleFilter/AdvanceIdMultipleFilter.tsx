@@ -15,40 +15,37 @@ export interface AdvanceIdMultipleFilterProps<
   T extends Model,
   TFilter extends ModelFilter
 > {
+  /**list value users select*/
   values?: Model[];
-
+  /**Value filter for api get data option*/
   valueFilter?: TFilter;
-
+  /**The property name of the model filter you want to search in the list data*/
   searchProperty?: string;
-
+  /**The type of searchProperty you want to search in the list data*/
   searchType?: string;
-
+  /**Placeholder of the component*/
   placeHolder?: string;
-
+  /**Not allow to handle change filter*/
   disabled?: boolean;
-
-  isMaterial?: boolean;
-
+  /**Api to get list data filter*/
   getList?: (TModelFilter?: TFilter) => Observable<T[]>;
-
+  /**Handle the change value of the component*/
   onChange?: (selectedList?: T[], ids?: []) => void;
-
+  /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
-
+  /**Model filter class of API get list data*/
   classFilter: new () => TFilter;
-
+  /**Label for current field*/
   label?: string;
-
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
-
+  /**Control the size of the component*/
   isSmall?: boolean;
-
-  selectWithPreferOption?: boolean;
-
+  /**Prefer option filter to select*/
   preferOptions?: T[];
-
+  /**Append this component to body*/
   appendToBody?: boolean;
-
+  /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
 }
 
@@ -66,7 +63,6 @@ export function AdvanceIdMultipleFilter(
     searchType,
     placeHolder,
     disabled,
-    isMaterial,
     getList,
     onChange,
     render,
@@ -172,7 +168,7 @@ export function AdvanceIdMultipleFilter(
     try {
       const filter = valueFilter ? valueFilter : new ClassFilter();
       handleGetList(filter);
-    } catch (error) { }
+    } catch (error) {}
   }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(
@@ -319,7 +315,6 @@ export function AdvanceIdMultipleFilter(
         <div className="advance-id-filter__input" onClick={handleToggle}>
           <InputTag
             listValue={values}
-            isMaterial={isMaterial}
             render={render}
             placeHolder={placeHolder}
             disabled={disabled}
@@ -420,7 +415,6 @@ AdvanceIdMultipleFilter.defaultProps = {
   searchType: "startWith",
   isEnumerable: false,
   render: defaultRenderObject,
-  isMaterial: false,
   disabled: false,
   bgColor: "white",
 };

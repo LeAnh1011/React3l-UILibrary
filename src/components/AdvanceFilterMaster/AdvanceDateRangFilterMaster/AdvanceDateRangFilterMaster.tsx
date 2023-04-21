@@ -24,37 +24,38 @@ class ListDate extends Model {
 }
 
 interface AdvanceDateRangeFilterMasterProps {
+  /**Value [fromDate, toDate] users select*/
   value?: [Moment, Moment];
-
+  /**Use to format the date selected*/
   dateFormat?: string[];
-
-  isMaterial?: boolean;
-
+  /**Handle the change value of the component*/
   onChange?: (item?: any, value?: [Moment, Moment]) => void;
-
+  /**Use to custom style the component*/
   className?: string;
-
+  /**Not allow to handle change the component*/
   disabled?: boolean;
-
+  /**Prop of DateRange Component*/
   typeCustomDate?: BORDER_TYPE;
-
+  /**Control the size of the component*/
   isSmall?: boolean;
-
+  /**Label for current field*/
   label?: string;
-
+  /**Selected value of list value suggest*/
   activeItem?: any;
-
+  /**Control the type of component: SHORT, INPUT */
   type?: ADVANCE_DATE_RANGE_TYPE;
-
+  /**Prop of component InputSelect*/
   inputType?: BORDER_TYPE;
-
+  /**Prop of component InputSelect*/
   placeHolderSelect?: string;
-
+  /**Append this component to body*/
   appendToBody?: boolean;
-
-  bgColor?: "white" | "gray";
-
+  /**Provide a translate function*/
   translate?: TFunction;
+  /**Placeholder of the component*/
+  placeholder?: [string, string];
+  /** Custom background color for component: "white" || "gray" */
+  bgColor?: "white" | "gray";
 }
 
 const list: ListDate[] = [
@@ -440,7 +441,6 @@ function AdvanceDateRangeFilterMaster(
 }
 
 AdvanceDateRangeFilterMaster.defaultProps = {
-  isMaterial: false,
   dateFormat: ["DD/MM/YYYY", "YYYY/MM/DD"],
   placeholder: ["Từ ngày", "Đến ngày"],
   type: ADVANCE_DATE_RANGE_TYPE.SHORT,

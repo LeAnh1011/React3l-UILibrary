@@ -7,10 +7,15 @@ import "./InlineLoading.scss";
 
 export type StatusLoading = "default" | "submitting" | "submitted" | "error";
 export interface InlineLoadingProps {
+  /**Pass the classname to change the style inline loading */
   className?: string;
-  status?: StatusLoading;
+  /**State of inline loading*/
+  status?: "default" | "submitting" | "submitted" | "error";
+  /**Title for status submitting*/
   titleLoading?: string;
+  /**Title for status submitted*/
   titleSubmitted?: string;
+  /**Title for status error*/
   titleError?: string;
 }
 

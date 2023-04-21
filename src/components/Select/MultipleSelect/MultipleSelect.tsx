@@ -17,52 +17,49 @@ export interface MultipleSelectProps<
   T extends Model,
   TFilter extends ModelFilter
 > {
+  /**list value users select*/
   values?: Model[];
-
+  /**Value filter for api get data option*/
   valueFilter?: TFilter;
-
+  /**The property name of the model filter you want to search in the list data*/
   searchProperty?: string;
-
+  /**The type of searchProperty you want to search in the list data*/
   searchType?: string;
-
+  /**Placeholder of the component*/
   placeHolder?: string;
-
+  /**Not allow to handle change value*/
   disabled?: boolean;
-
-  isMaterial?: boolean;
-
+  /**Show symbol * as required field*/
   isRequired?: boolean;
-
+  /**Append this component to body*/
   appendToBody?: boolean;
-
+  /**Api to get list data*/
   getList?: (TModelFilter?: TFilter) => Observable<T[]>;
-
+  /**Handle the change value of the field*/
   onChange?: (selectedList?: T[], ids?: []) => void;
-
+  /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
-
+  /**Model filter class of API get list data*/
   classFilter: new () => TFilter;
-
+  /**Label for current field*/
   label?: string;
-
+  /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
-
+  /**Control the size of the component*/
   isSmall?: boolean;
-
+  /**Option show button add new*/
   selectWithAdd?: () => void;
-
-  selectWithPreferOption?: boolean;
-
+  /**Component enable to search data list*/
   isUsingSearch?: boolean;
-
+  /**Prefer option to select*/
   preferOptions?: T[];
-
+  /**Show maximum length of item in each data row*/
   maxLengthItem?: number;
-
+  /**Set show tooltip or not */
   isShowTooltip?: boolean;
-
+  /** Provide a custom action (onClick) to the component */
   action?: InputAction;
-
+  /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
 }
 
@@ -78,7 +75,6 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     searchType,
     placeHolder,
     disabled,
-    isMaterial,
     isRequired,
     appendToBody,
     getList,
@@ -190,7 +186,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     try {
       const filter = valueFilter ? valueFilter : new ClassFilter();
       handleGetList(filter);
-    } catch (error) { }
+    } catch (error) {}
   }, [valueFilter, ClassFilter, handleGetList]);
 
   const handleToggle = React.useCallback(
@@ -338,7 +334,6 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
           <div>
             <InputTag
               listValue={values}
-              isMaterial={isMaterial}
               render={render}
               placeHolder={placeHolder}
               disabled={disabled}
@@ -387,7 +382,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                         >
                           <span className="select__text">
                             {maxLengthItem &&
-                              render(item)?.length > maxLengthItem ? (
+                            render(item)?.length > maxLengthItem ? (
                               <Tooltip title={item?.name}>
                                 {CommonService.limitWord(
                                   render(item),
@@ -430,7 +425,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                       >
                         <span className="select__text">
                           {maxLengthItem &&
-                            render(item)?.length > maxLengthItem ? (
+                          render(item)?.length > maxLengthItem ? (
                             <Tooltip title={item?.name}>
                               {CommonService.limitWord(
                                 render(item),

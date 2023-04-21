@@ -1,14 +1,22 @@
-import React from "react";
-import TreeSelect from "./TreeSelect";
-import { Model, ModelFilter } from "react3l-common";
-import { Observable } from "rxjs";
-import { IdFilter } from "react3l-advanced-filters";
-import { StringFilter } from "react3l-advanced-filters";
+import {
+  ArgsTable,
+  Description,
+  PRIMARY_STORY,
+  Primary,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/react";
 import { Radio } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
-import FormItem from "./../../FormItem/FormItem";
+import React from "react";
+import { IdFilter, StringFilter } from "react3l-advanced-filters";
+import { Model, ModelFilter } from "react3l-common";
+import { Observable } from "rxjs";
 import { BORDER_TYPE } from "./../../../config/enum";
-import { ValidateStatus } from "./../../../config/enum";
+import FormItem from "./../../FormItem/FormItem";
+import TreeSelect from "./TreeSelect";
 
 export class DistrictFilter extends ModelFilter {
   public id: IdFilter = new IdFilter();
@@ -29,7 +37,50 @@ function reducerFunc(state: Model, action: changeAction<Model>): Model[] {
   }
   return [...action.data];
 }
-
+export default {
+  title: "Select/TreeSelect",
+  component: TreeSelect,
+  subcomponents: { FormItem },
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Description />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    label: {
+      control: "text",
+      defaultValue: "Đơn vị tổ chức",
+    },
+    placeHolder: {
+      defaultValue: "Chọn đơn vị",
+    },
+    type: {
+      control: {
+        type: "radio",
+        options: [
+          BORDER_TYPE.MATERIAL,
+          BORDER_TYPE.BORDERED,
+          BORDER_TYPE.FLOAT_LABEL,
+        ],
+      },
+      defaultValue: 1,
+    },
+    maxLengthItem: {
+      defaultValue: 30,
+    },
+  },
+};
 const demoList: any = [
   {
     id: 274,
@@ -411,11 +462,6 @@ const demoList: any = [
   },
 ];
 
-const list = [
-  { id: 9, name: "Phòng Muti Media", code: "MEDIA", parentId: null },
-  { id: 10, name: "Phòng truyền thông", code: "PTT", parentId: 9 },
-];
-
 const demoItem = {
   id: 1,
   name: "Ban hành chính",
@@ -433,35 +479,14 @@ const demoSearchFunc = (TModelFilter?: ModelFilter) => {
   return demoObservable;
 };
 
-export function TreeSelectStories() {
+const Template: Story = (args) => {
   const [listItem, dispatch] = React.useReducer(reducerFunc, demoList);
 
   const [item, setItem] = React.useState<Model>(demoItem);
 
   const [isMultiple, setMultiple] = React.useState(false);
 
-  const [type, setType] = React.useState<BORDER_TYPE>(BORDER_TYPE.BORDERED);
-
-  const [isSmall, setIsSmall] = React.useState<boolean>(false);
-
-  const [isValidated, setValidated] = React.useState(false);
-
-  const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
-
   const [filter] = React.useState<DistrictFilter>(new DistrictFilter());
-
-  const [
-    isSelectWithPreferOption,
-    setIsSelectWithPreferOption,
-  ] = React.useState<boolean>(false);
-
-  const [isSelectWithAdd, setIsSelectWithAdd] = React.useState<boolean>(false);
-
-  const [withSearch, setWithSearch] = React.useState(true);
-
-  const handleChangeType = React.useCallback((event: RadioChangeEvent) => {
-    setType(event.target.value);
-  }, []);
 
   const handleChangeRadio = React.useCallback((event: RadioChangeEvent) => {
     if (event.target.value) setItem(new Model());
@@ -477,90 +502,20 @@ export function TreeSelectStories() {
     }
   }, []);
 
-  const handleChangeValidated = React.useCallback((event: RadioChangeEvent) => {
-    setValidated(event.target.value);
-  }, []);
-
-  const handleChangeSelectWithAdd = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setIsSelectWithAdd(event.target.value);
-    },
-    []
-  );
-
-  const handleChangeSelectWithPreferOption = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setIsSelectWithPreferOption(event.target.value);
-    },
-    []
-  );
-
-  const handleChangeDisabled = React.useCallback((event: RadioChangeEvent) => {
-    setIsDisabled(event.target.value);
-  }, []);
-
-  const handleChangeSize = React.useCallback((event: RadioChangeEvent) => {
-    setIsSmall(event.target.value);
-  }, []);
-
-  const handleChangeWithSearch = React.useCallback(
-    (event: RadioChangeEvent) => {
-      setWithSearch(event.target.value);
-    },
-    []
-  );
-
   return (
     <div style={{ margin: "10px", width: "300px" }}>
       <div style={{ margin: "10px", width: "300px" }}>
-        <FormItem
-          validateStatus={isValidated ? ValidateStatus.error : null}
-          message={isValidated ? "Error label" : ""}
-        >
+        <FormItem>
           <TreeSelect
             checkable={isMultiple}
             placeHolder={"Select Organization"}
             selectable={!isMultiple}
-            classFilter={DistrictFilter}
             onChange={handleChangeItem}
-            checkStrictly={true}
-            // item={item}
-            listItem={isMultiple ? listItem : []}
-            getTreeData={demoSearchFunc}
-            type={type}
-            isUsingSearch={withSearch}
-            label={"Label"}
-            disabled={isDisabled}
-            isSmall={isSmall}
-            // selectWithPreferOption={isSelectWithPreferOption}
-            // preferOptions={isSelectWithPreferOption ? list : undefined}
-            valueFilter={{ ...filter, id: { equal: 1 } }}
-          />
-        </FormItem>
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <FormItem
-          validateStatus={isValidated ? ValidateStatus.error : null}
-          message={isValidated ? "Error label" : ""}
-        >
-          <TreeSelect
-            checkable={isMultiple}
-            placeHolder={"Select Organization"}
-            selectable={!isMultiple}
-            classFilter={DistrictFilter}
-            onChange={handleChangeItem}
-            checkStrictly={true}
             item={isMultiple ? undefined : item}
             listItem={isMultiple ? listItem : []}
             getTreeData={demoSearchFunc}
-            type={type}
-            isUsingSearch={withSearch}
             label={"Label"}
-            disabled={isDisabled}
-            isSmall={isSmall}
-            selectWithPreferOption={isSelectWithPreferOption}
-            preferOptions={isSelectWithPreferOption ? list : undefined}
+            valueFilter={{ ...filter, id: { equal: 1 } }}
           />
         </FormItem>
       </div>
@@ -571,63 +526,7 @@ export function TreeSelectStories() {
           <Radio value={true}>Multiple</Radio>
         </Radio.Group>
       </div>
-
-      <div style={{ margin: "10px", width: "400px" }}>
-        <Radio.Group onChange={handleChangeType} value={type}>
-          <Radio value={BORDER_TYPE.MATERIAL}>Material</Radio>
-          <Radio value={BORDER_TYPE.FLOAT_LABEL}>Float Label</Radio>
-          <Radio value={BORDER_TYPE.BORDERED}>Bordered</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeValidated} value={isValidated}>
-          <Radio value={true}>Validated</Radio>
-          <Radio value={false}>Not Validated</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeDisabled} value={isDisabled}>
-          <Radio value={true}>Disabled</Radio>
-          <Radio value={false}>Not Disabled</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "400px" }}>
-        <Radio.Group
-          onChange={handleChangeSelectWithAdd}
-          value={isSelectWithAdd}
-        >
-          <Radio value={true}>Select with add</Radio>
-          <Radio value={false}>Not select with add</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "800px" }}>
-        <Radio.Group
-          onChange={handleChangeSelectWithPreferOption}
-          value={isSelectWithPreferOption}
-        >
-          <Radio value={true}>Select with prefer option</Radio>
-          <Radio value={false}>Not select with prefer option</Radio>
-        </Radio.Group>
-      </div>
-
-      <div style={{ margin: "10px", width: "300px" }}>
-        <Radio.Group onChange={handleChangeSize} value={isSmall}>
-          <Radio value={true}>Small</Radio>
-          <Radio value={false}>Default</Radio>
-        </Radio.Group>
-      </div>
-      {isMultiple && (
-        <div style={{ margin: "10px", width: "300px" }}>
-          <Radio.Group onChange={handleChangeWithSearch} value={withSearch}>
-            <Radio value={true}>Using Search</Radio>
-            <Radio value={false}>Not Using Search</Radio>
-          </Radio.Group>
-        </div>
-      )}
     </div>
   );
-}
+};
+export const Default = Template.bind({});

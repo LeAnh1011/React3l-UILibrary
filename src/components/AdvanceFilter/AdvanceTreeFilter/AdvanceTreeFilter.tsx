@@ -16,32 +16,53 @@ export interface AdvanceTreeFilterProps<
   T extends Model,
   TModelFilter extends ModelFilter
 > {
+  /** User-selected values*/
   listItem?: Model[];
+  /** User-selected value*/
   item?: Model;
-  isMaterial?: boolean;
+  /**The property name of the model filter you want to search in the list data*/
   searchProperty?: string;
+  /**The type of searchProperty you want to search in the list data*/
   searchType?: string;
+  /** An optional to multiple check filter values*/
   checkable?: boolean;
+  /** Prop of AntdTreeProps*/
   selectable?: boolean;
+  /**Check treeNode precisely; parent treeNode and children treeNodes are not associated*/
   checkStrictly?: boolean;
+  /** Not allow to handle change filter*/
   disabled?: boolean;
+  /** Value filter for api get data option*/
   valueFilter?: TModelFilter;
+  /** Placeholder of the component*/
   placeHolder?: string;
-  error?: string;
+  /** Key of selected node */
   selectedKey?: number;
+  /**Not allow to select the father item that contain a lot of items inside*/
   onlySelectLeaf?: boolean;
+  /** Provide a function to render a specific property as name*/
   render?: (T: T) => string;
+  /** API to get data*/
   getTreeData?: (TModelFilter?: TModelFilter) => Observable<T[]>;
+  /** Function to change selected items*/
   onChange?: (T: Model[], TT: boolean) => void;
+  /** Model filter class of API get list data*/
   classFilter?: new () => TModelFilter;
+  /** Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL */
   type?: BORDER_TYPE;
+  /** Label for current field*/
   label?: string;
+  /** Control the size of the component*/
   isSmall?: boolean;
+  /** Prop of AntdTreeProps*/
   treeTitleRender?: (T: T) => string;
-  selectWithPreferOption?: boolean;
+  /** Prefer node item of tree*/
   preferOptions?: T[];
+  /** Set maximum length of each data row to render*/
   maxLengthItem?: number;
+  /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  /**Append this component to body*/
   appendToBody?: boolean;
 }
 export interface filterAction {
@@ -61,7 +82,6 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
   const {
     listItem,
     item,
-    isMaterial,
     checkStrictly,
     searchProperty,
     searchType,
@@ -80,7 +100,6 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
     label,
     isSmall,
     treeTitleRender,
-    selectWithPreferOption,
     preferOptions,
     maxLengthItem,
     bgColor,
@@ -249,7 +268,6 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
           {checkable ? (
             <InputTag
               listValue={listItem}
-              isMaterial={isMaterial}
               render={render}
               placeHolder={placeHolder}
               disabled={disabled}
@@ -270,7 +288,6 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
             <InputSelect
               value={item}
               render={render}
-              isMaterial={isMaterial}
               placeHolder={placeHolder}
               expanded={expanded}
               disabled={disabled}
@@ -306,7 +323,6 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               selectable={selectable}
               checkable={checkable}
               titleRender={treeTitleRender}
-              selectWithPreferOption={selectWithPreferOption}
               preferOptions={preferOptions}
               isExpand={expanded}
               maxLengthItem={maxLengthItem}
@@ -324,7 +340,6 @@ AdvanceTreeFilter.defaultProps = {
   searchType: "contain",
   classFilter: ModelFilter,
   onlySelectLeaf: false,
-  isMaterial: false,
   checkable: false,
   disabled: false,
   selectable: true,

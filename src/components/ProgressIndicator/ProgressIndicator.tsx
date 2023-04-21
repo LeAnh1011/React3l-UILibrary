@@ -7,9 +7,13 @@ export interface ProgressIndicatorModel {
 }
 
 export interface ProgressIndicatorProps {
+  /**Pass list section [{sectionName,sectionId}] */
   list?: ProgressIndicatorModel[];
+  /**Pass Id of ProgressIndicatorContent to control action scroll */
   idContainer?: string;
+  /**An option to set  vertical or horizontal type*/
   type?: "vertical" | "horizontal";
+  /**Use to custom style the component*/
   className?: string;
 }
 
@@ -19,7 +23,7 @@ const ProgressIndicator = (props: ProgressIndicatorProps) => {
   else if (type === "horizontal")
     return <HorizontalProgressIndicator {...props} />;
   return <></>;
-}
+};
 ProgressIndicator.Content = ProgressIndicatorContent;
 
 ProgressIndicator.defaultProps = {

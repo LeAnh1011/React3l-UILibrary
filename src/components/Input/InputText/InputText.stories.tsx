@@ -1,4 +1,7 @@
-import Apple16 from "@carbon/icons-react/es/apple/16";
+import React from "react";
+import FormItem from "../../FormItem/FormItem";
+import { BORDER_TYPE } from "./../../../config/enum";
+import InputText from "./InputText";
 import {
   ArgsTable,
   Description,
@@ -8,11 +11,7 @@ import {
   Subtitle,
   Title,
 } from "@storybook/addon-docs";
-import { Story } from "@storybook/react";
-import React from "react";
-import FormItem from "../../FormItem/FormItem";
-import { BORDER_TYPE } from "./../../../config/enum";
-import InputText from "./InputText";
+import { ComponentMeta, Story } from "@storybook/react";
 
 export default {
   title: "Input/InputText",
@@ -39,9 +38,6 @@ export default {
       control: "text",
       defaultValue: "First Name",
     },
-    maxLength: {
-      control: "number",
-    },
     placeHolder: {
       control: "text",
       defaultValue: "Enter text",
@@ -57,27 +53,42 @@ export default {
       },
       defaultValue: 1,
     },
+    isRequired: {},
+    value: {},
+    prefix: {
+      defaultValue: "Mr.",
+    },
+    suffix: {
+      defaultValue: "Kg",
+    },
+    allowPositive: {},
+    isReverseSymb: {},
+    decimalDigit: {},
+    disabled: {},
+    min: {},
+    max: {},
+    action: {},
+    isSmall: {},
+    onChange: {},
+    onBlur: {},
+    onEnter: {},
+    onKeyDown: {},
+    className: {},
   },
-};
+} as ComponentMeta<typeof InputText>;
 
 const Template: Story = (args) => {
-  const [inputValue, setInputVal] = React.useState();
+  const [value, setValue] = React.useState();
 
   const handleChangeValue = React.useCallback((value) => {
-    setInputVal(value);
+    setValue(value);
   }, []);
 
   return (
-    <div style={{ width: "300px", padding: "10px" }}>
+    <div style={{ width: "300px", margin: "10px" }}>
       <div style={{ margin: "15px 0" }}>
         <FormItem>
-          <InputText
-            {...args}
-            prefix={<Apple16 />}
-            suffix={<Apple16 />}
-            value={inputValue}
-            onChange={handleChangeValue}
-          />
+          <InputText {...args} value={value} onChange={handleChangeValue} />
         </FormItem>
       </div>
     </div>

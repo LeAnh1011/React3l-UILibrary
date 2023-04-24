@@ -10,7 +10,7 @@ import type {
 } from "antd/lib/tree";
 import classNames from "classnames";
 import IconLoading from "@Components/IconLoading/IconLoading";
-import React, { RefObject } from "react";
+import React, { ReactNode, RefObject } from "react";
 import { Model, ModelFilter } from "react3l-common";
 import type { Observable } from "rxjs";
 import { CommonService } from "@Services/common-service";
@@ -44,12 +44,12 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   /**Function to change selected items*/
   onChange?: (treeNode: CustomTreeNode<T>[]) => void;
   /**Provide a function to render a specific property as name*/
-  render?: (treeNode: T) => string;
+  render?: (treeNode: T) => string | ReactNode;
   /**Option to show add new button*/
   selectWithAdd?: () => void;
   /**Prefer node item of tree*/
   preferOptions?: T[];
-  /**Show maximum length of each row item in tree*/
+  /**Show maximum length of each row item in tree (must pass value when render option return string)*/
   maxLengthItem?: number;
   /**Pass ref of list data select */
   selectListRef?: RefObject<any>;
@@ -418,10 +418,11 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                         {render && typeof render === "function" ? (
                           <>
                             {maxLengthItem &&
-                            render(node?.item)?.length > maxLengthItem ? (
+                            (render(node?.item) as string)?.length >
+                              maxLengthItem ? (
                               <Tooltip title={render(node?.item)}>
                                 {CommonService.limitWord(
-                                  render(node?.item),
+                                  render(node?.item) as string,
                                   maxLengthItem
                                 )}
                               </Tooltip>

@@ -1,4 +1,3 @@
-import { Model, ModelFilter } from "react3l-common";
 import { notification } from "antd";
 import classNames from "classnames";
 import React, { Reducer, RefObject } from "react";
@@ -30,8 +29,7 @@ const imageReducer = (state: ImageFile, action: ImageAction): ImageFile => {
   }
 };
 
-export interface ComponentUploadAvatarProps
-  extends UploadImageProps<Model, ModelFilter> {}
+export interface ComponentUploadAvatarProps extends UploadImageProps {}
 
 export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
   const {

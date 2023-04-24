@@ -44,7 +44,7 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   /**Function to change selected items*/
   onChange?: (treeNode: CustomTreeNode<T>[]) => void;
   /**Provide a function to render a specific property as name*/
-  render?: (treeNode: T) => string | ReactNode;
+  render?: (treeNode: T) => string;
   /**Option to show add new button*/
   selectWithAdd?: () => void;
   /**Prefer node item of tree*/
@@ -53,6 +53,8 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   maxLengthItem?: number;
   /**Pass ref of list data select */
   selectListRef?: RefObject<any>;
+  /** Prop of AntdTreeProps*/
+  titleRender?: (T: T) => ReactNode;
   isExpand?: boolean;
 }
 function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
@@ -71,6 +73,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     maxLengthItem = 30,
     render,
     checkStrictly,
+    titleRender,
   } = props;
 
   const [internalTreeData, setInternalTreeData] = React.useState<
@@ -418,11 +421,10 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                         {render && typeof render === "function" ? (
                           <>
                             {maxLengthItem &&
-                            (render(node?.item) as string)?.length >
-                              maxLengthItem ? (
+                            render(node?.item)?.length > maxLengthItem ? (
                               <Tooltip title={render(node?.item)}>
                                 {CommonService.limitWord(
-                                  render(node?.item) as string,
+                                  render(node?.item),
                                   maxLengthItem
                                 )}
                               </Tooltip>
@@ -473,36 +475,42 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                           onSelect={handleSelect}
                           checkedKeys={internalCheckedKeys}
                           selectedKeys={internalSelectedKeys}
-                          titleRender={(node: any) => (
-                            <div
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                              }}
-                            >
-                              <div>
-                                {maxLengthItem &&
-                                node?.title?.length > maxLengthItem ? (
-                                  <Tooltip title={node?.title}>
-                                    {CommonService.limitWord(
-                                      node?.title,
-                                      maxLengthItem
-                                    )}
-                                  </Tooltip>
-                                ) : (
-                                  node?.title
-                                )}
-                              </div>
-                              {!checkable &&
-                                internalSelectedKeys &&
-                                internalSelectedKeys.includes(node.key) && (
-                                  <div style={{ display: "flex" }}>
-                                    <Checkmark16 />
+                          titleRender={
+                            titleRender
+                              ? titleRender
+                              : (node: any) => (
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      justifyContent: "space-between",
+                                    }}
+                                  >
+                                    <div>
+                                      {maxLengthItem &&
+                                      node?.title?.length > maxLengthItem ? (
+                                        <Tooltip title={node?.title}>
+                                          {CommonService.limitWord(
+                                            node?.title,
+                                            maxLengthItem
+                                          )}
+                                        </Tooltip>
+                                      ) : (
+                                        node?.title
+                                      )}
+                                    </div>
+                                    {!checkable &&
+                                      internalSelectedKeys &&
+                                      internalSelectedKeys.includes(
+                                        node.key
+                                      ) && (
+                                        <div style={{ display: "flex" }}>
+                                          <Checkmark16 />
+                                        </div>
+                                      )}
                                   </div>
-                                )}
-                            </div>
-                          )}
+                                )
+                          }
                         />
                       )}
                   </div>

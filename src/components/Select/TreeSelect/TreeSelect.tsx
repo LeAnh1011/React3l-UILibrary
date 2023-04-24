@@ -1,4 +1,4 @@
-import React, { RefObject, Reducer } from "react";
+import React, { RefObject, Reducer, ReactNode } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Model, ModelFilter } from "react3l-common";
 import Tree from "../../Tree/Tree";
@@ -62,7 +62,7 @@ export interface TreeSelectProps<
   /** Control the size of the component*/
   isSmall?: boolean;
   /** Prop of AntdTreeProps*/
-  treeTitleRender?: (T: T) => string;
+  treeTitleRender?: (T: T) => ReactNode;
   /**Option show button add new*/
   selectWithAdd?: () => void;
   /**Component enable to search data list*/

@@ -1,4 +1,4 @@
-import React, { RefObject, Reducer } from "react";
+import React, { RefObject, Reducer, ReactNode } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Model, ModelFilter } from "react3l-common";
 import Tree from "../../Tree";
@@ -59,6 +59,8 @@ export interface AdvanceTreeFilterMasterProps<
   maxLengthItem?: number;
   /**Use to custom style the component*/
   className?: string;
+  /** Prop of AntdTreeProps*/
+  treeTitleRender?: (T: T) => ReactNode;
 }
 export interface filterAction {
   type: string;
@@ -93,6 +95,7 @@ function AdvanceTreeFilterMaster(
     getTreeData,
     onChange,
     render,
+    treeTitleRender,
     preferOptions,
     label,
     maxLength,
@@ -257,6 +260,7 @@ function AdvanceTreeFilterMaster(
                 selectable={selectable}
                 checkable={checkable}
                 render={render}
+                titleRender={treeTitleRender}
                 selectWithAdd={undefined}
                 preferOptions={preferOptions}
                 isExpand={expanded}

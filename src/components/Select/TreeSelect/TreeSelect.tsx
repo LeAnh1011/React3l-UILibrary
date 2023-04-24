@@ -11,6 +11,7 @@ import InputSelect from "../../Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "@Configs/enum";
 import { IdFilter } from "react3l-advanced-filters";
 import "./TreeSelect.scss";
+import classNames from "classnames";
 
 export interface TreeSelectProps<
   T extends Model,
@@ -72,6 +73,8 @@ export interface TreeSelectProps<
   maxLengthItem?: number;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "gray" | "white";
+  /**Use to custom style the component*/
+  className?: string;
 }
 export interface filterAction {
   type: string;
@@ -115,6 +118,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     preferOptions,
     maxLengthItem,
     bgColor,
+    className,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -286,7 +290,10 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
 
   return (
     <>
-      <div className="tree-select__container" ref={wrapperRef}>
+      <div
+        className={classNames("tree-select__container", className)}
+        ref={wrapperRef}
+      >
         <div className="tree-select__input" onClick={handleExpand}>
           {checkable ? (
             <InputTag

@@ -61,6 +61,8 @@ export interface MultipleSelectProps<
   action?: InputAction;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  /**Use to custom style the component*/
+  className?: string;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -91,6 +93,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     isShowTooltip,
     action,
     bgColor,
+    className,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -327,7 +330,10 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
   return (
     <>
       <div
-        className="select__container multiple-select__container"
+        className={classNames(
+          "select__container multiple-select__container",
+          className
+        )}
         ref={wrapperRef}
       >
         <div className="select__input" onClick={handleToggle}>

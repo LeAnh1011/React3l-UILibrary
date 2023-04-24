@@ -52,6 +52,8 @@ export interface SelectProps<T extends Model> {
   maxLengthItem?: number;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  /**Use to custom style the component*/
+  className?: string;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -102,6 +104,7 @@ function EnumSelect(props: SelectProps<Model>) {
     maxLengthItem,
     action,
     bgColor,
+    className,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -360,7 +363,7 @@ function EnumSelect(props: SelectProps<Model>) {
   return (
     <>
       <div
-        className={classNames("select__container", {
+        className={classNames("select__container", className, {
           "multiple-select__container": isMultiple,
         })}
         ref={wrapperRef}

@@ -62,6 +62,8 @@ export interface SelectProps<
   action?: InputAction;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  /**Use to custom style the component*/
+  className?: string;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -92,6 +94,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
     maxLengthItem,
     action,
     bgColor,
+    className,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -283,7 +286,10 @@ function Select(props: SelectProps<Model, ModelFilter>) {
 
   return (
     <>
-      <div className="select__container" ref={wrapperRef}>
+      <div
+        className={classNames("select__container", className)}
+        ref={wrapperRef}
+      >
         <div className="select__input" onClick={handleToggle}>
           <InputSelect
             value={internalValue}

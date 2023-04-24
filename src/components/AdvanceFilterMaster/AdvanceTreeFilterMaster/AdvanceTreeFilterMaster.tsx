@@ -57,6 +57,8 @@ export interface AdvanceTreeFilterMasterProps<
   maxLength?: number;
   /**Set maximum length of data name display in each row of tree*/
   maxLengthItem?: number;
+  /**Use to custom style the component*/
+  className?: string;
 }
 export interface filterAction {
   type: string;
@@ -95,6 +97,7 @@ function AdvanceTreeFilterMaster(
     label,
     maxLength,
     maxLengthItem,
+    className,
   } = props;
   const inputRef: any = React.useRef<any>(null);
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -201,7 +204,13 @@ function AdvanceTreeFilterMaster(
 
   return (
     <>
-      <div className="advance-tree-filter-master__container" ref={wrapperRef}>
+      <div
+        className={classNames(
+          "advance-tree-filter-master__container",
+          className
+        )}
+        ref={wrapperRef}
+      >
         <div
           onClick={handleExpand}
           className={classNames(

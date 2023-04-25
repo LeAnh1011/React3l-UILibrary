@@ -406,57 +406,61 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                   onCheck={checkStrictly ? handleCheckStrictly : handleCheck}
                   onSelect={handleSelect}
                   treeData={internalTreeData}
-                  titleRender={(node: any) => (
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                      }}
-                      tabIndex={-1}
-                      onKeyDown={handleMove(node)}
-                      className={`tree-node-${node.key}`}
-                    >
-                      <div>
-                        {render && typeof render === "function" ? (
-                          <>
-                            {maxLengthItem &&
-                            render(node?.item)?.length > maxLengthItem ? (
-                              <Tooltip title={render(node?.item)}>
-                                {CommonService.limitWord(
-                                  render(node?.item),
-                                  maxLengthItem
-                                )}
-                              </Tooltip>
-                            ) : (
-                              render(node?.item)
-                            )}
-                          </>
-                        ) : (
-                          <>
-                            {maxLengthItem &&
-                            node?.title?.length > maxLengthItem ? (
-                              <Tooltip title={node?.title}>
-                                {CommonService.limitWord(
-                                  node?.title,
-                                  maxLengthItem
-                                )}
-                              </Tooltip>
-                            ) : (
-                              node?.title
-                            )}
-                          </>
-                        )}
-                      </div>
-                      {!checkable &&
-                        internalSelectedKeys &&
-                        internalSelectedKeys.includes(node.key) && (
-                          <div style={{ display: "flex" }}>
-                            <Checkmark16 />
+                  titleRender={
+                    titleRender
+                      ? titleRender
+                      : (node: any) => (
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "space-between",
+                            }}
+                            tabIndex={-1}
+                            onKeyDown={handleMove(node)}
+                            className={`tree-node-${node.key}`}
+                          >
+                            <div>
+                              {render && typeof render === "function" ? (
+                                <>
+                                  {maxLengthItem &&
+                                  render(node?.item)?.length > maxLengthItem ? (
+                                    <Tooltip title={render(node?.item)}>
+                                      {CommonService.limitWord(
+                                        render(node?.item),
+                                        maxLengthItem
+                                      )}
+                                    </Tooltip>
+                                  ) : (
+                                    render(node?.item)
+                                  )}
+                                </>
+                              ) : (
+                                <>
+                                  {maxLengthItem &&
+                                  node?.title?.length > maxLengthItem ? (
+                                    <Tooltip title={node?.title}>
+                                      {CommonService.limitWord(
+                                        node?.title,
+                                        maxLengthItem
+                                      )}
+                                    </Tooltip>
+                                  ) : (
+                                    node?.title
+                                  )}
+                                </>
+                              )}
+                            </div>
+                            {!checkable &&
+                              internalSelectedKeys &&
+                              internalSelectedKeys.includes(node.key) && (
+                                <div style={{ display: "flex" }}>
+                                  <Checkmark16 />
+                                </div>
+                              )}
                           </div>
-                        )}
-                    </div>
-                  )}
+                        )
+                  }
                 ></TreeAntd>
 
                 {!loading && internalTreeData.length > 0 && (

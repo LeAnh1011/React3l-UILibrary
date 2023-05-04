@@ -10,8 +10,8 @@ import InputTag from "../../Input/InputTag/InputTag";
 import InputSelect from "../../Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "@Configs/enum";
 import { IdFilter } from "react3l-advanced-filters";
-import "./TreeSelect.scss";
 import classNames from "classnames";
+import "./TreeSelect.scss";
 
 export interface TreeSelectProps<
   T extends Model,

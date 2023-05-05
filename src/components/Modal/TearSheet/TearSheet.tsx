@@ -7,10 +7,10 @@ import "./TearSheet.scss";
 
 export interface TearSheetProps extends AntModalProps {
   children?: ReactNode;
-  /**Is the modal footer (cancel, apply, apply next button) visible or not*/
+  /**Is the modal footer (cancel, save button) visible or not*/
   visibleFooter?: boolean;
-  /**Name of apply button*/
-  titleButtonApply?: string;
+  /**Name of save button*/
+  titleButtonSave?: string;
   /**Name of cancel button*/
   titleButtonCancel?: string;
   /**Cancel the form*/
@@ -21,13 +21,13 @@ export interface TearSheetProps extends AntModalProps {
   loadingType?: "default" | "submitting" | "submitted" | "error";
   /**Pass the classname to change the style component*/
   className?: string;
-
+  /**Control the TearSheet visible or not*/
   visible?: boolean;
-
+  /**Title of header TearSheet */
   title?: string;
-
+  /**Description of header TearSheet  */
   description?: string;
-
+  /**Additional content of header TearSheet  */
   additionalContent?: string;
 }
 
@@ -42,7 +42,7 @@ function TearSheet(props: TearSheetProps) {
     title,
     description,
     additionalContent,
-    titleButtonApply,
+    titleButtonSave,
     titleButtonCancel,
   } = props;
 
@@ -105,7 +105,7 @@ function TearSheet(props: TearSheetProps) {
               {titleButtonCancel}
             </Button>
             <Button type="bleed-primary" onClick={handleSave}>
-              {titleButtonApply}
+              {titleButtonSave}
             </Button>
           </div>
         )}
@@ -114,8 +114,8 @@ function TearSheet(props: TearSheetProps) {
   );
 }
 TearSheet.defaultProps = {
-  titleButtonApply: "Lưu",
+  titleButtonSave: "Lưu",
   titleButtonCancel: "Đóng",
-  visibleFooter: false,
+  visibleFooter: true,
 };
 export default TearSheet;

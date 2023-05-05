@@ -48,33 +48,25 @@ function TearSheet(props: TearSheetProps) {
 
   React.useEffect(() => {
     if (visible) {
-      document
-        .getElementById("tear-sheet__component")
-        .classList.add("background-active");
-      document
-        .getElementById("tear-sheet__container")
-        .classList.add("content-active");
+      document.getElementById("background").classList.add("background-active");
+      document.getElementById("content").classList.add("content-active");
     } else {
       if (
-        document
-          .getElementById("tear-sheet__container")
-          .classList.contains("content-active")
+        document.getElementById("content").classList.contains("content-active")
       ) {
         document
-          .getElementById("tear-sheet__component")
+          .getElementById("background")
           .classList.remove("background-active");
-        document
-          .getElementById("tear-sheet__container")
-          .classList.remove("content-active");
+        document.getElementById("content").classList.remove("content-active");
       }
     }
   }, [visible]);
 
   return (
-    <div className="tear-sheet__component" id="tear-sheet__component">
+    <div className="tear-sheet__component" id="background">
       <div
         className={classNames("tear-sheet__container", className)}
-        id="tear-sheet__container"
+        id="content"
       >
         <div className="tear-sheet__header">
           <div className="tear-sheet__header-title">{title}</div>

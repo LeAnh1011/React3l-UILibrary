@@ -54,7 +54,8 @@ export default {
     // InpageNavigation
     "src/components/InpageNavigation/index.ts",
     //Modal/Drawer
-    "src/components/Modal/index.ts",
+    "src/components/Modal/NormalModal/index.ts",
+    "src/components/Modal/TearSheet/index.ts",
     "src/components/Drawer/index.ts",
     //UploadFile
     "src/components/UploadFile/index.ts",

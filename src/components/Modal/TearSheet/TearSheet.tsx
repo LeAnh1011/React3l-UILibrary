@@ -3,8 +3,8 @@ import Close20 from "@carbon/icons-react/es/close/20";
 import { ModalProps as AntModalProps } from "antd";
 import classNames from "classnames";
 import React, { ReactNode } from "react";
-import "./TearSheet.scss";
 import InlineLoading from "@Components/InlineLoading/InlineLoading";
+import "./TearSheet.scss";
 
 export interface TearSheetProps extends AntModalProps {
   children?: ReactNode;

@@ -368,7 +368,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                   className="select__list multiple-select__list"
                   ref={selectListRef}
                 >
-                  {internalList.length > 0 ? (
+                  {internalList && internalList.length > 0 ? (
                     internalList.map((item, index) => (
                       <div
                         className={classNames(

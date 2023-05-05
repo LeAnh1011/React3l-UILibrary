@@ -35,22 +35,22 @@ function TearSheet(props: TearSheetProps) {
     if (visible) {
       document
         .getElementById("tear-sheet__component")
-        .classList.add("active-bg");
+        .classList.add("background-active");
       document
         .getElementById("tear-sheet__container")
-        .classList.add("active-content");
+        .classList.add("content-active");
     } else {
       if (
         document
           .getElementById("tear-sheet__container")
-          .classList.contains("active-content")
+          .classList.contains("content-active")
       ) {
         document
           .getElementById("tear-sheet__component")
-          .classList.remove("active-bg");
+          .classList.remove("background-active");
         document
           .getElementById("tear-sheet__container")
-          .classList.remove("active-content");
+          .classList.remove("content-active");
       }
     }
   }, [visible]);

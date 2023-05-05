@@ -88,6 +88,7 @@ const Template: Story = (args) => {
     <div>
       <Button
         type="primary"
+        className="btn btn--sm"
         onClick={() => {
           setVisible(true);
         }}

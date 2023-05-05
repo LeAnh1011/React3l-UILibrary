@@ -55,6 +55,7 @@ const Template: Story = (args) => {
       }, 1000);
     }, 2000);
   }, [i]);
+
   // function handleSave() {
   //   setVisible(false);
   // }
@@ -81,6 +82,7 @@ const Template: Story = (args) => {
         loadingType={loadingType}
         title="First Sheet"
         description="Generic description"
+        additionalContent="Header additional content"
         {...args}
       >
         <div className="p--sm">

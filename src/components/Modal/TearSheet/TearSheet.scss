@@ -29,8 +29,12 @@
     }
 
     .tear-sheet__header {
-      padding: 24px 80px 24px 32px;
+      padding: 24px 80px 8px 32px;
       border-bottom: 1px solid #e0e0e0;
+
+      &.pb24px {
+        padding-bottom: 24px !important;
+      }
 
       .tear-sheet__header-title {
         font-size: 2rem;

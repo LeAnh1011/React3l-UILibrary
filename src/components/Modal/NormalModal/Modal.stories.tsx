@@ -102,6 +102,7 @@ const Template: Story = (args) => {
         handleCancel={handleCancel}
         title="Modal Title"
         loadingType={loadingType}
+        visibleFooter={true}
         {...args}
       >
         <div

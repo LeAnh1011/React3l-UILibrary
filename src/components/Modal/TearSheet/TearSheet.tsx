@@ -4,6 +4,7 @@ import { ModalProps as AntModalProps } from "antd";
 import classNames from "classnames";
 import React, { ReactNode } from "react";
 import "./TearSheet.scss";
+import InlineLoading from "@Components/InlineLoading/InlineLoading";
 
 export interface TearSheetProps extends AntModalProps {
   children?: ReactNode;
@@ -44,6 +45,7 @@ function TearSheet(props: TearSheetProps) {
     additionalContent,
     titleButtonSave,
     titleButtonCancel,
+    loadingType,
   } = props;
 
   React.useEffect(() => {
@@ -68,7 +70,12 @@ function TearSheet(props: TearSheetProps) {
         className={classNames("tear-sheet__container", className)}
         id="content"
       >
-        <div className="tear-sheet__header">
+        <div
+          className={classNames(
+            "tear-sheet__header",
+            additionalContent ? "" : "pb24px"
+          )}
+        >
           <div className="tear-sheet__header-title">{title}</div>
           <div className="tear-sheet__header-description">{description}</div>
           {additionalContent && (
@@ -93,11 +100,26 @@ function TearSheet(props: TearSheetProps) {
         </div>
         {visibleFooter && (
           <div className="tear-sheet__footer">
-            <Button type="bleed-secondary" onClick={handleCancel}>
+            <Button
+              type="bleed-secondary"
+              onClick={handleCancel}
+              disabled={loadingType !== "default"}
+            >
               {titleButtonCancel}
             </Button>
-            <Button type="bleed-primary" onClick={handleSave}>
-              {titleButtonSave}
+            <Button
+              type="bleed-primary"
+              onClick={handleSave}
+              disabled={loadingType !== "default"}
+            >
+              {loadingType !== "default" ? (
+                <InlineLoading
+                  status={loadingType}
+                  className="il-normal-no-icon btn--sm "
+                />
+              ) : (
+                <span>{titleButtonSave}</span>
+              )}
             </Button>
           </div>
         )}
@@ -109,5 +131,6 @@ TearSheet.defaultProps = {
   titleButtonSave: "Lưu",
   titleButtonCancel: "Đóng",
   visibleFooter: true,
+  loadingType: "default",
 };
 export default TearSheet;

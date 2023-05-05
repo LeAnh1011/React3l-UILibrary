@@ -4,7 +4,7 @@ import ReactCrop from "react-image-crop";
 import { ImageFile } from "../ComponentUploadImage";
 import classNames from "classnames";
 import { formatFileSize } from "@Helpers/file";
-import { ModalCustomProps } from "@Components/Modal/Modal";
+import { ModalCustomProps } from "@Components/Modal/NormalModal/Modal";
 import Close16 from "@carbon/icons-react/es/close/16";
 import CloudUpload24 from "@carbon/icons-react/es/cloud--upload/24";
 import Crop20 from "@carbon/icons-react/es/crop/20";

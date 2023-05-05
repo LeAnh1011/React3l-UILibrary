@@ -9,10 +9,10 @@ import {
 } from "@storybook/addon-docs";
 import { Story } from "@storybook/react";
 import React from "react";
-import Button from "../Button/Button";
-import FormItem from "../FormItem";
-import InputText from "../Input/InputText/InputText";
-import { BORDER_TYPE, ValidateStatus } from "./../../config/enum";
+import Button from "../../Button/Button";
+import FormItem from "../../FormItem";
+import InputText from "../../Input/InputText/InputText";
+import { BORDER_TYPE, ValidateStatus } from "./../../../config/enum";
 import Modal, { MODAL_SIZE } from "./Modal";
 export type LoadingType = "default" | "submitting" | "submitted" | "error";
 
@@ -88,6 +88,7 @@ const Template: Story = (args) => {
     <div>
       <Button
         type="primary"
+        className="btn btn--sm"
         onClick={() => {
           setVisible(true);
         }}
@@ -101,6 +102,7 @@ const Template: Story = (args) => {
         handleCancel={handleCancel}
         title="Modal Title"
         loadingType={loadingType}
+        visibleFooter={true}
         {...args}
       >
         <div

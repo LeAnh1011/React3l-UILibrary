@@ -35,13 +35,6 @@ export default {
       ),
     },
   },
-  argTypes: {
-    title: {
-      defaultValue: "Thông tin chi tiết",
-      description: "/**Title of the modal*/",
-      control: "text",
-    },
-  },
 };
 
 const Template: Story = (args) => {
@@ -86,39 +79,139 @@ const Template: Story = (args) => {
         handleSave={handleOnClick}
         handleCancel={handleCancel}
         loadingType={loadingType}
+        title="First Sheet"
+        description="Generic description"
         {...args}
       >
-        <div
-          style={{
-            marginBottom: "16px",
-            marginTop: 16,
-          }}
-        >
-          <FormItem
-            validateStatus={ValidateStatus.error}
-            message={"Field required!"}
+        <div className="p--sm">
+          <div
+            style={{
+              marginBottom: "16px",
+              marginTop: 16,
+            }}
           >
-            <InputText placeHolder={"Enter text..."} />
-          </FormItem>
-        </div>
-        <div style={{ marginBottom: "16px" }}>
-          <FormItem
-            validateStatus={ValidateStatus.warning}
-            message={"Field required!"}
+            <FormItem
+              validateStatus={ValidateStatus.error}
+              message={"Field required!"}
+            >
+              <InputText placeHolder={"Enter text..."} />
+            </FormItem>
+          </div>
+          <div style={{ marginBottom: "16px" }}>
+            <FormItem
+              validateStatus={ValidateStatus.warning}
+              message={"Field required!"}
+            >
+              <InputText placeHolder={"Enter text..."} />
+            </FormItem>
+          </div>
+          <div>
+            <FormItem
+              validateStatus={ValidateStatus.success}
+              message={"Field required!"}
+            >
+              <InputText
+                placeHolder={"Enter text..."}
+                type={BORDER_TYPE.MATERIAL}
+              />
+            </FormItem>
+          </div>
+          <div
+            style={{
+              marginBottom: "16px",
+              marginTop: 16,
+            }}
           >
-            <InputText placeHolder={"Enter text..."} />
-          </FormItem>
-        </div>
-        <div>
-          <FormItem
-            validateStatus={ValidateStatus.success}
-            message={"Field required!"}
+            <FormItem
+              validateStatus={ValidateStatus.error}
+              message={"Field required!"}
+            >
+              <InputText placeHolder={"Enter text..."} />
+            </FormItem>
+          </div>
+          <div style={{ marginBottom: "16px" }}>
+            <FormItem
+              validateStatus={ValidateStatus.warning}
+              message={"Field required!"}
+            >
+              <InputText placeHolder={"Enter text..."} />
+            </FormItem>
+          </div>
+          <div>
+            <FormItem
+              validateStatus={ValidateStatus.success}
+              message={"Field required!"}
+            >
+              <InputText
+                placeHolder={"Enter text..."}
+                type={BORDER_TYPE.MATERIAL}
+              />
+            </FormItem>
+          </div>
+          <div
+            style={{
+              marginBottom: "16px",
+              marginTop: 16,
+            }}
           >
-            <InputText
-              placeHolder={"Enter text..."}
-              type={BORDER_TYPE.MATERIAL}
-            />
-          </FormItem>
+            <FormItem
+              validateStatus={ValidateStatus.error}
+              message={"Field required!"}
+            >
+              <InputText placeHolder={"Enter text..."} />
+            </FormItem>
+          </div>
+          <div style={{ marginBottom: "16px" }}>
+            <FormItem
+              validateStatus={ValidateStatus.warning}
+              message={"Field required!"}
+            >
+              <InputText placeHolder={"Enter text..."} />
+            </FormItem>
+          </div>
+          <div>
+            <FormItem
+              validateStatus={ValidateStatus.success}
+              message={"Field required!"}
+            >
+              <InputText
+                placeHolder={"Enter text..."}
+                type={BORDER_TYPE.MATERIAL}
+              />
+            </FormItem>
+          </div>
+          <div
+            style={{
+              marginBottom: "16px",
+              marginTop: 16,
+            }}
+          >
+            <FormItem
+              validateStatus={ValidateStatus.error}
+              message={"Field required!"}
+            >
+              <InputText placeHolder={"Enter text..."} />
+            </FormItem>
+          </div>
+          <div style={{ marginBottom: "16px" }}>
+            <FormItem
+              validateStatus={ValidateStatus.warning}
+              message={"Field required!"}
+            >
+              <InputText placeHolder={"Enter text..."} />
+            </FormItem>
+          </div>
+          <div>
+            <FormItem
+              validateStatus={ValidateStatus.success}
+              message={"Field required!"}
+            >
+              <InputText
+                placeHolder={"Enter text..."}
+                type={BORDER_TYPE.MATERIAL}
+              />
+            </FormItem>
+          </div>
         </div>
       </TearSheet>
     </div>

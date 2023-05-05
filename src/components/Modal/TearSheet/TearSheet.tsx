@@ -11,25 +11,40 @@ export interface TearSheetProps extends AntModalProps {
   visibleFooter?: boolean;
   /**Name of apply button*/
   titleButtonApply?: string;
-  /**Name of apply next button*/
-  titleButtonApplyNext?: string;
   /**Name of cancel button*/
   titleButtonCancel?: string;
   /**Cancel the form*/
   handleCancel?: (event: any) => void;
   /**Save the form*/
   handleSave?: (event: any) => void;
-  /**Apply and process to next form*/
-  handleApplyNext?: (event: any) => void;
   /**Pass state of loading */
   loadingType?: "default" | "submitting" | "submitted" | "error";
   /**Pass the classname to change the style component*/
   className?: string;
+
   visible?: boolean;
+
+  title?: string;
+
+  description?: string;
+
+  additionalContent?: string;
 }
 
 function TearSheet(props: TearSheetProps) {
-  const { handleCancel, handleSave, className, visible } = props;
+  const {
+    handleCancel,
+    handleSave,
+    className,
+    visible,
+    children,
+    visibleFooter,
+    title,
+    description,
+    additionalContent,
+    titleButtonApply,
+    titleButtonCancel,
+  } = props;
 
   React.useEffect(() => {
     if (visible) {
@@ -62,13 +77,13 @@ function TearSheet(props: TearSheetProps) {
         id="tear-sheet__container"
       >
         <div className="tear-sheet__header">
-          <div className="tear-sheet__header-title">First Sheet</div>
-          <div className="tear-sheet__header-description">
-            Generic description
-          </div>
-          <div className="tear-sheet__header-additional-content">
-            Header additional content
-          </div>
+          <div className="tear-sheet__header-title">{title}</div>
+          <div className="tear-sheet__header-description">{description}</div>
+          {additionalContent && (
+            <div className="tear-sheet__header-additional-content">
+              {additionalContent}
+            </div>
+          )}
           <Button
             type="icon-only-ghost"
             className="btn btn--2xl button-close"
@@ -76,18 +91,31 @@ function TearSheet(props: TearSheetProps) {
             onClick={handleCancel}
           />
         </div>
-        <div className="tear-sheet__body"></div>
-        <div className="tear-sheet__footer">
-          <Button type="bleed-secondary" onClick={handleCancel}>
-            Đóng
-          </Button>
-          <Button type="bleed-primary" onClick={handleSave}>
-            Lưu
-          </Button>
+        <div
+          className={classNames(
+            "tear-sheet__body",
+            visibleFooter ? "pb60px" : ""
+          )}
+        >
+          {children}
         </div>
+        {visibleFooter && (
+          <div className="tear-sheet__footer">
+            <Button type="bleed-secondary" onClick={handleCancel}>
+              {titleButtonCancel}
+            </Button>
+            <Button type="bleed-primary" onClick={handleSave}>
+              {titleButtonApply}
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
 }
-TearSheet.defaultProps = {};
+TearSheet.defaultProps = {
+  titleButtonApply: "Lưu",
+  titleButtonCancel: "Đóng",
+  visibleFooter: false,
+};
 export default TearSheet;

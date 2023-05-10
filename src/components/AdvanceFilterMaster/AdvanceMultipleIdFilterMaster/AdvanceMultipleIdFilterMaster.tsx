@@ -1,5 +1,4 @@
-import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
-import Search16 from "@carbon/icons-react/es/search/16";
+import { ChevronDown, Search } from "@carbon/icons-react";
 import IconLoading from "@Components/IconLoading/IconLoading";
 import InputText from "@Components/Input/InputText";
 import { DEBOUNCE_TIME_300 } from "@Configs/consts";
@@ -325,7 +324,7 @@ function AdvanceMultipleIdFilterMaster(
             </span>
             <div className="advance-id-filter-master__title">
               <span className="filter-title"> {label}</span>
-              <ChevronDown16 />
+              <ChevronDown size={16} />
             </div>
           </label>
         </div>
@@ -337,7 +336,7 @@ function AdvanceMultipleIdFilterMaster(
                 maxLength={maxLength}
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
-                suffix={<Search16 />}
+                suffix={<Search size={16} />}
                 ref={inputRef}
                 onKeyDown={handleKeyDown}
               />

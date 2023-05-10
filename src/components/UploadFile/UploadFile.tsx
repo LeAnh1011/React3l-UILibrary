@@ -1,4 +1,4 @@
-import Upload16 from "@carbon/icons-react/es/upload/16";
+import { Upload } from "@carbon/icons-react";
 import Button from "@Components/Button";
 import { notification } from "antd";
 import classNames from "classnames";
@@ -173,7 +173,7 @@ export function UploadFile(props: UploadFileProps) {
           </div>
         ) : type === "link" ? (
           <div className="upload-link" onClick={handleClickButton}>
-            {icon ? icon : <Upload16 />}
+            {icon ? icon : <Upload size={16} />}
             <span className="upload-content m-l--2xs">{uploadContent}</span>
           </div>
         ) : (

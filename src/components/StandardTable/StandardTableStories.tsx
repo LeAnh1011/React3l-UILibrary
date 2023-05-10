@@ -1,6 +1,4 @@
-import Add16 from "@carbon/icons-react/es/add/16";
-import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
-import ChevronUp16 from "@carbon/icons-react/es/chevron--up/16";
+import { Add, ChevronDown, ChevronUp } from "@carbon/icons-react";
 import { Story } from "@storybook/react";
 import { ColumnProps } from "antd/lib/table";
 // import { Model } from "react3l-common";
@@ -309,9 +307,9 @@ export const StandardTableDefault: Story = (args) => {
     expandedRowRender: expandedRowRender,
     expandIcon: ({ expanded, onExpand, record }: any) =>
       expanded ? (
-        <ChevronUp16 onClick={(e) => onExpand(record, e)} />
+        <ChevronUp size={16} onClick={(e) => onExpand(record, e)} />
       ) : (
-        <ChevronDown16 onClick={(e) => onExpand(record, e)} />
+        <ChevronDown size={16} onClick={(e) => onExpand(record, e)} />
       ),
   };
 
@@ -321,13 +319,17 @@ export const StandardTableDefault: Story = (args) => {
         selectedRowKeys={selectedRowKeys}
         setSelectedRowKeys={setSelectedRowKeys}
       >
-        <Button type="ghost-primary" className="btn--lg" icon={<Add16 />}>
+        <Button
+          type="ghost-primary"
+          className="btn--lg"
+          icon={<Add size={16} />}
+        >
           {"Button"}
         </Button>
         <Button
           type="ghost-primary"
           className="btn--lg"
-          icon={<ChevronDown16 />}
+          icon={<ChevronDown size={16} />}
         >
           {"Button"}
         </Button>

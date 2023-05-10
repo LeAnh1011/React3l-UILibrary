@@ -1,5 +1,7 @@
-import OverflowMenuVertical16 from "@carbon/icons-react/es/overflow-menu--vertical/16";
-import OverflowMenuHorizontal16 from "@carbon/icons-react/es/overflow-menu--horizontal/16";
+import {
+  OverflowMenuVertical,
+  OverflowMenuHorizontal,
+} from "@carbon/icons-react";
 import classNames from "classnames";
 import React, { RefObject } from "react";
 import { CommonService } from "@Services/common-service";
@@ -126,9 +128,9 @@ function OverflowMenu(props: CustomProps) {
           disabled={disabled}
         >
           {type === "vertical" ? (
-            <OverflowMenuVertical16 />
+            <OverflowMenuVertical size={16} />
           ) : (
-            <OverflowMenuHorizontal16 />
+            <OverflowMenuHorizontal size={16} />
           )}
         </button>
       </div>

@@ -1,5 +1,5 @@
 import { Model, ModelFilter } from "react3l-common";
-import Add16 from "@carbon/icons-react/es/add/16";
+import { Add } from "@carbon/icons-react";
 import { useDebounceFn } from "ahooks";
 import { CommonService } from "@Services/common-service";
 import classNames from "classnames";
@@ -454,7 +454,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                 )}
                 onClick={selectWithAdd}
               >
-                <Add16 className="m-l--xs" />
+                <Add size={16} className="m-l--xs" />
                 <span className="m-l--xs">Add new</span>
               </div>
             )}

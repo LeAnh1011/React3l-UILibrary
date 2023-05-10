@@ -5,7 +5,7 @@ import { useDropzone } from "react-dropzone";
 import { UploadImageProps } from "../UploadImage";
 import CroppedModal, { ImageResult } from "./CroppedModal/CroppedModal";
 import "./ComponentUploadImage.scss";
-import CloudUpload24 from "@carbon/icons-react/es/cloud--upload/24";
+import { CloudUpload } from "@carbon/icons-react";
 
 export interface ImageFile {
   fileId: string | number;
@@ -153,7 +153,9 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
           {...getRootProps()}
         >
           {!currentAvatar ? (
-            <div onClick={handleInput}>{icon ? icon : <CloudUpload24 />}</div>
+            <div onClick={handleInput}>
+              {icon ? icon : <CloudUpload size={24} />}
+            </div>
           ) : (
             renderImage
           )}

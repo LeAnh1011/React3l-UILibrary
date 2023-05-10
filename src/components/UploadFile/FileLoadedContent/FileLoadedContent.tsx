@@ -1,7 +1,6 @@
 import React from "react";
 import { FileModel } from "../UploadFile";
-import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
-import WarningFilled16 from "@carbon/icons-react/es/warning--filled/16";
+import { CloseFilled, WarningFilled } from "@carbon/icons-react";
 import { Popconfirm, Tooltip } from "antd";
 import "./FileLoadedContent.scss";
 
@@ -31,7 +30,7 @@ export default function FileLoadedContent(props: FileLoadedContentProps) {
               </Tooltip>
             </div>
             <div>
-              <WarningFilled16 color="red" className="m-r--3xs" />
+              <WarningFilled size={16} color="red" className="m-r--3xs" />
               <Popconfirm
                 placement="leftTop"
                 title={"Bạn có chắc chắn muốn xóa?"}
@@ -40,7 +39,7 @@ export default function FileLoadedContent(props: FileLoadedContentProps) {
                 cancelText="Hủy"
                 okType="danger"
               >
-                <CloseFilled16 className="remove-file" />
+                <CloseFilled size={16} className="remove-file" />
               </Popconfirm>
             </div>
           </div>
@@ -65,7 +64,7 @@ export default function FileLoadedContent(props: FileLoadedContentProps) {
                 cancelText="Hủy"
                 okType="danger"
               >
-                <CloseFilled16 className="remove-file" />
+                <CloseFilled size={16} className="remove-file" />
               </Popconfirm>
             </div>
           )}

@@ -8,8 +8,7 @@ import type { Observable } from "rxjs";
 import { CommonService } from "@Services/common-service";
 import InputText from "@Components/Input/InputText";
 import classNames from "classnames";
-import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
-import Search16 from "@carbon/icons-react/es/search/16";
+import { ChevronDown, Search } from "@carbon/icons-react";
 import { IdFilter } from "react3l-advanced-filters";
 import "./AdvanceTreeFilterMaster.scss";
 
@@ -231,7 +230,7 @@ function AdvanceTreeFilterMaster(
                 "(" + listItem?.length + ") "}
               {label}
             </span>
-            <ChevronDown16 />
+            <ChevronDown size={16} />
           </div>
         </div>
         {expanded && (
@@ -242,7 +241,7 @@ function AdvanceTreeFilterMaster(
                 maxLength={maxLength}
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
-                suffix={<Search16 />}
+                suffix={<Search size={16} />}
                 ref={inputRef}
                 onKeyDown={handleKeyPress}
               />

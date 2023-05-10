@@ -1,4 +1,4 @@
-import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
+import { CloseFilled } from "@carbon/icons-react";
 import classNames from "classnames";
 import React, { ReactSVGElement, RefObject } from "react";
 import "./InputSearchSelect.scss";
@@ -77,10 +77,11 @@ function InputSearchSelect(props: InputSelectProps) {
               style={{ width: "16px", height: "20px", paddingTop: 2 }}
               className="m-r--2xs"
             >
-              <CloseFilled16
+              <CloseFilled
+                size={16}
                 className="input-icon__clear m-r--2xs"
                 onClick={handleClearInput}
-              ></CloseFilled16>
+              />
             </div>
           )}
         </div>

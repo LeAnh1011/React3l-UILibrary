@@ -2,7 +2,7 @@ import React, { RefObject } from "react";
 import { Model, ModelFilter } from "react3l-common";
 import classNames from "classnames";
 import { Empty } from "antd";
-import Search16 from "@carbon/icons-react/es/search/16";
+import { Search } from "@carbon/icons-react";
 import { CommonService } from "@Services/common-service";
 import {
   debounceTime,
@@ -284,7 +284,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           className={classNames("component__input-search__icon-box")}
           onClick={handleClickSearchIcon}
         >
-          <Search16 className="icon-input-search" />
+          <Search size={16} className="icon-input-search" />
         </div>
         <div className={classNames("box-input-search")}>
           {getList && typeof getList === "function" ? (

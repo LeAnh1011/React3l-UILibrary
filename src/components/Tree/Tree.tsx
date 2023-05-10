@@ -1,6 +1,4 @@
-import Add16 from "@carbon/icons-react/es/add/16";
-import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
-import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
+import { Add, Checkmark, ChevronDown } from "@carbon/icons-react";
 import { Empty, Tooltip, Tree as TreeAntd } from "antd";
 import { Key } from "antd/lib/table/interface";
 import type {
@@ -20,7 +18,7 @@ import "./Tree.scss";
 function SwitcherIcon() {
   return (
     <span className="tree__icon">
-      <ChevronDown16></ChevronDown16>
+      <ChevronDown size={16} />
     </span>
   );
 }
@@ -455,7 +453,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                               internalSelectedKeys &&
                               internalSelectedKeys.includes(node.key) && (
                                 <div style={{ display: "flex" }}>
-                                  <Checkmark16 />
+                                  <Checkmark size={16} />
                                 </div>
                               )}
                           </div>
@@ -509,7 +507,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                                         node.key
                                       ) && (
                                         <div style={{ display: "flex" }}>
-                                          <Checkmark16 />
+                                          <Checkmark size={16} />
                                         </div>
                                       )}
                                   </div>
@@ -526,7 +524,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                     )}
                     onClick={selectWithAdd}
                   >
-                    <Add16 className="m-l--xs" />
+                    <Add size={16} className="m-l--xs" />
                     <span>Add new</span>
                   </div>
                 )}

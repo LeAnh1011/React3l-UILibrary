@@ -1,7 +1,6 @@
 import React from "react";
 import { FileModel } from "../UploadImage";
-import Edit24 from "@carbon/icons-react/es/edit/24";
-import TrashCan24 from "@carbon/icons-react/es/trash-can/24";
+import { Edit, TrashCan } from "@carbon/icons-react";
 
 interface ImageItemProps extends FileModel {}
 
@@ -24,10 +23,10 @@ const ImageItem = (props: ImageItemProps) => {
       {props.isDelete && (
         <div className="image-item__action-block">
           {handleInput !== null && (
-            <Edit24 color="white" onClick={handleInput} />
+            <Edit size={24} color="white" onClick={handleInput} />
           )}
           {handleDelete !== null && (
-            <TrashCan24 color="white" onClick={handleDelete} />
+            <TrashCan size={24} color="white" onClick={handleDelete} />
           )}
         </div>
       )}

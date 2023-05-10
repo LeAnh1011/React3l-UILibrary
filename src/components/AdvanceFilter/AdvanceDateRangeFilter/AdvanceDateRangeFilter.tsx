@@ -5,8 +5,7 @@ import classNames from "classnames";
 import { BORDER_TYPE } from "@Configs/enum";
 import { Moment } from "moment";
 import { CommonService } from "@Services/common-service";
-import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
-import Calendar16 from "@carbon/icons-react/es/calendar/16";
+import { CloseFilled, Calendar } from "@carbon/icons-react";
 import "./AdvanceDateRangeFilter.scss";
 
 const { RangePicker } = DatePicker;
@@ -14,7 +13,7 @@ const { RangePicker } = DatePicker;
 function SuffixDateIcon() {
   return (
     <span className={classNames("date-range__icon")}>
-      <Calendar16 />
+      <Calendar size={16} />
     </span>
   );
 }
@@ -150,13 +149,14 @@ function AdvanceDateRangeFilter(
                 }
               )}
             >
-              <CloseFilled16
+              <CloseFilled
+                size={16}
                 className={classNames(
                   "advance-date-range-filter__icon-clear",
                   "m-l--2xs"
                 )}
                 onClick={handleClearDate}
-              ></CloseFilled16>
+              />
             </span>
           </>
         )}

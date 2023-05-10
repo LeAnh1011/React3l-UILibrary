@@ -8,7 +8,7 @@ import { BORDER_TYPE } from "@Configs/enum";
 import { Moment } from "moment";
 import React, { ReactSVGElement, RefObject } from "react";
 import { CommonService } from "@Services/common-service";
-import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
+import { CloseFilled } from "@carbon/icons-react";
 import "./DatePicker.scss";
 
 interface DatePickerAction {
@@ -145,10 +145,11 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
               { "date-picker__icon-wrapper--sm": isSmall }
             )}
           >
-            <CloseFilled16
+            <CloseFilled
+              size={16}
               className={classNames("date-picker__icon-clear", "m-l--2xs")}
               onClick={handleClearDate}
-            ></CloseFilled16>
+            />
           </span>
         )}
       </div>

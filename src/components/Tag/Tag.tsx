@@ -1,7 +1,7 @@
 import { Tooltip } from "antd";
 import classNames from "classnames";
 import { CommonService } from "@Services/common-service";
-import Close16 from "@carbon/icons-react/es/close/16";
+import { Close } from "@carbon/icons-react";
 import "./Tag.scss";
 
 export interface TagProps {
@@ -52,7 +52,7 @@ function Tag(props: TagProps) {
       </span>
       {typeof action === "function" && action && (
         <div className="tag-clear" onClick={action}>
-          <Close16 />
+          <Close size={16} />
         </div>
       )}
     </div>

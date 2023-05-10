@@ -1,4 +1,4 @@
-import Close16 from "@carbon/icons-react/es/close/16";
+import { Close } from "@carbon/icons-react";
 import { Tooltip } from "antd";
 import classNames from "classnames";
 import { formatDate } from "@Helpers/date-time";
@@ -539,7 +539,8 @@ function TagFilter(props: TagFilterProps) {
                           </>
                         )}
                       </div>
-                      <Close16
+                      <Close
+                        size={16}
                         aria-label="Add"
                         className={classNames("tag-filter__container-clear", {
                           "tag-filter__container-clear--disabled": handleCheckField(

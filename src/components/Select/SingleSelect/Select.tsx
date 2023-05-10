@@ -1,6 +1,5 @@
 import { DEBOUNCE_TIME_300 } from "@Configs/consts";
-import Add16 from "@carbon/icons-react/es/add/16";
-import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
+import { Add, Checkmark } from "@carbon/icons-react";
 import { Model, ModelFilter } from "react3l-common";
 import { useDebounceFn } from "ahooks";
 import { Empty, Tooltip } from "antd";
@@ -340,7 +339,9 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                         ) : (
                           <span className="select__text">{render(item)}</span>
                         )}
-                        {item.id === internalValue?.id && <Checkmark16 />}
+                        {item.id === internalValue?.id && (
+                          <Checkmark size={16} />
+                        )}
                       </div>
                     ))
                   ) : (
@@ -382,7 +383,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                       ) : (
                         <span className="select__text">{render(item)}</span>
                       )}
-                      {item.id === internalValue?.id && <Checkmark16 />}
+                      {item.id === internalValue?.id && <Checkmark size={16} />}
                     </div>
                   ))}
               </div>
@@ -394,7 +395,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                 )}
                 onClick={selectWithAdd}
               >
-                <Add16 className="m-l--2xs" />
+                <Add size={16} className="m-l--2xs" />
                 <span>
                   {selectWithAddTitle ? selectWithAddTitle : "Add new"}
                 </span>

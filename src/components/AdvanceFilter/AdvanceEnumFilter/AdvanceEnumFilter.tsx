@@ -1,6 +1,6 @@
 import React, { RefObject } from "react";
 import { Model } from "react3l-common";
-import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
+import { Checkmark } from "@carbon/icons-react";
 import { Checkbox, Empty } from "antd";
 import classNames from "classnames";
 import InputSelect from "@Components/Input/InputSelect/InputSelect";
@@ -456,7 +456,9 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
                             onClick={handleClickItem(item)}
                           >
                             <span className="select__text">{render(item)}</span>
-                            {item.id === internalValue?.id && <Checkmark16 />}
+                            {item.id === internalValue?.id && (
+                              <Checkmark size={16} />
+                            )}
                           </div>
                         ))
                       ) : (

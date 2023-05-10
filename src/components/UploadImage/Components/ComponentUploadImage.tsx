@@ -1,5 +1,4 @@
-import CloudUpload24 from "@carbon/icons-react/es/cloud--upload/24";
-import Edit24 from "@carbon/icons-react/es/edit/24";
+import { CloudUpload, Edit } from "@carbon/icons-react";
 import { notification } from "antd";
 import classNames from "classnames";
 import React, { Reducer, RefObject } from "react";
@@ -205,7 +204,7 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
                 ))}
               </div>
               <div className="m-t--2xs">
-                <CloudUpload24 />
+                <CloudUpload size={24} />
               </div>
             </>
           )}
@@ -223,12 +222,12 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
                     {files.length > 1 ? `${files.length - 1}+` : ""}
                   </div>
                   <div className="upload-image--minimized__act p-t--2xs">
-                    <Edit24 />
+                    <Edit size={24} />
                   </div>
                 </div>
               ) : (
                 <div onClick={handleInput}>
-                  <CloudUpload24 />
+                  <CloudUpload size={24} />
                 </div>
               )}
             </>
@@ -237,7 +236,7 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
             <>
               {files.length === 0 ? (
                 <div onClick={handleInput}>
-                  <CloudUpload24 />
+                  <CloudUpload size={24} />
                 </div>
               ) : (
                 <div className="upload-image__list">{menuFile[0]}</div>

@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { BORDER_TYPE } from "@Configs/enum";
 import React, { ReactNode, ReactSVGElement, RefObject } from "react";
-import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
+import { CloseFilled } from "@carbon/icons-react";
 import { Tooltip } from "antd";
 import "./InputText.scss";
 
@@ -259,7 +259,7 @@ const InputText = React.forwardRef(
           )}
           {internalValue && !disabled && (
             <div className={classNames("input-icon__clear", "m-l--2xs")}>
-              <CloseFilled16 onClick={handleClearInput}></CloseFilled16>
+              <CloseFilled size={16} onClick={handleClearInput} />
             </div>
           )}
           {suffix && (

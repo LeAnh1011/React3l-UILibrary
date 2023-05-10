@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { Modal as AntModal, ModalProps as AntModalProps } from "antd";
 import classNames from "classnames";
 import Button from "@Components/Button";
-import Close20 from "@carbon/icons-react/es/close/20";
+import { Close } from "@carbon/icons-react";
 import InlineLoading from "@Components/InlineLoading";
 import "./Modal.scss";
 
@@ -127,7 +127,7 @@ function Modal(props: ModalCustomProps) {
           "btn-component btn-only-icon btn--2xl btn--icon-only-ghost"
         )}
       >
-        <Close20 />
+        <Close size={20} />
       </div>
     );
   }, []);

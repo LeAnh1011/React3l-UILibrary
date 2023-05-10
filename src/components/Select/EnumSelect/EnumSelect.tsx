@@ -6,8 +6,7 @@ import { CommonService } from "@Services/common-service";
 import InputSelect from "@Components/Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "@Configs/enum";
 import InputTag from "@Components/Input/InputTag";
-import Add16 from "@carbon/icons-react/es/add/16";
-import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
+import { Add, Checkmark } from "@carbon/icons-react";
 import { ErrorObserver, Observable, Subscription } from "rxjs";
 import { InputAction } from "@Components/Input/InputText/InputText";
 
@@ -466,7 +465,7 @@ function EnumSelect(props: SelectProps<Model>) {
                     )}
                     onClick={selectWithAdd}
                   >
-                    <Add16 className="m-l--xs" />
+                    <Add size={16} className="m-l--xs" />
                     <span className="m-l--xs">Add new</span>
                   </div>
                 )}
@@ -509,7 +508,9 @@ function EnumSelect(props: SelectProps<Model>) {
                                 render(item)
                               )}
                             </span>
-                            {item.id === internalValue?.id && <Checkmark16 />}
+                            {item.id === internalValue?.id && (
+                              <Checkmark size={16} />
+                            )}
                           </div>
                         ))
                       ) : (
@@ -525,7 +526,7 @@ function EnumSelect(props: SelectProps<Model>) {
                     )}
                     onClick={selectWithAdd}
                   >
-                    <Add16 className="m-l--2xs" />
+                    <Add size={16} className="m-l--2xs" />
                     <span>Add new</span>
                   </div>
                 )}

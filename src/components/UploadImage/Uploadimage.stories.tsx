@@ -1,4 +1,4 @@
-import Camera32 from "@carbon/icons-react/es/camera/32";
+import { Camera } from "@carbon/icons-react";
 import {
   ArgsTable,
   Description,
@@ -114,8 +114,8 @@ const Template: Story = (args) => {
           // sử dụng hàm khác
           uploadAvatar={demoUploadAvatar}
           updateAvatar={handleChangeAvatar}
-          icon={<Camera32 />}
-        ></UploadImage>
+          icon={<Camera size={32} />}
+        />
       </div>
       <div style={{ width: "100%", padding: "10px 10px" }}>
         Loại Thường , multiple false
@@ -125,7 +125,7 @@ const Template: Story = (args) => {
           isMultiple={false}
           uploadFile={demoUploadListImage}
           updateList={handleChangeListImage}
-        ></UploadImage>
+        />
       </div>
       <div style={{ width: "100%", padding: "10px 10px", display: "flex" }}>
         <div>
@@ -136,7 +136,7 @@ const Template: Story = (args) => {
             isMinimized={true}
             uploadFile={demoUploadListImage}
             updateList={handleChangeListImage}
-          ></UploadImage>
+          />
         </div>
       </div>
       <div style={{ width: "100%", padding: "10px 10px", display: "flex" }}>
@@ -148,7 +148,7 @@ const Template: Story = (args) => {
             isMinimized={false}
             uploadFile={demoUploadListImage}
             updateList={handleChangeListImage}
-          ></UploadImage>
+          />
         </div>
       </div>
     </div>

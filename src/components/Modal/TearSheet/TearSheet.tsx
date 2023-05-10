@@ -1,5 +1,5 @@
 import Button from "@Components/Button";
-import Close20 from "@carbon/icons-react/es/close/20";
+import { Close } from "@carbon/icons-react";
 import { ModalProps as AntModalProps } from "antd";
 import classNames from "classnames";
 import React, { ReactNode } from "react";
@@ -86,7 +86,7 @@ function TearSheet(props: TearSheetProps) {
           <Button
             type="icon-only-ghost"
             className="btn btn--2xl button-close"
-            icon={<Close20 />}
+            icon={<Close size={20} />}
             onClick={handleCancel}
           />
         </div>

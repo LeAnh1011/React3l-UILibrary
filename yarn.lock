@@ -13623,30 +13623,32 @@ react-textarea-autosize@^8.3.0:
     use-composed-ref "^1.0.0"
     use-latest "^1.0.0"
 
-react3l-advanced-filters@^6.0.0-rc.1:
-  version "6.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/react3l-advanced-filters/-/react3l-advanced-filters-6.0.0-rc.1.tgz#b2c8f3016b135bde1dbc5ac733008d4638580108"
-  integrity sha512-PGYZTgVON/6mAci34tgLkvsNdRGFs1hYZARvlMG6PsEIJVmI7UxkRbNEY+EYq4lMyzansCZrgE8wgm2HX8ukNA==
+react3l-advanced-filters@^6.1.0-rc.1:
+  version "6.1.0-rc.1"
+  resolved "https://registry.yarnpkg.com/react3l-advanced-filters/-/react3l-advanced-filters-6.1.0-rc.1.tgz#ba511af0ee8e340767316eacb81e9513a30f14f3"
+  integrity sha512-C8gKFYCYFkuoC41HjBiXpA6tx+BsRygzgJ9IMspQvv/yQpQoygguWSlQvT/AMvRH1T4nuFXLX5SCGfYXDQeL4A==
+  dependencies:
+    react3l-decorators "6.0.0"
 
-react3l-axios-observable@^6.0.0-rc.1:
-  version "6.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/react3l-axios-observable/-/react3l-axios-observable-6.0.0-rc.1.tgz#baf73725cee8e79dc407d055f0a1c3d7b2f7ec28"
-  integrity sha512-XqZnW3jV+DhU17ONKuINNoz3cS4Ya1Mx4CWSv+l55xGnTxx2uxdyAj6N/FsDkYp4rgZ3MRMkcMhe8AurmM9CYw==
+react3l-axios-observable@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/react3l-axios-observable/-/react3l-axios-observable-6.0.0.tgz#e4db13b781db3a6f420406fac645021479e59f26"
+  integrity sha512-ET0qzwTD9cS3ZcccHCF6/XWKQX1LDqJzZD+4c5UlEoMdrqGoGuYGQPIwnO6kckhQndjWCd6iRpncjFAEiKuU1g==
 
-react3l-common@^6.0.3-rc.1:
-  version "6.0.3-rc.1"
-  resolved "https://registry.yarnpkg.com/react3l-common/-/react3l-common-6.0.3-rc.1.tgz#25c8cac0bdcce0bc685c5b27836ff13548454706"
-  integrity sha512-0VmDNTiom+4vP16JZUJDnZUhoVM/tGfE191Em+kUtafNd19ypeb1RicvVgb0JXKJb/VbPMLvyWcmEGLOIk0Vjw==
+react3l-common@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/react3l-common/-/react3l-common-6.0.0.tgz#f9b23b1541e934111683cf525fcda801d92f71d7"
+  integrity sha512-RKo03TJhJcc3g/I/J1Gtve5bwHJIIkXdgtF2vKdnwJzJy+tYpPggBCfyOcPZfd7Zby0ju52zWWh0TOybhjkJqQ==
 
-react3l-decorators@^6.0.0-rc.1:
-  version "6.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/react3l-decorators/-/react3l-decorators-6.0.0-rc.1.tgz#94059428c06bb810634a6f22df41cdf97e6d83bc"
-  integrity sha512-pf/cncIUBXWmutYKJlbY/8tg/ZJ/b0HF8xjMwe8pBPJTMe1f8/tZzGDeRwtq5VLTwUudwng4HJFFvziTI39S2w==
+react3l-decorators@6.0.0, react3l-decorators@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/react3l-decorators/-/react3l-decorators-6.0.0.tgz#a45fbe369c66e08e69dc424cc85d43d8f397c4e3"
+  integrity sha512-awxOwT9eRvIcL20/cICWyPMHnM5wyS7d0fqvsIZMkrbA+BBRYoTw6IruQbukLiH8gggcsg9AlrEZtPXFWxnC3g==
 
-react3l-localization@^6.0.0-rc.1:
-  version "6.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/react3l-localization/-/react3l-localization-6.0.0-rc.1.tgz#30d8984c04757b33fe3af4d61d9237cfa994e898"
-  integrity sha512-DpKwrKtsw2wp/9eHsSLySS7ckA1pbuCxxieNyJMStzl7LYTiEo2PY7Extk3HQAuzbyCopf9F4D++liW+1tcTig==
+react3l-localization@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/react3l-localization/-/react3l-localization-6.0.0.tgz#2ca9dd32f988ca2938dab819c0eab141eb023f12"
+  integrity sha512-hju8kb+jVXo1Vuciut4b+1vmMAYCswS1WU4EWSKqbiZrqMlb+ONhjH1+pOfo8qxKjCfS4lMTaQGX4y0PaEBoCw==
 
 react@^17.0.2:
   version "17.0.2"

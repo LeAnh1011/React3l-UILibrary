@@ -7,7 +7,7 @@ import "./FileLoadedContent.scss";
 
 export interface FileLoadedContentProps {
   /**Pass list file loaded */
-  loadedFiles?: FileModel[];
+  file?: FileModel;
   /**Function use to remove file */
   removeFile?: (fileId: string | number) => void;
   /**Option to set component have only view mode */
@@ -17,11 +17,11 @@ export interface FileLoadedContentProps {
 }
 
 export default function FileLoadedContent(props: FileLoadedContentProps) {
-  const { loadedFiles, removeFile, isViewMode, className } = props;
+  const { file, removeFile, isViewMode, className } = props;
   const renderLoadedFile = React.useCallback(
-    (file, index) => {
+    (file) => {
       return file?.errors ? (
-        <div className="file-loaded-error" key={index}>
+        <div className="file-loaded-error" key={file?.id}>
           <div className="file-loaded-container">
             <div className="w-file-name">
               <Tooltip title={file?.name}>
@@ -49,7 +49,7 @@ export default function FileLoadedContent(props: FileLoadedContentProps) {
           </div>
         </div>
       ) : (
-        <div className="file-loaded-container" key={index}>
+        <div className="file-loaded-container" key={file?.id}>
           <div className="w-file-name">
             <a href={file?.path} download>
               {file?.name}
@@ -74,12 +74,7 @@ export default function FileLoadedContent(props: FileLoadedContentProps) {
     },
     [removeFile, isViewMode]
   );
-  return (
-    <div className={className}>
-      {loadedFiles?.length > 0 &&
-        loadedFiles.map((file, index) => renderLoadedFile(file, index))}
-    </div>
-  );
+  return <div className={className}>{renderLoadedFile(file)}</div>;
 }
 
 FileLoadedContent.defaultProps = {

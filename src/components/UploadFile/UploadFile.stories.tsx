@@ -103,7 +103,7 @@ const Template: Story = (args) => {
   const [fileLoading, setFileLoading] = React.useState<FileModel[]>([]);
 
   return (
-    <div style={{ width: 260 }}>
+    <div style={{ display: "flex" }}>
       <UploadFile
         uploadFile={demoUploadFile}
         updateList={handleUpdateList}
@@ -111,16 +111,30 @@ const Template: Story = (args) => {
         type="dragAndDrop"
         uploadContent="Drag and drop files here or upload"
         setListFileLoading={setFileLoading}
+        className="w300px"
       ></UploadFile>
-      <UploadFile.FileLoadingContent
-        loadingFiles={fileLoading}
-        className="content-loading"
-      />
-      <UploadFile.FileLoadedContent
-        loadedFiles={model?.files}
-        removeFile={handleRemoveFile}
-        className="content-loaded"
-      />
+
+      <div className="flex-file-loaded">
+        {fileLoading?.map((file, index) => {
+          return (
+            <UploadFile.FileLoadingContent
+              file={file}
+              key={index}
+              className="w300px"
+            />
+          );
+        })}
+        {model?.files?.map((file, index) => {
+          return (
+            <UploadFile.FileLoadedContent
+              key={index}
+              file={file}
+              removeFile={handleRemoveFile}
+              className="w300px"
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

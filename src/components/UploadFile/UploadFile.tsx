@@ -47,6 +47,8 @@ export interface UploadFileProps {
   isViewMode?: boolean;
   /**Function to set list file in status loading */
   setListFileLoading?: React.Dispatch<SetStateAction<FileModel[]>>;
+  /**Use to custom style the component*/
+  className?: string;
 }
 export function UploadFile(props: UploadFileProps) {
   const {
@@ -59,6 +61,7 @@ export function UploadFile(props: UploadFileProps) {
     type = "button",
     icon,
     setListFileLoading,
+    className,
   } = props;
 
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>();
@@ -157,7 +160,7 @@ export function UploadFile(props: UploadFileProps) {
   });
 
   return (
-    <div className="upload-button__container">
+    <div className={classNames("upload-button__container", className)}>
       <div>
         {type === "dragAndDrop" ? (
           <div className={classNames("upload-dropzone")} {...getRootProps()}>

@@ -5,14 +5,7 @@ import Button from "@Components/Button";
 import { Close } from "@carbon/icons-react";
 import InlineLoading from "@Components/InlineLoading";
 import "./Modal.scss";
-
-export enum MODAL_SIZE {
-  SIZE_320 = 320,
-  SIZE_520 = 520,
-  SIZE_720 = 720,
-  SIZE_1024 = 1024,
-  SIZE_1200 = 1200,
-}
+import { MODAL_SIZE } from "@Configs/enum";
 
 export interface ModalCustomProps extends AntModalProps {
   children?: ReactNode;

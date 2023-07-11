@@ -7,15 +7,10 @@ import moment from "moment";
 import { Moment } from "moment";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import nameof from "ts-nameof.macro";
+import { ActionFilterEnum } from "@Configs/enum";
 
-export enum ActionFilterEnum {
-  ChangeAllField,
-  ChangeOneField,
-  ChangeSkipTake,
-  ChangeOrderType,
-}
 
-export class Filter {}
+export class Filter { }
 
 type CoreFilter = StringFilter | NumberFilter | DateFilter | IdFilter;
 

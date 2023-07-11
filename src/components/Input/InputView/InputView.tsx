@@ -2,23 +2,18 @@ import { Tooltip } from "antd";
 import classNames from "classnames";
 import React, { ReactNode, RefObject } from "react";
 import "./InputView.scss";
+import { BORDER_TYPE__INPUT_VIEW } from "@Configs/enum";
 
 export interface InputAction {
   name?: ReactNode;
   action?: any;
-}
-export enum BORDER_TYPE {
-  MATERIAL,
-  BORDERED,
-  FLOAT_LABEL,
-  NOT_BORDERED,
 }
 
 export interface InputViewProps {
   /**Label for current field*/
   label?: string;
   /**Control the style type of component: MATERIAL, BORDERED, FLOAT_LABEL, NOT_BORDERED */
-  type?: BORDER_TYPE;
+  type?: BORDER_TYPE__INPUT_VIEW;
   /**Prefix for filter value*/
   prefix?: string | JSX.Element;
   /**Show * as require field */
@@ -98,7 +93,7 @@ const InputView = React.forwardRef(
     return (
       <div className={classNames("input-view__wrapper", className)}>
         <div className="input-view__label m-b--3xs">
-          {type !== BORDER_TYPE.FLOAT_LABEL && label && (
+          {type !== BORDER_TYPE__INPUT_VIEW.FLOAT_LABEL && label && (
             <label
               className={classNames("component__title", {
                 "component__title--disabled": disabled,
@@ -121,10 +116,11 @@ const InputView = React.forwardRef(
             "p-y--2xs": isSmall,
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
-            "input-view--material": type === BORDER_TYPE.MATERIAL,
-            "input-view--not__bordered": type === BORDER_TYPE.NOT_BORDERED,
+            "input-view--material": type === BORDER_TYPE__INPUT_VIEW.MATERIAL,
+            "input-view--not__bordered":
+              type === BORDER_TYPE__INPUT_VIEW.NOT_BORDERED,
             "input-view--disabled ": disabled,
-            "input-view--float": type === BORDER_TYPE.FLOAT_LABEL,
+            "input-view--float": type === BORDER_TYPE__INPUT_VIEW.FLOAT_LABEL,
           })}
           ref={ref}
           onClick={() => {
@@ -146,7 +142,9 @@ const InputView = React.forwardRef(
                 type="view"
                 value={internalValue}
                 placeholder={
-                  type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
+                  type === BORDER_TYPE__INPUT_VIEW.FLOAT_LABEL && label
+                    ? " "
+                    : placeHolder
                 }
                 ref={inputRef}
                 disabled
@@ -156,7 +154,7 @@ const InputView = React.forwardRef(
               />
             </div>
           </Tooltip>
-          {type === BORDER_TYPE.FLOAT_LABEL && label && (
+          {type === BORDER_TYPE__INPUT_VIEW.FLOAT_LABEL && label && (
             <label
               className={classNames("component__title", {
                 "component__title--normal": !prefix,
@@ -189,7 +187,7 @@ const InputView = React.forwardRef(
 InputView.defaultProps = {
   label: "",
   isSmall: false,
-  type: BORDER_TYPE.MATERIAL,
+  type: BORDER_TYPE__INPUT_VIEW.MATERIAL,
   prefix: "",
   className: "",
   isRequired: false,

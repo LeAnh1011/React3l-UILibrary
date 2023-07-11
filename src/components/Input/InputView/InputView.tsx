@@ -21,6 +21,10 @@ export interface InputViewProps {
   type?: BORDER_TYPE;
   /**Prefix for filter value*/
   prefix?: string | JSX.Element;
+  /**Show * as require field */
+  isRequired?: boolean;
+  //**Disable field */
+  disabled?: boolean;
   /**Suffix for filter value*/
   suffix?: string | JSX.Element;
   /**User-filled value*/
@@ -55,6 +59,8 @@ const InputView = React.forwardRef(
       className,
       isSmall,
       bgColor,
+      isRequired,
+      disabled,
     } = props;
 
     const [internalValue, setInternalValue] = React.useState<string>("");
@@ -93,7 +99,14 @@ const InputView = React.forwardRef(
       <div className={classNames("input-view__wrapper", className)}>
         <div className="input-view__label m-b--3xs">
           {type !== BORDER_TYPE.FLOAT_LABEL && label && (
-            <label className={classNames("component__title")}>{label}</label>
+            <label
+              className={classNames("component__title", {
+                "component__title--disabled": disabled,
+              })}
+            >
+              {label}
+              {isRequired && <span className="view-danger">&nbsp;*</span>}
+            </label>
           )}
           {showCount && maxLength > 0 && (
             <span className="input-view__count p-l--xs body-text--xs">
@@ -110,6 +123,7 @@ const InputView = React.forwardRef(
             "p--xs": !isSmall,
             "input-view--material": type === BORDER_TYPE.MATERIAL,
             "input-view--not__bordered": type === BORDER_TYPE.NOT_BORDERED,
+            "input-view--disabled ": disabled,
             "input-view--float": type === BORDER_TYPE.FLOAT_LABEL,
           })}
           ref={ref}
@@ -136,7 +150,9 @@ const InputView = React.forwardRef(
                 }
                 ref={inputRef}
                 disabled
-                className={classNames("component__input")}
+                className={classNames("component__input", {
+                  "disabled-field": disabled,
+                })}
               />
             </div>
           </Tooltip>
@@ -149,6 +165,7 @@ const InputView = React.forwardRef(
               })}
             >
               {label}
+              {isRequired && <span className="view-danger">&nbsp;*</span>}
             </label>
           )}
           {suffix && (
@@ -175,6 +192,7 @@ InputView.defaultProps = {
   type: BORDER_TYPE.MATERIAL,
   prefix: "",
   className: "",
+  isRequired: false,
   maxLength: 0,
   bgColor: "white",
 };

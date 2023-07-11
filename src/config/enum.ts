@@ -2,6 +2,7 @@ export enum BORDER_TYPE {
   MATERIAL,
   BORDERED,
   FLOAT_LABEL,
+  NOT_BORDERED,
 }
 
 export enum ValidateStatus {
@@ -38,11 +39,4 @@ export enum MODAL_SIZE {
   SIZE_720 = 720,
   SIZE_1024 = 1024,
   SIZE_1200 = 1200,
-}
-
-export enum BORDER_TYPE__INPUT_VIEW {
-  MATERIAL,
-  BORDERED,
-  FLOAT_LABEL,
-  NOT_BORDERED,
 }

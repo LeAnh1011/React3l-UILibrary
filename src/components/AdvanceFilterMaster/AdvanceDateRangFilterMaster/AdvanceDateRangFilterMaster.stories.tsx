@@ -10,10 +10,8 @@ import {
 import { Story } from "@storybook/react";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { BORDER_TYPE } from "../../../config/enum";
-import AdvanceDateRangFilterMaster, {
-  ADVANCE_DATE_RANGE_TYPE,
-} from "./AdvanceDateRangFilterMaster";
+import { ADVANCE_DATE_RANGE_TYPE, BORDER_TYPE } from "../../../config/enum";
+import AdvanceDateRangFilterMaster from "./AdvanceDateRangFilterMaster";
 
 export default {
   title: "AdvanceFilterMaster/AdvanceDateRangFilterMaster",

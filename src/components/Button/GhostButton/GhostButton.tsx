@@ -1,5 +1,5 @@
+import React, { PropsWithChildren } from "react";
 import classNames from "classnames";
-import { PropsWithChildren } from "react";
 import { ButtonProps } from "../Button";
 import "./GhostButton.scss";
 

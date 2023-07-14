@@ -54,9 +54,7 @@ function InputSearchSelect(props: InputSelectProps) {
   }, [expanded]);
 
   React.useEffect(() => {
-    if (value) {
-      inputRef.current.value = value;
-    }
+    inputRef.current.value = value;
   }, [value]);
 
   return (

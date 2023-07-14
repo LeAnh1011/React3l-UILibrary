@@ -1,7 +1,7 @@
 import React from "react";
 import FormItem from "../../FormItem/FormItem";
-import { BORDER_TYPE } from "./../../../config/enum";
-import InputNumber, { DECIMAL, LONG } from "./InputNumber";
+import { BORDER_TYPE, NUMBER_TYPE } from "./../../../config/enum";
+import InputNumber from "./InputNumber";
 import {
   ArgsTable,
   Description,
@@ -54,8 +54,11 @@ export default {
       defaultValue: 1,
     },
     numberType: {
-      control: { type: "radio", options: [LONG, DECIMAL] },
-      defaultValue: LONG,
+      control: {
+        type: "radio",
+        options: [NUMBER_TYPE.LONG, NUMBER_TYPE.DECIMAL],
+      },
+      defaultValue: NUMBER_TYPE.LONG,
     },
     isRequired: {},
     value: {},

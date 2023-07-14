@@ -2,11 +2,8 @@ import classNames from "classnames";
 import React, { ReactSVGElement, RefObject } from "react";
 import { CloseFilled } from "@carbon/icons-react";
 import { ReactNode } from "react";
-import { BORDER_TYPE } from "@Configs/enum";
+import { BORDER_TYPE, NUMBER_TYPE } from "@Configs/enum";
 import "./InputNumber.scss";
-
-export const DECIMAL: string = "DECIMAL";
-export const LONG: string = "LONG";
 
 interface InputNumberAction {
   name?: string;
@@ -29,7 +26,7 @@ export interface InputNumberProps {
   /**Allow value to be negative or not*/
   allowNegative?: boolean;
   /**Provide an option set decimal number type for value*/
-  numberType?: string;
+  numberType?: NUMBER_TYPE;
   /**Reverse symbol “.” and “,”*/
   isReverseSymb?: boolean;
   /**Provide a length of number behind the point (character)*/
@@ -111,7 +108,7 @@ function InputNumber(props: InputNumberProps) {
       const newRegEx = buildRegex();
       if (isReverseSymb) {
         switch (numberType) {
-          case DECIMAL:
+          case NUMBER_TYPE.DECIMAL:
             if (allowNegative) {
               inputValue = inputValue
                 .replace(/^(-00)/gm, "-0")
@@ -148,7 +145,7 @@ function InputNumber(props: InputNumberProps) {
         }
       } else {
         switch (numberType) {
-          case DECIMAL:
+          case NUMBER_TYPE.DECIMAL:
             if (allowNegative) {
               inputValue = inputValue
                 .replace(/^(-00)/gm, "-0")
@@ -199,7 +196,7 @@ function InputNumber(props: InputNumberProps) {
           stringValue = value.replace(/,/g, "");
         }
         switch (numberType) {
-          case DECIMAL:
+          case NUMBER_TYPE.DECIMAL:
             number = parseFloat(stringValue);
             isOutOfRange =
               (typeof max === "number" && number > max) ||
@@ -408,7 +405,7 @@ InputNumber.defaultProps = {
   isRequired: false,
   allowNegative: false,
   isReverseSymb: false,
-  numberType: LONG,
+  numberType: NUMBER_TYPE.LONG,
   decimalDigit: 4,
   disabled: false,
   prefix: "",

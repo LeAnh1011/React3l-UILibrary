@@ -40,3 +40,8 @@ export enum MODAL_SIZE {
   SIZE_1024 = 1024,
   SIZE_1200 = 1200,
 }
+
+export enum NUMBER_TYPE {
+  DECIMAL = "DECIMAL",
+  LONG = "LONG",
+}

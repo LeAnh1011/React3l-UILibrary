@@ -3,7 +3,6 @@ import {
   Checkbox as CheckboxAntd,
   CheckboxProps as CheckboxPropsAntd,
 } from "antd";
-import CheckboxGroup from "./CheckboxGroup";
 import "./Checkbox.scss";
 
 export interface CheckboxProps {
@@ -41,7 +40,5 @@ function Checkbox(props: CheckboxProps & CheckboxPropsAntd) {
     </div>
   );
 }
-
-Checkbox.Group = CheckboxGroup;
 
 export default Checkbox;

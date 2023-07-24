@@ -2,8 +2,8 @@ import { CommonService } from "@Services/common-service";
 import React from "react";
 import { Model } from "react3l-common";
 import { ErrorObserver, Observable, Subscription } from "rxjs";
-import Checkbox from ".";
 import "./CheckboxGroup.scss";
+import Checkbox from "./Checkbox";
 
 export interface CheckboxGroupComponentProps<T extends Model> {
   /**Handle change the values of CheckboxGroup */
@@ -106,7 +106,7 @@ function CheckboxGroup(props: CheckboxGroupComponentProps<Model>) {
   return (
     <div className="checkbox-group__container">
       <div className="checkbox-group__label">{label}</div>
-      <div>
+      <div className="p-t--3xs">
         {listOptions?.length > 0 &&
           listOptions?.map((option) => {
             return (

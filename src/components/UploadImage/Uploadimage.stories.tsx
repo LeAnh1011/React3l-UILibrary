@@ -11,7 +11,8 @@ import {
 import { ComponentMeta, Story } from "@storybook/react";
 import React from "react";
 import { Observable } from "rxjs";
-import UploadImage, { File, FileModel, UPLOADTYPE_IMAGE } from "./UploadImage";
+import UploadImage, { File, FileModel } from "./UploadImage";
+import { UPLOADTYPE_IMAGE } from "./../../config/enum";
 
 const demoList = {
   url:

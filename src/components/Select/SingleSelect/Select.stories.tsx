@@ -15,6 +15,7 @@ import { of } from "rxjs";
 import FormItem from "../../FormItem/FormItem";
 import { BORDER_TYPE } from "./../../../config/enum";
 import Select from "./Select";
+
 class DemoFilter extends ModelFilter {
   id: IdFilter = new IdFilter();
   name: StringFilter = new StringFilter();

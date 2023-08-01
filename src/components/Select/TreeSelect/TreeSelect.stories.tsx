@@ -18,13 +18,14 @@ import { BORDER_TYPE } from "./../../../config/enum";
 import FormItem from "./../../FormItem/FormItem";
 import TreeSelect from "./TreeSelect";
 
-export class DistrictFilter extends ModelFilter {
+class DistrictFilter extends ModelFilter {
   public id: IdFilter = new IdFilter();
 
   public name: StringFilter = new StringFilter();
 
   public provinceId: IdFilter = new IdFilter();
 }
+
 interface changeAction<T extends Model> {
   type: string;
   data: T[];
@@ -37,6 +38,7 @@ function reducerFunc(state: Model, action: changeAction<Model>): Model[] {
   }
   return [...action.data];
 }
+
 export default {
   title: "Select/TreeSelect",
   component: TreeSelect,
@@ -529,4 +531,5 @@ const Template: Story = (args) => {
     </div>
   );
 };
+
 export const Default = Template.bind({});

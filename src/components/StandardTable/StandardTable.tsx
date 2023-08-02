@@ -96,7 +96,7 @@ function StandardTable(props: StandardTableCustomProps) {
               <LoadingOutlined
                 style={{
                   fontSize: 32,
-                  color: "#0F62FE",
+                  color: "#000000",
                 }}
                 spin
               />

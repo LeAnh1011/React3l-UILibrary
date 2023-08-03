@@ -82,7 +82,7 @@ export default {
   output: [
     {
       dir: "build",
-      format: "cjs",
+      format: "esm",
       sourcemap: true,
       exports: "named",
       preserveModulesRoot: "src",

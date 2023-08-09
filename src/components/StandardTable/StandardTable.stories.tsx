@@ -577,6 +577,7 @@ const Template: Story = (args) => {
         dataSource={dataSource}
         rowSelection={rowSelection}
         loading={loading}
+        className="hihi"
         // scroll={{ x: 1900 }}
       />
       <div>

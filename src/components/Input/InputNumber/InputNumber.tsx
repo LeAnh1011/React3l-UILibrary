@@ -1,8 +1,8 @@
-import classNames from "classnames";
-import React, { ReactSVGElement, RefObject } from "react";
-import { CloseFilled } from "@carbon/icons-react";
-import { ReactNode } from "react";
+import Button from "@Components/Button/Button";
 import { BORDER_TYPE } from "@Configs/enum";
+import { Close, WarningFilled } from "@carbon/icons-react";
+import classNames from "classnames";
+import React, { ReactNode, ReactSVGElement, RefObject } from "react";
 import "./InputNumber.scss";
 
 export const DECIMAL: string = "DECIMAL";
@@ -384,9 +384,15 @@ function InputNumber(props: InputNumberProps) {
         )}
         {internalValue && !disabled && (
           <div className={classNames("input-icon__clear", "m-l--2xs")}>
-            <CloseFilled size={16} onClick={handleClearInput} />
+            <Button
+              type="icon-only-ghost"
+              className="btn--xs"
+              icon={<Close size={16} />}
+              onClick={handleClearInput}
+            ></Button>
           </div>
         )}
+        <div className={classNames("input-icon__warning", "m-l--2xs")}><WarningFilled size={16}  /></div>
         {suffix && (
           <>
             {typeof suffix === "string" ? (

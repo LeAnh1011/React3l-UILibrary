@@ -50,10 +50,9 @@
       top: 0.3rem !important;
     }
     .advance-date-range-filter__icon-clear {
-      color: var(--palette-coolGray-50);
+      color: var(--palette-gray-100);
       &:hover {
         cursor: pointer;
-        color: var(--palette-coolGrayHover-50);
       }
     }
   }
@@ -183,12 +182,9 @@
 }
 
 .form-item__container--error {
-  .advance-date-range-filter__icon-wrapper {
-    background-color: var(--color-critical-blur) !important;
-  }
+ 
   .advance-date-range-filter--material
     + .advance-date-range-filter__icon-wrapper {
-    background-color: var(--color-critical-blur) !important;
     &:hover {
       background-color: var(--palette-grayHover-10) !important;
     }

@@ -1,11 +1,12 @@
+import Button from "@Components/Button/Button";
+import { BORDER_TYPE } from "@Configs/enum";
+import { CommonService } from "@Services/common-service";
+import { Calendar, Close } from "@carbon/icons-react";
 import { DatePicker } from "antd";
 import type { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
-import { BORDER_TYPE } from "@Configs/enum";
 import { Moment } from "moment";
 import React, { ReactSVGElement, RefObject } from "react";
-import { CommonService } from "@Services/common-service";
-import { CloseFilled, Calendar } from "@carbon/icons-react";
 import "./DateRange.scss";
 
 const { RangePicker } = DatePicker;
@@ -174,11 +175,12 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
                 }
               )}
             >
-              <CloseFilled
-                size={16}
-                className={classNames("date-range__icon-clear", "m-l--2xs")}
+              <Button
+                type="icon-only-ghost"
+                className="btn--xs date-range__icon-clear m-l--2xs"
+                icon={<Close size={16} />}
                 onClick={handleClearDate}
-              />
+              ></Button>
             </span>
           </>
         )}

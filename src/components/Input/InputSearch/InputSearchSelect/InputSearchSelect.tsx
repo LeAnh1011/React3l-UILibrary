@@ -1,4 +1,5 @@
-import { CloseFilled } from "@carbon/icons-react";
+import Button from "@Components/Button/Button";
+import { Close } from "@carbon/icons-react";
 import classNames from "classnames";
 import React, { ReactSVGElement, RefObject } from "react";
 import "./InputSearchSelect.scss";
@@ -75,11 +76,8 @@ function InputSearchSelect(props: InputSelectProps) {
               style={{ width: "16px", height: "20px", paddingTop: 2 }}
               className="m-r--2xs"
             >
-              <CloseFilled
-                size={16}
-                className="input-icon__clear m-r--2xs"
-                onClick={handleClearInput}
-              />
+              <Button type="icon-only-ghost" className="btn--xs input-icon__clear" icon={<Close size={16}/>} onClick={handleClearInput}></Button>
+            
             </div>
           )}
         </div>

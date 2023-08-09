@@ -2,7 +2,10 @@
   .content-icon {
     font-size: 16px;
   }
-
+  &.btn--xs {
+    height: 16px;
+    width: 16px;
+  }
   &.btn--sm {
     height: 24px;
     width: 24px;

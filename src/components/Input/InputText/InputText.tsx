@@ -1,8 +1,9 @@
-import classNames from "classnames";
+import Button from "@Components/Button/Button";
 import { BORDER_TYPE } from "@Configs/enum";
-import React, { ReactNode, ReactSVGElement, RefObject } from "react";
-import { CloseFilled } from "@carbon/icons-react";
+import { Close, WarningFilled } from "@carbon/icons-react";
 import { Tooltip } from "antd";
+import classNames from "classnames";
+import React, { ReactNode, ReactSVGElement, RefObject } from "react";
 import "./InputText.scss";
 
 export interface InputAction {
@@ -259,9 +260,11 @@ const InputText = React.forwardRef(
           )}
           {internalValue && !disabled && (
             <div className={classNames("input-icon__clear", "m-l--2xs")}>
-              <CloseFilled size={16} onClick={handleClearInput} />
+              <Button type="icon-only-ghost" className="btn--xs" icon={<Close size={16}/>} onClick={handleClearInput}></Button>
             </div>
           )}
+          <div className={classNames("input-icon__warning", "m-l--2xs")}><WarningFilled size={16}  /></div>
+          
           {suffix && (
             <>
               {typeof suffix === "string" ? (

@@ -1,9 +1,10 @@
-import React, { ReactSVGElement, RefObject } from "react";
-import { CloseFilled, ChevronDown, Close } from "@carbon/icons-react";
-import { Model } from "react3l-common";
-import classNames from "classnames";
+import Button from "@Components/Button/Button";
 import { BORDER_TYPE } from "@Configs/enum";
+import { ChevronDown, Close } from "@carbon/icons-react";
 import { Tooltip } from "antd";
+import classNames from "classnames";
+import React, { ReactSVGElement, RefObject } from "react";
+import { Model } from "react3l-common";
 import { InputAction } from "../InputText/InputText";
 import "./InputTag.scss";
 
@@ -299,11 +300,12 @@ function InputTag(props: InputTagProps<Model>) {
           )}
 
           {!disabled && searchTerm && (
-            <CloseFilled
-              size={16}
-              className="input-icon input-icon__clear m-x--2xs"
+            <Button
+              type="icon-only-ghost"
+              className="btn--xs input-icon input-icon__clear m-x--2xs"
+              icon={<Close size={16} />}
               onClick={handleClearInput}
-            />
+            ></Button>
           )}
 
           <ChevronDown

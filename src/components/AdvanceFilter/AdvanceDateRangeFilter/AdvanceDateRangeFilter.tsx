@@ -1,11 +1,12 @@
-import React, { ReactSVGElement, RefObject } from "react";
+import Button from "@Components/Button/Button";
+import { BORDER_TYPE } from "@Configs/enum";
+import { CommonService } from "@Services/common-service";
+import { Calendar, Close } from "@carbon/icons-react";
 import { DatePicker } from "antd";
 import { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
-import { BORDER_TYPE } from "@Configs/enum";
 import { Moment } from "moment";
-import { CommonService } from "@Services/common-service";
-import { CloseFilled, Calendar } from "@carbon/icons-react";
+import React, { ReactSVGElement, RefObject } from "react";
 import "./AdvanceDateRangeFilter.scss";
 
 const { RangePicker } = DatePicker;
@@ -149,14 +150,12 @@ function AdvanceDateRangeFilter(
                 }
               )}
             >
-              <CloseFilled
-                size={16}
-                className={classNames(
-                  "advance-date-range-filter__icon-clear",
-                  "m-l--2xs"
-                )}
+              <Button
+                type="icon-only-ghost"
+                className="btn--xs advance-date-range-filter__icon-clear m-l--2xs"
+                icon={<Close size={16} />}
                 onClick={handleClearDate}
-              />
+              ></Button>
             </span>
           </>
         )}

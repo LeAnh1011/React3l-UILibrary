@@ -35,7 +35,7 @@
     top: 0.5rem;
     right: 0.5rem;
     box-sizing: border-box;
-    background-color: var(--color-white);
+    background-color: var(--palette-gray-10);
     justify-content: flex-end;
     align-items: center;
 
@@ -57,10 +57,9 @@
       top: 0.3rem !important;
     }
     .time-picker__icon-clear {
-      color: var(--palette-coolGray-50);
+      color: var(--palette-gray-100);
       &:hover {
         cursor: pointer;
-        color: var(--palette-coolGrayHover-50);
       }
     }
   }
@@ -206,11 +205,7 @@
   }
 }
 .form-item__container--error {
-  .time-picker__icon-wrapper {
-    background-color: var(--color-critical-blur) !important;
-  }
   .time-picker--material + .time-picker__icon-wrapper {
-    background-color: var(--color-critical-blur) !important;
     &:hover {
       background-color: var(--palette-grayHover-10) !important;
     }

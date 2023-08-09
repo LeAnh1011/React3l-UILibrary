@@ -1,14 +1,15 @@
-import {
-  DatePicker as DatePickerAntd,
-  DatePickerProps as AntdDatePickerProps,
-} from "antd";
-import classNames from "classnames";
+import Button from "@Components/Button/Button";
 import { DEFAULT_DATETIME_VALUE } from "@Configs/consts";
 import { BORDER_TYPE } from "@Configs/enum";
+import { CommonService } from "@Services/common-service";
+import { Close } from "@carbon/icons-react";
+import {
+  DatePickerProps as AntdDatePickerProps,
+  DatePicker as DatePickerAntd,
+} from "antd";
+import classNames from "classnames";
 import { Moment } from "moment";
 import React, { ReactSVGElement, RefObject } from "react";
-import { CommonService } from "@Services/common-service";
-import { CloseFilled } from "@carbon/icons-react";
 import "./DatePicker.scss";
 
 interface DatePickerAction {
@@ -145,11 +146,12 @@ function DatePicker(props: DatePickerProps & AntdDatePickerProps) {
               { "date-picker__icon-wrapper--sm": isSmall }
             )}
           >
-            <CloseFilled
-              size={16}
-              className={classNames("date-picker__icon-clear", "m-l--2xs")}
+            <Button
+              type="icon-only-ghost"
+              className="btn--xs date-picker__icon-clear m-l--2xs"
+              icon={<Close size={16} />}
               onClick={handleClearDate}
-            />
+            ></Button>
           </span>
         )}
       </div>

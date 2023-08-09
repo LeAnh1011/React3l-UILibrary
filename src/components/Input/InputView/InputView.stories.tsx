@@ -67,7 +67,7 @@ const Template: Story = (args) => {
     <div style={{ width: "300px", padding: "10px" }}>
       <div style={{ margin: "15px 0" }}>
         <FormItem>
-          <InputView {...args} label="First Name" value={inputValue} />
+          <InputView {...args} label="First Name" value={inputValue} type={0}/>
         </FormItem>
       </div>
     </div>

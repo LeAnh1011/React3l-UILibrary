@@ -91,7 +91,7 @@ function StandardTable(props: StandardTableCustomProps) {
     <>
       <div className={classNames("page-table")} id={idContainer}>
         <Table
-          {...props}
+         
           loading={{
             indicator: (
               <LoadingOutlined
@@ -105,11 +105,12 @@ function StandardTable(props: StandardTableCustomProps) {
             spinning: spinning,
           }}
           className={classNames(
+            className,
             `table-size-${tableSize}`,
             "custom-scrollbar",
             { "big-checkbox-col": !expandable },
-            `${className}`
           )}
+          {...props}
         />
       </div>
     </>

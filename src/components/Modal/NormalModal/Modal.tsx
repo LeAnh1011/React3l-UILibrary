@@ -131,7 +131,7 @@ function Modal(props: ModalCustomProps) {
         {...props}
         style={{ top: 72, width: 1500 }}
         destroyOnClose={destroyOnClose}
-        className={classNames("modal__container", props?.className)}
+        className={classNames("modal__container")}
         closeIcon={CloseButton}
         footer={visibleFooter ? renderModalFooter : null}
         onCancel={handleCancel}

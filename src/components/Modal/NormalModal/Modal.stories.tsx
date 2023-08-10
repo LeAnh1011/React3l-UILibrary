@@ -12,8 +12,8 @@ import React from "react";
 import Button from "../../Button/Button";
 import FormItem from "../../FormItem";
 import InputText from "../../Input/InputText/InputText";
-import { BORDER_TYPE, ValidateStatus } from "./../../../config/enum";
-import Modal, { MODAL_SIZE } from "./Modal";
+import { BORDER_TYPE, MODAL_SIZE, ValidateStatus } from "./../../../config/enum";
+import Modal from "./Modal";
 export type LoadingType = "default" | "submitting" | "submitted" | "error";
 
 export default {
@@ -41,7 +41,6 @@ export default {
       description: "/**Title of the modal*/",
       control: "text",
     },
-
     size: {
       control: {
         type: "radio",
@@ -103,6 +102,7 @@ const Template: Story = (args) => {
         title="Modal Title"
         loadingType={loadingType}
         visibleFooter={true}
+        className="modal-detail"
         {...args}
       >
         <div

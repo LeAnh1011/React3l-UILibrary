@@ -1,14 +1,15 @@
-import {
-  TimePicker as TimePickerAntd,
-  TimePickerProps as AntdTimePickerProps,
-} from "antd";
-import classNames from "classnames";
+import Button from "@Components/Button/Button";
 import { DEFAULT_DATETIME_VALUE } from "@Configs/consts";
 import { BORDER_TYPE } from "@Configs/enum";
+import { CommonService } from "@Services/common-service";
+import { Close } from "@carbon/icons-react";
+import {
+  TimePickerProps as AntdTimePickerProps,
+  TimePicker as TimePickerAntd,
+} from "antd";
+import classNames from "classnames";
 import { Moment } from "moment";
 import React, { ReactSVGElement, RefObject } from "react";
-import { CommonService } from "@Services/common-service";
-import { CloseFilled } from "@carbon/icons-react";
 import "./TimePicker.scss";
 
 interface TimePickerAction {
@@ -145,11 +146,12 @@ function TimePicker(props: TimePickerProps & AntdTimePickerProps) {
               { "time-picker__icon-wrapper--sm": isSmall }
             )}
           >
-            <CloseFilled
-              size={16}
-              className={classNames("time-picker__icon-clear", "m-l--2xs")}
+            <Button
+              type="icon-only-ghost"
+              className="btn--xs time-picker__icon-clear m-l--2xs"
+              icon={<Close size={16} />}
               onClick={handleClearTime}
-            />
+            ></Button>
           </span>
         )}
       </div>

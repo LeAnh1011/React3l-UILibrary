@@ -1,6 +1,7 @@
-import classNames from "classnames";
-import { CloseFilled } from "@carbon/icons-react";
+import Button from "@Components/Button/Button";
 import { BORDER_TYPE } from "@Configs/enum";
+import { Close } from "@carbon/icons-react";
+import classNames from "classnames";
 import React, { ReactSVGElement, RefObject } from "react";
 import "./AdvanceStringFilter.scss";
 
@@ -203,7 +204,7 @@ const AdvanceStringFilter = React.forwardRef(
           )}
           {internalValue && !disabled && (
             <div className={classNames("input-icon__clear", "m-l--2xs")}>
-              <CloseFilled size={16} onClick={handleClearInput} />
+              <Button type="icon-only-ghost" className="btn--xs" icon={<Close size={16}/>} onClick={handleClearInput}></Button>
             </div>
           )}
           {suffix && (

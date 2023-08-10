@@ -1,8 +1,9 @@
-import React, { ReactSVGElement, RefObject } from "react";
-import { CloseFilled, ChevronDown } from "@carbon/icons-react";
-import { Model } from "react3l-common";
-import classNames from "classnames";
+import Button from "@Components/Button/Button";
 import { BORDER_TYPE } from "@Configs/enum";
+import { ChevronDown, Close } from "@carbon/icons-react";
+import classNames from "classnames";
+import React, { ReactSVGElement, RefObject } from "react";
+import { Model } from "react3l-common";
 import { InputAction } from "../InputText/InputText";
 import "./InputSelect.scss";
 
@@ -213,11 +214,13 @@ function InputSelect(props: InputSelectProps<Model>) {
                 </label>
               )}
               {internalValue && !disabled ? (
-                <CloseFilled
-                  size={16}
-                  className="input-icon input-icon__clear m-r--2xs"
-                  onClick={handleClearInput}
-                />
+                <Button
+                type="icon-only-ghost"
+                className="btn--xs input-icon input-icon__clear m-r--2xs"
+                icon={<Close size={16} />}
+                onClick={handleClearInput}
+              ></Button>
+                
               ) : null}
               <ChevronDown
                 size={16}
@@ -256,11 +259,12 @@ function InputSelect(props: InputSelectProps<Model>) {
                 </label>
               )}
               {value && !disabled && (
-                <CloseFilled
-                  size={16}
-                  className="input-icon input-icon__clear"
+                <Button
+                  type="icon-only-ghost"
+                  className="btn--xs input-icon input-icon__clear"
+                  icon={<Close size={16} />}
                   onClick={handleClearItem}
-                />
+                ></Button>
               )}
               <ChevronDown
                 size={16}

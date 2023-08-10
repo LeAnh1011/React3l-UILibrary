@@ -36,7 +36,7 @@ export default {
       control: {
         type: "radio",
         options: [
-          "btn--sx",
+          "btn--xs",
           "btn--sm",
           "btn--md",
           "btn--lg",

@@ -210,11 +210,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+    .input-icon__warning {
+      justify-content: center;
+      align-items: center;
+      display: none;
       svg {
-        color: var(--palette-coolGray-50);
+        color: var(--color-critical);
         &:hover {
           cursor: pointer;
-          color: var(--palette-coolGrayHover-50);
         }
       }
     }
@@ -222,6 +226,9 @@
 }
 .form-item__container {
   &.form-item__container--error {
+    .input-icon__warning {
+      display: flex;
+    }
     .form-item__content {
       .component__input {
         &.input-text--material {

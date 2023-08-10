@@ -189,10 +189,21 @@
       justify-content: center;
       align-items: center;
       svg {
-        color: var(--palette-coolGray-50);
+        color: var(--palette-gray-100);
         &:hover {
           cursor: pointer;
           color: var(--palette-coolGrayHover-50);
+        }
+      }
+    }
+    .input-icon__warning {
+      justify-content: center;
+      align-items: center;
+      display: none;
+      svg {
+        color: var(--color-critical);
+        &:hover {
+          cursor: pointer;
         }
       }
     }
@@ -200,6 +211,9 @@
 }
 .form-item__container {
   &.form-item__container--error {
+    .input-icon__warning {
+      display: flex;
+    }
     .form-item__content {
       .component__input {
         &.input-number--material {

@@ -1,14 +1,15 @@
-import React, { ReactSVGElement, RefObject } from "react";
-import {
-  DatePicker as DatePickerAntd,
-  DatePickerProps as AntdDatePickerProps,
-} from "antd";
-import classNames from "classnames";
+import Button from "@Components/Button/Button";
 import { DEFAULT_DATETIME_VALUE } from "@Configs/consts";
 import { BORDER_TYPE } from "@Configs/enum";
-import { Moment } from "moment";
 import { CommonService } from "@Services/common-service";
-import { CloseFilled } from "@carbon/icons-react";
+import { Close } from "@carbon/icons-react";
+import {
+  DatePickerProps as AntdDatePickerProps,
+  DatePicker as DatePickerAntd,
+} from "antd";
+import classNames from "classnames";
+import { Moment } from "moment";
+import React, { ReactSVGElement, RefObject } from "react";
 import "./AdvanceDateFilter.scss";
 
 interface AdvanceDateFilterProps {
@@ -130,14 +131,12 @@ function AdvanceDateFilter(
                 }
               )}
             >
-              <CloseFilled
-                size={16}
-                className={classNames(
-                  "advance-date-filter__icon-clear",
-                  "m-l--2xs"
-                )}
+              <Button
+                type="icon-only-ghost"
+                className="btn--xs advance-date-filter__icon-clear m-l--2xs"
+                icon={<Close size={16} />}
                 onClick={handleClearDate}
-              />
+              ></Button>
             </span>
           )}
       </div>

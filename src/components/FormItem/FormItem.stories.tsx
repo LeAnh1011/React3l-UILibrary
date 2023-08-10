@@ -10,6 +10,7 @@ import {
 import { Story } from "@storybook/react";
 import React from "react";
 import InputText from "../Input/InputText/InputText";
+import InputNumber from "../Input/InputNumber/InputNumber";
 import FormItem from "./FormItem";
 export default {
   title: "FormItem",
@@ -38,12 +39,12 @@ const Template: Story = (args) => {
     <>
       <div style={{ margin: "10px", width: "250px" }}>
         <FormItem {...args}>
-          <InputText placeHolder={"Enter text..."} />
+          <InputText placeHolder={"Enter text..."} label="Giá trị" isSmall />
         </FormItem>
       </div>
       <div style={{ margin: "10px", width: "250px" }}>
         <FormItem {...args}>
-          <InputText placeHolder={"Enter text..."} />
+          <InputNumber placeHolder={"Enter text..."} label="Tổng giá trị"/>
         </FormItem>
       </div>
       <div style={{ margin: "10px", width: "250px" }}>

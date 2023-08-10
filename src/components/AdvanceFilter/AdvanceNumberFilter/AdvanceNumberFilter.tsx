@@ -1,8 +1,8 @@
-import classNames from "classnames";
-import { CloseFilled } from "@carbon/icons-react";
-import React, { ReactSVGElement, RefObject } from "react";
-import { ReactNode } from "react";
+import Button from "@Components/Button/Button";
 import { BORDER_TYPE } from "@Configs/enum";
+import { Close } from "@carbon/icons-react";
+import classNames from "classnames";
+import React, { ReactNode, ReactSVGElement, RefObject } from "react";
 import "./AdvanceNumberFilter.scss";
 
 export const DECIMAL: string = "DECIMAL";
@@ -347,7 +347,7 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
         )}
         {internalValue && !disabled && (
           <div className={classNames("input-icon__clear", "m-l--2xs")}>
-            <CloseFilled size={16} onClick={handleClearInput} />
+            <Button type="icon-only-ghost" className="btn--xs" icon={<Close size={16}/>} onClick={handleClearInput}></Button>
           </div>
         )}
         {suffix && (

@@ -82,7 +82,7 @@ export default {
   output: [
     {
       dir: "build",
-      format: "esm",
+      format: "cjs",
       sourcemap: true,
       exports: "named",
       preserveModulesRoot: "src",
@@ -112,5 +112,5 @@ export default {
       extract: false,
     }),
     terser(),
-  ]
+  ],
 };

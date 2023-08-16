@@ -261,7 +261,7 @@ export function ComponentUploadImage(props: ComponentUploadImageProps) {
       </div>
       {listImage && (
         <CroppedModal
-          visible={isPreview}
+          open={isPreview}
           handleCancel={handleClosePreview}
           handleSave={handleSaveCropped}
           listImage={listImage}

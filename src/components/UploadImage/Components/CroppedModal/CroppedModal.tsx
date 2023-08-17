@@ -118,7 +118,7 @@ export default function CroppedModal(props: CroppedModalProps) {
   const {
     isMultiple,
     listImage,
-    visible,
+    open,
     handleCancel,
     handleSave,
     defaultAspect,
@@ -485,7 +485,7 @@ export default function CroppedModal(props: CroppedModalProps) {
   return (
     <>
       <Modal
-        visible={visible}
+        open={open}
         width={1000}
         closable={false}
         bodyStyle={{ borderRadius: 10 }}

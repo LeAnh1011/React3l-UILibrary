@@ -16,7 +16,7 @@ export interface CheckboxProps {
   label?: string;
 }
 
-function Checkbox(props: CheckboxProps & CheckboxPropsAntd) {
+function Checkbox(props: CheckboxProps) {
   const { onChange, checked, disabled, label } = props;
   const handleChange = React.useCallback(
     (value) => {

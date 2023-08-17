@@ -94,7 +94,6 @@ UploadImage.defaultProps = {
   isMinimized: false,
   autoUpload: false,
   size: "lg",
-  isSingle: false,
   maximumSize: 5000000,
 };
 

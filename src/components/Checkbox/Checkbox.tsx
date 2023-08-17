@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  Checkbox as CheckboxAntd,
-  CheckboxProps as CheckboxPropsAntd,
-} from "antd";
+import { Checkbox as CheckboxAntd } from "antd";
 import "./Checkbox.scss";
 
 export interface CheckboxProps {

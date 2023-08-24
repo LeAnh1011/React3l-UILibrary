@@ -593,7 +593,7 @@ function Comment(props: CommentProps<ModelFilter>) {
         )}
       </div>
       <Modal
-        visible={isPreview}
+        open={isPreview}
         width={800}
         visibleFooter={false}
         closable={true}

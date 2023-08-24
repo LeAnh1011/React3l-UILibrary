@@ -452,7 +452,7 @@ function Comment(props: CommentProps<ModelFilter>) {
     if (discussionId) {
       const subcription = getListMessages();
       return () => {
-        subcription.unsubscribe();
+        subcription && subcription.unsubscribe();
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

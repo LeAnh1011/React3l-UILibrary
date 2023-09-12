@@ -282,7 +282,6 @@ AdvanceTreeFilterMaster.defaultProps = {
   checkable: false,
   disabled: false,
   selectable: true,
-  treeTitleRender: (t: any) => t?.title,
 };
 
 export default AdvanceTreeFilterMaster;

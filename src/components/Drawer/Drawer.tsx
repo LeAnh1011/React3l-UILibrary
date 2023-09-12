@@ -44,7 +44,7 @@ export interface DrawerProps {
   /**Control close icon visible or not*/
   isHaveCloseIcon?: boolean;
   /**Control the size of drawer*/
-  size?: "sm" | "lg";
+  size?: "sm" | "lg" | "max";
 }
 
 function Drawer(props: DrawerProps) {

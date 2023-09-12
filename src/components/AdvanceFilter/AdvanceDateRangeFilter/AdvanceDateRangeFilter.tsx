@@ -39,6 +39,8 @@ interface AdvanceDateRangeFilterProps {
   placeholder?: [string, string];
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  /** Set unique class for popup calendar */
+  uniquePopupClassName?: string;
 }
 
 function AdvanceDateRangeFilter(
@@ -55,6 +57,7 @@ function AdvanceDateRangeFilter(
     placeholder,
     className,
     bgColor,
+    uniquePopupClassName,
   } = props;
 
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
@@ -100,6 +103,7 @@ function AdvanceDateRangeFilter(
       <div className="advance-date-range-filter__container">
         <RangePicker
           {...props}
+          popupClassName={uniquePopupClassName}
           value={internalValue}
           style={{ width: "100%" }}
           allowClear={false}

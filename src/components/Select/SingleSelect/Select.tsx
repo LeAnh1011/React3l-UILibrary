@@ -261,25 +261,33 @@ function Select(props: SelectProps<Model, ModelFilter>) {
 
   React.useEffect(() => {
     if (isExpand && appendToBody) {
-      const currentPosition = wrapperRef.current.getBoundingClientRect();
-      const spaceBelow = window.innerHeight - currentPosition.bottom;
-      if (spaceBelow <= 200) {
-        setTimeout(() => {
+      const handleScroll = () => {
+        const currentPosition = wrapperRef.current.getBoundingClientRect();
+        const spaceBelow = window.innerHeight - currentPosition.bottom;
+        if (spaceBelow <= 200) {
+          setTimeout(() => {
+            setAppendToBodyStyle({
+              position: "fixed",
+              bottom: spaceBelow + wrapperRef.current.clientHeight,
+              left: currentPosition.left,
+              maxWidth: wrapperRef.current.clientWidth,
+            });
+          }, 100);
+        } else {
           setAppendToBodyStyle({
             position: "fixed",
-            bottom: spaceBelow + wrapperRef.current.clientHeight,
+            top: currentPosition.top + wrapperRef.current.clientHeight,
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
           });
-        }, 100);
-      } else {
-        setAppendToBodyStyle({
-          position: "fixed",
-          top: currentPosition.top + wrapperRef.current.clientHeight,
-          left: currentPosition.left,
-          maxWidth: wrapperRef.current.clientWidth,
-        });
-      }
+        }
+      };
+      handleScroll();
+      document.addEventListener("scroll", handleScroll, true);
+
+      return () => {
+        document.removeEventListener("scroll", handleScroll);
+      };
     }
   }, [appendToBody, isExpand]);
 

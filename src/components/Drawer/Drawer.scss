@@ -11,19 +11,25 @@
   z-index: 1010;
 
   &.slide-out {
-    &.drawer-sm{
+    &.drawer-sm {
       width: 400px;
       .drawer_footer {
         width: 400px;
       }
     }
-    &.drawer-lg{
+    &.drawer-lg {
       width: 594px;
       .drawer_footer {
         width: 594px;
       }
     }
-    &.drawer-max{
+    &.drawer-xl {
+      width: 55vw;
+      .drawer_footer {
+        width: 55vw;
+      }
+    }
+    &.drawer-max {
       width: 80vw;
       .drawer_footer {
         width: 80vw;
@@ -40,18 +46,18 @@
       display: flex;
       justify-content: space-between;
       width: 100%;
-      box-shadow: inset 0px -1px 0px #E1E3E5;
+      box-shadow: inset 0px -1px 0px #e1e3e5;
 
       .drawer__header-text {
-        .title{
+        .title {
           font-size: 20px;
           line-height: 24px;
         }
-        
+
         padding: 12px 16px;
-        &.have-description{
+        &.have-description {
           padding: 16px 12px 16px 16px;
-          .description{
+          .description {
             font-size: 14px;
             line-height: 16px;
             margin-top: 3px;

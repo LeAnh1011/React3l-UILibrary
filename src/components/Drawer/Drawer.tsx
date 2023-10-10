@@ -44,7 +44,9 @@ export interface DrawerProps {
   /**Control close icon visible or not*/
   isHaveCloseIcon?: boolean;
   /**Control the size of drawer*/
-  size?: "sm" | "lg" | "max";
+  size?: "sm" | "lg" | "xl" | "max";
+  /**Control the size of drawer*/
+  side?: "left" | "right";
 }
 
 function Drawer(props: DrawerProps) {
@@ -65,6 +67,7 @@ function Drawer(props: DrawerProps) {
     handleApplyNext,
     isHaveCloseIcon,
     size,
+    side,
   } = props;
   const ref: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(null);
 
@@ -118,7 +121,7 @@ function Drawer(props: DrawerProps) {
   return (
     <>
       <div
-        className={classNames(`drawer__container drawer-${size}`, {
+        className={classNames(`drawer__container drawer-${size} side-${side}`, {
           "slide-out": visible === true,
         })}
       >
@@ -167,6 +170,7 @@ Drawer.defaultProps = {
   numberButton: NUMBER_BUTTON.TWO,
   isHaveCloseIcon: true,
   size: "sm",
+  side: "right",
 };
 
 export default Drawer;

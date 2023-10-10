@@ -3,12 +3,19 @@
   width: 0;
   position: fixed;
   top: 0;
-  right: 0;
   bottom: 0;
   overflow-x: hidden;
   transition: 0.2s;
   background: #ffffff;
   z-index: 1010;
+
+  &.side-left {
+    left: 0;
+  }
+
+  &.side-right {
+    right: 0;
+  }
 
   &.slide-out {
     &.drawer-sm {

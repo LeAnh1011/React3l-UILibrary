@@ -21,6 +21,7 @@
     &.drawer-sm {
       width: 400px;
       .drawer_footer {
+        display: block;
         width: 400px;
       }
     }
@@ -28,18 +29,21 @@
       width: 594px;
       .drawer_footer {
         width: 594px;
+        display: block;
       }
     }
     &.drawer-xl {
       width: 55vw;
       .drawer_footer {
         width: 55vw;
+        display: block;
       }
     }
     &.drawer-max {
       width: 80vw;
       .drawer_footer {
         width: 80vw;
+        display: block;
       }
     }
   }
@@ -96,6 +100,7 @@
       bottom: 0;
       border-top: 1px solid #f8f8fa;
       background-color: #ffffff;
+      display: none;
       .button-bleed-footer {
         width: 100%;
         display: flex;

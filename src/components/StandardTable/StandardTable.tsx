@@ -1,4 +1,4 @@
-import LoadingOutlined from "@ant-design/icons/LoadingOutlined";
+import { LoadingOutlined } from "@ant-design/icons";
 import { Table } from "antd";
 import type { TableProps } from "antd/lib/table";
 import classNames from "classnames";

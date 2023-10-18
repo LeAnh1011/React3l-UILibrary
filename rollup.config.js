@@ -1,24 +1,41 @@
 import commonjs from "@rollup/plugin-commonjs";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import typescript from "rollup-plugin-typescript2";
+import ttypescript from "ttypescript";
 import postcss from "rollup-plugin-postcss";
 import { terser } from "rollup-plugin-terser";
+import babel from "@rollup/plugin-babel";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   input: "src/index.ts",
   output: [
     {
-      file: "build/index.js",
-      format: "esm",
+      dir: "build/cjs",
+      format: "cjs",
+      preserveModules: true,
+      preserveModulesRoot: "src",
       sourcemap: true,
+    },
+    {
+      dir: "build/esm",
+      format: "esm",
+      preserveModules: true,
+      preserveModulesRoot: "src",
+      sourcemap: true,
+      entryFileNames: (chunkInfo) => {
+        if (chunkInfo.name.includes("node_modules")) {
+          return chunkInfo.name.replace("node_modules", "external") + ".js";
+        }
+
+        return "[name].js";
+      },
     },
   ],
   plugins: [
     peerDepsExternal(),
     commonjs(),
     typescript({
-      typescript: require("ttypescript"),
+      typescript: ttypescript,
       tsconfigDefaults: {
         compilerOptions: {
           plugins: [
@@ -30,6 +47,11 @@ export default {
           ],
         },
       },
+    }),
+    babel({
+      exclude: "node_modules/**",
+      babelHelpers: "runtime",
+      extensions: [".js", ".jsx", ".ts", ".tsx"],
     }),
     postcss({
       use: ["sass"],

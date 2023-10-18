@@ -1,4 +1,4 @@
-import LoadingOutlined from "@ant-design/icons/LoadingOutlined";
+import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 
 export interface IconLoadingAction {

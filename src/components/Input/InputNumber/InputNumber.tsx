@@ -304,7 +304,7 @@ function InputNumber(props: InputNumberProps) {
 
   return (
     <div className={classNames("input-number__wrapper", className)}>
-      <div className="input-number__label m-b--2xs">
+      <div className="input-number__label m-b--3xs">
         {type !== BORDER_TYPE.FLOAT_LABEL && label && (
           <label
             className={classNames("component__title", {

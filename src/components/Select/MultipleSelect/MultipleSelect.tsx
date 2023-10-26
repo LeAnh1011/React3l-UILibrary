@@ -69,7 +69,7 @@ function defaultRenderObject<T extends Model>(t: T) {
   return t?.name;
 }
 
-export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
+function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
   const {
     values,
     valueFilter,

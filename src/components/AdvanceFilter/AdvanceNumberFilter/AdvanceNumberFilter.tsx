@@ -2,11 +2,8 @@ import classNames from "classnames";
 import { CloseFilled } from "@carbon/icons-react";
 import React, { ReactSVGElement, RefObject } from "react";
 import { ReactNode } from "react";
-import { BORDER_TYPE } from "@Configs/enum";
+import { BORDER_TYPE, NUMBER_TYPE } from "@Configs/enum";
 import "./AdvanceNumberFilter.scss";
-
-export const DECIMAL: string = "DECIMAL";
-export const LONG: string = "LONG";
 
 export interface AdvanceNumberProps {
   /**Label for current field*/
@@ -22,7 +19,7 @@ export interface AdvanceNumberProps {
   /**Allow values to be negative not*/
   allowPositive?: boolean;
   /**Provide an option set decimal number type for value filter*/
-  numberType?: string;
+  numberType?: NUMBER_TYPE;
   /**Reverse symbol “.” and “,”*/
   isReverseSymb?: boolean;
   /**Provide a length of number behind the point (character)*/
@@ -100,7 +97,7 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
       const newRegEx = buildRegex();
       if (isReverseSymb) {
         switch (numberType) {
-          case DECIMAL:
+          case NUMBER_TYPE.DECIMAL:
             if (allowPositive) {
               inputValue = inputValue
                 .replace(/[^0-9,-]/g, "")
@@ -130,7 +127,7 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
         }
       } else {
         switch (numberType) {
-          case DECIMAL:
+          case NUMBER_TYPE.DECIMAL:
             if (allowPositive) {
               inputValue = inputValue
                 .replace(/[^0-9.-]/g, "")
@@ -174,7 +171,7 @@ function AdvanceNumberFilter(props: AdvanceNumberProps) {
           stringValue = value.replace(/,/g, "");
         }
         switch (numberType) {
-          case DECIMAL:
+          case NUMBER_TYPE.DECIMAL:
             number = parseFloat(stringValue);
             isOutOfRange =
               (typeof max === "number" && number > max) ||
@@ -370,7 +367,7 @@ AdvanceNumberFilter.defaultProps = {
   isSmall: false,
   allowPositive: false,
   isReverseSymb: false,
-  numberType: LONG,
+  numberType: NUMBER_TYPE.LONG,
   decimalDigit: 4,
   disabled: false,
   prefix: "",

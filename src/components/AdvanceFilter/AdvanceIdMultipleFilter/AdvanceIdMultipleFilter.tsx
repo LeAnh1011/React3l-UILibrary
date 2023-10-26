@@ -53,7 +53,7 @@ function defaultRenderObject<T extends Model>(t: T) {
   return t?.name;
 }
 
-export function AdvanceIdMultipleFilter(
+function AdvanceIdMultipleFilter(
   props: AdvanceIdMultipleFilterProps<Model, ModelFilter>
 ) {
   const {

@@ -50,7 +50,8 @@ export interface UploadFileProps {
   /**Use to custom style the component*/
   className?: string;
 }
-export function UploadFile(props: UploadFileProps) {
+
+function UploadFile(props: UploadFileProps) {
   const {
     uploadContent,
     isMultiple,

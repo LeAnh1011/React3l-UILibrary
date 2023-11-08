@@ -2,14 +2,14 @@
   "homepage": "http://leanh1011.github.io/React3l-UILibrary",
   "name": "react3l-ui-library",
   "sideEffects": false,
-  "version": "0.2.21",
+  "version": "0.2.23",
   "main": "build/cjs/index.js",
   "module": "build/esm/index.js",
   "files": [
     "build"
   ],
-  "types": "./build/index.d.ts",
-  "typings": "./build/index.d.ts",
+  "types": "./build/esm/index.d.ts",
+  "typings": "./build/esm/index.d.ts",
   "type": "module",
   "dependencies": {
     "react-dropzone": "^11.5.1",

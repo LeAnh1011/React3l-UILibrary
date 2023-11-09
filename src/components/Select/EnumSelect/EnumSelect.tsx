@@ -53,6 +53,8 @@ export interface SelectProps<T extends Model> {
   bgColor?: "white" | "gray";
   /**Use to custom style the component*/
   className?: string;
+  /**Use to set time get list to call*/
+  isLoadMultipleTimes?: boolean;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -104,6 +106,7 @@ function EnumSelect(props: SelectProps<Model>) {
     action,
     bgColor,
     className,
+    isLoadMultipleTimes,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -130,7 +133,7 @@ function EnumSelect(props: SelectProps<Model>) {
 
   React.useEffect(() => {
     const subscription = new Subscription();
-    if (firstLoad) {
+    if (isLoadMultipleTimes) {
       subscription.add(getList);
       getList().subscribe({
         next: (res: Model[]) => {
@@ -140,12 +143,23 @@ function EnumSelect(props: SelectProps<Model>) {
           setList([]);
         },
       });
+    } else {
+      if (firstLoad) {
+        subscription.add(getList);
+        getList().subscribe({
+          next: (res: Model[]) => {
+            setList(res);
+          },
+          error: (err: ErrorObserver<Error>) => {
+            setList([]);
+          },
+        });
+      }
     }
-
     return function cleanup() {
       subscription.unsubscribe();
     };
-  }, [firstLoad, getList]);
+  }, [firstLoad, getList, isLoadMultipleTimes]);
 
   // use this for multiple type
   const internalList = React.useMemo(() => {

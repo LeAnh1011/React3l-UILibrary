@@ -223,20 +223,22 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
         nativeEvent: MouseEvent;
       }
     ) => {
-      const { node, selectedNodes } = info;
-      const filterList = internalSelectedKeys.filter(
-        (id) => id === node?.item?.id
-      );
-      const isChangedNode = !(filterList.length > 0);
-      if (
-        typeof onChange === "function" &&
-        filterList?.length === 0 &&
-        isChangedNode
-      ) {
-        onChange([selectedNodes[0].item]);
+      if (!checkable) {
+        const { node, selectedNodes } = info;
+        const filterList = internalSelectedKeys.filter(
+          (id) => id === node?.item?.id
+        );
+        const isChangedNode = !(filterList.length > 0);
+        if (
+          typeof onChange === "function" &&
+          filterList?.length === 0 &&
+          isChangedNode
+        ) {
+          onChange([selectedNodes[0].item]);
+        }
       }
     },
-    [internalSelectedKeys, onChange]
+    [checkable, internalSelectedKeys, onChange]
   );
 
   React.useEffect(() => {

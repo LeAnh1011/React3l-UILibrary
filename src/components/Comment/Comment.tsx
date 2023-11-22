@@ -452,7 +452,7 @@ function Comment(props: CommentProps<ModelFilter>) {
     if (discussionId) {
       const subcription = getListMessages();
       return () => {
-        subcription && subcription.unsubscribe();
+        subcription.unsubscribe();
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -509,7 +509,7 @@ function Comment(props: CommentProps<ModelFilter>) {
                       className="msg-content"
                       dangerouslySetInnerHTML={{ __html: currentItem.content }}
                     />
-                    {currentItem.creatorId === userInfo.id && (
+                    {currentItem.isOwner && (
                       <div className="action-owner-message">
                         {canEditMessage && (
                           <Button
@@ -519,19 +519,21 @@ function Comment(props: CommentProps<ModelFilter>) {
                             {"Sửa"}
                           </Button>
                         )}
-                        <Popconfirm
-                          placement="leftTop"
-                          title={"Bạn có chắc chắn muốn xóa?"}
-                          onConfirm={() => handleOkDeleteMessage(currentItem)}
-                          onCancel={() =>
-                            handleCancelDeleteMessage(currentItem)
-                          }
-                          okText="Xóa"
-                          cancelText="Hủy"
-                          okType="danger"
-                        >
-                          <Button type="link">{"Xóa"}</Button>
-                        </Popconfirm>
+                        {typeof deleteMessage !== "undefined" && (
+                          <Popconfirm
+                            placement="leftTop"
+                            title={"Bạn có chắc chắn muốn xóa?"}
+                            onConfirm={() => handleOkDeleteMessage(currentItem)}
+                            onCancel={() =>
+                              handleCancelDeleteMessage(currentItem)
+                            }
+                            okText="Xóa"
+                            cancelText="Hủy"
+                            okType="danger"
+                          >
+                            <Button type="link">{"Xóa"}</Button>
+                          </Popconfirm>
+                        )}
                       </div>
                     )}
                   </div>

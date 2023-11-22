@@ -19,6 +19,8 @@ export interface LayoutHeaderProps {
   isSorter?: boolean;
   /** Option to add state of sorting */
   sortedColumn?: any;
+  /** Show symbol * as required field */
+  isRequired?: boolean;
 }
 
 function LayoutHeader(props: LayoutHeaderProps) {
@@ -30,6 +32,7 @@ function LayoutHeader(props: LayoutHeaderProps) {
     isSorter,
     sortedColumn,
     position,
+    isRequired,
   } = props;
 
   return (
@@ -52,6 +55,7 @@ function LayoutHeader(props: LayoutHeaderProps) {
         ) : (
           title
         )}
+        {isRequired && <span className="text-danger">&nbsp;*</span>}
       </div>
       {isSorter && <Sorter sortedColumn={sortedColumn}></Sorter>}
     </button>

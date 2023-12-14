@@ -132,7 +132,7 @@ const Template: Story = (args) => {
           listItem={args?.isMultiple ? listItem : []}
           getTreeData={demoSearchFunc}
           preferOptions={args?.isSelectWithPreferOption ? list : undefined}
-          render={(t) => t?.code}
+          maxLengthItem={5}
         />
       </div>
     </div>

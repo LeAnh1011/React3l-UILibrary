@@ -389,7 +389,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                           <span className="select__text">
                             {maxLengthItem &&
                             render(item)?.length > maxLengthItem ? (
-                              <Tooltip title={item?.name}>
+                              <Tooltip title={render(item)}>
                                 {CommonService.limitWord(
                                   render(item),
                                   maxLengthItem

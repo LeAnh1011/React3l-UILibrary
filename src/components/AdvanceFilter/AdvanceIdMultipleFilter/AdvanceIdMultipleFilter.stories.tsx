@@ -112,6 +112,8 @@ const Template: Story = (args) => {
           valueFilter={selectModelFilter}
           classFilter={DemoFilter}
           preferOptions={list}
+          render={(item)=> `${item?.code} - ${item?.name}`}
+          maxLengthItem={10}
         ></AdvanceIdMultipleFilter>
       </div>
     </>

@@ -7,7 +7,7 @@ import { DEBOUNCE_TIME_300 } from "@Configs/consts";
 import React, { RefObject } from "react";
 import type { ErrorObserver, Observable } from "rxjs";
 import { BORDER_TYPE } from "@Configs/enum";
-import { Checkbox, Empty } from "antd";
+import { Checkbox, Empty, Tooltip } from "antd";
 import IconLoading from "@Components/IconLoading/IconLoading";
 import "./AdvanceIdMultipleFilter.scss";
 
@@ -47,6 +47,10 @@ export interface AdvanceIdMultipleFilterProps<
   appendToBody?: boolean;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  /**Show maximum length of item in each data row*/
+  maxLengthItem?: number;
+  /**Set show tooltip or not */
+  isShowTooltip?: boolean;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -73,6 +77,8 @@ export function AdvanceIdMultipleFilter(
     preferOptions,
     bgColor,
     appendToBody,
+    maxLengthItem,
+    isShowTooltip,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -329,7 +335,7 @@ export function AdvanceIdMultipleFilter(
             isFilter={true}
             isNotExpand={!isExpand}
             bgColor={bgColor}
-            isShowTooltip
+            isShowTooltip={isShowTooltip}
           />
         </div>
         {isExpand && (
@@ -363,7 +369,17 @@ export function AdvanceIdMultipleFilter(
                           onChange={handleClickItem(item)}
                         >
                           <span className="advance-id-filter__text">
-                            {render(item)}
+                            {maxLengthItem &&
+                            render(item)?.length > maxLengthItem ? (
+                              <Tooltip title={render(item)}>
+                                {CommonService.limitWord(
+                                  render(item),
+                                  maxLengthItem
+                                )}
+                              </Tooltip>
+                            ) : (
+                              render(item)
+                            )}
                           </span>
                         </Checkbox>
                       </div>
@@ -396,7 +412,17 @@ export function AdvanceIdMultipleFilter(
                         checked={item.isSelected}
                       >
                         <span className="advance-id-filter__text ">
-                          {render(item)}
+                          {maxLengthItem &&
+                          render(item)?.length > maxLengthItem ? (
+                            <Tooltip title={item?.name}>
+                              {CommonService.limitWord(
+                                render(item),
+                                maxLengthItem
+                              )}
+                            </Tooltip>
+                          ) : (
+                            render(item)
+                          )}
                         </span>
                       </Checkbox>
                     </div>
@@ -417,6 +443,8 @@ AdvanceIdMultipleFilter.defaultProps = {
   render: defaultRenderObject,
   disabled: false,
   bgColor: "white",
+  maxLengthItem: 30,
+  isShowTooltip: true,
 };
 
 export default AdvanceIdMultipleFilter;

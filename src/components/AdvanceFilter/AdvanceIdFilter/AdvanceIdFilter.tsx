@@ -10,6 +10,7 @@ import { CommonService } from "@Services/common-service";
 import InputSelect from "@Components/Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "@Configs/enum";
 import IconLoading from "@Components/IconLoading/IconLoading";
+import _cloneDeep from "lodash/cloneDeep";
 import "./AdvanceIdFilter.scss";
 
 export interface AdvanceIdFilterProps<
@@ -120,7 +121,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
   const { run } = useDebounceFn(
     (searchTerm: string) => {
       const cloneValueFilter = valueFilter
-        ? { ...valueFilter }
+        ? _cloneDeep(valueFilter)
         : new ClassFilter();
       if (searchType) {
         cloneValueFilter[searchProperty][searchType] = searchTerm;

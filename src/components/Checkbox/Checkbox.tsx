@@ -1,5 +1,7 @@
 import React from "react";
 import { Checkbox as CheckboxAntd } from "antd";
+import CheckboxGroup from "./CheckboxGroup";
+import classNames from "classnames";
 import "./Checkbox.scss";
 
 export interface CheckboxProps {
@@ -11,10 +13,12 @@ export interface CheckboxProps {
   disabled?: boolean;
   /**Label of this checkbox item */
   label?: string;
+  /**Type read only is true */
+  readOnly?: boolean;
 }
 
 function Checkbox(props: CheckboxProps) {
-  const { onChange, checked, disabled, label } = props;
+  const { onChange, checked, disabled, label, readOnly } = props;
   const handleChange = React.useCallback(
     (value) => {
       if (onChange && typeof onChange === "function") {
@@ -26,7 +30,11 @@ function Checkbox(props: CheckboxProps) {
   );
 
   return (
-    <div className="checkbox__container">
+    <div
+      className={classNames("checkbox__container", {
+        "read-only": readOnly,
+      })}
+    >
       <CheckboxAntd
         checked={checked}
         onChange={handleChange}
@@ -37,5 +45,7 @@ function Checkbox(props: CheckboxProps) {
     </div>
   );
 }
+
+Checkbox.Group = CheckboxGroup;
 
 export default Checkbox;

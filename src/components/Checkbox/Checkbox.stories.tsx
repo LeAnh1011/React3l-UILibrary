@@ -40,12 +40,19 @@ const Template: Story = (args) => {
   return (
     <div>
       <div>
+        <div>checkbox </div>
         <div style={{ margin: "10px", width: "500px" }}>
           <Checkbox
             {...args}
             checked={checked || args.checked}
             onChange={handleChangeChecked}
           >
+            {args.children}
+          </Checkbox>
+        </div>
+        <div>checkbox read only</div>
+        <div style={{ margin: "10px", width: "500px" }}>
+          <Checkbox {...args} checked={true} readOnly>
             {args.children}
           </Checkbox>
         </div>

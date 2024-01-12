@@ -50,7 +50,7 @@ const Template: Story = (args) => {
             {args.children}
           </Checkbox>
         </div>
-        <div>checkbox only read</div>
+        <div>checkbox read only</div>
         <div style={{ margin: "10px", width: "500px" }}>
           <Checkbox {...args} checked={true} readOnly>
             {args.children}

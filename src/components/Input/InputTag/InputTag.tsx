@@ -1,4 +1,4 @@
-import React, { ReactSVGElement, RefObject } from "react";
+import React, { Dispatch, ReactSVGElement, RefObject, SetStateAction } from "react";
 import { CloseFilled, ChevronDown, Close } from "@carbon/icons-react";
 import { Model } from "react3l-common";
 import classNames from "classnames";
@@ -46,6 +46,10 @@ export interface InputTagProps<T extends Model> {
   action?: InputAction;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  /** boolean control clear search text */
+  clearCurrentSearch?: boolean;
+  /** set control clear search text */
+  setClearCurrentSearch?: Dispatch<SetStateAction<boolean>>;
 }
 
 function InputTag(props: InputTagProps<Model>) {
@@ -68,6 +72,8 @@ function InputTag(props: InputTagProps<Model>) {
     render,
     action,
     bgColor,
+    clearCurrentSearch,
+    setClearCurrentSearch,
   } = props;
 
   const internalListValue = React.useMemo<Model[]>(() => {
@@ -127,6 +133,13 @@ function InputTag(props: InputTagProps<Model>) {
     },
     [onKeyEnter]
   );
+
+  React.useEffect(()=>{
+    if(clearCurrentSearch){
+      setSearchTerm("");
+      setClearCurrentSearch(false);
+    }
+  },[clearCurrentSearch, setClearCurrentSearch])
 
   return (
     <>

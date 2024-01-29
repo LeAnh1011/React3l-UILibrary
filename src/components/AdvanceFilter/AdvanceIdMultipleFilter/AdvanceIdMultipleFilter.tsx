@@ -4,7 +4,7 @@ import { CommonService } from "@Services/common-service";
 import classNames from "classnames";
 import InputTag from "@Components/Input/InputTag/InputTag";
 import { DEBOUNCE_TIME_300 } from "@Configs/consts";
-import React, { RefObject } from "react";
+import React, { Dispatch, RefObject, SetStateAction } from "react";
 import type { ErrorObserver, Observable } from "rxjs";
 import { BORDER_TYPE } from "@Configs/enum";
 import { Checkbox, Empty } from "antd";
@@ -46,7 +46,11 @@ export interface AdvanceIdMultipleFilterProps<
   /**Append this component to body*/
   appendToBody?: boolean;
   /** Custom background color for component: "white" || "gray" */
-  bgColor?: "white" | "gray";
+  bgColor?: "white" | "gray"; 
+  /** boolean control clear search text */
+  clearCurrentSearch?: boolean;
+  /** set control clear search text */
+  setClearCurrentSearch?: Dispatch<SetStateAction<boolean>>;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -73,6 +77,8 @@ function AdvanceIdMultipleFilter(
     preferOptions,
     bgColor,
     appendToBody,
+    clearCurrentSearch,
+    setClearCurrentSearch,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -330,6 +336,8 @@ function AdvanceIdMultipleFilter(
             isNotExpand={!isExpand}
             bgColor={bgColor}
             isShowTooltip
+            clearCurrentSearch={clearCurrentSearch}
+            setClearCurrentSearch={setClearCurrentSearch}
           />
         </div>
         {isExpand && (

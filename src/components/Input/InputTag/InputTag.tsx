@@ -46,6 +46,7 @@ export interface InputTagProps<T extends Model> {
   action?: InputAction;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  clearSearchTerm?: boolean;
 }
 
 function InputTag(props: InputTagProps<Model>) {
@@ -68,6 +69,7 @@ function InputTag(props: InputTagProps<Model>) {
     render,
     action,
     bgColor,
+    clearSearchTerm,
   } = props;
 
   const internalListValue = React.useMemo<Model[]>(() => {
@@ -75,11 +77,8 @@ function InputTag(props: InputTagProps<Model>) {
   }, [listValue]);
 
   const [searchTerm, setSearchTerm] = React.useState<string>("");
-
   const inputRef: RefObject<HTMLInputElement> = React.useRef();
-
   const inputContainerRef: RefObject<HTMLDivElement> = React.useRef();
-
   const handleChangeInput = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setSearchTerm(event.target.value);
@@ -127,6 +126,12 @@ function InputTag(props: InputTagProps<Model>) {
     },
     [onKeyEnter]
   );
+
+  React.useEffect(()=>{
+    if(!clearSearchTerm){
+      setSearchTerm("");
+    }
+  },[clearSearchTerm])
 
   return (
     <>

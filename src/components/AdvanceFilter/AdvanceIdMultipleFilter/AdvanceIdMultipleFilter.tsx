@@ -309,10 +309,10 @@ function AdvanceIdMultipleFilter(
   return (
     <>
       <div
-        className="advance-id-filter__container advance-id-multiple-filter__container"
+        className="advance-id-multiple-filter__container"
         ref={wrapperRef}
       >
-        <div className="advance-id-filter__input" onClick={handleToggle}>
+        <div className="advance-id-multiple-filter__input" onClick={handleToggle}>
           <InputTag
             listValue={values}
             render={render}
@@ -330,26 +330,27 @@ function AdvanceIdMultipleFilter(
             isNotExpand={!isExpand}
             bgColor={bgColor}
             isShowTooltip
+            clearSearchTerm={isExpand}
           />
         </div>
         {isExpand && (
           <div
-            className="advance-id-filter__list-container"
+            className="advance-id-multiple-filter__list-container"
             style={appendToBodyStyle}
           >
             {!loading ? (
               <>
                 <div
-                  className="advance-id-filter__list advance-id-multiple-filter__list"
+                  className="advance-id-multiple-filter__list"
                   ref={selectListRef}
                 >
                   {internalList.length > 0 ? (
                     internalList.map((item, index) => (
                       <div
                         className={classNames(
-                          "advance-id-filter__item p-l--xs p-y--xs p-r--2xs",
+                          "advance-id-multiple-filter__item p-l--xs p-y--xs p-r--2xs",
                           {
-                            "advance-id-filter__item--selected":
+                            "advance-id-multiple-filter__item--selected":
                               item.isSelected,
                           }
                         )}
@@ -362,7 +363,7 @@ function AdvanceIdMultipleFilter(
                           checked={item.isSelected}
                           onChange={handleClickItem(item)}
                         >
-                          <span className="advance-id-filter__text">
+                          <span className="advance-id-multiple-filter__text">
                             {render(item)}
                           </span>
                         </Checkbox>
@@ -374,18 +375,18 @@ function AdvanceIdMultipleFilter(
                 </div>
               </>
             ) : (
-              <div className="advance-id-filter__loading">
+              <div className="advance-id-multiple-filter__loading">
                 <IconLoading color="#0F62FE" size={24} />
               </div>
             )}
             {!loading && list.length > 0 && (
-              <div className="advance-id-filter__list-prefer">
+              <div className="advance-id-multiple-filter__list-prefer">
                 {internalPreferOptions &&
                   internalPreferOptions?.length > 0 &&
                   internalPreferOptions.map((item, index) => (
                     <div
                       className={classNames(
-                        "advance-id-filter__prefer-option advance-id-filter__item p-l--xs p-y--xs p-r--2xs"
+                        "advance-id-multiple-filter__prefer-option advance-id-multiple-filter__item p-l--xs p-y--xs p-r--2xs"
                       )}
                       key={index}
                       onKeyDown={handleMove(item)}
@@ -395,7 +396,7 @@ function AdvanceIdMultipleFilter(
                         onChange={handleClickItem(item)}
                         checked={item.isSelected}
                       >
-                        <span className="advance-id-filter__text ">
+                        <span className="advance-id-multiple-filter__text ">
                           {render(item)}
                         </span>
                       </Checkbox>

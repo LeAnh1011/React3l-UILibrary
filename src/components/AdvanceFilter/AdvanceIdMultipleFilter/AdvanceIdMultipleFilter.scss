@@ -1,20 +1,98 @@
-.advance-id-multiple-filter__list {
-  .advance-id-filter__item {
-    padding-right: 12px !important;
-  }
-  .advance-id-filter__item--selected {
-    justify-content: flex-start !important;
-  }
-}
-
-/* custom checkbox */
+@import "./../../../styles/common/mixins";
+/* Style for Select.tsx */
 .advance-id-multiple-filter__container {
+  width: 100%;
+
+  position: relative;
+
+  .advance-id-multiple-filter__input {
+    width: 100%;
+  }
+
+  .advance-id-multiple-filter__list-container {
+    width: 100%;
+    height: auto;
+    background-color: var(--palette-gray-10);
+    @include box-shadow--popover();
+    margin-top: 5px;
+    position: absolute;
+    z-index: 999;
+    .advance-id-multiple-filter__list {
+      width: 100%;
+      overflow-y: auto;
+      max-height: 202px;
+      position: relative;
+      background-color: var(--palette-gray-10);
+    }
+    .advance-id-multiple-filter__bottom-button {
+      height: 40px;
+      width: 100%;
+      background-color: var(--palette-gray-10);
+      display: flex;
+      align-items: center;
+      box-shadow: inset 0px 1px 0px #e1e3e5;
+      span {
+        font-size: 14px;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .advance-id-multiple-filter__add-button {
+      span {
+        color: var(--color-primary);
+        font-size: 12px;
+        margin-left: 7px;
+      }
+      svg {
+        color: var(--color-primary);
+      }
+    }
+    .advance-id-multiple-filter__loading {
+      width: 100%;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .advance-id-multiple-filter__item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding-right: 12px !important;
+      font-size: 14px;
+      line-height: 16px;
+      .advance-id-multiple-filter__text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+      &:hover,
+      &:focus {
+        background-color: var(--palette-grayHover-10);
+      }
+      &:focus-visible {
+        outline: none;
+      }
+      &.advance-id-multiple-filter__item--selected {
+        background-color: var(--palette-grayHover-10);
+        display: flex;
+        justify-content: flex-start !important;
+      }
+    }
+
+    .advance-id-multiple-filter__list-prefer {
+      box-shadow: inset 0px 1px 0px #e1e3e5;
+    }
+  }
+
   .checkbox__container {
     display: flex;
     align-items: center;
-  }
-  .advance-id-multiple-filter__text {
-    margin-left: 24px;
   }
 
   .ant-checkbox:hover .ant-checkbox-inner {
@@ -39,3 +117,4 @@
     border-color: var(--color-text);
   }
 }
+

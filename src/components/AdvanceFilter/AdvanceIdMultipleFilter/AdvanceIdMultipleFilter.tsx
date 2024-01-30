@@ -330,6 +330,7 @@ function AdvanceIdMultipleFilter(
             isNotExpand={!isExpand}
             bgColor={bgColor}
             isShowTooltip
+            clearSearchTerm={isExpand}
           />
         </div>
         {isExpand && (

@@ -40,6 +40,7 @@ export { default as IconLoading } from "./components/IconLoading";
 export { default as InlineLoading } from "./components/InlineLoading";
 
 export { default as Modal } from "./components/Modal/NormalModal";
+export { default as NonModal } from "./components/Modal/NonModal";
 export { default as TearSheet } from "./components/Modal/TearSheet";
 export { default as Drawer } from "./components/Drawer";
 

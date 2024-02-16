@@ -11,6 +11,7 @@ import LinkPlainButton from "./LinkPlainButton";
 import NormalButton from "./NormalButton/NormalButton";
 import OutlineButton from "./OutlineButton";
 import "./ButtonComponent.scss";
+import { useDebounceFn } from "ahooks";
 
 export type ButtonType =
   | "primary"
@@ -42,25 +43,33 @@ export interface ButtonProps {
   className?: string;
   /**Function to be called when the button is clicked*/
   onClick?: ButtonHTMLAttributes<any>["onClick"];
-
+  /**Children content of this component*/
   children?: ReactNode;
   /**Disabled state of button*/
   disabled?: boolean;
   /**Set the icon of button*/
   icon?: JSX.Element;
+  /**The state to set onclick function is debounce */
+  isDebounce?: boolean;
 }
 
 const Button = (props: PropsWithChildren<ButtonProps>, ref: React.Ref<any>) => {
+  const { onClick, isDebounce } = props;
+
+  const { run } = useDebounceFn(onClick, {
+    wait: 175,
+  });
+
   if (
     props.type === "primary" ||
     props.type === "secondary" ||
     props.type === "danger"
   ) {
-    return <NormalButton {...props} />;
+    return <NormalButton {...props} onClick={isDebounce ? run : onClick} />;
   }
 
   if (props.type === "outline-primary" || props.type === "outline-danger") {
-    return <OutlineButton {...props} />;
+    return <OutlineButton {...props} onClick={isDebounce ? run : onClick} />;
   }
 
   if (
@@ -68,19 +77,19 @@ const Button = (props: PropsWithChildren<ButtonProps>, ref: React.Ref<any>) => {
     props.type === "ghost-primary" ||
     props.type === "ghost-secondary"
   ) {
-    return <GhostButton {...props} />;
+    return <GhostButton {...props} onClick={isDebounce ? run : onClick} />;
   }
 
   if (props.type === "bleed-primary" || props.type === "bleed-secondary") {
-    return <BleedButton {...props} />;
+    return <BleedButton {...props} onClick={isDebounce ? run : onClick} />;
   }
 
   if (props.type === "link-plain") {
-    return <LinkPlainButton {...props} />;
+    return <LinkPlainButton {...props} onClick={isDebounce ? run : onClick} />;
   }
 
   if (props.type === "link") {
-    return <LinkButton {...props} />;
+    return <LinkButton {...props} onClick={isDebounce ? run : onClick} />;
   }
 
   if (
@@ -90,7 +99,7 @@ const Button = (props: PropsWithChildren<ButtonProps>, ref: React.Ref<any>) => {
     props.type === "icon-only-outline-danger" ||
     props.type === "icon-only-ghost"
   ) {
-    return <IconButton {...props} />;
+    return <IconButton {...props} onClick={run} />;
   }
 
   return <></>;
@@ -100,6 +109,7 @@ Button.defaultProps = {
   type: "primary",
   htmlType: "button",
   disabled: false,
+  isDebounce: true,
 };
 
 export default Button;

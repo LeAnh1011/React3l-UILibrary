@@ -229,15 +229,15 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     ) => {
       const { node, selectedNodes } = info;
       if (typeof onChange === "function") {
-        if (!isDisableSelected) {
-          onChange([selectedNodes[0].item]);
-        } else {
-          const filterList = internalSelectedKeys.filter(
-            (id) => id === node?.item?.id
-          );
-          if (filterList.length === 0) {
+        const filterList = internalSelectedKeys.filter(
+          (id) => id === node?.item?.id
+        );
+        if (filterList.length === 0) {
+          if (!isDisableSelected) {
             onChange(null, true);
           }
+        } else {
+          onChange([selectedNodes[0].item]);
         }
       }
     },

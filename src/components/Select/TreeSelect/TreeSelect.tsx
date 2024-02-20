@@ -75,6 +75,8 @@ export interface TreeSelectProps<
   bgColor?: "gray" | "white";
   /**Use to custom style the component*/
   className?: string;
+  /** Option to let user cant select the selected item in tree list */
+  isDisableSelected?: boolean;
 }
 export interface filterAction {
   type: string;
@@ -119,6 +121,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     maxLengthItem,
     bgColor,
     className,
+    isDisableSelected,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -358,6 +361,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               preferOptions={preferOptions}
               isExpand={expanded}
               maxLengthItem={maxLengthItem}
+              isDisableSelected={isDisableSelected}
             />
           </div>
         )}

@@ -53,7 +53,10 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   selectListRef?: RefObject<any>;
   /** Prop of AntdTreeProps*/
   titleRender?: (T: T) => ReactNode;
+  /** Option to collapse and expand tree data */
   isExpand?: boolean;
+  /** Option to let user cant select the selected item in tree list */
+  isDisableSelected?: boolean;
 }
 function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const {
@@ -72,6 +75,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     render,
     checkStrictly,
     titleRender,
+    isDisableSelected,
   } = props;
 
   const [internalTreeData, setInternalTreeData] = React.useState<
@@ -224,19 +228,20 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       }
     ) => {
       const { node, selectedNodes } = info;
-      const filterList = internalSelectedKeys.filter(
-        (id) => id === node?.item?.id
-      );
-      const isChangedNode = !(filterList.length > 0);
-      if (
-        typeof onChange === "function" &&
-        filterList?.length === 0 &&
-        isChangedNode
-      ) {
-        onChange([selectedNodes[0].item]);
+      if (typeof onChange === "function") {
+        if (!isDisableSelected) {
+          onChange([selectedNodes[0].item]);
+        } else {
+          const filterList = internalSelectedKeys.filter(
+            (id) => id === node?.item?.id
+          );
+          if (filterList.length === 0) {
+            onChange([selectedNodes[0].item]);
+          }
+        }
       }
     },
-    [internalSelectedKeys, onChange]
+    [internalSelectedKeys, isDisableSelected, onChange]
   );
 
   React.useEffect(() => {

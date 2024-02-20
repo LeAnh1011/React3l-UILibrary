@@ -54,7 +54,7 @@ export interface ButtonProps {
 }
 
 const Button = (props: PropsWithChildren<ButtonProps>, ref: React.Ref<any>) => {
-  const { onClick, isDebounce } = props;
+  const { onClick, isDebounce, ...rest } = props;
 
   const { run } = useDebounceFn(onClick, {
     wait: 175,
@@ -65,11 +65,11 @@ const Button = (props: PropsWithChildren<ButtonProps>, ref: React.Ref<any>) => {
     props.type === "secondary" ||
     props.type === "danger"
   ) {
-    return <NormalButton {...props} onClick={isDebounce ? run : onClick} />;
+    return <NormalButton {...rest} onClick={isDebounce ? run : onClick} />;
   }
 
   if (props.type === "outline-primary" || props.type === "outline-danger") {
-    return <OutlineButton {...props} onClick={isDebounce ? run : onClick} />;
+    return <OutlineButton {...rest} onClick={isDebounce ? run : onClick} />;
   }
 
   if (
@@ -77,19 +77,19 @@ const Button = (props: PropsWithChildren<ButtonProps>, ref: React.Ref<any>) => {
     props.type === "ghost-primary" ||
     props.type === "ghost-secondary"
   ) {
-    return <GhostButton {...props} onClick={isDebounce ? run : onClick} />;
+    return <GhostButton {...rest} onClick={isDebounce ? run : onClick} />;
   }
 
   if (props.type === "bleed-primary" || props.type === "bleed-secondary") {
-    return <BleedButton {...props} onClick={isDebounce ? run : onClick} />;
+    return <BleedButton {...rest} onClick={isDebounce ? run : onClick} />;
   }
 
   if (props.type === "link-plain") {
-    return <LinkPlainButton {...props} onClick={isDebounce ? run : onClick} />;
+    return <LinkPlainButton {...rest} onClick={isDebounce ? run : onClick} />;
   }
 
   if (props.type === "link") {
-    return <LinkButton {...props} onClick={isDebounce ? run : onClick} />;
+    return <LinkButton {...rest} onClick={isDebounce ? run : onClick} />;
   }
 
   if (
@@ -99,7 +99,7 @@ const Button = (props: PropsWithChildren<ButtonProps>, ref: React.Ref<any>) => {
     props.type === "icon-only-outline-danger" ||
     props.type === "icon-only-ghost"
   ) {
-    return <IconButton {...props} onClick={run} />;
+    return <IconButton {...rest} onClick={run} />;
   }
 
   return <></>;

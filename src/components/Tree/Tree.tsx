@@ -233,11 +233,11 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
           (id) => id === node?.item?.id
         );
         if (filterList.length === 0) {
+          onChange([selectedNodes[0].item]);
+        } else {
           if (!isDisableSelected) {
             onChange(null, true);
           }
-        } else {
-          onChange([selectedNodes[0].item]);
         }
       }
     },

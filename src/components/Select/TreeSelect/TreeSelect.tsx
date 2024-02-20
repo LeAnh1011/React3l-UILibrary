@@ -216,8 +216,10 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
   );
 
   const handleOnchange = React.useCallback(
-    (selectedNodes: Model[]) => {
-      onChange([...selectedNodes], checkable);
+    (selectedNodes: Model[], disableChange?: boolean) => {
+      if (!disableChange) {
+        onChange([...selectedNodes], checkable);
+      }
       if (!checkable) setExpanded(false);
     },
     [onChange, checkable]

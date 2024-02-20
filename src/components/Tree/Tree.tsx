@@ -40,7 +40,7 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   /**API to get data*/
   getTreeData?: (TModelFilter?: TModelFilter) => Observable<T[]>;
   /**Function to change selected items*/
-  onChange?: (treeNode: CustomTreeNode<T>[]) => void;
+  onChange?: (treeNode: CustomTreeNode<T>[], disableChange?: boolean) => void;
   /**Provide a function to render a specific property as name*/
   render?: (treeNode: T) => string;
   /**Option to show add new button*/
@@ -236,7 +236,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
             (id) => id === node?.item?.id
           );
           if (filterList.length === 0) {
-            onChange([selectedNodes[0].item]);
+            onChange(null, true);
           }
         }
       }

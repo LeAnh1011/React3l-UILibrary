@@ -46,6 +46,8 @@ export interface InputSearchProps<
   animationInput?: boolean;
   /**Option to set position for InputSearch */
   position?: "left" | "right";
+  /**Set maximum length of search value*/
+  maxLength?: number;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -67,6 +69,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     animationInput,
     onChange,
     position,
+    maxLength,
   } = props;
   const [showListItem, setShowListItem] = React.useState<boolean>();
   const [fullWidth, setFullWidth] = React.useState<boolean>(!animationInput);
@@ -130,9 +133,14 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     [onChangeSearchField]
   );
 
-  const handleSearchChange = React.useCallback((searchTerm: string) => {
-    searchTermRef.current.next(searchTerm);
-  }, []);
+  const handleSearchChange = React.useCallback(
+    (searchTerm: string) => {
+      if (!maxLength || (maxLength && searchTerm.length <= maxLength)) {
+        searchTermRef.current.next(searchTerm);
+      }
+    },
+    [maxLength]
+  );
 
   const handleKeyPress = React.useCallback(
     (event: any) => {

@@ -46,6 +46,7 @@ export interface InputSearchProps<
   animationInput?: boolean;
   /**Option to set position for InputSearch */
   position?: "left" | "right";
+  
   /**Set maximum length of search value*/
   maxLength?: number;
 }

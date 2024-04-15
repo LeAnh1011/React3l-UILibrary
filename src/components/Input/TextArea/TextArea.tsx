@@ -65,7 +65,7 @@ function TextArea(props: TextAreaProps) {
 
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-      if (event.target.value.length <= maxLength) {
+      if (event.target.value.replaceAll("\n","")?.length <= maxLength) {
         setInternalValue(event.target.value);
         if (typeof onChange === "function") {
           onChange(event.currentTarget.value);

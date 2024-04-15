@@ -34,7 +34,9 @@ export interface InputNumberProps {
   /**Placeholder of the component*/
   placeHolder?: string;
   /**Not allow to handle change value*/
-  disabled?: boolean;
+  disabled?: boolean /**Not allow to handle change value*/;
+  /**Read only field*/
+  readOnly?: boolean;
   /**Use to custom style the component*/
   className?: string;
   /**Min of the value number*/
@@ -71,6 +73,7 @@ function InputNumber(props: InputNumberProps) {
     placeHolder,
     className,
     disabled,
+    readOnly,
     min,
     max,
     isSmall,
@@ -366,6 +369,7 @@ function InputNumber(props: InputNumberProps) {
           className={classNames("component__input", {
             "disabled-field": disabled,
           })}
+          readOnly={readOnly}
         />
         {type === BORDER_TYPE.FLOAT_LABEL && label && (
           <label
@@ -379,7 +383,7 @@ function InputNumber(props: InputNumberProps) {
             {isRequired && <span className="text-danger">&nbsp;*</span>}
           </label>
         )}
-        {internalValue && !disabled && (
+        {internalValue && !disabled && !readOnly && (
           <div className={classNames("input-icon__clear", "m-l--2xs")}>
             <CloseFilled size={16} onClick={handleClearInput} />
           </div>
@@ -408,6 +412,7 @@ InputNumber.defaultProps = {
   numberType: NUMBER_TYPE.LONG,
   decimalDigit: 4,
   disabled: false,
+  readOnly: false,
   prefix: "",
 };
 

@@ -117,8 +117,7 @@ const InputView = React.forwardRef(
             "p-x--xs": isSmall,
             "p--xs": !isSmall,
             "input-view--material": type === BORDER_TYPE.MATERIAL,
-            "input-view--not__bordered":
-              type === BORDER_TYPE.NOT_BORDERED,
+            "input-view--not__bordered": type === BORDER_TYPE.NOT_BORDERED,
             "input-view--disabled ": disabled,
             "input-view--float": type === BORDER_TYPE.FLOAT_LABEL,
           })}
@@ -142,12 +141,11 @@ const InputView = React.forwardRef(
                 type="view"
                 value={internalValue}
                 placeholder={
-                  type === BORDER_TYPE.FLOAT_LABEL && label
-                    ? " "
-                    : placeHolder
+                  type === BORDER_TYPE.FLOAT_LABEL && label ? " " : placeHolder
                 }
                 ref={inputRef}
-                disabled
+                readOnly
+                disabled={disabled}
                 className={classNames("component__input", {
                   "disabled-field": disabled,
                 })}

@@ -27,6 +27,8 @@ export interface InputTextProps {
   value?: string;
   /**Not allow to handle change value*/
   disabled?: boolean;
+  /**Read only field*/
+  readOnly?: boolean;
   /**Placeholder of the component*/
   placeHolder?: string;
   /**Use to custom style the component*/
@@ -66,6 +68,7 @@ const InputText = React.forwardRef(
       maxLength,
       value,
       disabled,
+      readOnly,
       placeHolder,
       className,
       isSmall,
@@ -242,6 +245,7 @@ const InputText = React.forwardRef(
                 })}
                 autoComplete="new-password"
                 name={nameAttr}
+                readOnly={readOnly}
               />
             </div>
           </Tooltip>
@@ -257,7 +261,7 @@ const InputText = React.forwardRef(
               {isRequired && <span className="text-danger">&nbsp;*</span>}
             </label>
           )}
-          {internalValue && !disabled && (
+          {internalValue && !disabled && !readOnly && (
             <div className={classNames("input-icon__clear", "m-l--2xs")}>
               <CloseFilled size={16} onClick={handleClearInput} />
             </div>
@@ -287,6 +291,7 @@ InputText.defaultProps = {
   isRequired: false,
   prefix: "",
   disabled: false,
+  readOnly: false,
   className: "",
   maxLength: 0,
   typeInput: "text",

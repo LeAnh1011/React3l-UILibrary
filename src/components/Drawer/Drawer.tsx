@@ -22,9 +22,9 @@ export interface DrawerProps {
   /**Control the loading state of the drawer*/
   loading?: boolean;
   /**The title for drawer*/
-  title?: string;
+  title?: ReactNode;
   /**The description for title*/
-  description?: string;
+  description?: ReactNode;
   /**The title of Apply button*/
   titleButtonApply?: string;
   /**The title of ApplyNext button*/
@@ -44,7 +44,7 @@ export interface DrawerProps {
   /**Control close icon visible or not*/
   isHaveCloseIcon?: boolean;
   /**Control the size of drawer*/
-  size?: "sm" | "lg" | "xl" | "max";
+  size?: "sm" | "lg" | "xl" | "2xl" | "max";
   /**Control the size of drawer*/
   side?: "left" | "right";
 }

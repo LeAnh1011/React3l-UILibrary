@@ -39,10 +39,17 @@
         display: block;
       }
     }
-    &.drawer-max {
+    &.drawer-2xl {
       width: 80vw;
       .drawer_footer {
         width: 80vw;
+        display: block;
+      }
+    }
+    &.drawer-max {
+      width: 90vw;
+      .drawer_footer {
+        width: 90vw;
         display: block;
       }
     }

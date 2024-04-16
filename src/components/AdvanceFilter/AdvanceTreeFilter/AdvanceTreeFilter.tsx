@@ -10,6 +10,7 @@ import InputTag from "@Components/Input/InputTag";
 import InputSelect from "../../Input/InputSelect";
 import { BORDER_TYPE } from "@Configs/enum";
 import { IdFilter } from "react3l-advanced-filters";
+import { TreeNode } from "@Components/Tree/TreeNode";
 import "./AdvanceTreeFilter.scss";
 
 export interface AdvanceTreeFilterProps<
@@ -64,6 +65,8 @@ export interface AdvanceTreeFilterProps<
   bgColor?: "white" | "gray";
   /**Append this component to body*/
   appendToBody?: boolean;
+  /** Option to let developer can modify tree data */
+  buildTree?: (flatData: Model[]) => [TreeNode<Model>[], number[]];
 }
 export interface filterAction {
   type: string;
@@ -104,6 +107,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
     maxLengthItem,
     bgColor,
     appendToBody,
+    buildTree,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -326,6 +330,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               preferOptions={preferOptions}
               isExpand={expanded}
               maxLengthItem={maxLengthItem}
+              buildTree={buildTree}
             />
           </div>
         )}

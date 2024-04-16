@@ -13,6 +13,8 @@ import { Model, ModelFilter } from "react3l-common";
 import type { Observable } from "rxjs";
 import { CommonService } from "@Services/common-service";
 import { TreeNode as CustomTreeNode } from "./TreeNode";
+import { TreeNode } from "@Components/Tree/TreeNode";
+
 import "./Tree.scss";
 
 function SwitcherIcon() {
@@ -57,6 +59,8 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   isExpand?: boolean;
   /** Option to let user cant select the selected item in tree list */
   isDisableSelected?: boolean;
+  /** Option to let developer can modify tree data */
+  buildTree?: (flatData: Model[]) => [TreeNode<Model>[], number[]];
 }
 function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const {
@@ -76,6 +80,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     checkStrictly,
     titleRender,
     isDisableSelected,
+    buildTree,
   } = props;
 
   const [internalTreeData, setInternalTreeData] = React.useState<
@@ -107,7 +112,14 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   // prefer options tree list
   const internalPreferOptionsTreeData = React.useMemo(() => {
     if (preferOptions && preferOptions.length > 0) {
-      const [treeData] = CommonService.buildTree(preferOptions);
+      let treeData: TreeNode<Model>[];
+      if (typeof buildTree !== "undefined") {
+        const value = buildTree(preferOptions);
+        treeData = value[0];
+      } else {
+        const value = CommonService.buildTree(preferOptions);
+        treeData = value[0];
+      }
       if (selectedKey) {
         CommonService.setDisabledNode(selectedKey, treeData);
       }
@@ -117,7 +129,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       return treeData;
     }
     return [];
-  }, [onlySelectLeaf, preferOptions, selectedKey]);
+  }, [buildTree, onlySelectLeaf, preferOptions, selectedKey]);
 
   const searchTreeNodeById: any = React.useCallback(
     (element: CustomTreeNode<Model>, key: number) => {
@@ -260,9 +272,17 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       getTreeData(valueFilter).subscribe({
         next: (res: Model[]) => {
           if (res) {
-            const [treeData, internalExpandedKeys] = CommonService.buildTree(
-              res
-            );
+            let treeData: TreeNode<Model>[];
+            let internalExpandedKeys: number[];
+            if (typeof buildTree != "undefined") {
+              const value = buildTree(res);
+              treeData = value[0];
+              internalExpandedKeys = value[1];
+            } else {
+              const value = CommonService.buildTree(res);
+              treeData = value[0];
+              internalExpandedKeys = value[1];
+            }
             if (selectedKey) {
               CommonService.setDisabledNode(selectedKey, treeData);
             }
@@ -281,7 +301,14 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       });
     }
     return () => {};
-  }, [getTreeData, selectedKey, subscription, onlySelectLeaf, valueFilter]);
+  }, [
+    getTreeData,
+    selectedKey,
+    subscription,
+    onlySelectLeaf,
+    valueFilter,
+    buildTree,
+  ]);
 
   // local filter tree base on model filter commented because now using server filter data
   // React.useEffect(() => {

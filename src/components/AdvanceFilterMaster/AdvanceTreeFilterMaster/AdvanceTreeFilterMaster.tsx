@@ -10,6 +10,7 @@ import InputText from "@Components/Input/InputText";
 import classNames from "classnames";
 import { ChevronDown, Search } from "@carbon/icons-react";
 import { IdFilter } from "react3l-advanced-filters";
+import { TreeNode } from "@Components/Tree/TreeNode";
 import "./AdvanceTreeFilterMaster.scss";
 
 export interface AdvanceTreeFilterMasterProps<
@@ -60,6 +61,8 @@ export interface AdvanceTreeFilterMasterProps<
   className?: string;
   /** Prop of AntdTreeProps*/
   treeTitleRender?: (T: T) => ReactNode;
+  /** Option to let developer can modify tree data */
+  buildTree?: (flatData: Model[]) => [TreeNode<Model>[], number[]];
 }
 export interface filterAction {
   type: string;
@@ -100,6 +103,7 @@ function AdvanceTreeFilterMaster(
     maxLength,
     maxLengthItem,
     className,
+    buildTree,
   } = props;
   const inputRef: any = React.useRef<any>(null);
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -264,6 +268,7 @@ function AdvanceTreeFilterMaster(
                 preferOptions={preferOptions}
                 isExpand={expanded}
                 maxLengthItem={maxLengthItem}
+                buildTree={buildTree}
               />
             </div>
           </div>

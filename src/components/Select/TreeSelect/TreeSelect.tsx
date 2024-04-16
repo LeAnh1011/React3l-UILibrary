@@ -11,6 +11,7 @@ import InputSelect from "../../Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "@Configs/enum";
 import { IdFilter } from "react3l-advanced-filters";
 import classNames from "classnames";
+import { TreeNode } from "@Components/Tree/TreeNode";
 import "./TreeSelect.scss";
 
 export interface TreeSelectProps<
@@ -77,6 +78,8 @@ export interface TreeSelectProps<
   className?: string;
   /** Option to let user cant select the selected item in tree list */
   isDisableSelected?: boolean;
+  /** Option to let developer can modify tree data */
+  buildTree?: (flatData: Model[]) => [TreeNode<Model>[], number[]];
 }
 export interface filterAction {
   type: string;
@@ -122,6 +125,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     bgColor,
     className,
     isDisableSelected,
+    buildTree,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -364,6 +368,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               isExpand={expanded}
               maxLengthItem={maxLengthItem}
               isDisableSelected={isDisableSelected}
+              buildTree={buildTree}
             />
           </div>
         )}

@@ -386,6 +386,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
               isEnumerable={true}
               isFilter={true}
               bgColor={bgColor}
+              handlePressExpandedIcon={handleCloseSelect}
             />
           )}
         </div>

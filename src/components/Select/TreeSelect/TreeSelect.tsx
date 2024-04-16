@@ -341,6 +341,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               onKeyEnter={handleKeyEnter}
               isRequired={isRequired}
               bgColor={bgColor}
+              handlePressExpandedIcon={handleCloseList}
             />
           )}
         </div>

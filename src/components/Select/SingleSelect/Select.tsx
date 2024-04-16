@@ -315,6 +315,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
             isSmall={isSmall}
             action={action}
             bgColor={bgColor}
+            handlePressExpandedIcon={handleCloseSelect}
           />
         </div>
         {isExpand && (

@@ -304,6 +304,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               onKeyDown={handleKeyPress}
               isFilter={true}
               bgColor={bgColor}
+              handlePressExpandedIcon={handleCloseList}
             />
           )}
         </div>

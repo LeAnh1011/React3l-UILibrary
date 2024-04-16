@@ -361,6 +361,7 @@ function AdvanceDateRangeFilterMaster(
             onKeyDown={handleKeyDown}
             render={renderItem}
             bgColor={bgColor}
+            handlePressExpandedIcon={handleCloseAdvanceFilterMaster}
           />
         </div>
       )}

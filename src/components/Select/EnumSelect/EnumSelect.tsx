@@ -418,6 +418,7 @@ function EnumSelect(props: SelectProps<Model>) {
               isRequired={isRequired}
               action={action}
               bgColor={bgColor}
+              handlePressExpandedIcon={handleCloseSelect}
             />
           )}
         </div>

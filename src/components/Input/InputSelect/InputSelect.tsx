@@ -13,6 +13,8 @@ export interface InputSelectProps<T extends Model> {
   disabled?: boolean;
   /** Focus to input of inputSelect */
   expanded?: boolean;
+  /** Set expand value */
+  handlePressExpandedIcon?: () => void;
   /** Placeholder of the Component */
   placeHolder?: string;
   /**Provide a function to render a specific property as name*/
@@ -68,6 +70,7 @@ function InputSelect(props: InputSelectProps<Model>) {
     isEnumerable,
     isFilter,
     bgColor,
+    handlePressExpandedIcon,
   } = props;
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
@@ -224,6 +227,7 @@ function InputSelect(props: InputSelectProps<Model>) {
                 className={classNames("input-icon", "input-select__icon", {
                   "input-select__icon--disabled": disabled,
                 })}
+                onClick={handlePressExpandedIcon}
               />
             </>
           ) : (

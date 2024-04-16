@@ -277,6 +277,7 @@ function AdvanceIdFilter(props: AdvanceIdFilterProps<Model, ModelFilter>) {
             isSmall={isSmall}
             isFilter={true}
             bgColor={bgColor}
+            handlePressExpandedIcon={handleCloseSelect}
           />
         </div>
         {isExpand && (

@@ -129,6 +129,14 @@ function InputSelect(props: InputSelectProps<Model>) {
     [onKeyEnter]
   );
 
+  const handleClickChevron = React.useCallback(
+    (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
+      event.stopPropagation();
+      handlePressExpandedIcon();
+    },
+    [handlePressExpandedIcon]
+  );
+
   React.useEffect(() => {
     if (expanded) {
       setInternalValue("");
@@ -227,7 +235,7 @@ function InputSelect(props: InputSelectProps<Model>) {
                 className={classNames("input-icon", "input-select__icon", {
                   "input-select__icon--disabled": disabled,
                 })}
-                onClick={handlePressExpandedIcon}
+                onClick={handleClickChevron}
               />
             </>
           ) : (

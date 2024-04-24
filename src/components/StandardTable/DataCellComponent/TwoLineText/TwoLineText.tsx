@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React from "react";
+import React, { ReactNode } from "react";
 import { Tooltip } from "antd";
 import { CommonService } from "@Services/common-service";
 import "./TwoLineText.scss";
@@ -27,6 +27,10 @@ export interface TwoLineTextProps {
   countCharacters1?: number;
   /** Count max length to display of line 2 */
   countCharacters2?: number;
+  /** Customize content of tooltip value line 1 */
+  tooltipLine1?: ReactNode;
+  /** Customize content of tooltip value line 2 */
+  tooltipLine2?: ReactNode;
 }
 
 function TwoLineText(props: TwoLineTextProps) {
@@ -42,6 +46,8 @@ function TwoLineText(props: TwoLineTextProps) {
     link,
     countCharacters1,
     countCharacters2,
+    tooltipLine1,
+    tooltipLine2,
   } = props;
 
   const getFrameStyle = React.useMemo(() => {
@@ -80,7 +86,7 @@ function TwoLineText(props: TwoLineTextProps) {
               ></i>
             )}
             {countCharacters1 && countCharacters1 > 0 ? (
-              <Tooltip title={valueLine1}>
+              <Tooltip title={tooltipLine1 ? tooltipLine1 : valueLine1}>
                 {CommonService.limitWord(valueLine1, countCharacters1)}
               </Tooltip>
             ) : (
@@ -97,7 +103,7 @@ function TwoLineText(props: TwoLineTextProps) {
             {link ? (
               <a href={link} rel="noopener noreferrer" className="link-text">
                 {countCharacters2 && countCharacters2 > 0 ? (
-                  <Tooltip title={valueLine2}>
+                  <Tooltip title={tooltipLine2 ? tooltipLine2 : valueLine2}>
                     {CommonService.limitWord(valueLine2, countCharacters2)}
                   </Tooltip>
                 ) : (
@@ -107,7 +113,7 @@ function TwoLineText(props: TwoLineTextProps) {
             ) : (
               <>
                 {countCharacters2 && countCharacters2 > 0 ? (
-                  <Tooltip title={valueLine2}>
+                  <Tooltip title={tooltipLine2 ? tooltipLine2 : valueLine2}>
                     {CommonService.limitWord(valueLine2, countCharacters2)}
                   </Tooltip>
                 ) : (

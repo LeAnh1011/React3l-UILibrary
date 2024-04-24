@@ -3,6 +3,7 @@ import { Tooltip } from "antd";
 import { CommonService } from "@Services/common-service";
 import { Link } from "react-router-dom";
 import "./OneLineText.scss";
+import { ReactNode } from "react";
 
 export interface OneLineTextProps {
   /**Used to change style Component */
@@ -21,6 +22,8 @@ export interface OneLineTextProps {
   link?: string;
   /** Count max length to display of value */
   countCharacters?: number;
+  /** Customize content of tooltip value line 1 */
+  tooltip?: ReactNode;
 }
 
 function OneLineText(props: OneLineTextProps) {
@@ -33,6 +36,7 @@ function OneLineText(props: OneLineTextProps) {
     link,
     avatarType,
     countCharacters,
+    tooltip,
   } = props;
   return (
     <>
@@ -51,7 +55,7 @@ function OneLineText(props: OneLineTextProps) {
           {link ? (
             <a href={link} rel="noopener noreferrer" className="link-text">
               {countCharacters && countCharacters > 0 ? (
-                <Tooltip title={value}>
+                <Tooltip title={tooltip ? tooltip : value}>
                   {CommonService.limitWord(value, countCharacters)}
                 </Tooltip>
               ) : (
@@ -61,7 +65,7 @@ function OneLineText(props: OneLineTextProps) {
           ) : (
             <>
               {countCharacters && countCharacters > 0 ? (
-                <Tooltip title={value}>
+                <Tooltip title={tooltip ? tooltip : value}>
                   {CommonService.limitWord(value, countCharacters)}
                 </Tooltip>
               ) : (
@@ -77,7 +81,7 @@ function OneLineText(props: OneLineTextProps) {
           {link ? (
             <Link to={link} className="link-text">
               {countCharacters && countCharacters > 0 ? (
-                <Tooltip title={value}>
+                <Tooltip title={tooltip ? tooltip : value}>
                   {CommonService.limitWord(value, countCharacters)}
                 </Tooltip>
               ) : (
@@ -87,7 +91,7 @@ function OneLineText(props: OneLineTextProps) {
           ) : (
             <span>
               {countCharacters && countCharacters > 0 ? (
-                <Tooltip title={value}>
+                <Tooltip title={tooltip ? tooltip : value}>
                   {CommonService.limitWord(value, countCharacters)}
                 </Tooltip>
               ) : (

@@ -47,6 +47,8 @@ export interface DrawerProps {
   size?: "sm" | "lg" | "xl" | "2xl" | "max";
   /**Control the size of drawer*/
   side?: "left" | "right";
+  /**Use to custom style the component*/
+  className?: string;
 }
 
 function Drawer(props: DrawerProps) {
@@ -68,6 +70,7 @@ function Drawer(props: DrawerProps) {
     isHaveCloseIcon,
     size,
     side,
+    className,
   } = props;
   const ref: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(null);
 
@@ -121,9 +124,13 @@ function Drawer(props: DrawerProps) {
   return (
     <>
       <div
-        className={classNames(`drawer__container drawer-${size} side-${side}`, {
-          "slide-out": visible === true,
-        })}
+        className={classNames(
+          `drawer__container drawer-${size} side-${side}`,
+          {
+            "slide-out": visible === true,
+          },
+          className
+        )}
       >
         <Spin spinning={loading} indicator={antIcon}>
           <div className="drawer__content">

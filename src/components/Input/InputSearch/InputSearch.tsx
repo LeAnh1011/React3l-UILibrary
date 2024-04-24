@@ -46,6 +46,8 @@ export interface InputSearchProps<
   animationInput?: boolean;
   /**Option to set position for InputSearch */
   position?: "left" | "right";
+  /** Custom background color for component: "white" || "gray" */
+  bgColor?: "white" | "gray";
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -67,6 +69,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
     animationInput,
     onChange,
     position,
+    bgColor
   } = props;
   const [showListItem, setShowListItem] = React.useState<boolean>();
   const [fullWidth, setFullWidth] = React.useState<boolean>(!animationInput);
@@ -275,6 +278,7 @@ function InputSearch(props: InputSearchProps<Model, ModelFilter>) {
           "visible__input-search": showInput,
           "hidden__input-search": !showInput,
           "position-right": position === "right",
+          "component__input-search-select--white": bgColor === "white",
         })}
         onClick={handleToggle}
         tabIndex={0}

@@ -287,6 +287,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               isNotExpand={!expanded}
               isShowTooltip
               bgColor={bgColor}
+              clearSearchTerm={expanded}
             />
           ) : (
             <InputSelect

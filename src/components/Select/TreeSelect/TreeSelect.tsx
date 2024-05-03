@@ -323,6 +323,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               isRequired={isRequired}
               isShowTooltip
               bgColor={bgColor}
+              handlePressExpandedIcon={handleCloseList}
             />
           ) : (
             <InputSelect

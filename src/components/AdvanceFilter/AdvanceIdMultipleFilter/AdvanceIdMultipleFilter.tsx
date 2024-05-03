@@ -308,11 +308,11 @@ function AdvanceIdMultipleFilter(
 
   return (
     <>
-      <div
-        className="advance-id-multiple-filter__container"
-        ref={wrapperRef}
-      >
-        <div className="advance-id-multiple-filter__input" onClick={handleToggle}>
+      <div className="advance-id-multiple-filter__container" ref={wrapperRef}>
+        <div
+          className="advance-id-multiple-filter__input"
+          onClick={handleToggle}
+        >
           <InputTag
             listValue={values}
             render={render}
@@ -331,6 +331,7 @@ function AdvanceIdMultipleFilter(
             bgColor={bgColor}
             isShowTooltip
             clearSearchTerm={isExpand}
+            handlePressExpandedIcon={handleCloseSelect}
           />
         </div>
         {isExpand && (

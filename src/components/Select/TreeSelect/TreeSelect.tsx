@@ -353,6 +353,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
             style={appendToBodyStyle}
           >
             <Tree
+              items={listItem}
               getTreeData={getTreeData}
               selectedKey={selectedKey}
               onlySelectLeaf={onlySelectLeaf}

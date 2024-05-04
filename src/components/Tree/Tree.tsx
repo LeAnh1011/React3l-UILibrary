@@ -63,6 +63,8 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   isDisableSelected?: boolean;
   /** Option to let developer can modify tree data */
   buildTree?: (flatData: Model[]) => [TreeNode<Model>[], number[]];
+  /** Key property when you want to customize build tree object */
+  keyField?: string;
 }
 function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const {
@@ -84,6 +86,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     titleRender,
     isDisableSelected,
     buildTree,
+    keyField,
   } = props;
 
   const [internalTreeData, setInternalTreeData] = React.useState<
@@ -237,13 +240,14 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
         if (typeof onChange === "function") {
           const filteredItems = listItems.filter(
             (item) =>
-              !allKeys.includes(item.id) && !halfCheckedKeys.includes(item.id)
+              !allKeys.includes(item[keyField]) &&
+              !halfCheckedKeys.includes(item[keyField])
           );
           onChange(filteredItems as any);
         }
       }
     },
-    [findAllKey, items, onChange]
+    [findAllKey, items, keyField, onChange]
   );
 
   const handleCheckStrictly: any = React.useCallback(
@@ -265,13 +269,13 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
         });
         if (typeof onChange === "function") {
           const filteredItems = listItems.filter(
-            (item) => item.id !== node.key
+            (item) => item[keyField] !== node.key
           );
           onChange(filteredItems as any);
         }
       }
     },
-    [items, onChange]
+    [items, keyField, onChange]
   );
 
   // const handleCheck: any = React.useCallback(
@@ -322,7 +326,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       const { node, selectedNodes } = info;
       if (typeof onChange === "function") {
         const filterList = internalSelectedKeys.filter(
-          (id) => id === node?.item?.id
+          (key) => key === node?.item?.[keyField]
         );
         if (filterList.length === 0) {
           onChange([selectedNodes[0].item]);
@@ -333,7 +337,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
         }
       }
     },
-    [internalSelectedKeys, isDisableSelected, onChange]
+    [internalSelectedKeys, isDisableSelected, keyField, onChange]
   );
 
   React.useEffect(() => {

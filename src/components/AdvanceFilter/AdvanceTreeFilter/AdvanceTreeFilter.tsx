@@ -67,6 +67,8 @@ export interface AdvanceTreeFilterProps<
   appendToBody?: boolean;
   /** Option to let developer can modify tree data */
   buildTree?: (flatData: Model[]) => [TreeNode<Model>[], number[]];
+  /** Key property when you want to customize build tree object */
+  keyField?: string;
 }
 export interface filterAction {
   type: string;
@@ -108,6 +110,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
     bgColor,
     appendToBody,
     buildTree,
+    keyField,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -115,10 +118,10 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
   const [expanded, setExpanded] = React.useState<boolean>(false);
 
   const listIds = React.useMemo(() => {
-    if (item) return [item.id];
-    if (listItem) return listItem.map((currentItem) => currentItem?.id);
+    if (item) return [item?.[keyField]];
+    if (listItem) return listItem.map((currentItem) => currentItem?.[keyField]);
     return [];
-  }, [listItem, item]);
+  }, [item, keyField, listItem]);
 
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
     null
@@ -157,14 +160,14 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
     (item: Model) => {
       if (checkable) {
         const newListItem = listItem.filter(
-          (currentItem) => currentItem.id !== item?.id
+          (currentItem) => currentItem?.[keyField] !== item?.[keyField]
         );
         onChange(newListItem, checkable);
       } else {
         onChange([null], checkable);
       }
     },
-    [listItem, onChange, checkable]
+    [checkable, listItem, onChange, keyField]
   );
 
   const handleClearMultiItem = React.useCallback(() => {
@@ -316,6 +319,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
             id={componentId}
           >
             <Tree
+              items={listItem}
               getTreeData={getTreeData}
               selectedKey={selectedKey}
               onlySelectLeaf={onlySelectLeaf}
@@ -333,6 +337,7 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               isExpand={expanded}
               maxLengthItem={maxLengthItem}
               buildTree={buildTree}
+              keyField={keyField}
             />
           </div>
         )}
@@ -352,6 +357,7 @@ AdvanceTreeFilter.defaultProps = {
   selectable: true,
   bgColor: "white",
   treeTitleRender: (t: any) => t?.title,
+  keyField: "id",
 };
 
 export default AdvanceTreeFilter;

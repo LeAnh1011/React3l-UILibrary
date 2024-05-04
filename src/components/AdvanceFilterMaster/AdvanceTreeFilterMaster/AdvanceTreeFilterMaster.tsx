@@ -63,6 +63,8 @@ export interface AdvanceTreeFilterMasterProps<
   treeTitleRender?: (T: T) => ReactNode;
   /** Option to let developer can modify tree data */
   buildTree?: (flatData: Model[]) => [TreeNode<Model>[], number[]];
+  /** Key property when you want to customize build tree object */
+  keyField?: string;
 }
 export interface filterAction {
   type: string;
@@ -104,6 +106,7 @@ function AdvanceTreeFilterMaster(
     maxLengthItem,
     className,
     buildTree,
+    keyField,
   } = props;
   const inputRef: any = React.useRef<any>(null);
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -111,10 +114,10 @@ function AdvanceTreeFilterMaster(
   const [expanded, setExpanded] = React.useState<boolean>(false);
 
   const listIds = React.useMemo(() => {
-    if (item) return [item.id];
-    if (listItem) return listItem.map((currentItem) => currentItem?.id);
+    if (item) return [item?.[keyField]];
+    if (listItem) return listItem.map((currentItem) => currentItem?.[keyField]);
     return [];
-  }, [listItem, item]);
+  }, [item, keyField, listItem]);
 
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
     null
@@ -252,6 +255,7 @@ function AdvanceTreeFilterMaster(
             </div>
             <div className="advance-tree-filter-master__list" id={componentId}>
               <Tree
+                items={listItem}
                 getTreeData={getTreeData}
                 selectedKey={selectedKey}
                 onlySelectLeaf={onlySelectLeaf}
@@ -269,6 +273,7 @@ function AdvanceTreeFilterMaster(
                 isExpand={expanded}
                 maxLengthItem={maxLengthItem}
                 buildTree={buildTree}
+                keyField={keyField}
               />
             </div>
           </div>

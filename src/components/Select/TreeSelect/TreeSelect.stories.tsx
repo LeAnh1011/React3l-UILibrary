@@ -518,6 +518,7 @@ const Template: Story = (args) => {
             getTreeData={demoSearchFunc}
             label={"Label"}
             valueFilter={{ ...filter, id: { equal: 1 } }}
+            checkStrictly
           />
         </FormItem>
       </div>

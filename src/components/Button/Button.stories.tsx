@@ -1,4 +1,4 @@
-import Add16 from "@carbon/icons-react/es/add/16";
+import { Add } from "@carbon/icons-react";
 import {
   ArgsTable,
   Description,
@@ -68,7 +68,7 @@ const Template: Story = (args) => {
       <Button
         {...args}
         className={classNames("m-l--2xl", args?.className)}
-        icon={<Add16 />}
+        icon={<Add size={16} />}
         loading={loading}
         onClick={handleOnClick}
       >
@@ -77,7 +77,7 @@ const Template: Story = (args) => {
       <Button
         {...args}
         className={classNames("m-l--2xl", args?.className)}
-        icon={<Add16 />}
+        icon={<Add size={16} />}
         loading={loading}
         onClick={handleOnClick}
       >
@@ -86,7 +86,7 @@ const Template: Story = (args) => {
       <Button
         {...args}
         className={classNames("m-l--2xl", args?.className)}
-        icon={<Add16 />}
+        icon={<Add size={16} />}
         loading={loading}
         onClick={handleOnClick}
       >

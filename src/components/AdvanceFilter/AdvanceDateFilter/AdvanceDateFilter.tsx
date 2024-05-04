@@ -8,7 +8,7 @@ import { DEFAULT_DATETIME_VALUE } from "@Configs/consts";
 import { BORDER_TYPE } from "@Configs/enum";
 import { Moment } from "moment";
 import { CommonService } from "@Services/common-service";
-import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
+import { CloseFilled } from "@carbon/icons-react";
 import "./AdvanceDateFilter.scss";
 
 interface AdvanceDateFilterProps {
@@ -130,13 +130,14 @@ function AdvanceDateFilter(
                 }
               )}
             >
-              <CloseFilled16
+              <CloseFilled
+                size={16}
                 className={classNames(
                   "advance-date-filter__icon-clear",
                   "m-l--2xs"
                 )}
                 onClick={handleClearDate}
-              ></CloseFilled16>
+              />
             </span>
           )}
       </div>

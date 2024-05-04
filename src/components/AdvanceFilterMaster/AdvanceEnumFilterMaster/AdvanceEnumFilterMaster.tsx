@@ -1,6 +1,5 @@
 import { CommonService } from "@Services/common-service";
-import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
-import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
+import { Checkmark, ChevronDown } from "@carbon/icons-react";
 import { Checkbox, Empty, Tooltip } from "antd";
 import classNames from "classnames";
 import React, { RefObject } from "react";
@@ -321,7 +320,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
                   {label}
                   {listValue?.length > 0 && <>({listValue?.length})</>}
                 </span>
-                <ChevronDown16 />
+                <ChevronDown size={16} />
               </div>
             </div>
           ) : (
@@ -333,7 +332,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
             >
               <div className="advance-enum-filter-master__title">
                 <span className="filter-title"> {label}</span>
-                <ChevronDown16 />
+                <ChevronDown size={16} />
               </div>
             </div>
           )}
@@ -437,7 +436,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
                                   )}
                                 </span>
                                 {item.id === internalValue?.id && (
-                                  <Checkmark16 />
+                                  <Checkmark size={16} />
                                 )}
                               </div>
                             ))

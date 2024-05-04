@@ -1,4 +1,4 @@
-import Close20 from "@carbon/icons-react/es/close/20";
+import { Close } from "@carbon/icons-react";
 import { Spin } from "antd";
 import classNames from "classnames";
 import Button from "@Components/Button";
@@ -140,7 +140,7 @@ function Drawer(props: DrawerProps) {
               {!description && isHaveCloseIcon && (
                 <Button
                   type="icon-only-ghost"
-                  icon={<Close20 />}
+                  icon={<Close size={20} />}
                   className="btn--2xl"
                   onClick={handleClose}
                 />

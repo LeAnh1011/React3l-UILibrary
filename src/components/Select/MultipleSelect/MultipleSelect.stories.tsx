@@ -113,8 +113,8 @@ const Template: Story = (args) => {
             valueFilter={selectModelFilter}
             classFilter={DemoFilter}
             preferOptions={list}
-            maxLengthItem={10}
-            render={(item) => item?.code}
+            // maxLengthItem={10}
+            render={(item) => item?.name}
           ></MultipleSelect>
         </FormItem>
       </div>

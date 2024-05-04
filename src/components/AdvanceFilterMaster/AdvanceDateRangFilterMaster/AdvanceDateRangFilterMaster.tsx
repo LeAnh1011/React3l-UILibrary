@@ -1,21 +1,15 @@
-import Calendar16 from "@carbon/icons-react/es/calendar/16";
-import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
+import { Calendar, ChevronDown } from "@carbon/icons-react";
 import type { RangePickerProps } from "antd/lib/date-picker";
 import classNames from "classnames";
 import DateRange from "@Components/Input/DateRange";
 import InputSelect from "@Components/Input/InputSelect";
-import { BORDER_TYPE } from "@Configs/enum";
+import { ADVANCE_DATE_RANGE_TYPE, BORDER_TYPE } from "@Configs/enum";
 import moment, { Moment } from "moment";
 import React, { RefObject } from "react";
 import { TFunction } from "i18next";
 import { Model } from "react3l-common";
 import { CommonService } from "@Services/common-service";
 import "./AdvanceDateRangFilterMaster.scss";
-
-export enum ADVANCE_DATE_RANGE_TYPE {
-  SHORT,
-  INPUT,
-}
 
 class ListDate extends Model {
   id?: number;
@@ -349,7 +343,7 @@ function AdvanceDateRangeFilterMaster(
           >
             <div className="advance-date-range-filter-master__title">
               <span className="filter-title"> {label}</span>
-              <ChevronDown16 />
+              <ChevronDown size={16} />
             </div>
           </div>
         </div>
@@ -407,7 +401,7 @@ function AdvanceDateRangeFilterMaster(
             })}
             onClick={handleClickCustomDate}
           >
-            <Calendar16 />
+            <Calendar size={16} />
             <span>
               {translate
                 ? translate("general.filter.customDate")

@@ -5,8 +5,7 @@ import { BORDER_TYPE } from "@Configs/enum";
 import { Moment } from "moment";
 import React, { ReactSVGElement, RefObject } from "react";
 import { CommonService } from "@Services/common-service";
-import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
-import Calendar16 from "@carbon/icons-react/es/calendar/16";
+import { CloseFilled, Calendar } from "@carbon/icons-react";
 import "./DateRange.scss";
 
 const { RangePicker } = DatePicker;
@@ -14,7 +13,7 @@ const { RangePicker } = DatePicker;
 function SuffixDateIcon() {
   return (
     <span className={classNames("date-range__icon")}>
-      <Calendar16 />
+      <Calendar size={16} />
     </span>
   );
 }
@@ -175,10 +174,11 @@ function DateRange(props: DateRangeProps & RangePickerProps) {
                 }
               )}
             >
-              <CloseFilled16
+              <CloseFilled
+                size={16}
                 className={classNames("date-range__icon-clear", "m-l--2xs")}
                 onClick={handleClearDate}
-              ></CloseFilled16>
+              />
             </span>
           </>
         )}

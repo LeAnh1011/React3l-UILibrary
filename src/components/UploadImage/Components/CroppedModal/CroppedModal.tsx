@@ -4,12 +4,14 @@ import ReactCrop from "react-image-crop";
 import { ImageFile } from "../ComponentUploadImage";
 import classNames from "classnames";
 import { formatFileSize } from "@Helpers/file";
-import { ModalCustomProps } from "@Components/Modal/Modal";
-import Close16 from "@carbon/icons-react/es/close/16";
-import CloudUpload24 from "@carbon/icons-react/es/cloud--upload/24";
-import Crop20 from "@carbon/icons-react/es/crop/20";
-import TrashCan32 from "@carbon/icons-react/es/trash-can/32";
-import Upload16 from "@carbon/icons-react/es/upload/16";
+import { ModalCustomProps } from "@Components/Modal/NormalModal/Modal";
+import {
+  Close,
+  CloudUpload,
+  Crop,
+  TrashCan,
+  Upload,
+} from "@carbon/icons-react";
 import "./CroppedModal.scss";
 
 const { Option } = Select;
@@ -116,7 +118,7 @@ export default function CroppedModal(props: CroppedModalProps) {
   const {
     isMultiple,
     listImage,
-    visible,
+    open,
     handleCancel,
     handleSave,
     defaultAspect,
@@ -483,7 +485,7 @@ export default function CroppedModal(props: CroppedModalProps) {
   return (
     <>
       <Modal
-        visible={visible}
+        open={open}
         width={1000}
         closable={false}
         bodyStyle={{ borderRadius: 10 }}
@@ -520,7 +522,7 @@ export default function CroppedModal(props: CroppedModalProps) {
                           className="image-item__delete"
                           onClick={() => handleDelete(index)}
                         >
-                          <TrashCan32 />
+                          <TrashCan size={32} />
                         </div>
                       </div>
                     );
@@ -533,7 +535,7 @@ export default function CroppedModal(props: CroppedModalProps) {
                         })}
                         onClick={() => moreRef.current.click()}
                       >
-                        <CloudUpload24 />
+                        <CloudUpload size={24} />
                         <input
                           type="file"
                           ref={moreRef}
@@ -601,7 +603,7 @@ export default function CroppedModal(props: CroppedModalProps) {
                     </div>
                     <div style={{ marginLeft: 56 }}>
                       <Button onClick={makeCropImage}>
-                        <Crop20 />
+                        <Crop size={20} />
                         Cắt
                       </Button>
                     </div>
@@ -653,11 +655,11 @@ export default function CroppedModal(props: CroppedModalProps) {
                 <div className="cropped-modal__footer">
                   <Button type="primary" onClick={handleConfirm}>
                     Tải lên
-                    <Upload16 />
+                    <Upload size={16} />
                   </Button>
                   <Button onClick={handleCancelModal}>
                     Hủy
-                    <Close16 />
+                    <Close size={16} />
                   </Button>
                 </div>
               </div>

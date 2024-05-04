@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  Checkbox as CheckboxAntd,
-  CheckboxProps as CheckboxPropsAntd,
-} from "antd";
+import { Checkbox as CheckboxAntd } from "antd";
 import CheckboxGroup from "./CheckboxGroup";
 import "./Checkbox.scss";
 
@@ -17,7 +14,7 @@ export interface CheckboxProps {
   label?: string;
 }
 
-function Checkbox(props: CheckboxProps & CheckboxPropsAntd) {
+function Checkbox(props: CheckboxProps) {
   const { onChange, checked, disabled, label } = props;
   const handleChange = React.useCallback(
     (value) => {

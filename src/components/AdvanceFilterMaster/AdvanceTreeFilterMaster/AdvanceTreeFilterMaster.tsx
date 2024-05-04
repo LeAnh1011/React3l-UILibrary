@@ -1,4 +1,4 @@
-import React, { RefObject, Reducer } from "react";
+import React, { RefObject, Reducer, ReactNode } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Model, ModelFilter } from "react3l-common";
 import Tree from "../../Tree";
@@ -8,8 +8,7 @@ import type { Observable } from "rxjs";
 import { CommonService } from "@Services/common-service";
 import InputText from "@Components/Input/InputText";
 import classNames from "classnames";
-import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
-import Search16 from "@carbon/icons-react/es/search/16";
+import { ChevronDown, Search } from "@carbon/icons-react";
 import { IdFilter } from "react3l-advanced-filters";
 import "./AdvanceTreeFilterMaster.scss";
 
@@ -57,6 +56,10 @@ export interface AdvanceTreeFilterMasterProps<
   maxLength?: number;
   /**Set maximum length of data name display in each row of tree*/
   maxLengthItem?: number;
+  /**Use to custom style the component*/
+  className?: string;
+  /** Prop of AntdTreeProps*/
+  treeTitleRender?: (T: T) => ReactNode;
 }
 export interface filterAction {
   type: string;
@@ -91,10 +94,12 @@ function AdvanceTreeFilterMaster(
     getTreeData,
     onChange,
     render,
+    treeTitleRender,
     preferOptions,
     label,
     maxLength,
     maxLengthItem,
+    className,
   } = props;
   const inputRef: any = React.useRef<any>(null);
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -201,7 +206,13 @@ function AdvanceTreeFilterMaster(
 
   return (
     <>
-      <div className="advance-tree-filter-master__container" ref={wrapperRef}>
+      <div
+        className={classNames(
+          "advance-tree-filter-master__container",
+          className
+        )}
+        ref={wrapperRef}
+      >
         <div
           onClick={handleExpand}
           className={classNames(
@@ -219,7 +230,7 @@ function AdvanceTreeFilterMaster(
                 "(" + listItem?.length + ") "}
               {label}
             </span>
-            <ChevronDown16 />
+            <ChevronDown size={16} />
           </div>
         </div>
         {expanded && (
@@ -230,7 +241,7 @@ function AdvanceTreeFilterMaster(
                 maxLength={maxLength}
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
-                suffix={<Search16 />}
+                suffix={<Search size={16} />}
                 ref={inputRef}
                 onKeyDown={handleKeyPress}
               />
@@ -248,6 +259,7 @@ function AdvanceTreeFilterMaster(
                 selectable={selectable}
                 checkable={checkable}
                 render={render}
+                titleRender={treeTitleRender}
                 selectWithAdd={undefined}
                 preferOptions={preferOptions}
                 isExpand={expanded}
@@ -270,7 +282,6 @@ AdvanceTreeFilterMaster.defaultProps = {
   checkable: false,
   disabled: false,
   selectable: true,
-  treeTitleRender: (t: any) => t?.title,
 };
 
 export default AdvanceTreeFilterMaster;

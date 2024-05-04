@@ -1,20 +1,17 @@
 import { Tabs as TabsAntd } from "antd";
 import type { TabsProps as TabsPropsAnt, TabsType } from "antd/lib/tabs";
 import classNames from "classnames";
-import React, { ReactNode } from "react";
+import React from "react";
 import "./Tabs.scss";
 
 export interface TabsProps extends TabsPropsAnt {
   /**Option change tab styling */
   mode?: TabsType;
-  children?: ReactNode;
   /**List key of error tab */
   tabErrorKeys?: string[];
   /**Option for change background color tab to white  */
   lightColor?: boolean;
 }
-
-const { TabPane } = TabsAntd;
 
 function Tabs(props: TabsProps) {
   const { mode, children, tabErrorKeys, lightColor, ...rest } = props;
@@ -61,15 +58,11 @@ function Tabs(props: TabsProps) {
         })}
         ref={tabRef}
       >
-        <TabsAntd {...rest} type={mode}>
-          {children}
-        </TabsAntd>
+        <TabsAntd {...rest} type={mode} />
       </div>
     </>
   );
 }
-
-Tabs.TabPane = TabPane;
 
 Tabs.defaultProps = {
   mode: "line",

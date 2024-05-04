@@ -10,8 +10,8 @@ import {
 import { Story } from "@storybook/react";
 import React from "react";
 import FormItem from "../../FormItem/FormItem";
-import InputView, { BORDER_TYPE } from "./InputView";
-
+import { BORDER_TYPE } from "../../../config/enum";
+import InputView from "./InputView";
 export default {
   title: "Input/InputView",
   component: InputView,

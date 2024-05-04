@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
+import { CloseFilled } from "@carbon/icons-react";
 import { BORDER_TYPE } from "@Configs/enum";
 import React, { ReactSVGElement, RefObject } from "react";
 import "./AdvanceStringFilter.scss";
@@ -203,7 +203,7 @@ const AdvanceStringFilter = React.forwardRef(
           )}
           {internalValue && !disabled && (
             <div className={classNames("input-icon__clear", "m-l--2xs")}>
-              <CloseFilled16 onClick={handleClearInput}></CloseFilled16>
+              <CloseFilled size={16} onClick={handleClearInput} />
             </div>
           )}
           {suffix && (

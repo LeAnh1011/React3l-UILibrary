@@ -11,7 +11,7 @@ import {
 import { Story } from "@storybook/react";
 import Button from "../Button";
 import { Tabs } from "antd";
-import Add16 from "@carbon/icons-react/es/add/16";
+import { Add } from "@carbon/icons-react";
 import InlineLoading from "./InlineLoading";
 export type LoadingType = "default" | "submitting" | "submitted" | "error";
 const { TabPane } = Tabs;
@@ -165,7 +165,7 @@ const Template: Story = (args) => {
                   type="primary"
                   className="btn--sm"
                   onClick={handleOnClick}
-                  icon={<Add16 />}
+                  icon={<Add size={16} />}
                 >
                   {"Button"}
                 </Button>
@@ -184,7 +184,7 @@ const Template: Story = (args) => {
                   type="primary"
                   className="btn--sm"
                   onClick={handleOnClick}
-                  icon={<Add16 />}
+                  icon={<Add size={16} />}
                 >
                   {"Button"}
                 </Button>
@@ -203,7 +203,7 @@ const Template: Story = (args) => {
                   type="primary"
                   className="btn--lg"
                   onClick={handleOnClick}
-                  icon={<Add16 />}
+                  icon={<Add size={16} />}
                 >
                   {"Button"}
                 </Button>
@@ -222,7 +222,7 @@ const Template: Story = (args) => {
                   type="primary"
                   className="btn--xl"
                   onClick={handleOnClick}
-                  icon={<Add16 />}
+                  icon={<Add size={16} />}
                 >
                   {"Button"}
                 </Button>
@@ -335,7 +335,7 @@ const Template: Story = (args) => {
                   type="outline-primary"
                   className="btn--sm"
                   onClick={handleOnClick}
-                  icon={<Add16 />}
+                  icon={<Add size={16} />}
                 >
                   {"Button"}
                 </Button>
@@ -354,7 +354,7 @@ const Template: Story = (args) => {
                   type="outline-primary"
                   className="btn--sm"
                   onClick={handleOnClick}
-                  icon={<Add16 />}
+                  icon={<Add size={16} />}
                 >
                   {"Button"}
                 </Button>
@@ -373,7 +373,7 @@ const Template: Story = (args) => {
                   type="outline-primary"
                   className="btn--lg"
                   onClick={handleOnClick}
-                  icon={<Add16 />}
+                  icon={<Add size={16} />}
                 >
                   {"Button"}
                 </Button>
@@ -392,7 +392,7 @@ const Template: Story = (args) => {
                   type="outline-primary"
                   className="btn--xl"
                   onClick={handleOnClick}
-                  icon={<Add16 />}
+                  icon={<Add size={16} />}
                 >
                   {"Button"}
                 </Button>
@@ -433,7 +433,7 @@ const Template: Story = (args) => {
               <Button
                 type="bleed-primary"
                 onClick={handleOnClick}
-                icon={<Add16 />}
+                icon={<Add size={16} />}
               >
                 {"Button"}
               </Button>

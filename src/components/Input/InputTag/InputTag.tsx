@@ -1,7 +1,5 @@
 import React, { ReactSVGElement, RefObject } from "react";
-import CloseFilled16 from "@carbon/icons-react/es/close--filled/16";
-import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
-import Close16 from "@carbon/icons-react/es/close/16";
+import { CloseFilled, ChevronDown, Close } from "@carbon/icons-react";
 import { Model } from "react3l-common";
 import classNames from "classnames";
 import { BORDER_TYPE } from "@Configs/enum";
@@ -218,10 +216,11 @@ function InputTag(props: InputTagProps<Model>) {
                       {internalListValue?.length}
                     </span>
                     {
-                      <Close16
+                      <Close
+                        size={16}
                         className="input-tag-item__icon"
                         onClick={handleClearMultiItem}
-                      ></Close16>
+                      />
                     }
                   </span>
                 </Tooltip>
@@ -248,10 +247,11 @@ function InputTag(props: InputTagProps<Model>) {
                     {internalListValue?.length}
                   </span>
                   {
-                    <Close16
+                    <Close
+                      size={16}
                       className="input-tag-item__icon"
                       onClick={handleClearMultiItem}
-                    ></Close16>
+                    />
                   }
                 </span>
               )}
@@ -299,17 +299,19 @@ function InputTag(props: InputTagProps<Model>) {
           )}
 
           {!disabled && searchTerm && (
-            <CloseFilled16
+            <CloseFilled
+              size={16}
               className="input-icon input-icon__clear m-x--2xs"
               onClick={handleClearInput}
-            ></CloseFilled16>
+            />
           )}
 
-          <ChevronDown16
+          <ChevronDown
+            size={16}
             className={classNames("input-icon", "input-tag__icon", {
               "input-tag__icon--disabled": disabled,
             })}
-          ></ChevronDown16>
+          />
         </div>
       </div>
     </>

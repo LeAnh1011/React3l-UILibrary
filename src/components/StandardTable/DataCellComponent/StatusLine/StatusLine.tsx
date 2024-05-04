@@ -1,4 +1,4 @@
-import DotMark16 from "@carbon/icons-react/es/dot-mark/16";
+import { DotMark } from "@carbon/icons-react";
 import { Tooltip } from "antd";
 import classNames from "classnames";
 import { CommonService } from "@Services/common-service";
@@ -28,7 +28,7 @@ function StatusLine(props: StatusLineProps) {
           "status-line-data"
         )}
       >
-        <DotMark16 className="status" style={{ color: color }} />
+        <DotMark size={16} className="status" style={{ color: color }} />
         {countCharacters && countCharacters > 0 ? (
           <Tooltip title={value}>
             {CommonService.limitWord(value, countCharacters)}

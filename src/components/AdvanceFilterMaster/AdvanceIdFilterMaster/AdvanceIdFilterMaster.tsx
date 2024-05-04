@@ -1,6 +1,4 @@
-import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
-import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
-import Search16 from "@carbon/icons-react/es/search/16";
+import { Checkmark, ChevronDown, Search } from "@carbon/icons-react";
 import IconLoading from "@Components/IconLoading/IconLoading";
 import InputText from "@Components/Input/InputText";
 import { DEBOUNCE_TIME_300 } from "@Configs/consts";
@@ -240,7 +238,7 @@ function AdvanceIdFilterMaster(
           >
             <div className="advance-id-filter-master__title">
               <span className="filter-title"> {label}</span>
-              <ChevronDown16 />
+              <ChevronDown size={16} />
             </div>
           </div>
         </div>
@@ -252,7 +250,7 @@ function AdvanceIdFilterMaster(
                 maxLength={maxLength}
                 onChange={handleSearchChange}
                 placeHolder={placeHolder}
-                suffix={<Search16 />}
+                suffix={<Search size={16} />}
                 ref={inputRef}
                 onKeyDown={handleKeyDown}
               />
@@ -275,7 +273,7 @@ function AdvanceIdFilterMaster(
                       ) : (
                         render(item)
                       )}
-                      {item.id === Number(value) && <Checkmark16 />}
+                      {item.id === Number(value) && <Checkmark size={16} />}
                     </div>
                   ))
                 ) : (
@@ -313,7 +311,7 @@ function AdvanceIdFilterMaster(
                           render(item)
                         )}
                       </span>
-                      {item.id === Number(value) && <Checkmark16 />}
+                      {item.id === Number(value) && <Checkmark size={16} />}
                     </div>
                   ))}
               </div>

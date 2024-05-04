@@ -2,17 +2,10 @@ import React, { ReactNode } from "react";
 import { Modal as AntModal, ModalProps as AntModalProps } from "antd";
 import classNames from "classnames";
 import Button from "@Components/Button";
-import Close20 from "@carbon/icons-react/es/close/20";
+import { Close } from "@carbon/icons-react";
 import InlineLoading from "@Components/InlineLoading";
 import "./Modal.scss";
-
-export enum MODAL_SIZE {
-  SIZE_320 = 320,
-  SIZE_520 = 520,
-  SIZE_720 = 720,
-  SIZE_1024 = 1024,
-  SIZE_1200 = 1200,
-}
+import { MODAL_SIZE } from "@Configs/enum";
 
 export interface ModalCustomProps extends AntModalProps {
   children?: ReactNode;
@@ -127,7 +120,7 @@ function Modal(props: ModalCustomProps) {
           "btn-component btn-only-icon btn--2xl btn--icon-only-ghost"
         )}
       >
-        <Close20 />
+        <Close size={20} />
       </div>
     );
   }, []);
@@ -138,7 +131,7 @@ function Modal(props: ModalCustomProps) {
         {...props}
         style={{ top: 72, width: 1500 }}
         destroyOnClose={destroyOnClose}
-        className={classNames("modal__container")}
+        className={classNames("modal__container", props?.className)}
         closeIcon={CloseButton}
         footer={visibleFooter ? renderModalFooter : null}
         onCancel={handleCancel}

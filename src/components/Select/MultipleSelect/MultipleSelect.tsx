@@ -1,5 +1,5 @@
 import { Model, ModelFilter } from "react3l-common";
-import Add16 from "@carbon/icons-react/es/add/16";
+import { Add } from "@carbon/icons-react";
 import { useDebounceFn } from "ahooks";
 import { CommonService } from "@Services/common-service";
 import classNames from "classnames";
@@ -61,6 +61,8 @@ export interface MultipleSelectProps<
   action?: InputAction;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  /**Use to custom style the component*/
+  className?: string;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -91,6 +93,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     isShowTooltip,
     action,
     bgColor,
+    className,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -327,7 +330,10 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
   return (
     <>
       <div
-        className="select__container multiple-select__container"
+        className={classNames(
+          "select__container multiple-select__container",
+          className
+        )}
         ref={wrapperRef}
       >
         <div className="select__input" onClick={handleToggle}>
@@ -362,7 +368,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                   className="select__list multiple-select__list"
                   ref={selectListRef}
                 >
-                  {internalList.length > 0 ? (
+                  {internalList && internalList.length > 0 ? (
                     internalList.map((item, index) => (
                       <div
                         className={classNames(
@@ -383,7 +389,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                           <span className="select__text">
                             {maxLengthItem &&
                             render(item)?.length > maxLengthItem ? (
-                              <Tooltip title={item?.name}>
+                              <Tooltip title={render(item)}>
                                 {CommonService.limitWord(
                                   render(item),
                                   maxLengthItem
@@ -448,7 +454,7 @@ export function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
                 )}
                 onClick={selectWithAdd}
               >
-                <Add16 className="m-l--xs" />
+                <Add size={16} className="m-l--xs" />
                 <span className="m-l--xs">Add new</span>
               </div>
             )}

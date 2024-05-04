@@ -1,4 +1,4 @@
-import React, { RefObject, Reducer } from "react";
+import React, { RefObject, Reducer, ReactNode } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Model, ModelFilter } from "react3l-common";
 import Tree from "../../Tree/Tree";
@@ -10,6 +10,7 @@ import InputTag from "../../Input/InputTag/InputTag";
 import InputSelect from "../../Input/InputSelect/InputSelect";
 import { BORDER_TYPE } from "@Configs/enum";
 import { IdFilter } from "react3l-advanced-filters";
+import classNames from "classnames";
 import "./TreeSelect.scss";
 
 export interface TreeSelectProps<
@@ -61,7 +62,7 @@ export interface TreeSelectProps<
   /** Control the size of the component*/
   isSmall?: boolean;
   /** Prop of AntdTreeProps*/
-  treeTitleRender?: (T: T) => string;
+  treeTitleRender?: (T: T) => ReactNode;
   /**Option show button add new*/
   selectWithAdd?: () => void;
   /**Component enable to search data list*/
@@ -72,6 +73,8 @@ export interface TreeSelectProps<
   maxLengthItem?: number;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "gray" | "white";
+  /**Use to custom style the component*/
+  className?: string;
 }
 export interface filterAction {
   type: string;
@@ -115,6 +118,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     preferOptions,
     maxLengthItem,
     bgColor,
+    className,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -286,7 +290,10 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
 
   return (
     <>
-      <div className="tree-select__container" ref={wrapperRef}>
+      <div
+        className={classNames("tree-select__container", className)}
+        ref={wrapperRef}
+      >
         <div className="tree-select__input" onClick={handleExpand}>
           {checkable ? (
             <InputTag

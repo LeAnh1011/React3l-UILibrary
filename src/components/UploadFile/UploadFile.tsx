@@ -1,4 +1,4 @@
-import Upload16 from "@carbon/icons-react/es/upload/16";
+import { Upload } from "@carbon/icons-react";
 import Button from "@Components/Button";
 import { notification } from "antd";
 import classNames from "classnames";
@@ -47,6 +47,8 @@ export interface UploadFileProps {
   isViewMode?: boolean;
   /**Function to set list file in status loading */
   setListFileLoading?: React.Dispatch<SetStateAction<FileModel[]>>;
+  /**Use to custom style the component*/
+  className?: string;
 }
 export function UploadFile(props: UploadFileProps) {
   const {
@@ -59,6 +61,7 @@ export function UploadFile(props: UploadFileProps) {
     type = "button",
     icon,
     setListFileLoading,
+    className,
   } = props;
 
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>();
@@ -157,7 +160,7 @@ export function UploadFile(props: UploadFileProps) {
   });
 
   return (
-    <div className="upload-button__container">
+    <div className={classNames("upload-button__container", className)}>
       <div>
         {type === "dragAndDrop" ? (
           <div className={classNames("upload-dropzone")} {...getRootProps()}>
@@ -173,7 +176,7 @@ export function UploadFile(props: UploadFileProps) {
           </div>
         ) : type === "link" ? (
           <div className="upload-link" onClick={handleClickButton}>
-            {icon ? icon : <Upload16 />}
+            {icon ? icon : <Upload size={16} />}
             <span className="upload-content m-l--2xs">{uploadContent}</span>
           </div>
         ) : (

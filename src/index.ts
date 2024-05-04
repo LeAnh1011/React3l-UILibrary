@@ -39,7 +39,8 @@ export { default as Button } from "./components/Button";
 export { default as IconLoading } from "./components/IconLoading";
 export { default as InlineLoading } from "./components/InlineLoading";
 
-export { default as Modal } from "./components/Modal";
+export { default as Modal } from "./components/Modal/NormalModal";
+export { default as TearSheet } from "./components/Modal/TearSheet";
 export { default as Drawer } from "./components/Drawer";
 
 export { default as UploadFile } from "./components/UploadFile";

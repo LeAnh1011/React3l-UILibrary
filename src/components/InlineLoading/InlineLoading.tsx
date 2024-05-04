@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import React, { PropsWithChildren } from "react";
-import CheckmarkFilled16 from "@carbon/icons-react/es/checkmark--filled/16";
-import ErrorFilled16 from "@carbon/icons-react/es/error--filled/16";
+import { CheckmarkFilled, ErrorFilled } from "@carbon/icons-react";
 import IconLoading from "@Components/IconLoading";
 import "./InlineLoading.scss";
 
@@ -39,13 +38,16 @@ const InlineLoading = React.forwardRef(
         )}
         {status === "submitted" && (
           <div className="submitted-box">
-            <CheckmarkFilled16 className="icon-submitted-inline-loading" />
+            <CheckmarkFilled
+              size={16}
+              className="icon-submitted-inline-loading"
+            />
             {titleSubmitted}
           </div>
         )}
         {status === "error" && (
           <div className="error-box">
-            <ErrorFilled16 className="icon-error-inline-loading" />
+            <ErrorFilled size={16} className="icon-error-inline-loading" />
             {titleError}
           </div>
         )}

@@ -4,17 +4,17 @@ import IconLoading from "@Components/IconLoading/IconLoading";
 import "./FileLoadingContent.scss";
 
 export interface FileLoadingContentProps {
-  /**Pass list file loading */
-  loadingFiles?: FileModel[];
+  /**Pass file loading */
+  file?: FileModel;
   /**Use to custom style the component*/
   className?: string;
 }
 
 export default function FileLoadingContent(props: FileLoadingContentProps) {
-  const { loadingFiles, className } = props;
-  const renderLoadingFile = React.useCallback((file, index) => {
+  const { file, className } = props;
+  const renderLoadingFile = React.useCallback((file) => {
     return (
-      <div className="file-loading-container" key={index}>
+      <div className="file-loading-container" key={file?.id}>
         <a href={file?.path} download>
           {file?.name}
         </a>
@@ -22,12 +22,7 @@ export default function FileLoadingContent(props: FileLoadingContentProps) {
       </div>
     );
   }, []);
-  return (
-    <div className={className}>
-      {loadingFiles?.length > 0 &&
-        loadingFiles.map((file, index) => renderLoadingFile(file, index))}
-    </div>
-  );
+  return <div className={className}>{renderLoadingFile(file)}</div>;
 }
 
 FileLoadingContent.defaultProps = {

@@ -4,6 +4,7 @@ import type { Observable } from "rxjs";
 import { ComponentUploadAvatar } from "./Components/ComponentUploadAvatar";
 import { ComponentUploadImage } from "./Components/ComponentUploadImage";
 import "./UploadImage.scss";
+import { UPLOADTYPE_IMAGE } from "@Configs/enum";
 
 export class File extends Model {
   public id?: number;
@@ -33,11 +34,6 @@ export interface FileModel extends File {
   isDelete?: boolean;
   clearAction?: (fileId: string | number) => void;
   handleInput?: (e: any) => void;
-}
-
-export enum UPLOADTYPE_IMAGE {
-  IMAGE,
-  AVATAR,
 }
 
 export interface UploadImageProps {
@@ -98,7 +94,6 @@ UploadImage.defaultProps = {
   isMinimized: false,
   autoUpload: false,
   size: "lg",
-  isSingle: false,
   maximumSize: 5000000,
 };
 

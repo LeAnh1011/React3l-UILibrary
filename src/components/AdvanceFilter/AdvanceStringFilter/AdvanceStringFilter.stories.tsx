@@ -59,6 +59,7 @@ export default {
       },
       defaultValue: 1,
     },
+    onKeyDown: {},
   },
 };
 

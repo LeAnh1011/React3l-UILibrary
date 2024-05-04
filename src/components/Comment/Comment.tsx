@@ -5,7 +5,7 @@ import moment, { Moment } from "moment";
 import React, { RefObject } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ErrorObserver, forkJoin, Observable, finalize } from "rxjs";
-import Modal from "../Modal/Modal";
+import Modal from "../Modal/NormalModal/Modal";
 import Button from "@Components/Button";
 import { Creator, FileModel, Message } from "./Comment.model";
 import ContentEditable from "./ContentEditable/ContentEditable";

@@ -1,6 +1,4 @@
-import Add16 from "@carbon/icons-react/es/add/16";
-import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
-import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
+import { Add, Checkmark, ChevronDown } from "@carbon/icons-react";
 import { Empty, Tooltip, Tree as TreeAntd } from "antd";
 import { Key } from "antd/lib/table/interface";
 import type {
@@ -10,7 +8,7 @@ import type {
 } from "antd/lib/tree";
 import classNames from "classnames";
 import IconLoading from "@Components/IconLoading/IconLoading";
-import React, { RefObject } from "react";
+import React, { ReactNode, RefObject } from "react";
 import { Model, ModelFilter } from "react3l-common";
 import type { Observable } from "rxjs";
 import { CommonService } from "@Services/common-service";
@@ -20,7 +18,7 @@ import "./Tree.scss";
 function SwitcherIcon() {
   return (
     <span className="tree__icon">
-      <ChevronDown16></ChevronDown16>
+      <ChevronDown size={16} />
     </span>
   );
 }
@@ -49,10 +47,12 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   selectWithAdd?: () => void;
   /**Prefer node item of tree*/
   preferOptions?: T[];
-  /**Show maximum length of each row item in tree*/
+  /**Show maximum length of each row item in tree (must pass value when render option return string)*/
   maxLengthItem?: number;
   /**Pass ref of list data select */
   selectListRef?: RefObject<any>;
+  /** Prop of AntdTreeProps*/
+  titleRender?: (T: T) => ReactNode;
   isExpand?: boolean;
 }
 function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
@@ -71,6 +71,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     maxLengthItem = 30,
     render,
     checkStrictly,
+    titleRender,
   } = props;
 
   const [internalTreeData, setInternalTreeData] = React.useState<
@@ -222,20 +223,22 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
         nativeEvent: MouseEvent;
       }
     ) => {
-      const { node, selectedNodes } = info;
-      const filterList = internalSelectedKeys.filter(
-        (id) => id === node?.item?.id
-      );
-      const isChangedNode = !(filterList.length > 0);
-      if (
-        typeof onChange === "function" &&
-        filterList?.length === 0 &&
-        isChangedNode
-      ) {
-        onChange([selectedNodes[0].item]);
+      if (!checkable) {
+        const { node, selectedNodes } = info;
+        const filterList = internalSelectedKeys.filter(
+          (id) => id === node?.item?.id
+        );
+        const isChangedNode = !(filterList.length > 0);
+        if (
+          typeof onChange === "function" &&
+          filterList?.length === 0 &&
+          isChangedNode
+        ) {
+          onChange([selectedNodes[0].item]);
+        }
       }
     },
-    [internalSelectedKeys, onChange]
+    [checkable, internalSelectedKeys, onChange]
   );
 
   React.useEffect(() => {
@@ -403,57 +406,61 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                   onCheck={checkStrictly ? handleCheckStrictly : handleCheck}
                   onSelect={handleSelect}
                   treeData={internalTreeData}
-                  titleRender={(node: any) => (
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                      }}
-                      tabIndex={-1}
-                      onKeyDown={handleMove(node)}
-                      className={`tree-node-${node.key}`}
-                    >
-                      <div>
-                        {render && typeof render === "function" ? (
-                          <>
-                            {maxLengthItem &&
-                            render(node?.item)?.length > maxLengthItem ? (
-                              <Tooltip title={render(node?.item)}>
-                                {CommonService.limitWord(
-                                  render(node?.item),
-                                  maxLengthItem
-                                )}
-                              </Tooltip>
-                            ) : (
-                              render(node?.item)
-                            )}
-                          </>
-                        ) : (
-                          <>
-                            {maxLengthItem &&
-                            node?.title?.length > maxLengthItem ? (
-                              <Tooltip title={node?.title}>
-                                {CommonService.limitWord(
-                                  node?.title,
-                                  maxLengthItem
-                                )}
-                              </Tooltip>
-                            ) : (
-                              node?.title
-                            )}
-                          </>
-                        )}
-                      </div>
-                      {!checkable &&
-                        internalSelectedKeys &&
-                        internalSelectedKeys.includes(node.key) && (
-                          <div style={{ display: "flex" }}>
-                            <Checkmark16 />
+                  titleRender={
+                    titleRender
+                      ? titleRender
+                      : (node: any) => (
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "space-between",
+                            }}
+                            tabIndex={-1}
+                            onKeyDown={handleMove(node)}
+                            className={`tree-node-${node.key}`}
+                          >
+                            <div>
+                              {render && typeof render === "function" ? (
+                                <>
+                                  {maxLengthItem &&
+                                  render(node?.item)?.length > maxLengthItem ? (
+                                    <Tooltip title={render(node?.item)}>
+                                      {CommonService.limitWord(
+                                        render(node?.item),
+                                        maxLengthItem
+                                      )}
+                                    </Tooltip>
+                                  ) : (
+                                    render(node?.item)
+                                  )}
+                                </>
+                              ) : (
+                                <>
+                                  {maxLengthItem &&
+                                  node?.title?.length > maxLengthItem ? (
+                                    <Tooltip title={node?.title}>
+                                      {CommonService.limitWord(
+                                        node?.title,
+                                        maxLengthItem
+                                      )}
+                                    </Tooltip>
+                                  ) : (
+                                    node?.title
+                                  )}
+                                </>
+                              )}
+                            </div>
+                            {!checkable &&
+                              internalSelectedKeys &&
+                              internalSelectedKeys.includes(node.key) && (
+                                <div style={{ display: "flex" }}>
+                                  <Checkmark size={16} />
+                                </div>
+                              )}
                           </div>
-                        )}
-                    </div>
-                  )}
+                        )
+                  }
                 ></TreeAntd>
 
                 {!loading && internalTreeData.length > 0 && (
@@ -472,36 +479,42 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                           onSelect={handleSelect}
                           checkedKeys={internalCheckedKeys}
                           selectedKeys={internalSelectedKeys}
-                          titleRender={(node: any) => (
-                            <div
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                              }}
-                            >
-                              <div>
-                                {maxLengthItem &&
-                                node?.title?.length > maxLengthItem ? (
-                                  <Tooltip title={node?.title}>
-                                    {CommonService.limitWord(
-                                      node?.title,
-                                      maxLengthItem
-                                    )}
-                                  </Tooltip>
-                                ) : (
-                                  node?.title
-                                )}
-                              </div>
-                              {!checkable &&
-                                internalSelectedKeys &&
-                                internalSelectedKeys.includes(node.key) && (
-                                  <div style={{ display: "flex" }}>
-                                    <Checkmark16 />
+                          titleRender={
+                            titleRender
+                              ? titleRender
+                              : (node: any) => (
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      justifyContent: "space-between",
+                                    }}
+                                  >
+                                    <div>
+                                      {maxLengthItem &&
+                                      node?.title?.length > maxLengthItem ? (
+                                        <Tooltip title={node?.title}>
+                                          {CommonService.limitWord(
+                                            node?.title,
+                                            maxLengthItem
+                                          )}
+                                        </Tooltip>
+                                      ) : (
+                                        node?.title
+                                      )}
+                                    </div>
+                                    {!checkable &&
+                                      internalSelectedKeys &&
+                                      internalSelectedKeys.includes(
+                                        node.key
+                                      ) && (
+                                        <div style={{ display: "flex" }}>
+                                          <Checkmark size={16} />
+                                        </div>
+                                      )}
                                   </div>
-                                )}
-                            </div>
-                          )}
+                                )
+                          }
                         />
                       )}
                   </div>
@@ -513,7 +526,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
                     )}
                     onClick={selectWithAdd}
                   >
-                    <Add16 className="m-l--xs" />
+                    <Add size={16} className="m-l--xs" />
                     <span>Add new</span>
                   </div>
                 )}

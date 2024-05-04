@@ -1,6 +1,5 @@
 import { DEBOUNCE_TIME_300 } from "@Configs/consts";
-import Add16 from "@carbon/icons-react/es/add/16";
-import Checkmark16 from "@carbon/icons-react/es/checkmark/16";
+import { Add, Checkmark } from "@carbon/icons-react";
 import { Model, ModelFilter } from "react3l-common";
 import { useDebounceFn } from "ahooks";
 import { Empty, Tooltip } from "antd";
@@ -62,6 +61,8 @@ export interface SelectProps<
   action?: InputAction;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  /**Use to custom style the component*/
+  className?: string;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -92,6 +93,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
     maxLengthItem,
     action,
     bgColor,
+    className,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -283,7 +285,10 @@ function Select(props: SelectProps<Model, ModelFilter>) {
 
   return (
     <>
-      <div className="select__container" ref={wrapperRef}>
+      <div
+        className={classNames("select__container", className)}
+        ref={wrapperRef}
+      >
         <div className="select__input" onClick={handleToggle}>
           <InputSelect
             value={internalValue}
@@ -334,7 +339,9 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                         ) : (
                           <span className="select__text">{render(item)}</span>
                         )}
-                        {item.id === internalValue?.id && <Checkmark16 />}
+                        {item.id === internalValue?.id && (
+                          <Checkmark size={16} />
+                        )}
                       </div>
                     ))
                   ) : (
@@ -376,7 +383,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                       ) : (
                         <span className="select__text">{render(item)}</span>
                       )}
-                      {item.id === internalValue?.id && <Checkmark16 />}
+                      {item.id === internalValue?.id && <Checkmark size={16} />}
                     </div>
                   ))}
               </div>
@@ -388,7 +395,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
                 )}
                 onClick={selectWithAdd}
               >
-                <Add16 className="m-l--2xs" />
+                <Add size={16} className="m-l--2xs" />
                 <span>
                   {selectWithAddTitle ? selectWithAddTitle : "Add new"}
                 </span>

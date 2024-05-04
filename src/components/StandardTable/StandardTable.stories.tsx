@@ -1,5 +1,4 @@
-import Add16 from "@carbon/icons-react/es/add/16";
-import ChevronDown16 from "@carbon/icons-react/es/chevron--down/16";
+import { Add, ChevronDown } from "@carbon/icons-react";
 import {
   ArgsTable,
   Description,
@@ -557,13 +556,17 @@ const Template: Story = (args) => {
         selectedRowKeys={selectedRowKeys}
         setSelectedRowKeys={setSelectedRowKeys}
       >
-        <Button type="ghost-primary" className="btn--lg" icon={<Add16 />}>
+        <Button
+          type="ghost-primary"
+          className="btn--lg"
+          icon={<Add size={16} />}
+        >
           {"Button"}
         </Button>
         <Button
           type="ghost-primary"
           className="btn--lg"
-          icon={<ChevronDown16 />}
+          icon={<ChevronDown size={16} />}
         >
           {"Button"}
         </Button>

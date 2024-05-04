@@ -9,7 +9,7 @@ import React, {
 } from "react";
 import type { Observable } from "rxjs";
 import classNames from "classnames";
-import Attachment16 from "@carbon/icons-react/es/attachment/16";
+import { Attachment } from "@carbon/icons-react";
 import "./ContentEditable.scss";
 
 export interface contentAction {
@@ -280,7 +280,8 @@ const ContentEditable = forwardRef<
                 style={{ display: "none" }}
                 onChange={(e) => handleAttachFile(e.target.files)}
               />
-              <Attachment16
+              <Attachment
+                size={16}
                 onClick={() => {
                   inputFileRef.current.click();
                 }}

@@ -14,6 +14,7 @@ import { IdFilter, StringFilter } from "react3l-advanced-filters";
 import { Model, ModelFilter } from "react3l-common";
 import { Observable } from "rxjs";
 import AdvanceTreeFilterMaster from "./AdvanceTreeFilterMaster";
+import { Radio, RadioChangeEvent } from "antd";
 class DistrictFilter extends ModelFilter {
   public id: IdFilter = new IdFilter();
 
@@ -113,7 +114,17 @@ const Template: Story = (args) => {
 
   const [item, setItem] = React.useState<Model>(demoItem);
 
+  const [isMultiple, setMultiple] = React.useState(false);
+
+  const handleChangeRadio = React.useCallback((event: RadioChangeEvent) => {
+    if (event.target.value) setItem(new Model());
+    else dispatch({ type: "UPDATE_MODEL", data: [] });
+    setMultiple(event.target.value);
+  }, []);
+
   const handleChangeItem = React.useCallback((items: Model[], isMultiple) => {
+    // eslint-disable-next-line no-debugger
+    debugger
     if (isMultiple) {
       dispatch({ type: "UPDATE_MODEL", data: items });
     } else {
@@ -128,12 +139,20 @@ const Template: Story = (args) => {
           {...args}
           classFilter={DistrictFilter}
           onChange={handleChangeItem}
-          item={item}
-          listItem={args?.isMultiple ? listItem : []}
+          item={isMultiple ? undefined : item}
+          listItem={isMultiple ? listItem : []}
+          checkable={isMultiple}
+          selectable={!isMultiple}
           getTreeData={demoSearchFunc}
           preferOptions={args?.isSelectWithPreferOption ? list : undefined}
           render={(t) => t?.code}
         />
+      </div>
+      <div style={{ margin: "10px", width: "300px" }}>
+        <Radio.Group onChange={handleChangeRadio} value={isMultiple}>
+          <Radio value={false}>Single</Radio>
+          <Radio value={true}>Multiple</Radio>
+        </Radio.Group>
       </div>
     </div>
   );

@@ -293,6 +293,7 @@ AdvanceTreeFilterMaster.defaultProps = {
   disabled: false,
   selectable: true,
   treeTitleRender: (t: any) => t?.title,
+  keyField: "id",
 };
 
 export default AdvanceTreeFilterMaster;

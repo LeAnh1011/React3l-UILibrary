@@ -42,7 +42,7 @@ function AdvanceInputRangeFilter(props: AdvanceInputRangeFilterProps) {
       if (validateRange(number, valueRange[1])) {
         onChangeRange([number, valueRange[1]]);
       } else {
-        onChangeRange([undefined, undefined]);
+        onChangeRange([number, undefined]);
       }
     },
     [onChangeRange, validateRange, valueRange]
@@ -53,7 +53,7 @@ function AdvanceInputRangeFilter(props: AdvanceInputRangeFilterProps) {
       if (validateRange(valueRange[0], number)) {
         onChangeRange([valueRange[0], number]);
       } else {
-        onChangeRange([undefined, undefined]);
+        onChangeRange([undefined, number]);
       }
     },
     [onChangeRange, validateRange, valueRange]

@@ -369,6 +369,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
               isNotExpand={!isExpand}
               isShowTooltip
               bgColor={bgColor}
+              handlePressExpandedIcon={handleCloseSelect}
             />
           ) : (
             <InputSelect

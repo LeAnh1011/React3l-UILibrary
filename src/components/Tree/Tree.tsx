@@ -14,7 +14,7 @@ import type { Observable } from "rxjs";
 import { CommonService } from "@Services/common-service";
 import { TreeNode as CustomTreeNode } from "./TreeNode";
 import { TreeNode } from "@Components/Tree/TreeNode";
-
+import _cloneDeep from "lodash/cloneDeep";
 import "./Tree.scss";
 
 function SwitcherIcon() {
@@ -25,6 +25,8 @@ function SwitcherIcon() {
   );
 }
 export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
+  /**Item selected*/
+  items?: Model[];
   /**List TreeNode data*/
   treeData?: CustomTreeNode<T>[];
   /**Value filter for api getTreeData*/
@@ -61,9 +63,12 @@ export interface TreeProps<T extends Model, TModelFilter extends ModelFilter> {
   isDisableSelected?: boolean;
   /** Option to let developer can modify tree data */
   buildTree?: (flatData: Model[]) => [TreeNode<Model>[], number[]];
+  /** Key property when you want to customize build tree object */
+  keyField?: string;
 }
 function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
   const {
+    items,
     treeData = [],
     valueFilter,
     expandedKeys,
@@ -81,6 +86,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     titleRender,
     isDisableSelected,
     buildTree,
+    keyField,
   } = props;
 
   const [internalTreeData, setInternalTreeData] = React.useState<
@@ -174,19 +180,32 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     []
   );
 
-  const searchTree = React.useCallback(
-    (treeNodes: CustomTreeNode<Model>[], listKeys: Key[]) => {
-      const nodes: any[] = [];
+  // const searchTree = React.useCallback(
+  //   (treeNodes: CustomTreeNode<Model>[], listKeys: Key[]) => {
+  //     const nodes: any[] = [];
 
-      treeNodes.forEach((currentTree) => {
-        listKeys.forEach((currentKey) => {
-          const node = searchTreeNodeById(currentTree, currentKey);
-          if (node) nodes.push(node);
-        });
-      });
-      return nodes;
+  //     treeNodes.forEach((currentTree) => {
+  //       listKeys.forEach((currentKey) => {
+  //         const node = searchTreeNodeById(currentTree, currentKey);
+  //         if (node) nodes.push(node);
+  //       });
+  //     });
+  //     return nodes;
+  //   },
+  //   [searchTreeNodeById]
+  // );
+
+  const findAllKey = React.useCallback(
+    (node: TreeNode<Model>, listKey: (string | number)[]) => {
+      listKey.push(node.key);
+      if (node.children && node.children.length > 0) {
+        node.children.forEach((nodeValue: TreeNode<Model>) =>
+          findAllKey(nodeValue, listKey)
+        );
+      }
+      return listKey;
     },
-    [searchTreeNodeById]
+    []
   );
 
   const handleExpandKey = React.useCallback((expandedKeys: Key[]) => {
@@ -194,39 +213,104 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
     setAutoExpandParent(false);
   }, []);
 
+  // Change handle check tree data:
+
   const handleCheck: any = React.useCallback(
-    (checkedKeys: Key[]) => {
-      setInternalCheckedKeys(checkedKeys);
-      if (typeof onChange === "function") {
-        const checkedNodes = searchTree(
-          [...internalTreeData, ...internalPreferOptionsTreeData],
-          checkedKeys
-        );
-        const checkedItems = checkedNodes.map(
-          (currentNode) => currentNode.item
-        );
-        onChange([...checkedItems]);
+    (checkedKeys: Key[], checkInfo: any) => {
+      const { checked, node, halfCheckedKeys, checkedNodes } = checkInfo;
+      const listItems = items != null ? _cloneDeep(items) : [];
+      const allKeys = findAllKey(node, []);
+      const checkedItems = checkedNodes.map(
+        (currentNode: any) => currentNode.item
+      );
+      if (checked) {
+        // setInternalCheckedKeys((prevState) => {
+        //   return [...prevState, ...allKeys];
+        // });
+        if (typeof onChange === "function") {
+          listItems.push(...checkedItems);
+          onChange(CommonService.uniqueArray(listItems));
+        }
+      } else {
+        // setInternalCheckedKeys((prevState) => {
+        //   return [...prevState].filter(
+        //     (item) => !allKeys.includes(item) && !halfCheckedKeys.includes(item)
+        //   );
+        // });
+        if (typeof onChange === "function") {
+          const filteredItems = listItems.filter(
+            (item) =>
+              !allKeys.includes(item[keyField]) &&
+              !halfCheckedKeys.includes(item[keyField])
+          );
+          onChange(filteredItems as any);
+        }
       }
     },
-    [internalPreferOptionsTreeData, internalTreeData, onChange, searchTree]
+    [findAllKey, items, keyField, onChange]
   );
 
   const handleCheckStrictly: any = React.useCallback(
-    (checkedKeys: { checked: Key[]; halfChecked: Key[] }) => {
-      setInternalCheckedKeys(checkedKeys.checked);
-      if (typeof onChange === "function") {
-        const checkedNodes = searchTree(
-          [...internalTreeData, ...internalPreferOptionsTreeData],
-          checkedKeys.checked
-        );
-        const checkedItems = checkedNodes.map(
-          (currentNode) => currentNode.item
-        );
-        onChange([...checkedItems]);
+    (checkedKeys: Key[], checkInfo: any) => {
+      const { checked, node } = checkInfo;
+      const listItems = items != null ? _cloneDeep(items) : [];
+      const currentItem = node.item;
+      if (checked) {
+        setInternalCheckedKeys((prevState) => {
+          return [...prevState, node.key];
+        });
+        if (typeof onChange === "function") {
+          listItems.push(currentItem);
+          onChange(listItems as any);
+        }
+      } else {
+        setInternalCheckedKeys((prevState) => {
+          return [...prevState].filter((item) => item !== node.key);
+        });
+        if (typeof onChange === "function") {
+          const filteredItems = listItems.filter(
+            (item) => item[keyField] !== node.key
+          );
+          onChange(filteredItems as any);
+        }
       }
     },
-    [internalPreferOptionsTreeData, internalTreeData, onChange, searchTree]
+    [items, keyField, onChange]
   );
+
+  // const handleCheck: any = React.useCallback(
+  //   (checkedKeys: Key[]) => {
+  //     setInternalCheckedKeys(checkedKeys);
+  //     if (typeof onChange === "function") {
+  //       const checkedNodes = searchTree(
+  //         [...internalTreeData, ...internalPreferOptionsTreeData],
+  //         checkedKeys
+  //       );
+  //       const checkedItems = checkedNodes.map(
+  //         (currentNode) => currentNode.item
+  //       );
+  //       onChange([...checkedItems]);
+  //     }
+  //   },
+  //   [internalPreferOptionsTreeData, internalTreeData, onChange, searchTree]
+  // );
+
+  // const handleCheckStrictly: any = React.useCallback(
+  //   (checkedKeys: { checked: Key[]; halfChecked: Key[] }) => {
+  //     setInternalCheckedKeys(checkedKeys.checked);
+  //     if (typeof onChange === "function") {
+  //       const checkedNodes = searchTree(
+  //         [...internalTreeData, ...internalPreferOptionsTreeData],
+  //         checkedKeys.checked
+  //       );
+  //       const checkedItems = checkedNodes.map(
+  //         (currentNode) => currentNode.item
+  //       );
+  //       onChange([...checkedItems]);
+  //     }
+  //   },
+  //   [internalPreferOptionsTreeData, internalTreeData, onChange, searchTree]
+  // );
 
   const handleSelect: AntdTreeProps["onSelect"] = React.useCallback(
     (
@@ -242,7 +326,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
       const { node, selectedNodes } = info;
       if (typeof onChange === "function") {
         const filterList = internalSelectedKeys.filter(
-          (id) => id === node?.item?.id
+          (key) => key === node?.item?.[keyField]
         );
         if (filterList.length === 0) {
           onChange([selectedNodes[0].item]);
@@ -253,7 +337,7 @@ function Tree(props: TreeProps<Model, ModelFilter> & AntdTreeProps) {
         }
       }
     },
-    [internalSelectedKeys, isDisableSelected, onChange]
+    [internalSelectedKeys, isDisableSelected, keyField, onChange]
   );
 
   React.useEffect(() => {

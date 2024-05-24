@@ -400,6 +400,7 @@ function EnumSelect(props: SelectProps<Model>) {
               isRequired={isRequired}
               isShowTooltip
               bgColor={bgColor}
+              handlePressExpandedIcon={handleCloseSelect}
             />
           ) : (
             <InputSelect

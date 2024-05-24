@@ -1,9 +1,8 @@
-import { CommonService } from "@Services/common-service";
 import React from "react";
 import { Model } from "react3l-common";
 import { ErrorObserver, Observable, Subscription } from "rxjs";
-import "./CheckboxGroup.scss";
 import Checkbox from "./Checkbox";
+import "./CheckboxGroup.scss";
 
 export interface CheckboxGroupComponentProps<T extends Model> {
   /**Handle change the values of CheckboxGroup */
@@ -115,7 +114,8 @@ function CheckboxGroup(props: CheckboxGroupComponentProps<Model>) {
                 disabled={disabled}
                 onChange={(check) => handleChange(check, option?.id)}
                 key={option?.id}
-                label={CommonService.limitWord(render(option), maxLengthItem)}
+                maxLengthItem={maxLengthItem}
+                label={render(option)}
               />
             );
           })}

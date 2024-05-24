@@ -80,6 +80,8 @@ export interface TreeSelectProps<
   isDisableSelected?: boolean;
   /** Option to let developer can modify tree data */
   buildTree?: (flatData: Model[]) => [TreeNode<Model>[], number[]];
+  /** Key property when you want to customize build tree object */
+  keyField?: string;
 }
 export interface filterAction {
   type: string;
@@ -126,6 +128,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     className,
     isDisableSelected,
     buildTree,
+    keyField,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -135,10 +138,13 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
   const [appendToBodyStyle, setAppendToBodyStyle] = React.useState({});
 
   const listIds = React.useMemo(() => {
-    if (item) return [item.id];
-    if (listItem) return listItem.map((currentItem) => currentItem?.id);
+    if (item) return [item?.[keyField]];
+    if (listItem)
+      return listItem.map(
+        (currentItem) => currentItem && currentItem?.[keyField]
+      );
     return [];
-  }, [listItem, item]);
+  }, [item, keyField, listItem]);
 
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
     null
@@ -177,14 +183,14 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     (item: Model) => {
       if (checkable) {
         const newListItem = listItem.filter(
-          (currentItem) => currentItem.id !== item?.id
+          (currentItem) => currentItem?.[keyField] !== item?.[keyField]
         );
         onChange(newListItem, checkable);
       } else {
         onChange([null], checkable);
       }
     },
-    [listItem, onChange, checkable]
+    [checkable, listItem, onChange, keyField]
   );
 
   const handleClearMultiItem = React.useCallback(() => {
@@ -323,6 +329,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               isRequired={isRequired}
               isShowTooltip
               bgColor={bgColor}
+              handlePressExpandedIcon={handleCloseList}
             />
           ) : (
             <InputSelect
@@ -352,6 +359,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
             style={appendToBodyStyle}
           >
             <Tree
+              items={listItem}
               getTreeData={getTreeData}
               selectedKey={selectedKey}
               onlySelectLeaf={onlySelectLeaf}
@@ -370,6 +378,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               maxLengthItem={maxLengthItem}
               isDisableSelected={isDisableSelected}
               buildTree={buildTree}
+              keyField={keyField}
             />
           </div>
         )}
@@ -389,6 +398,7 @@ TreeSelect.defaultProps = {
   disabled: false,
   selectable: true,
   treeTitleRender: (t: any) => t?.title,
+  keyField: "id",
 };
 
 export default TreeSelect;

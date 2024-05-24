@@ -359,6 +359,7 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
               isShowTooltip={isShowTooltip}
               action={action}
               bgColor={bgColor}
+              handlePressExpandedIcon={handleCloseSelect}
             />
           </div>
         </div>

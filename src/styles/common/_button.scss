@@ -61,6 +61,8 @@
   .box-icon {
     width: 16px;
     height: 16px;
+    display: flex;
+    align-items: center;
     .ant-spin {
       font-size: 14px !important;
       line-height: 1px;

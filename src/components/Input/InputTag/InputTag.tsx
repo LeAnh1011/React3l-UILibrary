@@ -46,6 +46,9 @@ export interface InputTagProps<T extends Model> {
   action?: InputAction;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  /** Set expand value */
+  handlePressExpandedIcon?: () => void;
+  /**Clear search value when open */
   clearSearchTerm?: boolean;
 }
 
@@ -70,6 +73,7 @@ function InputTag(props: InputTagProps<Model>) {
     action,
     bgColor,
     clearSearchTerm,
+    handlePressExpandedIcon,
   } = props;
 
   const internalListValue = React.useMemo<Model[]>(() => {
@@ -127,11 +131,19 @@ function InputTag(props: InputTagProps<Model>) {
     [onKeyEnter]
   );
 
-  React.useEffect(()=>{
-    if(!clearSearchTerm){
+  const handleClickChevron = React.useCallback(
+    (event: React.MouseEvent<ReactSVGElement, MouseEvent>) => {
+      event.stopPropagation();
+      handlePressExpandedIcon();
+    },
+    [handlePressExpandedIcon]
+  );
+
+  React.useEffect(() => {
+    if (!clearSearchTerm) {
       setSearchTerm("");
     }
-  },[clearSearchTerm])
+  }, [clearSearchTerm]);
 
   return (
     <>
@@ -316,6 +328,7 @@ function InputTag(props: InputTagProps<Model>) {
             className={classNames("input-icon", "input-tag__icon", {
               "input-tag__icon--disabled": disabled,
             })}
+            onClick={handleClickChevron}
           />
         </div>
       </div>

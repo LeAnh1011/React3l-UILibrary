@@ -46,9 +46,9 @@ const Template: Story = (args) => {
             {...args}
             checked={checked || args.checked}
             onChange={handleChangeChecked}
-          >
-            {args.children}
-          </Checkbox>
+            maxLengthItem={20}
+            label="Đây là cái test ahiihiihiihiii"
+          ></Checkbox>
         </div>
         <div>checkbox read only</div>
         <div style={{ margin: "10px", width: "500px" }}>

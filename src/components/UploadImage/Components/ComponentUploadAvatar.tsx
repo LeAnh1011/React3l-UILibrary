@@ -29,7 +29,9 @@ const imageReducer = (state: ImageFile, action: ImageAction): ImageFile => {
   }
 };
 
-export interface ComponentUploadAvatarProps extends UploadImageProps {}
+export interface ComponentUploadAvatarProps extends UploadImageProps {
+  height?: number;
+}
 
 export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
   const {
@@ -39,6 +41,7 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
     className,
     icon,
     maximumSize,
+    height,
   } = props;
 
   const fileRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
@@ -135,10 +138,11 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
           src={currentAvatar}
           className={classNames(className, "image-in-content")}
           alt="avatar"
+          height={height ? height : 200}
         />
       </div>
     );
-  }, [className, currentAvatar]);
+  }, [className, currentAvatar, height]);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -171,7 +175,7 @@ export function ComponentUploadAvatar(props: ComponentUploadAvatarProps) {
       </div>
       {image && isPreview && (
         <CroppedModal
-          visible={isPreview}
+          open={isPreview}
           handleCancel={handleClosePreview}
           handleSave={handleSaveCropped}
           listImage={[image]}

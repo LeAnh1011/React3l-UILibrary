@@ -1,3 +1,27 @@
+.btn--bleed-danger {
+  background-color: var(--color-critical);
+  color: var(--color-white);
+
+  &:visited {
+    color: var(--color-white);
+  }
+
+  &:hover {
+    background-color: var(--color-critical-hover) !important;
+  }
+
+  &:active {
+    background-color: var(--color-critical-active);
+  }
+  &:focus {
+    background-color: var(--color-critical);
+    box-shadow: inset 0 0 0 2px var(--color-critical), inset 0 0 0 3px var(--color-white);
+  }
+  &.disabled {
+    color: var(--palette-gray-50) !important;
+    background-color: var(--palette-gray-30) !important;
+  }
+}
 .btn--bleed-primary {
   background-color: var(--color-primary);
   color: var(--color-white);

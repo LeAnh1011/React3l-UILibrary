@@ -27,6 +27,8 @@ export interface ModalCustomProps extends AntModalProps {
   handleApplyNext?: (event: any) => void;
   /**Pass state of loading */
   loadingType?: "default" | "submitting" | "submitted" | "error";
+  /**Pass button save type */
+  saveType?: "danger" | "primary";
 }
 
 function Modal(props: ModalCustomProps) {
@@ -41,6 +43,7 @@ function Modal(props: ModalCustomProps) {
     handleCancel,
     handleSave,
     handleApplyNext,
+    saveType
   } = props;
   const renderModalFooter = React.useMemo(
     () => (
@@ -76,7 +79,7 @@ function Modal(props: ModalCustomProps) {
           {handleSave && (
             <>
               <Button
-                type="bleed-primary"
+                type={saveType === "primary" ? "bleed-primary":"bleed-danger"}
                 className={classNames(
                   handleApplyNext &&
                     size !== MODAL_SIZE.SIZE_320 &&
@@ -101,16 +104,7 @@ function Modal(props: ModalCustomProps) {
         </div>
       </div>
     ),
-    [
-      handleApplyNext,
-      size,
-      handleCancel,
-      titleButtonCancel,
-      titleButtonApplyNext,
-      handleSave,
-      loadingType,
-      titleButtonApply,
-    ]
+    [handleApplyNext, size, handleCancel, titleButtonCancel, titleButtonApplyNext, handleSave, saveType, loadingType, titleButtonApply]
   );
 
   const CloseButton = React.useMemo(() => {
@@ -146,5 +140,6 @@ Modal.defaultProps = {
   size: MODAL_SIZE.SIZE_1024,
   destroyOnClose: true,
   loadingType: "default",
+  saveType: "primary"
 };
 export default Modal;

@@ -215,10 +215,10 @@ function AdvanceMultipleIdFilterMaster(
       }
       if (filteredItem) {
         const tmpSelect = [...selectedList];
-        const tmp = [...(values ?? [])];
         const ids = values?.map((item) => item?.id);
-        const index = tmp.indexOf(filteredItem);
-        tmp.splice(index, 1);
+        const index = tmpSelect.findIndex(
+          (item) => item.id === filteredItem.id
+        );
         ids.splice(index, 1);
         tmpSelect.splice(index, 1);
         onChange([...tmpSelect], ids as any);

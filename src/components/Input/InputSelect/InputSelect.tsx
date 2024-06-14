@@ -45,6 +45,8 @@ export interface InputSelectProps<T extends Model> {
   action?: InputAction;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  /*Name attribute of input*/
+  nameAttr?: string;
 }
 
 function InputSelect(props: InputSelectProps<Model>) {
@@ -68,6 +70,7 @@ function InputSelect(props: InputSelectProps<Model>) {
     isEnumerable,
     isFilter,
     bgColor,
+    nameAttr,
   } = props;
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
@@ -241,6 +244,7 @@ function InputSelect(props: InputSelectProps<Model>) {
                 })}
                 disabled={disabled}
                 ref={inputRef}
+                name={nameAttr}
               />
               {type === BORDER_TYPE.FLOAT_LABEL && label && (
                 <label

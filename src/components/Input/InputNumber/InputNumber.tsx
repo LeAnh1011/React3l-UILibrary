@@ -56,6 +56,8 @@ export interface InputNumberProps {
   onBlur?: (T: number) => void;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  /*Name attribute of input*/
+  nameAttr?: string;
 }
 
 function InputNumber(props: InputNumberProps) {
@@ -81,6 +83,7 @@ function InputNumber(props: InputNumberProps) {
     onChange,
     onEnter,
     onBlur,
+    nameAttr,
   } = props;
 
   const [internalValue, setInternalValue] = React.useState<string>("");
@@ -369,6 +372,7 @@ function InputNumber(props: InputNumberProps) {
           className={classNames("component__input", {
             "disabled-field": disabled,
           })}
+          name={nameAttr}
         />
         {type === BORDER_TYPE.FLOAT_LABEL && label && (
           <label

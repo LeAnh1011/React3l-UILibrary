@@ -46,6 +46,8 @@ export interface InputTagProps<T extends Model> {
   action?: InputAction;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  /*Name attribute of input*/
+  nameAttr?: string;
 }
 
 function InputTag(props: InputTagProps<Model>) {
@@ -68,6 +70,7 @@ function InputTag(props: InputTagProps<Model>) {
     render,
     action,
     bgColor,
+    nameAttr,
   } = props;
 
   const internalListValue = React.useMemo<Model[]>(() => {
@@ -270,6 +273,7 @@ function InputTag(props: InputTagProps<Model>) {
               onChange={handleChangeInput}
               readOnly={!isUsingSearch}
               onKeyDown={isNotExpand ? handleEnter : handleKeyDown}
+              name={nameAttr}
             />
           ) : (
             <input
@@ -280,6 +284,7 @@ function InputTag(props: InputTagProps<Model>) {
               }
               disabled={disabled}
               onKeyDown={isNotExpand ? handleEnter : handleKeyDown}
+              name={nameAttr}
             />
           )}
 

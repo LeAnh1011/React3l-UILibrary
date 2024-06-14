@@ -75,6 +75,8 @@ export interface TreeSelectProps<
   bgColor?: "gray" | "white";
   /**Use to custom style the component*/
   className?: string;
+  /*Name attribute of input*/
+  nameAttr?: string;
 }
 export interface filterAction {
   type: string;
@@ -119,6 +121,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     maxLengthItem,
     bgColor,
     className,
+    nameAttr,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -314,6 +317,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               isRequired={isRequired}
               isShowTooltip
               bgColor={bgColor}
+              nameAttr={nameAttr}
             />
           ) : (
             <InputSelect
@@ -332,6 +336,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               onKeyEnter={handleKeyEnter}
               isRequired={isRequired}
               bgColor={bgColor}
+              nameAttr={nameAttr}
             />
           )}
         </div>

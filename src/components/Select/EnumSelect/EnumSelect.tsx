@@ -53,6 +53,8 @@ export interface SelectProps<T extends Model> {
   bgColor?: "white" | "gray";
   /**Use to custom style the component*/
   className?: string;
+  /*Name attribute of input*/
+  nameAttr?: string;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -104,6 +106,7 @@ function EnumSelect(props: SelectProps<Model>) {
     action,
     bgColor,
     className,
+    nameAttr,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -386,6 +389,7 @@ function EnumSelect(props: SelectProps<Model>) {
               isRequired={isRequired}
               isShowTooltip
               bgColor={bgColor}
+              nameAttr={nameAttr}
             />
           ) : (
             <InputSelect
@@ -404,6 +408,7 @@ function EnumSelect(props: SelectProps<Model>) {
               isRequired={isRequired}
               action={action}
               bgColor={bgColor}
+              nameAttr={nameAttr}
             />
           )}
         </div>

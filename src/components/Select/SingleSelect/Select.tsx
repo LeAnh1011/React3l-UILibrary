@@ -63,6 +63,8 @@ export interface SelectProps<
   bgColor?: "white" | "gray";
   /**Use to custom style the component*/
   className?: string;
+  /*Name attribute of input*/
+  nameAttr?: string;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -94,6 +96,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
     action,
     bgColor,
     className,
+    nameAttr,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -307,6 +310,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
             isSmall={isSmall}
             action={action}
             bgColor={bgColor}
+            nameAttr={nameAttr}
           />
         </div>
         {isExpand && (

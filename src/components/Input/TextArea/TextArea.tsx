@@ -37,6 +37,8 @@ export interface TextAreaProps {
   onEnter?: (T: string | null) => void;
   /**Handle onBlur action*/
   onBlur?: (T: string | null) => void;
+  /*Name attribute of input*/
+  nameAttr?: string;
 }
 
 function TextArea(props: TextAreaProps) {
@@ -55,6 +57,7 @@ function TextArea(props: TextAreaProps) {
     onChange,
     onEnter,
     onBlur,
+    nameAttr,
   } = props;
 
   const [internalValue, setInternalValue] = React.useState<string>("");
@@ -157,6 +160,7 @@ function TextArea(props: TextAreaProps) {
             className={classNames("component__input", {
               "disabled-field": disabled,
             })}
+            name={nameAttr}
           ></textarea>
           {type === BORDER_TYPE.FLOAT_LABEL && label && (
             <label className="component__title">

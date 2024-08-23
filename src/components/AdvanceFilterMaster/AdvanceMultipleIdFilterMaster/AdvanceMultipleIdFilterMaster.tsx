@@ -17,6 +17,8 @@ export interface AdvanceMultipleIdFilterMasterProps<
 > {
   /**list value users select*/
   values?: any[];
+  /**list value users select*/
+  selectedList?: any[];
   /**Label for current field*/
   label?: string;
   /**Value filter for api get data option*/
@@ -60,6 +62,7 @@ function AdvanceMultipleIdFilterMaster(
     valueFilter,
     label,
     values,
+    selectedList,
     searchProperty,
     searchType,
     placeHolder,
@@ -124,20 +127,6 @@ function AdvanceMultipleIdFilterMaster(
         }
       });
       return [...list];
-    }
-    return [];
-  }, [list, values]);
-
-  const selectedList = React.useMemo(() => {
-    if (list && list.length > 0) {
-      const select = list.filter((current) => {
-        let filteredItem =
-          values &&
-          values?.length > 0 &&
-          values.filter((item) => Number(item) === Number(current.id))[0];
-        return filteredItem;
-      });
-      return [...select];
     }
     return [];
   }, [list, values]);
@@ -214,14 +203,12 @@ function AdvanceMultipleIdFilterMaster(
         cloneValueFilter["id"]["notIn"].push(item?.id);
       }
       if (filteredItem) {
-        const tmpSelect = [...selectedList];
+        const tmpSelect = [...(selectedList ?? [])];
         const tmp = [...(values ?? [])];
-        const ids = values?.map((item) => item?.id);
         const index = tmp.indexOf(filteredItem);
         tmp.splice(index, 1);
-        ids.splice(index, 1);
         tmpSelect.splice(index, 1);
-        onChange([...tmpSelect], ids as any);
+        onChange([...tmpSelect], tmp as any);
       } else {
         const ids = selectedList?.map((item) => item?.id);
         onChange([...selectedList, item], [...ids, item?.id] as any);

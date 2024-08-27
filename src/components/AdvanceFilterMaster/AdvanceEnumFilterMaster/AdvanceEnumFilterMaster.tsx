@@ -2,7 +2,7 @@ import { CommonService } from "@Services/common-service";
 import { Checkmark, ChevronDown } from "@carbon/icons-react";
 import { Checkbox, Empty, Tooltip } from "antd";
 import classNames from "classnames";
-import React, { RefObject } from "react";
+import React, { ReactNode, RefObject } from "react";
 import { Model } from "react3l-common";
 import { ErrorObserver, Observable, Subscription } from "rxjs";
 import "./AdvanceEnumFilterMaster.scss";
@@ -24,6 +24,8 @@ export interface AdvanceEnumMasterProps<T extends Model> {
   onChangeMultiple?: (ids?: [], selectedList?: T[]) => void;
   /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
+  /**Custom title for render*/
+  renderTitle?: ReactNode;
   /**Label for current field*/
   label?: string;
   /**Control the size of the component*/
@@ -83,6 +85,7 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
     className,
     maxLengthItem = 30,
     height,
+    renderTitle,
   } = props;
 
   const internalValue = React.useMemo<Model>(() => {
@@ -316,10 +319,14 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
               className={classNames({ "filter-active": listValue?.length > 0 })}
             >
               <div className="advance-enum-filter-master__title">
-                <span className="filter-title">
-                  {label}
-                  {listValue?.length > 0 && <>({listValue?.length})</>}
-                </span>
+                {renderTitle ? (
+                  renderTitle
+                ) : (
+                  <span className="filter-title">
+                    {label}
+                    {listValue?.length > 0 && <>({listValue?.length})</>}
+                  </span>
+                )}
                 <ChevronDown size={16} />
               </div>
             </div>
@@ -331,7 +338,11 @@ function AdvanceEnumFilterMaster(props: AdvanceEnumMasterProps<Model>) {
               })}
             >
               <div className="advance-enum-filter-master__title">
-                <span className="filter-title"> {label}</span>
+                {renderTitle ? (
+                  renderTitle
+                ) : (
+                  <span className="filter-title"> {label}</span>
+                )}
                 <ChevronDown size={16} />
               </div>
             </div>

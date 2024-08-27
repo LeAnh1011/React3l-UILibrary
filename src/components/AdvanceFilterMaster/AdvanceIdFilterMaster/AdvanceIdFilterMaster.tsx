@@ -6,7 +6,7 @@ import { CommonService } from "@Services/common-service";
 import { useDebounceFn } from "ahooks";
 import { Empty, Tooltip } from "antd";
 import classNames from "classnames";
-import React, { RefObject } from "react";
+import React, { ReactNode, RefObject } from "react";
 import { Model, ModelFilter } from "react3l-common";
 import { ErrorObserver, Observable } from "rxjs";
 import "./AdvanceIdFilterMaster.scss";
@@ -39,6 +39,8 @@ export interface AdvanceIdFilterMasterProps<
   getList?: (TModelFilter?: TModelFilter) => Observable<T[]>;
   /**Handle the change value of the component*/
   onChange?: (T: number, value?: T) => void;
+  /**Custom title for render*/
+  renderTitle?: ReactNode;
   /**Provide a function to render a specific property as name*/
   render?: (t: T) => string;
   /**Model filter class of API get list data*/
@@ -77,6 +79,7 @@ function AdvanceIdFilterMaster(
     preferOptions,
     maxLength,
     maxLengthItem,
+    renderTitle,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -237,7 +240,11 @@ function AdvanceIdFilterMaster(
             })}
           >
             <div className="advance-id-filter-master__title">
-              <span className="filter-title"> {label}</span>
+              {renderTitle ? (
+                renderTitle
+              ) : (
+                <span className="filter-title"> {label}</span>
+              )}
               <ChevronDown size={16} />
             </div>
           </div>

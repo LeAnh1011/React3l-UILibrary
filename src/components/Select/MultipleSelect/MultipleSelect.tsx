@@ -63,6 +63,8 @@ export interface MultipleSelectProps<
   bgColor?: "white" | "gray";
   /**Use to custom style the component*/
   className?: string;
+  /**Option to show 1 tag or multiple tag  */
+  isMutipleTag?: boolean;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -94,6 +96,7 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     action,
     bgColor,
     className,
+    isMutipleTag,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -250,6 +253,21 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     onChange([], []);
   }, [onChange]);
 
+  const handleClear = React.useCallback(
+    (item: Model) => {
+      let filteredItem = values?.filter((current) => current.id === item.id)[0];
+      if (filteredItem) {
+        const tmp = [...(values ? values : [])];
+        const ids = values?.map((item) => item?.id);
+        const index = tmp.indexOf(filteredItem);
+        tmp.splice(index, 1);
+        ids.splice(index, 1);
+        onChange([...tmp], ids as any);
+      }
+    },
+    [onChange, values]
+  );
+
   const handleKeyPress = React.useCallback(
     (event: any) => {
       switch (event.keyCode) {
@@ -349,6 +367,7 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
               onSearch={handleSearchChange}
               label={label}
               onClearMulti={handleClearAll}
+              onClear={handleClear}
               type={type}
               isSmall={isSmall}
               isUsingSearch={isUsingSearch}
@@ -357,6 +376,7 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
               isNotExpand={!isExpand}
               isRequired={isRequired}
               isShowTooltip={isShowTooltip}
+              isMutipleTag={isMutipleTag}
               action={action}
               bgColor={bgColor}
               handlePressExpandedIcon={handleCloseSelect}

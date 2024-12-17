@@ -69,6 +69,10 @@ export interface AdvanceTreeFilterProps<
   buildTree?: (flatData: Model[]) => [TreeNode<Model>[], number[]];
   /** Key property when you want to customize build tree object */
   keyField?: string;
+  /**Set show tooltip or not */
+  isShowTooltip?: boolean;
+  /**Option to show 1 tag or multiple tag  */
+  isMutipleTag?: boolean;
 }
 export interface filterAction {
   type: string;
@@ -111,6 +115,8 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
     appendToBody,
     buildTree,
     keyField,
+    isShowTooltip,
+    isMutipleTag,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -288,7 +294,8 @@ function AdvanceTreeFilter(props: AdvanceTreeFilterProps<Model, ModelFilter>) {
               onKeyDown={handleKeyPress}
               isFilter={true}
               isNotExpand={!expanded}
-              isShowTooltip
+              isShowTooltip={isShowTooltip}
+              isMutipleTag={isMutipleTag}
               bgColor={bgColor}
               clearSearchTerm={expanded}
               handlePressExpandedIcon={handleCloseList}
@@ -359,6 +366,7 @@ AdvanceTreeFilter.defaultProps = {
   bgColor: "white",
   treeTitleRender: (t: any) => t?.title,
   keyField: "id",
+  isShowTooltip: true,
 };
 
 export default AdvanceTreeFilter;

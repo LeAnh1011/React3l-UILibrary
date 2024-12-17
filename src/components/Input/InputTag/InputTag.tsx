@@ -50,6 +50,8 @@ export interface InputTagProps<T extends Model> {
   handlePressExpandedIcon?: () => void;
   /**Clear search value when open */
   clearSearchTerm?: boolean;
+  /**Option to show 1 tag or multiple tag  */
+  isMutipleTag?: boolean;
 }
 
 function InputTag(props: InputTagProps<Model>) {
@@ -62,6 +64,7 @@ function InputTag(props: InputTagProps<Model>) {
     label,
     type,
     isSmall,
+    onClear,
     onClearMulti,
     isUsingSearch,
     onKeyDown,
@@ -74,6 +77,7 @@ function InputTag(props: InputTagProps<Model>) {
     bgColor,
     clearSearchTerm,
     handlePressExpandedIcon,
+    isMutipleTag,
   } = props;
 
   const internalListValue = React.useMemo<Model[]>(() => {
@@ -137,6 +141,16 @@ function InputTag(props: InputTagProps<Model>) {
       handlePressExpandedIcon();
     },
     [handlePressExpandedIcon]
+  );
+
+  const handleClearItem = React.useCallback(
+    (item) => (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      event.stopPropagation();
+      if (typeof onClear === "function") {
+        onClear(item);
+      }
+    },
+    [onClear]
   );
 
   React.useEffect(() => {
@@ -246,31 +260,55 @@ function InputTag(props: InputTagProps<Model>) {
           ) : (
             <>
               {internalListValue && internalListValue.length > 0 && (
-                <span
-                  className={classNames(
-                    "input-tag-item__label m-r--3xs m-b--3xs",
-                    {
-                      "input-tag-item__label--small":
-                        type === BORDER_TYPE.FLOAT_LABEL && isSmall,
-                      "p-l--3xs": type === BORDER_TYPE.FLOAT_LABEL && isSmall,
-                      "p-l--2xs": !(
-                        type === BORDER_TYPE.FLOAT_LABEL && isSmall
-                      ),
-                    }
+                <>
+                  {isMutipleTag ? (
+                    <>
+                      {internalListValue &&
+                        internalListValue.map((item, index) => (
+                          <span
+                            className="input-tag-item__label p-l--2xs m-r--3xs m-b--3xs"
+                            key={index}
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <span className="input-tag-item__text">
+                              {render(item)}
+                            </span>
+                            <i
+                              className="input-tag-item__icon tio-clear"
+                              onClick={handleClearItem(item)}
+                            ></i>
+                          </span>
+                        ))}
+                    </>
+                  ) : (
+                    <span
+                      className={classNames(
+                        "input-tag-item__label m-r--3xs m-b--3xs",
+                        {
+                          "input-tag-item__label--small":
+                            type === BORDER_TYPE.FLOAT_LABEL && isSmall,
+                          "p-l--3xs":
+                            type === BORDER_TYPE.FLOAT_LABEL && isSmall,
+                          "p-l--2xs": !(
+                            type === BORDER_TYPE.FLOAT_LABEL && isSmall
+                          ),
+                        }
+                      )}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <span className="input-tag-item__text">
+                        {internalListValue?.length}
+                      </span>
+                      {
+                        <Close
+                          size={16}
+                          className="input-tag-item__icon"
+                          onClick={handleClearMultiItem}
+                        />
+                      }
+                    </span>
                   )}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <span className="input-tag-item__text">
-                    {internalListValue?.length}
-                  </span>
-                  {
-                    <Close
-                      size={16}
-                      className="input-tag-item__icon"
-                      onClick={handleClearMultiItem}
-                    />
-                  }
-                </span>
+                </>
               )}
             </>
           )}

@@ -47,6 +47,10 @@ export interface AdvanceIdMultipleFilterProps<
   appendToBody?: boolean;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  /**Set show tooltip or not */
+  isShowTooltip?: boolean;
+  /**Option to show 1 tag or multiple tag  */
+  isMutipleTag?: boolean;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -73,6 +77,8 @@ function AdvanceIdMultipleFilter(
     preferOptions,
     bgColor,
     appendToBody,
+    isShowTooltip,
+    isMutipleTag,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -222,6 +228,21 @@ function AdvanceIdMultipleFilter(
     [run]
   );
 
+  const handleClear = React.useCallback(
+    (item: Model) => {
+      let filteredItem = values?.filter((current) => current.id === item.id)[0];
+      if (filteredItem) {
+        const tmp = [...(values ? values : [])];
+        const ids = values?.map((item) => item?.id);
+        const index = tmp.indexOf(filteredItem);
+        tmp.splice(index, 1);
+        ids.splice(index, 1);
+        onChange([...tmp], ids as any);
+      }
+    },
+    [onChange, values]
+  );
+
   const handleClearAll = React.useCallback(() => {
     onChange([], []);
   }, [onChange]);
@@ -320,6 +341,7 @@ function AdvanceIdMultipleFilter(
             disabled={disabled}
             onSearch={handleSearchChange}
             label={label}
+            onClear={handleClear}
             onClearMulti={handleClearAll}
             type={type}
             isSmall={isSmall}
@@ -329,7 +351,8 @@ function AdvanceIdMultipleFilter(
             isFilter={true}
             isNotExpand={!isExpand}
             bgColor={bgColor}
-            isShowTooltip
+            isShowTooltip={isShowTooltip}
+            isMutipleTag={isMutipleTag}
             clearSearchTerm={isExpand}
             handlePressExpandedIcon={handleCloseSelect}
           />
@@ -419,6 +442,7 @@ AdvanceIdMultipleFilter.defaultProps = {
   render: defaultRenderObject,
   disabled: false,
   bgColor: "white",
+  isShowTooltip: true,
 };
 
 export default AdvanceIdMultipleFilter;

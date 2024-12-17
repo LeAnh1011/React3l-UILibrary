@@ -82,6 +82,10 @@ export interface TreeSelectProps<
   buildTree?: (flatData: Model[]) => [TreeNode<Model>[], number[]];
   /** Key property when you want to customize build tree object */
   keyField?: string;
+  /**Set show tooltip or not */
+  isShowTooltip?: boolean;
+  /**Option to show 1 tag or multiple tag  */
+  isMutipleTag?: boolean;
 }
 export interface filterAction {
   type: string;
@@ -129,6 +133,8 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     isDisableSelected,
     buildTree,
     keyField,
+    isShowTooltip,
+    isMutipleTag,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -327,7 +333,8 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               isNotExpand={!expanded}
               onKeyEnter={handleKeyEnter}
               isRequired={isRequired}
-              isShowTooltip
+              isShowTooltip={isShowTooltip}
+              isMutipleTag={isMutipleTag}
               bgColor={bgColor}
               handlePressExpandedIcon={handleCloseList}
             />
@@ -397,6 +404,7 @@ TreeSelect.defaultProps = {
   checkable: false,
   disabled: false,
   selectable: true,
+  isShowTooltip: true,
   treeTitleRender: (t: any) => t?.title,
   keyField: "id",
 };

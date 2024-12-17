@@ -55,6 +55,10 @@ export interface SelectProps<T extends Model> {
   className?: string;
   /**Use to set time get list to call*/
   isLoadMultipleTimes?: boolean;
+  /**Set show tooltip or not */
+  isShowTooltip?: boolean;
+  /**Option to show 1 tag or multiple tag  */
+  isMutipleTag?: boolean;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -107,6 +111,8 @@ function EnumSelect(props: SelectProps<Model>) {
     bgColor,
     className,
     isLoadMultipleTimes,
+    isShowTooltip,
+    isMutipleTag,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -281,6 +287,28 @@ function EnumSelect(props: SelectProps<Model>) {
     onChange(undefined);
   }, [onChange]);
 
+  const handleClearMultiItem = React.useCallback(
+    (item: Model) => {
+      let filteredItem = listValue?.filter(
+        (current) => current.id === item.id
+      )[0];
+      if (filteredItem) {
+        const tmp = [...selectedList];
+        const ids = selectedList?.map((item) => item?.id);
+        const index = tmp.indexOf(filteredItem);
+        const indexIds = tmp.indexOf(filteredItem?.id);
+        tmp.splice(index, 1);
+        ids.splice(indexIds, 1);
+        dispatch({
+          type: "REMOVE",
+          data: item,
+        });
+        onChangeMultiple([...tmp], ids as any);
+      }
+    },
+    [listValue, onChangeMultiple, selectedList]
+  );
+
   // use this for type multiple
   const handleClearAll = React.useCallback(() => {
     onChangeMultiple([], []);
@@ -388,7 +416,7 @@ function EnumSelect(props: SelectProps<Model>) {
               render={render}
               placeHolder={placeHolder}
               disabled={disabled}
-              onClear={handleClearItem}
+              onClear={handleClearMultiItem}
               onKeyDown={handleKeyPress}
               onKeyEnter={handleKeyEnter}
               type={type}
@@ -398,9 +426,10 @@ function EnumSelect(props: SelectProps<Model>) {
               onClearMulti={handleClearAll}
               isNotExpand={!isExpand}
               isRequired={isRequired}
-              isShowTooltip
+              isShowTooltip={isShowTooltip}
               bgColor={bgColor}
               handlePressExpandedIcon={handleCloseSelect}
+              isMutipleTag={isMutipleTag}
             />
           ) : (
             <InputSelect
@@ -558,6 +587,7 @@ EnumSelect.defaultProps = {
   render: defaultRenderObject,
   disabled: false,
   maxLengthItem: 30,
+  isShowTooltip: true,
 };
 
 export default EnumSelect;

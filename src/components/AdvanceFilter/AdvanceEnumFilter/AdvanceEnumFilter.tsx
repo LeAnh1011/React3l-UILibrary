@@ -42,6 +42,10 @@ export interface AdvanceEnumProps<T extends Model> {
   height?: number;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  /**Set show tooltip or not */
+  isShowTooltip?: boolean;
+  /**Option to show 1 tag or multiple tag  */
+  isMutipleTag?: boolean;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -87,6 +91,8 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
     getList,
     height,
     bgColor,
+    isShowTooltip,
+    isMutipleTag,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -246,6 +252,28 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
     []
   );
 
+  const handleClearMultiItem = React.useCallback(
+    (item: Model) => {
+      let filteredItem = listValue?.filter(
+        (current) => current.id === item.id
+      )[0];
+      if (filteredItem) {
+        const tmp = [...selectedList];
+        const ids = selectedList?.map((item) => item?.id);
+        const index = tmp.indexOf(filteredItem);
+        const indexIds = tmp.indexOf(filteredItem?.id);
+        tmp.splice(index, 1);
+        ids.splice(indexIds, 1);
+        dispatch({
+          type: "REMOVE",
+          data: item,
+        });
+        onChangeMultiple([...tmp], ids as any);
+      }
+    },
+    [listValue, onChangeMultiple, selectedList]
+  );
+
   const handleClearItem = React.useCallback(() => {
     onChange(null);
   }, [onChange]);
@@ -357,7 +385,7 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
               render={render}
               placeHolder={placeHolder}
               disabled={disabled}
-              onClear={handleClearItem}
+              onClear={handleClearMultiItem}
               onKeyDown={handleKeyPress}
               onKeyEnter={handleKeyEnter}
               type={type}
@@ -367,7 +395,8 @@ function AdvanceEnumFilter(props: AdvanceEnumProps<Model>) {
               onClearMulti={handleClearAll}
               isFilter={true}
               isNotExpand={!isExpand}
-              isShowTooltip
+              isShowTooltip={isShowTooltip}
+              isMutipleTag={isMutipleTag}
               bgColor={bgColor}
               handlePressExpandedIcon={handleCloseSelect}
             />
@@ -481,6 +510,7 @@ AdvanceEnumFilter.defaultProps = {
   render: defaultRenderObject,
   disabled: false,
   bgColor: "white",
+  isShowTooltip: true,
 };
 
 export default AdvanceEnumFilter;

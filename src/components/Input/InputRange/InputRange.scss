@@ -1,10 +1,14 @@
 /* Style for InputRange.tsx */
 .input-range__container {
-    display: flex;
-    align-items: center;
-    .input-range__input-number-to {
-        .component__title {
-            visibility: hidden;
-        }
+  display: flex;
+  align-items: center;
+  .input-range__input-number {
+    flex-grow: 1;
+  }
+  .input-range__input-number-to {
+    flex-grow: 1;
+    .component__title {
+      visibility: hidden;
     }
+  }
 }

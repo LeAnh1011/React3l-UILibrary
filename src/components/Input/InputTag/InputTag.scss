@@ -21,10 +21,12 @@
     position: relative;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px 4px;
     align-items: center;
     width: 100%;
     outline: 1px solid var(--palette-coolGray-50);
-    height: 40px;
+    min-height: 40px;
     background-color: var(--palette-gray-10);
 
     &.input-tag--filter-have-item {
@@ -37,7 +39,7 @@
     }
 
     &.input-tag__container--sm {
-      height: 32px !important;
+      min-height: 32px !important;
     }
 
     &.input-tag__container--white {
@@ -243,7 +245,7 @@
       padding: 0;
       outline: none;
       border: none;
-      width: 100%;
+      flex-grow: 1;
       font-size: 14px;
       line-height: 1rem;
       background-color: transparent;

@@ -144,7 +144,7 @@ function InputTag(props: InputTagProps<Model>) {
   );
 
   const handleClearItem = React.useCallback(
-    (item) => (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    (item) => (event: React.MouseEvent<ReactSVGElement>) => {
       event.stopPropagation();
       if (typeof onClear === "function") {
         onClear(item);
@@ -273,10 +273,13 @@ function InputTag(props: InputTagProps<Model>) {
                             <span className="input-tag-item__text">
                               {render(item)}
                             </span>
-                            <i
-                              className="input-tag-item__icon tio-clear"
-                              onClick={handleClearItem(item)}
-                            ></i>
+                            {
+                              <Close
+                                size={16}
+                                className="input-tag-item__icon"
+                                onClick={handleClearItem(item)}
+                              />
+                            }
                           </span>
                         ))}
                     </>

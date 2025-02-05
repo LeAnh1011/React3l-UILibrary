@@ -59,6 +59,8 @@ export interface SelectProps<T extends Model> {
   isShowTooltip?: boolean;
   /**Option to show 1 tag or multiple tag  */
   isMutipleTag?: boolean;
+  /**Option to reorder list value by change  */
+  reorderListByChange?: boolean;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -113,6 +115,7 @@ function EnumSelect(props: SelectProps<Model>) {
     isLoadMultipleTimes,
     isShowTooltip,
     isMutipleTag,
+    reorderListByChange,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -222,14 +225,19 @@ function EnumSelect(props: SelectProps<Model>) {
   const handleClickItem = React.useCallback(
     (item: Model) => (event: any) => {
       // perform sort
-      const currentIndex = list.findIndex((current) => current.id === item.id);
-      list.splice(currentIndex, 1);
-      list.unshift(item);
-      setList(list);
+      if (reorderListByChange) {
+        const currentIndex = list.findIndex(
+          (current) => current.id === item.id
+        );
+        list.splice(currentIndex, 1);
+        list.unshift(item);
+        setList(list);
+      }
+
       onChange(item.id, item);
       handleCloseSelect();
     },
-    [handleCloseSelect, list, onChange]
+    [handleCloseSelect, list, onChange, reorderListByChange]
   );
 
   // use this function for multiple type
@@ -254,12 +262,14 @@ function EnumSelect(props: SelectProps<Model>) {
         onChangeMultiple([...tmp], ids as any);
       } else {
         // perform sort
-        const currentIndex = list.findIndex(
-          (current) => current.id === item.id
-        );
-        list.splice(currentIndex, 1);
-        list.unshift(item);
-        setList(list);
+        if (reorderListByChange) {
+          const currentIndex = list.findIndex(
+            (current) => current.id === item.id
+          );
+          list.splice(currentIndex, 1);
+          list.unshift(item);
+          setList(list);
+        }
         const ids = selectedList?.map((item) => item?.id);
         onChangeMultiple([...selectedList, item], [...ids, item?.id] as any);
         dispatch({
@@ -268,7 +278,7 @@ function EnumSelect(props: SelectProps<Model>) {
         });
       }
     },
-    [list, listValue, onChangeMultiple, selectedList]
+    [list, listValue, onChangeMultiple, reorderListByChange, selectedList]
   );
 
   const handleClickMultiParentItem = React.useCallback(
@@ -588,6 +598,7 @@ EnumSelect.defaultProps = {
   disabled: false,
   maxLengthItem: 30,
   isShowTooltip: true,
+  reorderListByChange: true,
 };
 
 export default EnumSelect;

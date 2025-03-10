@@ -295,6 +295,16 @@
         color: var(--palette-coolGrayHover-50);
       }
     }
+
+    .input-tag__string {
+      white-space: nowrap;
+    }
+
+    .input-tag__prefix-icon {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }
 

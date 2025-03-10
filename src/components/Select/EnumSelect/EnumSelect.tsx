@@ -61,6 +61,8 @@ export interface SelectProps<T extends Model> {
   isMutipleTag?: boolean;
   /**Option to reorder list value by change  */
   reorderListByChange?: boolean;
+  /**Prefix for filter value*/
+  prefix?: string | JSX.Element;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -116,6 +118,7 @@ function EnumSelect(props: SelectProps<Model>) {
     isShowTooltip,
     isMutipleTag,
     reorderListByChange,
+    prefix,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -440,6 +443,7 @@ function EnumSelect(props: SelectProps<Model>) {
               bgColor={bgColor}
               handlePressExpandedIcon={handleCloseSelect}
               isMutipleTag={isMutipleTag}
+              prefix={prefix}
             />
           ) : (
             <InputSelect
@@ -459,6 +463,7 @@ function EnumSelect(props: SelectProps<Model>) {
               action={action}
               bgColor={bgColor}
               handlePressExpandedIcon={handleCloseSelect}
+              prefix={prefix}
             />
           )}
         </div>

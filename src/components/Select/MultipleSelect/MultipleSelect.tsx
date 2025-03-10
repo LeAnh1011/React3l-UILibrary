@@ -65,6 +65,8 @@ export interface MultipleSelectProps<
   className?: string;
   /**Option to show 1 tag or multiple tag  */
   isMutipleTag?: boolean;
+  /**Prefix for filter value*/
+  prefix?: string | JSX.Element;
 }
 
 function defaultRenderObject<T extends Model>(t: T) {
@@ -97,6 +99,7 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     bgColor,
     className,
     isMutipleTag,
+    prefix,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -380,6 +383,7 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
               action={action}
               bgColor={bgColor}
               handlePressExpandedIcon={handleCloseSelect}
+              prefix={prefix}
             />
           </div>
         </div>

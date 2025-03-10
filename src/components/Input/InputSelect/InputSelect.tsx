@@ -47,6 +47,8 @@ export interface InputSelectProps<T extends Model> {
   action?: InputAction;
   /** Custom background color for component: "white" || "gray" */
   bgColor?: "white" | "gray";
+  /**Prefix for filter value*/
+  prefix?: string | JSX.Element;
 }
 
 function InputSelect(props: InputSelectProps<Model>) {
@@ -71,6 +73,7 @@ function InputSelect(props: InputSelectProps<Model>) {
     isFilter,
     bgColor,
     handlePressExpandedIcon,
+    prefix,
   } = props;
 
   const inputRef: RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(
@@ -191,6 +194,19 @@ function InputSelect(props: InputSelectProps<Model>) {
         >
           {expanded ? (
             <>
+              {prefix && (
+                <>
+                  {typeof prefix === "string" ? (
+                    <span className="p-r--2xs input-select__string">
+                      {prefix}
+                    </span>
+                  ) : (
+                    <div className="m-r--xs input-select__prefix-icon">
+                      {prefix}
+                    </div>
+                  )}
+                </>
+              )}
               <input
                 type="text"
                 value={internalValue}
@@ -240,6 +256,19 @@ function InputSelect(props: InputSelectProps<Model>) {
             </>
           ) : (
             <>
+              {prefix && (
+                <>
+                  {typeof prefix === "string" ? (
+                    <span className="p-r--2xs input-select__string">
+                      {prefix}
+                    </span>
+                  ) : (
+                    <div className="m-r--xs input-select__prefix-icon">
+                      {prefix}
+                    </div>
+                  )}
+                </>
+              )}
               <input
                 type="text"
                 value={(render(value) as string) || ""}

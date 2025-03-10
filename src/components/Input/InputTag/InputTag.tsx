@@ -52,6 +52,8 @@ export interface InputTagProps<T extends Model> {
   clearSearchTerm?: boolean;
   /**Option to show 1 tag or multiple tag  */
   isMutipleTag?: boolean;
+  /**Prefix for filter value*/
+  prefix?: string | JSX.Element;
 }
 
 function InputTag(props: InputTagProps<Model>) {
@@ -78,6 +80,7 @@ function InputTag(props: InputTagProps<Model>) {
     clearSearchTerm,
     handlePressExpandedIcon,
     isMutipleTag,
+    prefix,
   } = props;
 
   const internalListValue = React.useMemo<Model[]>(() => {
@@ -209,6 +212,15 @@ function InputTag(props: InputTagProps<Model>) {
           }
           ref={inputContainerRef}
         >
+          {prefix && (
+            <>
+              {typeof prefix === "string" ? (
+                <span className="p-r--2xs input-tag__string">{prefix}</span>
+              ) : (
+                <div className="m-r--xs input-tag__prefix-icon">{prefix}</div>
+              )}
+            </>
+          )}
           {isShowTooltip ? (
             <>
               {internalListValue && internalListValue.length > 0 && (

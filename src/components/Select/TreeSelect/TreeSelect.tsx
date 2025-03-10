@@ -86,6 +86,8 @@ export interface TreeSelectProps<
   isShowTooltip?: boolean;
   /**Option to show 1 tag or multiple tag  */
   isMutipleTag?: boolean;
+  /**Prefix for filter value*/
+  prefix?: string | JSX.Element;
 }
 export interface filterAction {
   type: string;
@@ -135,6 +137,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     keyField,
     isShowTooltip,
     isMutipleTag,
+    prefix,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -337,6 +340,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               isMutipleTag={isMutipleTag}
               bgColor={bgColor}
               handlePressExpandedIcon={handleCloseList}
+              prefix={prefix}
             />
           ) : (
             <InputSelect
@@ -356,6 +360,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               isRequired={isRequired}
               bgColor={bgColor}
               handlePressExpandedIcon={handleCloseList}
+              prefix={prefix}
             />
           )}
         </div>

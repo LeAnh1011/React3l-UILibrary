@@ -384,6 +384,7 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
               bgColor={bgColor}
               handlePressExpandedIcon={handleCloseSelect}
               prefix={prefix}
+              clearSearchTerm={isExpand}
             />
           </div>
         </div>

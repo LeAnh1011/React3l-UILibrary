@@ -33,6 +33,8 @@ export interface MultipleSelectProps<
   isRequired?: boolean;
   /**Append this component to body*/
   appendToBody?: boolean;
+  /**Append this component to top*/
+  isAppendTop?: boolean;
   /**Api to get list data*/
   getList?: (TModelFilter?: TFilter) => Observable<T[]>;
   /**Handle the change value of the field*/
@@ -100,6 +102,7 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     className,
     isMutipleTag,
     prefix,
+    isAppendTop,
   } = props;
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -329,7 +332,7 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     if (isExpand && appendToBody) {
       const currentPosition = wrapperRef.current.getBoundingClientRect();
       const spaceBelow = window.innerHeight - currentPosition.bottom;
-      if (spaceBelow <= 200) {
+      if (isAppendTop) {
         setTimeout(() => {
           setAppendToBodyStyle({
             position: "fixed",
@@ -339,15 +342,26 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
           });
         }, 100);
       } else {
-        setAppendToBodyStyle({
-          position: "fixed",
-          top: currentPosition.top + wrapperRef.current.clientHeight,
-          left: currentPosition.left,
-          maxWidth: wrapperRef.current.clientWidth,
-        });
+        if (spaceBelow <= 200) {
+          setTimeout(() => {
+            setAppendToBodyStyle({
+              position: "fixed",
+              bottom: spaceBelow + wrapperRef.current.clientHeight,
+              left: currentPosition.left,
+              maxWidth: wrapperRef.current.clientWidth,
+            });
+          }, 100);
+        } else {
+          setAppendToBodyStyle({
+            position: "fixed",
+            top: currentPosition.top + wrapperRef.current.clientHeight,
+            left: currentPosition.left,
+            maxWidth: wrapperRef.current.clientWidth,
+          });
+        }
       }
     }
-  }, [appendToBody, isExpand]);
+  }, [appendToBody, isExpand, isAppendTop]);
 
   CommonService.useClickOutside(wrapperRef, handleCloseSelect);
 
@@ -503,6 +517,7 @@ MultipleSelect.defaultProps = {
   disabled: false,
   maxLengthItem: 30,
   isShowTooltip: true,
+  isAppendTop: false,
 };
 
 export default MultipleSelect;

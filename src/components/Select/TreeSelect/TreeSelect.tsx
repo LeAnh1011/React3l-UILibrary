@@ -48,6 +48,8 @@ export interface TreeSelectProps<
   isRequired?: boolean;
   /**Append this component to body*/
   appendToBody?: boolean;
+  /**Append this component to top*/
+  isAppendTop?: boolean;
   /**Provide a function to render a specific property as name*/
   render?: (T: T) => string;
   /** API to get data*/
@@ -138,6 +140,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     isShowTooltip,
     isMutipleTag,
     prefix,
+    isAppendTop,
   } = props;
 
   const componentId = React.useMemo(() => uuidv4(), []);
@@ -292,7 +295,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     if (expanded && appendToBody) {
       const currentPosition = wrapperRef.current.getBoundingClientRect();
       const spaceBelow = window.innerHeight - currentPosition.bottom;
-      if (spaceBelow <= 200) {
+      if (isAppendTop) {
         setTimeout(() => {
           setAppendToBodyStyle({
             position: "fixed",
@@ -302,15 +305,26 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
           });
         }, 100);
       } else {
-        setAppendToBodyStyle({
-          position: "fixed",
-          top: currentPosition.top + wrapperRef.current.clientHeight,
-          left: currentPosition.left,
-          maxWidth: wrapperRef.current.clientWidth,
-        });
+        if (spaceBelow <= 200) {
+          setTimeout(() => {
+            setAppendToBodyStyle({
+              position: "fixed",
+              bottom: spaceBelow + wrapperRef.current.clientHeight,
+              left: currentPosition.left,
+              maxWidth: wrapperRef.current.clientWidth,
+            });
+          }, 100);
+        } else {
+          setAppendToBodyStyle({
+            position: "fixed",
+            top: currentPosition.top + wrapperRef.current.clientHeight,
+            left: currentPosition.left,
+            maxWidth: wrapperRef.current.clientWidth,
+          });
+        }
       }
     }
-  }, [appendToBody, componentId, expanded]);
+  }, [appendToBody, componentId, expanded, isAppendTop]);
 
   return (
     <>
@@ -412,6 +426,7 @@ TreeSelect.defaultProps = {
   isShowTooltip: true,
   treeTitleRender: (t: any) => t?.title,
   keyField: "id",
+  isAppendTop: false,
 };
 
 export default TreeSelect;

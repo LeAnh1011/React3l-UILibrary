@@ -33,6 +33,8 @@ export interface SelectProps<
   isEnumerable?: boolean;
   /**Append this component to body*/
   appendToBody?: boolean;
+  /**Append this component to top*/
+  isAppendTop?: boolean;
   /**Show symbol * as required field*/
   isRequired?: boolean;
   /**Api to get list data*/
@@ -97,6 +99,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
     bgColor,
     className,
     prefix,
+    isAppendTop,
   } = props;
 
   const internalValue = React.useMemo((): Model => {
@@ -267,7 +270,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
       const handleScroll = () => {
         const currentPosition = wrapperRef.current.getBoundingClientRect();
         const spaceBelow = window.innerHeight - currentPosition.bottom;
-        if (spaceBelow <= 200) {
+        if (isAppendTop) {
           setTimeout(() => {
             setAppendToBodyStyle({
               position: "fixed",
@@ -277,12 +280,23 @@ function Select(props: SelectProps<Model, ModelFilter>) {
             });
           }, 100);
         } else {
-          setAppendToBodyStyle({
-            position: "fixed",
-            top: currentPosition.top + wrapperRef.current.clientHeight,
-            left: currentPosition.left,
-            maxWidth: wrapperRef.current.clientWidth,
-          });
+          if (spaceBelow <= 200) {
+            setTimeout(() => {
+              setAppendToBodyStyle({
+                position: "fixed",
+                bottom: spaceBelow + wrapperRef.current.clientHeight,
+                left: currentPosition.left,
+                maxWidth: wrapperRef.current.clientWidth,
+              });
+            }, 100);
+          } else {
+            setAppendToBodyStyle({
+              position: "fixed",
+              top: currentPosition.top + wrapperRef.current.clientHeight,
+              left: currentPosition.left,
+              maxWidth: wrapperRef.current.clientWidth,
+            });
+          }
         }
       };
       handleScroll();
@@ -292,7 +306,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
         document.removeEventListener("scroll", handleScroll);
       };
     }
-  }, [appendToBody, isExpand]);
+  }, [appendToBody, isAppendTop, isExpand]);
 
   return (
     <>
@@ -426,6 +440,7 @@ Select.defaultProps = {
   searchType: "contain",
   isEnumerable: false,
   appendToBody: false,
+  isAppendTop: false,
   render: defaultRenderObject,
   isMaterial: false,
   disabled: false,

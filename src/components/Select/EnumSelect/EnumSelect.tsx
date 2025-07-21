@@ -9,6 +9,7 @@ import InputTag from "@Components/Input/InputTag";
 import { Add, Checkmark } from "@carbon/icons-react";
 import { ErrorObserver, Observable, Subscription } from "rxjs";
 import { InputAction } from "@Components/Input/InputText/InputText";
+import { createPortal } from "react-dom";
 
 export interface SelectProps<T extends Model> {
   /**Value users select*/
@@ -132,6 +133,10 @@ function EnumSelect(props: SelectProps<Model>) {
   const [firstLoad, setFirstLoad] = React.useState<boolean>(true);
 
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
+    null
+  );
+
+  const selectContainerRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
     null
   );
 
@@ -388,7 +393,7 @@ function EnumSelect(props: SelectProps<Model>) {
     [handleToggle]
   );
 
-  CommonService.useClickOutside(wrapperRef, handleCloseSelect);
+  CommonService.useClickOutside(selectContainerRef, handleCloseSelect);
 
   React.useEffect(() => {
     if (isExpand && appendToBody) {
@@ -397,15 +402,15 @@ function EnumSelect(props: SelectProps<Model>) {
       if (spaceBelow <= 200) {
         setTimeout(() => {
           setAppendToBodyStyle({
-            position: "fixed",
-            bottom: spaceBelow + wrapperRef.current.clientHeight,
+            position: "absolute",
+            top: currentPosition.top - wrapperRef.current.clientHeight - 210,
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
           });
         }, 100);
       } else {
         setAppendToBodyStyle({
-          position: "fixed",
+          position: "absolute",
           top: currentPosition.top + wrapperRef.current.clientHeight,
           left: currentPosition.left,
           maxWidth: wrapperRef.current.clientWidth,
@@ -468,8 +473,13 @@ function EnumSelect(props: SelectProps<Model>) {
           )}
         </div>
         {isMultiple
-          ? isExpand && (
-              <div className="select__list-container">
+          ? isExpand &&
+            createPortal(
+              <div
+                className="select__list-container"
+                style={appendToBodyStyle}
+                ref={selectContainerRef}
+              >
                 {
                   <>
                     <div
@@ -529,68 +539,85 @@ function EnumSelect(props: SelectProps<Model>) {
                     <span className="m-l--xs">Add new</span>
                   </div>
                 )}
-              </div>
+              </div>,
+              document.body
             )
-          : isExpand && (
-              <div className="select__list-container" style={appendToBodyStyle}>
-                {
-                  <>
-                    <div
-                      className="select__list"
-                      ref={selectListRef}
-                      style={{ maxHeight: `${height}px` }}
-                    >
-                      {list.length > 0 ? (
-                        list.map((item, index) => (
-                          <div
-                            className={classNames(
-                              "select__item p-l--xs p-y--xs",
-                              {
-                                "select__item--selected":
-                                  item.id === internalValue?.id,
-                              }
-                            )}
-                            tabIndex={-1}
-                            key={index}
-                            onKeyDown={handleMove(item)}
-                            onClick={handleClickItem(item)}
-                          >
-                            <span className="select__text">
-                              {maxLengthItem &&
-                              render(item)?.length > maxLengthItem ? (
-                                <Tooltip title={render(item)}>
-                                  {CommonService.limitWord(
-                                    render(item),
-                                    maxLengthItem
-                                  )}
-                                </Tooltip>
-                              ) : (
-                                render(item)
+          : isExpand &&
+            createPortal(
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  zIndex: 1100,
+                }}
+              >
+                <div
+                  className="select__list-container"
+                  style={appendToBodyStyle}
+                  ref={selectContainerRef}
+                >
+                  {
+                    <>
+                      <div
+                        className="select__list"
+                        ref={selectListRef}
+                        style={{ maxHeight: `${height}px` }}
+                      >
+                        {list.length > 0 ? (
+                          list.map((item, index) => (
+                            <div
+                              className={classNames(
+                                "select__item p-l--xs p-y--xs",
+                                {
+                                  "select__item--selected":
+                                    item.id === internalValue?.id,
+                                }
                               )}
-                            </span>
-                            {item.id === internalValue?.id && (
-                              <Checkmark size={16} />
-                            )}
-                          </div>
-                        ))
-                      ) : (
-                        <Empty />
+                              tabIndex={-1}
+                              key={index}
+                              onKeyDown={handleMove(item)}
+                              onClick={handleClickItem(item)}
+                            >
+                              <span className="select__text">
+                                {maxLengthItem &&
+                                render(item)?.length > maxLengthItem ? (
+                                  <Tooltip title={render(item)}>
+                                    {CommonService.limitWord(
+                                      render(item),
+                                      maxLengthItem
+                                    )}
+                                  </Tooltip>
+                                ) : (
+                                  render(item)
+                                )}
+                              </span>
+                              {item.id === internalValue?.id && (
+                                <Checkmark size={16} />
+                              )}
+                            </div>
+                          ))
+                        ) : (
+                          <Empty />
+                        )}
+                      </div>
+                    </>
+                  }
+                  {typeof selectWithAdd !== "undefined" && (
+                    <div
+                      className={classNames(
+                        "select__bottom-button select__add-button p-y--xs"
                       )}
+                      onClick={selectWithAdd}
+                    >
+                      <Add size={16} className="m-l--2xs" />
+                      <span>Add new</span>
                     </div>
-                  </>
-                }
-                {typeof selectWithAdd !== "undefined" && (
-                  <div
-                    className={classNames(
-                      "select__bottom-button select__add-button p-y--xs"
-                    )}
-                    onClick={selectWithAdd}
-                  >
-                    <Add size={16} className="m-l--2xs" />
-                    <span>Add new</span>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
+              </div>,
+              document.body
             )}
       </div>
     </>

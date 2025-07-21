@@ -123,8 +123,6 @@ const Template: Story = (args) => {
   }, []);
 
   const handleChangeItem = React.useCallback((items: Model[], isMultiple) => {
-    // eslint-disable-next-line no-debugger
-    debugger
     if (isMultiple) {
       dispatch({ type: "UPDATE_MODEL", data: items });
     } else {

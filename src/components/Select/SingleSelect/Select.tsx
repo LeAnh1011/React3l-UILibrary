@@ -12,6 +12,7 @@ import { BORDER_TYPE } from "@Configs/enum";
 import IconLoading from "@Components/IconLoading/IconLoading";
 import { InputAction } from "@Components/Input/InputText/InputText";
 import "./Select.scss";
+import { createPortal } from "react-dom";
 
 export interface SelectProps<
   T extends Model,
@@ -113,6 +114,10 @@ function Select(props: SelectProps<Model, ModelFilter>) {
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
+    null
+  );
+
+  const selectContainerRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
     null
   );
 
@@ -263,7 +268,7 @@ function Select(props: SelectProps<Model, ModelFilter>) {
     [handleToggle]
   );
 
-  CommonService.useClickOutside(wrapperRef, handleCloseSelect);
+  CommonService.useClickOutside(selectContainerRef, handleCloseSelect);
 
   React.useEffect(() => {
     if (isExpand && appendToBody) {
@@ -273,8 +278,8 @@ function Select(props: SelectProps<Model, ModelFilter>) {
         if (isAppendTop) {
           setTimeout(() => {
             setAppendToBodyStyle({
-              position: "fixed",
-              bottom: spaceBelow + wrapperRef.current.clientHeight,
+              position: "absolute",
+              top: currentPosition.top - wrapperRef.current.clientHeight - 210,
               left: currentPosition.left,
               maxWidth: wrapperRef.current.clientWidth,
             });
@@ -283,15 +288,16 @@ function Select(props: SelectProps<Model, ModelFilter>) {
           if (spaceBelow <= 200) {
             setTimeout(() => {
               setAppendToBodyStyle({
-                position: "fixed",
-                bottom: spaceBelow + wrapperRef.current.clientHeight,
+                position: "absolute",
+                top:
+                  currentPosition.top - wrapperRef.current.clientHeight - 210,
                 left: currentPosition.left,
                 maxWidth: wrapperRef.current.clientWidth,
               });
             }, 100);
           } else {
             setAppendToBodyStyle({
-              position: "fixed",
+              position: "absolute",
               top: currentPosition.top + wrapperRef.current.clientHeight,
               left: currentPosition.left,
               maxWidth: wrapperRef.current.clientWidth,
@@ -336,100 +342,124 @@ function Select(props: SelectProps<Model, ModelFilter>) {
             handlePressExpandedIcon={handleCloseSelect}
           />
         </div>
-        {isExpand && (
-          <div className="select__list-container" style={appendToBodyStyle}>
-            {!loading ? (
-              <>
-                <div className="select__list" ref={selectListRef}>
-                  {list.length > 0 ? (
-                    list.map((item, index) => (
-                      <div
-                        className={classNames("select__item p-l--xs p-y--xs", {
-                          "select__item--selected":
-                            item.id === internalValue?.id,
-                        })}
-                        tabIndex={-1}
-                        key={index}
-                        onKeyDown={handleMove(item)}
-                        onClick={handleClickItem(item)}
-                      >
-                        {maxLengthItem &&
-                        render(item)?.length > maxLengthItem ? (
-                          <Tooltip title={render(item)}>
-                            <span className="select__text">
-                              {CommonService.limitWord(
-                                render(item),
-                                maxLengthItem
-                              )}
-                            </span>
-                          </Tooltip>
-                        ) : (
-                          <span className="select__text">{render(item)}</span>
-                        )}
-                        {item.id === internalValue?.id && (
-                          <Checkmark size={16} />
-                        )}
-                      </div>
-                    ))
-                  ) : (
-                    <Empty />
-                  )}
-                </div>
-              </>
-            ) : (
-              <div className="select__loading">
-                <IconLoading color="#0F62FE" size={24} />
-              </div>
-            )}
-            {!loading && list.length > 0 && (
-              <div className="select__list-prefer">
-                {preferOptions &&
-                  preferOptions?.length > 0 &&
-                  preferOptions.map((item, index) => (
-                    <div
-                      className={classNames(
-                        "select__prefer-option select__item p--xs",
-                        {
-                          "select__item--selected":
-                            item.id === internalValue?.id,
-                        }
-                      )}
-                      key={index}
-                      onKeyDown={handleMove(item)}
-                      onClick={handleClickItem(item)}
-                    >
-                      {maxLengthItem && render(item)?.length > maxLengthItem ? (
-                        <Tooltip title={render(item)}>
-                          <span className="select__text">
-                            {CommonService.limitWord(
-                              render(item),
-                              maxLengthItem
-                            )}
-                          </span>
-                        </Tooltip>
-                      ) : (
-                        <span className="select__text">{render(item)}</span>
-                      )}
-                      {item.id === internalValue?.id && <Checkmark size={16} />}
-                    </div>
-                  ))}
-              </div>
-            )}
-            {typeof selectWithAdd !== "undefined" && (
+        {isExpand &&
+          createPortal(
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                zIndex: 1100,
+              }}
+            >
               <div
-                className={classNames(
-                  "select__bottom-button select__add-button p-y--xs"
-                )}
-                onClick={selectWithAdd}
+                className="select__list-container"
+                style={appendToBodyStyle}
+                ref={selectContainerRef}
               >
-                <Add size={16} className="m-l--2xs" />
-                <span>
-                  {selectWithAddTitle ? selectWithAddTitle : "Add new"}
-                </span>
+                {!loading ? (
+                  <>
+                    <div className="select__list" ref={selectListRef}>
+                      {list.length > 0 ? (
+                        list.map((item, index) => (
+                          <div
+                            className={classNames(
+                              "select__item p-l--xs p-y--xs",
+                              {
+                                "select__item--selected":
+                                  item.id === internalValue?.id,
+                              }
+                            )}
+                            tabIndex={-1}
+                            key={index}
+                            onKeyDown={handleMove(item)}
+                            onClick={handleClickItem(item)}
+                          >
+                            {maxLengthItem &&
+                            render(item)?.length > maxLengthItem ? (
+                              <Tooltip title={render(item)}>
+                                <span className="select__text">
+                                  {CommonService.limitWord(
+                                    render(item),
+                                    maxLengthItem
+                                  )}
+                                </span>
+                              </Tooltip>
+                            ) : (
+                              <span className="select__text">
+                                {render(item)}
+                              </span>
+                            )}
+                            {item.id === internalValue?.id && (
+                              <Checkmark size={16} />
+                            )}
+                          </div>
+                        ))
+                      ) : (
+                        <Empty />
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <div className="select__loading">
+                    <IconLoading color="#0F62FE" size={24} />
+                  </div>
+                )}
+                {!loading && list.length > 0 && (
+                  <div className="select__list-prefer">
+                    {preferOptions &&
+                      preferOptions?.length > 0 &&
+                      preferOptions.map((item, index) => (
+                        <div
+                          className={classNames(
+                            "select__prefer-option select__item p--xs",
+                            {
+                              "select__item--selected":
+                                item.id === internalValue?.id,
+                            }
+                          )}
+                          key={index}
+                          onKeyDown={handleMove(item)}
+                          onClick={handleClickItem(item)}
+                        >
+                          {maxLengthItem &&
+                          render(item)?.length > maxLengthItem ? (
+                            <Tooltip title={render(item)}>
+                              <span className="select__text">
+                                {CommonService.limitWord(
+                                  render(item),
+                                  maxLengthItem
+                                )}
+                              </span>
+                            </Tooltip>
+                          ) : (
+                            <span className="select__text">{render(item)}</span>
+                          )}
+                          {item.id === internalValue?.id && (
+                            <Checkmark size={16} />
+                          )}
+                        </div>
+                      ))}
+                  </div>
+                )}
+                {typeof selectWithAdd !== "undefined" && (
+                  <div
+                    className={classNames(
+                      "select__bottom-button select__add-button p-y--xs"
+                    )}
+                    onClick={selectWithAdd}
+                  >
+                    <Add size={16} className="m-l--2xs" />
+                    <span>
+                      {selectWithAddTitle ? selectWithAddTitle : "Add new"}
+                    </span>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        )}
+            </div>,
+            document.body
+          )}
       </div>
     </>
   );
@@ -439,7 +469,7 @@ Select.defaultProps = {
   searchProperty: "name",
   searchType: "contain",
   isEnumerable: false,
-  appendToBody: false,
+  appendToBody: true,
   isAppendTop: false,
   render: defaultRenderObject,
   isMaterial: false,

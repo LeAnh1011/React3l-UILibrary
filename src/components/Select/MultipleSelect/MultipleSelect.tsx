@@ -12,6 +12,7 @@ import { Checkbox, Empty, Tooltip } from "antd";
 import IconLoading from "@Components/IconLoading/IconLoading";
 import { InputAction } from "@Components/Input/InputText/InputText";
 import "./MultipleSelect.scss";
+import { createPortal } from "react-dom";
 
 export interface MultipleSelectProps<
   T extends Model,
@@ -112,6 +113,10 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
   const [isExpand, setExpand] = React.useState<boolean>(false);
 
   const wrapperRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
+    null
+  );
+
+  const selectContainerRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
     null
   );
 
@@ -335,7 +340,7 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
       if (isAppendTop) {
         setTimeout(() => {
           setAppendToBodyStyle({
-            position: "fixed",
+            position: "absolute",
             bottom: spaceBelow + wrapperRef.current.clientHeight,
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
@@ -345,7 +350,7 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
         if (spaceBelow <= 200) {
           setTimeout(() => {
             setAppendToBodyStyle({
-              position: "fixed",
+              position: "absolute",
               bottom: spaceBelow + wrapperRef.current.clientHeight,
               left: currentPosition.left,
               maxWidth: wrapperRef.current.clientWidth,
@@ -353,7 +358,7 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
           }, 100);
         } else {
           setAppendToBodyStyle({
-            position: "fixed",
+            position: "absolute",
             top: currentPosition.top + wrapperRef.current.clientHeight,
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
@@ -363,7 +368,7 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
     }
   }, [appendToBody, isExpand, isAppendTop]);
 
-  CommonService.useClickOutside(wrapperRef, handleCloseSelect);
+  CommonService.useClickOutside(selectContainerRef, handleCloseSelect);
 
   return (
     <>
@@ -403,106 +408,122 @@ function MultipleSelect(props: MultipleSelectProps<Model, ModelFilter>) {
           </div>
         </div>
 
-        {isExpand && (
-          <div className="select__list-container" style={appendToBodyStyle}>
-            {!loading ? (
-              <>
-                <div
-                  className="select__list multiple-select__list"
-                  ref={selectListRef}
-                >
-                  {internalList && internalList.length > 0 ? (
-                    internalList.map((item, index) => (
-                      <div
-                        className={classNames(
-                          "select__item p-l--xs p-y--xs p-r--2xs",
-                          {
-                            "select__item--selected": item.isSelected,
-                          }
-                        )}
-                        key={index}
-                        onKeyDown={handleMove(item)}
-                        tabIndex={-1}
-                        onClick={handleClickParentItem}
-                      >
-                        <Checkbox
-                          checked={item.isSelected}
-                          onChange={handleClickItem(item)}
-                        >
-                          <span className="select__text">
-                            {maxLengthItem &&
-                            render(item)?.length > maxLengthItem ? (
-                              <Tooltip title={item?.name}>
-                                {CommonService.limitWord(
-                                  render(item),
-                                  maxLengthItem
-                                )}
-                              </Tooltip>
-                            ) : (
-                              render(item)
-                            )}
-                          </span>
-                        </Checkbox>
-                      </div>
-                    ))
-                  ) : (
-                    <Empty />
-                  )}
-                </div>
-              </>
-            ) : (
-              <div className="select__loading">
-                <IconLoading color="#0F62FE" size={24} />
-              </div>
-            )}
-            {!loading && list.length > 0 && (
-              <div className="select__list-prefer">
-                {internalPreferOptions &&
-                  internalPreferOptions?.length > 0 &&
-                  internalPreferOptions.map((item, index) => (
-                    <div
-                      className={classNames(
-                        "select__prefer-option select__item p-l--xs p-y--xs p-r--2xs"
-                      )}
-                      key={index}
-                      onKeyDown={handleMove(item)}
-                      onClick={handleClickParentItem}
-                    >
-                      <Checkbox
-                        onChange={handleClickItem(item)}
-                        checked={item.isSelected}
-                      >
-                        <span className="select__text">
-                          {maxLengthItem &&
-                          render(item)?.length > maxLengthItem ? (
-                            <Tooltip title={item?.name}>
-                              {CommonService.limitWord(
-                                render(item),
-                                maxLengthItem
-                              )}
-                            </Tooltip>
-                          ) : (
-                            render(item)
-                          )}
-                        </span>
-                      </Checkbox>
-                    </div>
-                  ))}
-              </div>
-            )}
-            {typeof selectWithAdd !== "undefined" && (
+        {isExpand &&
+          createPortal(
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                zIndex: 1100,
+              }}
+            >
               <div
-                className={classNames(
-                  "select__bottom-button select__add-button p-y--xs"
-                )}
-                onClick={selectWithAdd}
+                className="select__list-container"
+                ref={selectContainerRef}
+                style={appendToBodyStyle}
               >
-                <Add size={16} className="m-l--xs" />
-                <span className="m-l--xs">Add new</span>
+                {!loading ? (
+                  <>
+                    <div
+                      className="select__list multiple-select__list"
+                      ref={selectListRef}
+                    >
+                      {internalList && internalList.length > 0 ? (
+                        internalList.map((item, index) => (
+                          <div
+                            className={classNames(
+                              "select__item p-l--xs p-y--xs p-r--2xs",
+                              {
+                                "select__item--selected": item.isSelected,
+                              }
+                            )}
+                            key={index}
+                            onKeyDown={handleMove(item)}
+                            tabIndex={-1}
+                            onClick={handleClickParentItem}
+                          >
+                            <Checkbox
+                              checked={item.isSelected}
+                              onChange={handleClickItem(item)}
+                            >
+                              <span className="select__text">
+                                {maxLengthItem &&
+                                render(item)?.length > maxLengthItem ? (
+                                  <Tooltip title={item?.name}>
+                                    {CommonService.limitWord(
+                                      render(item),
+                                      maxLengthItem
+                                    )}
+                                  </Tooltip>
+                                ) : (
+                                  render(item)
+                                )}
+                              </span>
+                            </Checkbox>
+                          </div>
+                        ))
+                      ) : (
+                        <Empty />
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <div className="select__loading">
+                    <IconLoading color="#0F62FE" size={24} />
+                  </div>
+                )}
+                {!loading && list.length > 0 && (
+                  <div className="select__list-prefer">
+                    {internalPreferOptions &&
+                      internalPreferOptions?.length > 0 &&
+                      internalPreferOptions.map((item, index) => (
+                        <div
+                          className={classNames(
+                            "select__prefer-option select__item p-l--xs p-y--xs p-r--2xs"
+                          )}
+                          key={index}
+                          onKeyDown={handleMove(item)}
+                          onClick={handleClickParentItem}
+                        >
+                          <Checkbox
+                            onChange={handleClickItem(item)}
+                            checked={item.isSelected}
+                          >
+                            <span className="select__text">
+                              {maxLengthItem &&
+                              render(item)?.length > maxLengthItem ? (
+                                <Tooltip title={item?.name}>
+                                  {CommonService.limitWord(
+                                    render(item),
+                                    maxLengthItem
+                                  )}
+                                </Tooltip>
+                              ) : (
+                                render(item)
+                              )}
+                            </span>
+                          </Checkbox>
+                        </div>
+                      ))}
+                  </div>
+                )}
+                {typeof selectWithAdd !== "undefined" && (
+                  <div
+                    className={classNames(
+                      "select__bottom-button select__add-button p-y--xs"
+                    )}
+                    onClick={selectWithAdd}
+                  >
+                    <Add size={16} className="m-l--xs" />
+                    <span className="m-l--xs">Add new</span>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        )}
+            </div>,
+            document.body
+          )}
       </div>
     </>
   );

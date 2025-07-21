@@ -13,6 +13,7 @@ import { IdFilter } from "react3l-advanced-filters";
 import classNames from "classnames";
 import { TreeNode } from "@Components/Tree/TreeNode";
 import "./TreeSelect.scss";
+import { createPortal } from "react-dom";
 
 export interface TreeSelectProps<
   T extends Model,
@@ -162,6 +163,10 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     null
   );
 
+  const treeListRef: RefObject<HTMLDivElement> = React.useRef<HTMLDivElement>(
+    null
+  );
+
   const [filter, dispatch] = React.useReducer<
     Reducer<ModelFilter, filterAction>
   >(filterReducer, { ...new ClassFilter(), valueFilter });
@@ -289,7 +294,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
     dispatch({ type: "UPDATE", data: cloneFilter });
   }, [filter, searchProperty, searchType]);
 
-  CommonService.useClickOutside(wrapperRef, handleCloseList);
+  CommonService.useClickOutside(treeListRef, handleCloseList);
 
   React.useEffect(() => {
     if (expanded && appendToBody) {
@@ -298,8 +303,8 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
       if (isAppendTop) {
         setTimeout(() => {
           setAppendToBodyStyle({
-            position: "fixed",
-            bottom: spaceBelow + wrapperRef.current.clientHeight,
+            position: "absolute",
+            top: currentPosition.top - wrapperRef.current.clientHeight - 210,
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
           });
@@ -308,15 +313,15 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
         if (spaceBelow <= 200) {
           setTimeout(() => {
             setAppendToBodyStyle({
-              position: "fixed",
-              bottom: spaceBelow + wrapperRef.current.clientHeight,
+              position: "absolute",
+              top: currentPosition.top - wrapperRef.current.clientHeight - 210,
               left: currentPosition.left,
               maxWidth: wrapperRef.current.clientWidth,
             });
           }, 100);
         } else {
           setAppendToBodyStyle({
-            position: "fixed",
+            position: "absolute",
             top: currentPosition.top + wrapperRef.current.clientHeight,
             left: currentPosition.left,
             maxWidth: wrapperRef.current.clientWidth,
@@ -378,36 +383,39 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
             />
           )}
         </div>
-        {expanded && (
-          <div
-            className="tree-select__list"
-            id={componentId}
-            style={appendToBodyStyle}
-          >
-            <Tree
-              items={listItem}
-              getTreeData={getTreeData}
-              selectedKey={selectedKey}
-              onlySelectLeaf={onlySelectLeaf}
-              checkedKeys={listIds}
-              valueFilter={filter}
-              checkStrictly={checkStrictly}
-              height={300}
-              render={render}
-              onChange={handleOnchange}
-              selectable={selectable}
-              checkable={checkable}
-              titleRender={treeTitleRender}
-              selectWithAdd={selectWithAdd}
-              preferOptions={preferOptions}
-              isExpand={expanded}
-              maxLengthItem={maxLengthItem}
-              isDisableSelected={isDisableSelected}
-              buildTree={buildTree}
-              keyField={keyField}
-            />
-          </div>
-        )}
+        {expanded &&
+          createPortal(
+            <div
+              className="tree-select__list"
+              id={componentId}
+              style={appendToBodyStyle}
+              ref={treeListRef}
+            >
+              <Tree
+                items={listItem}
+                getTreeData={getTreeData}
+                selectedKey={selectedKey}
+                onlySelectLeaf={onlySelectLeaf}
+                checkedKeys={listIds}
+                valueFilter={filter}
+                checkStrictly={checkStrictly}
+                height={300}
+                render={render}
+                onChange={handleOnchange}
+                selectable={selectable}
+                checkable={checkable}
+                titleRender={treeTitleRender}
+                selectWithAdd={selectWithAdd}
+                preferOptions={preferOptions}
+                isExpand={expanded}
+                maxLengthItem={maxLengthItem}
+                isDisableSelected={isDisableSelected}
+                buildTree={buildTree}
+                keyField={keyField}
+              />
+            </div>,
+            document.body
+          )}
       </div>
     </>
   );

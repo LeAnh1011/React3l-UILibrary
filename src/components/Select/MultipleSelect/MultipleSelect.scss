@@ -18,13 +18,14 @@
   .multiple-select__text {
     margin-left: 24px;
   }
-  .component__input  {
+  .component__input {
     input {
       cursor: default;
     }
-    
   }
+}
 
+.multiple-select__list {
   .ant-checkbox:hover .ant-checkbox-inner {
     border-color: var(--color-text) !important;
   }

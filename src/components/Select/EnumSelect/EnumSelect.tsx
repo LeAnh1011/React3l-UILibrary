@@ -635,7 +635,7 @@ function EnumSelect(props: SelectProps<Model>) {
 }
 
 EnumSelect.defaultProps = {
-  appendToBody: false,
+  appendToBody: true,
   render: defaultRenderObject,
   disabled: false,
   maxLengthItem: 30,

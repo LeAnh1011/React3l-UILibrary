@@ -539,6 +539,7 @@ MultipleSelect.defaultProps = {
   maxLengthItem: 30,
   isShowTooltip: true,
   isAppendTop: false,
+  appendToBody: true,
 };
 
 export default MultipleSelect;

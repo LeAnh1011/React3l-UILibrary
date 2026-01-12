@@ -446,6 +446,7 @@ TreeSelect.defaultProps = {
   treeTitleRender: (t: any) => t?.title,
   keyField: "id",
   isAppendTop: false,
+  appendToBody: true,
 };
 
 export default TreeSelect;

@@ -360,6 +360,7 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
               bgColor={bgColor}
               handlePressExpandedIcon={handleCloseList}
               prefix={prefix}
+              clearSearchTerm={expanded}
             />
           ) : (
             <InputSelect

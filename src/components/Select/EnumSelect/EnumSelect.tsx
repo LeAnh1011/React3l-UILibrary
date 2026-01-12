@@ -476,69 +476,79 @@ function EnumSelect(props: SelectProps<Model>) {
           ? isExpand &&
             createPortal(
               <div
-                className="select__list-container"
-                style={appendToBodyStyle}
-                ref={selectContainerRef}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  zIndex: 1100,
+                }}
               >
-                {
-                  <>
-                    <div
-                      className="select__list multiple-select__list"
-                      ref={selectListRef}
-                      style={{ maxHeight: `${height}px` }}
-                    >
-                      {internalList.length > 0 ? (
-                        internalList.map((item, index) => (
-                          <div
-                            className={classNames(
-                              "select__item p-l--xs p-y--xs p-r--2xs",
-                              {
-                                "select__item--selected": item.isSelected,
-                              }
-                            )}
-                            key={index}
-                            onKeyDown={handleMove(item)}
-                            tabIndex={-1}
-                            onClick={handleClickMultiParentItem}
-                          >
-                            <Checkbox
-                              checked={item.isSelected}
-                              onChange={handleClickMultiItem(item)}
+                <div
+                  className="select__list-container"
+                  style={appendToBodyStyle}
+                  ref={selectContainerRef}
+                >
+                  {
+                    <>
+                      <div
+                        className="select__list multiple-select__list"
+                        ref={selectListRef}
+                        style={{ maxHeight: `${height}px` }}
+                      >
+                        {internalList.length > 0 ? (
+                          internalList.map((item, index) => (
+                            <div
+                              className={classNames(
+                                "select__item p-l--xs p-y--xs p-r--2xs",
+                                {
+                                  "select__item--selected": item.isSelected,
+                                }
+                              )}
+                              key={index}
+                              onKeyDown={handleMove(item)}
+                              tabIndex={-1}
+                              onClick={handleClickMultiParentItem}
                             >
-                              <span className="select__text">
-                                {maxLengthItem &&
-                                render(item)?.length > maxLengthItem ? (
-                                  <Tooltip title={render(item)}>
-                                    {CommonService.limitWord(
-                                      render(item),
-                                      maxLengthItem
-                                    )}
-                                  </Tooltip>
-                                ) : (
-                                  render(item)
-                                )}
-                              </span>
-                            </Checkbox>
-                          </div>
-                        ))
-                      ) : (
-                        <Empty />
-                      )}
-                    </div>
-                  </>
-                }
+                              <Checkbox
+                                checked={item.isSelected}
+                                onChange={handleClickMultiItem(item)}
+                              >
+                                <span className="select__text">
+                                  {maxLengthItem &&
+                                  render(item)?.length > maxLengthItem ? (
+                                    <Tooltip title={render(item)}>
+                                      {CommonService.limitWord(
+                                        render(item),
+                                        maxLengthItem
+                                      )}
+                                    </Tooltip>
+                                  ) : (
+                                    render(item)
+                                  )}
+                                </span>
+                              </Checkbox>
+                            </div>
+                          ))
+                        ) : (
+                          <Empty />
+                        )}
+                      </div>
+                    </>
+                  }
 
-                {typeof selectWithAdd !== "undefined" && (
-                  <div
-                    className={classNames(
-                      "select__bottom-button select__add-button p-y--xs"
-                    )}
-                    onClick={selectWithAdd}
-                  >
-                    <Add size={16} className="m-l--xs" />
-                    <span className="m-l--xs">Add new</span>
-                  </div>
-                )}
+                  {typeof selectWithAdd !== "undefined" && (
+                    <div
+                      className={classNames(
+                        "select__bottom-button select__add-button p-y--xs"
+                      )}
+                      onClick={selectWithAdd}
+                    >
+                      <Add size={16} className="m-l--xs" />
+                      <span className="m-l--xs">Add new</span>
+                    </div>
+                  )}
+                </div>
               </div>,
               document.body
             )

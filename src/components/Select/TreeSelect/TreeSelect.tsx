@@ -387,33 +387,43 @@ function TreeSelect(props: TreeSelectProps<Model, ModelFilter>) {
         {expanded &&
           createPortal(
             <div
-              className="tree-select__list"
-              id={componentId}
-              style={appendToBodyStyle}
-              ref={treeListRef}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                zIndex: 1100,
+              }}
             >
-              <Tree
-                items={listItem}
-                getTreeData={getTreeData}
-                selectedKey={selectedKey}
-                onlySelectLeaf={onlySelectLeaf}
-                checkedKeys={listIds}
-                valueFilter={filter}
-                checkStrictly={checkStrictly}
-                height={300}
-                render={render}
-                onChange={handleOnchange}
-                selectable={selectable}
-                checkable={checkable}
-                titleRender={treeTitleRender}
-                selectWithAdd={selectWithAdd}
-                preferOptions={preferOptions}
-                isExpand={expanded}
-                maxLengthItem={maxLengthItem}
-                isDisableSelected={isDisableSelected}
-                buildTree={buildTree}
-                keyField={keyField}
-              />
+              <div
+                className="tree-select__list"
+                id={componentId}
+                style={appendToBodyStyle}
+                ref={treeListRef}
+              >
+                <Tree
+                  items={listItem}
+                  getTreeData={getTreeData}
+                  selectedKey={selectedKey}
+                  onlySelectLeaf={onlySelectLeaf}
+                  checkedKeys={listIds}
+                  valueFilter={filter}
+                  checkStrictly={checkStrictly}
+                  height={300}
+                  render={render}
+                  onChange={handleOnchange}
+                  selectable={selectable}
+                  checkable={checkable}
+                  titleRender={treeTitleRender}
+                  selectWithAdd={selectWithAdd}
+                  preferOptions={preferOptions}
+                  isExpand={expanded}
+                  maxLengthItem={maxLengthItem}
+                  isDisableSelected={isDisableSelected}
+                  buildTree={buildTree}
+                  keyField={keyField}
+                />
+              </div>
             </div>,
             document.body
           )}

@@ -107,6 +107,7 @@ const Template: Story = (args) => {
         title="Modal Title"
         loadingType={loadingType}
         visibleFooter={true}
+        saveType="danger"
         {...args}
       >
         <div

@@ -23,6 +23,7 @@ export type ButtonType =
   | "ghost-primary"
   | "ghost-secondary"
   | "bleed-primary"
+  | "bleed-danger"
   | "bleed-secondary"
   | "link-plain"
   | "link"
@@ -80,7 +81,7 @@ const Button = (props: PropsWithChildren<ButtonProps>, ref: React.Ref<any>) => {
     return <GhostButton {...rest} onClick={isDebounce ? run : onClick} />;
   }
 
-  if (props.type === "bleed-primary" || props.type === "bleed-secondary") {
+  if (props.type === "bleed-primary" || props.type === "bleed-secondary" || props.type === "bleed-danger") {
     return <BleedButton {...rest} onClick={isDebounce ? run : onClick} />;
   }
 
